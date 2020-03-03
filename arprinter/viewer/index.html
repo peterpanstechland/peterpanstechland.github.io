@@ -3,9 +3,13 @@
 <script src="src/aframe.min.js"></script>
 <script src="src/aframe-ar.js"></script>
   <body style='margin : 0px; overflow: hidden;'>
+    <a-assets>
+      <video id="car" autoplay loop="true" src="assets/tub.mp4"></video>
+    </a-assets>
     <a-scene embedded arjs>
       <a-marker preset="hiro">
-          <a-box position='0 0.5 0' material='color: red;'></a-box>
+          <!-- <a-box position='0 0.5 0' material='color: red;'></a-box> -->
+          <a-video src="#car" position="0 0.5 0" rotation="270 0 0" play="true"></a-video>
       </a-marker>
       <a-marker type="pattern" url="marker/PYTHON.patt">
           <a-box position='0 0.5 0' material='color: yellow;'></a-box>
