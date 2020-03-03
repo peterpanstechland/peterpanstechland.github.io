@@ -4,6 +4,9 @@
 <script src="src/aframe-ar.js"></script>
   <body style='margin : 0px; overflow: hidden;'>
     <a-scene embedded arjs>
+      <a-marker-camera preset='custom' type='pattern' url='https://raw.githubusercontent.com/peterpanstechland/peterpanstechland.github.io/master/arprinter/viewer/marker/PYTHON.patt'>
+        <a-box position='0 0.5 0' material='color: red;'></a-box>
+      </a-marker-camera>
       <a-marker preset="pattern" type='pattern' patternUrl='https://raw.githubusercontent.com/peterpanstechland/peterpanstechland.github.io/master/arprinter/viewer/marker/pattern.patt'>
           <a-box position='0 0.5 0' material='color: yellow;'></a-box>
       </a-marker>
