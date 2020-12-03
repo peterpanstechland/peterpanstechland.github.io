@@ -2,8 +2,14 @@
 layout: default
 ---
 
-## Welcome to another page
+## Welcome to Peter Pan's Blog
+---
+### USEFULL COMMANDS
 
-_yay_
+#### rsync -- Download file from server to local
+
+```
+rsync -avL --progress -e "ssh -i xxx.pem" xxx@xxx.xxx.xxx.xxx:~/remote/files ~/local/folder/
+```
 
 [back](./)
