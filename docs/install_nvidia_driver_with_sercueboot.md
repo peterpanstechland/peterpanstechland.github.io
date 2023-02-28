@@ -8,7 +8,6 @@ openssl req -new -x509 -newkey rsa:2048 -keyout PATH_TO_PRIVATE_KEY -outform DER
 
 eg. ```PATH_TO_PRIVATE_KEY``` = ```/home/xxx/nvidia.key```, ```PATH_TO_PUBLIC_KEY``` = ```/home/xxx/nvidia.der```
 
-```
 
 Step 3: Enroll the public key (nvidia.der) to MOK (Machine Owner Key)
 
