@@ -10,7 +10,10 @@ on:
 jobs:
   build:
     name: Build Docusaurus
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
+    defaults:
+        run:
+         working-directory: ./
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,7 +27,7 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build website
         run: yarn build
-
+        
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
