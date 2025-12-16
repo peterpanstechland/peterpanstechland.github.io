@@ -35,6 +35,11 @@ const config: Config = {
     },
   },
 
+  // 客户端模块 - Nova AI 聊天助手
+  clientModules: [
+    require.resolve('./src/plugins/docusaurus-nova-ai/client.tsx'),
+  ],
+
   presets: [
     [
       'classic',
