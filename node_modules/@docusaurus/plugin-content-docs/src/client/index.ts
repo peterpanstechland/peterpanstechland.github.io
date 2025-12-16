@@ -20,6 +20,48 @@ import {
 } from './docsClientUtils';
 import type {UseDataOptions} from '@docusaurus/types';
 
+export {
+  useDocById,
+  findSidebarCategory,
+  findFirstSidebarItemLink,
+  isActiveSidebarItem,
+  isVisibleSidebarItem,
+  useVisibleSidebarItems,
+  useSidebarBreadcrumbs,
+  useDocsVersionCandidates,
+  useLayoutDoc,
+  useLayoutDocsSidebar,
+  useDocRootMetadata,
+  useCurrentSidebarCategory,
+  useCurrentSidebarSiblings,
+  filterDocCardListItems,
+} from './docsUtils';
+
+export {useDocsPreferredVersion} from './docsPreferredVersion';
+
+export {
+  DocSidebarItemsExpandedStateProvider,
+  useDocSidebarItemsExpandedState,
+} from './docSidebarItemsExpandedState';
+
+export {DocsVersionProvider, useDocsVersion} from './docsVersion';
+
+export {DocsSidebarProvider, useDocsSidebar} from './docsSidebar';
+
+export {DocProvider, useDoc, type DocContextValue} from './doc';
+
+export {
+  useDocsPreferredVersionByPluginId,
+  DocsPreferredVersionContextProvider,
+} from './docsPreferredVersion';
+
+export {
+  useDocsContextualSearchTags,
+  getDocsVersionSearchTag,
+} from './docsSearch';
+
+export {useBreadcrumbsStructuredData} from './structuredDataUtils';
+
 export type ActivePlugin = {
   pluginId: string;
   pluginData: GlobalPluginData;

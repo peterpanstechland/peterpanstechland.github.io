@@ -43,3 +43,11 @@ website/i18n/**/*
 #!website/i18n/fr/**/*
 
 .netlify
+node_modules
+node_modules
+node_modules
+node_modules
+node_modules
+node_modules
+node_modules
+node_modules

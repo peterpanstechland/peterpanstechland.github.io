@@ -17,18 +17,18 @@ const PluginName = 'docusaurus-plugin-sitemap';
 export default function pluginSitemap(
   context: LoadContext,
   options: PluginOptions,
-): Plugin<void> {
+): Plugin<void> | null {
   if (context.siteConfig.future.experimental_router === 'hash') {
     logger.warn(
       `${PluginName} does not support the Hash Router and will be disabled.`,
     );
-    return {name: PluginName};
+    return null;
   }
 
   return {
     name: PluginName,
 
-    async postBuild({siteConfig, routes, outDir, head}) {
+    async postBuild({siteConfig, routes, outDir, routesBuildMetadata}) {
       if (siteConfig.noIndex) {
         return;
       }
@@ -36,7 +36,7 @@ export default function pluginSitemap(
       const generatedSitemap = await createSitemap({
         siteConfig,
         routes,
-        head,
+        routesBuildMetadata,
         options,
       });
       if (!generatedSitemap) {

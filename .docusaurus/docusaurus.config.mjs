@@ -5,21 +5,41 @@
  */
 export default {
   "title": "Peter Pan's Techland",
-  "tagline": "The moment you doubt whether you can fly, you cease for ever to be able to do it.",
+  "tagline": "AI × Edge × AWS - Building the future, one project at a time.",
   "favicon": "img/favicon.ico",
   "url": "https://peterpanstechland.github.io",
   "baseUrl": "/",
   "organizationName": "peterpanstechland",
   "projectName": "peterpanstechland.github.io",
   "onBrokenLinks": "throw",
-  "onBrokenMarkdownLinks": "warn",
+  "clientModules": [
+    "C:\\Users\\Twink\\OneDrive\\Documents\\Robomon\\peterpanstechland.github.io\\src\\plugins\\docusaurus-nova-ai\\client.tsx"
+  ],
+  "customFields": {
+    "novaChat": {
+      "apiEndpoint": "https://your-api-gateway-url.amazonaws.com/api/nova-chat",
+      "welcomeMessage": "👋 你好！我是 Nova AI 助手，有什么可以帮助你的吗？",
+      "placeholder": "输入你的问题...",
+      "position": "bottom-right"
+    }
+  },
   "i18n": {
     "defaultLocale": "en",
     "locales": [
-      "en"
+      "en",
+      "zh-Hans"
     ],
-    "path": "i18n",
-    "localeConfigs": {}
+    "localeConfigs": {
+      "en": {
+        "label": "EN",
+        "htmlLang": "en-US"
+      },
+      "zh-Hans": {
+        "label": "中文",
+        "htmlLang": "zh-Hans"
+      }
+    },
+    "path": "i18n"
   },
   "presets": [
     [
@@ -27,11 +47,13 @@ export default {
       {
         "docs": {
           "sidebarPath": "./sidebars.ts",
-          "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
+          "editUrl": "https://github.com/peterpanstechland/peterpanstechland.github.io/edit/main/"
         },
         "blog": {
           "showReadingTime": true,
-          "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/"
+          "editUrl": "https://github.com/peterpanstechland/peterpanstechland.github.io/edit/main/",
+          "blogSidebarTitle": "All posts",
+          "blogSidebarCount": "ALL"
         },
         "theme": {
           "customCss": "./src/css/custom.css"
@@ -42,17 +64,41 @@ export default {
   "themeConfig": {
     "image": "img/docusaurus-social-card.jpg",
     "navbar": {
-      "title": "My Site",
+      "title": "Peter Pan's Techland",
       "logo": {
-        "alt": "My Site Logo",
+        "alt": "Site Logo",
         "src": "img/logo.svg"
       },
       "items": [
         {
-          "type": "docSidebar",
-          "sidebarId": "tutorialSidebar",
+          "type": "doc",
+          "docId": "start-here/intro",
           "position": "left",
-          "label": "Tutorial"
+          "label": "Start Here"
+        },
+        {
+          "type": "doc",
+          "docId": "projects/index",
+          "position": "left",
+          "label": "Projects"
+        },
+        {
+          "type": "doc",
+          "docId": "guides/index",
+          "position": "left",
+          "label": "Guides"
+        },
+        {
+          "type": "doc",
+          "docId": "workshops/index",
+          "position": "left",
+          "label": "Workshops"
+        },
+        {
+          "type": "doc",
+          "docId": "community/index",
+          "position": "left",
+          "label": "Community"
         },
         {
           "to": "/blog",
@@ -60,9 +106,15 @@ export default {
           "position": "left"
         },
         {
-          "href": "https://github.com/facebook/docusaurus",
+          "href": "https://github.com/peterpanstechland",
           "label": "GitHub",
           "position": "right"
+        },
+        {
+          "type": "localeDropdown",
+          "position": "right",
+          "dropdownItemsBefore": [],
+          "dropdownItemsAfter": []
         }
       ],
       "hideOnScroll": false
@@ -74,8 +126,16 @@ export default {
           "title": "Docs",
           "items": [
             {
-              "label": "Tutorial",
-              "to": "/docs/intro"
+              "label": "Start Here",
+              "to": "/docs/start-here/intro"
+            },
+            {
+              "label": "Projects",
+              "to": "/docs/projects"
+            },
+            {
+              "label": "Guides",
+              "to": "/docs/guides"
             }
           ]
         },
@@ -83,16 +143,12 @@ export default {
           "title": "Community",
           "items": [
             {
-              "label": "Stack Overflow",
-              "href": "https://stackoverflow.com/questions/tagged/docusaurus"
+              "label": "AWS Builder Community",
+              "href": "https://community.aws/"
             },
             {
-              "label": "Discord",
-              "href": "https://discordapp.com/invite/docusaurus"
-            },
-            {
-              "label": "Twitter",
-              "href": "https://twitter.com/docusaurus"
+              "label": "GitHub",
+              "href": "https://github.com/peterpanstechland"
             }
           ]
         },
@@ -104,13 +160,13 @@ export default {
               "to": "/blog"
             },
             {
-              "label": "GitHub",
-              "href": "https://github.com/facebook/docusaurus"
+              "label": "About",
+              "to": "/docs/about"
             }
           ]
         }
       ],
-      "copyright": "Copyright © 2024 My Project, Inc. Built with Docusaurus."
+      "copyright": "Copyright © 2025 Peter Pan's Techland. Built with Docusaurus."
     },
     "prism": {
       "theme": {
@@ -304,7 +360,12 @@ export default {
           }
         ]
       },
-      "additionalLanguages": [],
+      "additionalLanguages": [
+        "bash",
+        "json",
+        "python",
+        "yaml"
+      ],
       "magicComments": [
         {
           "className": "theme-code-block-highlighted-line",
@@ -328,6 +389,11 @@ export default {
         "autoCollapseCategories": false
       }
     },
+    "blog": {
+      "sidebar": {
+        "groupByYear": true
+      }
+    },
     "metadata": [],
     "tableOfContents": {
       "minHeadingLevel": 2,
@@ -336,6 +402,20 @@ export default {
   },
   "baseUrlIssueBanner": true,
   "future": {
+    "v4": {
+      "removeLegacyPostBuildHeadAttribute": false,
+      "useCssCascadeLayers": false
+    },
+    "experimental_faster": {
+      "swcJsLoader": false,
+      "swcJsMinimizer": false,
+      "swcHtmlMinimizer": false,
+      "lightningCssMinimizer": false,
+      "mdxCrossCompilerCache": false,
+      "rspackBundler": false,
+      "rspackPersistentCache": false,
+      "ssgWorkerThreads": false
+    },
     "experimental_storage": {
       "type": "localStorage",
       "namespace": false
@@ -347,18 +427,17 @@ export default {
   "staticDirectories": [
     "static"
   ],
-  "customFields": {},
   "plugins": [],
   "themes": [],
   "scripts": [],
   "headTags": [],
   "stylesheets": [],
-  "clientModules": [],
   "titleDelimiter": "|",
   "noIndex": false,
   "markdown": {
     "format": "mdx",
     "mermaid": false,
+    "emoji": true,
     "mdx1Compat": {
       "comments": true,
       "admonitions": true,
@@ -366,6 +445,10 @@ export default {
     },
     "anchors": {
       "maintainCase": false
+    },
+    "hooks": {
+      "onBrokenMarkdownLinks": "warn",
+      "onBrokenMarkdownImages": "throw"
     }
   }
 };

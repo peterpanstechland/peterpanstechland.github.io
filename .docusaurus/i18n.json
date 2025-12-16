@@ -1,17 +1,31 @@
 {
   "defaultLocale": "en",
   "locales": [
-    "en"
+    "en",
+    "zh-Hans"
   ],
   "path": "i18n",
   "currentLocale": "en",
   "localeConfigs": {
     "en": {
-      "label": "English",
+      "label": "EN",
       "direction": "ltr",
-      "htmlLang": "en",
+      "htmlLang": "en-US",
       "calendar": "gregory",
-      "path": "en"
+      "path": "en",
+      "translate": false,
+      "url": "https://peterpanstechland.github.io",
+      "baseUrl": "/"
+    },
+    "zh-Hans": {
+      "label": "中文",
+      "direction": "ltr",
+      "htmlLang": "zh-Hans",
+      "calendar": "gregory",
+      "path": "zh-Hans",
+      "translate": true,
+      "url": "https://peterpanstechland.github.io",
+      "baseUrl": "/zh-Hans/"
     }
   }
 }

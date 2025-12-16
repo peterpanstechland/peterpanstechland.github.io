@@ -5,7 +5,6 @@
  */
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { useColorMode } from '@docusaurus/theme-common';
 import styles from './styles.module.css';
 
 interface Message {
@@ -25,6 +24,17 @@ interface NovaChatConfig {
 // 从页面配置读取
 function getConfig(): NovaChatConfig {
   if (typeof document === 'undefined') return {};
+  
+  // 尝试从 Docusaurus 配置读取
+  try {
+    // @ts-ignore
+    const siteConfig = window.__DOCUSAURUS__?.siteConfig;
+    if (siteConfig?.customFields?.novaChat) {
+      return siteConfig.customFields.novaChat;
+    }
+  } catch {}
+  
+  // 备用：从 script 标签读取
   const configEl = document.getElementById('nova-chat-config');
   if (configEl) {
     try {
@@ -71,7 +81,6 @@ export default function NovaChat(): JSX.Element | null {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { colorMode } = useColorMode();
 
   const config = getConfig();
   const {
@@ -161,7 +170,7 @@ export default function NovaChat(): JSX.Element | null {
     <div className={styles.container} data-position={position}>
       {/* 聊天窗口 */}
       {isOpen && (
-        <div className={styles.chatWindow} data-theme={colorMode}>
+        <div className={styles.chatWindow}>
           {/* 头部 */}
           <div className={styles.header}>
             <div className={styles.headerInfo}>
@@ -263,4 +272,3 @@ export default function NovaChat(): JSX.Element | null {
     </div>
   );
 }
-

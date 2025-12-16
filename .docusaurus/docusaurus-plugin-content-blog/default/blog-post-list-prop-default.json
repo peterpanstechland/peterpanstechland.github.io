@@ -1,25 +1,11 @@
 {
-  "title": "Recent posts",
+  "title": "All posts",
   "items": [
     {
-      "title": "Welcome",
+      "title": "Welcome to Peter Pan's Techland",
       "permalink": "/blog/welcome",
-      "unlisted": false
-    },
-    {
-      "title": "MDX Blog Post",
-      "permalink": "/blog/mdx-blog-post",
-      "unlisted": false
-    },
-    {
-      "title": "Long Blog Post",
-      "permalink": "/blog/long-blog-post",
-      "unlisted": false
-    },
-    {
-      "title": "First Blog Post",
-      "permalink": "/blog/first-blog-post",
-      "unlisted": false
+      "unlisted": false,
+      "date": "2025-01-01T00:00:00.000Z"
     }
   ]
 }

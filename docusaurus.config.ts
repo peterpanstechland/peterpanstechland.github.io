@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: "Peter Pan's Techland",
-  tagline: 'AI × Edge × AWS — Building intelligent systems from cloud to device',
+  tagline: 'AI × Edge × AWS - Building the future, one project at a time.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -19,26 +19,40 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
+  // Nova AI 聊天助手插件
+  clientModules: [
+    require.resolve('./src/plugins/docusaurus-nova-ai/client.tsx'),
+  ],
+
+  // Nova AI 配置 (可选)
+  customFields: {
+    novaChat: {
+      // API 端点 - 部署 Lambda 后替换为真实 URL
+      apiEndpoint: 'https://your-api-gateway-url.amazonaws.com/api/nova-chat',
+      // 欢迎消息
+      welcomeMessage: '👋 你好！我是 Nova AI 助手，有什么可以帮助你的吗？',
+      // 输入框占位符
+      placeholder: '输入你的问题...',
+      // 按钮位置: 'bottom-right' 或 'bottom-left'
+      position: 'bottom-right',
+    },
+  },
+
   // Internationalization configuration
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh-Hans'],
     localeConfigs: {
       en: {
+        label: 'EN',
         htmlLang: 'en-US',
-        label: 'English',
       },
       'zh-Hans': {
+        label: '中文',
         htmlLang: 'zh-Hans',
-        label: '简体中文',
       },
     },
   },
-
-  // 客户端模块 - Nova AI 聊天助手
-  clientModules: [
-    require.resolve('./src/plugins/docusaurus-nova-ai/client.tsx'),
-  ],
 
   presets: [
     [
@@ -66,6 +80,7 @@ const config: Config = {
   themeConfig: {
     // Social card image
     image: 'img/docusaurus-social-card.jpg',
+    
     navbar: {
       title: "Peter Pan's Techland",
       logo: {
@@ -114,31 +129,25 @@ const config: Config = {
           label: 'Blog',
           position: 'left',
         },
-        // About
-        {
-          type: 'doc',
-          docId: 'about/index',
-          position: 'left',
-          label: 'About',
-        },
-        // Language Switcher
-        {
-          type: 'localeDropdown',
-          position: 'right',
-        },
-        // GitHub
+        // Right side items
         {
           href: 'https://github.com/peterpanstechland',
           label: 'GitHub',
           position: 'right',
         },
+        // Language switcher
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
       ],
     },
+    
     footer: {
       style: 'dark',
       links: [
         {
-          title: 'Explore',
+          title: 'Docs',
           items: [
             {
               label: 'Start Here',
@@ -158,12 +167,12 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/peterpanstechland',
+              label: 'AWS Builder Community',
+              href: 'https://community.aws/',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/peterpantech',
+              label: 'GitHub',
+              href: 'https://github.com/peterpanstechland',
             },
           ],
         },
@@ -183,10 +192,11 @@ const config: Config = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Peter Pan's Techland. Built with Docusaurus.`,
     },
+    
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['bash', 'json', 'python', 'yaml', 'cpp', 'arduino'],
+      additionalLanguages: ['bash', 'json', 'python', 'yaml'],
     },
   } satisfies Preset.ThemeConfig,
 };
