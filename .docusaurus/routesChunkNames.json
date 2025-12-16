@@ -112,13 +112,13 @@
     },
     "content": "content---markdown-page-393-028"
   },
-  "/docs-fbc": {
+  "/docs-e96": {
     "__comp": "__comp---theme-docs-root-5-e-9-0b6",
     "__context": {
       "plugin": "plugin---docsaba-d7c"
     }
   },
-  "/docs-08a": {
+  "/docs-866": {
     "__comp": "__comp---theme-doc-version-roota-7-b-5de",
     "__props": "__props---docs-005-788"
   },
@@ -158,12 +158,16 @@
     "__comp": "__comp---theme-doc-tag-doc-list-pagedf-2-9f0",
     "__props": "__props---docs-tags-iot-832-415"
   },
-  "/docs-28e": {
+  "/docs-fdf": {
     "__comp": "__comp---theme-doc-roota-94-67a"
   },
   "/docs/about-c2e": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-about-1-f-6-ce8"
+  },
+  "/docs/category/automation-bed": {
+    "__comp": "__comp---theme-doc-category-generated-index-page-14-e-640",
+    "__props": "__props---docs-category-automation-97-b-9bc"
   },
   "/docs/community-3a7": {
     "__comp": "__comp---theme-doc-item-178-a40",
@@ -180,6 +184,10 @@
   "/docs/guides/ai/nova-chat-deployment-0c8": {
     "__comp": "__comp---theme-doc-item-178-a40",
     "content": "content---docs-guides-ai-nova-chat-deploymentf-2-f-904"
+  },
+  "/docs/guides/automation/now-page-automation-60c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---docs-guides-automation-now-page-automation-7-ab-18d"
   },
   "/docs/guides/aws/getting-started-21e": {
     "__comp": "__comp---theme-doc-item-178-a40",

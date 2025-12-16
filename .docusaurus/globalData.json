@@ -31,6 +31,11 @@
               "sidebar": "docsSidebar"
             },
             {
+              "id": "guides/automation/now-page-automation",
+              "path": "/docs/guides/automation/now-page-automation",
+              "sidebar": "docsSidebar"
+            },
+            {
               "id": "guides/aws/getting-started",
               "path": "/docs/guides/aws/getting-started",
               "sidebar": "docsSidebar"
@@ -63,6 +68,11 @@
             {
               "id": "workshops/index",
               "path": "/docs/workshops",
+              "sidebar": "docsSidebar"
+            },
+            {
+              "id": "/category/automation",
+              "path": "/docs/category/automation",
               "sidebar": "docsSidebar"
             }
           ],

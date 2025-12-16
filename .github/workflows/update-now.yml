@@ -1,0 +1,63 @@
+name: Auto Update Now Page
+
+on:
+  # 每周一 UTC 时间 0:00 运行 (北京时间周一早8点)
+  schedule:
+    - cron: '0 0 * * 1'
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no new activity'
+        required: false
+        default: 'false'
+
+jobs:
+  update-now:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          pip install zhipuai requests PyGithub
+
+      - name: Generate Now Page Content
+        env:
+          ZHIPU_API_KEY: ${{ secrets.ZHIPU_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python .github/scripts/generate-now-page.py
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Check if there are changes
+          if git diff --quiet docs/start-here/now.md i18n/zh-Hans/docusaurus-plugin-content-docs/current/start-here/now.md; then
+            echo "No changes to commit"
+          else
+            git add docs/start-here/now.md
+            git add i18n/zh-Hans/docusaurus-plugin-content-docs/current/start-here/now.md
+            git commit -m "🤖 Auto-update Now page [$(date +'%Y-%m-%d')]"
+            git push
+          fi
+

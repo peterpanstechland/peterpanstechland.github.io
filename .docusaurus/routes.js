@@ -74,11 +74,11 @@ export default [
   },
   {
     path: '/docs',
-    component: ComponentCreator('/docs', 'fbc'),
+    component: ComponentCreator('/docs', 'e96'),
     routes: [
       {
         path: '/docs',
-        component: ComponentCreator('/docs', '08a'),
+        component: ComponentCreator('/docs', '866'),
         routes: [
           {
             path: '/docs/tags',
@@ -127,11 +127,17 @@ export default [
           },
           {
             path: '/docs',
-            component: ComponentCreator('/docs', '28e'),
+            component: ComponentCreator('/docs', 'fdf'),
             routes: [
               {
                 path: '/docs/about',
                 component: ComponentCreator('/docs/about', 'c2e'),
+                exact: true,
+                sidebar: "docsSidebar"
+              },
+              {
+                path: '/docs/category/automation',
+                component: ComponentCreator('/docs/category/automation', 'bed'),
                 exact: true,
                 sidebar: "docsSidebar"
               },
@@ -156,6 +162,12 @@ export default [
               {
                 path: '/docs/guides/ai/nova-chat-deployment',
                 component: ComponentCreator('/docs/guides/ai/nova-chat-deployment', '0c8'),
+                exact: true,
+                sidebar: "docsSidebar"
+              },
+              {
+                path: '/docs/guides/automation/now-page-automation',
+                component: ComponentCreator('/docs/guides/automation/now-page-automation', '60c'),
                 exact: true,
                 sidebar: "docsSidebar"
               },
