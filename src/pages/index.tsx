@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import Translate, {translate} from '@docusaurus/Translate';
 
 import styles from './index.module.css';
 
@@ -10,66 +11,90 @@ import styles from './index.module.css';
 const features = [
   {
     icon: '🤖',
-    title: 'Edge Intelligence',
-    description: 'Deep integration with ESP32-S3. On-device VAD, Opus encoding, and low-latency MQTT voice streaming.',
+    titleKey: 'homepage.features.edge.title',
+    titleDefault: 'Edge Intelligence',
+    descKey: 'homepage.features.edge.description',
+    descDefault: 'Deep integration with ESP32-S3. On-device VAD, Opus encoding, and low-latency MQTT voice streaming.',
   },
   {
     icon: '☁️',
-    title: 'Cloud Native',
-    description: 'Serverless architecture powered by AWS Lambda and Bedrock. Scalable, cost-effective, and resilient.',
+    titleKey: 'homepage.features.cloud.title',
+    titleDefault: 'Cloud Native',
+    descKey: 'homepage.features.cloud.description',
+    descDefault: 'Serverless architecture powered by AWS Lambda and Bedrock. Scalable, cost-effective, and resilient.',
   },
   {
     icon: '🎭',
-    title: 'Cyber Puppetry',
-    description: 'Revitalizing traditional shadow puppetry with PixiJS and Motion Capture. A bridge between heritage and future.',
+    titleKey: 'homepage.features.puppetry.title',
+    titleDefault: 'Cyber Puppetry',
+    descKey: 'homepage.features.puppetry.description',
+    descDefault: 'Revitalizing traditional shadow puppetry with PixiJS and Motion Capture. A bridge between heritage and future.',
   },
 ];
 
 // Project Card 数据
 const projects = [
   {
-    tag: 'AI × IoT',
+    tagKey: 'homepage.projects.esp32.tag',
+    tagDefault: 'AI × IoT',
     tagClass: 'tagIot',
-    title: 'ESP32 Voice Terminal',
-    description: 'A dedicated hardware endpoint for LLM voice interaction with < 200ms latency.',
+    titleKey: 'homepage.projects.esp32.title',
+    titleDefault: 'ESP32 Voice Terminal',
+    descKey: 'homepage.projects.esp32.description',
+    descDefault: 'A dedicated hardware endpoint for LLM voice interaction with < 200ms latency.',
     link: '/docs/projects',
-    linkText: 'View Architecture →',
+    linkTextKey: 'homepage.projects.viewArchitecture',
+    linkTextDefault: 'View Architecture →',
     linkColor: 'primary',
   },
   {
-    tag: 'Digital Art',
+    tagKey: 'homepage.projects.shadow.tag',
+    tagDefault: 'Digital Art',
     tagClass: 'tagArt',
-    title: 'Cyber Shadow System',
-    description: 'Real-time motion capture system driving digital shadow puppets for immersive exhibitions.',
+    titleKey: 'homepage.projects.shadow.title',
+    titleDefault: 'Cyber Shadow System',
+    descKey: 'homepage.projects.shadow.description',
+    descDefault: 'Real-time motion capture system driving digital shadow puppets for immersive exhibitions.',
     link: '/docs/projects',
-    linkText: 'Watch Demo →',
+    linkTextKey: 'homepage.projects.watchDemo',
+    linkTextDefault: 'Watch Demo →',
     linkColor: 'accent',
   },
 ];
 
-function FeatureCard({ icon, title, description }) {
+function FeatureCard({ icon, titleKey, titleDefault, descKey, descDefault }) {
   return (
     <div className={styles.featureCard}>
       <div className={styles.iconBox}>{icon}</div>
-      <h3 className={styles.featureTitle}>{title}</h3>
-      <p className={styles.featureDesc}>{description}</p>
+      <h3 className={styles.featureTitle}>
+        <Translate id={titleKey}>{titleDefault}</Translate>
+      </h3>
+      <p className={styles.featureDesc}>
+        <Translate id={descKey}>{descDefault}</Translate>
+      </p>
     </div>
   );
 }
 
-function ProjectCard({ tag, tagClass, title, description, link, linkText, linkColor }) {
+function ProjectCard({ tagKey, tagDefault, tagClass, titleKey, titleDefault, descKey, descDefault, link, linkTextKey, linkTextDefault, linkColor }) {
   return (
     <div className={styles.projectCard}>
       <div className={styles.projectContent}>
-        <span className={clsx(styles.projectTag, styles[tagClass])}>{tag}</span>
-        <h3 className={styles.projectTitle}>{title}</h3>
-        <p className={styles.projectDesc}>{description}</p>
+        <span className={clsx(styles.projectTag, styles[tagClass])}>
+          <Translate id={tagKey}>{tagDefault}</Translate>
+        </span>
+        <h3 className={styles.projectTitle}>
+          <Translate id={titleKey}>{titleDefault}</Translate>
+        </h3>
+        <p className={styles.projectDesc}>
+          <Translate id={descKey}>{descDefault}</Translate>
+        </p>
       </div>
       <Link 
         to={link} 
         className={clsx(styles.projectLink, linkColor === 'accent' ? styles.linkAccent : styles.linkPrimary)}
       >
-        {linkText}
+        <Translate id={linkTextKey}>{linkTextDefault}</Translate>
       </Link>
     </div>
   );
@@ -79,18 +104,22 @@ function HomepageHeader() {
   return (
     <header className={styles.hero}>
       <Heading as="h1" className={styles.heroTitle}>
-        Building the<br />
-        <span className={styles.heroGradient}>Soul of Machines</span>
+        <Translate id="homepage.hero.title.line1">Building the</Translate><br />
+        <span className={styles.heroGradient}>
+          <Translate id="homepage.hero.title.line2">Soul of Machines</Translate>
+        </span>
       </Heading>
       <p className={styles.heroSubtitle}>
-        连接 AIoT 边缘计算与数字艺术的实验场。在这里，我们探索硅基智能与传统皮影艺术的赛博融合。
+        <Translate id="homepage.hero.subtitle">
+          A laboratory connecting AIoT edge computing and digital art. Exploring the cyber fusion of silicon intelligence and traditional shadow puppetry.
+        </Translate>
       </p>
       <div className={styles.heroBtns}>
         <Link className={clsx(styles.btn, styles.btnPrimary)} to="/docs/start-here/intro">
-          Start Reading
+          <Translate id="homepage.hero.cta.start">Start Reading</Translate>
         </Link>
         <Link className={clsx(styles.btn, styles.btnSecondary)} href="https://github.com/peterpanstechland">
-          View GitHub
+          <Translate id="homepage.hero.cta.github">View GitHub</Translate>
         </Link>
       </div>
     </header>
@@ -101,8 +130,14 @@ function FeaturesSection() {
   return (
     <section className={styles.sectionContainer}>
       <div className={styles.sectionTitle}>
-        <Heading as="h2">Core Technologies</Heading>
-        <p>基于现代 Web 技术栈与 AWS 云服务的全链路解决方案</p>
+        <Heading as="h2">
+          <Translate id="homepage.features.title">Core Technologies</Translate>
+        </Heading>
+        <p>
+          <Translate id="homepage.features.subtitle">
+            Full-stack solutions based on modern web technologies and AWS cloud services
+          </Translate>
+        </p>
       </div>
       <div className={styles.features}>
         {features.map((props, idx) => (
@@ -117,8 +152,14 @@ function ProjectsSection() {
   return (
     <section className={styles.sectionContainer}>
       <div className={styles.sectionTitle}>
-        <Heading as="h2">Featured Projects</Heading>
-        <p>最新落地的 AI 互动装置与开源硬件项目</p>
+        <Heading as="h2">
+          <Translate id="homepage.projects.title">Featured Projects</Translate>
+        </Heading>
+        <p>
+          <Translate id="homepage.projects.subtitle">
+            Latest AI interactive installations and open-source hardware projects
+          </Translate>
+        </p>
       </div>
       <div className={styles.showcaseGrid}>
         {projects.map((props, idx) => (
@@ -133,8 +174,8 @@ export default function Home(): JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title="Home"
-      description="连接 AIoT 边缘计算与数字艺术的实验场">
+      title={translate({id: 'homepage.meta.title', message: 'Home'})}
+      description={translate({id: 'homepage.meta.description', message: 'A laboratory connecting AIoT edge computing and digital art'})}>
       {/* 动态光效背景 */}
       <div className={styles.ambientLight} />
       <div className={styles.ambientLightAccent} />

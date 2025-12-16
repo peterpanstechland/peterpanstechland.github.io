@@ -1,4 +1,104 @@
 {
+  "homepage.meta.title": {
+    "message": "首页",
+    "description": "Homepage meta title"
+  },
+  "homepage.meta.description": {
+    "message": "连接 AIoT 边缘计算与数字艺术的实验场",
+    "description": "Homepage meta description"
+  },
+  "homepage.hero.title.line1": {
+    "message": "构建",
+    "description": "Homepage hero title line 1"
+  },
+  "homepage.hero.title.line2": {
+    "message": "机甲之灵",
+    "description": "Homepage hero title line 2"
+  },
+  "homepage.hero.subtitle": {
+    "message": "连接 AIoT 边缘计算与数字艺术的实验场。在这里，我们探索硅基智能与传统皮影艺术的赛博融合。",
+    "description": "Homepage hero subtitle"
+  },
+  "homepage.hero.cta.start": {
+    "message": "开始阅读",
+    "description": "Homepage CTA button - start reading"
+  },
+  "homepage.hero.cta.github": {
+    "message": "查看 GitHub",
+    "description": "Homepage CTA button - view github"
+  },
+  "homepage.features.title": {
+    "message": "核心技术",
+    "description": "Features section title"
+  },
+  "homepage.features.subtitle": {
+    "message": "基于现代 Web 技术栈与 AWS 云服务的全链路解决方案",
+    "description": "Features section subtitle"
+  },
+  "homepage.features.edge.title": {
+    "message": "边缘智能",
+    "description": "Edge intelligence feature title"
+  },
+  "homepage.features.edge.description": {
+    "message": "深度集成 ESP32-S3。设备端 VAD、Opus 编码和低延迟 MQTT 语音流。",
+    "description": "Edge intelligence feature description"
+  },
+  "homepage.features.cloud.title": {
+    "message": "云原生",
+    "description": "Cloud native feature title"
+  },
+  "homepage.features.cloud.description": {
+    "message": "基于 AWS Lambda 和 Bedrock 的无服务器架构。可扩展、经济高效且弹性十足。",
+    "description": "Cloud native feature description"
+  },
+  "homepage.features.puppetry.title": {
+    "message": "赛博皮影",
+    "description": "Cyber puppetry feature title"
+  },
+  "homepage.features.puppetry.description": {
+    "message": "用 PixiJS 和动作捕捉技术复兴传统皮影艺术。连接传统与未来的桥梁。",
+    "description": "Cyber puppetry feature description"
+  },
+  "homepage.projects.title": {
+    "message": "精选项目",
+    "description": "Projects section title"
+  },
+  "homepage.projects.subtitle": {
+    "message": "最新落地的 AI 互动装置与开源硬件项目",
+    "description": "Projects section subtitle"
+  },
+  "homepage.projects.esp32.tag": {
+    "message": "AI × IoT",
+    "description": "ESP32 project tag"
+  },
+  "homepage.projects.esp32.title": {
+    "message": "ESP32 语音终端",
+    "description": "ESP32 project title"
+  },
+  "homepage.projects.esp32.description": {
+    "message": "专为 LLM 语音交互设计的硬件终端，延迟低于 200ms。",
+    "description": "ESP32 project description"
+  },
+  "homepage.projects.shadow.tag": {
+    "message": "数字艺术",
+    "description": "Shadow system project tag"
+  },
+  "homepage.projects.shadow.title": {
+    "message": "赛博皮影系统",
+    "description": "Shadow system project title"
+  },
+  "homepage.projects.shadow.description": {
+    "message": "实时动作捕捉驱动数字皮影，打造沉浸式展览体验。",
+    "description": "Shadow system project description"
+  },
+  "homepage.projects.viewArchitecture": {
+    "message": "查看架构 →",
+    "description": "View architecture link text"
+  },
+  "homepage.projects.watchDemo": {
+    "message": "观看演示 →",
+    "description": "Watch demo link text"
+  },
   "theme.ErrorPageContent.title": {
     "message": "页面已崩溃。",
     "description": "The title of the fallback page when the page crashed"
