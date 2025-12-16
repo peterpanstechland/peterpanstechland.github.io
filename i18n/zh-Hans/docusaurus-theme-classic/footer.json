@@ -1,0 +1,46 @@
+{
+  "link.title.Explore": {
+    "message": "探索",
+    "description": "The title of the footer links column with title=Explore in the footer"
+  },
+  "link.title.Community": {
+    "message": "社区",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.More": {
+    "message": "更多",
+    "description": "The title of the footer links column with title=More in the footer"
+  },
+  "link.item.label.Start Here": {
+    "message": "开始",
+    "description": "The label of footer link with label=Start Here linking to /docs/start-here/intro"
+  },
+  "link.item.label.Projects": {
+    "message": "项目",
+    "description": "The label of footer link with label=Projects linking to /docs/projects"
+  },
+  "link.item.label.Guides": {
+    "message": "指南",
+    "description": "The label of footer link with label=Guides linking to /docs/guides"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/peterpanstechland"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://twitter.com/peterpantech"
+  },
+  "link.item.label.Blog": {
+    "message": "博客",
+    "description": "The label of footer link with label=Blog linking to /blog"
+  },
+  "link.item.label.About": {
+    "message": "关于",
+    "description": "The label of footer link with label=About linking to /docs/about"
+  },
+  "copyright": {
+    "message": "Copyright © 2025 Peter Pan's Techland. 基于 Docusaurus 构建。",
+    "description": "The footer copyright"
+  }
+}

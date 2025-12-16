@@ -1,23 +1,300 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* --- 动态光效背景 --- */
+.ambientLight {
+  position: fixed;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vw;
+  background: radial-gradient(circle, var(--primary-dim, rgba(139, 92, 246, 0.15)) 0%, transparent 70%);
+  filter: blur(120px);
+  z-index: -1;
+  pointer-events: none;
+}
 
-.heroBanner {
-  padding: 4rem 0;
+.ambientLightAccent {
+  position: fixed;
+  bottom: -20%;
+  right: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.08) 0%, transparent 70%);
+  filter: blur(100px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* --- Hero Section --- */
+.hero {
+  padding: 6rem 1.5rem 4rem;
   text-align: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--text-title, #fff);
+  letter-spacing: -2px;
+  font-weight: 800;
+}
+
+.heroGradient {
+  background: linear-gradient(to right, var(--ifm-color-primary, #8b5cf6), var(--accent, #f43f5e));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted, #9ca3af);
+  max-width: 650px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+.heroBtns {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- 按钮 --- */
+.btn {
+  padding: 12px 32px;
+  border-radius: var(--radius-md, 12px);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btnPrimary {
+  background: var(--text-title, #fff);
+  color: var(--ifm-background-color, #050507);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+[data-theme='dark'] .btnPrimary {
+  background: #fff;
+  color: #000;
+}
+
+[data-theme='light'] .btnPrimary {
+  background: #000;
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px var(--primary-glow, rgba(139, 92, 246, 0.5));
+  background: var(--ifm-color-primary, #8b5cf6);
+  color: #fff;
+  text-decoration: none;
+}
+
+.btnSecondary {
+  background: var(--ifm-background-surface-color, rgba(30, 30, 35, 0.6));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  color: var(--text-title, #fff);
+}
+
+.btnSecondary:hover {
+  background: var(--bg-card-hover, rgba(40, 40, 50, 0.8));
+  border-color: var(--text-muted, #9ca3af);
+  text-decoration: none;
+  color: var(--text-title, #fff);
+}
+
+/* --- Section Container --- */
+.sectionContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-title, #fff);
+}
+
+.sectionTitle p {
+  color: var(--text-muted, #9ca3af);
+  margin: 0;
+}
+
+/* --- Feature Grid --- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  background: var(--ifm-background-surface-color, rgba(30, 30, 35, 0.6));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-lg, 16px);
+  padding: 2rem;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.featureCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--ifm-color-primary, #8b5cf6);
+  box-shadow: 0 10px 40px -10px var(--primary-dim, rgba(139, 92, 246, 0.15));
 }
 
-.buttons {
+.iconBox {
+  width: 50px;
+  height: 50px;
+  background: var(--primary-dim, rgba(139, 92, 246, 0.15));
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.featureTitle {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-title, #fff);
+  font-size: 1.25rem;
+}
+
+.featureDesc {
+  margin: 0;
+  color: var(--text-muted, #9ca3af);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --- Project Showcase Grid --- */
+.showcaseGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.projectCard {
+  background: var(--ifm-background-surface-color, rgba(30, 30, 35, 0.6));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  border-radius: var(--radius-xl, 24px);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  transition: all 0.3s ease;
+}
+
+.projectCard:hover {
+  border-color: var(--accent, #f43f5e);
+}
+
+.projectContent {
+  flex: 1;
+}
+
+.projectTag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+
+.tagIot {
+  background: rgba(139, 92, 246, 0.1);
+  color: var(--ifm-color-primary, #8b5cf6);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.tagArt {
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--accent, #f43f5e);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.projectTitle {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-title, #fff);
+}
+
+.projectDesc {
+  color: var(--text-muted, #9ca3af);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.projectLink {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.linkPrimary {
+  color: var(--ifm-color-primary, #8b5cf6);
+}
+
+.linkPrimary:hover {
+  color: var(--ifm-color-primary-light, #a78bfa);
+  text-decoration: none;
+}
+
+.linkAccent {
+  color: var(--accent, #f43f5e);
+}
+
+.linkAccent:hover {
+  color: #fb7185;
+  text-decoration: none;
+}
+
+/* --- 响应式 --- */
+@media (max-width: 996px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
+  
+  .showcaseGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 1rem 2rem;
+  }
+  
+  .heroTitle {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+  }
+  
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+  
+  .sectionContainer {
+    padding: 2rem 1rem;
+  }
 }

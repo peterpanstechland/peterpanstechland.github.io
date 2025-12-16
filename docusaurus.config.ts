@@ -3,30 +3,36 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Peter Pan\'s Techland',
-  tagline: 'The moment you doubt whether you can fly, you cease for ever to be able to do it.',
+  title: "Peter Pan's Techland",
+  tagline: 'AI × Edge × AWS — Building intelligent systems from cloud to device',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://peterpanstechland.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'peterpanstechland', // Usually your GitHub org/user name.
-  projectName: 'peterpanstechland.github.io', // Usually your repo name.
+  organizationName: 'peterpanstechland',
+  projectName: 'peterpanstechland.github.io',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  // Internationalization configuration
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en', 'zh-Hans'],
+    localeConfigs: {
+      en: {
+        htmlLang: 'en-US',
+        label: 'English',
+      },
+      'zh-Hans': {
+        htmlLang: 'zh-Hans',
+        label: '简体中文',
+      },
+    },
   },
 
   presets: [
@@ -35,17 +41,15 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/peterpanstechland/peterpanstechland.github.io/edit/main/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/peterpanstechland/peterpanstechland.github.io/edit/main/',
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -55,24 +59,71 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
+    // Social card image
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: "Peter Pan's Techland",
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Site Logo',
         src: 'img/logo.svg',
       },
       items: [
+        // Start Here
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          type: 'doc',
+          docId: 'start-here/intro',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Start Here',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        // Projects
         {
-          href: 'https://github.com/facebook/docusaurus',
+          type: 'doc',
+          docId: 'projects/index',
+          position: 'left',
+          label: 'Projects',
+        },
+        // Guides
+        {
+          type: 'doc',
+          docId: 'guides/index',
+          position: 'left',
+          label: 'Guides',
+        },
+        // Workshops
+        {
+          type: 'doc',
+          docId: 'workshops/index',
+          position: 'left',
+          label: 'Workshops',
+        },
+        // Community
+        {
+          type: 'doc',
+          docId: 'community/index',
+          position: 'left',
+          label: 'Community',
+        },
+        // Blog
+        {
+          to: '/blog',
+          label: 'Blog',
+          position: 'left',
+        },
+        // About
+        {
+          type: 'doc',
+          docId: 'about/index',
+          position: 'left',
+          label: 'About',
+        },
+        // Language Switcher
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
+        // GitHub
+        {
+          href: 'https://github.com/peterpanstechland',
           label: 'GitHub',
           position: 'right',
         },
@@ -82,11 +133,19 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Explore',
           items: [
             {
-              label: 'Tutorial',
-              to: '/docs/intro',
+              label: 'Start Here',
+              to: '/docs/start-here/intro',
+            },
+            {
+              label: 'Projects',
+              to: '/docs/projects',
+            },
+            {
+              label: 'Guides',
+              to: '/docs/guides',
             },
           ],
         },
@@ -94,16 +153,12 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'GitHub',
+              href: 'https://github.com/peterpanstechland',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: 'https://twitter.com/peterpantech',
             },
           ],
         },
@@ -115,17 +170,18 @@ const config: Config = {
               to: '/blog',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: 'About',
+              to: '/docs/about',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Peter Pan's Techland. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ['bash', 'json', 'python', 'yaml', 'cpp', 'arduino'],
     },
   } satisfies Preset.ThemeConfig,
 };

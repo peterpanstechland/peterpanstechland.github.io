@@ -1,0 +1,42 @@
+{
+  "version.label": {
+    "message": "当前版本",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.Start Here": {
+    "message": "开始",
+    "description": "The label for category Start Here in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Projects": {
+    "message": "项目",
+    "description": "The label for category Projects in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Guides": {
+    "message": "指南",
+    "description": "The label for category Guides in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Workshops": {
+    "message": "工作坊",
+    "description": "The label for category Workshops in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Community": {
+    "message": "社区",
+    "description": "The label for category Community in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.About": {
+    "message": "关于",
+    "description": "The label for category About in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.AWS": {
+    "message": "AWS",
+    "description": "The label for category AWS in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.Edge Devices": {
+    "message": "边缘设备",
+    "description": "The label for category Edge Devices in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.AI & ML": {
+    "message": "AI & ML",
+    "description": "The label for category AI & ML in sidebar docsSidebar"
+  }
+}

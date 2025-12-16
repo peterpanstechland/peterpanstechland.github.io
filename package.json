@@ -1,10 +1,11 @@
 {
-  "name": "my-website",
-  "version": "0.0.0",
+  "name": "peterpanstechland",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
+    "start:zh": "docusaurus start --locale zh-Hans",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",

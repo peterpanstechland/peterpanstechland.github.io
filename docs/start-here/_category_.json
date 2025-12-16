@@ -1,0 +1,9 @@
+{
+  "label": "Start Here",
+  "position": 1,
+  "collapsed": false,
+  "link": {
+    "type": "doc",
+    "id": "start-here/intro"
+  }
+}

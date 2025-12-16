@@ -1,0 +1,9 @@
+{
+  "label": "Community",
+  "position": 5,
+  "collapsed": false,
+  "link": {
+    "type": "doc",
+    "id": "community/index"
+  }
+}

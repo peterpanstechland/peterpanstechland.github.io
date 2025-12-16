@@ -1,16 +1,118 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+# Announcements
+announcement:
+  label: Announcement
+  description: Site announcements and updates
+
+# AWS Related
+aws:
+  label: AWS
+  description: Amazon Web Services related content
+
+bedrock:
+  label: Bedrock
+  description: Amazon Bedrock generative AI
+
+nova:
+  label: Nova
+  description: Amazon Nova models
+
+iot:
+  label: IoT
+  description: Internet of Things
+
+greengrass:
+  label: Greengrass
+  description: AWS IoT Greengrass
+
+lambda:
+  label: Lambda
+  description: AWS Lambda serverless
+
+# AI/ML
+ai:
+  label: AI
+  description: Artificial Intelligence
+
+llm:
+  label: LLM
+  description: Large Language Models
+
+edge-ai:
+  label: Edge AI
+  description: AI at the edge
+
+# Hardware
+hardware:
+  label: Hardware
+  description: Hardware projects and electronics
+
+esp32:
+  label: ESP32
+  description: ESP32 microcontroller projects
+
+raspberry-pi:
+  label: Raspberry Pi
+  description: Raspberry Pi projects
+
+jetson:
+  label: Jetson
+  description: NVIDIA Jetson projects
+
+arduino:
+  label: Arduino
+  description: Arduino projects
+
+sensors:
+  label: Sensors
+  description: Sensor integrations
+
+3d-printing:
+  label: 3D Printing
+  description: 3D printing and fabrication
+
+# Development
+python:
+  label: Python
+  description: Python programming
+
+firmware:
+  label: Firmware
+  description: Firmware development
+
+web:
+  label: Web
+  description: Web development
+
+# Project Types
+project:
+  label: Project
+  description: Complete project builds
+
+tutorial:
+  label: Tutorial
+  description: Step-by-step tutorials
+
+smart-home:
+  label: Smart Home
+  description: Smart home automation
+
+robotics:
+  label: Robotics
+  description: Robotics projects
+
+# Meta
+beginner:
+  label: Beginner
+  description: Beginner-friendly content
+
+advanced:
+  label: Advanced
+  description: Advanced topics
+
+architecture:
+  label: Architecture
+  description: System architecture and design
+
+lessons-learned:
+  label: Lessons Learned
+  description: Experiences and insights
