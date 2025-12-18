@@ -132,7 +132,6 @@ const table = new dynamodb.Table(this, 'GameTable', {
 
 - [GitHub Repository](https://github.com/peterpanstechland/aws-gameday-2025)
 - [AWS GameDay Official](https://aws.amazon.com/gameday/)
-- [Architecture Decision Records](/docs/hackathons/2025/aws-gameday-adr)
 
 ---
 
