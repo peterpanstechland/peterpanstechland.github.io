@@ -116,6 +116,13 @@ const config: Config = {
           position: 'left',
           label: 'Workshops',
         },
+        // Hackathons
+        {
+          type: 'doc',
+          docId: 'hackathons/index',
+          position: 'left',
+          label: 'Hackathons',
+        },
         // Community
         {
           type: 'doc',

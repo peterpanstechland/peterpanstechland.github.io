@@ -1,0 +1,9 @@
+{
+  "label": "黑客松",
+  "position": 5,
+  "link": {
+    "type": "doc",
+    "id": "hackathons/index"
+  }
+}
+
