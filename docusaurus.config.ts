@@ -19,6 +19,12 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
+  // 启用 Mermaid 图表支持
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
+
   // Nova AI 聊天助手插件
   clientModules: [
     require.resolve('./src/plugins/docusaurus-nova-ai/client.tsx'),
@@ -204,6 +210,11 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
       additionalLanguages: ['bash', 'json', 'python', 'yaml'],
+    },
+    
+    // Mermaid 图表主题配置
+    mermaid: {
+      theme: { light: 'neutral', dark: 'dark' },
     },
   } satisfies Preset.ThemeConfig,
 };
