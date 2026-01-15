@@ -74,6 +74,8 @@ async function callNovaAPI(message: string, apiEndpoint: string): Promise<string
   return `感谢你的提问！这是一个演示版本。\n\n在实际部署中，这里会调用 AWS Nova 模型来智能回答你的问题："${message}"\n\n你可以尝试问一些关于 **AWS**、**Bedrock**、**Nova**、**ESP32** 的问题。`;
 }
 
+const config = getConfig();
+
 export default function NovaChat(): JSX.Element | null {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -82,7 +84,6 @@ export default function NovaChat(): JSX.Element | null {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const config = getConfig();
   const {
     apiEndpoint = '/api/nova-chat',
     welcomeMessage = '👋 你好！我是 Nova AI 助手，有什么可以帮助你的吗？',
