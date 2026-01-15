@@ -188,14 +188,25 @@ export default function NovaChat(): JSX.Element | null {
           </div>
 
           {/* 消息列表 */}
-          <div className={styles.messages}>
+          <div
+            className={styles.messages}
+            role="log"
+            aria-live="polite"
+            aria-atomic="false"
+          >
             {messages.map((msg) => (
               <div
                 key={msg.id}
                 className={`${styles.message} ${styles[msg.role]}`}
               >
                 {msg.role === 'assistant' && (
-                  <span className={styles.avatar}>🤖</span>
+                  <span
+                    className={styles.avatar}
+                    role="img"
+                    aria-label="AI Avatar"
+                  >
+                    🤖
+                  </span>
                 )}
                 <div className={styles.messageContent}>
                   {msg.content.split('\n').map((line, i) => (
@@ -206,9 +217,19 @@ export default function NovaChat(): JSX.Element | null {
             ))}
             {isLoading && (
               <div className={`${styles.message} ${styles.assistant}`}>
-                <span className={styles.avatar}>🤖</span>
+                <span
+                  className={styles.avatar}
+                  role="img"
+                  aria-label="AI Avatar"
+                >
+                  🤖
+                </span>
                 <div className={styles.messageContent}>
-                  <div className={styles.typingIndicator}>
+                  <div
+                    className={styles.typingIndicator}
+                    role="status"
+                    aria-label="Nova AI is typing"
+                  >
                     <span></span>
                     <span></span>
                     <span></span>
