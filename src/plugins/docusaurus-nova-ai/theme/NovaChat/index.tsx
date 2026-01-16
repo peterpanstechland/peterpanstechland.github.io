@@ -83,6 +83,7 @@ export default function NovaChat(): JSX.Element | null {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fabRef = useRef<HTMLButtonElement>(null);
 
   const {
     apiEndpoint = '/api/nova-chat',
@@ -162,6 +163,24 @@ export default function NovaChat(): JSX.Element | null {
     }
   };
 
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+  };
+
+  // Auto-resize textarea when input changes
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    }
+  }, [input]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    // Return focus to the FAB button when closing
+    fabRef.current?.focus();
+  };
+
   // 只在客户端渲染
   if (typeof window === 'undefined') {
     return null;
@@ -181,7 +200,7 @@ export default function NovaChat(): JSX.Element | null {
             </div>
             <button 
               className={styles.closeButton} 
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               aria-label="关闭聊天"
             >
               ✕
@@ -247,7 +266,7 @@ export default function NovaChat(): JSX.Element | null {
               ref={inputRef}
               className={styles.input}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={handleInput}
               onKeyDown={handleKeyDown}
               placeholder={placeholder}
               rows={1}
@@ -258,6 +277,7 @@ export default function NovaChat(): JSX.Element | null {
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
               aria-label="发送消息"
+              title="按 Enter 发送"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
@@ -274,6 +294,7 @@ export default function NovaChat(): JSX.Element | null {
 
       {/* 浮动按钮 */}
       <button
+        ref={fabRef}
         className={`${styles.fab} ${isOpen ? styles.fabOpen : ''}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? '关闭聊天' : '打开 AI 助手'}
