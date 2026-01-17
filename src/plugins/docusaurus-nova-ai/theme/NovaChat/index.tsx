@@ -117,6 +117,14 @@ export default function NovaChat(): JSX.Element | null {
     }
   }, [isOpen]);
 
+  // 自动调整输入框高度
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    }
+  }, [input]);
+
   const handleSend = useCallback(async () => {
     if (!input.trim() || isLoading) return;
 
