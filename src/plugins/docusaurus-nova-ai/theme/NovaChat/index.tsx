@@ -83,6 +83,8 @@ export default function NovaChat(): JSX.Element | null {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fabRef = useRef<HTMLButtonElement>(null);
+  const prevIsOpen = useRef(isOpen);
 
   const {
     apiEndpoint = '/api/nova-chat',
@@ -110,12 +112,36 @@ export default function NovaChat(): JSX.Element | null {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // 聚焦输入框
+  // 聚焦输入框及焦点管理
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
+    if (isOpen) {
+      inputRef.current?.focus();
+    } else if (prevIsOpen.current) {
+      // 聊天窗口关闭时，将焦点归还给浮动按钮
+      fabRef.current?.focus();
     }
+    prevIsOpen.current = isOpen;
   }, [isOpen]);
+
+  // ESC 键关闭聊天
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
+
+  // 自动调整输入框高度
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `${Math.min(inputRef.current.scrollHeight, 120)}px`;
+    }
+  }, [input]);
 
   const handleSend = useCallback(async () => {
     if (!input.trim() || isLoading) return;
@@ -274,6 +300,7 @@ export default function NovaChat(): JSX.Element | null {
 
       {/* 浮动按钮 */}
       <button
+        ref={fabRef}
         className={`${styles.fab} ${isOpen ? styles.fabOpen : ''}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? '关闭聊天' : '打开 AI 助手'}
