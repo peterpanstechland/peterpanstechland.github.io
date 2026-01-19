@@ -76,6 +76,13 @@ async function callNovaAPI(message: string, apiEndpoint: string): Promise<string
 
 const config = getConfig();
 
+const SUGGESTIONS = [
+  "什么是 Nova?",
+  "AWS 帮助",
+  "ESP32 教程",
+  "如何部署?",
+];
+
 export default function NovaChat(): JSX.Element | null {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -117,13 +124,13 @@ export default function NovaChat(): JSX.Element | null {
     }
   }, [isOpen]);
 
-  const handleSend = useCallback(async () => {
-    if (!input.trim() || isLoading) return;
+  const sendMessage = useCallback(async (text: string) => {
+    if (!text.trim() || isLoading) return;
 
     const userMessage: Message = {
       id: `user-${Date.now()}`,
       role: 'user',
-      content: input.trim(),
+      content: text.trim(),
       timestamp: new Date(),
     };
 
@@ -153,7 +160,15 @@ export default function NovaChat(): JSX.Element | null {
     } finally {
       setIsLoading(false);
     }
-  }, [input, isLoading, apiEndpoint]);
+  }, [isLoading, apiEndpoint]);
+
+  const handleSend = () => {
+    sendMessage(input);
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    sendMessage(suggestion);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -195,26 +210,42 @@ export default function NovaChat(): JSX.Element | null {
             aria-live="polite"
             aria-atomic="false"
           >
-            {messages.map((msg) => (
-              <div
-                key={msg.id}
-                className={`${styles.message} ${styles[msg.role]}`}
-              >
-                {msg.role === 'assistant' && (
-                  <span
-                    className={styles.avatar}
-                    role="img"
-                    aria-label="AI Avatar"
-                  >
-                    🤖
-                  </span>
-                )}
-                <div className={styles.messageContent}>
-                  {msg.content.split('\n').map((line, i) => (
-                    <p key={i}>{line || <br />}</p>
-                  ))}
+            {messages.map((msg, index) => (
+              <React.Fragment key={msg.id}>
+                <div
+                  className={`${styles.message} ${styles[msg.role]}`}
+                >
+                  {msg.role === 'assistant' && (
+                    <span
+                      className={styles.avatar}
+                      role="img"
+                      aria-label="AI Avatar"
+                    >
+                      🤖
+                    </span>
+                  )}
+                  <div className={styles.messageContent}>
+                    {msg.content.split('\n').map((line, i) => (
+                      <p key={i}>{line || <br />}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+                {/* 仅在欢迎消息（第一条且是助手消息）后显示建议 */}
+                {index === 0 && messages.length === 1 && msg.role === 'assistant' && (
+                  <div className={styles.suggestionContainer}>
+                    {SUGGESTIONS.map((suggestion) => (
+                      <button
+                        key={suggestion}
+                        className={styles.suggestionChip}
+                        onClick={() => handleSuggestionClick(suggestion)}
+                        aria-label={`发送: ${suggestion}`}
+                      >
+                        {suggestion}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </React.Fragment>
             ))}
             {isLoading && (
               <div className={`${styles.message} ${styles.assistant}`}>
