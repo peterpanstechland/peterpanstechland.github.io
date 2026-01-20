@@ -76,7 +76,7 @@ async function callNovaAPI(message: string, apiEndpoint: string): Promise<string
 
 const config = getConfig();
 
-export default function NovaChat(): JSX.Element | null {
+export default function NovaChat(): React.JSX.Element | null {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -252,16 +252,24 @@ export default function NovaChat(): JSX.Element | null {
               placeholder={placeholder}
               rows={1}
               disabled={isLoading}
+              aria-label="输入您的问题"
             />
             <button
               className={styles.sendButton}
               onClick={handleSend}
               disabled={!input.trim() || isLoading}
-              aria-label="发送消息"
+              aria-label={isLoading ? "正在发送消息" : "发送消息"}
             >
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-              </svg>
+              {isLoading ? (
+                <svg viewBox="0 0 24 24" fill="none" width="20" height="20" className={styles.spinner}>
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" opacity="0.25" />
+                  <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" fill="currentColor" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                </svg>
+              )}
             </button>
           </div>
 
