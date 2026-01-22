@@ -76,13 +76,15 @@ async function callNovaAPI(message: string, apiEndpoint: string): Promise<string
 
 const config = getConfig();
 
-export default function NovaChat(): JSX.Element | null {
+export default function NovaChat(): React.JSX.Element | null {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fabRef = useRef<HTMLButtonElement>(null);
+  const prevIsOpen = useRef(isOpen);
 
   const {
     apiEndpoint = '/api/nova-chat',
@@ -110,11 +112,28 @@ export default function NovaChat(): JSX.Element | null {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // 聚焦输入框
+  // 聚焦输入框与焦点恢复
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
+    } else if (!isOpen && prevIsOpen.current && fabRef.current) {
+      fabRef.current.focus();
     }
+    prevIsOpen.current = isOpen;
+  }, [isOpen]);
+
+  // Handle Escape key to close chat
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (isOpen && e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleEscape);
+    }
+    return () => window.removeEventListener('keydown', handleEscape);
   }, [isOpen]);
 
   const handleSend = useCallback(async () => {
@@ -274,6 +293,7 @@ export default function NovaChat(): JSX.Element | null {
 
       {/* 浮动按钮 */}
       <button
+        ref={fabRef}
         className={`${styles.fab} ${isOpen ? styles.fabOpen : ''}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-label={isOpen ? '关闭聊天' : '打开 AI 助手'}
