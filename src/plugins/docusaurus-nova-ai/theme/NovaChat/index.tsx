@@ -76,13 +76,14 @@ async function callNovaAPI(message: string, apiEndpoint: string): Promise<string
 
 const config = getConfig();
 
-export default function NovaChat(): JSX.Element | null {
+export default function NovaChat(): React.JSX.Element | null {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const prevFocusRef = useRef<HTMLElement | null>(null);
 
   const {
     apiEndpoint = '/api/nova-chat',
@@ -110,11 +111,29 @@ export default function NovaChat(): JSX.Element | null {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // 聚焦输入框
+  // 聚焦管理
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
+    if (isOpen) {
+      // 打开时存储焦点（避免存储自身 Input）
+      if (document.activeElement instanceof HTMLElement && document.activeElement !== inputRef.current) {
+        prevFocusRef.current = document.activeElement;
+      }
+      inputRef.current?.focus();
+    } else {
+      // 关闭时恢复焦点
+      prevFocusRef.current?.focus();
     }
+  }, [isOpen]);
+
+  // ESC 关闭
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen]);
 
   const handleSend = useCallback(async () => {
