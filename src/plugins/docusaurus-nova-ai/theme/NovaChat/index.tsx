@@ -129,12 +129,21 @@ export default function NovaChat(): React.JSX.Element | null {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
+        e.stopPropagation();
         setIsOpen(false);
       }
     };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
+    window.addEventListener('keydown', handleEsc, { capture: true });
+    return () => window.removeEventListener('keydown', handleEsc, { capture: true });
   }, [isOpen]);
+
+  // 输入框自适应高度
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto';
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    }
+  }, [input]);
 
   const handleSend = useCallback(async () => {
     if (!input.trim() || isLoading) return;
@@ -190,12 +199,17 @@ export default function NovaChat(): React.JSX.Element | null {
     <div className={styles.container} data-position={position}>
       {/* 聊天窗口 */}
       {isOpen && (
-        <div className={styles.chatWindow}>
+        <div
+          className={styles.chatWindow}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="nova-chat-title"
+        >
           {/* 头部 */}
           <div className={styles.header}>
             <div className={styles.headerInfo}>
-              <span className={styles.headerIcon}>⚡</span>
-              <span className={styles.headerTitle}>Nova AI 助手</span>
+              <span className={styles.headerIcon} aria-hidden="true">⚡</span>
+              <span className={styles.headerTitle} id="nova-chat-title">Nova AI 助手</span>
               <span className={styles.statusDot} />
             </div>
             <button 
@@ -269,6 +283,7 @@ export default function NovaChat(): React.JSX.Element | null {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={placeholder}
+              aria-label={placeholder}
               rows={1}
               disabled={isLoading}
             />
@@ -278,7 +293,7 @@ export default function NovaChat(): React.JSX.Element | null {
               disabled={!input.trim() || isLoading}
               aria-label="发送消息"
             >
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
                 <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
               </svg>
             </button>
@@ -298,11 +313,11 @@ export default function NovaChat(): React.JSX.Element | null {
         aria-label={isOpen ? '关闭聊天' : '打开 AI 助手'}
       >
         {isOpen ? (
-          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true">
             <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
           </svg>
         ) : (
-          <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true">
             <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
             <circle cx="12" cy="10" r="1.5" />
             <circle cx="8" cy="10" r="1.5" />
