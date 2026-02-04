@@ -4,3 +4,7 @@
 ## 2024-05-22 - Focus Management in Root Portals
 **Learning:** Chat widgets injected at the document root detach from the natural focus order, trapping keyboard users or losing their place.
 **Action:** Implement manual focus restoration (using a ref to store activeElement) and global Escape key listeners for all root-injected overlays.
+
+## 2025-03-01 - Modal ARIA Semantics
+**Learning:** Adding `aria-modal="true"` to a non-modal dialog (like a chat widget) misleads screen readers if the background remains interactive.
+**Action:** Only use `aria-modal="true"` if you also implement a focus trap and background inertness. Otherwise, stick to `role="dialog"`.

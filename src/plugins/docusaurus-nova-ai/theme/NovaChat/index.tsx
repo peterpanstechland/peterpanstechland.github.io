@@ -136,6 +136,15 @@ export default function NovaChat(): React.JSX.Element | null {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen]);
 
+  // Auto-resize textarea
+  useEffect(() => {
+    const textarea = inputRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }, [input]);
+
   const handleSend = useCallback(async () => {
     if (!input.trim() || isLoading) return;
 
@@ -190,12 +199,18 @@ export default function NovaChat(): React.JSX.Element | null {
     <div className={styles.container} data-position={position}>
       {/* 聊天窗口 */}
       {isOpen && (
-        <div className={styles.chatWindow}>
+        <div
+          className={styles.chatWindow}
+          role="dialog"
+          aria-labelledby="nova-chat-title"
+        >
           {/* 头部 */}
           <div className={styles.header}>
             <div className={styles.headerInfo}>
               <span className={styles.headerIcon}>⚡</span>
-              <span className={styles.headerTitle}>Nova AI 助手</span>
+              <span className={styles.headerTitle} id="nova-chat-title">
+                Nova AI 助手
+              </span>
               <span className={styles.statusDot} />
             </div>
             <button 
