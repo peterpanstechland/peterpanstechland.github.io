@@ -111,6 +111,15 @@ export default function NovaChat(): React.JSX.Element | null {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  // 自动调整输入框高度
+  useEffect(() => {
+    const textarea = inputRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }, [input]);
+
   // 聚焦管理
   useEffect(() => {
     if (isOpen) {
@@ -271,6 +280,7 @@ export default function NovaChat(): React.JSX.Element | null {
               placeholder={placeholder}
               rows={1}
               disabled={isLoading}
+              aria-label="输入消息"
             />
             <button
               className={styles.sendButton}

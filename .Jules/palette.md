@@ -4,3 +4,6 @@
 ## 2024-05-22 - Focus Management in Root Portals
 **Learning:** Chat widgets injected at the document root detach from the natural focus order, trapping keyboard users or losing their place.
 **Action:** Implement manual focus restoration (using a ref to store activeElement) and global Escape key listeners for all root-injected overlays.
+## 2025-05-22 - Auto-resizing Textareas
+**Learning:** For auto-expanding textareas, simply setting height to scrollHeight is insufficient because the element won't shrink when text is deleted.
+**Action:** Always reset height to 'auto' before calculating and setting the new scrollHeight to ensure the element can shrink correctly.
