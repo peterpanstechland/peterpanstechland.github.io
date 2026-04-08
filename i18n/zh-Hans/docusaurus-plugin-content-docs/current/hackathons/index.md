@@ -24,13 +24,19 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 
 | 年份 | 赛事 | 项目 | 成绩 |
 |------|------|------|------|
-| 2025 | AWS GameDay | 云架构挑战 | 🥈 亚军 |
+| 2026 | NVIDIA DGX Spark 黑客松 | NemoClaw Travel OS | 🏆 已提交 |
+| 2025 | AWS GameDay | 云架构挑战 | 🎖️ 参与奖 |
 | 2025 | AI 黑客松 | 语音控制 IoT | 🏅 决赛入围 |
 | 2024 | IoT 挑战赛 | 智能家居自动化 | 🎖️ 参与奖 |
 
 ---
 
 ## 🔥 精选项目
+
+### [NemoClaw Travel OS — DGX Spark 黑客松 2026](/docs/hackathons/2026/nvidia-dgx-spark)
+基于 NVIDIA DGX Spark 的完全私有化游戏化 AI 旅行助手。从行程规划到旅行日记，由 Nemotron-3-Super-120B、Gemma 4 NVFP4 和 NemoClaw 驱动。
+
+**技术栈：** NemoClaw, Nemotron, vLLM, TensorRT-LLM, OpenShell, Ollama, Ansible, WireGuard, 高德 MCP
 
 ### [AWS GameDay 2025](/docs/hackathons/2025/aws-gameday)
 专注于弹性和成本优化的云架构比赛。
@@ -52,9 +58,11 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 |------|------|
 | **云服务** | AWS Lambda, API Gateway, DynamoDB, S3 |
 | **AI/ML** | Amazon Bedrock, Nova, SageMaker |
-| **边缘设备** | ESP32, Raspberry Pi, Arduino |
-| **前端** | React, Next.js, Tailwind CSS |
-| **DevOps** | CDK, SAM, GitHub Actions |
+| **NVIDIA** | NemoClaw, Nemotron, vLLM, TensorRT-LLM, NIM, OpenShell, NVFP4 |
+| **边缘/本地** | NVIDIA DGX Spark, ESP32, Raspberry Pi, Ollama |
+| **前端** | React, Next.js, Tailwind CSS, 原生 JS PWA |
+| **DevOps** | Ansible, CDK, SAM, GitHub Actions, WireGuard |
+| **地图** | 高德 REST API, 高德 MCP |
 
 ---
 

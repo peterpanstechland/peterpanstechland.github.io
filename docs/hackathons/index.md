@@ -24,6 +24,7 @@ Hackathons are an incredible way to:
 
 | Year | Event | Project | Result |
 |------|-------|---------|--------|
+| 2026 | NVIDIA DGX Spark Hackathon | NemoClaw Travel OS | 🏆 Submitted |
 | 2025 | AWS GameDay | Cloud Architecture Challenge | 🥈 2nd Place |
 | 2025 | AI Hackathon | Voice-Controlled IoT | 🏅 Finalist |
 | 2024 | IoT Challenge | Smart Home Automation | 🎖️ Participant |
@@ -31,6 +32,11 @@ Hackathons are an incredible way to:
 ---
 
 ## 🔥 Featured Projects
+
+### [NemoClaw Travel OS — DGX Spark Hackathon 2026](/docs/hackathons/2026/nvidia-dgx-spark)
+A fully private, gamified AI travel planner running on NVIDIA DGX Spark. From trip planning to travel diary, powered by Nemotron-3-Super-120B, Gemma 4 NVFP4, and NemoClaw.
+
+**Tech Stack:** NemoClaw, Nemotron, vLLM, TensorRT-LLM, OpenShell, Ollama, Ansible, WireGuard, Amap MCP
 
 ### [AWS GameDay 2025](/docs/hackathons/2025/aws-gameday)
 A cloud architecture competition focusing on resilience and cost optimization.
@@ -52,9 +58,11 @@ Most of my hackathon projects utilize:
 |----------|--------------|
 | **Cloud** | AWS Lambda, API Gateway, DynamoDB, S3 |
 | **AI/ML** | Amazon Bedrock, Nova, SageMaker |
-| **Edge** | ESP32, Raspberry Pi, Arduino |
-| **Frontend** | React, Next.js, Tailwind CSS |
-| **DevOps** | CDK, SAM, GitHub Actions |
+| **NVIDIA** | NemoClaw, Nemotron, vLLM, TensorRT-LLM, NIM, OpenShell, NVFP4 |
+| **Edge / Local** | NVIDIA DGX Spark, ESP32, Raspberry Pi, Ollama |
+| **Frontend** | React, Next.js, Tailwind CSS, Vanilla JS PWA |
+| **DevOps** | Ansible, CDK, SAM, GitHub Actions, WireGuard |
+| **Maps** | Amap REST API, Amap MCP |
 
 ---
 
