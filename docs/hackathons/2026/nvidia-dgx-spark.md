@@ -100,9 +100,9 @@ This means Yunxi's personality isn't hardcoded — it's version-controlled, depl
 |-------|---------|
 | **Event** | NVIDIA DGX Spark Hackathon 2026 |
 | **Platform** | NVIDIA DGX Spark (GB10 Grace Blackwell Superchip) |
-| **Duration** | Multi-week |
+| **Duration** | March 29 – April 9 |
 | **Project** | NemoClaw Travel OS — Private AI Travel Planner |
-| **Team** | PeterPan's Tech Land |
+| **Team** | 交个朋友 |
 | **GitHub** | [ansible-dgx-spark](https://github.com/peterpanstechland/ansible-dgx-spark) · [nemoclaw-travel-planner](https://github.com/peterpanstechland/nemoclaw-travel-planner) |
 | **Reference** | [build.nvidia.com/spark](https://build.nvidia.com/spark) |
 

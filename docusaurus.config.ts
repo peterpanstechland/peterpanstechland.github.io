@@ -60,6 +60,8 @@ const config: Config = {
     },
   },
 
+  plugins: ['docusaurus-plugin-image-zoom'],
+
   presets: [
     [
       'classic',
@@ -215,6 +217,14 @@ const config: Config = {
     // Mermaid 图表主题配置
     mermaid: {
       theme: { light: 'neutral', dark: 'dark' },
+    },
+
+    zoom: {
+      selector: '.markdown img',
+      background: {
+        light: 'rgba(255, 255, 255, 0.9)',
+        dark: 'rgba(0, 0, 0, 0.9)',
+      },
     },
   } satisfies Preset.ThemeConfig,
 };

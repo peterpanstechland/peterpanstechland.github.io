@@ -100,9 +100,9 @@ keywords: [nvidia, dgx-spark, nemoclaw, nemotron, vllm, nvfp4, tensorrt-llm, nim
 |------|------|
 | **赛事** | NVIDIA DGX Spark Hackathon 2026 |
 | **平台** | NVIDIA DGX Spark（GB10 Grace Blackwell 超级芯片）|
-| **周期** | 多周 |
+| **周期** | 3 月 29 日 - 4 月 9 日 |
 | **项目** | NemoClaw Travel OS——私有化 AI 旅行助手 |
-| **团队** | PeterPan's Tech Land |
+| **团队** | 交个朋友 |
 | **GitHub** | [ansible-dgx-spark](https://github.com/peterpanstechland/ansible-dgx-spark) · [nemoclaw-travel-planner](https://github.com/peterpanstechland/nemoclaw-travel-planner) |
 | **参考** | [build.nvidia.com/spark](https://build.nvidia.com/spark) |
 
