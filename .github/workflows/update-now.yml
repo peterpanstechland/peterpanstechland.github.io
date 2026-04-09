@@ -37,7 +37,7 @@ jobs:
 
       - name: Install Python dependencies
         run: |
-          pip install zhipuai requests PyGithub
+          pip install zhipuai requests PyGithub sniffio
 
       - name: Generate Now Page Content
         env:
