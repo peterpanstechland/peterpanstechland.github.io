@@ -135,15 +135,29 @@ Most AI travel tools stop at "here's your itinerary." Yunxi covers the entire jo
 
 ```mermaid
 graph LR
-    Plan["🗺️ Plan"] --> Go["🎒 Go"]
+    Chat["💬 Feishu Chat"] --> Plan["🗺️ Plan"]
+    Plan --> Go["🎒 Go"]
     Go --> Record["📸 Record"]
     Record --> Publish["📱 Publish"]
-    Publish -.->|"Next trip"| Plan
+    Publish -.->|"Next trip"| Chat
 ```
+
+### 💬 Step Zero: Talk to Yunxi
+
+Everything starts with a conversation in Feishu (Lark). You chat with Yunxi and provide the basics:
+
+- **Origin & destination** — where you're leaving from, where you want to go
+- **Travel mode** — driving, high-speed rail, flight
+- **Group size** — how many adults, how many kids
+- **Preferences** — seafood or historic sites, budget range, must-visit spots, interest in trending locations
+
+Once Yunxi understands your needs, she generates a complete itinerary and pushes it to the frontend at [travel-spark.peafamily.online](https://travel-spark.peafamily.online).
+
+![Yunxi-generated detailed travel plan for Shanwei](/img/hackathons/2026/ai-guide.png)
 
 ### 🗺️ Phase 1: Plan
 
-Yunxi generates a complete itinerary via natural conversation:
+On the frontend, you see Yunxi's fully generated itinerary:
 
 - **Route optimization** via Amap driving/transit APIs with distance, duration, and toll estimates
 - **Weather-aware scheduling** — rainy days get indoor alternatives automatically
@@ -174,8 +188,6 @@ This is where NemoClaw Travel OS stands apart from every other travel planner.
 - **Canvas share poster** — long-press to generate a shareable travel card
 
 ### 📱 Phase 4: Publish
-
-![AI-generated detailed travel guide for Shanwei](/img/hackathons/2026/ai-guide.png)
 
 - **Xiaohongshu Skill** — Yunxi drafts "seed content" styled for Chinese social media (hashtags, emoji, structured recs)
 - **Chrome CDP integration** — searches existing travel posts and guides online, referencing real experiences to improve recommendation quality
