@@ -24,6 +24,7 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 
 | 年份 | 赛事 | 项目 | 成绩 |
 |------|------|------|------|
+| 2026 | OpenClaw 龙虾前沿实验计划 | Cyber Boss 赛博老板 | 🏆 已提交 |
 | 2026 | NVIDIA DGX Spark 黑客松 | NemoClaw Travel OS | 🏆 已提交 |
 | 2025 | AWS GameDay | 云架构挑战 | 🎖️ 参与奖 |
 | 2025 | AI 黑客松 | 语音控制 IoT | 🏅 决赛入围 |
@@ -32,6 +33,11 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 ---
 
 ## 🔥 精选项目
+
+### [Cyber Boss 赛博老板 — OpenClaw 龙虾前沿实验计划 2026](/docs/hackathons/2026/cyber-boss)
+一个刻薄的 AI 老板「铁哥」，基于 OpenClaw + 飞书生态运行你的一人公司——排今日活、派飞书任务、催 deadline、对你的拖延毒舌点评。17 个角色 Bot 并行，完全自托管。
+
+**技术栈：** OpenClaw, TOOLS.md, 飞书（Bitable + 任务 + WebSocket）, Vue 3, Express, SQLite, Ansible, Docker
 
 ### [NemoClaw Travel OS — DGX Spark 黑客松 2026](/docs/hackathons/2026/nvidia-dgx-spark)
 基于 NVIDIA DGX Spark 的完全私有化游戏化 AI 旅行助手。从行程规划到旅行日记，由 Nemotron-3-Super-120B、Gemma 4 NVFP4 和 NemoClaw 驱动。

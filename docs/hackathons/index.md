@@ -24,6 +24,7 @@ Hackathons are an incredible way to:
 
 | Year | Event | Project | Result |
 |------|-------|---------|--------|
+| 2026 | OpenClaw Builder Program (Lobster Frontier Experiment) | Cyber Boss | 🏆 Submitted |
 | 2026 | NVIDIA DGX Spark Hackathon | NemoClaw Travel OS | 🏆 Submitted |
 | 2025 | AWS GameDay | Cloud Architecture Challenge | 🥈 2nd Place |
 | 2025 | AI Hackathon | Voice-Controlled IoT | 🏅 Finalist |
@@ -32,6 +33,11 @@ Hackathons are an incredible way to:
 ---
 
 ## 🔥 Featured Projects
+
+### [Cyber Boss — OpenClaw Builder Program 2026](/docs/hackathons/2026/cyber-boss)
+A snarky AI boss called Tie-ge who runs a one-person company on OpenClaw + Feishu — schedules the day, dispatches tasks, chases deadlines, and roasts procrastination. 17 role-based bots, fully self-hosted.
+
+**Tech Stack:** OpenClaw, TOOLS.md, Feishu (Bitable + Tasks + WebSocket), Vue 3, Express, SQLite, Ansible, Docker
 
 ### [NemoClaw Travel OS — DGX Spark Hackathon 2026](/docs/hackathons/2026/nvidia-dgx-spark)
 A fully private, gamified AI travel planner running on NVIDIA DGX Spark. From trip planning to travel diary, powered by Nemotron-3-Super-120B, Gemma 4 NVFP4, and NemoClaw.
