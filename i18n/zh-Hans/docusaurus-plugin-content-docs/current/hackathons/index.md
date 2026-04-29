@@ -36,9 +36,9 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 ## 🔥 精选项目
 
 ### [Roomba-VLLM — Attrax 春潮黑客松 2026 · 影石 Cameraman 赛道](/docs/hackathons/2026/roomba-vllm)
-为我家 5 岁女儿打造的全本地化赛博管家——Insta360 Link 2C 当云台前置摄像头、Jetson Orin NX 跑 Ollama + Gemma E4B 做 Live VLM 推理、OpenClaw 排定时巡视和星星积分系统。24 小时极限交付，斩获 Cameraman 大奖（TOP 1/200 Outlier）。
+为我家 8 岁女儿房间打造的全本地化赛博管家——Insta360 Link 2 Pro 当云台前置摄像头、Jetson Orin NX 跑 Ollama + Gemma E4B 做 Live VLM 推理、OpenClaw 排定时巡视和星星积分系统。24 小时极限交付（前 24 小时在玩高擎动力机械臂蹦迪）；嘉立创赞助硬件；斩获影石 Cameraman 大奖（TOP 1/200 Outlier）。
 
-**技术栈：** Insta360 Link 2C、reComputer J4012（Jetson Orin NX）、Ollama、Gemma E4B、OpenClaw、WireGuard、TinkerCAD、Bambu Lab X1C、DAP（下一步）
+**技术栈：** Insta360 Link 2 Pro、reComputer J4012（Jetson Orin NX）、Ollama、Gemma E4B、OpenClaw、WireGuard、TinkerCAD、Bambu Lab X1C、嘉立创 CH340X、DAP（下一步）
 
 ### [Cyber Boss 赛博老板 — OpenClaw 龙虾前沿实验计划 2026](/docs/hackathons/2026/cyber-boss)
 一个刻薄的 AI 老板「铁哥」，基于 OpenClaw + 飞书生态运行你的一人公司——排今日活、派飞书任务、催 deadline、对你的拖延毒舌点评。17 个角色 Bot 并行，完全自托管。
@@ -72,7 +72,7 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 | **AI/ML** | Amazon Bedrock, Nova, SageMaker |
 | **NVIDIA** | NemoClaw, Nemotron, vLLM, TensorRT-LLM, NIM, OpenShell, NVFP4 |
 | **边缘/本地** | NVIDIA DGX Spark, Jetson Orin NX, ESP32, Raspberry Pi, Ollama |
-| **具身/相机** | Insta360 Link 2C / X5、DAP、AirSim360、DiT360、DDGS、Roomba 底盘 |
+| **具身/相机** | Insta360 Link 2 Pro / X5、DAP、AirSim360、DiT360、DDGS、Roomba 底盘 |
 | **3D / 硬件** | TinkerCAD, Bambu Lab X1C |
 | **前端** | React, Next.js, Tailwind CSS, 原生 JS PWA |
 | **DevOps** | Ansible, CDK, SAM, GitHub Actions, WireGuard |

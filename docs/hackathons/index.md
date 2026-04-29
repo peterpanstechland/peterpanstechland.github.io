@@ -36,9 +36,9 @@ Hackathons are an incredible way to:
 ## 🔥 Featured Projects
 
 ### [Roomba-VLLM — Attrax Spring Hackathon 2026 · Insta360 Cameraman Track](/docs/hackathons/2026/roomba-vllm)
-A fully local cyber butler for my 5-year-old daughter's room — Insta360 Link 2C as the gimbaled front camera, Jetson Orin NX running Ollama + Gemma E4B for live VLM inference, OpenClaw for daily patrols and a star-based reward system. Built in 24 hours, won the Cameraman Award (TOP 1/200 Outlier).
+A fully local cyber butler — Insta360 Link 2 Pro as the gimbaled front camera, Jetson Orin NX running Ollama + Gemma E4B for live VLM inference, OpenClaw for daily patrols and a star-based reward system on my 8-year-old's room. Built in 24 hours (after 24 hours of jamming a robotic arm to a DJ set). Sponsored by JLCPCB. Won the Cameraman Award (TOP 1/200 Outlier).
 
-**Tech Stack:** Insta360 Link 2C, reComputer J4012 (Jetson Orin NX), Ollama, Gemma E4B, OpenClaw, WireGuard, TinkerCAD, Bambu Lab X1C, DAP (next)
+**Tech Stack:** Insta360 Link 2 Pro, reComputer J4012 (Jetson Orin NX), Ollama, Gemma E4B, OpenClaw, WireGuard, TinkerCAD, Bambu Lab X1C, JLCPCB CH340X, DAP (next)
 
 ### [Cyber Boss — OpenClaw Builder Program 2026](/docs/hackathons/2026/cyber-boss)
 A snarky AI boss called Tie-ge who runs a one-person company on OpenClaw + Feishu — schedules the day, dispatches tasks, chases deadlines, and roasts procrastination. 17 role-based bots, fully self-hosted.
@@ -72,7 +72,7 @@ Most of my hackathon projects utilize:
 | **AI/ML** | Amazon Bedrock, Nova, SageMaker |
 | **NVIDIA** | NemoClaw, Nemotron, vLLM, TensorRT-LLM, NIM, OpenShell, NVFP4 |
 | **Edge / Local** | NVIDIA DGX Spark, Jetson Orin NX, ESP32, Raspberry Pi, Ollama |
-| **Embodied / Cameras** | Insta360 Link 2C / X5, DAP, AirSim360, DiT360, DDGS, Roomba chassis |
+| **Embodied / Cameras** | Insta360 Link 2 Pro / X5, DAP, AirSim360, DiT360, DDGS, Roomba chassis |
 | **3D / Hardware** | TinkerCAD, Bambu Lab X1C |
 | **Frontend** | React, Next.js, Tailwind CSS, Vanilla JS PWA |
 | **DevOps** | Ansible, CDK, SAM, GitHub Actions, WireGuard |
