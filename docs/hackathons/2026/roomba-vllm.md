@@ -93,13 +93,13 @@ The plot twist came at the awards ceremony — **the actual humans showed up**. 
 ## What It Actually Does — The Daily Loop
 
 ```mermaid
-graph LR
+flowchart TB
     Cron["⏰ Cron · 4:00 PM<br/>(after school)"] --> Patrol["🚗 Roomba patrols the room"]
     Patrol --> Capture["📸 Link 2 Pro<br/>(gimbal front camera)"]
     Capture --> VLM["🧠 Gemma E4B on Jetson<br/>(local Live VLM)"]
     VLM --> Eval["📋 Generate to-do list<br/>(books, toys, clothes, bed...)"]
-    Eval --> OpenClaw["🦞 OpenClaw dispatches<br/>to-do via Feishu"]
-    OpenClaw --> Kid["👧 Daughter cleans"]
+    Eval --> OpenClaw["🦞 OpenClaw dispatches<br/>the to-do via Feishu"]
+    OpenClaw --> Kid["👧 Daughter cleans the room"]
     Kid -->|"I'm done!"| Rescan["🔄 Rescan the room"]
     Rescan --> Stars["⭐ Award stars or<br/>flag remaining items"]
     Stars -.->|"Friday night"| Allowance["💰 Stars → weekend allowance"]

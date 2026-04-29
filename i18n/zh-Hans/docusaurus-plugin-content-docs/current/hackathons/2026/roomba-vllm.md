@@ -96,7 +96,7 @@ keywords: [insta360, cameraman, attrax, hackathon, jetson-orin-nx, ollama, gemma
 ## 它每天到底在干什么 — 每日闭环
 
 ```mermaid
-graph LR
+flowchart TB
     Cron["⏰ 定时 · 下午 4 点<br/>(放学后)"] --> Patrol["🚗 Roomba 巡视房间"]
     Patrol --> Capture["📸 Link 2 Pro<br/>(云台前置)"]
     Capture --> VLM["🧠 Jetson 上的 Gemma E4B<br/>(本地 Live VLM)"]
