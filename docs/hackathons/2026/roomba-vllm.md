@@ -12,7 +12,7 @@ keywords: [insta360, cameraman, attrax, hackathon, jetson-orin-nx, ollama, gemma
 >
 > Cameraman Award · TOP 1/200 Outlier · April 26, 2026
 
-![The actual robot — Insta360 X5 + Link 2 Pro + reComputer J4012 + USB speaker + a small lobster, all riding a Roomba chassis](/img/hackathons/2026/roomba-vllm-robot-hero.png)
+![Attrax Spring Hackathon 2026 closing ceremony — gold confetti, the AttraX wave logo on stage, every team holding up their prize cards. The atmosphere this entire post is reaching for.](/img/hackathons/2026/roomba-vllm-attrax-finale.png)
 
 ---
 
@@ -52,6 +52,8 @@ So I built one. In 24 hours. At a hackathon. And it ended up winning the Insta36
 
 The whole thing is a chunk of metal, plastic, and silicon I assembled by hand on a hackathon table. Nothing fancy — but the feedback loop it enables is the part that matters.
 
+![The actual robot — Insta360 X5 + Link 2 Pro + reComputer J4012 + USB speaker + a small lobster, all riding a Roomba chassis](/img/hackathons/2026/roomba-vllm-robot-hero.png)
+
 ---
 
 ## Event Info
@@ -71,6 +73,10 @@ The whole thing is a chunk of metal, plastic, and silicon I assembled by hand on
 The venue itself is the kind of hackathon you remember:
 
 ![Attrax Spring Hackathon venue — Livehouse MAO Shenzhen, packed-out auditorium and rows of soldering tables on the main floor](/img/hackathons/2026/roomba-vllm-hackathon-venue.png)
+
+And the scale, in case "TOP 1/200" felt abstract — here's the entire project map for this round:
+
+![Attrax Spring Hackathon 2026 — every team's seat assignment (rows × columns × tracks). 200+ project cards across the floor — mine is "FamilyQuest / 家庭副本" in the front row.](/img/hackathons/2026/roomba-vllm-attrax-projects-grid.png)
 
 ---
 
@@ -263,9 +269,11 @@ The X5 + DAP pair takes the butler from "a camera that talks" to "a robot that k
 
 ## Cameraman Is Accelerating Its Evolution
 
-This project landed in an interesting week — Insta360's CEO **Liu Jingkang (刘靖康)** published [a shareholder letter](https://mp.weixin.qq.com/s/Yplv0SzQNg4SEEa-6kfUtw) the same week I was finalizing the demo. The framing in that letter is exactly the framing my project ended up needing:
+This project landed in an interesting week — Insta360 published its **2025 Annual Report · Letter to Investors** ([the letter](https://mp.weixin.qq.com/s/Yplv0SzQNg4SEEa-6kfUtw), authored by CEO **Liu Jingkang / 刘靖康**) the same week I was finalizing the demo. The framing in that letter is exactly the framing my project ended up needing.
 
-![From Liu Jingkang's shareholder letter: AI = brain, camera = eyes, drone/gimbal = limbs](/img/hackathons/2026/roomba-vllm-cameraman-evolution-1.png)
+![Cover of Insta360's 2025 Annual Report · Letter to Investors — "不求一帆风顺，但愿乘风破浪" / "Don't ask for a calm sea — ride the waves"](/img/hackathons/2026/roomba-vllm-investor-letter-cover.png)
+
+The letter contains a section titled **"AI 赋能影像技术，Cameraman 加速进化"** (AI-Empowered Imaging, Cameraman Accelerating Its Evolution). The thesis is a clean three-part decomposition:
 
 > **AI = the brain.** Lets the camera perceive space, intent, and the world.
 >
@@ -281,9 +289,9 @@ That's *literally* the architecture of Roomba-VLLM:
 - **Limbs** = the Roomba chassis (and a gimbal on the Link 2 Pro)
 - **Brain** = Gemma E4B + OpenClaw on the Jetson
 
-And the open-source ecosystem coming out of [Insta360 Research Team](https://github.com/Insta360-Research-Team) is what makes the brain's *spatial* understanding real:
+The same letter section also calls out the open-source projects from [Insta360 Research Team](https://github.com/Insta360-Research-Team) that make the brain's *spatial* understanding real — and the user-side data showing why this matters at scale:
 
-![Insta360 Research Team's panoramic stack: AirSim360, DAP, DiT360, DDGS](/img/hackathons/2026/roomba-vllm-cameraman-evolution-2.png)
+![Cameraman section of the 2025 letter to investors — AI = brain / camera = eyes / drone+gimbal = limbs, plus the AirSim360 / DAP / DiT360 / DDGS open-source stack and user-side AI-editing + cloud-storage growth metrics](/img/hackathons/2026/roomba-vllm-investor-letter-cameraman.png)
 
 | Project | What It Does | Why It Matters for a Cyber Butler |
 |---------|--------------|-----------------------------------|
@@ -367,7 +375,7 @@ The win wasn't just a trophy — it was a tool unlock. With the X5 in hand I can
 | **Insta360 Developer Portal** | [insta360.com/cn/developer/home](https://www.insta360.com/cn/developer/home) |
 | **Insta360 SDK / Camera open-source org** | [github.com/Insta360Develop](https://github.com/Insta360Develop) |
 | **Insta360 Research Team (panoramic AI)** | [github.com/Insta360-Research-Team](https://github.com/Insta360-Research-Team) |
-| **Liu Jingkang's shareholder letter** | [Cameraman Accelerates Its Evolution](https://mp.weixin.qq.com/s/Yplv0SzQNg4SEEa-6kfUtw) |
+| **Insta360 2025 Annual Report · Letter to Investors** | [mp.weixin.qq.com/s/Yplv0SzQNg4SEEa-6kfUtw](https://mp.weixin.qq.com/s/Yplv0SzQNg4SEEa-6kfUtw) |
 | **JLCPCB (hardware sponsor)** | [jlcpcb.com](https://jlcpcb.com/) |
 | **Cyber Boss (sister OpenClaw project)** | [/docs/hackathons/2026/cyber-boss](/docs/hackathons/2026/cyber-boss) |
 | **2026 Hackathon Index** | [/docs/hackathons](/docs/hackathons) |
