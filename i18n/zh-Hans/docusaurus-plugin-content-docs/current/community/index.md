@@ -13,8 +13,6 @@ slug: /community
 
 ### 亚马逊云科技 User Group（AWS UG China）
 
-![亚马逊云科技 User Group 社区](/img/community/aws-ug-china.png)
-
 **[亚马逊云科技 User Group](https://awscommunity.cn/)**（AWS UG China）是一个面向开发者的技术交流与分享社区，提供互相学习、分享技术实践、参与培训与社区共建的机会。
 
 | | |

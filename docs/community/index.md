@@ -13,8 +13,6 @@ My contributions to the tech community through talks, articles, and open-source 
 
 ### Amazon Cloud Technology User Group (AWS UG China)
 
-![Amazon Cloud Technology User Group China](/img/community/aws-ug-china.png)
-
 **[亚马逊云科技 User Group](https://awscommunity.cn/)** (AWS UG China) is a developer community for learning, sharing technical practices, and participating in training and community-building activities.
 
 | | |
