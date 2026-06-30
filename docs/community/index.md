@@ -9,6 +9,27 @@ slug: /community
 
 My contributions to the tech community through talks, articles, and open-source projects.
 
+## Communities I Belong To
+
+### Amazon Cloud Technology User Group (AWS UG China)
+
+![Amazon Cloud Technology User Group China](/img/community/aws-ug-china.png)
+
+**[亚马逊云科技 User Group](https://awscommunity.cn/)** (AWS UG China) is a developer community for learning, sharing technical practices, and participating in training and community-building activities.
+
+| | |
+|---|---|
+| **Website** | [awscommunity.cn](https://awscommunity.cn/) |
+| **Scope** | 470+ groups worldwide · 98 countries · 500K+ members |
+| **Local chapters** | Beijing, Shanghai, Shenzhen, Wuhan, Xi'an, and more |
+| **Get involved** | [Apply as Leader](https://awscommunity.cn/) · Speaker · Volunteer |
+
+The community publishes technical content on WeChat, Bilibili, Xiaohongshu, and other platforms. Follow the official **User Group** WeChat account for event previews and community updates.
+
+**2026 Summer Community Day** — see the [NFC Wristband Programming Guide](/docs/community/summer-community-day-2026/nfc-wristband-guide) for how to program your event wristband with your own links, apps, and mini programs.
+
+---
+
 ## Speaking & Events
 
 ### Upcoming
@@ -69,7 +90,8 @@ Want to collaborate or invite me to speak?
 ## Community Resources
 
 ### Recommended Communities
-- AWS User Groups
+- [Amazon Cloud Technology User Group (AWS UG China)](https://awscommunity.cn/)
+- [AWS Builder Community](https://community.aws/)
 - IoT Maker communities
 - Local hackerspaces
 
@@ -77,4 +99,3 @@ Want to collaborate or invite me to speak?
 - AWS Skill Builder
 - AWS Documentation
 - Community forums
-
