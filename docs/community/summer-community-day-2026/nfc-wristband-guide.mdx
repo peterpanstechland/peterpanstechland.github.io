@@ -1,0 +1,317 @@
+---
+sidebar_position: 1
+sidebar_label: NFC Wristband Guide
+title: "2026 Summer Community Day · NFC Wristband Programming Guide"
+description: "Program your Community Day NFC wristband with URLs, Android apps, or WeChat mini programs using NDEF on NTAG215 tags."
+keywords: [nfc, ndef, ntag215, wristband, aws, community-day, wechat, android]
+---
+
+import styles from './styles.module.css';
+
+<div className={styles.awsUgPage}>
+
+<div className={styles.heroBanner}>
+
+**2026 Summer Community Day** — Your NFC wristband is a blank canvas. Write your blog, a website, an Android app launch, or a WeChat mini program onto the tag and share it with a single tap.
+
+</div>
+
+# 2026 Summer Community Day · NFC Wristband Guide
+
+At **2026 Summer Community Day**, every attendee receives an **NFC wristband** with a rewritable tag inside. After the event, you can erase the default content and write your own — a personal blog, portfolio, social link, Android app shortcut, or WeChat mini program entry.
+
+This guide covers NFC tag basics, the **NDEF** data format, the **NTAG215** chip used in our wristbands, and three ready-to-use examples themed for the **Amazon Cloud Technology User Group** (AWS UG China) community.
+
+---
+
+## What Is NFC?
+
+**Near Field Communication (NFC)** is a short-range wireless protocol (about 4 cm). When you hold a phone against an NFC tag or wristband, the phone reads or writes data stored on the tag — no pairing, no battery on the tag side.
+
+Typical use cases at community events:
+
+| Scenario | What gets written |
+|----------|-------------------|
+| Personal branding | Your blog, GitHub, or portfolio URL |
+| Community links | Official sites like [awscommunity.cn](https://awscommunity.cn/) |
+| Mobile apps | Android App Record to launch an installed app |
+| WeChat ecosystem | URL Link to open a mini program |
+
+:::tip Before you start
+You need a phone with **NFC enabled** (most modern Android and iPhone models). Install a tag-writing app such as **[NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)** (Android / iOS) or **[NXP TagWriter](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter)** (Android).
+:::
+
+---
+
+## Common NFC Tag Types
+
+Not all NFC chips are the same. Tags differ in memory size, security, and whether they speak **NDEF** (the standard format phones understand out of the box).
+
+| Chip | NFC Forum Type | User Memory | NDEF Support | Typical Use |
+|------|----------------|-------------|--------------|-------------|
+| **NTAG213** | Type 2 | 180 bytes | ✅ Yes | Stickers, business cards, small payloads |
+| **NTAG215** | Type 2 | 504 bytes | ✅ Yes | **Event wristbands**, Amiibo, medium URLs |
+| **NTAG216** | Type 2 | 888 bytes | ✅ Yes | Longer URLs, vCard, multiple records |
+| **MIFARE Ultralight** | Type 2 | 64–192 bytes | ✅ Yes | Disposable tickets, simple links |
+| **MIFARE Classic** | Type A (legacy) | 1 KB / 4 KB | ⚠️ Via wrapper | Access cards, older deployments |
+| **MIFARE DESFire** | Type 4 | 2–8 KB | ✅ Yes | Transit, payment, secure access |
+| **ISO 15693** | Type 5 | Varies | ✅ Yes | Inventory, logistics (less common on phones) |
+
+:::info How to pick the right tag
+For **URLs and NDEF records**, choose **NTAG21x (Type 2)** — phones read them natively without extra apps. For **Community Day wristbands**, we standardised on **NTAG215** for the best balance of cost, capacity, and compatibility.
+:::
+
+---
+
+## NDEF — NFC Data Exchange Format
+
+**NDEF** is the universal "language" NFC tags use to store structured data. When you tap a tag, the phone OS parses NDEF records and decides what to do — open a browser, launch an app, show text, etc.
+
+### NDEF message structure
+
+```text
+NDEF Message
+├── Record 1  (e.g. URI — a web link)
+├── Record 2  (e.g. AAR — Android app package name)
+└── Record N  (optional extra records)
+```
+
+Each **record** has a **Type Name Format (TNF)** and a **type** that defines the payload:
+
+| TNF | Type | Purpose | Example payload |
+|-----|------|---------|-----------------|
+| Well Known | `U` (URI) | Open a URL | `https://awscommunity.cn/` |
+| Well Known | `T` (Text) | Display plain text | `Hello Community Day!` |
+| Well Known | `Sp` (Smart Poster) | Title + URI combo | Event poster links |
+| External | `android.com:pkg` | **Android Application Record (AAR)** | `com.amazon.aws.cardclash` |
+| MIME | `text/plain`, custom | Arbitrary typed data | vCard, JSON |
+
+### URI identifier codes
+
+URI records often use a **prefix code** to save space. Code `0x04` means the prefix `https://` is implied:
+
+```text
+Raw URI record payload:  [0x04] + "awscommunity.cn/"
+Phone resolves to:       https://awscommunity.cn/
+```
+
+:::warning One message, multiple records
+Android tries **AAR first** — if the app is installed, it launches directly. If not, the OS falls back to the next record (usually a URI pointing to the Play Store or a website). Always add a URI fallback when writing app launch records.
+:::
+
+---
+
+## Our NFC Tag — NTAG215
+
+<div className={styles.chipCard}>
+
+#### ◆ NTAG215 — the chip inside your Community Day wristband
+
+| Spec | Value |
+|------|-------|
+| **Standard** | ISO/IEC 14443 Type A · NFC Forum Type 2 Tag |
+| **User memory** | 504 bytes |
+| **Typical NDEF capacity** | ~492 bytes (after capability container) |
+| **Rewritable** | Yes — can be locked permanently if you choose |
+| **Phone compatibility** | Android (native), iPhone 7+ (background tag reading in iOS 13+) |
+| **Event use** | Pre-programmed activity URL at check-in; **re-writable by attendees** after the event |
+
+</div>
+
+At Community Day, wristbands may ship with an official activity landing URL (NDEF URI record). That content is **not permanent** unless explicitly locked — you can overwrite it with your own NDEF message using the steps below.
+
+---
+
+## How to Write Your Wristband
+
+### Step 1 — Enable NFC
+
+- **Android**: Settings → Connected devices → Connection preferences → NFC → **On**
+- **iPhone**: NFC is always on for background reading; writing requires a third-party app (e.g. NFC Tools)
+
+### Step 2 — Read the current tag (optional)
+
+Open **NFC Tools → Read** and tap the wristband. Note the chip type (should show **NTAG215**) and existing records.
+
+### Step 3 — Compose your NDEF message
+
+In **NFC Tools → Write → Add a record**, choose the record type (URI, Application, etc.). You can stack multiple records in one message.
+
+### Step 4 — Write
+
+Tap **Write** and hold the phone flat against the wristband chip (usually the flat pad on the band). Wait for the success confirmation.
+
+### Step 5 — Verify
+
+Switch to **Read** mode and tap again. Confirm the payload matches what you intended, then test with a second phone if possible.
+
+:::caution Do not lock the tag unless you mean it
+Locking is **irreversible**. For personal experimentation, leave the tag unlocked so you can rewrite it anytime.
+:::
+
+---
+
+## Example 1 · Open the AWS UG China Community Website
+
+<span className={styles.tagBadge}>URI Record</span> **Target:** [https://awscommunity.cn/](https://awscommunity.cn/) — the official **Amazon Cloud Technology User Group** community portal.
+
+<div className={styles.exampleBlock}>
+<div className={styles.exampleHeader}>EXAMPLE 1 — URI (Website)</div>
+
+**NFC Tools steps**
+
+1. Write → Add record → **URL / URI**
+2. Enter: `https://awscommunity.cn/`
+3. Write to tag
+
+**NDEF equivalent**
+
+```text
+Record type:  URI (Well Known, type "U")
+URI prefix:   0x04 (https://)
+URI body:     awscommunity.cn/
+Full URL:     https://awscommunity.cn/
+```
+
+</div>
+
+When someone taps your wristband, their phone opens the AWS UG China community site — city groups, special-interest communities, events, and volunteer applications.
+
+---
+
+## Example 2 · Launch the Android App「AWS Card Clash」
+
+<span className={styles.tagBadge}>AAR + URI</span> **Target:** [AWS Card Clash](https://play.google.com/store/apps/details?id=com.amazon.aws.cardclash) — Amazon's free 3D card game for learning AWS architecture.
+
+<div className={styles.exampleBlock}>
+<div className={styles.exampleHeader}>EXAMPLE 2 — Android Application Record + Play Store fallback</div>
+
+**Package name**
+
+```text
+com.amazon.aws.cardclash
+```
+
+**NFC Tools steps**
+
+1. Write → Add record → **Application** (or "Android Application Record")
+   - Package: `com.amazon.aws.cardclash`
+2. Add a second record → **URL / URI** (fallback if app not installed)
+   - `https://play.google.com/store/apps/details?id=com.amazon.aws.cardclash`
+3. Write both records in one message
+
+**NDEF record order (recommended)**
+
+```text
+Record 1 — AAR
+  TNF:       External
+  Type:      android.com:pkg
+  Payload:   com.amazon.aws.cardclash
+
+Record 2 — URI (fallback)
+  TNF:       Well Known
+  Type:      U
+  Payload:   0x04 + play.google.com/store/apps/details?id=com.amazon.aws.cardclash
+```
+
+</div>
+
+:::info iPhone note
+iOS does not support AAR. iPhone users tapping this tag will follow the URI fallback and land on the App Store / Play Store web page. For iOS app deep links, use a Universal Link (HTTPS URL) instead.
+:::
+
+---
+
+## Example 3 · Open a WeChat Mini Program
+
+<span className={styles.tagBadge}>URI Record</span> **Target:** A WeChat **mini program** — e.g. a community check-in app, event companion, or your own project mini program.
+
+WeChat does not use AAR. The standard approach is to write a **URL Link** or **URL Scheme** generated from the [WeChat Mini Program admin console](https://mp.weixin.qq.com/) as a plain URI NDEF record.
+
+<div className={styles.exampleBlock}>
+<div className={styles.exampleHeader}>EXAMPLE 3 — WeChat Mini Program via URL Link</div>
+
+**Option A — URL Link (recommended, works on iOS & Android WeChat)**
+
+Generate a URL Link in the mini program backend:
+
+```text
+POST https://api.weixin.qq.com/wxa/generate_urllink
+  ?access_token=ACCESS_TOKEN
+
+Body:
+{
+  "path": "/pages/index/index",
+  "query": "from=nfc&event=2026-summer-community-day",
+  "expire_type": 1,
+  "expire_interval": 30
+}
+```
+
+Response gives a short link like:
+
+```text
+https://wxaurl.cn/XXXXXX
+```
+
+Write that URL as a **URI NDEF record** — when tapped, WeChat opens and launches the mini program.
+
+**Option B — URL Scheme (legacy, shorter but expires)**
+
+```text
+weixin://dl/business/?appid=YOUR_APPID&path=pages/index/index&query=from%3Dnfc
+```
+
+**NFC Tools steps**
+
+1. Write → Add record → **URL / URI**
+2. Paste your `https://wxaurl.cn/...` or `weixin://dl/business/...` link
+3. Write to tag
+
+</div>
+
+:::tip Replace with your own mini program
+Community Day attendees can point this at **any** published mini program — your side project, a community tool, or an event companion app. You need **developer access** to the target mini program to generate valid URL Links.
+:::
+
+---
+
+## Ideas for Your Own Content
+
+Once you understand the three patterns above, the wristband becomes a pocket-sized business card:
+
+| Goal | Record type | Example |
+|------|-------------|---------|
+| Personal blog | URI | `https://peterpanstechland.github.io/` |
+| GitHub profile | URI | `https://github.com/yourname` |
+| LinkedIn | URI | `https://linkedin.com/in/yourname` |
+| Android app | AAR + URI fallback | Your app's package name + Play Store URL |
+| WeChat mini program | URI (URL Link) | `https://wxaurl.cn/...` |
+| Plain message | Text | Your name and email |
+
+---
+
+## Troubleshooting
+
+| Problem | Likely cause | Fix |
+|---------|--------------|-----|
+| Phone does nothing | NFC off or wrong tap spot | Enable NFC; move slowly over the chip pad |
+| "Tag not writable" | Tag locked | Use an unlocked wristband; locked tags cannot be changed |
+| App doesn't open (Android) | AAR missing or wrong package | Double-check `com.amazon.aws.cardclash`; add URI fallback |
+| WeChat doesn't open | Invalid or expired URL Link | Regenerate link in MP admin; check expiry |
+| iPhone opens Safari instead of app | iOS has no AAR support | Use HTTPS Universal Links or URL Links for WeChat |
+
+---
+
+## Learn More
+
+- [AWS UG China Community](https://awscommunity.cn/) — join city groups, apply as speaker or volunteer
+- [AWS Card Clash](https://aws.amazon.com/training/digital/aws-card-clash/) — learn cloud architecture through gameplay
+- [NFC Forum NDEF specification](https://nfc-forum.org/specs-and-application-documents/specifications/nfc-forum-technical-specifications/) — technical deep dive
+- [WeChat URL Link docs](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/url-link/generateUrlLink.html) — mini program link generation
+
+---
+
+*Guide prepared for **2026 Summer Community Day** · Amazon Cloud Technology User Group (AWS UG China). Theme colors: AWS Orange `#FF9900` on dark surface `#1E1E1E`.*
+
+</div>

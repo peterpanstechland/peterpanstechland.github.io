@@ -9,6 +9,27 @@ slug: /community
 
 我通过演讲、文章和开源项目对技术社区的贡献。
 
+## 我参与的社区
+
+### 亚马逊云科技 User Group（AWS UG China）
+
+![亚马逊云科技 User Group 社区](/img/community/aws-ug-china.png)
+
+**[亚马逊云科技 User Group](https://awscommunity.cn/)**（AWS UG China）是一个面向开发者的技术交流与分享社区，提供互相学习、分享技术实践、参与培训与社区共建的机会。
+
+| | |
+|---|---|
+| **官方网站** | [awscommunity.cn](https://awscommunity.cn/) |
+| **全球规模** | 470+ 组织 · 覆盖 98 个国家 · 50 万+ 成员 |
+| **城市社区** | 北京、上海、深圳、武汉、西安等 |
+| **加入我们** | [申请 Leader](https://awscommunity.cn/) · 讲师 · 志愿者 |
+
+社区在微信公众号、视频号、小红书、Bilibili 等平台持续更新技术干货与活动回顾。关注 **User Group** 公众号，获取活动预告与社区动态。
+
+**2026 夏季 Community Day** — 请参阅 [NFC 手环写入教程](/docs/community/summer-community-day-2026/nfc-wristband-guide)，了解如何将手环刷成你自己的博客链接、网站、App 或小程序入口。
+
+---
+
 ## 演讲与活动
 
 ### 即将举行
@@ -69,7 +90,8 @@ slug: /community
 ## 社区资源
 
 ### 推荐社区
-- AWS 用户组
+- [亚马逊云科技 User Group（AWS UG China）](https://awscommunity.cn/)
+- [AWS Builder Community](https://community.aws/)
 - IoT 创客社区
 - 本地创客空间
 
@@ -77,4 +99,3 @@ slug: /community
 - AWS Skill Builder
 - AWS 文档
 - 社区论坛
-
