@@ -48,6 +48,16 @@ slug: /community
 - 云端设备集成模式
 - 实践教程与最佳实践
 
+### AWS UG China — 亚马逊云科技 User Group
+
+**AWS UG China**（AWS User Group China，中文即**亚马逊云科技 User Group**）是遍布中国各地的亚马逊云科技构建者、开发者与爱好者社区。我们举办 Meetup、Community Day、黑客松和动手实验工作坊，分享知识、共同成长。
+
+- **官方网站**：[awscommunity.cn](https://awscommunity.cn/)
+- **活动形式**：Community Day、技术分享、工作坊、黑客松
+- **关注领域**：云计算、AI/ML、IoT 与边缘计算、Serverless 等
+
+> 📟 **2026 夏季 Community Day** —— 查看 [NFC 手环使用教程](./nfc-wristband-guide.mdx)，了解如何把信息写入活动手环。
+
 ## 联系
 
 想要合作或邀请我演讲？

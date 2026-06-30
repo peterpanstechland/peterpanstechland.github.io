@@ -1,0 +1,333 @@
+---
+sidebar_position: 2
+title: NFC Wristband Guide
+description: 2026 Summer Community Day — program your AWS UG China NFC wristband to open a website, an Android app, or a WeChat Mini Program
+keywords: [NFC, NDEF, NTAG, AWS UG China, Community Day, wristband]
+tags: [nfc, ndef, community-day, aws-ug-china, hardware]
+---
+
+export const C = {
+  orange: 'rgb(254, 153, 0)',
+  orangeSoft: 'rgba(254, 153, 0, 0.12)',
+  orangeBorder: 'rgba(254, 153, 0, 0.45)',
+  black: '#161616',
+  white: '#ffffff',
+};
+
+export const Hero = ({title, subtitle}) => (
+  <div
+    style={{
+      background: `linear-gradient(135deg, ${C.black} 0%, #232f3e 100%)`,
+      border: `1px solid ${C.orangeBorder}`,
+      borderRadius: 16,
+      padding: '2rem 1.75rem',
+      margin: '1.5rem 0 2rem',
+      color: C.white,
+      boxShadow: `0 10px 40px rgba(254, 153, 0, 0.18)`,
+    }}>
+    <div
+      style={{
+        display: 'inline-block',
+        background: C.orange,
+        color: C.black,
+        fontWeight: 800,
+        fontSize: '0.75rem',
+        letterSpacing: '0.08em',
+        textTransform: 'uppercase',
+        padding: '0.25rem 0.7rem',
+        borderRadius: 999,
+        marginBottom: '0.9rem',
+      }}>
+      AWS UG China · 2026 Summer Community Day
+    </div>
+    <h2
+      style={{
+        color: C.white,
+        border: 'none',
+        padding: 0,
+        margin: '0 0 0.4rem',
+        fontSize: '1.9rem',
+      }}>
+      {title}
+    </h2>
+    <p style={{color: 'rgba(255,255,255,0.82)', margin: 0, fontSize: '1.05rem'}}>
+      {subtitle}
+    </p>
+  </div>
+);
+
+export const StepCard = ({n, title, children}) => (
+  <div
+    style={{
+      position: 'relative',
+      background: C.orangeSoft,
+      border: `1px solid ${C.orangeBorder}`,
+      borderLeft: `5px solid ${C.orange}`,
+      borderRadius: 12,
+      padding: '1.1rem 1.25rem 1.1rem 1.4rem',
+      margin: '1.25rem 0',
+    }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.6rem',
+        marginBottom: '0.5rem',
+      }}>
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 30,
+          height: 30,
+          borderRadius: '50%',
+          background: C.orange,
+          color: C.black,
+          fontWeight: 800,
+          fontSize: '0.95rem',
+          flexShrink: 0,
+        }}>
+        {n}
+      </span>
+      <strong style={{fontSize: '1.1rem'}}>{title}</strong>
+    </div>
+    <div>{children}</div>
+  </div>
+);
+
+export const Pill = ({children}) => (
+  <span
+    style={{
+      display: 'inline-block',
+      background: C.orange,
+      color: C.black,
+      fontWeight: 700,
+      fontSize: '0.8rem',
+      padding: '0.15rem 0.6rem',
+      borderRadius: 999,
+      margin: '0 0.2rem',
+    }}>
+    {children}
+  </span>
+);
+
+# NFC Wristband Guide
+
+<Hero
+  title="Make your wristband do something cool 📟"
+  subtitle="At the 2026 Summer Community Day, every attendee gets an NFC wristband. Tap it on a phone and it can open your blog, your website, an app, or a WeChat Mini Program — no app install required to read it."
+/>
+
+This guide explains **what an NFC tag is**, the **NDEF format** we use, **the exact tag inside this year's wristband**, and three ready-to-use examples:
+
+1. Open the **AWS UG China official website** — [awscommunity.cn](https://awscommunity.cn/)
+2. Open an **Android app** — *AWS Card Clash*
+3. Open a **WeChat Mini Program** (微信小程序)
+
+:::tip Who is this for?
+Anyone at the Community Day. You only need an **NFC-capable smartphone** (almost all modern Android phones and iPhone 7 and later) and a free writer app. No coding required for the basic examples.
+:::
+
+## 1. What is an NFC tag?
+
+**NFC** (Near Field Communication) is a short-range (≈4 cm) wireless technology. An **NFC tag** is a tiny passive chip + antenna with no battery — it draws power from the phone's NFC field when you tap it. The chip stores a small amount of data that any NFC phone can read instantly.
+
+### Common NFC tag chips
+
+Most consumer NFC tags (stickers, cards, wristbands) use NXP's **NTAG** family. The main difference is **how much user memory** they have.
+
+| Chip | User memory | Approx. URL capacity | Typical use |
+|------|-------------|----------------------|-------------|
+| NTAG213 | 144 bytes | ~130 characters | Stickers, simple links |
+| **NTAG215** | **504 bytes** | ~480 characters | Wristbands, business cards, Amiibo |
+| NTAG216 | 888 bytes | ~850 characters | vCards, long payloads |
+
+:::info Why memory matters
+A short link like `https://awscommunity.cn/` is tiny, so even NTAG213 is plenty. You only need a bigger chip when storing long URLs, contact cards (vCard), or multiple records.
+:::
+
+### What's inside *this year's* wristband
+
+<StepCard n="📟" title="Our 2026 Community Day tag">
+
+- **Chip**: NTAG215 (504 bytes of user memory)
+- **Standard**: ISO/IEC 14443A, NFC Forum **Type 2 Tag**
+- **Format**: pre-formatted as **NDEF**, ready to write
+- **Rewritable**: yes — you can re-program it many times, and lock it when you're happy
+- **Read by**: any NFC phone, no app needed to *read* a standard NDEF link
+
+</StepCard>
+
+## 2. The NDEF format (how the data is stored)
+
+To make a tag "just work" across phones, the content must follow a standard layout called **NDEF** (NFC Data Exchange Format).
+
+- An NDEF tag holds an **NDEF Message**.
+- A message contains one or more **NDEF Records**.
+- Each record has a **type** that tells the phone what to do.
+
+The two record types you'll use most:
+
+| Record type | TNF / type | What the phone does |
+|-------------|-----------|---------------------|
+| **URI** | Well-known `U` | Opens a link (`https://`, `tel:`, custom scheme…) |
+| **Text** | Well-known `T` | Shows plain text (good for notes, not for auto-open) |
+
+A neat trick in the URI record is the **URI prefix byte**: instead of storing `https://www.` as characters, NDEF stores a single byte for the common prefix to save space.
+
+```text
+URI prefix codes (excerpt):
+0x00  (no prefix)
+0x01  http://www.
+0x02  https://www.
+0x03  http://
+0x04  https://
+0x05  tel:
+...
+```
+
+So `https://awscommunity.cn/` is stored as prefix byte `0x04` + `awscommunity.cn/`.
+
+:::note Read vs. write
+**Reading** a standard NDEF URI tag needs *no app* — the phone OS recognizes it and offers to open the link. **Writing** (programming) a tag is what needs a writer app. The examples below cover writing.
+:::
+
+## 3. What you need to program the wristband
+
+- An NFC phone (Android recommended for the easiest experience)
+- A free NFC writer app:
+  - **Android**: [NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc) (also on iOS), or **NXP TagWriter**
+  - **iOS**: NFC Tools (iPhone 7+)
+- Your target content (a URL, an app link, or a Mini Program scheme)
+
+**General writing steps** (same for all examples):
+
+1. Open **NFC Tools** → **Write** tab → **Add a record**.
+2. Choose the record type (usually **URL/URI**).
+3. Paste your content and confirm.
+4. Tap **Write** → hold the **wristband** against the back of the phone until you see *"Write complete"*.
+5. (Optional) Use **Other → Lock tag** to make it permanent.
+
+---
+
+## Example 1 — Open the AWS UG China website
+
+> Goal: tapping the wristband opens **[https://awscommunity.cn/](https://awscommunity.cn/)** in the browser.
+
+<StepCard n="1" title="Write a URI record">
+
+- Record type: <Pill>URL / URI</Pill>
+- Value:
+
+```text
+https://awscommunity.cn/
+```
+
+That's it. Because this is a standard `https` URI record, **any** NFC phone (Android or iPhone) will offer to open it in the browser — no app needed on the reader's side.
+
+</StepCard>
+
+This is the same pattern you'd use for **your own blog or personal website** — just paste your URL instead, e.g. `https://peterpanstechland.github.io/`.
+
+:::tip Smallest, most compatible payload
+Plain `https://` URI records are the most universally supported. When in doubt, use a URL.
+:::
+
+## Example 2 — Open an Android app (*AWS Card Clash*)
+
+> Goal: tapping the wristband opens the **AWS Card Clash** Android app (and ideally falls back to the store if it isn't installed).
+
+There are two good ways to do this on Android:
+
+<StepCard n="A" title="Recommended — Android App Record (AAR)">
+
+NFC Tools lets you add an **Application record** (a.k.a. Android Application Record / AAR). It stores the app's **package name**, and Android will launch that app directly (or open the Play Store if it's not installed).
+
+- Record type: <Pill>Application</Pill> (Android)
+- Value = the app's package name, for example:
+
+```text
+com.awsugchina.cardclash
+```
+
+> Replace the package name with *AWS Card Clash*'s real one (find it in the Play Store URL: `play.google.com/store/apps/details?id=<package.name>`).
+
+</StepCard>
+
+<StepCard n="B" title="Alternative — a deep link or store URL (cross-platform)">
+
+If you prefer one record that also does something on iPhone, write a **URI** record pointing to either the app's deep link or its store page:
+
+```text
+# Play Store page (opens the store, then the app)
+https://play.google.com/store/apps/details?id=com.awsugchina.cardclash
+
+# Or a custom app deep link (if the app registers a scheme/App Link)
+awscardclash://home
+```
+
+</StepCard>
+
+:::info AAR vs. URL
+Use the **AAR (Application record)** for the most reliable "open this exact app" behavior on Android. Use a **store URL** if you want it to work for people who don't have the app yet, or across platforms.
+:::
+
+## Example 3 — Open a WeChat Mini Program (微信小程序)
+
+> Goal: tapping the wristband opens a specific **WeChat Mini Program**.
+
+WeChat Mini Programs can't be opened by a raw package name — they open through a **WeChat URL Scheme** that you generate from the Mini Program's backend.
+
+<StepCard n="1" title="Generate a Mini Program URL Scheme">
+
+In the Mini Program's WeChat admin (or via the server API `generateScheme` / `generateUrlLink`), generate an **open link**. It looks like:
+
+```text
+weixin://dl/business/?t=XXXXXXXX
+```
+
+- `generateScheme` → a `weixin://` **URL Scheme** (best for opening from outside WeChat, e.g. a browser/NFC tap).
+- `generateUrlLink` → an `https://` **URL Link** that also routes into the Mini Program.
+
+</StepCard>
+
+<StepCard n="2" title="Write it to the tag">
+
+- Record type: <Pill>URI / URL</Pill>
+- Value: paste the generated scheme, e.g.
+
+```text
+weixin://dl/business/?t=XXXXXXXX
+```
+
+When an Android user taps the wristband, the OS recognizes the `weixin://` scheme and hands it to WeChat, which opens the Mini Program.
+
+</StepCard>
+
+:::warning Things to know about WeChat
+- The user must have **WeChat installed**.
+- URL Scheme links have an **expiry** (set when you generate them) — for an event, generate one with a long/no expiry or regenerate as needed.
+- On **iPhone**, `weixin://` schemes opened directly from a tag can be inconsistent; an `https://` **URL Link** (from `generateUrlLink`) is often more reliable as a fallback.
+- For a polished experience, WeChat also offers an official **"碰一碰" (tap) / NFC** capability that requires registering tags with the WeChat Open Platform — overkill for most Community Day setups, but worth knowing.
+:::
+
+## Quick reference
+
+| You want to open… | Record type | Value to write |
+|-------------------|-------------|----------------|
+| A website / your blog | URI | `https://awscommunity.cn/` |
+| An Android app (exact) | Application (AAR) | `com.awsugchina.cardclash` |
+| An Android app (with fallback) | URI | `https://play.google.com/store/apps/details?id=...` |
+| A WeChat Mini Program | URI | `weixin://dl/business/?t=...` |
+
+## Troubleshooting
+
+- **Nothing happens on tap** → Make sure **NFC is enabled** in phone settings, and move the wristband around the back of the phone (the antenna location varies).
+- **"Tag type not supported"** → The tag may not be NDEF-formatted. In NFC Tools use **Other → Format memory**, then write again.
+- **Can't overwrite** → The tag may be **locked**. Locked tags are read-only by design.
+- **iPhone won't write** → Some older record types are Android-only (e.g. AAR). Use a plain **URI** record for cross-platform writing.
+
+---
+
+*Part of the AWS UG China — 亚马逊云科技 User Group community resources. See you at the 2026 Summer Community Day! 🎉*

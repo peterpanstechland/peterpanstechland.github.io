@@ -1,0 +1,332 @@
+---
+sidebar_position: 2
+title: NFC 手环使用教程
+description: 2026 夏季 Community Day —— 把 AWS UG China NFC 手环刷成网站、安卓 App 或微信小程序
+keywords: [NFC, NDEF, NTAG, AWS UG China, Community Day, 手环]
+tags: [nfc, ndef, community-day, aws-ug-china, hardware]
+---
+
+export const C = {
+  orange: 'rgb(254, 153, 0)',
+  orangeSoft: 'rgba(254, 153, 0, 0.12)',
+  orangeBorder: 'rgba(254, 153, 0, 0.45)',
+  black: '#161616',
+  white: '#ffffff',
+};
+
+export const Hero = ({title, subtitle}) => (
+  <div
+    style={{
+      background: `linear-gradient(135deg, ${C.black} 0%, #232f3e 100%)`,
+      border: `1px solid ${C.orangeBorder}`,
+      borderRadius: 16,
+      padding: '2rem 1.75rem',
+      margin: '1.5rem 0 2rem',
+      color: C.white,
+      boxShadow: `0 10px 40px rgba(254, 153, 0, 0.18)`,
+    }}>
+    <div
+      style={{
+        display: 'inline-block',
+        background: C.orange,
+        color: C.black,
+        fontWeight: 800,
+        fontSize: '0.75rem',
+        letterSpacing: '0.08em',
+        padding: '0.25rem 0.7rem',
+        borderRadius: 999,
+        marginBottom: '0.9rem',
+      }}>
+      AWS UG China · 2026 夏季 Community Day
+    </div>
+    <h2
+      style={{
+        color: C.white,
+        border: 'none',
+        padding: 0,
+        margin: '0 0 0.4rem',
+        fontSize: '1.9rem',
+      }}>
+      {title}
+    </h2>
+    <p style={{color: 'rgba(255,255,255,0.82)', margin: 0, fontSize: '1.05rem'}}>
+      {subtitle}
+    </p>
+  </div>
+);
+
+export const StepCard = ({n, title, children}) => (
+  <div
+    style={{
+      position: 'relative',
+      background: C.orangeSoft,
+      border: `1px solid ${C.orangeBorder}`,
+      borderLeft: `5px solid ${C.orange}`,
+      borderRadius: 12,
+      padding: '1.1rem 1.25rem 1.1rem 1.4rem',
+      margin: '1.25rem 0',
+    }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.6rem',
+        marginBottom: '0.5rem',
+      }}>
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 30,
+          height: 30,
+          borderRadius: '50%',
+          background: C.orange,
+          color: C.black,
+          fontWeight: 800,
+          fontSize: '0.95rem',
+          flexShrink: 0,
+        }}>
+        {n}
+      </span>
+      <strong style={{fontSize: '1.1rem'}}>{title}</strong>
+    </div>
+    <div>{children}</div>
+  </div>
+);
+
+export const Pill = ({children}) => (
+  <span
+    style={{
+      display: 'inline-block',
+      background: C.orange,
+      color: C.black,
+      fontWeight: 700,
+      fontSize: '0.8rem',
+      padding: '0.15rem 0.6rem',
+      borderRadius: 999,
+      margin: '0 0.2rem',
+    }}>
+    {children}
+  </span>
+);
+
+# NFC 手环使用教程
+
+<Hero
+  title="让你的手环做点酷事 📟"
+  subtitle="在 2026 夏季 Community Day，每位参访者都会拿到一枚 NFC 手环。把它贴近手机轻轻一碰，就能打开你的博客、网站、App，甚至微信小程序 —— 读取时连 App 都不用装。"
+/>
+
+本教程会讲清楚 **NFC 标签是什么**、我们使用的 **NDEF 格式**、**本次手环里的具体标签**，以及三个可直接上手的例子：
+
+1. 打开 **AWS UG China 官方网站** —— [awscommunity.cn](https://awscommunity.cn/)
+2. 打开 **安卓 App** —— *AWS Card Clash*
+3. 打开 **微信小程序**
+
+:::tip 适合谁看？
+所有来参加 Community Day 的小伙伴。你只需要一部**支持 NFC 的手机**（几乎所有较新的安卓手机，以及 iPhone 7 及以后机型）和一个免费的写入 App，基础例子无需任何编程。
+:::
+
+## 1. NFC 标签是什么？
+
+**NFC**（近场通信）是一种近距离（约 4 厘米）无线技术。**NFC 标签**是一枚极小的无源芯片 + 天线，**自身没有电池** —— 当你贴近手机时，它从手机的 NFC 磁场里取电。芯片里存着少量数据，任何带 NFC 的手机一碰即可读取。
+
+### 常见的 NFC 标签芯片
+
+市面上的消费级 NFC 标签（贴纸、卡片、手环）大多采用 NXP 的 **NTAG** 系列。它们的主要区别在于**可用存储空间大小**。
+
+| 芯片 | 用户存储 | 大致可存网址长度 | 典型用途 |
+|------|----------|------------------|----------|
+| NTAG213 | 144 字节 | 约 130 字符 | 贴纸、简单链接 |
+| **NTAG215** | **504 字节** | 约 480 字符 | 手环、名片、Amiibo |
+| NTAG216 | 888 字节 | 约 850 字符 | vCard、长内容 |
+
+:::info 为什么要在意存储大小
+像 `https://awscommunity.cn/` 这样的短链接非常小，连 NTAG213 都绰绰有余。只有当你要存长网址、联系人名片（vCard）或多条记录时，才需要更大的芯片。
+:::
+
+### 本次手环里的标签
+
+<StepCard n="📟" title="2026 Community Day 标签规格">
+
+- **芯片**：NTAG215（504 字节用户存储）
+- **标准**：ISO/IEC 14443A，NFC Forum **Type 2 Tag**
+- **格式**：出厂已格式化为 **NDEF**，可直接写入
+- **可重写**：可以 —— 能反复多次重新编程，写好后还能锁定
+- **读取**：任何 NFC 手机均可读取标准 NDEF 链接，读取无需安装 App
+
+</StepCard>
+
+## 2. NDEF 格式（数据是怎么存的）
+
+为了让标签在不同手机上「碰一下就能用」，内容必须遵循一种叫 **NDEF**（NFC Data Exchange Format，NFC 数据交换格式）的标准布局。
+
+- 一个 NDEF 标签存放一条 **NDEF 消息（Message）**。
+- 一条消息包含一条或多条 **NDEF 记录（Record）**。
+- 每条记录都有一个**类型（type）**，告诉手机该做什么。
+
+最常用的两种记录类型：
+
+| 记录类型 | TNF / 类型 | 手机的行为 |
+|----------|-----------|------------|
+| **URI** | 知名类型 `U` | 打开链接（`https://`、`tel:`、自定义 scheme 等） |
+| **Text** | 知名类型 `T` | 显示纯文本（适合备注，不会自动打开） |
+
+URI 记录里有个巧妙的设计 —— **URI 前缀字节**：NDEF 不会把 `https://www.` 当成字符逐个存储，而是用一个字节代表常见前缀，从而节省空间。
+
+```text
+URI 前缀编码（节选）：
+0x00  （无前缀）
+0x01  http://www.
+0x02  https://www.
+0x03  http://
+0x04  https://
+0x05  tel:
+...
+```
+
+所以 `https://awscommunity.cn/` 实际存为：前缀字节 `0x04` + `awscommunity.cn/`。
+
+:::note 读取 vs. 写入
+**读取**标准 NDEF URI 标签**无需任何 App** —— 手机系统会自动识别并提示打开链接。需要 App 的是**写入（编程）**标签。下面的例子讲的都是写入。
+:::
+
+## 3. 给手环写入需要准备什么
+
+- 一部支持 NFC 的手机（推荐安卓，体验最顺）
+- 一个免费的 NFC 写入 App：
+  - **安卓**：[NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)（iOS 也有），或 **NXP TagWriter**
+  - **iOS**：NFC Tools（iPhone 7 及以上）
+- 你的目标内容（一个网址、一个 App 链接，或一个小程序 scheme）
+
+**通用写入步骤**（所有例子都一样）：
+
+1. 打开 **NFC Tools** → **写入（Write）** 标签页 → **添加记录（Add a record）**。
+2. 选择记录类型（通常是 **URL/URI**）。
+3. 粘贴你的内容并确认。
+4. 点 **写入（Write）** → 把**手环**贴到手机背面，直到看到「写入完成 / Write complete」。
+5.（可选）用 **其他 → 锁定标签（Lock tag）**，让内容永久固定。
+
+---
+
+## 例子一 —— 打开 AWS UG China 官网
+
+> 目标：碰一下手环，浏览器就打开 **[https://awscommunity.cn/](https://awscommunity.cn/)**。
+
+<StepCard n="1" title="写入一条 URI 记录">
+
+- 记录类型：<Pill>URL / URI</Pill>
+- 内容：
+
+```text
+https://awscommunity.cn/
+```
+
+就这么简单。由于这是标准的 `https` URI 记录，**任何** NFC 手机（安卓或 iPhone）都会提示在浏览器中打开 —— 读取方完全不用装 App。
+
+</StepCard>
+
+同样的套路也可以用来打开**你自己的博客或个人网站** —— 把网址换成你的即可，例如 `https://peterpanstechland.github.io/`。
+
+:::tip 体积最小、兼容性最好
+纯 `https://` 的 URI 记录是兼容性最广的方案。拿不准时，就写网址。
+:::
+
+## 例子二 —— 打开安卓 App（*AWS Card Clash*）
+
+> 目标：碰一下手环，打开 **AWS Card Clash** 安卓 App（最好在没装时能回退到应用商店）。
+
+在安卓上有两种好办法：
+
+<StepCard n="A" title="推荐 —— 安卓应用记录（AAR）">
+
+NFC Tools 支持添加一条 **应用记录（Android Application Record，简称 AAR）**。它存的是 App 的**包名（package name）**，安卓会直接启动该 App（没装则跳转 Play 商店）。
+
+- 记录类型：<Pill>Application</Pill>（安卓应用）
+- 内容 = App 的包名，例如：
+
+```text
+com.awsugchina.cardclash
+```
+
+> 把包名换成 *AWS Card Clash* 的真实包名（可在 Play 商店网址里找到：`play.google.com/store/apps/details?id=<包名>`）。
+
+</StepCard>
+
+<StepCard n="B" title="备选 —— 深链接或商店网址（跨平台）">
+
+如果你想用一条记录在 iPhone 上也能有反应，就写一条 **URI** 记录，指向 App 的深链接或商店页：
+
+```text
+# 应用商店页面（先打开商店，再进 App）
+https://play.google.com/store/apps/details?id=com.awsugchina.cardclash
+
+# 或自定义 App 深链接（前提是 App 注册了对应 scheme / App Link）
+awscardclash://home
+```
+
+</StepCard>
+
+:::info AAR vs. 网址
+想要在安卓上「精准打开指定 App」最稳妥，用 **AAR（应用记录）**；想兼顾还没装 App 的人或跨平台，用**商店网址**。
+:::
+
+## 例子三 —— 打开微信小程序
+
+> 目标：碰一下手环，打开指定的**微信小程序**。
+
+微信小程序不能用包名直接打开，而是通过从小程序后台生成的**微信 URL Scheme** 来跳转。
+
+<StepCard n="1" title="生成小程序 URL Scheme">
+
+在小程序的微信后台（或通过服务端接口 `generateScheme` / `generateUrlLink`）生成一条**打开链接**。它长这样：
+
+```text
+weixin://dl/business/?t=XXXXXXXX
+```
+
+- `generateScheme` → 生成 `weixin://` **URL Scheme**（适合从微信外部打开，比如浏览器 / NFC 一碰）。
+- `generateUrlLink` → 生成 `https://` **URL Link**，同样能跳转进小程序。
+
+</StepCard>
+
+<StepCard n="2" title="把它写入标签">
+
+- 记录类型：<Pill>URI / URL</Pill>
+- 内容：粘贴生成的 scheme，例如：
+
+```text
+weixin://dl/business/?t=XXXXXXXX
+```
+
+当安卓用户碰一下手环时，系统识别到 `weixin://` scheme 并交给微信，微信随即打开小程序。
+
+</StepCard>
+
+:::warning 关于微信的几点注意
+- 用户必须**已安装微信**。
+- URL Scheme 链接有**有效期**（生成时设置）—— 办活动时建议生成长期/不过期的，或按需重新生成。
+- 在 **iPhone** 上，直接从标签打开 `weixin://` scheme 可能不稳定；用 `https://` 的 **URL Link**（`generateUrlLink` 生成）作为回退通常更可靠。
+- 想要更完善的体验，微信还提供官方的 **「碰一碰」/ NFC** 能力，但需要在微信开放平台注册标签 —— 对大多数 Community Day 场景属于「杀鸡用牛刀」，了解即可。
+:::
+
+## 速查表
+
+| 你想打开… | 记录类型 | 写入内容 |
+|-----------|----------|----------|
+| 网站 / 你的博客 | URI | `https://awscommunity.cn/` |
+| 安卓 App（精准） | Application（AAR） | `com.awsugchina.cardclash` |
+| 安卓 App（带回退） | URI | `https://play.google.com/store/apps/details?id=...` |
+| 微信小程序 | URI | `weixin://dl/business/?t=...` |
+
+## 常见问题排查
+
+- **碰了没反应** → 确认手机设置里**已开启 NFC**，并在手机背面挪动手环（天线位置因机型而异）。
+- **「不支持的标签类型」** → 标签可能没格式化为 NDEF。在 NFC Tools 里用 **其他 → 格式化内存（Format memory）**，再重新写入。
+- **无法覆盖写入** → 标签可能**已被锁定**，锁定后只读，属于正常设计。
+- **iPhone 写不进去** → 部分记录类型仅限安卓（如 AAR）。跨平台写入请使用纯 **URI** 记录。
+
+---
+
+*本文属于 AWS UG China —— 亚马逊云科技 User Group 社区资源。2026 夏季 Community Day 见！🎉*
