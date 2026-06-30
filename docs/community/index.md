@@ -69,16 +69,6 @@ I actively contribute to the AWS community through technical content and project
 - Cloud-device integration patterns
 - Hands-on tutorials and best practices
 
-### AWS UG China — 亚马逊云科技 User Group
-
-**AWS UG China** (Amazon Web Services User Group China, 中文：**亚马逊云科技 User Group**) is the community of AWS builders, developers, and enthusiasts across China. We host meetups, Community Days, hackathons, and hands-on workshops to share knowledge and grow together.
-
-- **Official site**: [awscommunity.cn](https://awscommunity.cn/)
-- **Activities**: Community Day, technical talks, workshops, hackathons
-- **Focus areas**: Cloud, AI/ML, IoT & edge, serverless, and more
-
-> 📟 **2026 Summer Community Day** — check out the [NFC Wristband Guide](./nfc-wristband-guide.mdx) to learn how to program the event wristband.
-
 ## Connect
 
 Want to collaborate or invite me to speak?

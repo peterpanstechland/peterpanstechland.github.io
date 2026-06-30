@@ -1,8 +1,8 @@
-/* AWS User Group China theme â€” dark surface + AWS Orange (#FF9900) */
+/* AWS User Group China theme â€?dark surface + AWS Orange rgb(254, 153, 0) */
 .awsUgPage {
-  --aws-orange: #ff9900;
+  --aws-orange: #fe9900;
   --aws-orange-dark: #ec7211;
-  --aws-orange-dim: rgba(255, 153, 0, 0.12);
+  --aws-orange-dim: rgba(254, 153, 0, 0.12);
   --aws-surface: #1e1e1e;
   --aws-surface-raised: #2a2a2a;
   --aws-text: #f5f5f5;
@@ -17,7 +17,7 @@
   margin: 0 0 2rem;
   font-weight: 600;
   font-size: 1.05rem;
-  box-shadow: 0 4px 24px rgba(255, 153, 0, 0.25);
+  box-shadow: 0 4px 24px rgba(254, 153, 0, 0.25);
 }
 
 .heroBanner p {
@@ -27,7 +27,7 @@
 
 .chipCard {
   background: var(--aws-surface);
-  border: 1px solid rgba(255, 153, 0, 0.35);
+  border: 1px solid rgba(254, 153, 0, 0.35);
   border-left: 4px solid var(--aws-orange);
   border-radius: 8px;
   padding: 1rem 1.25rem;
@@ -51,7 +51,7 @@
 
 .exampleBlock {
   background: var(--aws-surface-raised);
-  border: 1px solid rgba(255, 153, 0, 0.2);
+  border: 1px solid rgba(254, 153, 0, 0.2);
   border-radius: 10px;
   padding: 0.25rem 0;
   margin: 1.25rem 0 2rem;
@@ -60,7 +60,7 @@
 
 .exampleHeader {
   background: var(--aws-orange-dim);
-  border-bottom: 1px solid rgba(255, 153, 0, 0.25);
+  border-bottom: 1px solid rgba(254, 153, 0, 0.25);
   padding: 0.6rem 1.25rem;
   font-weight: 700;
   color: var(--aws-orange);
