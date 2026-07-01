@@ -222,7 +222,7 @@ const config: Config = {
     },
 
     zoom: {
-      selector: '.markdown img',
+      selector: '.markdown img:not(.no-zoom)',
       background: {
         light: 'rgba(255, 255, 255, 0.9)',
         dark: 'rgba(0, 0, 0, 0.9)',
