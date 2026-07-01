@@ -1,15 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120" role="img" aria-label="AWS User Group China">
-  <!-- AWS UG China mark: house + speech bubble, orange / white / black -->
-  <path
-    fill="#232f3e"
-    d="M 18 44 L 60 8 L 102 44 L 102 64
-       C 102 82 92 92 76 92
-       L 88 112 L 78 94
-       C 58 94 18 84 18 64 Z" />
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="126" viewBox="0 0 100 105" role="img" aria-label="AWS User Group China">
+  <!-- AWS UG China mark: roof + chat-bubble, navy outline / orange fill -->
   <path
     fill="rgb(254, 153, 0)"
-    d="M 26 48 L 60 16 L 94 48 L 94 64
-       C 94 78 86 86 72 86
-       L 80 102 L 73 87
-       C 56 87 26 78 26 64 Z" />
+    stroke="#2b3648"
+    stroke-width="6"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    d="M 50 20
+       L 76 46
+       C 85 48 90 56 90 66
+       C 90 74 87 79 82 82
+       L 94 98
+       L 68 96
+       C 64 97 57 98 50 98
+       C 38 98 10 84 10 66
+       C 10 56 15 48 24 46
+       Z" />
 </svg>
