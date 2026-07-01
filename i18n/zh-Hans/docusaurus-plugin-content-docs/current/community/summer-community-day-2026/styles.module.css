@@ -1,4 +1,4 @@
-/* AWS User Group China theme â€?dark surface + AWS Orange (#fe9900) */
+/* AWS User Group China theme — dark surface + AWS Orange rgb(254, 153, 0) */
 .awsUgPage {
   --aws-orange: #fe9900;
   --aws-orange-dark: #ec7211;
@@ -7,6 +7,73 @@
   --aws-surface-raised: #2a2a2a;
   --aws-text: #f5f5f5;
   --aws-text-muted: #b0b0b0;
+}
+
+/* --- Page-scoped overrides: replace site purple with AWS orange --- */
+.awsUgPage :global(h2::before) {
+  background: var(--aws-orange) !important;
+  opacity: 1;
+}
+
+.awsUgPage :global(h2) {
+  border-bottom-color: rgba(254, 153, 0, 0.28);
+}
+
+.awsUgPage :global(h3) {
+  border-left: 3px solid var(--aws-orange);
+  padding-left: 0.75rem;
+}
+
+.awsUgPage :global(.hash-link) {
+  color: var(--aws-orange);
+  opacity: 0.55;
+}
+
+.awsUgPage :global(.hash-link:hover) {
+  opacity: 1;
+}
+
+.awsUgPage :global(p code),
+.awsUgPage :global(li code),
+.awsUgPage :global(td code) {
+  background: var(--aws-orange-dim) !important;
+  color: var(--aws-orange-dark) !important;
+  border: 1px solid rgba(254, 153, 0, 0.28) !important;
+}
+
+.awsUgPage :global(a) {
+  color: var(--aws-orange-dark);
+  border-bottom-color: var(--aws-orange);
+}
+
+.awsUgPage :global(a:hover) {
+  background: var(--aws-orange-dim);
+  color: var(--aws-orange);
+}
+
+.awsUgPage :global(ul li::before) {
+  color: var(--aws-orange) !important;
+}
+
+.awsUgPage :global(blockquote) {
+  border-left-color: var(--aws-orange) !important;
+  background: var(--aws-orange-dim) !important;
+}
+
+.awsUgPage :global(.alert--info) {
+  border-left-color: var(--aws-orange) !important;
+}
+
+.awsUgPage :global(.alert--warning) {
+  border-left-color: var(--aws-orange-dark) !important;
+}
+
+.awsUgPage :global(table th) {
+  border-bottom-color: rgba(254, 153, 0, 0.35);
+}
+
+.awsUgPage :global(table tr:hover td) {
+  background: var(--aws-orange-dim);
 }
 
 .heroBanner {
@@ -49,6 +116,32 @@
   color: var(--aws-text);
 }
 
+.chipCard :global(table) {
+  margin: 0.75rem 0 0;
+}
+
+.chipCard :global(th) {
+  color: var(--aws-text);
+  border-bottom-color: rgba(254, 153, 0, 0.35);
+}
+
+.chipCard :global(td) {
+  color: var(--aws-text-muted);
+  border-bottom-color: rgba(254, 153, 0, 0.15);
+}
+
+.chipCard :global(tr:nth-child(odd) td) {
+  background: rgba(254, 153, 0, 0.04);
+}
+
+.chipCard :global(tr:hover td) {
+  background: rgba(254, 153, 0, 0.08);
+}
+
+.chipCard :global(td strong) {
+  color: var(--aws-text);
+}
+
 .exampleBlock {
   background: var(--aws-surface-raised);
   border: 1px solid rgba(254, 153, 0, 0.2);
@@ -56,6 +149,7 @@
   padding: 0.25rem 0;
   margin: 1.25rem 0 2rem;
   overflow: hidden;
+  color: var(--aws-text-muted);
 }
 
 .exampleHeader {
@@ -75,8 +169,26 @@
   background: #161616 !important;
 }
 
-.exampleBlock :global(p) {
+.exampleBlock :global(p),
+.exampleBlock :global(ol),
+.exampleBlock :global(ul) {
   padding: 0 1.25rem;
+  color: var(--aws-text-muted);
+}
+
+.exampleBlock :global(strong) {
+  color: var(--aws-text);
+}
+
+.exampleBlock :global(p code),
+.exampleBlock :global(li code) {
+  background: rgba(254, 153, 0, 0.15) !important;
+  color: var(--aws-orange) !important;
+  border: 1px solid rgba(254, 153, 0, 0.25) !important;
+}
+
+.exampleBlock :global(ul li::before) {
+  color: var(--aws-orange) !important;
 }
 
 .tagBadge {
