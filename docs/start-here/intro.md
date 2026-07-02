@@ -11,7 +11,14 @@ slug: /start-here/intro
 
 ## Who Am I
 
-I'm Peter Pan, a maker and developer passionate about bridging the gap between cloud intelligence and edge devices. My work focuses on the intersection of **AI**, **Edge Computing**, and **AWS Cloud Services**.
+<div class="whoami">
+  <img src="/img/logo.jpg" alt="Peter Pan" class="whoami-avatar" />
+  <div class="whoami-text">
+
+<p>I'm Peter Pan, a maker and developer passionate about bridging the gap between cloud intelligence and edge devices. My work focuses on the intersection of <strong>AI</strong>, <strong>Edge Computing</strong>, and <strong>AWS Cloud Services</strong>.</p>
+
+  </div>
+</div>
 
 ## What You'll Find Here
 

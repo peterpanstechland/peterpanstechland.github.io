@@ -1,0 +1,596 @@
+---
+sidebar_position: 1
+sidebar_label: NFC 手环教程
+title: "AWS UG 2026 夏季 Community Day · NFC 手环写入教程"
+description: "在 Community Day NFC 手环上写入网址、Android 应用或微信小程序，基于 NTAG215 与 NDEF 格式。"
+keywords: [nfc, ndef, ntag215, 手环, aws, community-day, 微信, android]
+---
+
+import styles from './styles.module.css';
+import nfcBracelet from '@site/docs/community/summer-community-day-2026/assets/nfc_bracelet.jpg';
+import nfcBraceletTag from '@site/docs/community/summer-community-day-2026/assets/nfc_bracelet_nfctag.jpg';
+import nfcToolsSearch from '@site/docs/community/summer-community-day-2026/assets/NFC_Tools.jpg';
+import nfcToolsApp from '@site/docs/community/summer-community-day-2026/assets/NFC_Tools-app.jpg';
+import nfcToolsFrontpage from '@site/docs/community/summer-community-day-2026/assets/NFC_tools_app_frontpage.jpg';
+import nfcToolsPreview from '@site/docs/community/summer-community-day-2026/assets/nfc_tools_preview.jpg';
+import backupGif from '@site/docs/community/summer-community-day-2026/assets/backup.gif';
+import writeNewUrl from '@site/docs/community/summer-community-day-2026/assets/write_new_url.gif';
+import androidAppGif from '@site/docs/community/summer-community-day-2026/assets/androidapp.gif';
+
+<div className={styles.awsUgPage}>
+
+<div className={styles.heroBanner}>
+
+**AWS UG 2026 夏季 Community Day** — 手环可当作一枚 NFC 小实用工具，把博客、网站、Android 应用或微信小程序刷进标签，轻轻一碰即可分享。
+
+</div>
+
+# AWS UG 2026 夏季 Community Day · NFC 手环写入教程
+
+在 **AWS UG 2026 夏季 Community Day** 上，每位参会者都会收到一枚内置 **NFC 标签** 的手环。活动结束后，你可以擦除默认内容，写入自己的信息——个人博客、作品集、社交链接、Android 应用快捷方式，或微信小程序入口。
+
+本教程涵盖 **先备份手环原有内容**、NFC 标签基础、**NDEF** 数据格式、本次活动手环使用的 **NTAG215** 芯片，以及三个可直接上手的 **Amazon Web Services User Group**（AWS UG China）主题示例。
+
+<figure className={styles.guideFigure}>
+  <img src={nfcBracelet} alt="AWS UG Community Day NFC 手环，带有 User Group 标识" className={styles.guidePhoto} />
+  <figcaption className={styles.photoCaption}>Community Day 手环 — 内置可重写的 NTAG215 标签。</figcaption>
+</figure>
+
+---
+
+## 先备份手环信息
+
+在覆写默认的 Community Day 内容之前，**务必先保存标签上已有的数据**。一旦写入新内容，原来的 NDEF 消息就会被替换——没有备份就无法恢复。
+
+### 第一步 — 读取标签
+
+1. 安装 **[NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)**（Android / iOS），并在手机上开启 NFC。
+2. 打开 **NFC Tools → 读取**。
+3. 将手机平贴手环芯片区域（通常在手环内侧的 flat pad）。
+4. 等待应用显示标签详情——芯片类型（**NTAG215**）、**UID**（唯一标签 ID），以及全部 **NDEF 记录**（通常是官方活动落地页的 URI）。
+
+<div className={styles.photoGrid}>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsFrontpage} alt="NFC Tools 读取界面，等待贴近标签" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>NFC Tools → 读取 — 将手机贴近芯片区域。</figcaption>
+  </figure>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsPreview} alt="NFC Tools 读取成功后显示的 NTAG215 标签详情" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>读取成功 — 可看到芯片类型、UID 与存储信息。</figcaption>
+  </figure>
+</div>
+
+### 第二步 — 在 NFC Tools 中保存标签配置
+
+读取成功后：
+
+1. 点击 **保存**（磁盘图标）或 **添加到已保存标签**——不同版本文案可能略有差异。
+2. 起一个清晰的名字，例如 `Community Day 手环 — 原始备份`。
+3. 确认已保存条目中的 URI / 记录与刚才读取的内容一致。
+
+之后如需恢复出厂内容，可通过 **NFC Tools → 写入 → 已保存标签** 写回。
+
+<figure className={styles.guideFigure}>
+  <img src={backupGif} alt="NFC Tools 中读取标签并保存为备份配置的屏幕录制" className={styles.guideGif} />
+  <figcaption className={styles.photoCaption}>备份演示 — 读取标签后，在 NFC Tools 中保存配置。</figcaption>
+</figure>
+
+### 第三步 — 保留可读的备份
+
+除 App 内保存外，至少再做一项，避免只依赖单一设备：
+
+| 方式 | 建议保存的内容 |
+|------|----------------|
+| **截图** | 完整的读取界面：芯片类型、UID、每条记录 |
+| **复制链接** | 将活动 URI 粘贴到备忘录、邮件或云文档 |
+| **手写记录** | UID + URL 写在纸上，作为离线备份 |
+
+:::tip 出厂手环里通常有什么
+大多数 Community Day 手环预写一条 **URI 记录**——指向官方活动落地页（如 `https://awscommunity.cn/…`）。请备份完整 URL，便于日后重新访问活动页面或分享给朋友。
+:::
+
+:::warning 每次覆写前都应备份
+每次 **写入** 都会替换标签上的整条 NDEF 消息。若你先试示例一、再改示例二，任何还想保留的版本都应先再次备份。
+:::
+
+---
+
+## 什么是 NFC？
+
+**NFC（近场通信）** 是一种短距离无线协议（约 4 厘米）。手机贴近 NFC 标签或手环时，即可读取或写入标签上的数据——无需配对，标签本身也不需要电池。
+
+### 关于 [NFC Forum](https://nfc-forum.org/)
+
+**[NFC Forum](https://nfc-forum.org/)** 是制定 NFC 技术标准的全球性行业组织。它将各类非接触式协议统一为同一套规范，让数十亿手机、标签与读卡器能够互通——**轻轻一碰即可连接**。
+
+与本教程相关的几项工作：
+
+| 领域 | 内容 |
+|------|------|
+| **技术规范** | NDEF、NFC Forum Tag Types（Type 1–5）、设备交互行为 |
+| **认证体系** | 测试实验室与合规计划，确保标签与手机互操作 |
+| **应用场景** | 非接触支付、交通卡、门禁、智能海报（碰一下打开网址）、设备配对等 |
+
+手机操作系统可直接解析手环上的标准 **NDEF** 数据（**读取标签**通常不需要单独的 NFC 读卡 App）。最终会打开浏览器、已安装的应用还是微信，则取决于你写入的记录类型，以及对方手机上是否已安装对应 App。
+
+社区活动中的常见用法：
+
+| 场景 | 写入内容 |
+|------|----------|
+| 个人品牌 | 博客、GitHub、作品集链接 |
+| 社区链接 | 官方网站，如 [awscommunity.cn](https://awscommunity.cn/) |
+| 移动应用 | Android Application Record，直接启动已安装 App |
+| 微信生态 | URL Link（需已安装微信） | 打开小程序 |
+
+:::tip 开始之前
+你需要一部 **已开启 NFC** 的手机（大多数现代 Android 和 iPhone 均支持）。安装标签写入工具，例如 **[NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)**（Android / iOS）或 **[NXP TagWriter](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter)**（Android）。
+:::
+
+<div className={styles.photoGrid}>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsSearch} alt="在 iOS 上搜索 NFC Tools" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>在手机上搜索 NFC Tools。</figcaption>
+  </figure>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsApp} alt="Google Play 上的 NFC Tools 应用页面" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>从 Google Play 或 App Store 安装。</figcaption>
+  </figure>
+</div>
+
+---
+
+## 常见 NFC 标签类型
+
+并非所有 NFC 芯片都一样。标签在容量、安全性和是否原生支持 **NDEF**（手机默认可识别的标准格式）方面存在差异。
+
+| 芯片 | NFC Forum 类型 | 用户存储 | NDEF 支持 | 典型用途 |
+|------|----------------|----------|-----------|----------|
+| **NTAG213** | Type 2 | 180 字节 | ✅ 支持 | 贴纸、名片、短链接 |
+| **NTAG215** | Type 2 | 504 字节 | ✅ 支持 | **活动手环**、Amiibo、中等长度 URL |
+| **NTAG216** | Type 2 | 888 字节 | ✅ 支持 | 更长 URL、vCard、多记录 |
+| **MIFARE Ultralight** | Type 2 | 64–192 字节 | ✅ 支持 | 一次性门票、简单链接 |
+| **MIFARE Classic** | Type A（传统） | 1 KB / 4 KB | ⚠️ 需封装 | 门禁卡、旧系统 |
+| **MIFARE DESFire** | Type 4 | 2–8 KB | ✅ 支持 | 交通、支付、高安全场景 |
+| **ISO 15693** | Type 5 | 不等 | ✅ 支持 | 仓储物流（手机上较少见） |
+
+:::info 如何选择标签
+写入 **URL 等标准 NDEF 记录** 时，优先选择 **NTAG21x（Type 2）**——手机系统层面即可识别标签内容。**打开网页、App 或微信小程序** 仍取决于对方是否已安装浏览器、对应 App 或微信。本次活动手环统一采用 **NTAG215**，在成本、容量与兼容性之间取得最佳平衡。
+:::
+
+---
+
+## NDEF — NFC 数据交换格式
+
+**NDEF（NFC Data Exchange Format）** 是 NFC 标签存储结构化数据的通用"语言"。手机贴近标签后，操作系统解析 NDEF 记录并决定下一步动作——打开浏览器、启动 App、显示文本等。
+
+### NDEF 消息结构
+
+```text
+NDEF Message（消息）
+├── Record 1  （例如 URI — 网页链接）
+├── Record 2  （例如 AAR — Android 应用包名）
+└── Record N  （可选的更多记录）
+```
+
+每条 **记录** 包含 **TNF（Type Name Format）** 和 **类型**，共同定义载荷内容：
+
+| TNF | 类型 | 用途 | 示例载荷 |
+|-----|------|------|----------|
+| Well Known | `U`（URI） | 打开网址 | `https://awscommunity.cn/` |
+| Well Known | `T`（Text） | 显示纯文本 | `Community Day 你好！` |
+| Well Known | `Sp`（Smart Poster） | 标题 + URI 组合 | 活动海报链接 |
+| External | `android.com:pkg` | **Android Application Record（AAR）** | `com.amazon.aws.cardclash` |
+| MIME | `text/plain` 等 | 任意类型数据 | vCard、JSON |
+
+### URI 前缀码
+
+URI 记录常用 **前缀码** 节省空间。`0x04` 表示前缀 `https://` 已隐含：
+
+```text
+URI 记录原始载荷:  [0x04] + "awscommunity.cn/"
+手机解析为:         https://awscommunity.cn/
+```
+
+:::warning 一条消息，多条记录
+Android 会 **优先尝试 AAR**——若 App 已安装则直接启动；否则回退到下一条记录（通常是 Play Store 或网站 URI）。写入 App 启动记录时，务必添加 URI 回退。
+:::
+
+---
+
+## 本次活动 NFC 标签 — NTAG215
+
+<div className={styles.chipCard}>
+
+#### ◆ NTAG215 — Community Day 手环内置芯片
+
+| 规格 | 数值 |
+|------|------|
+| **标准** | ISO/IEC 14443 Type A · NFC Forum Type 2 Tag |
+| **用户存储** | 504 字节 |
+| **典型 NDEF 可用容量** | 约 492 字节（扣除 Capability Container） |
+| **可重写** | 是 — 也可选择永久锁定 |
+| **手机兼容** | Android（原生支持）；iPhone 7+（iOS 13+ 后台读标签） |
+| **活动用途** | 签到时可预写活动落地页 URL；**活动结束后参会者可自行重写** |
+
+</div>
+
+<figure className={styles.guideFigure}>
+  <img src={nfcBraceletTag} alt="Community Day 手环内侧 NTAG215 芯片与天线特写" className={styles.guidePhoto} />
+  <figcaption className={styles.photoCaption}>手环内侧的 flat pad — 手机贴近此处读写。线圈与芯片为 NTAG215（13.56 MHz，Type 2）。</figcaption>
+</figure>
+
+Community Day 手环出厂时可能预写官方活动落地页 URL（NDEF URI 记录）。除非被 **显式锁定**，否则该内容 **并非永久**——你可以按下方步骤覆写为自己的 NDEF 消息。
+
+---
+
+## 如何写入手环
+
+:::info 已经备份了吗？
+若尚未保存出厂内容，请先回到上文 [先备份手环信息](#先备份手环信息) 完成备份再继续。
+:::
+
+### 第一步 — 开启 NFC
+
+- **Android**：设置 → 已连接的设备 → 连接偏好设置 → NFC → **开启**
+- **iPhone**：NFC 读取默认开启；写入需借助第三方 App（如 NFC Tools）
+
+### 第二步 — 构建 NDEF 消息
+
+在 **NFC Tools → 写入 → 添加记录** 中选择记录类型（URI、Application 等）。可在一条消息中叠加多条记录。
+
+### 第三步 — 写入
+
+点击 **写入**，将手机平贴手环芯片区域（通常在手环内侧的 flat pad）。等待成功提示。
+
+### 第四步 — 验证
+
+切换至 **读取** 模式再次贴近，确认内容与预期一致，条件允许时用第二部手机交叉测试。
+
+:::tip 完整演示见示例一
+写入网站链接的动图演示在下方 [示例一](#示例一--打开-amazon-web-services-user-group-社区官网) — 第一次操作建议跟着示例一步步做。
+:::
+
+:::caution 除非确定，否则不要锁定标签
+锁定操作 **不可逆**。个人实验建议保持未锁定，以便随时重写。
+:::
+
+---
+
+## 示例一 · 打开 Amazon Web Services User Group 社区官网
+
+<span className={styles.tagBadge}>URI 记录</span> **目标：** [https://awscommunity.cn/](https://awscommunity.cn/) — **Amazon Web Services User Group** 官方社区门户。
+
+<div className={styles.exampleBlock}>
+<div className={styles.exampleHeader}>示例 1 — URI（网站）</div>
+
+**NFC Tools 操作步骤**
+
+1. 写入 → 添加记录 → **URL / URI**
+2. 输入：`https://awscommunity.cn/`
+3. 写入标签
+
+**NDEF 等价内容**
+
+```text
+记录类型:  URI（Well Known，类型 "U"）
+URI 前缀:  0x04（https://）
+URI 主体:  awscommunity.cn/
+完整 URL:  https://awscommunity.cn/
+```
+
+</div>
+
+<figure className={styles.guideFigure}>
+  <img src={writeNewUrl} alt="示例一屏幕录制：在 NFC Tools 中添加 URL 记录并写入手环" className={styles.guideGif} />
+  <figcaption className={styles.photoCaption}>示例一演示 — 写入 → 添加记录 → URL / URI → 输入链接 → 写入 → 贴近手环，直到出现「写完成」。</figcaption>
+</figure>
+
+他人轻触你的手环后，手机将打开 AWS UG China 社区网站——浏览城市社区、专项社区、活动资讯，或申请成为讲师与志愿者。
+
+---
+
+## 示例二 · 启动 Android 应用「AWS Card Clash」
+
+<span className={styles.tagBadge}>AAR + URI</span> **目标：** [AWS Card Clash](https://play.google.com/store/apps/details?id=com.amazon.aws.cardclash) — Amazon 出品的免费 3D 卡牌游戏，通过游戏学习 AWS 架构设计。
+
+<div className={styles.exampleBlock}>
+<div className={styles.exampleHeader}>示例 2 — Android Application Record + Play Store 回退</div>
+
+**包名**
+
+```text
+com.amazon.aws.cardclash
+```
+
+**NFC Tools 操作步骤**
+
+1. 写入 → 添加记录 → **Application**（Android Application Record）
+   - 包名：`com.amazon.aws.cardclash`
+2. 再添加一条 → **URL / URI**（App 未安装时的回退）
+   - `https://play.google.com/store/apps/details?id=com.amazon.aws.cardclash`
+3. 将两条记录写入同一条 NDEF 消息
+
+**推荐 NDEF 记录顺序**
+
+```text
+Record 1 — AAR
+  TNF:       External
+  Type:      android.com:pkg
+  Payload:   com.amazon.aws.cardclash
+
+Record 2 — URI（回退）
+  TNF:       Well Known
+  Type:      U
+  Payload:   0x04 + play.google.com/store/apps/details?id=com.amazon.aws.cardclash
+```
+
+</div>
+
+<figure className={styles.guideFigure}>
+  <img src={androidAppGif} alt="示例二屏幕录制：添加 Android Application Record 并写入手环" className={styles.guideGif} />
+  <figcaption className={styles.photoCaption}>示例二演示 — 写入 → 添加记录 → Application → 输入 `com.amazon.aws.cardclash` → 添加 Play Store URI 回退 → 写入 → 贴近手环。</figcaption>
+</figure>
+
+:::info iPhone 说明
+iOS 不支持 AAR。iPhone 用户轻触此标签时会走 URI 回退，打开 App Store / Play Store 网页。若需 iOS App 深链，请改用 Universal Link（HTTPS URL）。
+:::
+
+### 延展 · 上班打卡
+
+**AAR + URI** 同样适用于日常 Android 办公 App，不限于游戏。常见用法：到公司门口碰一下手环，**一步打开打卡 App**，省去找图标的时间。
+
+| App | Android 包名 |
+|-----|--------------|
+| **企业微信** | `com.tencent.wework` |
+| **钉钉** | `com.alibaba.android.rimet` |
+| **飞书** | `com.ss.android.lark` |
+
+**操作步骤** — 与上文示例二相同，只需替换包名：
+
+1. 写入 → 添加记录 → **Application** → 例如 `com.tencent.wework`
+2. 再添加 **URL / URI** 回退 → 同一 App 的 Play Store 链接（建议保留）
+3. 写入手环
+
+```text
+Record 1 — AAR
+  Payload:   com.tencent.wework        ← 企业微信示例
+
+Record 2 — URI（回退）
+  Payload:   App 未安装时跳转 Play Store
+```
+
+:::tip 能做到什么、做不到什么
+**AAR 会打开 App**，到门口碰一下通常能省下几秒。它**不会自动替你完成打卡**——仍要在企业微信、钉钉或飞书里点确认，除非公司提供了**打卡深链**（HTTPS 或 App 专用 URL）。若 IT 发了这类链接，可像**示例一**那样写 **URI 记录**，或与 AAR 组合，让 App 直接落到打卡页。
+:::
+
+若公司打卡在**微信小程序**里而非原生 App，请用**示例三**（URL Link），不要用 AAR。
+
+---
+
+## 示例三 · 打开微信小程序
+
+<span className={styles.tagBadge}>URI 记录</span> **目标：** 任意 **微信小程序** — 社区签到、活动伴侣，或你自己的小程序项目。
+
+微信不使用 AAR。标准做法是在 [微信小程序管理后台](https://mp.weixin.qq.com/) 生成 **URL Link** 或 **URL Scheme**，以普通 URI NDEF 记录写入标签。
+
+<div className={styles.exampleBlock}>
+<div className={styles.exampleHeader}>示例 3 — 通过微信 URL Link 打开小程序</div>
+
+**方案 A — URL Link（推荐，iOS / Android 微信均支持）**
+
+在小程序后端生成 URL Link：
+
+```text
+POST https://api.weixin.qq.com/wxa/generate_urllink
+  ?access_token=ACCESS_TOKEN
+
+Body:
+{
+  "path": "/pages/index/index",
+  "query": "from=nfc&event=2026-summer-community-day",
+  "expire_type": 1,
+  "expire_interval": 30
+}
+```
+
+响应返回短链，例如：
+
+```text
+https://wxaurl.cn/XXXXXX
+```
+
+将该 URL 作为 **URI NDEF 记录** 写入 — 轻触后，若手机已安装微信，将打开微信并启动小程序。
+
+**方案 B — 明文 URL Scheme（不推荐用于 NFC 手环）**
+
+自行拼接的链接示例（Bonjour）：
+
+```text
+weixin://dl/business/?appid=wxa3cd9247c890de37&path=/pages/index/index&env_version=release
+```
+
+需要**小程序官方**在微信公众平台开启「明文 Scheme 拉起此小程序」。即便如此，从 NFC 标签轻触拉起时，仍**大概率失败**并提示 **「对不起，当前页面无法访问」**——不同机型表现差异很大（例如部分华为机型可能可以，许多 iPhone / 其他 Android 不行）。同一链接放在微信聊天里能打开，**不能**代表写进手环就能用。
+
+**手环场景请优先用方案 A**（`https://wxaurl.cn/...`）或稳定的 HTTPS 名片链接（如 `https://bonjour.bio/...`）。
+
+**NFC Tools 操作步骤**
+
+1. 写入 → 添加记录 → **URL / URI**
+2. 粘贴 `https://wxaurl.cn/...` 链接（**推荐**）
+3. 写入标签
+
+</div>
+
+:::warning NFC 标签上的明文 `weixin://` Scheme
+将自行拼接的 `weixin://dl/business/?appid=...` 写入手环 **大概率无法稳定使用**，尤其是**非本人运营**的第三方小程序。常见现象：微信能拉起，但提示「对不起，当前页面无法访问」；不同手机结果不一致（部分华为可能成功，多数其他机型失败）。聊天里粘贴能打开 **不代表** NFC 碰一下也能用。请改用 **URL Link**（`https://wxaurl.cn/...`）或 HTTPS 落地页。
+:::
+
+:::tip 换成你自己的小程序
+Community Day 参会者可将此示例指向 **任意** 已发布小程序——个人 side project、社区工具或活动伴侣 App。你需要对目标小程序拥有 **开发者权限**，才能生成有效的 URL Link。
+:::
+
+---
+
+## 写入你自己的内容
+
+掌握以上三种模式后，手环就是口袋里的名片：
+
+| 目标 | 记录类型 | 示例 |
+|------|----------|------|
+| 个人博客 | URI | `https://peterpanstechland.github.io/` |
+| GitHub 主页 | URI | `https://github.com/yourname` |
+| LinkedIn | URI | `https://linkedin.com/in/yourname` |
+| Android 应用 | AAR + URI 回退 | 应用包名 + Play Store URL |
+| 上班打卡（Android） | AAR + URI 回退 | `com.tencent.wework`、`com.alibaba.android.rimet` 或 `com.ss.android.lark` |
+| 微信小程序 | URI（URL Link） | `https://wxaurl.cn/...` |
+| 纯文字信息 | Text | 姓名与邮箱 |
+
+---
+
+## 故障排查
+
+| 现象 | 可能原因 | 解决方法 |
+|------|----------|----------|
+| 手机无反应 | NFC 未开启或位置不对 | 开启 NFC；缓慢移动至芯片区域 |
+| 提示"标签不可写" | 标签已锁定 | 换未锁定手环；已锁定无法修改 |
+| App 未启动（Android） | AAR 缺失或包名错误 | 核对 `com.amazon.aws.cardclash`；添加 URI 回退 |
+| 微信未打开 | URL Link 无效或过期 | 在 MP 后台重新生成；检查有效期 |
+| iPhone 打开 Safari 而非 App | iOS 不支持 AAR | 对微信使用 URL Link；对 App 使用 Universal Link |
+
+---
+
+## 常见问题（FAQ）
+
+### 可以把门禁卡刷写到手环上吗？
+
+**简短回答：几乎都不行。** Community Day 手环是固定的 **NTAG215**（13.56 MHz，NFC Forum Type 2），用于存放 **NDEF 数据**（网址、启动 App），并非用来模拟门禁凭证。
+
+| 门禁卡类型 | 频率 | NTAG215 能替代吗？ | 原因 |
+|------------|------|--------------------|------|
+| ID 卡（EM4100、HID Prox、T5577） | 125 kHz（低频） | ❌ 不能 | 频率不同——手机和手环都只支持 13.56 MHz |
+| MIFARE Classic | 13.56 MHz（高频） | ❌ 不能 | 芯片不同；NTAG215 没有可模拟的 Crypto-1 扇区 |
+| 仅校验 UID 的系统 | 13.56 MHz（高频） | ❌ 不能 | NTAG215 的 UID **出厂锁定**，无法改成另一张卡的 UID |
+| MIFARE DESFire / CPU 卡 | 13.56 MHz（高频） | ❌ 不能 | 强双向认证（AES/3DES），无法克隆 |
+
+:::caution 法律与合规提示
+只可复制**你本人拥有、且获授权复制**的卡片。克隆他人门禁卡，或复制单位、物业发放的卡片，可能违反法律或相关规定。此外，复制 125 kHz ID 卡或破解 MIFARE Classic 需要专用硬件（如 Proxmark3，或可改写 UID 的「魔术卡」）——手机加 NTAG215 手环做不到。
+:::
+
+### IC 卡和 ID 卡有什么区别？
+
+这是国内常见的一组叫法：
+
+| | ID 卡 | IC 卡 |
+|---|-------|-------|
+| **全称** | Identification（身份识别）卡 | Integrated Circuit（集成电路）卡 |
+| **常见频率** | 125 kHz（低频） | 13.56 MHz（高频） |
+| **芯片** | 只读的 ID 号 | 带读写存储的真芯片 |
+| **存储** | 无——仅一个固定 UID | 数十字节到数 KB 数据 |
+| **加密** | 无（明文 ID） | 常见支持 |
+| **典型代表** | EM4100、EM4200、HID Prox | MIFARE Classic/Ultralight/DESFire、**NTAG215** |
+| **易克隆？** | 非常容易（ID 直接广播） | 取决于加密 |
+
+你的 Community Day 手环（**NTAG215，13.56 MHz，带存储**）属于 **IC 卡**，不是 ID 卡。
+
+### 这些标签用的是什么加密？
+
+「NFC」其实是一大类芯片，安全性天差地别：
+
+| 芯片 / 卡片 | 安全性 | 说明 |
+|-------------|--------|------|
+| 125 kHz ID 卡 | **无** | 明文 UID，轻易克隆 |
+| **NTAG215**（本次手环） | **数据无加密** | 有唯一且锁定的 UID、可选 **32 位密码**（PWD_AUTH）与一次性锁定位——但 NDEF 内容任何手机都能读 |
+| MIFARE Classic | **Crypto-1（已被攻破）** | 48 位密钥、每扇区 Key A/B；Proxmark3 类工具可破解，已不再安全 |
+| MIFARE DESFire EV1/2/3 | **DES / 3DES / AES-128** | 基于文件、双向认证——被认为安全 |
+| CPU 卡 / 智能卡 | **AES / RSA / ECC** | 银行、身份证、SIM 级安全 |
+
+:::warning 不要在手环里存放敏感信息
+NTAG215 **不对数据加密**。你写入的任何内容（网址、文本、联系方式）都能被**任何人**碰一下读走。切勿写入密码、私密证件号或敏感个人信息。可选的密码仅限制**谁能重写或锁定**标签，并不会加密已存内容。
+:::
+
+---
+
+## 延展阅读 · NFC 与家庭自动化
+
+:::tip 可选阅读——完成手环教程无需额外设备
+上文已足够把 **Community Day 手环**写好。本节面向想把同一套 NFC 知识用到别处的人——例如门口、床头的贴纸标签。**不**需要智能家居网关、Home Assistant 或任何新设备也能先理解思路；具体怎么配，取决于你手头有什么手机和应用。
+:::
+
+手环教程侧重**分享链接与 App**（NDEF URI / AAR）。家庭自动化用的是同一类 **13.56 MHz NTAG** 标签，但目的不同：**碰一下标签 → 跑一条自动化**（灯光、场景、通知等）。
+
+### 和「往手环里写网址」有什么不同
+
+| | Community Day 手环 | 常见的家庭 NFC 自动化 |
+|---|-------------------|------------------------|
+| **目的** | 让别人点开你的网站或 App | 自己碰一下，触发**自己的** routine |
+| **关键数据** | NDEF 记录（URI、Text、AAR） | 常常是标签 **UID**（唯一 ID），或绑定你账号的 URL |
+| **谁在读** | 附近任何人都能碰 | 通常是你的手机，或你控制的固定读头 |
+| **形态** | 手环 | 贴纸、卡片、钥匙扣——芯片仍多为 **NTAG215 / NTAG216** |
+
+很多自动化**根本不会往标签里写公开 URL**。手机记住「读到 UID `04:A1:B2:…` 就执行晚安场景」即可；标签可以是空的，或只写一条无害说明。
+
+### 三条常见路径（按你已有的手机 / 生态选）
+
+**1. 纯手机自动化——不依赖网关**
+
+普通 NFC 贴纸 + 随身手机即可：
+
+| 平台 | 常见 App | 大致流程 |
+|------|----------|----------|
+| **iPhone** | **快捷指令** | 自动化 → **NFC** → 扫一次标签 → 添加操作（开关 HomeKit 设备、运行场景、发通知等） |
+| **Android** | **MacroDroid**、**Tasker**、三星 **Bixby 日常程序**、各品牌自带 App | NFC 触发 → 执行任务（开关蓝牙/Wi‑Fi、打开智能家居 App、请求 webhook 等） |
+
+买 **NTAG215 贴纸**，贴在门口或床头，在 App 里绑定即可。无需服务器、无需 Home Assistant——适合第一次试水。
+
+**2. 智能家居中枢——已有「全家一套」时**
+
+若你已经在用中枢（例如 **Home Assistant**、以 HomeKit 为主的家庭，或厂商云且 App 支持 NFC），流程一般是：
+
+1. 在**中枢的手机 App**里**登记**标签（或写入该中枢要求的 URL）。
+2. **建自动化**：「扫到标签 X → 执行脚本 / 场景」。
+3. 在**玄关、床头、书桌**贴标签：离家、晚安、专注模式等。
+
+**[Home Assistant](https://www.home-assistant.io/)** 是常见的开源方案：**[Companion 手机 App](https://companion.home-assistant.io/)** 可写入 NFC 标签，并在你的 HA 实例上触发自动化。写 Community Day 手环**用不到**它；若你已在自托管 HA 或打算以后玩，这是可选路径之一。
+
+米家、Aqara、纯 HomeKit 等生态各不相同——买标签前，先确认**你用的 App 是否支持 NFC 触发**。
+
+**3. 往标签写 Webhook URL——灵活，但要注意安全**
+
+与本教程 **示例一** 相同：用 NFC Tools 添加 **URI**，指向一条 HTTPS 接口，用来启动场景（Home Assistant webhook、云函数、IFTTT 类服务等）。
+
+- **优点：** 能打开链接的手机都能用；绑定步骤少。
+- **缺点：** 谁读到标签谁就能看到 URL。应使用**足够长的随机路径**、仅 HTTPS，并把标签当成**室内未上锁的开关**——放家里尚可，别用在公开手环上。
+
+安全原则见上文 FAQ：**切勿把密码或 API 密钥写进标签。**
+
+### 固定 NFC 读头（可选，进阶）
+
+若不想每次掏手机解锁，可用**固定读头**（例如 **ESP32 + PN532**，经 **[ESPHome](https://esphome.io/)** 接入 Home Assistant）放在门口或开关旁。读到标签 UID 或少量 NDEF 数据后发给中枢——碰一下就行。属于 DIY 玩法；纯手机自动化不必上这一层。
+
+### 场景举例
+
+| 位置 | 碰一下… |
+|------|---------|
+| 玄关 | 离家——关灯、关空调、可选通知「已出门」 |
+| 床头 | 晚安——关灯、窗帘场景、勿扰 |
+| 书桌 | 专注——台灯亮、手机勿扰 |
+| 访客贴纸 | 权限受限（例如只打开访客 Wi‑Fi 说明页） |
+
+### 小结
+
+- **芯片相同**（NTAG215 一类），**玩法不同**：自动化关心*谁扫*、*执行什么*，而不是分享宣传链接。
+- **从简开始：** 手机 + NFC 贴纸 + 一条快捷指令或 MacroDroid 规则。
+- 需要全屋场景时，再用 Home Assistant 或固定读头扩展——**仅当你已有或打算购置对应设备时**再考虑即可。
+
+---
+
+## 延伸阅读
+
+- [AWS UG China 社区官网](https://awscommunity.cn/) — 加入城市社区，申请成为讲师或志愿者
+- [AWS Card Clash](https://aws.amazon.com/training/digital/aws-card-clash/) — 通过游戏学习云架构
+- [NFC Forum 官网](https://nfc-forum.org/) — 全球 NFC 标准组织；NDEF、标签类型与认证体系
+- [NFC Forum 技术规范](https://nfc-forum.org/specs-and-application-documents/specifications/nfc-forum-technical-specifications/) — 技术深入阅读
+- [微信 URL Link 文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/url-link/generateUrlLink.html) — 小程序链接生成
+- [Home Assistant — NFC 标签](https://www.home-assistant.io/integrations/tag/) — 可选；基于中枢的 NFC 家庭自动化
+
+</div>

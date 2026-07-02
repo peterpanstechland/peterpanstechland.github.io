@@ -1,0 +1,28 @@
+.ugHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.ugLogo {
+  flex-shrink: 0;
+  display: block;
+  width: 96px;
+  height: 96px;
+  max-width: 96px;
+  max-height: 96px;
+  object-fit: contain;
+}
+
+.ugTitle {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.ugTitle::before {
+  display: none !important;
+}
