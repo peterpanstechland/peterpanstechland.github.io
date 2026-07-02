@@ -1,26 +1,97 @@
 ---
 sidebar_position: 1
 sidebar_label: NFC Wristband Guide
-title: "2026 Summer Community Day · NFC Wristband Programming Guide"
+title: "AWS UG 2026 Summer Community Day · NFC Wristband Programming Guide"
 description: "Program your Community Day NFC wristband with URLs, Android apps, or WeChat mini programs using NDEF on NTAG215 tags."
 keywords: [nfc, ndef, ntag215, wristband, aws, community-day, wechat, android]
 ---
 
 import styles from './styles.module.css';
+import nfcBracelet from '@site/docs/community/summer-community-day-2026/assets/nfc_bracelet.jpg';
+import nfcBraceletTag from '@site/docs/community/summer-community-day-2026/assets/nfc_bracelet_nfctag.jpg';
+import nfcToolsSearch from '@site/docs/community/summer-community-day-2026/assets/NFC_Tools.jpg';
+import nfcToolsApp from '@site/docs/community/summer-community-day-2026/assets/NFC_Tools-app.jpg';
+import nfcToolsFrontpage from '@site/docs/community/summer-community-day-2026/assets/NFC_tools_app_frontpage.jpg';
+import nfcToolsPreview from '@site/docs/community/summer-community-day-2026/assets/nfc_tools_preview.jpg';
+import backupGif from '@site/docs/community/summer-community-day-2026/assets/backup.gif';
+import writeNewUrl from '@site/docs/community/summer-community-day-2026/assets/write_new_url.gif';
+import androidAppGif from '@site/docs/community/summer-community-day-2026/assets/androidapp.gif';
 
 <div className={styles.awsUgPage}>
 
 <div className={styles.heroBanner}>
 
-**2026 Summer Community Day** — Your NFC wristband is a blank canvas. Write your blog, a website, an Android app launch, or a WeChat mini program onto the tag and share it with a single tap.
+**AWS UG 2026 Summer Community Day** — Use your wristband as a handy NFC tag: flash your blog, website, Android app, or WeChat mini program onto it and share with a single tap.
 
 </div>
 
-# 2026 Summer Community Day · NFC Wristband Guide
+# AWS UG 2026 Summer Community Day · NFC Wristband Guide
 
-At **2026 Summer Community Day**, every attendee receives an **NFC wristband** with a rewritable tag inside. After the event, you can erase the default content and write your own — a personal blog, portfolio, social link, Android app shortcut, or WeChat mini program entry.
+At **AWS UG 2026 Summer Community Day**, every attendee receives an **NFC wristband** with a rewritable tag inside. After the event, you can erase the default content and write your own — a personal blog, portfolio, social link, Android app shortcut, or WeChat mini program entry.
 
-This guide covers NFC tag basics, the **NDEF** data format, the **NTAG215** chip used in our wristbands, and three ready-to-use examples themed for the **Amazon Cloud Technology User Group** (AWS UG China) community.
+This guide covers **backing up your wristband first**, NFC tag basics, the **NDEF** data format, the **NTAG215** chip used in our wristbands, and three ready-to-use examples themed for the **Amazon Web Services User Group** (AWS UG China) community.
+
+<figure className={styles.guideFigure}>
+  <img src={nfcBracelet} alt="AWS UG Community Day NFC wristband with User Group branding" className={styles.guidePhoto} />
+  <figcaption className={styles.photoCaption}>Community Day wristband — each band carries a rewritable NTAG215 tag.</figcaption>
+</figure>
+
+---
+
+## Back Up Your Wristband First
+
+Before you overwrite the default Community Day content, **save what's already on the tag**. Writing new data replaces the previous NDEF message — there is no undo unless you kept a backup.
+
+### Step 1 — Read the tag
+
+1. Install **[NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)** (Android / iOS) and enable NFC on your phone.
+2. Open **NFC Tools → Read**.
+3. Hold the phone flat against the wristband chip (the flat pad on the inside of the band).
+4. Wait until the app lists the tag details — chip type (**NTAG215**), **UID** (unique tag ID), and all **NDEF records** (usually a URI pointing to the official activity page).
+
+<div className={styles.photoGrid}>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsFrontpage} alt="NFC Tools Read tab waiting for a tag" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>NFC Tools → Read — hold the phone near the chip pad.</figcaption>
+  </figure>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsPreview} alt="NFC Tools showing NTAG215 tag details after a successful read" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>Successful read — chip type, UID, and memory details.</figcaption>
+  </figure>
+</div>
+
+### Step 2 — Save the tag profile in NFC Tools
+
+After a successful read:
+
+1. Tap **Save** (disk icon) or **Add to saved tags** — exact wording varies by app version.
+2. Give it a clear name, e.g. `Community Day wristband — original backup`.
+3. Confirm the saved entry shows the same URI / records you just read.
+
+You can later restore this profile via **NFC Tools → Write → Saved tags** if you want the factory content back.
+
+<figure className={styles.guideFigure}>
+  <img src={backupGif} alt="Screen recording of reading an NFC tag and saving it as a backup profile in NFC Tools" className={styles.guideGif} />
+  <figcaption className={styles.photoCaption}>Backup walkthrough — read the tag, then save the profile in NFC Tools.</figcaption>
+</figure>
+
+### Step 3 — Keep a human-readable copy
+
+Do at least one of the following so you still have the data outside the app:
+
+| Method | What to capture |
+|--------|-----------------|
+| **Screenshot** | Full Read screen showing chip type, UID, and every record |
+| **Copy the URL** | Paste the activity URI into Notes, email, or a cloud doc |
+| **Write it down** | UID + URL on paper if you prefer offline backup |
+
+:::tip What a typical factory wristband contains
+Most Community Day wristbands ship with a single **URI record** — the official activity landing page (e.g. `https://awscommunity.cn/…`). Back up that full URL; you may need it to rejoin event pages or share the original link with friends.
+:::
+
+:::warning Back up before every overwrite
+Each **Write** replaces the entire NDEF message on the tag. If you experiment with Example 1, then Example 2, save again after any version you might want to restore later.
+:::
 
 ---
 
@@ -40,7 +111,7 @@ What the Forum maintains that matters for this guide:
 | **Certification** | Test labs and compliance programs so tags and phones interoperate |
 | **Use cases** | Contactless payments, transit cards, access control, smart posters (tap-to-open URLs), device pairing, and more |
 
-When your phone reads a wristband tag without installing an extra app, it is following rules published by the NFC Forum. The **NDEF** format and **Type 2 Tag** classification used in our NTAG215 wristbands both come from these specifications.
+When your phone's OS parses standard **NDEF** data from the wristband (reading the tag usually does not require a separate NFC reader app), it follows NFC Forum specifications. What opens next — a browser, an installed app, or WeChat — depends on the record type and what apps the recipient has installed.
 
 Typical use cases at community events:
 
@@ -49,11 +120,22 @@ Typical use cases at community events:
 | Personal branding | Your blog, GitHub, or portfolio URL |
 | Community links | Official sites like [awscommunity.cn](https://awscommunity.cn/) |
 | Mobile apps | Android App Record to launch an installed app |
-| WeChat ecosystem | URL Link to open a mini program |
+| WeChat ecosystem | URL Link (WeChat required) | Open a mini program |
 
 :::tip Before you start
 You need a phone with **NFC enabled** (most modern Android and iPhone models). Install a tag-writing app such as **[NFC Tools](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc)** (Android / iOS) or **[NXP TagWriter](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter)** (Android).
 :::
+
+<div className={styles.photoGrid}>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsSearch} alt="Searching for NFC Tools on iOS" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>Search for NFC Tools on your phone.</figcaption>
+  </figure>
+  <figure className={styles.photoGridItem}>
+    <img src={nfcToolsApp} alt="NFC Tools on Google Play" className={styles.guidePhotoWide} />
+    <figcaption className={styles.photoCaption}>Install from Google Play or the App Store.</figcaption>
+  </figure>
+</div>
 
 ---
 
@@ -72,7 +154,7 @@ Not all NFC chips are the same. Tags differ in memory size, security, and whethe
 | **ISO 15693** | Type 5 | Varies | ✅ Yes | Inventory, logistics (less common on phones) |
 
 :::info How to pick the right tag
-For **URLs and NDEF records**, choose **NTAG21x (Type 2)** — phones read them natively without extra apps. For **Community Day wristbands**, we standardised on **NTAG215** for the best balance of cost, capacity, and compatibility.
+For **URLs and standard NDEF records**, choose **NTAG21x (Type 2)** — phones can identify tag content at the OS level. **Opening a webpage, app, or WeChat mini program** still depends on whether the recipient has a browser, the target app, or WeChat installed. For **Community Day wristbands**, we standardised on **NTAG215** for the best balance of cost, capacity, and compatibility.
 :::
 
 ---
@@ -132,32 +214,41 @@ Android tries **AAR first** — if the app is installed, it launches directly. I
 
 </div>
 
+<figure className={styles.guideFigure}>
+  <img src={nfcBraceletTag} alt="Close-up of the NTAG215 chip and antenna inside the Community Day wristband" className={styles.guidePhoto} />
+  <figcaption className={styles.photoCaption}>The flat pad on the inside of the band — this is where you tap your phone. The coil and chip are NTAG215 (13.56 MHz, Type 2).</figcaption>
+</figure>
+
 At Community Day, wristbands may ship with an official activity landing URL (NDEF URI record). That content is **not permanent** unless explicitly locked — you can overwrite it with your own NDEF message using the steps below.
 
 ---
 
 ## How to Write Your Wristband
 
+:::info Already backed up?
+If you have not saved the factory content yet, go to [Back Up Your Wristband First](#back-up-your-wristband-first) above before continuing.
+:::
+
 ### Step 1 — Enable NFC
 
 - **Android**: Settings → Connected devices → Connection preferences → NFC → **On**
 - **iPhone**: NFC is always on for background reading; writing requires a third-party app (e.g. NFC Tools)
 
-### Step 2 — Read the current tag (optional)
-
-Open **NFC Tools → Read** and tap the wristband. Note the chip type (should show **NTAG215**) and existing records.
-
-### Step 3 — Compose your NDEF message
+### Step 2 — Compose your NDEF message
 
 In **NFC Tools → Write → Add a record**, choose the record type (URI, Application, etc.). You can stack multiple records in one message.
 
-### Step 4 — Write
+### Step 3 — Write
 
 Tap **Write** and hold the phone flat against the wristband chip (usually the flat pad on the band). Wait for the success confirmation.
 
-### Step 5 — Verify
+### Step 4 — Verify
 
 Switch to **Read** mode and tap again. Confirm the payload matches what you intended, then test with a second phone if possible.
+
+:::tip See Example 1 for a full demo
+The animated walkthrough for writing a website URL lives under [Example 1](#example-1--open-the-aws-ug-china-community-website) below — follow that section step by step on your first try.
+:::
 
 :::caution Do not lock the tag unless you mean it
 Locking is **irreversible**. For personal experimentation, leave the tag unlocked so you can rewrite it anytime.
@@ -167,7 +258,7 @@ Locking is **irreversible**. For personal experimentation, leave the tag unlocke
 
 ## Example 1 · Open the AWS UG China Community Website
 
-<span className={styles.tagBadge}>URI Record</span> **Target:** [https://awscommunity.cn/](https://awscommunity.cn/) — the official **Amazon Cloud Technology User Group** community portal.
+<span className={styles.tagBadge}>URI Record</span> **Target:** [https://awscommunity.cn/](https://awscommunity.cn/) — the official **Amazon Web Services User Group** community portal.
 
 <div className={styles.exampleBlock}>
 <div className={styles.exampleHeader}>EXAMPLE 1 — URI (Website)</div>
@@ -188,6 +279,11 @@ Full URL:     https://awscommunity.cn/
 ```
 
 </div>
+
+<figure className={styles.guideFigure}>
+  <img src={writeNewUrl} alt="Example 1 screen recording: add a URL record in NFC Tools and write it to the wristband" className={styles.guideGif} />
+  <figcaption className={styles.photoCaption}>Example 1 demo — Write → Add record → URL / URI → enter the link → Write → tap the wristband until you see "Write complete!"</figcaption>
+</figure>
 
 When someone taps your wristband, their phone opens the AWS UG China community site — city groups, special-interest communities, events, and volunteer applications.
 
@@ -230,9 +326,44 @@ Record 2 — URI (fallback)
 
 </div>
 
+<figure className={styles.guideFigure}>
+  <img src={androidAppGif} alt="Example 2 screen recording: add an Android Application Record and write it to the wristband" className={styles.guideGif} />
+  <figcaption className={styles.photoCaption}>Example 2 demo — Write → Add record → Application → enter `com.amazon.aws.cardclash` → add Play Store URI fallback → Write → tap the wristband.</figcaption>
+</figure>
+
 :::info iPhone note
 iOS does not support AAR. iPhone users tapping this tag will follow the URI fallback and land on the App Store / Play Store web page. For iOS app deep links, use a Universal Link (HTTPS URL) instead.
 :::
+
+### Extension · Clock-in when you reach the office
+
+The same **AAR + URI** pattern works for everyday Android apps — not just games. A common idea: stick your phone to the wristband at the company entrance and **launch your work app in one tap** instead of hunting for an icon.
+
+| App | Android package name |
+|-----|----------------------|
+| **WeCom** (企业微信) | `com.tencent.wework` |
+| **DingTalk** (钉钉) | `com.alibaba.android.rimet` |
+| **Feishu** (飞书) | `com.ss.android.lark` |
+
+**Steps** — identical to Example 2 above; only the package name changes:
+
+1. Write → Add record → **Application** → e.g. `com.tencent.wework`
+2. Add **URL / URI** fallback → Play Store link for the same app (optional but recommended)
+3. Write to the wristband
+
+```text
+Record 1 — AAR
+  Payload:   com.tencent.wework        ← WeCom example
+
+Record 2 — URI (fallback)
+  Payload:   Play Store URL if app not installed
+```
+
+:::tip What this does — and what it doesn't
+**AAR opens the app**, which is usually enough to save a few seconds at the door. It does **not** automatically submit a punch on its own — you still confirm check-in inside WeCom, DingTalk, or Feishu unless your company gives you a **check-in deep link** (HTTPS or app-specific URL). If IT shares such a link, write it as a **URI record** (Example 1) or combine URI + AAR so the app opens straight to the punch screen.
+:::
+
+If your company check-in lives in a **WeChat mini program** instead of a native app, use **Example 3** (URL Link) rather than AAR.
 
 ---
 
@@ -268,21 +399,31 @@ Response gives a short link like:
 https://wxaurl.cn/XXXXXX
 ```
 
-Write that URL as a **URI NDEF record** — when tapped, WeChat opens and launches the mini program.
+Write that URL as a **URI NDEF record** — when tapped, WeChat opens and launches the mini program if it is installed on the phone.
 
-**Option B — URL Scheme (legacy, shorter but expires)**
+**Option B — Plaintext URL Scheme (not recommended for NFC)**
+
+Hand-built links look like this (Bonjour example):
 
 ```text
-weixin://dl/business/?appid=YOUR_APPID&path=pages/index/index&query=from%3Dnfc
+weixin://dl/business/?appid=wxa3cd9247c890de37&path=/pages/index/index&env_version=release
 ```
+
+Requires the **mini program owner** to enable “明文 Scheme 拉起此小程序” in WeChat MP admin. Even then, tapping from an NFC tag often fails with **“Sorry, this page cannot be accessed”** — behaviour varies by phone (e.g. some Huawei devices may work; many iPhone / other Android models do not). Opening the same link from a WeChat chat is **not** a reliable test for NFC.
+
+**Prefer Option A** (`https://wxaurl.cn/...`) or a stable HTTPS profile link (e.g. `https://bonjour.bio/...`) for wristbands.
 
 **NFC Tools steps**
 
 1. Write → Add record → **URL / URI**
-2. Paste your `https://wxaurl.cn/...` or `weixin://dl/business/...` link
+2. Paste your `https://wxaurl.cn/...` link (**recommended**)
 3. Write to tag
 
 </div>
+
+:::warning Plaintext `weixin://` Scheme on NFC tags
+Writing a hand-built `weixin://dl/business/?appid=...` URI to a wristband **usually does not work reliably**, especially for **third-party** mini programs you do not operate. Typical symptoms: WeChat opens but shows “Sorry, this page cannot be accessed”; results differ by device (some Huawei phones may succeed, many others fail). Links pasted in WeChat chat may still open — that does **not** mean the tag will work. Use **URL Link** (`https://wxaurl.cn/...`) or an HTTPS landing page instead.
+:::
 
 :::tip Replace with your own mini program
 Community Day attendees can point this at **any** published mini program — your side project, a community tool, or an event companion app. You need **developer access** to the target mini program to generate valid URL Links.
@@ -300,6 +441,7 @@ Once you understand the three patterns above, the wristband becomes a pocket-siz
 | GitHub profile | URI | `https://github.com/yourname` |
 | LinkedIn | URI | `https://linkedin.com/in/yourname` |
 | Android app | AAR + URI fallback | Your app's package name + Play Store URL |
+| Work check-in (Android) | AAR + URI fallback | `com.tencent.wework`, `com.alibaba.android.rimet`, or `com.ss.android.lark` |
 | WeChat mini program | URI (URL Link) | `https://wxaurl.cn/...` |
 | Plain message | Text | Your name and email |
 
@@ -317,6 +459,131 @@ Once you understand the three patterns above, the wristband becomes a pocket-siz
 
 ---
 
+## FAQ
+
+### Can I clone an access / door card onto the wristband?
+
+**Short answer: almost always no.** The Community Day wristband is a fixed **NTAG215** (13.56 MHz, NFC Forum Type 2) built to hold **NDEF data** (URLs, app launches) — not to emulate access credentials.
+
+| Access card type | Frequency | Can NTAG215 replace it? | Why |
+|------------------|-----------|-------------------------|-----|
+| ID card (EM4100, HID Prox, T5577) | 125 kHz (LF) | ❌ No | Different frequency — phones and the wristband are 13.56 MHz only |
+| MIFARE Classic | 13.56 MHz (HF) | ❌ No | Different chip; NTAG215 has no Crypto-1 sectors to emulate |
+| UID-only systems | 13.56 MHz (HF) | ❌ No | NTAG215's UID is **factory-locked** — it can't be changed to match another card |
+| MIFARE DESFire / CPU card | 13.56 MHz (HF) | ❌ No | Strong mutual authentication (AES/3DES) — not clonable |
+
+:::caution Legal & ethical note
+Only ever duplicate a card **you own and are authorized to copy**. Cloning someone else's badge, or a card issued by your building or employer, may break the law or local rules. Copying 125 kHz ID cards or cracking MIFARE Classic also needs dedicated hardware (e.g. Proxmark3, or a UID-writable "magic" card) — a phone plus an NTAG215 wristband cannot do it.
+:::
+
+### What's the difference between an "IC card" and an "ID card"?
+
+A common distinction in the Chinese market:
+
+| | ID card (ID卡) | IC card (IC卡) |
+|---|----------------|----------------|
+| **Full name** | Identification card | Integrated Circuit card |
+| **Typical frequency** | 125 kHz (low frequency) | 13.56 MHz (high frequency) |
+| **Chip** | Read-only ID number | Real chip with read/write memory |
+| **Storage** | None — just a fixed UID | Bytes to kilobytes of data |
+| **Encryption** | None (plaintext ID) | Often supported |
+| **Examples** | EM4100, EM4200, HID Prox | MIFARE Classic/Ultralight/DESFire, **NTAG215** |
+| **Cloneable?** | Very easy (ID is broadcast) | Depends on encryption |
+
+Your Community Day wristband (**NTAG215, 13.56 MHz, with memory**) is an **IC card**, not an ID card.
+
+### What encryption do these tags use?
+
+"NFC" spans a family of chips with very different security levels:
+
+| Chip / card | Security | Notes |
+|-------------|----------|-------|
+| 125 kHz ID card | **None** | Plaintext UID; trivially cloned |
+| **NTAG215** (our wristband) | **No data encryption** | Unique locked UID, optional **32-bit password** (PWD_AUTH) and one-way lock bits — but NDEF content is readable by any phone |
+| MIFARE Classic | **Crypto-1 (broken)** | 48-bit keys, per-sector Key A/B; crackable with Proxmark3-class tools — no longer secure |
+| MIFARE DESFire EV1/2/3 | **DES / 3DES / AES-128** | File-based, mutual authentication — considered secure |
+| CPU / smart card | **AES / RSA / ECC** | Banking, ID, and SIM-grade security |
+
+:::warning Don't store secrets on the wristband
+NTAG215 has **no data encryption**. Anything you write (a URL, text, contact info) can be read by **anyone** who taps it. Never write passwords, private ID numbers, or sensitive personal data. The optional password only limits *who can rewrite or lock* the tag — it does not encrypt the stored content.
+:::
+
+---
+
+## Going Further · NFC Tags for Home Automation
+
+:::tip Optional reading — no extra hardware required for this guide
+Everything above is enough to program your **Community Day wristband**. This section is for readers who want to reuse the same NFC skills elsewhere — for example, sticky tags by the door or bedside. You do **not** need a smart home hub, Home Assistant, or any new devices to understand the idea; setup steps depend on what you already own.
+:::
+
+The wristband tutorial focuses on **sharing links and apps** (NDEF URI / AAR). Home automation uses the same **13.56 MHz NTAG** family, but the goal is different: **tap a tag → run a routine** (lights, scenes, notifications, etc.).
+
+### How it differs from “write a URL on the band”
+
+| | Community Day wristband | Typical home NFC automation |
+|---|-------------------------|------------------------------|
+| **Goal** | Open a website or app for others | Trigger *your* routine when *you* tap |
+| **What matters** | NDEF records (URI, Text, AAR) | Often the tag's **UID** (unique ID), or a URL bound to your account |
+| **Who reads it** | Anyone nearby can tap | Usually your phone, or a fixed reader you control |
+| **Tag form** | Wristband | Stickers, cards, key fobs — still often **NTAG215 / NTAG216** |
+
+Many automations **never write a public URL** onto the tag. The phone learns “when I see UID `04:A1:B2:…`, run Goodnight scene.” The tag can stay blank or keep a harmless label record.
+
+### Three common paths (pick what matches your phone / home stack)
+
+**1. Phone-only automations — no hub required**
+
+Works with off-the-shelf NFC stickers and the phone you already carry:
+
+| Platform | Typical apps | Rough flow |
+|----------|--------------|------------|
+| **iPhone** | **Shortcuts** (快捷指令) | Automation → **NFC** → scan tag once → add actions (toggle HomeKit device, open a scene, send a notification, etc.) |
+| **Android** | **MacroDroid**, **Tasker**, Samsung **Bixby Routines**, vendor apps | NFC trigger → run task (toggle Bluetooth/Wi‑Fi, open smart-home app, fire a webhook) |
+
+You buy **NTAG215 stickers**, stick one by the door or bed, and bind it in the app. No server, no Home Assistant — good first experiment.
+
+**2. Smart home hub — when you already run a central system**
+
+If you use a hub (examples: **Home Assistant**, HomeKit-centric setups, or vendor clouds with NFC support in their app), the pattern is:
+
+1. **Register** the tag in the hub's mobile app (or write a hub-specific URL).
+2. **Create an automation**: “When tag X is scanned → run script / scene.”
+3. Place tags at **entry, bedside, desk** for Leave home, Good night, Focus mode, etc.
+
+**[Home Assistant](https://www.home-assistant.io/)** is a popular open-source option: the **[Companion app](https://companion.home-assistant.io/)** can write NFC tags that map to automations on your HA instance. You do **not** need this for the Community Day wristband; it is one path among many if you already self-host HA or plan to later.
+
+Other ecosystems (Mi Home, Aqara, HomeKit-only households, etc.) vary — check whether **your** vendor app supports NFC triggers before buying a pack of tags.
+
+**3. Write a webhook URL on the tag — flexible, but mind security**
+
+Same technique as Example 1 in this guide: use NFC Tools to add a **URI** record pointing at an HTTPS endpoint that starts a scene (Home Assistant webhook, a small cloud function, IFTTT-style services, etc.).
+
+- **Pros:** Works on any phone that opens the link; no special app binding step.
+- **Cons:** Anyone who reads the tag sees the URL. Use a **long random path**, HTTPS only, and treat the tag like an **unlocked light switch** — fine indoors, risky on a public wristband.
+
+See the FAQ above: **never put passwords or API keys on the tag.**
+
+### Fixed NFC reader (optional, advanced)
+
+Instead of unlocking your phone each time, a **fixed reader** (e.g. **ESP32 + PN532**, often via **[ESPHome](https://esphome.io/)** into Home Assistant) can sit by a door or switch. The tag's UID or a small NDEF payload is sent to your hub — tap and go, no phone out of pocket. This is DIY territory; not required for phone-based automations.
+
+### Example ideas
+
+| Location | Tap to… |
+|----------|---------|
+| Entry | Leave home — lights off, AC off, optional notify “I'm out” |
+| Bedside | Good night — lights off, curtain scene, DND |
+| Desk | Focus — desk lamp on, phone DND |
+| Guest sticker | Limited action only (e.g. open guest Wi‑Fi info page) |
+
+### Takeaway
+
+- **Same chips** (NTAG215-class), **different playbook**: automation cares about *who* scans and *what runs*, not sharing a marketing link.
+- **Start simple:** phone + NFC sticker + one Shortcut or MacroDroid rule.
+- **Scale up** with Home Assistant or fixed readers when you want whole-home scenes — only if that matches gear you already have or plan to buy.
+
+---
+
 ## Learn More
 
 - [AWS UG China Community](https://awscommunity.cn/) — join city groups, apply as speaker or volunteer
@@ -324,9 +591,6 @@ Once you understand the three patterns above, the wristband becomes a pocket-siz
 - [NFC Forum](https://nfc-forum.org/) — global NFC standards body; NDEF, tag types, and certification
 - [NFC Forum technical specifications](https://nfc-forum.org/specs-and-application-documents/specifications/nfc-forum-technical-specifications/) — technical deep dive
 - [WeChat URL Link docs](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/qrcode-link/url-link/generateUrlLink.html) — mini program link generation
-
----
-
-*Guide prepared for **2026 Summer Community Day** · Amazon Cloud Technology User Group (AWS UG China). Theme colors: AWS Orange `rgb(254, 153, 0)` · white · black text.*
+- [Home Assistant — NFC tags](https://www.home-assistant.io/integrations/tag/) — optional; hub-based home automation with NFC
 
 </div>

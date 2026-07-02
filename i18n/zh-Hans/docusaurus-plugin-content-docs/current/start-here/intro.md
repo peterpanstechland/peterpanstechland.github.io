@@ -11,7 +11,14 @@ slug: /start-here/intro
 
 ## 关于我
 
-我是 Peter Pan，一名热衷于连接云端智能与边缘设备的创客和开发者。我的工作专注于 **人工智能**、**边缘计算** 和 **AWS 云服务** 的交汇点。
+<div class="whoami">
+  <img src="/img/logo.jpg" alt="Peter Pan" class="whoami-avatar" />
+  <div class="whoami-text">
+
+<p>我是 Peter Pan，一名热衷于连接云端智能与边缘设备的创客和开发者。我的工作专注于 <strong>人工智能</strong>、<strong>边缘计算</strong> 和 <strong>AWS 云服务</strong> 的交汇点。</p>
+
+  </div>
+</div>
 
 ## 内容导航
 

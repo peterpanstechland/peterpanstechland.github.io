@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: "Peter Pan's Techland",
   tagline: 'AI × Edge × AWS - Building the future, one project at a time.',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.jpg',
 
   // Set the production url of your site here
   url: 'https://peterpanstechland.github.io',
@@ -94,8 +94,10 @@ const config: Config = {
     navbar: {
       title: "Peter Pan's Techland",
       logo: {
-        alt: 'Site Logo',
-        src: 'img/logo.svg',
+        alt: "Peter Pan's Techland",
+        src: 'img/logo.jpg',
+        width: 32,
+        height: 32,
       },
       items: [
         // Start Here
