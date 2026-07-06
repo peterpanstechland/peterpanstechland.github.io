@@ -20,7 +20,9 @@ Each workshop is structured as:
 
 ## Available Workshops
 
-*Coming soon: Full workshop materials with slides and code.*
+### 2026
+
+- **[Agentic Football Cup 72-Hour Pre-Test](/docs/workshops/2026/agentic-football-cup-pre-test)** — AWS China UG pre-test for the Beijing Agentic Football Cup workshop: AgentCore, CloudWatch observability, heatmaps, Playwright grinding, and open-source toolchain.
 
 ### Planned Workshops
 

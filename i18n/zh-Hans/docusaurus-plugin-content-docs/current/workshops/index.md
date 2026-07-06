@@ -20,7 +20,9 @@ slug: /workshops
 
 ## 可用工作坊
 
-*即将推出：包含幻灯片和代码的完整工作坊材料。*
+### 2026
+
+- **[Agentic Football Cup 72 小时前测](/docs/workshops/2026/agentic-football-cup-pre-test)** — 亚马逊云中国 UG 为北京 Agentic Football Cup 工作坊做的前测实录：AgentCore、CloudWatch 可观测、热力图、Playwright 刷赛与开源 toolchain。
 
 ### 计划中的工作坊
 
