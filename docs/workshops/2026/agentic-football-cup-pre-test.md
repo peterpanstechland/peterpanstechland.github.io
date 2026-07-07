@@ -39,15 +39,15 @@ During the pre-test we used **Harness** first, then switched to **local deploy**
 ```mermaid
 timeline
     title 72-Hour Pre-Test
-    Jul 3 16:00 : Workshop kickoff
-                : Harness smoke test
-                : Switch to local deploy
-    Jul 4-5     : Observability dashboard
-                : CloudWatch analysis
-                : Blast-shot override / prompt tuning
-                : Playwright match grinding
-    Jul 5 20:00 : Community live stream
-    Jul 6 16:00 : Pre-test ends
+    Jul 3 4PM : Workshop kickoff
+              : Harness smoke test
+              : Switch to local deploy
+    Jul 4-5   : Observability dashboard
+              : CloudWatch analysis
+              : Blast-shot override / prompt tuning
+              : Playwright match grinding
+    Jul 5 8PM : Community live stream
+    Jul 6 4PM : Pre-test ends
 ```
 
 ---
@@ -217,7 +217,190 @@ Over 72 hours we ground out **19 ranked matches** (5W 1D 13L — a 26% win rate 
 
 ### Live coach injection (experimental ⚠️)
 
-Remember the coach shout box on the match screen? We tried using Playwright to inject tactical prompts mid-match automatically (e.g. shout "all-out attack" when trailing), automating the halftime adjustment too. **Not successful yet** — likely the shout input's frontend event binding or the tick window in which shouts apply. More testing welcome; PRs appreciated.
+Remember the coach shout box on the match screen? We tried using Playwright to inject tactical prompts mid-match automatically (e.g. shout "all-out attack" when trailing), automating the halftime adjustment too. The road was bumpier than expected and produced three findings:
+
+1. **Free text gets rejected with a 400** — the shout channel only accepts 6 preset instructions (press_high, shoot_on_sight, slow_the_tempo, go_all_out_attack, …)
+2. **Orders sent at the goal moment get swallowed** — anything injected during the goal replay / kickoff cutscene vanishes; orders must be queued until the game clock resumes
+3. **Delivery can be proven** — we added a `co:1` field to the DECISION log that fires only when a coach order actually reaches the LLM prompt
+
+Those findings became the `LiveCoach` class (next chapter), but the win-rate impact is still inconclusive — **more matches needed**. PRs welcome.
+
+---
+
+## Code Walkthrough: How the Agents Are Actually Built
+
+> Best read side by side with the [repository](https://github.com/peterpanstechland/sample-ai-possibilities/tree/football-workshop/agentic-football-sample-agents); paths below are relative to `agentic-football-sample-agents/`.
+
+### Repository map
+
+```text
+agentic-football-sample-agents/
+├── ai-team-strands-extremely-aggressive/   # main squad: one agent per position
+│   ├── ai-gk/ ai-def/ ai-mid/ ai-fwd1/ ai-fwd2/
+│   │   └── src/main.py          # ~80 lines each: prompt + three configs
+│   ├── bench_latency.py         # per-position latency benchmark
+│   └── deploy-all.sh            # deploy the whole squad
+├── lib/                         # shared core (the interesting part)
+│   ├── agent_base.py            # decision pipeline: LLM → parse → override → DECISION log
+│   ├── state.py                 # compresses gameState into the prompt (injects COACH ORDER)
+│   ├── tactics.py               # inline tactical math: shot odds / best pass / open space
+│   ├── pattern_tracker.py       # cross-tick scouting memory (main threat, favored wing)
+│   ├── overrides.py             # 11 deterministic tactical rules (star of this chapter)
+│   ├── fallback.py              # per-position rule-based fallbacks
+│   ├── parsing.py               # parses LLM JSON (survives Nova's inline arithmetic)
+│   ├── tuning.py / tuning.json  # autopilot's control surface
+│   └── match_analytics.py       # heatmaps / match splitting / match reports
+├── observe_dashboard.py         # dashboard (+ analytics / settings / i18n modules)
+├── portal_bot.py                # Playwright portal automation + LiveCoach
+├── grind_matches.py             # batch grinding
+├── autopilot.py                 # the fully automated iteration loop
+└── analyze_match.py             # CLI report
+```
+
+One design rule: **position entry points stay thin; everything shared lives in `lib/`.** All five positions run the same pipeline, so a fix lands once and applies to the whole team — no copy-pasted player logic.
+
+### One player = ~80 lines of main.py
+
+FWD1 (left striker) as the example — the entry file only does four things: write the prompt, pick the fallback, pick the overrides, pick the model (excerpt):
+
+```python
+SYSTEM_PROMPT = f"""Ultra-aggressive left striker AI. You control ONLY player {MY_PLAYER_ID}
+(FWD1) in 5v5 soccer. Each tick: read state, reply ONE command.
+
+RULE #1 — SHOOT CENTER. Read TACTICS Shot line:
+- "LANE CLEAR" / "POINT-BLANK" / "LANE BLOCKED": SHOOT CENTER power 1.0.
+- Never dribble for a better angle inside 45m — shoot immediately.
+...
+Reply ONLY the JSON array, no other text:
+[{{"commandType":"SHOOT","playerId":3,"parameters":{{"aim_location":"CENTER","power":1.0}},"duration":0}}]"""
+
+# Rule fallback: only the designated player presses (no 5-man mobs);
+# forwards operate on the left wing
+AGG_FWD1_CONFIG = replace(FWD1_CONFIG, press_only_if_designated=True,
+                          advance_y=-14.0, default_y=-14.0)
+
+# Hard tactical rules: the prompt alone was ignored ~40% of the time
+OVERRIDE_CONFIG = OverrideConfig(wing_y=-14.0)
+
+# Nova 2 Lite: bench_models.py bake-off winner (100% JSON parse, tighter p95)
+agent = create_agent(SYSTEM_PROMPT, model_id="us.amazon.nova-2-lite-v1:0")
+create_invoke_handler(app, agent, MY_PLAYER_ID, POSITION_LABEL, fallback_commands,
+                      fallback_cfg=AGG_FWD1_CONFIG, override_cfg=OVERRIDE_CONFIG)
+```
+
+Two prompt tricks worth stealing: **feed the LLM solved tactical conclusions** (the `TACTICS Shot line` is computed fresh every tick by `tactics.py` — shot lane clear or not, best pass target — so the LLM only maps conclusions to an action), and **end with one complete JSON example** to anchor the output format.
+
+### What happens inside one tick (agent_base.py)
+
+```mermaid
+flowchart TD
+  P[Portal request with gameState] --> S[state.py compresses the state<br/>injects COACH ORDER]
+  S --> PT[pattern_tracker.py<br/>cross-tick scouting memory]
+  PT --> T[tactics.py inline math<br/>shot odds / best pass / open space]
+  T --> L[Bedrock LLM call<br/>temperature 0.2 · max_tokens 200]
+  L --> PC{parse_commands<br/>valid JSON?}
+  PC -- yes --> OV[overrides.py<br/>11 deterministic rules]
+  PC -- no --> FB[fallback.py rule-based] --> OV
+  OV --> D[DECISION structured log] --> CW[(CloudWatch)]
+  OV --> R[command back to the game engine]
+```
+
+Three engineering details:
+
+- **Four degradation layers**: `llm → parse-fallback → error-fallback → last-resort`. Whatever breaks, the player never stands still; the DECISION log's `source` field records which layer answered each tick
+- **Latency is engineered, not hoped for**: `max_tokens=200` caps output length (the answer is one JSON command — cut the long tail), and memoryless agents reset `agent.messages` every tick — in a warm runtime, accumulated history inflates prefill latency on every call. Together these cut decision latency from ~1.5s to ~0.7s (commit `8a4e3a5`)
+- **Memory ≠ stuffing history**: `pattern_tracker.py` distills opponent behavior with in-process counters into a few scouting lines ("opponent #7 is the main threat, favors the left wing, their GK plays short") — cross-tick recall without context growth
+
+### The DECISION log: one JSON line powers everything
+
+`agent_base.py` emits one structured line per tick — the single data source for every downstream tool:
+
+```json
+{"pos":"FWD1","tick":57,"t":93,"source":"llm","cmd":"SHOOT","latency_ms":612,
+ "hb":1,"dg":38.2,"mx":22.5,"my":-9.1,"hs":1,"as":1,
+ "want":"MOVE_TO","fix":1,"ov":"shot","aim":"CENTER","co":1}
+```
+
+| Field | Meaning | Consumed by |
+|-------|---------|-------------|
+| `source` | which layer decided (llm / parse-fallback / …) | dashboard "LLM share", the 0%-LLM alert |
+| `hb` / `dg` | had ball / distance to opponent goal | shot discipline (real chances vs blind hoofs) |
+| `want` vs `cmd` + `fix` | what the LLM wanted vs what ran; `fix:1` = override corrected it | override effectiveness stats |
+| `ov` | which override fired this tick | analytics override breakdown |
+| `mx` / `my` | player coordinates | heatmaps |
+| `hs` / `as` | live score | match reports, goal timeline, match splitting |
+| `co` | a coach order reached the prompt | LiveCoach delivery proof |
+
+Define this schema first and the dashboard, heatmaps, autopilot KPIs, and AI advice all share one language — **observability as a first-class citizen of the pipeline, not an afterthought**.
+
+### overrides.py: prompts suggest, code enforces
+
+This 40KB file was born from getting slapped by data. The module docstring preserves the evidence: in one match, **207 of 370 commands were MOVE_TO and 0 were MARK** — despite the prompt explicitly ordering "MARK when a teammate presses". The LLM answered 100% of ticks (fallback never ran), so **any rule that lives only in the prompt is effectively optional**. From iter-8 on, match-deciding rules became deterministic code:
+
+| Override tag | Rule | Evidence |
+|---|---|---|
+| `blast` | GK/DEF possession → instant full-power shot at the emptiest part of the frame (clearance + shot in one) | iter-9 |
+| `build` / `launch` / `carry` | with a clean lane, play the outlet pass / loft to the most advanced forward / carry up the wing; blast demoted to fallback | six matches of KPIs: 92–98% of shots were 45m+ hoofs donating possession |
+| `shot` | MID/FWD in range with a clear lane must shoot; a shot at a covered corner is re-aimed at the open one | |
+| `counter` | 3+ opponents in our half → one THROUGH ball to the most advanced open forward | |
+| `phantom` | SHOOT/PASS without the ball wastes the tick → rewritten into a real defensive job | |
+| `no-chase` / `anchor` | non-designated players don't chase; defensive runs far off the anchor line get clamped back | |
+| `cutback` / carry cap | all shot lanes blocked → cut back to an open teammate; dribble targets clamp at the box edge | 1-5 / 0-4 loss forensics |
+| `tackle` / `gk-smother` | the designated presser inside tackle range slides; the GK smothers loose balls in our box | "defense only marks, never tackles" observation |
+| `route-one` | pressed with every ground outlet shut → loft it to the most advanced forward | validation match: far_shot_ratio 1.0, forwards 0 shots |
+
+Every trigger leaves an `ov` tag in the DECISION log, and the analytics page counts them — **whether a rule works is measured, not felt**. The `blast → build → route-one` evolution (iter-9 → 11 → 12b) was forced by our own KPIs: first learn to hoof, then learn when not to.
+
+### tuning.json + autopilot: let the machine turn the knobs
+
+Override thresholds (shot range, mark radius, press bodies…) shouldn't be hand-edited. `lib/tuning.json` is a parameter overlay shipped with every deploy, and `autopilot.py` runs a closed loop around it:
+
+```mermaid
+flowchart LR
+  M[MATCH<br/>portal_bot plays one practice match] --> O[OBSERVE<br/>pull DECISION logs, distill KPIs]
+  O --> T[TUNE<br/>rule tuner or LLM advisor<br/>bounded deltas only]
+  T --> D[DEPLOY<br/>redeploy 5 agents via WSL]
+  D --> R[RECORD<br/>autopilot_history.jsonl]
+  R --> M
+```
+
+KPIs include far-shot waste, possession height, siege indicators, and override counts. The tuner is bounded-deterministic by default; `--llm-advisor` swaps in Nova to read the KPIs and propose deltas. Consecutive losses force exploration; wins freeze the config. The loop's first full run produced our **first win, 3-2** against the aggressive bot (commit `fffd0fa`).
+
+### LiveCoach: turning the coach into code
+
+The `LiveCoach` class in `portal_bot.py` subscribes to the live narration feed and maps situations onto the 6 preset shouts:
+
+```python
+if conceded:               return ("conceded",  "press_high")        # win it back now
+if scored and diff > 0:    return ("scored",    "slow_the_tempo")    # keep the shape
+if diff < 0 and late:      return ("chase-late","go_all_out_attack") # nothing to lose
+if diff < 0:               return ("chase",     "shoot_on_sight")    # our identity
+if diff > 0 and late:      return ("protect",   "slow_the_tempo")    # hold the line
+```
+
+The hard-won lessons live in the comments: goal-triggered orders are **queued** until the game clock resumes (otherwise the replay cutscene swallows them), with a 45s cooldown and same-situation dedupe to avoid flooding. Orders are injected into every agent's prompt by `state.py` as a top-priority `COACH ORDER (obey immediately)`, and the DECISION `co:1` field proves delivery. One shout steers five LLMs at once — the win-rate impact is still unproven, but the mechanism itself is worth the price of admission.
+
+### The iteration story in the git history
+
+40+ commits, numbered by iteration, tell a data-driven evolution:
+
+| Commit | Milestone |
+|---|---|
+| `8a4e3a5` | Decision latency ~1.5s → ~0.7s (reset history + cap max_tokens) |
+| `8758e20` iter-4 | First web observability dashboard + shoot-first policy |
+| `5814a00` iter-5 | Local training ground + live/training compare view |
+| `d17a3d3` iter-8 | **Overrides are born**: prompts suggest, code enforces |
+| `bd30b57` iter-9 | Counter-attack system + GK/DEF unlimited blast |
+| `276e4e2` iter-10 | **Autopilot loop** + Playwright portal bot |
+| `fffd0fa` iter-10 | **First win 3-2** after data-driven tuning |
+| `3d035bc` iter-11 | Build-from-back: fixing the "95% far-shot waste" |
+| `9880ce6` iter-11d | Attacking trio moved to Nova 2 Lite (picked by a real bake-off) |
+| `5030547` | Parser learns to eat Nova's `55*0.75` inline arithmetic |
+| `055fbd8` iter-12 | Finishing + ball-winning package (from 1-5 / 0-4 loss evidence) |
+| `8acd3ce` iter-12b | Route-one launch to beat the high press |
+| `3f0b8b4` / `cc2dbac` | Match analytics, session splitting, deployment docs open-sourced |
+
+Every iter commit names the match and the metric that motivated it — arguably the best habit in this repo.
 
 ---
 
