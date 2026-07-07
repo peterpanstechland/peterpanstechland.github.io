@@ -36,6 +36,21 @@ As the official [Learn More](https://agenticfootballcup.com/learnmore/) page put
 
 Signup (public session or private booking) takes a minute on the [official site](https://agenticfootballcup.com/).
 
+### From your laptop to Las Vegas: the qualification path
+
+This deserves its own highlight — **finishing the workshop is not the end, it is the entry ticket to the global league**:
+
+![From your laptop to Las Vegas — the official four-step qualification path](/img/workshops/2026/agentic-football-cup/path-to-vegas.png)
+
+*Image source: [agenticfootballcup.com/learnmore](https://agenticfootballcup.com/learnmore/)*
+
+1. **Complete a Workshop** — private or public session, build and deploy your agentic football team
+2. **Compete in the Day-of Tournament** — your agents face off against other participants live at the end of the workshop day
+3. **Enter the Global League Qualifying** — all workshop completers are eligible for the virtual qualifying tournament; keep improving your agents and compete globally
+4. 🏆 **AWS re:Invent 2026 · Las Vegas** — group winners play for the grand prize, live on stage at the world's largest cloud conference
+
+In the official words: "The path is real — build something great in the morning, qualify in the afternoon, and there's a route from your laptop to Vegas."
+
 Matches are **5v5**, with five positions per team: **GK / DEF / MID / FWD1 / FWD2**. The key idea: **every player is an independent agent deployed on AgentCore Runtime** — with its own system prompt, its own model, its own fallback rules, invoked independently on every decision tick. You are not "playing a game"; you are **operating five production agents at once**.
 
 The Portal also gamifies AgentCore's capabilities: the trophy wall maps to **Runtime, Memory, Code Interpreter, Browser, Identity, Gateway, Observability, Bedrock, Guardrails, and Evaluations**, with daily quests and XP. By the time you have played a few matches, you have toured the AgentCore product map.
@@ -526,6 +541,8 @@ This 72-hour pre-test was the systematic follow-up: Harness → local deploy →
 | Community | 72-hour pre-test + Jul 5 live stream, paving the way for Beijing |
 
 We had a great time and genuinely learned AgentCore along the way. If you are joining the Beijing or an online Agentic Football Cup workshop (signup at [agenticfootballcup.com](https://agenticfootballcup.com/)), take our [open-source toolchain](https://github.com/peterpanstechland/sample-ai-possibilities/tree/football-workshop/agentic-football-sample-agents) with you — issues and PRs welcome. And remember: completing a workshop qualifies you for the global league, and group winners play live on stage at **AWS re:Invent 2026 in Las Vegas**.
+
+One last hope: may the Agentic Football Cup scene in China keep growing, and may Chinese builders fight all the way to the re:Invent 2026 finals and represent China in Las Vegas. Our men's national football team may keep letting us down, but we believe our agents can win **without a sea-cucumber diet** (a beloved running joke about the national squad's famously pampered nutrition). ⚽
 
 ---
 

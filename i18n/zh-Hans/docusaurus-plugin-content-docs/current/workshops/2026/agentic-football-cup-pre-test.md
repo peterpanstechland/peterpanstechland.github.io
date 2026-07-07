@@ -36,6 +36,21 @@ description: 亚马逊云中国 UG 社区 72 小时 Agentic Football Cup worksho
 
 报名（个人公开场 / 组织私享场）都在 [官网](https://agenticfootballcup.com/) 一分钟搞定。
 
+### From your laptop to Las Vegas：晋级路线
+
+这条信息值得单独划重点——**完成工作坊不是终点，而是全球联赛的起点**：
+
+![From your laptop to Las Vegas — 官方晋级路线四步](/img/workshops/2026/agentic-football-cup/path-to-vegas.png)
+
+*图源：[agenticfootballcup.com/learnmore](https://agenticfootballcup.com/learnmore/)*
+
+1. **完成一场 Workshop** —— 私享场 / 公开场均可，构建并部署你的 Agent 球队
+2. **参加当日锦标赛** —— 工作坊收尾时，你的 Agent 与其他参与者现场对战
+3. **进入全球联赛资格赛** —— 所有完成者都有资格参加线上资格赛，持续改进 Agent、全球竞技
+4. 🏆 **AWS re:Invent 2026 · 拉斯维加斯** —— 小组冠军在全球最大云计算大会的舞台上，现场争夺大奖
+
+官方原话：「The path is real — build something great in the morning, qualify in the afternoon, and there's a route from your laptop to Vegas.」早上写代码，下午拿资格，从你的笔记本直通 Vegas。
+
 比赛为 **5v5** 制，每队 5 个位置：**GK（门将）/ DEF（后卫）/ MID（中场）/ FWD1、FWD2（双前锋）**。关键在于——**每名球员就是一个独立部署在 AgentCore Runtime 上的 Agent**：它有自己的提示词、自己的模型、自己的 fallback 规则，每个决策 tick 被独立调用。你不是在「玩游戏」，而是在**同时运维 5 个生产环境里的 Agent**。
 
 Portal 还把 AgentCore 的能力做成了游戏化任务：奖杯墙对应 **Runtime、Memory、Code Interpreter、Browser、Identity、Gateway、Observability、Bedrock、Guardrails、Evaluations** 十项能力，做每日任务攒 XP 升级。玩着玩着，AgentCore 的产品版图就摸清了。
@@ -527,6 +542,8 @@ $env:AAFC_TEAM_CODE = "你的队伍代码"
 | 社区 | 72 小时前测 + 7/5 直播，为北京 Workshop 铺路 |
 
 **玩得很开心，也实实在在学到了 AgentCore 相关业务。** 如果你准备参加北京或线上的 Agentic Football Cup Workshop（报名见 [agenticfootballcup.com](https://agenticfootballcup.com/)），欢迎直接使用我们的 [开源 toolchain](https://github.com/peterpanstechland/sample-ai-possibilities/tree/football-workshop/agentic-football-sample-agents)，Issue / PR 都敞开。别忘了：完成工作坊就有全球联赛资格，小组冠军直通 **AWS re:Invent 2026 拉斯维加斯** 决赛舞台。
+
+最后说点期待：希望 Agentic Football Cup 的国内赛事越办越多、越办越大，也期待有中国选手一路杀进 re:Invent 2026 决赛，代表中国出征拉斯维加斯。虽然中国男足很拉跨，但相信我们的 Agent **不需要补海参**就能赢下比赛。⚽
 
 ---
 
