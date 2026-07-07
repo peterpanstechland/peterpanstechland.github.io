@@ -16,7 +16,25 @@ description: A 72-hour Agentic Football Cup workshop pre-test by the AWS China U
 
 ## Background: the Agentic Football Cup Workshop
 
-[Agentic Football Cup](https://catalog.workshops.aws/agentic-football-cup/en-US) is an AWS workshop that teaches **Agentic AI** through a 2D pixel-art football game, built around **Amazon Bedrock AgentCore**, **CloudWatch**, and related services.
+![Agentic Football Cup official key art](/img/workshops/2026/agentic-football-cup/key-art-revised.jpg)
+
+*Image source: [agenticfootballcup.com](https://agenticfootballcup.com/)*
+
+[Agentic Football Cup](https://agenticfootballcup.com/) is a **free half-day workshop** (~4 hours) from AWS with a very direct tagline — **Build AI Agents. Watch them compete.** Through a 2D pixel-art football game you get hands-on with **Amazon Bedrock AgentCore**, **CloudWatch**, and related Agentic AI services: every player on the pitch is an autonomous AI agent. No scripts, pure emergent play.
+
+As the official [Learn More](https://agenticfootballcup.com/learnmore/) page puts it, "the football is the learning vehicle" — every pattern used in the match maps to a production agentic workload:
+
+| Official quick facts | Details |
+|------|---------|
+| Format | Free half-day (~4h); private sessions for orgs or public sessions for individuals |
+| Reach | Regular workshops in major cities worldwide (Shanghai and Beijing both on the list), in EN / JA / KO / ES / PT-BR |
+| What you learn | Multi-agent coordination & orchestration, real-time state management, tool use & structured output, guardrails & retry strategies, observability & debugging agent reasoning, prompt engineering for autonomous systems |
+| Tech stack | Amazon Bedrock, Bedrock AgentCore (managed runtime), Strands Agents SDK, Kiro IDE, Nova / Claude or any Bedrock model — deployed in your own AWS account |
+| Architecture | 10 autonomous agents called in parallel every 2 seconds, each decision targeted under 500ms |
+| Touchline coaching | Type instructions from the sideline mid-match and watch your agents reason about whether to follow them |
+| Path to Vegas | Completing a workshop qualifies you for the global league; group winners play for the grand prize **live on stage at AWS re:Invent 2026 in Las Vegas** |
+
+Signup (public session or private booking) takes a minute on the [official site](https://agenticfootballcup.com/).
 
 Matches are **5v5**, with five positions per team: **GK / DEF / MID / FWD1 / FWD2**. The key idea: **every player is an independent agent deployed on AgentCore Runtime** — with its own system prompt, its own model, its own fallback rules, invoked independently on every decision tick. You are not "playing a game"; you are **operating five production agents at once**.
 
@@ -478,7 +496,15 @@ Back in `/analytics`, the dropdown lists each session split by the `grind_result
 
 ## Connection to AWS Summit Shanghai 2026
 
-This was not my first encounter with Agentic Football Cup. At **AWS Summit Shanghai 2026** I competed on-site via Harness and had the pleasure of meeting the **game's author** — that visit was about discovering how fun it is.
+This was not my first encounter with Agentic Football Cup. At **AWS Summit Shanghai 2026** I competed on-site via Harness — the official site captions that day as "**120+ builders, one unforgettable match day**".
+
+![Shanghai Summit's Agentopia Arena — the pixel GOAL moment on the big screen](/img/workshops/2026/agentic-football-cup/afc-sh-14.jpg)
+
+![Shanghai Summit — a hall full of builders tuning agents, group standings rolling on the big screen](/img/workshops/2026/agentic-football-cup/afc-sh-15.jpg)
+
+*Event photos above: [agenticfootballcup.com](https://agenticfootballcup.com/)*
+
+That day I also had the pleasure of meeting the **game's author** — that visit was about discovering how fun it is.
 
 ![Shanghai Summit — selfie with the Agentic Football author, the pixel pitch START screen on the big display](/img/workshops/2026/agentic-football-cup/selfiewithcreator_2.jpg)
 
@@ -499,7 +525,7 @@ This 72-hour pre-test was the systematic follow-up: Harness → local deploy →
 | Automation | 19 matches ground via Playwright + an autopilot loop; coach injection still TBD |
 | Community | 72-hour pre-test + Jul 5 live stream, paving the way for Beijing |
 
-We had a great time and genuinely learned AgentCore along the way. If you are joining the Beijing or online Agentic Football Cup workshop, take our [open-source toolchain](https://github.com/peterpanstechland/sample-ai-possibilities/tree/football-workshop/agentic-football-sample-agents) with you — issues and PRs welcome.
+We had a great time and genuinely learned AgentCore along the way. If you are joining the Beijing or an online Agentic Football Cup workshop (signup at [agenticfootballcup.com](https://agenticfootballcup.com/)), take our [open-source toolchain](https://github.com/peterpanstechland/sample-ai-possibilities/tree/football-workshop/agentic-football-sample-agents) with you — issues and PRs welcome. And remember: completing a workshop qualifies you for the global league, and group winners play live on stage at **AWS re:Invent 2026 in Las Vegas**.
 
 ---
 

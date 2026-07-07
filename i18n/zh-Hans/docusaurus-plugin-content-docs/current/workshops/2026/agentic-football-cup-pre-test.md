@@ -16,7 +16,25 @@ description: 亚马逊云中国 UG 社区 72 小时 Agentic Football Cup worksho
 
 ## 背景：什么是 Agentic Football Cup Workshop？
 
-[Agentic Football Cup](https://catalog.workshops.aws/agentic-football-cup/en-US) 是 AWS 团队开发的 **寓教于乐** 工作坊：通过一场 2D 像素风足球赛，让你快速上手 **Amazon Bedrock AgentCore**、**CloudWatch** 等 Agentic AI 相关服务。
+![Agentic Football Cup 官方主视觉](/img/workshops/2026/agentic-football-cup/key-art-revised.jpg)
+
+*图源：[agenticfootballcup.com](https://agenticfootballcup.com/)*
+
+[Agentic Football Cup](https://agenticfootballcup.com/) 是 AWS 打造的 **免费半天工作坊**（约 4 小时），口号很直接——**Build AI Agents. Watch them compete.** 通过一场 2D 像素风足球赛，让你快速上手 **Amazon Bedrock AgentCore**、**CloudWatch** 等 Agentic AI 相关服务：场上每名球员都是自主决策的 AI Agent，无脚本、纯涌现式比赛。
+
+按官方 [Learn More](https://agenticfootballcup.com/learnmore/) 页的说法，「足球只是学习载体」——工作坊里用到的每个模式都直接对应生产级 agentic workload：
+
+| 官方速览 | 内容 |
+|------|------|
+| 形式 | 免费半天（约 4 小时）；可为组织预约私享场，也可参加公开场 |
+| 覆盖 | 全球主要城市巡回（上海、北京都在列表中），支持 EN / JA / KO / ES / PT-BR 五种语言 |
+| 你将学到 | 多 Agent 协同与编排、实时状态管理、工具调用与结构化输出、Guardrails 与重试策略、可观测与 Agent 推理调试、自主系统的提示词工程 |
+| 技术栈 | Amazon Bedrock、Bedrock AgentCore（托管运行时）、Strands Agents SDK、Kiro IDE、Nova / Claude 等任意 Bedrock 模型，部署在你自己的 AWS 账号 |
+| 架构指标 | 每 2 秒并行调用 10 个 Agent，每次决策目标 500ms 内返回 |
+| 场边执教 | 比赛中可从场边输入指令，看 Agent 自主推理是否听从——就像真教练在边线喊话 |
+| 通往 Vegas | 完成工作坊即获全球联赛资格；小组冠军将站上 **AWS re:Invent 2026 拉斯维加斯** 的舞台现场争夺大奖 |
+
+报名（个人公开场 / 组织私享场）都在 [官网](https://agenticfootballcup.com/) 一分钟搞定。
 
 比赛为 **5v5** 制，每队 5 个位置：**GK（门将）/ DEF（后卫）/ MID（中场）/ FWD1、FWD2（双前锋）**。关键在于——**每名球员就是一个独立部署在 AgentCore Runtime 上的 Agent**：它有自己的提示词、自己的模型、自己的 fallback 规则，每个决策 tick 被独立调用。你不是在「玩游戏」，而是在**同时运维 5 个生产环境里的 Agent**。
 
@@ -479,7 +497,15 @@ $env:AAFC_TEAM_CODE = "你的队伍代码"
 
 ## 与 2026 AWS 上海 Summit 的渊源
 
-这不是我第一次接触 Agentic Football Cup。在 **2026 AWS 上海 Summit** 上，我用 Harness 方式参加过现场比赛，也有幸与 **游戏作者** 交流并合影——那次更多是「体验一下有多好玩」。
+这不是我第一次接触 Agentic Football Cup。在 **2026 AWS 上海 Summit** 上，我用 Harness 方式参加过现场比赛——官方给那天的注脚是「**120+ builders, one unforgettable match day**」。
+
+![上海 Summit 竞技馆（Agentopia Arena）— 大屏上的像素 GOAL 瞬间](/img/workshops/2026/agentic-football-cup/afc-sh-14.jpg)
+
+![上海 Summit — 满场 builder 同时调 Agent，大屏滚动小组积分榜](/img/workshops/2026/agentic-football-cup/afc-sh-15.jpg)
+
+*以上两张现场照片图源：[agenticfootballcup.com](https://agenticfootballcup.com/)*
+
+那天我也有幸与 **游戏作者** 交流并合影——那次更多是「体验一下有多好玩」。
 
 ![上海 Summit — 与 Agentic Football 作者合影，身后大屏是像素球场的 START 画面](/img/workshops/2026/agentic-football-cup/selfiewithcreator_2.jpg)
 
@@ -500,7 +526,7 @@ $env:AAFC_TEAM_CODE = "你的队伍代码"
 | 自动化 | Playwright 刷赛 19 场 + autopilot 闭环；教练喊话注入仍待验证 |
 | 社区 | 72 小时前测 + 7/5 直播，为北京 Workshop 铺路 |
 
-**玩得很开心，也实实在在学到了 AgentCore 相关业务。** 如果你准备参加北京或线上的 Agentic Football Cup Workshop，欢迎直接使用我们的 [开源 toolchain](https://github.com/peterpanstechland/sample-ai-possibilities/tree/football-workshop/agentic-football-sample-agents)，Issue / PR 都敞开。
+**玩得很开心，也实实在在学到了 AgentCore 相关业务。** 如果你准备参加北京或线上的 Agentic Football Cup Workshop（报名见 [agenticfootballcup.com](https://agenticfootballcup.com/)），欢迎直接使用我们的 [开源 toolchain](https://github.com/peterpanstechland/sample-ai-possibilities/tree/football-workshop/agentic-football-sample-agents)，Issue / PR 都敞开。别忘了：完成工作坊就有全球联赛资格，小组冠军直通 **AWS re:Invent 2026 拉斯维加斯** 决赛舞台。
 
 ---
 
