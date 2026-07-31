@@ -25,7 +25,11 @@ Autonomous and semi-autonomous robotic systems.
 
 ## Featured Projects
 
-*Coming soon: Detailed project documentation with architecture diagrams, code samples, and deployment guides.*
+### [PanoTwin — Edge-Side Gaussian-Splatting Digital Twin (2026)](/docs/projects/2026/panotwin-jetson-x5)
+
+A three-stage pipeline running entirely on a Jetson Orin NX 16GB: dual-fisheye calibration, DAP panoramic metric depth, and D²GS sparse-view Gaussian splatting. Walk an Insta360 X5 around a room, get a metric-scale 3D reconstruction — with nothing leaving the LAN. The calibration stage reproduces HKUST's CO-Calib failure analysis to fix intrinsic-initialization divergence on 200°-class fisheye lenses.
+
+**Tech Stack:** Jetson Orin NX 16GB, JetPack 6.2, TensorRT, CUDA, NVDEC, Insta360 X5, DAP, D²GS, Kalibr, COLMAP, gsplat, ROS 2
 
 ---
 

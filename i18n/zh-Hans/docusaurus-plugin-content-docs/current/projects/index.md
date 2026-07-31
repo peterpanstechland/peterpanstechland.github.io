@@ -25,7 +25,11 @@ slug: /projects
 
 ## 精选项目
 
-*即将推出：详细的项目文档，包含架构图、代码示例和部署指南。*
+### [PanoTwin — 边缘端全景高斯泼溅数字孪生（2026）](/docs/projects/2026/panotwin-jetson-x5)
+
+完全跑在 Jetson Orin NX 16GB 上的三级流水线：双鱼眼标定 → DAP 全景度量深度 → D²GS 稀疏视角高斯泼溅。用影石 X5 在房间里走一圈，就能拿到带真实米制尺度的三维重建，全程不出局域网。标定环节复现了 HKUST CO-Calib 的失败机理分析，解决 200° 级鱼眼在 Kalibr 上内参初始化不收敛的问题。
+
+**技术栈：** Jetson Orin NX 16GB、JetPack 6.2、TensorRT、CUDA、NVDEC、影石 X5、DAP、D²GS、Kalibr、COLMAP、gsplat、ROS 2
 
 ---
 
