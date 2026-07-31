@@ -1,12 +1,20 @@
 ---
 sidebar_position: 1
-sidebar_label: "PanoTwin"
+sidebar_label: "PanoTwin（WIP）"
 title: "PanoTwin：用 Jetson Orin NX 16GB + 影石 X5 把一间房重建成边缘端高斯泼溅数字孪生"
 description: "NVIDIA Jetson 2026 开发者征文。一台 Jetson Orin NX 16GB 加一台影石 Insta360 X5，在完全离线的家庭局域网里跑通「双鱼眼标定 → DAP 全景度量深度 → D²GS 稀疏视角高斯泼溅」三级流水线。标定环节复现了 HKUST CO-Calib 的失败机理分析与观测质量选帧器，解决了 200° 级鱼眼在 Kalibr 上内参初始化不收敛的问题。开发周期 2026 年 6 月 1 日 – 7 月 28 日。"
 keywords: [nvidia, jetson, jetson-orin-nx, jetpack-6.2, tensorrt, cuda, nvdec, dap, depth-any-panoramas, ddgs, d2gs, gaussian-splatting, 高斯泼溅, 3dgs, insta360, x5, 影石, 鱼眼标定, co-calib, kalibr, colmap, dinov3, 全景深度, 数字孪生, 边缘ai, 稀疏视角重建, roomba-vllm]
 ---
 
 # PanoTwin：用 Jetson Orin NX 16GB + 影石 X5 把一间房重建成边缘端高斯泼溅数字孪生
+
+:::info WIP — 本文尚未定稿
+
+**当前状态：施工中（work in progress）。** 技术叙述部分已经写完，但性能数据的复测还没跑完。[模块 5.1](#51-实测指标表) 里所有标 `⬜ TODO` 的行都还没有实测数字，跑完会直接回填到原位并撤掉这条提示。
+
+*最后更新：2026 年 7 月 31 日*
+
+:::
 
 > **NVIDIA Jetson 2026 开发者有奖征文** · 主办：GPUS 开发者社区
 >
@@ -36,6 +44,7 @@ keywords: [nvidia, jetson, jetson-orin-nx, jetpack-6.2, tensorrt, cuda, nvdec, d
 |------|------|
 | **项目名** | PanoTwin — 全景数字孪生流水线 |
 | **一句话定位** | 用一台 360° 相机走一圈房间，在 Jetson 上离线重建出带真实尺度的高斯泼溅三维场景 |
+| **当前状态** | **WIP** — 2026 年 7 月 28 日冻结代码，性能复测仍在进行中 |
 | **开发周期** | 2026 年 6 月 1 日 – 7 月 28 日（约 8 周，业余时间，单人开发） |
 | **硬件平台** | NVIDIA Jetson Orin NX 16GB（Seeed reComputer J4012）+ 影石 Insta360 X5 |
 | **系统栈** | JetPack 6.2 / L4T 36.4.3 · CUDA 12.6 · cuDNN 9.3 · TensorRT 10.3 · VPI 3.2 |

@@ -1,12 +1,20 @@
 ---
 sidebar_position: 1
-sidebar_label: "PanoTwin"
+sidebar_label: "PanoTwin (WIP)"
 title: "PanoTwin: Turning a Room into an Edge-Side Gaussian-Splatting Digital Twin with Jetson Orin NX 16GB + Insta360 X5"
 description: "NVIDIA Jetson 2026 developer write-up. A fully offline three-stage pipeline running on a single Jetson Orin NX 16GB: dual-fisheye calibration, DAP panoramic metric depth, and D²GS sparse-view Gaussian splatting. The calibration stage reproduces HKUST's CO-Calib failure analysis and observation-quality frame selector to fix intrinsic-initialization divergence on 200°-class fisheye lenses. Development window: June 1 – July 28, 2026."
 keywords: [nvidia, jetson, jetson-orin-nx, jetpack-6.2, tensorrt, cuda, nvdec, dap, depth-any-panoramas, ddgs, d2gs, gaussian-splatting, 3dgs, insta360, x5, fisheye-calibration, co-calib, kalibr, colmap, dinov3, panoramic-depth, digital-twin, edge-ai, sparse-view-reconstruction, roomba-vllm]
 ---
 
 # PanoTwin: Turning a Room into an Edge-Side Gaussian-Splatting Digital Twin
+
+:::info WIP — this write-up is still being finalized
+
+**Status: work in progress.** The technical narrative is complete, but the performance re-measurement pass is not. Every row marked `⬜ TODO` in [Part 5.1](#51-measured-metrics) is still unmeasured. I'll backfill the numbers in place and drop this notice once that pass is done.
+
+*Last updated: July 31, 2026*
+
+:::
 
 > **NVIDIA Jetson 2026 Developer Write-Up** · Hosted by the GPUS Developer Community
 >
@@ -36,6 +44,7 @@ Every *other* number in this post has an explicit source: NVIDIA datasheet figur
 |-------|---------|
 | **Project** | PanoTwin — a panoramic digital-twin pipeline |
 | **One-liner** | Walk a 360° camera around a room, get a metric-scale Gaussian-splatting reconstruction, computed entirely on a Jetson |
+| **Status** | **WIP** — code frozen July 28, 2026; performance re-measurement still in progress |
 | **Development window** | June 1 – July 28, 2026 (~8 weeks, evenings and weekends, solo) |
 | **Hardware** | NVIDIA Jetson Orin NX 16GB (Seeed reComputer J4012) + Insta360 X5 |
 | **System stack** | JetPack 6.2 / L4T 36.4.3 · CUDA 12.6 · cuDNN 9.3 · TensorRT 10.3 · VPI 3.2 |
