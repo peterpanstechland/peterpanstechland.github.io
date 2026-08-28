@@ -25,6 +25,16 @@ slug: /projects
 
 ## 精选项目
 
+### [VoiceButler — Orin NX 上的离线中文语音对话（2026）](/docs/projects/2026/voicebutler-jetson)
+
+和家里那台机器人共用同一块 Jetson Orin NX 16GB 的离线回路：唤醒词 → VAD → SenseVoice 识别 → 本地 Gemma → Melo TTS。语音全部走 CPU ONNX，GPU 留给 Ollama；意图路由在 2B 模型开口之前先处理开车、算术和小学课本辅导。
+
+**技术栈：** Jetson Orin NX 16GB、JetPack 6.2、sherpa-onnx、SenseVoice、Silero VAD、Zipformer KWS、MeloTTS、Kokoro、Ollama gemma4:e2b、reSpeaker XVF3800、Roomba
+
+**当前状态：** 2026 年 8 月 28 日仍在车上运行。
+
+---
+
 ### [PanoTwin — 边缘端全景高斯泼溅数字孪生（2026）](/docs/projects/2026/panotwin-jetson-x5) · **WIP**
 
 完全跑在 Jetson Orin NX 16GB 上的三级流水线：双鱼眼标定 → DAP 全景度量深度 → D²GS 稀疏视角高斯泼溅。用影石 X5 在房间里走一圈，就能拿到带真实米制尺度的三维重建，全程不出局域网。标定环节复现了 HKUST CO-Calib 的失败机理分析，解决 200° 级鱼眼在 Kalibr 上内参初始化不收敛的问题。

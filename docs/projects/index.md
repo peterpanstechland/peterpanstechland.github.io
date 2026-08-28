@@ -25,6 +25,16 @@ Autonomous and semi-autonomous robotic systems.
 
 ## Featured Projects
 
+### [VoiceButler — Offline Chinese Speech-to-Speech on Orin NX (2026)](/docs/projects/2026/voicebutler-jetson)
+
+A fully offline wake-word → VAD → SenseVoice ASR → local Gemma → Melo TTS loop on the same Jetson Orin NX 16GB as the rest of the house robot. Speech stays on CPU ONNX so the GPU remains free for Ollama; a keyword router handles driving, arithmetic, and a primary-school textbook tutor before the 2B model ever sees the utterance.
+
+**Tech Stack:** Jetson Orin NX 16GB, JetPack 6.2, sherpa-onnx, SenseVoice, Silero VAD, Zipformer KWS, MeloTTS, Kokoro, Ollama gemma4:e2b, reSpeaker XVF3800, Roomba
+
+**Status:** Running on the robot as of August 28, 2026.
+
+---
+
 ### [PanoTwin — Edge-Side Gaussian-Splatting Digital Twin (2026)](/docs/projects/2026/panotwin-jetson-x5) · **WIP**
 
 A three-stage pipeline running entirely on a Jetson Orin NX 16GB: dual-fisheye calibration, DAP panoramic metric depth, and D²GS sparse-view Gaussian splatting. Walk an Insta360 X5 around a room, get a metric-scale 3D reconstruction — with nothing leaving the LAN. The calibration stage reproduces HKUST's CO-Calib failure analysis to fix intrinsic-initialization divergence on 200°-class fisheye lenses.
