@@ -855,3 +855,15 @@ blockquote p {
     height: 280px;
   }
 }
+
+/* UI screenshots: show the whole dashboard, do not crop like phone photos. */
+.markdown .photo-ui {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  margin: 0.75rem 0 1.25rem;
+  border: 1px solid var(--border-color);
+}

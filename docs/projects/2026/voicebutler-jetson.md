@@ -113,6 +113,19 @@ IDLE is the only state that should run 24/7. It costs two CPU threads of Zipform
 
 <img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-unbox.jpg" alt="What's in the kit: 4-mic ring, XIAO ESP32S3 carrier, FFC ribbon, and the 3M tape that keeps the ring on the chassis." />
 
+:::warning The expensive SKU is the harder one
+
+I opened the Circular-4 + XIAO box expecting a USB microphone. The box gives you a pretty render, a lime-green logo, and **no wiki URL**. If you do not already know that Seeed documentation lives at [wiki.seeedstudio.com](https://wiki.seeedstudio.com/respeaker_flex_xiao_introduction/), you are staring at two PCBs and an FFC with no next step.
+
+The high-end board with the XIAO ESP32S3 soldered on ships as an **I2S** device for the XIAO, not as a UAC sound card. To use it the way a Jetson wants — "it shows up as `XVF3800` in PortAudio" — you either:
+
+1. **Write firmware on the XIAO** and talk to the XVF3800 over I2S, or
+2. **DFU-flash the XMOS USB firmware** so the array enumerates as a USB mic. That flash goes through the USB-C **next to the 3.5 mm jack** (XMOS), not the XIAO port. Seeed's own notes: [reSpeaker Flex + XIAO](https://wiki.seeedstudio.com/respeaker_flex_xiao_introduction/) and [XVF3800 USB array](https://wiki.seeedstudio.com/respeaker_xvf3800_introduction/).
+
+That is a real on-ramp. I wanted far-field ears for a kitchen robot, not a weekend of `dfu-util`. The cheaper SKU without the XIAO would have been the USB-mic default.
+
+:::
+
 Match audio devices **by name substring**, never by ALSA card index. USB hubs re-enumerate; `hw:2` is a different gadget after a replug.
 
 ```text
@@ -408,10 +421,18 @@ If replies feel sluggish after the first token, look at TTS threads, not at "a b
 
 ## Part 7: Calibration labs (do these before you demo)
 
-A voice robot that you cannot calibrate is a science fair. The process hosts three lab modes so you do not run a second copy of the models.
+A voice robot that you cannot calibrate is a science fair. The same process hosts the labs, so you do not load a second copy of the models. Open the Roomba-VLLM web app → **VOICE**. Knobs write through to `.env`.
+
+<img class="photo-ui" src="/img/projects/2026/voicebutler-ui-assistant.png" alt="VOICE tab, assistant mode: DoA compass, Roomba 90° turn + cal, KWS threshold 0.10, VAD silence 0.45 s, MeloTTS, live transcript of the textbook tutor." />
 
 1. **KWS lab** — say the wake phrase, watch hits, drag threshold. Stop when a kettle does not wake it and a normal "Hey Boss" does.
+
+<img class="photo-ui" src="/img/projects/2026/voicebutler-ui-kws.png" alt="KWS lab selected: threshold 0.10 (lower is more sensitive), score 1.50, status IDLE · kws_lab." />
+
 2. **VAD lab** — speak a sentence, drag silence ms. Too low: it cuts 谢谢. Too high: you wait on the trailing 0.6 s like a call centre.
+
+<img class="photo-ui" src="/img/projects/2026/voicebutler-ui-vad.png" alt="VAD lab selected: threshold 0.50, silence-to-cut 0.45 s, status IDLE · vad_lab." />
+
 3. **DoA lab** — stand in front, tap "当前方向 = 正前方", then walk a quarter circle and confirm the compass.
 4. **Turn lab** — command 90°, measure, write `BUTLER_ROOMBA_TURN_CAL`.
 
@@ -449,6 +470,8 @@ Do this on carpet, not on a desk. The kinematics lie on shag.
 
 **6. Name the sound card, not its number.** Future you, unplugging a hub, will thank present you.
 
+**7. The SKU with more chips is not the SKU that works on day one.** Circular-4 + XIAO ships I2S. USB mic is a firmware choice, and the box will not tell you that.
+
 ---
 
 ## Part 10: Where this sits next to PanoTwin
@@ -474,3 +497,5 @@ Until barge-in works, the robot will finish its sentence. That is a hardware wir
 - [Ollama](https://ollama.com/) — local Gemma 4 on Jetson
 - [Roomba-VLLM](/docs/hackathons/2026/roomba-vllm) — the chassis this mouth is bolted to
 - [PanoTwin](/docs/projects/2026/panotwin-jetson-x5) — why the GPU is already busy
+- [reSpeaker Flex + XIAO wiki](https://wiki.seeedstudio.com/respeaker_flex_xiao_introduction/) — the page that should have been printed on the box
+- [reSpeaker XVF3800 USB array wiki](https://wiki.seeedstudio.com/respeaker_xvf3800_introduction/) — DFU / USB firmware

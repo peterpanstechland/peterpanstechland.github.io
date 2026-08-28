@@ -113,6 +113,19 @@ flowchart LR
 
 <img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-unbox.jpg" alt="开箱：四麦圆环、XIAO ESP32S3 载板、FFC 排线，以及把圆环粘上底盘的 3M 胶带。" />
 
+:::warning 越贵的 SKU，上手越不直观
+
+开箱那一刻我以为这是一支 USB 麦克风。盒子上是漂亮的渲染图、荧光绿的 logo，**没有 wiki 地址**。要不是已经知道 Seeed 文档住在 [wiki.seeedstudio.com](https://wiki.seeedstudio.com/respeaker_flex_xiao_introduction/)，你面对的就是两块板加一根排线，下一步完全靠猜。
+
+带 XIAO ESP32S3 的高配版出厂是给 XIAO 用的 **I2S**，不是 UAC 声卡。Jetson 想要的用法是 PortAudio 里出现 `XVF3800`，这只有两条路：
+
+1. **给 XIAO 做二次开发**，走 I2S 跟 XVF3800 说话；或者
+2. **重新刷 XMOS 的 USB 固件**，让阵列枚举成 USB 麦克风。刷写走 **3.5 mm 旁边那颗 USB-C**（XMOS 侧），不是 XIAO 那口。Seeed 自己的说明：[reSpeaker Flex + XIAO](https://wiki.seeedstudio.com/respeaker_flex_xiao_introduction/)、[XVF3800 USB 阵列](https://wiki.seeedstudio.com/respeaker_xvf3800_introduction/)。
+
+这是真门槛。我想要的是厨房里能用的远场耳朵，不是一个周末的 `dfu-util`。不带 XIAO 的便宜版，默认反而才是 USB 麦。
+
+:::
+
 音频设备按 **名字子串** 匹配，永远不要按 ALSA 卡号。USB Hub 重新枚举之后，`hw:2` 就是另一件东西。
 
 ```text
@@ -408,10 +421,18 @@ BUTLER_LLM_REASONING=none
 
 ## 模块 7：标定实验室（演示前先做这些）
 
-一台没法标定的语音机器人是科幻展板。同一进程托管三种实验室模式，这样就不必再加载一份模型。
+一台没法标定的语音机器人是科幻展板。同一进程托管实验室模式，这样就不必再加载一份模型。打开 Roomba-VLLM 网页 → **VOICE**。旋钮会写回 `.env`。
+
+<img class="photo-ui" src="/img/projects/2026/voicebutler-ui-assistant.png" alt="VOICE 页助手模式：DoA 罗盘、Roomba 90° 转向与标定、KWS 阈值 0.10、VAD 静音 0.45 秒、MeloTTS，以及课本辅导的实时转写。" />
 
 1. **KWS 实验室** — 喊唤醒词，看命中，拖阈值。停在「水壶不会唤醒、正常 Hey Boss 会唤醒」。
+
+<img class="photo-ui" src="/img/projects/2026/voicebutler-ui-kws.png" alt="选中 KWS 实验室：阈值 0.10（越低越灵敏），score 1.50，状态 IDLE · kws_lab。" />
+
 2. **VAD 实验室** — 说一句话，拖静音毫秒。太低：切开「谢谢」。太高：像客服一样干等那 0.6 秒。
+
+<img class="photo-ui" src="/img/projects/2026/voicebutler-ui-vad.png" alt="选中 VAD 实验室：阈值 0.50，切句静音 0.45 秒，状态 IDLE · vad_lab。" />
+
 3. **DoA 实验室** — 站在正前方，点「当前方向 = 正前方」，再走四分之一圈看罗盘。
 4. **转向实验室** — 下发 90°，实测，写入 `BUTLER_ROOMBA_TURN_CAL`。
 
@@ -449,6 +470,8 @@ BUTLER_LLM_REASONING=none
 
 **6. 给声卡起名字，不要记它的编号。** 未来那个拔掉 Hub 的你会感谢现在的你。
 
+**7. 芯片更多的 SKU，不一定第一天就能用。** Circular-4 + XIAO 出厂是 I2S。USB 麦是固件选择，盒子不会告诉你。
+
 ---
 
 ## 模块 10：它和 PanoTwin 怎么挤在同一块板上
@@ -474,3 +497,5 @@ VoiceButler 是 **耳朵和嘴巴**。PanoTwin 是 **带尺度的记忆**。Room
 - [Ollama](https://ollama.com/) — Jetson 上的本地 Gemma 4
 - [Roomba-VLLM](/docs/hackathons/2026/roomba-vllm) — 这张嘴巴拧上去的底盘
 - [PanoTwin](/docs/projects/2026/panotwin-jetson-x5) — GPU 为什么已经很忙
+- [reSpeaker Flex + XIAO wiki](https://wiki.seeedstudio.com/respeaker_flex_xiao_introduction/) — 本该印在盒子上的那一页
+- [reSpeaker XVF3800 USB 阵列 wiki](https://wiki.seeedstudio.com/respeaker_xvf3800_introduction/) — DFU / USB 固件
