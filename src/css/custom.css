@@ -813,3 +813,45 @@ blockquote p {
 .tag {
   transition: all 0.2s ease;
 }
+
+/* Phone photos in project write-ups: keep landscape short, portraits side-by-side. */
+.markdown .photo-wide {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-md);
+  margin: 1rem 0 1.25rem;
+}
+
+.markdown .photo-pair {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin: 1rem 0 1.5rem;
+}
+
+.markdown .photo-pair img {
+  width: calc(50% - 6px);
+  height: 420px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius-md);
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .markdown .photo-wide {
+    max-height: 240px;
+  }
+
+  .markdown .photo-pair {
+    flex-direction: column;
+  }
+
+  .markdown .photo-pair img {
+    width: 100%;
+    height: 280px;
+  }
+}

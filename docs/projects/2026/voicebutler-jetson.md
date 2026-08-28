@@ -14,7 +14,10 @@ keywords: [nvidia, jetson, jetson-orin-nx, jetpack-6.2, speech-to-speech, sherpa
 >
 > **Platform: NVIDIA Jetson Orin NX 16GB (reComputer J4012) · JetPack 6.2 · speech on CPU, LLM on GPU, nothing required from the cloud**
 
-![The same Roomba chassis this voice stack talks from — Jetson Orin NX 16GB, USB speaker, and the rest of the house-robot payload.](/img/hackathons/2026/roomba-vllm-robot-hero.png)
+<div class="photo-pair">
+  <img src="/img/projects/2026/voicebutler-rig-top.jpg" alt="Top-down: Jetson Orin NX on the Roomba chassis, purple 3D-printed carrier, heatsink, and the LED ring that sits over the board." />
+  <img src="/img/projects/2026/voicebutler-rig-speaker.jpg" alt="The same chassis from standing height, USB speaker clipped to the left of the purple frame, Ethernet and power still plugged in from the bench." />
+</div>
 
 This is the write-up I wish I had before wiring a Chinese speaker onto a Jetson that already had a VLM, a depth service, and three PyTorch virtualenvs. It is a **tutorial of a production pipeline**, not a survey of ASR papers. Every stage below is running on my board today.
 
@@ -106,6 +109,10 @@ IDLE is the only state that should run 24/7. It costs two CPU threads of Zipform
 | **USB speaker** | Playback | Cheap. The painful part is that the XVF3800 does **not** get an AEC reference from it — see Part 8 |
 | **Roomba chassis** | Turns toward the speaker | Open-loop differential drive through `ws://127.0.0.1:8000/ws/control` |
 
+<img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-box.jpg" alt="Seeed Studio reSpeaker Flex XVF3800 Circular-4 retail box — the far-field mic array this stack actually listens through." />
+
+<img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-unbox.jpg" alt="What's in the kit: 4-mic ring, XIAO ESP32S3 carrier, FFC ribbon, and the 3M tape that keeps the ring on the chassis." />
+
 Match audio devices **by name substring**, never by ALSA card index. USB hubs re-enumerate; `hw:2` is a different gadget after a replug.
 
 ```text
@@ -190,6 +197,8 @@ Live probe:
 ```
 
 ### 3.2 Direction of arrival, then turn
+
+<img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-live.jpg" alt="reSpeaker 4-mic ring joined to the Flex carrier over FFC, USB-C powered, 2.4 GHz antenna out — this is the DoA source, not a neural net." />
 
 The XVF3800 exposes azimuth as a USB vendor control transfer (`resid=20`, `cmdid=18`): status byte + `uint16` degrees + speech flag. No neural net, no extra GPU.
 

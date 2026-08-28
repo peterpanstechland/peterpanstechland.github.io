@@ -14,7 +14,10 @@ keywords: [nvidia, jetson, jetson-orin-nx, jetpack-6.2, 语音对话, sherpa-onn
 >
 > **运行平台：NVIDIA Jetson Orin NX 16GB（reComputer J4012）· JetPack 6.2 · 语音在 CPU，LLM 在 GPU，不依赖云端**
 
-![这套语音栈所在的同一台 Roomba：Jetson Orin NX 16GB、USB 喇叭，以及其余家用机器人载荷。](/img/hackathons/2026/roomba-vllm-robot-hero.png)
+<div class="photo-pair">
+  <img src="/img/projects/2026/voicebutler-rig-top.jpg" alt="俯拍：Roomba 底盘上的 Jetson Orin NX，紫色 3D 打印支架、散热片，以及盖在板子上的 LED 环。" />
+  <img src="/img/projects/2026/voicebutler-rig-speaker.jpg" alt="同一台车的站立俯视：USB 喇叭卡在紫色框架左侧，网线和电源还插在台架上。" />
+</div>
 
 这是我在给一台已经装着 VLM、深度服务、三个 PyTorch 虚拟环境的 Jetson 接上中文嘴巴之前，希望有人写给我的东西。它是一份 **正在跑着的生产流水线教程**，不是 ASR 论文综述。下面每一级今天都在这块板上工作。
 
@@ -106,6 +109,10 @@ flowchart LR
 | **USB 喇叭** | 播放 | 便宜。痛苦在于 XVF3800 **拿不到**它的 AEC 参考信号 — 见模块 8 |
 | **Roomba 底盘** | 转向说话人 | 开环差速，走 `ws://127.0.0.1:8000/ws/control` |
 
+<img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-box.jpg" alt="Seeed Studio reSpeaker Flex XVF3800 Circular-4 包装盒：这套栈真正在听的远场麦阵。" />
+
+<img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-unbox.jpg" alt="开箱：四麦圆环、XIAO ESP32S3 载板、FFC 排线，以及把圆环粘上底盘的 3M 胶带。" />
+
 音频设备按 **名字子串** 匹配，永远不要按 ALSA 卡号。USB Hub 重新枚举之后，`hw:2` 就是另一件东西。
 
 ```text
@@ -190,6 +197,8 @@ GigaSpeech Zipformer 是 **英文 BPE** 模型。关键词文件 **不是** 明�
 ```
 
 ### 3.2 声源方位，然后转身
+
+<img class="photo-wide" src="/img/projects/2026/voicebutler-respeaker-live.jpg" alt="reSpeaker 四麦圆环经 FFC 接到 Flex 载板，USB-C 供电，2.4 GHz 天线伸出 — DoA 来自这块芯片，不是神经网络。" />
 
 XVF3800 的方位角是 USB vendor 控制传输（`resid=20`，`cmdid=18`）：状态字节 + `uint16` 角度 + 是否有语音。没有神经网络，不占 GPU。
 
