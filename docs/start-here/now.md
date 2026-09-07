@@ -8,7 +8,7 @@ slug: now
 
 > This page is automatically updated to reflect my current work focus and activities.
 
-## August 2026
+## September 2026
 
 ### Current Focus
 
