@@ -38,5 +38,9 @@
   "sidebar.docsSidebar.category.AI & ML": {
     "message": "AI & ML",
     "description": "The label for category AI & ML in sidebar docsSidebar"
+  },
+  "sidebar.docsSidebar.category.hackathons-2026-aix-origin-apex-hand": {
+    "message": "AIx Origin · Apex 灵巧手",
+    "description": "The label for category 'AIx Origin · Apex Hand' in sidebar 'docsSidebar'"
   }
 }

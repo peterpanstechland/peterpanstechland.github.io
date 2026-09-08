@@ -24,6 +24,7 @@ Hackathons are an incredible way to:
 
 | Year | Event | Project | Result |
 |------|-------|---------|--------|
+| 2026 | AIx Origin Summit Shenzhen · INNOAI Hackathon | PΛN — HDMI cocktail machine + Apex dexterous hand (teleop / baoding RL) | 🏆 Insta360 Special Award |
 | 2026 | Attrax Spring Hackathon · Insta360 Cameraman Track | Roomba-VLLM | 🥇 Cameraman Award (TOP 1/200 Outlier) |
 | 2026 | OpenClaw Builder Program (Lobster Frontier Experiment) | Cyber Boss | 🏆 Submitted |
 | 2026 | NVIDIA DGX Spark Hackathon | NemoClaw Travel OS | 🏆 Submitted |
@@ -34,6 +35,11 @@ Hackathons are an incredible way to:
 ---
 
 ## 🔥 Featured Projects
+
+### [PΛN + Apex Dexterous Hand — AIx Origin · INNOAI Hackathon 2026](/docs/hackathons/2026/aix-origin-apex-hand)
+A cocktail machine (PΛN, Personal Agent for Nightlife — a Human Drink Machine Interface) wearing a Rysen Apex dexterous hand, and a five-part tutorial series on the hand itself: Isaac Lab + RSL-RL PPO training on a 12 GB laptop, first contact with the real-hand SDK, webcam teleoperation with the clinical Kapandji opposition test (score 9 on hardware), baoding-ball RL through nine reward iterations and a mount-angle sweep, and the sim-to-real observation contract. First team at the event to get the dexterous hand running; Insta360 Special Award.
+
+**Tech Stack:** Rysen Apex Hand, Isaac Sim 6 / Isaac Lab 3, RSL-RL PPO, MediaPipe, DexPilot-style IK, ONNX Runtime, Logitech C920, RealSense D435, Insta360 X5, RTX 4080 Laptop
 
 ### [Roomba-VLLM — Attrax Spring Hackathon 2026 · Insta360 Cameraman Track](/docs/hackathons/2026/roomba-vllm)
 A fully local cyber butler — Insta360 Link 2 Pro as the gimbaled front camera, Jetson Orin NX running Ollama + Gemma E4B for live VLM inference, OpenClaw for daily patrols and a star-based reward system on my 8-year-old's room. Built in 24 hours (after 24 hours of jamming a robotic arm to a DJ set). Sponsored by JLCPCB. Won the Cameraman Award (TOP 1/200 Outlier).
@@ -73,6 +79,7 @@ Most of my hackathon projects utilize:
 | **NVIDIA** | NemoClaw, Nemotron, vLLM, TensorRT-LLM, NIM, OpenShell, NVFP4 |
 | **Edge / Local** | NVIDIA DGX Spark, Jetson Orin NX, ESP32, Raspberry Pi, Ollama |
 | **Embodied / Cameras** | Insta360 Link 2 Pro / X5, DAP, AirSim360, DiT360, DDGS, Roomba chassis |
+| **Robotics / Sim** | Rysen Apex Hand, Isaac Sim 6, Isaac Lab 3, RSL-RL PPO, MediaPipe, DexPilot, ONNX Runtime, RealSense D435 |
 | **3D / Hardware** | TinkerCAD, Bambu Lab X1C |
 | **Frontend** | React, Next.js, Tailwind CSS, Vanilla JS PWA |
 | **DevOps** | Ansible, CDK, SAM, GitHub Actions, WireGuard |

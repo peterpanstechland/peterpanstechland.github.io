@@ -24,6 +24,7 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 
 | 年份 | 赛事 | 项目 | 成绩 |
 |------|------|------|------|
+| 2026 | AIx Origin Summit 深圳场 · INNOAI 黑客松 | PΛN — HDMI 调酒机 + Apex 灵巧手（遥操作 / 保健球 RL） | 🏆 影石 Insta360 特别奖 |
 | 2026 | Attrax 春潮黑客松 · 影石 Cameraman 赛道 | Roomba-VLLM | 🥇 Cameraman 大奖（TOP 1/200 Outlier） |
 | 2026 | OpenClaw 龙虾前沿实验计划 | Cyber Boss 赛博老板 | 🏆 已提交 |
 | 2026 | NVIDIA DGX Spark 黑客松 | NemoClaw Travel OS | 🏆 已提交 |
@@ -34,6 +35,11 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 ---
 
 ## 🔥 精选项目
+
+### [PΛN + Apex 灵巧手 — AIx Origin · INNOAI 黑客松 2026](/docs/hackathons/2026/aix-origin-apex-hand)
+一台顶着源升 Apex 灵巧手的调酒机（PΛN = Personal Agent for Nightlife，一个 Human Drink Machine Interface），以及围绕这只手的五篇教程：12 GB 笔记本上的 Isaac Lab + RSL-RL PPO 训练、真机 SDK 首次连通、摄像头遥操作 + 医学 Kapandji 对掌试验（真机打到 9 分）、保健球 RL 的九轮奖励迭代与安装角扫描、Sim2Real 观测契约。本场第一支把灵巧手跑起来的队伍；影石 Insta360 特别奖。
+
+**技术栈：** 源升 Apex Hand、Isaac Sim 6 / Isaac Lab 3、RSL-RL PPO、MediaPipe、DexPilot 风格 IK、ONNX Runtime、Logitech C920、RealSense D435、Insta360 X5、RTX 4080 Laptop
 
 ### [Roomba-VLLM — Attrax 春潮黑客松 2026 · 影石 Cameraman 赛道](/docs/hackathons/2026/roomba-vllm)
 为我家 8 岁女儿房间打造的全本地化赛博管家——Insta360 Link 2 Pro 当云台前置摄像头、Jetson Orin NX 跑 Ollama + Gemma E4B 做 Live VLM 推理、OpenClaw 排定时巡视和星星积分系统。24 小时极限交付（前 24 小时在玩高擎动力机械臂蹦迪）；嘉立创赞助硬件；斩获影石 Cameraman 大奖（TOP 1/200 Outlier）。
@@ -73,6 +79,7 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 | **NVIDIA** | NemoClaw, Nemotron, vLLM, TensorRT-LLM, NIM, OpenShell, NVFP4 |
 | **边缘/本地** | NVIDIA DGX Spark, Jetson Orin NX, ESP32, Raspberry Pi, Ollama |
 | **具身/相机** | Insta360 Link 2 Pro / X5、DAP、AirSim360、DiT360、DDGS、Roomba 底盘 |
+| **机器人 / 仿真** | 源升 Apex Hand、Isaac Sim 6、Isaac Lab 3、RSL-RL PPO、MediaPipe、DexPilot、ONNX Runtime、RealSense D435 |
 | **3D / 硬件** | TinkerCAD, Bambu Lab X1C |
 | **前端** | React, Next.js, Tailwind CSS, 原生 JS PWA |
 | **DevOps** | Ansible, CDK, SAM, GitHub Actions, WireGuard |
