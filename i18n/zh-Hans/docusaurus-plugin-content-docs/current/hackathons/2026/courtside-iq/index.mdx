@@ -1,0 +1,66 @@
+---
+sidebar_position: 0
+sidebar_label: 项目总览
+title: "Courtside IQ：让 AI 解说有证据，让主播保留判断"
+description: "TEAM7 · 技术犯规的 NBA 黑客松复盘：没有进入决赛，留下主播主导的篮球解说工作台、可检查的证据链，以及离线可读的交互式 AWS 架构。"
+keywords: [Courtside IQ, NBA, 黑客松, 技术犯规, 篮球解说, AWS, Strands, AgentCore, Bedrock, builder]
+---
+
+# Courtside IQ：让 AI 解说有证据，让主播保留判断
+
+**TEAM7 · 技术犯规 · NBA 黑客松**
+
+这次没进决赛，确实失落。我想把其中有用的工作整理下来，让其他 builder 也能研究和复用。我们做的 **Courtside IQ**，是一个由真人主播主导、AI 提供带来源提词的篮球解说工作台。比赛限时 12 小时；这里记录的是仓库当前的作品状态。
+
+我想探索的问题很具体：主播暂停一段进攻，问一句“这里发生了什么变化”，软件能不能帮他把答案查清楚、讲明白？一句篮球术语听起来像那么回事还不够。球员、事件、数据和观众正在看的那一帧，需要对应得上。
+
+[查看项目源码](https://github.com/peterpanstechland/NBAHackathon) · [观看实验环境中的公共节目](https://d3a7oi75hu7ibj.cloudfront.net/broadcast) · [阅读 Builder 长文](./builder-article)
+
+演示部署在实验环境中，不保证长期在线。代码仓库和本站保存的架构说明，是后续回看与研究的主要入口。
+
+## 先让主播用得顺手
+
+入口是一段上传的篮球视频。预处理完成后，主播可以选中关键帧，查看可用的球员与事件证据，再向 AI 提问。Qwen 结合图片和结构化底稿观察画面，推理流程把这些材料整理成简短的解说提示。主播可以修正身份、在球场上画线、停留在某一帧、慢放，或者批准一张数据卡上屏。
+
+![Courtside IQ 主播工作台：篮球视频、关键帧、球员证据与私人提词工具](/img/hackathons/2026/courtside-iq/host-workspace.png)
+
+这里最重要的交互是“确认”。私人提词可以被追问、修改或丢弃；公开图层和合成口播使用经过主播批准的内容。主播保留自己的表达与节奏，也对观众最终看到、听到的内容负责。
+
+从 builder 的角度，我越来越在意“一句话怎么被使用”。主播快速扫一眼的提示、展开后查看的解释、需要时能追溯的来源，服务于不同的时刻。把它们接起来，比再加一块大段生成文本的面板更有价值。
+
+## 从一帧画面，走到有依据的解释
+
+上传链路把素材存入 S3，由 Step Functions 编排处理。MediaConvert 准备视频与抽帧；视觉实现包含通过 SageMaker 运行的 RF-DETR 检测、SAM2 分割和 ViTPose 姿态估计，Rekognition OCR 辅助读取画面文字。具体能得到哪些结果，取决于启用的端点与已加载模型。这些观察再与可取得的 NBA 逐回合记录和名单快照结合。
+
+“结合”不等于自动变成真相。镜头里的临时轨迹只是一个对象，不天然对应某位 NBA 球员。官方匹配受已入库快照覆盖范围限制，视频时间与比赛时钟的对齐也包含估算。遇到陌生视频，可以保留视觉轨迹，同时让姓名和统计继续保持未知。官方记录、视觉观察和 AI 解读，需要让主播看得出区别。
+
+整回合分析实际使用的 Strands 图是 **evidence_planner → tactical_analyst → evidence_editor**：先检查缺口，再解释攻防，最后对照证据复核结论。AgentCore 承载 Agent 应用，Bedrock 提供模型推理，两者职责不同。想核查这段逻辑，可以从[三节点图的实现](https://github.com/peterpanstechland/NBAHackathon/blob/main/agent/src/copilot_agent/game_analysis.py)开始读。
+
+项目尚未经过独立准确率评估，也没有完成陌生素材的盲测。模型调用成功能说明链路跑通，不能证明每个球员、球权判断或战术解释都正确。
+
+## 把一次讲解，留下来给别人看
+
+主播的一次操作可以保存为解说作品。默认的编辑方式保留原片、单独的节目混音音轨，以及记录暂停、播放变化、画线和已批准图层的 JSON 时间线。回放时重现这套呈现；如果在浏览器中合成为单个视频文件，就需要重新编码，不能称为无损导出。
+
+![Courtside IQ 公共播出页：已录制的篮球解说节目与共享成品库入口](/img/hackathons/2026/courtside-iq/broadcast.png)
+
+完成同步的作品进入跨会话共享成品库。公共 `/broadcast` 页面使用服务器节目时钟，让观众从当前进度加入循环播放的录制节目。这是基于上传素材的体验，不是真实 NBA 比赛直播源，也不是 IVS / MediaLive 推流链路。在这个范围内，它已经能串起一件完整的事：复核一段进攻，录下自己的解释，再把节目分享出去。
+
+## 不开云账号，也能看架构
+
+下面的交互架构是一个静态、独立的 HTML 文件，不调用实验后端，也不查询实时 AWS 资源。即使演示环境下线，仍可以在这里检查实现路径和能力边界。
+
+<iframe
+  src="/labs/courtside-iq-architecture-zh.html"
+  title="Courtside IQ 交互式 AWS 架构：实现路径与证据边界"
+  style={{width: '100%', height: 780, border: '1px solid #cbd5e1', borderRadius: 16}}
+  loading="lazy"
+/>
+
+[全屏打开交互架构](pathname:///labs/courtside-iq-architecture-zh.html) · [了解可复用架构 Skill](./interactive-architecture-skill) · [下载 Skill ZIP](/downloads/aws-interactive-architecture.zip)
+
+## 我想带走的东西
+
+作为参赛作品，它有了一个明确的结果；作为 builder 的练习，我还是希望它能留下可用的东西。下一步真正有意义的进展，是做一组更小、更可重复的评估：用陌生片段核对身份和事件对齐，记录助手在哪些地方帮到了主播，又在哪些地方误导了主播。单纯继续加功能，回答不了这些问题。
+
+[Builder 长文](./builder-article)会展开产品取舍和工程实现；[架构 Skill 指南](./interactive-architecture-skill)则把“从仓库提取一份可检查的架构解释”整理成可复用的方法。加上公开代码，这些就是我希望从 Courtside IQ 留下的东西：一个真实的工作台、说得清楚的边界，以及其他 builder 能继续研究和改进的材料。

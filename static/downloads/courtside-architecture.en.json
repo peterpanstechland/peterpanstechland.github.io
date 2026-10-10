@@ -1,0 +1,1243 @@
+{
+  "title": "TEAM7 · Courtside IQ architecture",
+  "subtitle": "User workflows, code evidence and operating limits · static offline explorer",
+  "locale": "en",
+  "repoUrl": "https://github.com/peterpanstechland/NBAHackathon",
+  "revision": "f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c",
+  "nodes": [
+    {
+      "id": "host",
+      "title": "Host workspace",
+      "summary": "Pause · inspect · approve",
+      "responsibility": "The browser maps video time to the available evidence. The host reviews identities, annotations, narration and public actions.",
+      "limits": "Private suggestions are not authoritative events. Unknown identities must remain unknown.",
+      "boundary": "Client · browser",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/surfaces/host/HostPage.tsx",
+          "line": 1,
+          "claim": "Host workspace and operator controls."
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "title": "Amazon CloudFront",
+      "summary": "SPA + source delivery + /api",
+      "responsibility": "CloudFront routes the web application, media and uncached API paths to their configured origins.",
+      "limits": "CloudFront is global. This logical group is not a VPC or availability-zone diagram.",
+      "boundary": "AWS · global edge",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/web.ts",
+          "line": 29,
+          "claim": "Web and API routing behavior."
+        }
+      ],
+      "icon": "cloudfront"
+    },
+    {
+      "id": "api",
+      "title": "API Gateway → Lambda",
+      "summary": "HTTP control plane",
+      "responsibility": "HTTP routes validate access and dispatch upload, evidence, production and broadcast operations to Python handlers.",
+      "limits": "A session ID is not an owner credential. Public read and owner write have different access rules.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/http-api.ts",
+          "line": 35,
+          "claim": "HTTP API Lambda integration."
+        }
+      ],
+      "icon": "api-gateway"
+    },
+    {
+      "id": "s3",
+      "title": "Amazon S3",
+      "summary": "Media + versioned artifacts",
+      "responsibility": "Uploads, extracted frames, evidence artifacts and shared productions are stored under separate object keys.",
+      "limits": "An object key is not public authorization. Large original files still incur storage and transfer costs.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/artifacts.py",
+          "line": 1,
+          "claim": "Artifact persistence and delivery helpers."
+        }
+      ],
+      "icon": "s3"
+    },
+    {
+      "id": "workflow",
+      "title": "AWS Step Functions",
+      "summary": "Durable staged analysis",
+      "responsibility": "The state machine coordinates media preparation, evidence joining and batched vision indexing, with explicit failure recording.",
+      "limits": "Retries do not guarantee automatic correction of bad identities, game matching or model claims.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/pipeline.ts",
+          "line": 23,
+          "claim": "Pipeline state transitions and catches."
+        }
+      ],
+      "icon": "step-functions"
+    },
+    {
+      "id": "media",
+      "title": "AWS Elemental MediaConvert",
+      "summary": "Prepare video + JPEG frames",
+      "responsibility": "MediaConvert produces a source-resolution MP4 and JPEG samples for analysis. A separate render branch transcodes an already-composited WebM.",
+      "limits": "It does not interpret the custom editing JSON. Analysis currently samples 4 fps over at most the first ten minutes.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/pipeline/workflow.py",
+          "line": 17,
+          "claim": "Source processing and alternate render branch."
+        }
+      ],
+      "icon": "mediaconvert"
+    },
+    {
+      "id": "ocr",
+      "title": "Amazon Rekognition",
+      "summary": "Scoreboard OCR",
+      "responsibility": "The pipeline reads visible scoreboard text to estimate period and game-clock alignment.",
+      "limits": "OCR is fallible. A timestamp match is not a verified ball-release frame.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/pipeline/workflow.py",
+          "line": 80,
+          "claim": "Scoreboard region and sampled OCR calls."
+        }
+      ],
+      "icon": "rekognition"
+    },
+    {
+      "id": "official",
+      "title": "Official NBA evidence join",
+      "summary": "PBP · rosters · shot records",
+      "responsibility": "Python joins the inferred game clock, roster and hints to the NBA snapshots actually available to the application.",
+      "limits": "Coverage is bounded by ingested snapshots. Filenames are hints, not proof; an unfamiliar clip may remain unmatched.",
+      "boundary": "AWS · Python application logic",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/truth/resolver.py",
+          "line": 90,
+          "claim": "Candidate matching and evidence resolution."
+        }
+      ]
+    },
+    {
+      "id": "vision",
+      "title": "Amazon SageMaker AI",
+      "summary": "RF-DETR · SAM2 · ViTPose",
+      "responsibility": "A custom inference server provides detection, segmentation and pose outputs used by the vision index and selected-player presentation.",
+      "limits": "Outputs depend on enabled endpoints and loaded models. Tracks do not guarantee identity or cross-shot re-identification.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/courtvision/server.py",
+          "line": 1,
+          "claim": "Custom vision inference service."
+        }
+      ],
+      "icon": "sagemaker"
+    },
+    {
+      "id": "scene",
+      "title": "Amazon Bedrock · Qwen3-VL",
+      "summary": "Images + structured context",
+      "responsibility": "The Bedrock Converse call receives selected JPEG frames and structured evidence; normalization checks references before use.",
+      "limits": "Visual interpretations are estimates. It must not invent official statistics or confirmed identities.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/scene_model.py",
+          "line": 203,
+          "claim": "Converse image input and output normalization."
+        },
+        {
+          "path": "services/shared/src/nba_copilot/scene_jobs.py",
+          "line": 138,
+          "claim": "The asynchronous scene job calls the image model."
+        }
+      ],
+      "icon": "bedrock"
+    },
+    {
+      "id": "agent",
+      "title": "AgentCore + Strands",
+      "summary": "Planner → analyst → editor",
+      "responsibility": "AgentCore hosts the Python agent application. Strands GraphBuilder orchestrates evidence_planner, tactical_analyst and evidence_editor for possession preparation.",
+      "limits": "The live tool-using agent and preparation graph are distinct paths. AgentCore uses PUBLIC networking here.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "agent/src/copilot_agent/game_analysis.py",
+          "line": 58,
+          "claim": "Actual Strands GraphBuilder nodes and invocation."
+        },
+        {
+          "path": "agent/src/copilot_agent/app.py",
+          "line": 24,
+          "claim": "AgentCore application entry."
+        },
+        {
+          "path": "infra/lib/constructs/agents.ts",
+          "line": 100,
+          "claim": "PUBLIC network configuration; no private VPC claim."
+        }
+      ],
+      "icon": "agentcore"
+    },
+    {
+      "id": "guard",
+      "title": "Validation + Bedrock Guardrails",
+      "summary": "Evidence checks before delivery",
+      "responsibility": "Preparation checks evidence references, allows one editor repair, then applies the configured guardrail before persisting a report.",
+      "limits": "Safety filtering does not certify basketball facts or calibrated probabilities. Independent accuracy evaluation is still missing.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "agent/src/copilot_agent/game_analysis.py",
+          "line": 81,
+          "claim": "Program validation, one repair and guardrail application."
+        }
+      ],
+      "icon": "bedrock"
+    },
+    {
+      "id": "ledger",
+      "title": "DynamoDB + S3 evidence",
+      "summary": "State · annotations · report versions",
+      "responsibility": "Application records retain analysis state and annotations; S3 artifacts keep source-linked evidence and reports.",
+      "limits": "Persisted model output is still a draft until reviewed. Source linkage is not an independent accuracy test.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/keyframes.py",
+          "line": 1,
+          "claim": "Keyframe and annotation persistence."
+        }
+      ],
+      "icon": "dynamodb"
+    },
+    {
+      "id": "review",
+      "title": "Host review & public approval",
+      "summary": "Human owns the final message",
+      "responsibility": "The host can correct identities, edit narration and approve an overlay. Private agent suggestions cannot directly invoke a public publish tool.",
+      "limits": "Human approval reduces accidental publishing; it does not replace evidence checking.",
+      "boundary": "Client · human decision",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "agent/src/copilot_agent/handlers.py",
+          "line": 259,
+          "claim": "Private answer tool surface."
+        }
+      ]
+    },
+    {
+      "id": "cache",
+      "title": "Editable narration cache",
+      "summary": "Revision + text/voice hash",
+      "responsibility": "Reviewed text survives a model rerun. Annotation revisions invalidate stale analysis, and Polly audio is keyed by the final text and voice.",
+      "limits": "Different annotations and edited scripts must not reuse stale audio. Signed delivery URLs need renewal.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/keyframe_narration.py",
+          "line": 96,
+          "claim": "Reviewed text preservation and narration caching."
+        }
+      ],
+      "icon": "s3"
+    },
+    {
+      "id": "polly",
+      "title": "Amazon Polly",
+      "summary": "Private synthesized narration",
+      "responsibility": "The application synthesizes approved text with configured Polly voices and serves cached audio to the host.",
+      "limits": "Voice cloning and a custom voice model are not delivered by this path. Browser audio may need a user gesture.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/speech.py",
+          "line": 1,
+          "claim": "Speech synthesis and delivery."
+        }
+      ],
+      "icon": "polly"
+    },
+    {
+      "id": "realtime",
+      "title": "WebSocket API + Lambda",
+      "summary": "Async private answer updates",
+      "responsibility": "The real-time control path delivers asynchronous agent work results and approved session events.",
+      "limits": "Session-specific notifications are not the shared public program clock. Delivery requires correct session routing.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/realtime.ts",
+          "line": 26,
+          "claim": "WebSocket and asynchronous worker wiring."
+        }
+      ],
+      "icon": "api-gateway"
+    },
+    {
+      "id": "transcribe",
+      "title": "Cognito → Transcribe",
+      "summary": "Opt-in microphone transcription",
+      "responsibility": "A narrowly scoped Cognito Identity Pool role allows the browser to stream microphone audio to Amazon Transcribe when the host enables it.",
+      "limits": "Needs browser permission, valid temporary credentials and service access. A wake-word label alone does not prove reliable wake detection.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/realtime.ts",
+          "line": 107,
+          "claim": "Identity pool and Transcribe-only permissions."
+        }
+      ],
+      "icon": "transcribe"
+    },
+    {
+      "id": "project",
+      "title": "Original media + JSON timeline",
+      "summary": "Program time ≠ source time",
+      "responsibility": "The browser records playback, holds, rate changes, approved visuals and mixed program audio into courtside-project/v1.",
+      "limits": "This is a custom replay format, not a standard editing interchange. Flattened video export re-encodes.",
+      "boundary": "Client · browser editing",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/engine/productionProject.ts",
+          "line": 10,
+          "claim": "Program/source-time mapping and timeline contract."
+        }
+      ]
+    },
+    {
+      "id": "productions",
+      "title": "Shared production library",
+      "summary": "Validate assets before READY",
+      "responsibility": "The owner uploads assets and a manifest. Server validation checks objects before marking a production ready for shared read.",
+      "limits": "A local-only draft is not visible on another browser. Owner writes remain authenticated.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/productions.py",
+          "line": 109,
+          "claim": "Asset validation before shared readiness."
+        }
+      ],
+      "icon": "s3"
+    },
+    {
+      "id": "broadcast",
+      "title": "DynamoDB · program clock",
+      "summary": "Shared selection + endless loop",
+      "responsibility": "The public broadcast stores the selected production and uses a server start time with elapsed modulo duration for loop position.",
+      "limits": "This is recorded-program synchronization, not frame-accurate live streaming. No IVS or MediaLive pipeline is claimed.",
+      "boundary": "AWS · application resources",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/public_broadcast.py",
+          "line": 9,
+          "claim": "Durable broadcast selection and modulo clock."
+        }
+      ],
+      "icon": "dynamodb"
+    },
+    {
+      "id": "audience",
+      "title": "Public /broadcast viewer",
+      "summary": "No host session in the URL",
+      "responsibility": "Viewers join the same selected production. The player refreshes expiring asset URLs and reconstructs the timeline or plays a rendered asset.",
+      "limits": "Autoplay starts muted where required; a viewer click enables sound. Network buffering still affects synchronization.",
+      "boundary": "Client · viewer browser",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/surfaces/broadcast/PublicProductionPlayback.tsx",
+          "line": 28,
+          "claim": "Public player asset renewal and playback."
+        }
+      ]
+    },
+    {
+      "id": "roboflow",
+      "title": "Roboflow · optional detection",
+      "summary": "Opt-in external frame upload",
+      "responsibility": "The analysis pipeline can send up to eight selected frames to an external Roboflow inference API when explicitly enabled.",
+      "limits": "External data transfer and usage-based charges apply. This is not a mandatory analysis dependency.",
+      "boundary": "External · optional inference",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/pipeline/roboflow.py",
+          "line": 1,
+          "claim": "Optional external inference adapter."
+        }
+      ]
+    },
+    {
+      "id": "tripo",
+      "title": "Tripo · asset authoring",
+      "summary": "Approved creation → static GLB",
+      "responsibility": "Tripo was used separately to author mascot assets. The application loads resulting GLB assets or lets users import a model.",
+      "limits": "This is an authoring-time tool, not an automatically called per-frame runtime service.",
+      "boundary": "External · asset authoring",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/surfaces/brand/BrandPage.tsx",
+          "line": 128,
+          "claim": "Team mascot asset provenance and integration."
+        }
+      ]
+    },
+    {
+      "id": "ops",
+      "title": "IAM · Secrets · CloudWatch",
+      "summary": "Permissions · secrets · signals",
+      "responsibility": "CDK declares permissions, secret access, logs and a pipeline failure alarm. These are independent operational controls.",
+      "limits": "A declared alarm without an action is not verified paging. No measured cost or full least-privilege audit is claimed.",
+      "boundary": "AWS · application resources",
+      "status": "configured",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/pipeline.ts",
+          "line": 78,
+          "claim": "Declared pipeline failure metric alarm."
+        },
+        {
+          "path": "infra/lib/constructs/agents.ts",
+          "line": 24,
+          "claim": "Agent permissions and secret access declarations."
+        }
+      ],
+      "icon": "cloudwatch"
+    },
+    {
+      "id": "dlq",
+      "title": "Amazon SQS · failure records",
+      "summary": "Unhandled asynchronous failures",
+      "responsibility": "AgentWorker uses an SQS failure destination to retain unhandled asynchronous Lambda invocation failures.",
+      "limits": "It is not the normal request queue. No automatic replay consumer is established by this wiring.",
+      "boundary": "AWS · application resources",
+      "status": "configured",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/realtime.ts",
+          "line": 63,
+          "claim": "SQS onFailure destination for AgentWorker."
+        }
+      ],
+      "icon": "sqs"
+    }
+  ],
+  "folders": [
+    {
+      "id": "analysis",
+      "title": "1. Upload & analyze",
+      "description": "Turn uploaded footage into reviewable evidence.",
+      "nodes": [
+        {
+          "id": "host",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "api",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "s3",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "workflow",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "official",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ocr",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "media",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ledger",
+          "x": 320,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "scene",
+          "x": 616,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "vision",
+          "x": 912,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "analysis-1",
+          "from": "host",
+          "to": "api",
+          "label": "Request upload & analysis",
+          "kind": "sync"
+        },
+        {
+          "id": "analysis-2",
+          "from": "api",
+          "to": "s3",
+          "label": "Signed source upload",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-3",
+          "from": "api",
+          "to": "workflow",
+          "label": "Start durable job",
+          "kind": "async"
+        },
+        {
+          "id": "analysis-4",
+          "from": "workflow",
+          "to": "media",
+          "label": "Prepare source and frames",
+          "kind": "async"
+        },
+        {
+          "id": "analysis-5",
+          "from": "media",
+          "to": "ocr",
+          "label": "Sample JPEGs for OCR",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-6",
+          "from": "ocr",
+          "to": "official",
+          "label": "Resolve available snapshots",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-7",
+          "from": "media",
+          "to": "vision",
+          "label": "Batched visual indexing",
+          "kind": "async"
+        },
+        {
+          "id": "analysis-8",
+          "from": "vision",
+          "to": "scene",
+          "label": "Selected frame context",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-9",
+          "from": "official",
+          "to": "ledger",
+          "label": "Persist official evidence",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-10",
+          "from": "vision",
+          "to": "ledger",
+          "label": "Persist visual artifacts",
+          "kind": "data"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "analysis-1",
+          "note": "The host opens an uploaded clip; access is checked.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-2",
+          "note": "Media is stored before the analysis job starts.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-3",
+          "note": "The control plane requests the state machine.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-4",
+          "note": "MediaConvert is polled; failures are recorded.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-5",
+          "note": "Scoreboard readings estimate game-clock alignment.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-6",
+          "note": "Only ingested NBA data can be matched; missing evidence remains missing.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-7",
+          "note": "Detection, segmentation and pose provide observations, not guaranteed identities.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-8",
+          "note": "Selected JPEGs and structured context can be interpreted by Qwen3-VL.",
+          "branch": "alternative"
+        },
+        {
+          "edge": "analysis-9",
+          "note": "Store the matching result and retain provenance.",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-10",
+          "note": "Tracks and masks are stored separately from official facts.",
+          "branch": "main"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · logical application group (not VPC topology)",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    },
+    {
+      "id": "assist",
+      "title": "2. Ask, edit & approve",
+      "description": "A private answer becomes a reviewed broadcast cue.",
+      "nodes": [
+        {
+          "id": "host",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "api",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "realtime",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "agent",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "review",
+          "x": 24,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "cache",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "guard",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "scene",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "transcribe",
+          "x": 320,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "polly",
+          "x": 616,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ledger",
+          "x": 912,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "assist-1",
+          "from": "host",
+          "to": "api",
+          "label": "Ask about the paused frame",
+          "kind": "sync"
+        },
+        {
+          "id": "assist-2",
+          "from": "api",
+          "to": "realtime",
+          "label": "Queue private agent work",
+          "kind": "async"
+        },
+        {
+          "id": "assist-3",
+          "from": "realtime",
+          "to": "agent",
+          "label": "Invoke agent application",
+          "kind": "async"
+        },
+        {
+          "id": "assist-4",
+          "from": "realtime",
+          "to": "scene",
+          "label": "Optional asynchronous frame analysis",
+          "kind": "async"
+        },
+        {
+          "id": "assist-5",
+          "from": "agent",
+          "to": "guard",
+          "label": "Preparation report checks",
+          "kind": "sync"
+        },
+        {
+          "id": "assist-6",
+          "from": "guard",
+          "to": "ledger",
+          "label": "Persist versioned report",
+          "kind": "data"
+        },
+        {
+          "id": "assist-7",
+          "from": "ledger",
+          "to": "cache",
+          "label": "Keyframe narration & revisions",
+          "kind": "data"
+        },
+        {
+          "id": "assist-8",
+          "from": "cache",
+          "to": "review",
+          "label": "Edit and verify the script",
+          "kind": "approval"
+        },
+        {
+          "id": "assist-9",
+          "from": "review",
+          "to": "polly",
+          "label": "Synthesize selected text",
+          "kind": "approval"
+        },
+        {
+          "id": "assist-10",
+          "from": "host",
+          "to": "transcribe",
+          "label": "Opt-in microphone STT",
+          "kind": "sync"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "assist-1",
+          "note": "The current timestamp and evidence revision accompany the request.",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-2",
+          "note": "The asynchronous worker returns updates via the real-time path.",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-3",
+          "note": "The live tool agent is distinct from the preparation graph shown in node details.",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-4",
+          "note": "The scene job worker calls Qwen3-VL; live agent tools read cached observations rather than invoking this model themselves.",
+          "branch": "alternative"
+        },
+        {
+          "edge": "assist-5",
+          "note": "The preparation graph validates references and applies its configured guardrail.",
+          "branch": "alternative"
+        },
+        {
+          "edge": "assist-6",
+          "note": "A saved report remains a draft until the host reviews it.",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-7",
+          "note": "Reviewed text survives reruns; revised annotations invalidate stale analysis.",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-8",
+          "note": "The human host owns the final wording and public action.",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-9",
+          "note": "Audio uses the final text and configured voice; this is not voice cloning.",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-10",
+          "note": "Permission and temporary credentials are required.",
+          "branch": "alternative"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · logical application group (not VPC topology)",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    },
+    {
+      "id": "production",
+      "title": "3. Record & share",
+      "description": "Keep editing local; share validated assets to all sessions.",
+      "nodes": [
+        {
+          "id": "host",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "api",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "productions",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "s3",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "project",
+          "x": 24,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "broadcast",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "edge",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "media",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "audience",
+          "x": 24,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "production-1",
+          "from": "host",
+          "to": "project",
+          "label": "Record playback and commentary",
+          "kind": "sync"
+        },
+        {
+          "id": "production-2",
+          "from": "project",
+          "to": "api",
+          "label": "Request shared asset upload",
+          "kind": "sync"
+        },
+        {
+          "id": "production-3",
+          "from": "api",
+          "to": "productions",
+          "label": "Validate manifest and objects",
+          "kind": "sync"
+        },
+        {
+          "id": "production-4",
+          "from": "productions",
+          "to": "s3",
+          "label": "Store source, audio and JSON",
+          "kind": "data"
+        },
+        {
+          "id": "production-5",
+          "from": "host",
+          "to": "broadcast",
+          "label": "Publish selected production",
+          "kind": "approval"
+        },
+        {
+          "id": "production-6",
+          "from": "broadcast",
+          "to": "audience",
+          "label": "Public clock modulo duration",
+          "kind": "sync"
+        },
+        {
+          "id": "production-7",
+          "from": "s3",
+          "to": "edge",
+          "label": "Deliver approved assets",
+          "kind": "data"
+        },
+        {
+          "id": "production-8",
+          "from": "edge",
+          "to": "audience",
+          "label": "Replay and renew URLs",
+          "kind": "data"
+        },
+        {
+          "id": "production-9",
+          "from": "project",
+          "to": "media",
+          "label": "Alternate precomposited render",
+          "kind": "async"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "production-1",
+          "note": "Program time includes held frames; original source pixels remain separate.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-2",
+          "note": "A local draft becomes shareable only after assets are uploaded.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-3",
+          "note": "The server checks registered assets before marking the production READY.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-4",
+          "note": "The default replay reconstructs the custom timeline.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-5",
+          "note": "Authenticated owner selection changes the shared public program.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-6",
+          "note": "A session-free viewer joins the loop; this is recorded playback.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-7",
+          "note": "CloudFront or signed object URLs deliver the registered media.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-8",
+          "note": "Muted autoplay may require a click to enable commentary audio.",
+          "branch": "main"
+        },
+        {
+          "edge": "production-9",
+          "note": "The render branch accepts precomposited WebM, not the custom JSON itself.",
+          "branch": "alternative"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · logical application group (not VPC topology)",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    },
+    {
+      "id": "extensions",
+      "title": "4. Optional tools & operations",
+      "description": "External tools and failure paths have separate boundaries.",
+      "nodes": [
+        {
+          "id": "roboflow",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "workflow",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "vision",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ops",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "tripo",
+          "x": 24,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "s3",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "realtime",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "dlq",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "host",
+          "x": 24,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "extensions-1",
+          "from": "workflow",
+          "to": "roboflow",
+          "label": "Opt-in: at most eight frames",
+          "kind": "async"
+        },
+        {
+          "id": "extensions-2",
+          "from": "workflow",
+          "to": "vision",
+          "label": "Primary visual analysis",
+          "kind": "async"
+        },
+        {
+          "id": "extensions-3",
+          "from": "tripo",
+          "to": "s3",
+          "label": "Authored GLB assets",
+          "kind": "data"
+        },
+        {
+          "id": "extensions-4",
+          "from": "s3",
+          "to": "host",
+          "label": "Load or import mascot",
+          "kind": "data"
+        },
+        {
+          "id": "extensions-5",
+          "from": "realtime",
+          "to": "dlq",
+          "label": "Unhandled async failure",
+          "kind": "async"
+        },
+        {
+          "id": "extensions-6",
+          "from": "workflow",
+          "to": "ops",
+          "label": "Declared failure metric alarm",
+          "kind": "async"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "extensions-1",
+          "note": "Selected frames leave AWS only when the host enables this integration.",
+          "branch": "alternative"
+        },
+        {
+          "edge": "extensions-2",
+          "note": "The custom SageMaker path remains separate from optional Roboflow.",
+          "branch": "main"
+        },
+        {
+          "edge": "extensions-3",
+          "note": "Approved asset creation yields models later served as static assets.",
+          "branch": "authoring"
+        },
+        {
+          "edge": "extensions-4",
+          "note": "The browser renders GLB assets; it does not call Tripo per frame.",
+          "branch": "authoring"
+        },
+        {
+          "edge": "extensions-5",
+          "note": "SQS is an onFailure destination; no normal request queue or replay consumer is claimed.",
+          "branch": "failure"
+        },
+        {
+          "edge": "extensions-6",
+          "note": "This operational relationship represents a metric/alarm declaration, not verified paging.",
+          "branch": "failure"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · logical application group (not VPC topology)",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    }
+  ]
+}

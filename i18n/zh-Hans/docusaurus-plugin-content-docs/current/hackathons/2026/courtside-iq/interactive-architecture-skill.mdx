@@ -1,0 +1,103 @@
+---
+sidebar_position: 3
+sidebar_label: 互动架构 Skill
+title: "把 AWS 架构变成能点、能播放的解释：可复用 Codex Skill"
+description: "安装 Courtside IQ 提炼的架构 Skill，从仓库证据生成离线 HTML，播放流程、检查服务边界，并导出独立 SVG。"
+keywords: [AWS 架构, Codex Skill, 交互架构图, SVG, 实现证据, Courtside IQ]
+---
+
+# 把 AWS 架构变成能点、能播放的解释
+
+Courtside IQ 需要一张能让读者自己检查的架构图：点击服务看职责，播放流程看数据怎么走，再回到代码核对箭头。我们把这套方法提炼成了 **`aws-interactive-architecture`**，一个带静态浏览器模板的 Codex Skill。
+
+这是我们自己制作的 Skill，不是 AWS 官方 Skill，也没有 AWS 背书。包内图标保留来源与哈希清单，架构结论仍要靠实现证据。生成的 HTML 无需 AWS 账号、框架服务器或云 API 调用即可浏览。
+
+[下载 Skill ZIP](/downloads/aws-interactive-architecture.zip) · [查看 Skill 源码](https://github.com/peterpanstechland/NBAHackathon/tree/codex/courtside-iq-sharing/skills/aws-interactive-architecture)
+
+## 先试试成品
+
+选择流程标签，点击播放，再点节点查看职责、依据和限制。播放是一段讲解顺序，不会真的执行图中的服务。
+
+<iframe
+  src="/labs/courtside-iq-architecture-zh.html"
+  title="离线 Courtside IQ 交互架构：流程播放、服务职责与代码依据"
+  style={{width: '100%', height: 780, border: '1px solid #cbd5e1', borderRadius: 16}}
+  loading="lazy"
+/>
+
+[打开中文版](pathname:///labs/courtside-iq-architecture-zh.html) · [打开英文版](pathname:///labs/courtside-iq-architecture.html) · [中文模型 JSON](/downloads/courtside-architecture.zh.json) · [英文模型 JSON](/downloads/courtside-architecture.en.json)
+
+JSON 是可编辑的架构模型；HTML 把模型、样式、几何逻辑和图标一起打包。点击代码依据会单独打开仓库页面，架构图本身不发云请求。
+
+## 先说明每项结论的依据
+
+从一个用户动作开始，沿基础设施和处理器追到保存的结果。README 里的服务名称只是调查入口，不能证明每次请求都经过它。Skill 区分四种状态：
+
+- **Implemented：** 代码表达了行为，链接到相关文件或符号。
+- **Configured：** 已声明资源或设置，尚不能证明部署和执行成功。
+- **Proposed：** 设计提议，不标为已有实现。
+- **Observed：** 某项检查观察到限定行为，同时说明检查范围。
+
+重要节点要写职责、边界、限制，以及包含 `path`、可选 `line` 和 `claim` 的证据。箭头也要核查。例如 Courtside IQ 中 Strands 负责编排、AgentCore 承载应用、Bedrock 提供推理；SQS 失败目的地属于失败支路，Tripo 资产属于创作路径，不能全串成必经调用。
+
+先给图命名范围。“AWS 逻辑分组”不等于已经证明某个 Region、子网或可用区拓扑。画上传箭头时，要查明是接口转发视频字节，还是接口只登记任务、客户端直传对象存储；画模型箭头时，要确认谁发起推理、谁只承载应用。分享模型也应去掉私有部署标识、签名 URL 和访问令牌。
+
+## 安装并明确调用
+
+解压 ZIP，使指令文件直接位于：
+
+```text
+~/.codex/skills/aws-interactive-architecture/SKILL.md
+```
+
+保留旁边的 `scripts`、`references`、`assets` 和 `agents`，然后开启新的 Codex 会话。本包沿用 `.codex/skills` 布局；当前 [OpenAI 官方技能文档](https://learn.chatgpt.com/docs/build-skills)列出的用户发现目录是 `~/.agents/skills`，并支持符号链接。使用该目录的环境可以这样连接：
+
+```bash
+mkdir -p ~/.agents/skills
+ln -s ~/.codex/skills/aws-interactive-architecture \
+  ~/.agents/skills/aws-interactive-architecture
+```
+
+仅在目标链接尚不存在时执行。随后打开要解释的仓库，明确提及 Skill：
+
+```text
+$aws-interactive-architecture
+追踪这个仓库的上传、分析和发布流程。
+生成中英双语离线 HTML，附源码证据，区分已实现、已配置与提议，
+提供流程播放和 SVG 导出。未知部署细节保持未知，同时保存可编辑模型。
+```
+
+## 用模型直接构建
+
+构建器只使用 Python 标准库，几何测试需要 Node.js。下载上面的模型，或修改 `assets/starter/example.json`，把示例路径换成自己的文件：
+
+```bash
+python ~/.codex/skills/aws-interactive-architecture/scripts/build_explorer.py \
+  --model /path/to/architecture.zh.json \
+  --output /path/to/public/architecture-zh.html \
+  --repo-root /path/to/repository
+```
+
+`--repo-root` 检查引用的证据文件是否存在，不能判断它是否真正支持结论。纯示意设计可以省略此参数，并明确标为 proposed。在安装后的 Skill 目录运行：
+
+```bash
+node --test scripts/geometry.test.mjs
+```
+
+[模型格式](https://github.com/peterpanstechland/NBAHackathon/blob/codex/courtside-iq-sharing/skills/aws-interactive-architecture/references/model-format.md)定义节点、文件夹布局、箭头与播放步骤。同一对节点之间的多条箭头要有独立 ID；替代、失败和创作支路也要标明。设置 `locale` 为 `en` 或 `zh`，翻译可读字段，分别生成两份 HTML。公开证据最好固定到不可变提交。
+
+卡片里保留简短标题与摘要，完整职责和限制放在详情中，避免把一整段解释缩进看不清的方框。每个文件夹只放这条流程需要的节点，先把用户动作讲通，再补独立的运维或可选集成。中英文可以共享节点和箭头 ID，但可读文字需要分别校对，尤其是长英文词与连续中文的换行。
+
+中立示例本身标为 proposed，不是已经部署的参考系统。复用时要替换它的业务描述与证据，不能只改项目名。包内图标会按清单核对字节来源；这一检查与架构是否正确是两件事。新增服务时可以提供带匹配清单的图标目录，不必为一个项目塞入全部 AWS 服务。
+
+## 检查交互与导出
+
+“适应全图”同时容纳宽度和高度，切换标签或容器尺寸变化后重新计算；百分比缩放用于查看细节。复杂流程仍需要手动安排或拆页，避障路由不保证最优布局。
+
+播放支持暂停、速度、前后步与编号选择。切换文件夹会重置，点击节点会暂停，最后一步停止；启用减少动态效果时，改用手动步骤。桌面、窄屏和键盘操作都需要检查。
+
+“下载 SVG”导出当前文件夹的中立状态，图标内嵌，不保留播放高亮。下载后单独打开核对，再抽查源码链接是否支持文字。交付时保留 HTML、模型和证据缺口，仓库变化后也方便继续修订。
+
+几何测试负责检查路由和适配规则，仍需人工读图。文件路径校验通过，也不意味着引用的那行代码足以证明整段描述。挑一条关键路径逐项复核：输入从哪里来，处理在哪里发生，结果保存到哪里，失败去向是什么。把未查明的部分写出来，这份图才适合交给下一个维护者。
+
+[返回项目总览](/docs/hackathons/2026/courtside-iq) · [阅读 Courtside IQ Builder 文章](./builder-article)

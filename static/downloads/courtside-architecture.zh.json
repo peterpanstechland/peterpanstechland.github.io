@@ -1,0 +1,1243 @@
+{
+  "title": "TEAM7 · 技术犯规｜Courtside IQ 架构",
+  "subtitle": "用户流程、代码依据与运行边界 · 离线交互讲解",
+  "locale": "zh",
+  "repoUrl": "https://github.com/peterpanstechland/NBAHackathon",
+  "revision": "f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c",
+  "nodes": [
+    {
+      "id": "host",
+      "title": "主播工作台",
+      "summary": "暂停 · 检查 · 确认",
+      "responsibility": "浏览器把视频时间关联到已有证据。主播复核身份、标注、解说稿与上屏操作。",
+      "limits": "私有建议不是已确认比赛事实；未知球员身份需保留未知。",
+      "boundary": "客户端 · 浏览器",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/surfaces/host/HostPage.tsx",
+          "line": 1,
+          "claim": "主播工作台与操作者控制。"
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "title": "Amazon CloudFront",
+      "summary": "网页、素材与 /api 入口",
+      "responsibility": "CloudFront 将网页、媒体及无缓存 API 路径转发给配置的源站。",
+      "limits": "CloudFront 是全球服务；此处逻辑分组不代表 VPC 或可用区拓扑。",
+      "boundary": "AWS · 全球边缘",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/web.ts",
+          "line": 29,
+          "claim": "网页与 API 路由行为。"
+        }
+      ],
+      "icon": "cloudfront"
+    },
+    {
+      "id": "api",
+      "title": "API Gateway → Lambda",
+      "summary": "HTTP 控制面",
+      "responsibility": "HTTP 路由校验访问权限，将上传、证据、成片和公开播出操作交给 Python 处理程序。",
+      "limits": "session ID 不是主播权限凭证；公开读取与所有者写入遵循不同规则。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/http-api.ts",
+          "line": 35,
+          "claim": "HTTP API 与 Lambda 集成。"
+        }
+      ],
+      "icon": "api-gateway"
+    },
+    {
+      "id": "s3",
+      "title": "Amazon S3",
+      "summary": "媒体与带版本产物",
+      "responsibility": "上传文件、抽帧、证据产物和共享成片保存为不同的对象。",
+      "limits": "对象路径不等于公开授权；大体积原片仍产生存储与传输成本。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/artifacts.py",
+          "line": 1,
+          "claim": "产物存储与交付辅助函数。"
+        }
+      ],
+      "icon": "s3"
+    },
+    {
+      "id": "workflow",
+      "title": "AWS Step Functions",
+      "summary": "持久化分阶段分析",
+      "responsibility": "状态机编排媒体准备、证据关联和分批视觉索引，并明确记录失败。",
+      "limits": "重试不能保证自动修正错误身份、比赛匹配或模型结论。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/pipeline.ts",
+          "line": 23,
+          "claim": "流水线状态转换与异常捕获。"
+        }
+      ],
+      "icon": "step-functions"
+    },
+    {
+      "id": "media",
+      "title": "AWS Elemental MediaConvert",
+      "summary": "准备视频与 JPEG 抽帧",
+      "responsibility": "MediaConvert 生成保持源分辨率的 MP4 与分析用 JPEG 抽帧；另一路转码已合成的 WebM。",
+      "limits": "它不解释自定义剪辑 JSON。当前分析按 4 fps 抽帧，最多覆盖视频前十分钟。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/pipeline/workflow.py",
+          "line": 17,
+          "claim": "源视频处理与另一条渲染支路。"
+        }
+      ],
+      "icon": "mediaconvert"
+    },
+    {
+      "id": "ocr",
+      "title": "Amazon Rekognition",
+      "summary": "比分牌 OCR",
+      "responsibility": "流水线读取可见比分牌文字，估计节次与比赛时钟对齐。",
+      "limits": "OCR 会出错；时间匹配不等于已验证的出手帧。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/pipeline/workflow.py",
+          "line": 80,
+          "claim": "比分牌区域与抽样 OCR 调用。"
+        }
+      ],
+      "icon": "rekognition"
+    },
+    {
+      "id": "official",
+      "title": "NBA 官方证据关联",
+      "summary": "逐回合事件 · 名单 · 出手记录",
+      "responsibility": "Python 将估计时钟、名单与线索关联到应用实际拥有的 NBA 数据快照。",
+      "limits": "覆盖范围由已导入快照决定；文件名只是线索，陌生视频可能无法匹配。",
+      "boundary": "AWS · Python 应用逻辑",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/truth/resolver.py",
+          "line": 90,
+          "claim": "候选比赛匹配与证据解析。"
+        }
+      ]
+    },
+    {
+      "id": "vision",
+      "title": "Amazon SageMaker AI",
+      "summary": "RF-DETR · SAM2 · ViTPose",
+      "responsibility": "自定义推理服务提供检测、分割与姿态结果，用于视觉索引和选中球员展示。",
+      "limits": "结果取决于启用的端点及已加载模型；轨迹不保证身份或跨镜头重识别。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/courtvision/server.py",
+          "line": 1,
+          "claim": "自定义视觉推理服务。"
+        }
+      ],
+      "icon": "sagemaker"
+    },
+    {
+      "id": "scene",
+      "title": "Amazon Bedrock · Qwen3-VL",
+      "summary": "图像与结构化上下文",
+      "responsibility": "Bedrock Converse 接收选中 JPEG 帧与结构化证据，结果规范化检查引用后再使用。",
+      "limits": "视觉解读是估计，不能凭空产生官方统计或已确认身份。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/scene_model.py",
+          "line": 203,
+          "claim": "Converse 图像输入与结果规范化。"
+        },
+        {
+          "path": "services/shared/src/nba_copilot/scene_jobs.py",
+          "line": 138,
+          "claim": "异步画面作业调用图像模型。"
+        }
+      ],
+      "icon": "bedrock"
+    },
+    {
+      "id": "agent",
+      "title": "AgentCore + Strands",
+      "summary": "证据规划 → 战术分析 → 审稿",
+      "responsibility": "AgentCore 托管 Python Agent 应用；Strands GraphBuilder 在回合预分析中编排证据规划、战术分析与证据审稿。",
+      "limits": "实时工具 Agent 与预分析图是不同路径；本项目 AgentCore 配置为 PUBLIC 网络。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "agent/src/copilot_agent/game_analysis.py",
+          "line": 58,
+          "claim": "实际 Strands GraphBuilder 节点与调用。"
+        },
+        {
+          "path": "agent/src/copilot_agent/app.py",
+          "line": 24,
+          "claim": "AgentCore 应用入口。"
+        },
+        {
+          "path": "infra/lib/constructs/agents.ts",
+          "line": 100,
+          "claim": "PUBLIC 网络配置，不声称为私有 VPC。"
+        }
+      ],
+      "icon": "agentcore"
+    },
+    {
+      "id": "guard",
+      "title": "程序校验 + Bedrock Guardrails",
+      "summary": "交付前的证据检查",
+      "responsibility": "预分析检查证据引用，允许一次审稿修复，并在保存报告前应用配置的 Guardrail。",
+      "limits": "安全过滤不能认证篮球事实或概率校准；仍缺少独立准确率评测。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "agent/src/copilot_agent/game_analysis.py",
+          "line": 81,
+          "claim": "程序校验、一次修复与 Guardrail 应用。"
+        }
+      ],
+      "icon": "bedrock"
+    },
+    {
+      "id": "ledger",
+      "title": "DynamoDB + S3 证据",
+      "summary": "状态 · 标注 · 报告版本",
+      "responsibility": "应用记录保存分析状态和标注；S3 产物保留带来源的证据与报告。",
+      "limits": "持久化模型输出在复核前仍是草稿；来源关联不等于独立准确率测试。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/keyframes.py",
+          "line": 1,
+          "claim": "关键帧与标注持久化。"
+        }
+      ],
+      "icon": "dynamodb"
+    },
+    {
+      "id": "review",
+      "title": "主播复核与公开确认",
+      "summary": "主播决定最终表达",
+      "responsibility": "主播可修正身份、编辑解说并确认上屏；私有 Agent 建议不能直接调用公开发布工具。",
+      "limits": "人工确认减少误发布，但不能代替证据核查。",
+      "boundary": "客户端 · 人工决策",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "agent/src/copilot_agent/handlers.py",
+          "line": 259,
+          "claim": "私有回答的工具范围。"
+        }
+      ]
+    },
+    {
+      "id": "cache",
+      "title": "可编辑解说缓存",
+      "summary": "修订号与文本/声音哈希",
+      "responsibility": "复核稿不会被模型重跑覆盖；标注修订使旧分析失效，Polly 音频按最终文本与声音缓存。",
+      "limits": "不同标注与修改后的稿件不能复用过期音频；签名交付地址需要续期。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/keyframe_narration.py",
+          "line": 96,
+          "claim": "保留复核稿与解说缓存。"
+        }
+      ],
+      "icon": "s3"
+    },
+    {
+      "id": "polly",
+      "title": "Amazon Polly",
+      "summary": "私有合成解说",
+      "responsibility": "应用使用配置的 Polly 声音合成确认后的文本，并向主播提供缓存音频。",
+      "limits": "此路径没有交付声音克隆或自定义声音模型；浏览器播放可能需要用户点击。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/speech.py",
+          "line": 1,
+          "claim": "语音合成与交付。"
+        }
+      ],
+      "icon": "polly"
+    },
+    {
+      "id": "realtime",
+      "title": "WebSocket API + Lambda",
+      "summary": "异步私有回答更新",
+      "responsibility": "实时控制路径交付异步 Agent 结果与已确认的会话事件。",
+      "limits": "会话通知不是共享公开节目时钟；投递需要正确的 session 路由。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/realtime.ts",
+          "line": 26,
+          "claim": "WebSocket 与异步 Worker 接线。"
+        }
+      ],
+      "icon": "api-gateway"
+    },
+    {
+      "id": "transcribe",
+      "title": "Cognito → Transcribe",
+      "summary": "可选麦克风转写",
+      "responsibility": "主播开启麦克风后，浏览器使用 Cognito Identity Pool 限定权限，向 Amazon Transcribe 流式提交音频。",
+      "limits": "依赖浏览器授权、有效临时凭证和服务权限；唤醒词选项不等于已验证的稳定唤醒。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/realtime.ts",
+          "line": 107,
+          "claim": "Identity Pool 与仅限 Transcribe 的权限。"
+        }
+      ],
+      "icon": "transcribe"
+    },
+    {
+      "id": "project",
+      "title": "原片 + JSON 时间线",
+      "summary": "节目时间 ≠ 源视频时间",
+      "responsibility": "浏览器记录播放、停帧、变速、已确认图层和混合节目音轨，形成 courtside-project/v1。",
+      "limits": "这是自定义回放格式，并非标准剪辑交换格式；合成单个视频仍需重新编码。",
+      "boundary": "客户端 · 浏览器剪辑",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/engine/productionProject.ts",
+          "line": 10,
+          "claim": "节目/源视频时间映射与时间线格式。"
+        }
+      ]
+    },
+    {
+      "id": "productions",
+      "title": "共享成片库",
+      "summary": "校验资产后才 READY",
+      "responsibility": "所有者上传资产与清单，服务端校验对象后才将成片标记为可共享读取。",
+      "limits": "只保存在本地的草稿不会出现在其他浏览器；所有者写入仍需要鉴权。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/productions.py",
+          "line": 109,
+          "claim": "共享就绪前的资产校验。"
+        }
+      ],
+      "icon": "s3"
+    },
+    {
+      "id": "broadcast",
+      "title": "DynamoDB · 节目时钟",
+      "summary": "共享节目选择与持续循环",
+      "responsibility": "公开播出保存选中成片，以服务端起播时间与 elapsed 对 duration 取模计算循环进度。",
+      "limits": "这是录制节目的同步播放，不是逐帧精确的直播推流；没有声称采用 IVS 或 MediaLive。",
+      "boundary": "AWS · 应用资源",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/shared/src/nba_copilot/public_broadcast.py",
+          "line": 9,
+          "claim": "持久化播出选择与取模时钟。"
+        }
+      ],
+      "icon": "dynamodb"
+    },
+    {
+      "id": "audience",
+      "title": "公开 /broadcast 观众页",
+      "summary": "URL 不依赖主播 session",
+      "responsibility": "观众加入同一选中节目；播放器刷新过期资产地址，重建时间线或播放已合成视频。",
+      "limits": "按浏览器要求静音自动播放，观众点击后开启声音；网络缓冲仍影响同步。",
+      "boundary": "客户端 · 观众浏览器",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/surfaces/broadcast/PublicProductionPlayback.tsx",
+          "line": 28,
+          "claim": "公开播放器资产续期与播放。"
+        }
+      ]
+    },
+    {
+      "id": "roboflow",
+      "title": "Roboflow · 可选检测",
+      "summary": "选择启用才外发图像",
+      "responsibility": "明确启用后，分析流水线最多向外部 Roboflow 推理 API 发送八张选中帧。",
+      "limits": "涉及外部数据传输及按量计费，不是必需的分析依赖。",
+      "boundary": "外部 · 可选推理",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "services/pipeline/roboflow.py",
+          "line": 1,
+          "claim": "可选外部推理适配器。"
+        }
+      ]
+    },
+    {
+      "id": "tripo",
+      "title": "Tripo · 资产制作",
+      "summary": "批准制作 → 静态 GLB",
+      "responsibility": "Tripo 单独用于制作吉祥物资产；应用加载生成后的 GLB 或让用户导入模型。",
+      "limits": "这是资产制作工具，不是每帧自动调用的运行时服务。",
+      "boundary": "外部 · 资产制作",
+      "status": "implemented",
+      "evidence": [
+        {
+          "path": "web/src/surfaces/brand/BrandPage.tsx",
+          "line": 128,
+          "claim": "球队吉祥物资产来源与接入。"
+        }
+      ]
+    },
+    {
+      "id": "ops",
+      "title": "IAM · Secrets · CloudWatch",
+      "summary": "权限 · 密钥 · 运行信号",
+      "responsibility": "CDK 声明权限、密钥访问、日志及流水线失败告警，它们是独立的运行控制。",
+      "limits": "未配置通知动作的告警不等于已验证的呼叫链路；没有声称已完成成本测量或完整最小权限审计。",
+      "boundary": "AWS · 应用资源",
+      "status": "configured",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/pipeline.ts",
+          "line": 78,
+          "claim": "声明的流水线失败指标告警。"
+        },
+        {
+          "path": "infra/lib/constructs/agents.ts",
+          "line": 24,
+          "claim": "Agent 权限与密钥访问声明。"
+        }
+      ],
+      "icon": "cloudwatch"
+    },
+    {
+      "id": "dlq",
+      "title": "Amazon SQS · 失败记录",
+      "summary": "未处理异步失败",
+      "responsibility": "AgentWorker 使用 SQS 失败目的地保留未处理的异步 Lambda 调用失败。",
+      "limits": "它不是正常请求队列；这段接线没有建立自动重放消费者。",
+      "boundary": "AWS · 应用资源",
+      "status": "configured",
+      "evidence": [
+        {
+          "path": "infra/lib/constructs/realtime.ts",
+          "line": 63,
+          "claim": "AgentWorker 的 SQS onFailure 目的地。"
+        }
+      ],
+      "icon": "sqs"
+    }
+  ],
+  "folders": [
+    {
+      "id": "analysis",
+      "title": "1. 上传与分析",
+      "description": "把上传视频转为可复核证据。",
+      "nodes": [
+        {
+          "id": "host",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "api",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "s3",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "workflow",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "official",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ocr",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "media",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ledger",
+          "x": 320,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "scene",
+          "x": 616,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "vision",
+          "x": 912,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "analysis-1",
+          "from": "host",
+          "to": "api",
+          "label": "请求上传与分析",
+          "kind": "sync"
+        },
+        {
+          "id": "analysis-2",
+          "from": "api",
+          "to": "s3",
+          "label": "签名上传原片",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-3",
+          "from": "api",
+          "to": "workflow",
+          "label": "启动持久任务",
+          "kind": "async"
+        },
+        {
+          "id": "analysis-4",
+          "from": "workflow",
+          "to": "media",
+          "label": "准备源视频与抽帧",
+          "kind": "async"
+        },
+        {
+          "id": "analysis-5",
+          "from": "media",
+          "to": "ocr",
+          "label": "对 JPEG 抽样做 OCR",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-6",
+          "from": "ocr",
+          "to": "official",
+          "label": "关联已有数据快照",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-7",
+          "from": "media",
+          "to": "vision",
+          "label": "分批视觉索引",
+          "kind": "async"
+        },
+        {
+          "id": "analysis-8",
+          "from": "vision",
+          "to": "scene",
+          "label": "选中帧上下文",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-9",
+          "from": "official",
+          "to": "ledger",
+          "label": "保存官方证据",
+          "kind": "data"
+        },
+        {
+          "id": "analysis-10",
+          "from": "vision",
+          "to": "ledger",
+          "label": "保存视觉产物",
+          "kind": "data"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "analysis-1",
+          "note": "主播打开上传素材，服务端检查权限。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-2",
+          "note": "分析任务开始前，媒体先保存到对象存储。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-3",
+          "note": "控制面请求启动状态机。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-4",
+          "note": "轮询 MediaConvert，失败会记录。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-5",
+          "note": "比分牌读取用于估计比赛时钟对齐。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-6",
+          "note": "只匹配已导入 NBA 数据，缺失证据仍标记缺失。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-7",
+          "note": "检测、分割和姿态提供观测，不保证身份正确。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-8",
+          "note": "选中 JPEG 与结构化上下文可由 Qwen3-VL 解读。",
+          "branch": "alternative"
+        },
+        {
+          "edge": "analysis-9",
+          "note": "保存匹配结果及来源。",
+          "branch": "main"
+        },
+        {
+          "edge": "analysis-10",
+          "note": "轨迹与掩膜同官方事实分开保存。",
+          "branch": "main"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · 应用逻辑分组（非 VPC 拓扑）",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    },
+    {
+      "id": "assist",
+      "title": "2. 提问、编辑与确认",
+      "description": "把私有回答转为复核后的播报提示。",
+      "nodes": [
+        {
+          "id": "host",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "api",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "realtime",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "agent",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "review",
+          "x": 24,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "cache",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "guard",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "scene",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "transcribe",
+          "x": 320,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "polly",
+          "x": 616,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ledger",
+          "x": 912,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "assist-1",
+          "from": "host",
+          "to": "api",
+          "label": "询问暂停帧",
+          "kind": "sync"
+        },
+        {
+          "id": "assist-2",
+          "from": "api",
+          "to": "realtime",
+          "label": "派发私有 Agent 工作",
+          "kind": "async"
+        },
+        {
+          "id": "assist-3",
+          "from": "realtime",
+          "to": "agent",
+          "label": "调用 Agent 应用",
+          "kind": "async"
+        },
+        {
+          "id": "assist-4",
+          "from": "realtime",
+          "to": "scene",
+          "label": "可选异步帧分析",
+          "kind": "async"
+        },
+        {
+          "id": "assist-5",
+          "from": "agent",
+          "to": "guard",
+          "label": "预分析报告校验",
+          "kind": "sync"
+        },
+        {
+          "id": "assist-6",
+          "from": "guard",
+          "to": "ledger",
+          "label": "保存带版本报告",
+          "kind": "data"
+        },
+        {
+          "id": "assist-7",
+          "from": "ledger",
+          "to": "cache",
+          "label": "关键帧解说与修订",
+          "kind": "data"
+        },
+        {
+          "id": "assist-8",
+          "from": "cache",
+          "to": "review",
+          "label": "编辑与核查解说稿",
+          "kind": "approval"
+        },
+        {
+          "id": "assist-9",
+          "from": "review",
+          "to": "polly",
+          "label": "合成选定话术",
+          "kind": "approval"
+        },
+        {
+          "id": "assist-10",
+          "from": "host",
+          "to": "transcribe",
+          "label": "选择开启麦克风转写",
+          "kind": "sync"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "assist-1",
+          "note": "请求附带当前时间戳与证据修订号。",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-2",
+          "note": "异步 Worker 通过实时路径返回更新。",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-3",
+          "note": "实时工具 Agent 与节点说明中的预分析图不同。",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-4",
+          "note": "画面作业 Worker 调用 Qwen3-VL；实时 Agent 工具读取缓存观察，并非自行调用这个模型。",
+          "branch": "alternative"
+        },
+        {
+          "edge": "assist-5",
+          "note": "预分析图检查引用并应用配置的 Guardrail。",
+          "branch": "alternative"
+        },
+        {
+          "edge": "assist-6",
+          "note": "报告保存后，在主播复核前仍是草稿。",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-7",
+          "note": "复核稿保留，标注修订使旧分析失效。",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-8",
+          "note": "主播决定最终话术与公开操作。",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-9",
+          "note": "按最终文本与配置声音合成音频，不是声音克隆。",
+          "branch": "main"
+        },
+        {
+          "edge": "assist-10",
+          "note": "需要浏览器授权和临时凭证。",
+          "branch": "alternative"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · 应用逻辑分组（非 VPC 拓扑）",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    },
+    {
+      "id": "production",
+      "title": "3. 录制与分享",
+      "description": "本地剪辑，共享经校验的成片给所有会话。",
+      "nodes": [
+        {
+          "id": "host",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "api",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "productions",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "s3",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "project",
+          "x": 24,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "broadcast",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "edge",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "media",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "audience",
+          "x": 24,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "production-1",
+          "from": "host",
+          "to": "project",
+          "label": "记录播放与解说",
+          "kind": "sync"
+        },
+        {
+          "id": "production-2",
+          "from": "project",
+          "to": "api",
+          "label": "请求共享资产上传",
+          "kind": "sync"
+        },
+        {
+          "id": "production-3",
+          "from": "api",
+          "to": "productions",
+          "label": "校验清单与对象",
+          "kind": "sync"
+        },
+        {
+          "id": "production-4",
+          "from": "productions",
+          "to": "s3",
+          "label": "保存原片、音轨与 JSON",
+          "kind": "data"
+        },
+        {
+          "id": "production-5",
+          "from": "host",
+          "to": "broadcast",
+          "label": "播出选中成片",
+          "kind": "approval"
+        },
+        {
+          "id": "production-6",
+          "from": "broadcast",
+          "to": "audience",
+          "label": "公开时钟按时长循环",
+          "kind": "sync"
+        },
+        {
+          "id": "production-7",
+          "from": "s3",
+          "to": "edge",
+          "label": "交付确认后的资产",
+          "kind": "data"
+        },
+        {
+          "id": "production-8",
+          "from": "edge",
+          "to": "audience",
+          "label": "回放并续期地址",
+          "kind": "data"
+        },
+        {
+          "id": "production-9",
+          "from": "project",
+          "to": "media",
+          "label": "另一路预合成视频转码",
+          "kind": "async"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "production-1",
+          "note": "节目时间包含停帧，原片像素独立保留。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-2",
+          "note": "本地草稿只有上传资产后才可共享。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-3",
+          "note": "服务端检查已登记资产后才标记 READY。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-4",
+          "note": "默认回放重建自定义时间线。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-5",
+          "note": "已鉴权所有者的选择改变共享公开节目。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-6",
+          "note": "不带 session 的观众页加入循环，这是录制节目回放。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-7",
+          "note": "CloudFront 或签名对象地址交付已登记媒体。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-8",
+          "note": "静音自动播放后，可能需要点击开启解说声音。",
+          "branch": "main"
+        },
+        {
+          "edge": "production-9",
+          "note": "渲染支路接收预合成 WebM，不直接解析自定义 JSON。",
+          "branch": "alternative"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · 应用逻辑分组（非 VPC 拓扑）",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    },
+    {
+      "id": "extensions",
+      "title": "4. 可选工具与运维",
+      "description": "外部工具与失败路径有独立边界。",
+      "nodes": [
+        {
+          "id": "roboflow",
+          "x": 24,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "workflow",
+          "x": 320,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "vision",
+          "x": 616,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "ops",
+          "x": 912,
+          "y": 90,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "tripo",
+          "x": 24,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "s3",
+          "x": 320,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "realtime",
+          "x": 616,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "dlq",
+          "x": 912,
+          "y": 330,
+          "w": 230,
+          "h": 154
+        },
+        {
+          "id": "host",
+          "x": 24,
+          "y": 570,
+          "w": 230,
+          "h": 154
+        }
+      ],
+      "edges": [
+        {
+          "id": "extensions-1",
+          "from": "workflow",
+          "to": "roboflow",
+          "label": "可选：最多八张帧",
+          "kind": "async"
+        },
+        {
+          "id": "extensions-2",
+          "from": "workflow",
+          "to": "vision",
+          "label": "主要视觉分析",
+          "kind": "async"
+        },
+        {
+          "id": "extensions-3",
+          "from": "tripo",
+          "to": "s3",
+          "label": "制作完成的 GLB 资产",
+          "kind": "data"
+        },
+        {
+          "id": "extensions-4",
+          "from": "s3",
+          "to": "host",
+          "label": "加载或导入吉祥物",
+          "kind": "data"
+        },
+        {
+          "id": "extensions-5",
+          "from": "realtime",
+          "to": "dlq",
+          "label": "未处理异步失败",
+          "kind": "async"
+        },
+        {
+          "id": "extensions-6",
+          "from": "workflow",
+          "to": "ops",
+          "label": "声明失败指标告警",
+          "kind": "async"
+        }
+      ],
+      "steps": [
+        {
+          "edge": "extensions-1",
+          "note": "只有主播开启此集成，选中帧才会发到 AWS 之外。",
+          "branch": "alternative"
+        },
+        {
+          "edge": "extensions-2",
+          "note": "SageMaker 自定义路径与可选 Roboflow 分开。",
+          "branch": "main"
+        },
+        {
+          "edge": "extensions-3",
+          "note": "经批准制作的模型，之后作为静态资产交付。",
+          "branch": "authoring"
+        },
+        {
+          "edge": "extensions-4",
+          "note": "浏览器渲染 GLB，不逐帧调用 Tripo。",
+          "branch": "authoring"
+        },
+        {
+          "edge": "extensions-5",
+          "note": "SQS 是 onFailure 目的地，没有声称正常请求队列或自动重放消费者。",
+          "branch": "failure"
+        },
+        {
+          "edge": "extensions-6",
+          "note": "这个运维关系表示指标/告警声明，不等于已验证通知链路。",
+          "branch": "failure"
+        }
+      ],
+      "boundaries": [
+        {
+          "title": "AWS Cloud · 应用逻辑分组（非 VPC 拓扑）",
+          "x": 290,
+          "y": 15,
+          "w": 890,
+          "h": 754,
+          "kind": "aws"
+        }
+      ]
+    }
+  ]
+}
