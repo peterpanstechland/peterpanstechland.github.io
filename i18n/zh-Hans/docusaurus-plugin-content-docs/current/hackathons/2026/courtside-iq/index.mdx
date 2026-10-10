@@ -14,7 +14,7 @@ keywords: [Courtside IQ, NBA, 黑客松, 技术犯规, 篮球解说, AWS, Strand
 
 我想探索的问题很具体：主播暂停一段进攻，问一句“这里发生了什么变化”，软件能不能帮他把答案查清楚、讲明白？一句篮球术语听起来像那么回事还不够。球员、事件、数据和观众正在看的那一帧，需要对应得上。
 
-[查看项目源码](https://github.com/peterpanstechland/NBAHackathon) · [观看实验环境中的公共节目](https://d3a7oi75hu7ibj.cloudfront.net/broadcast) · [阅读 Builder 长文](./builder-article)
+[查看项目源码](https://github.com/peterpanstechland/NBAHackathon) · [观看实验环境中的公共节目](https://d3a7oi75hu7ibj.cloudfront.net/broadcast) · [阅读 Builder 长文](./builder-article) · [读这次关于跑题的复盘](./why-i-keep-losing-focus)
 
 演示部署在实验环境中，不保证长期在线。代码仓库和本站保存的架构说明，是后续回看与研究的主要入口。
 
@@ -64,3 +64,7 @@ keywords: [Courtside IQ, NBA, 黑客松, 技术犯规, 篮球解说, AWS, Strand
 作为参赛作品，它有了一个明确的结果；作为 builder 的练习，我还是希望它能留下可用的东西。下一步真正有意义的进展，是做一组更小、更可重复的评估：用陌生片段核对身份和事件对齐，记录助手在哪些地方帮到了主播，又在哪些地方误导了主播。单纯继续加功能，回答不了这些问题。
 
 [Builder 长文](./builder-article)会展开产品取舍和工程实现；[架构 Skill 指南](./interactive-architecture-skill)则把“从仓库提取一份可检查的架构解释”整理成可复用的方法。加上公开代码，这些就是我希望从 Courtside IQ 留下的东西：一个真实的工作台、说得清楚的边界，以及其他 builder 能继续研究和改进的材料。
+
+## 另一篇复盘
+
+[每次都复盘 为什么我还是会在黑客松里跑题](./why-i-keep-losing-focus)单独追问这次的优先级问题：为什么许多工程上合理的选择，最后没有让交付足够清晰；为什么赛后能讲明白的道理，没有在开发过程中真正限制范围。它与工程实现文章分别讨论决策和技术，不用可复用成果替代对比赛结果的反思。
