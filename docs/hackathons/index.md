@@ -24,6 +24,7 @@ Hackathons are an incredible way to:
 
 | Year | Event | Project | Result |
 |------|-------|---------|--------|
+| 2026 | NBA Hackathon | Courtside IQ · TEAM7 技术犯规 | Did not advance to the finals |
 | 2026 | AIx Origin Summit Shenzhen · INNOAI Hackathon | PΛN — HDMI cocktail machine + Apex dexterous hand (teleop / baoding RL) | 🏆 Insta360 Special Award |
 | 2026 | Attrax Spring Hackathon · Insta360 Cameraman Track | Roomba-VLLM | 🥇 Cameraman Award (TOP 1/200 Outlier) |
 | 2026 | OpenClaw Builder Program (Lobster Frontier Experiment) | Cyber Boss | 🏆 Submitted |
@@ -35,6 +36,11 @@ Hackathons are an incredible way to:
 ---
 
 ## 🔥 Featured Projects
+
+### [Courtside IQ — NBA Hackathon · TEAM7 技术犯规](/docs/hackathons/2026/courtside-iq)
+My NBA hackathon project with TEAM7 · 技术犯规: a workspace where a human host reviews a basketball clip, checks the evidence, approves AI cues and overlays, and saves a narrated production. Our entry did not advance to the finals. I am keeping the code, implementation limits, and offline interactive architecture here so other builders can inspect and reuse the work.
+
+**Tech Stack:** AWS, Strands Agents SDK, AgentCore, Bedrock, Qwen, SageMaker, React
 
 ### [PΛN + Apex Dexterous Hand — AIx Origin · INNOAI Hackathon 2026](/docs/hackathons/2026/aix-origin-apex-hand)
 A cocktail machine (PΛN, Personal Agent for Nightlife — a Human Drink Machine Interface) wearing a Rysen Apex dexterous hand, and a five-part tutorial series on the hand itself: Isaac Lab + RSL-RL PPO training on a 12 GB laptop, first contact with the real-hand SDK, webcam teleoperation with the clinical Kapandji opposition test (score 9 on hardware), baoding-ball RL through nine reward iterations and a mount-angle sweep, and the sim-to-real observation contract. First team at the event to get the dexterous hand running; Insta360 Special Award.
@@ -102,4 +108,3 @@ Most of my hackathon projects utilize:
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
-

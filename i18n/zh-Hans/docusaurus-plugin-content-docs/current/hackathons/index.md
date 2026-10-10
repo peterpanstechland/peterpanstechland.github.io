@@ -24,6 +24,7 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 
 | 年份 | 赛事 | 项目 | 成绩 |
 |------|------|------|------|
+| 2026 | NBA 黑客松 | Courtside IQ · TEAM7 技术犯规 | 未进入决赛 |
 | 2026 | AIx Origin Summit 深圳场 · INNOAI 黑客松 | PΛN — HDMI 调酒机 + Apex 灵巧手（遥操作 / 保健球 RL） | 🏆 影石 Insta360 特别奖 |
 | 2026 | Attrax 春潮黑客松 · 影石 Cameraman 赛道 | Roomba-VLLM | 🥇 Cameraman 大奖（TOP 1/200 Outlier） |
 | 2026 | OpenClaw 龙虾前沿实验计划 | Cyber Boss 赛博老板 | 🏆 已提交 |
@@ -35,6 +36,11 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 ---
 
 ## 🔥 精选项目
+
+### [Courtside IQ — NBA 黑客松 · TEAM7 技术犯规](/docs/hackathons/2026/courtside-iq)
+我和 TEAM7 · 技术犯规的 NBA 黑客松作品：一个由主播主导的篮球解说工作台，核对关键帧与证据，确认 AI 提词和图层，再保存一段自己的解说。这次没有进入决赛。我把公开代码、实现边界和离线交互架构留在这里，方便其他 builder 继续研究和复用。
+
+**技术栈：** AWS、Strands Agents SDK、AgentCore、Bedrock、Qwen、SageMaker、React
 
 ### [PΛN + Apex 灵巧手 — AIx Origin · INNOAI 黑客松 2026](/docs/hackathons/2026/aix-origin-apex-hand)
 一台顶着源升 Apex 灵巧手的调酒机（PΛN = Personal Agent for Nightlife，一个 Human Drink Machine Interface），以及围绕这只手的五篇教程：12 GB 笔记本上的 Isaac Lab + RSL-RL PPO 训练、真机 SDK 首次连通、摄像头遥操作 + 医学 Kapandji 对掌试验（真机打到 9 分）、保健球 RL 的九轮奖励迭代与安装角扫描、Sim2Real 观测契约。本场第一支把灵巧手跑起来的队伍；影石 Insta360 特别奖。
@@ -102,4 +108,3 @@ keywords: [黑客松, 比赛, 项目, aws, ai]
 import DocCardList from '@theme/DocCardList';
 
 <DocCardList />
-

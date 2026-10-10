@@ -1,0 +1,102 @@
+---
+sidebar_position: 3
+sidebar_label: Architecture Skill
+title: "Make an AWS architecture explorable: a reusable Codex Skill"
+description: "Install the Courtside IQ architecture Skill, build an evidence-linked offline HTML explorer, play workflows, inspect boundaries, and export a self-contained SVG."
+keywords: [AWS architecture, Codex Skill, interactive diagram, SVG, evidence, Courtside IQ]
+---
+
+# Make an AWS architecture explorable
+
+Courtside IQ needed an architecture that a reader could inspect: click a service, follow a workflow, and check which code supports an arrow. We extracted that method into **`aws-interactive-architecture`**, a reusable Codex Skill with a small static explorer.
+
+This is our own Skill, not an AWS official Skill or an AWS endorsement. Its bundled service icons have a source and hash manifest; the explanation still needs implementation evidence. The HTML explorer runs without an AWS account, framework server, or cloud API calls.
+
+[Download the Skill ZIP](/downloads/aws-interactive-architecture.zip) · [Browse the Skill source](https://github.com/peterpanstechland/NBAHackathon/tree/codex/courtside-iq-sharing/skills/aws-interactive-architecture)
+
+## Try the finished example
+
+Select a workflow tab, play its steps, then click a node to inspect its responsibility, evidence and limits. Playback illustrates a teaching sequence; it does not invoke the services.
+
+<iframe
+  src="/labs/courtside-iq-architecture.html"
+  title="Offline Courtside IQ architecture explorer with workflow playback and evidence links"
+  style={{width: '100%', height: 780, border: '1px solid #cbd5e1', borderRadius: 16}}
+  loading="lazy"
+/>
+
+[Open the English explorer](pathname:///labs/courtside-iq-architecture.html) · [Open the Chinese explorer](pathname:///labs/courtside-iq-architecture-zh.html) · [English model JSON](/downloads/courtside-architecture.en.json) · [Chinese model JSON](/downloads/courtside-architecture.zh.json)
+
+The editable JSON carries the architecture. The generated HTML embeds that model, styling, geometry, and icon bytes. Opening an evidence link is a separate navigation to the repository; the diagram itself makes no cloud requests.
+
+## Decide what each claim means
+
+Start by tracing one user action through infrastructure and handlers to a saved result. A README service list is a lead to investigate, rather than proof that every service runs on every request. The evidence contract distinguishes:
+
+- **Implemented:** code expresses the behavior; cite the relevant file or symbol.
+- **Configured:** a resource or setting is declared; deployment and successful execution need further evidence.
+- **Proposed:** a design suggestion, without an implementation badge.
+- **Observed:** an identifiable check demonstrated a scoped behavior, with the check's limits stated.
+
+For consequential nodes, record responsibility, boundary, limits, and evidence entries containing `path`, optional `line`, and `claim`. Review arrows with the same care. Courtside IQ separates Strands orchestration, AgentCore hosting and Bedrock inference. Its SQS failure destination is a failure branch, and its Tripo-authored asset belongs to an authoring path. Neither should be turned into a mandatory request step.
+
+Name the diagram's scope. A logical AWS group does not establish a Region, subnet or availability-zone topology. Confirm which actor sends bytes or invokes a model before drawing the connection. Keep private deployment identifiers, signed URLs and access tokens out of the shareable model.
+
+## Install and invoke the Skill
+
+Extract the ZIP so the instructions are directly at:
+
+```text
+~/.codex/skills/aws-interactive-architecture/SKILL.md
+```
+
+Keep `scripts`, `references`, `assets`, and `agents` beside that file. Start a new Codex session after installation. This package uses the existing `.codex/skills` layout; current [OpenAI skill documentation](https://learn.chatgpt.com/docs/build-skills) lists `~/.agents/skills` for user discovery and supports symlinked folders. If your installation uses that location, link this package there:
+
+```bash
+mkdir -p ~/.agents/skills
+ln -s ~/.codex/skills/aws-interactive-architecture \
+  ~/.agents/skills/aws-interactive-architecture
+```
+
+Use the link command only when its destination does not already exist. Then open the repository you want to explain and explicitly invoke the Skill:
+
+```text
+$aws-interactive-architecture
+Trace this repository's upload, analysis and publication workflows.
+Create English and Chinese offline HTML diagrams with source evidence,
+clear implemented/configured/proposed claims, playback and SVG export.
+Keep unknown deployment details unknown. Save the editable models too.
+```
+
+## Build from an editable model
+
+You can also run the included builder directly. It uses the Python standard library; Node.js is needed for the geometry tests. Download a model above or adapt `assets/starter/example.json`, then replace the example paths with your local files:
+
+```bash
+python ~/.codex/skills/aws-interactive-architecture/scripts/build_explorer.py \
+  --model /path/to/architecture.en.json \
+  --output /path/to/public/architecture.html \
+  --repo-root /path/to/repository
+```
+
+`--repo-root` checks that cited evidence files exist in that checkout. It cannot determine whether a file actually proves a claim. For a deliberately illustrative model, omit that option and label the design as proposed.
+
+Run this from the installed Skill directory:
+
+```bash
+node --test scripts/geometry.test.mjs
+```
+
+The [model format](https://github.com/peterpanstechland/NBAHackathon/blob/codex/courtside-iq-sharing/skills/aws-interactive-architecture/references/model-format.md) defines nodes, folder placements, edges and walkthrough steps. Give parallel arrows distinct edge IDs. Mark alternative, failure and authoring steps explicitly so playback does not suggest every branch executes in sequence. Set `locale` to `en` or `zh`, translate the readable fields, and generate a separate HTML file for each language. Prefer an immutable commit for public evidence links.
+
+Use short summaries inside cards and fuller explanations in the detail panel. Include only the services relevant to the chosen workflow. The neutral example is proposed architecture: replace its claims with your own evidence rather than treating it as a deployed reference. Icon validation checks the bundled bytes against the manifest, independently of architecture correctness.
+
+## Check interaction and exported output
+
+“Fit whole map” contains both width and height, recalculating when the container or tab changes. Percentage zoom lets readers inspect a large map. Dense workflows still need sensible placements or separate tabs; obstacle routing does not guarantee an optimal layout.
+
+Playback supports pause, speed, previous/next and numbered steps. Switching folders resets it; clicking a node pauses it; the last step stops. With reduced motion enabled, use manual steps. Check keyboard access and narrow screens as well as the desktop view.
+
+“Download SVG” exports the current folder from a neutral state, with embedded icons and no active playback highlight. Open the downloaded file independently to verify it. Finally, sample the source links and review their claims. Deliver the HTML, editable model, and remaining evidence gaps together. That makes the next architecture review easier to reproduce as the repository changes.
+
+[Back to the project](/docs/hackathons/2026/courtside-iq) · [Read the Courtside IQ builder article](./builder-article)
