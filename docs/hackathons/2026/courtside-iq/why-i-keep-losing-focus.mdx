@@ -1,0 +1,107 @@
+---
+title: Why I keep losing focus at hackathons
+sidebar_label: Why I keep losing focus
+sidebar_position: 1
+description: A personal reflection on Courtside IQ and why sound engineering choices did not lead to a clear deliverable or stop the project from growing beyond its original purpose.
+keywords: [Courtside IQ, NBA, hackathon, reflection, AI collaboration, product decisions]
+---
+
+After the NBA hackathon, what frustrated me most was that we ranked second in the AI assessment but did not make the final.
+
+From what I saw, other teams were using Claude Sonnet to write Three.js and shaders, turning basketball analysis into attractive videos that were easy to follow. Looking back at our Courtside IQ, we already had a lot: models, data, agents, a host console, mascots, recording and public playback. Yet when it was time to hand over the result, I was still asking the same questions. Has the video finished uploading? Is the sound still there? Can someone judging it open the link and immediately see the work? Will playback stop when the video ends?
+
+Those questions say more about the problem I had than an architecture diagram does.
+
+I put a great deal of effort into building a production platform without checking early enough that we had a complete piece of work someone could watch. Writing now that we showed good engineering judgment under constraints does not answer that problem. It might even let me avoid the harder question again: **Why can I explain the lessons after each project and still gradually lose focus on the next one?**
+
+## The video that still needed to be uploaded
+
+We wanted viewers to understand a basketball possession: who had the ball, what changed in the defense, which statistic mattered and why the decision was interesting. Viewers needed the picture, data and commentary to appear together at the right moment.
+
+As the project developed, I increasingly thought from the host console outward. A host needs to pause, draw, select players, check evidence, edit a script, record audio, save the result and share it with an audience. Those needs came from somewhere. My teammate raised real problems from using the product. Taking them seriously and implementing them had value.
+
+But there is still a gap between a console that can produce a program and a finished program a stranger can understand. Does the recording retain its sound? Is the work trapped inside one session? Can a fresh browser access it? Can the public page keep looping? These are all part of delivery. They should have been checked in our earliest complete demonstration.
+
+By the time I was addressing them, the feature list was already long. The anxiety of repeatedly checking the upload reminded me that I had tested many individual capabilities but waited too long to examine what someone else would actually receive.
+
+Those fixes mattered. Access across sessions, retained audio and correct looping deserved priority. The problem was that I had not used those requirements early enough to put the rest of the work in order.
+
+## Every new feature had a reasonable explanation
+
+When a player card did not line up with the picture, I wanted segmentation and highlighting. When identities got mixed up, I kept improving tracking and correction. When analysis took too long, I saved the results and made commentary scripts editable. When recording needed a better rhythm, I added keyframes, audio recording and a timeline. When the assistant felt distant, I wanted more mascot animation.
+
+Discussed one by one, it was hard to say that none of these deserved doing. Through those individually reasonable decisions, I slowly accepted a much larger project.
+
+What was easiest to leave out was the work each addition would delay. A more natural animation might mean one fewer rehearsal of the complete program. Connecting another model might mean no time to put an important data card where it was easiest to read. Faster code generation does not remove those tradeoffs. Testing, integration, explanation and maintenance still have to happen.
+
+I asked whether we could build something more often than I asked what it would change in the final demonstration. If it was feasible, the project gained another direction.
+
+Eventually, a goal centered on one piece of basketball content grew into a complete commentary platform. We never formally rewrote the goal, but our effort was already following the new one.
+
+## Sound engineering choices can still take a project off course
+
+I do not want to criticize myself by pretending none of the implementation mattered.
+
+Keeping the original video and recording pauses and overlays in JSON has a concrete purpose: replay can reproduce the host's actions. Saving commentary that has already been analyzed and can be edited by a person avoids repeated waits during recording. Separating official records, visual observations and AI explanations also helps reduce the risk of presenting guesses as facts.
+
+Those choices deserve their own technical articles. A technical article can explain how something works, which problem it solves and where its limits are.
+
+This reflection needs to ask another question: why did I try to do so many of those things in this particular delivery?
+
+A choice can be technically sound without deserving priority at that moment. More layers in the architecture do not necessarily make the possession easier to understand. More buttons do not necessarily help a host record smoother commentary. I need to judge both the quality of an implementation and its contribution to the piece of work in front of me.
+
+The Three.js and shader videos I saw made me realize that I had underestimated the design and engineering required for presentation itself. Helping viewers see a change, follow the information and understand an explanation takes repeated decisions and refinement. I should not undervalue what happens on screen simply because my backend is easier to turn into a long article.
+
+I have not seen the other teams' complete implementations. I cannot conclude that they only built a renderer, or explain the result on behalf of the judges. The comparison is enough to make me examine where I put my effort. It does not require me to label someone else's work.
+
+## A high AI score did not tell me the work was ready
+
+Second place in the AI assessment was part of this experience. Not reaching the final was also the result. Together, those facts do not establish that the AI understood engineering better or that the judges only liked attractive videos.
+
+I would need to go back to the assessment's inputs and rules to understand what that ranking actually meant. If an assessment mainly encountered feature descriptions and code, its judgment might differ from watching a finished video. If it watched the video directly, I would still need to know what it measured. A ranking alone cannot supply the missing scoring logic.
+
+For me, the more useful concern is the reassurance a high score can create. It is easy to read positive feedback as approval of the direction and assume that all that remains is to fill in the gaps. Whether viewers can open the work, hear the commentary and understand the main point still needs someone to walk through the experience.
+
+I can keep using AI assessments, but each time I need to state the inputs, criteria and what was left outside their scope. They can help me examine particular problems. They cannot decide for me that the final work has been delivered successfully.
+
+## Why my reflections did not change what I built next
+
+It is easy for me to write a complete reflection after a project: the constraints we encountered, the solutions we found and the modules we can reuse. That exercise is useful after the work is done. It also helps me recover some order from disappointment.
+
+But I find it easier to explain past choices than to constrain future ones. Looking backward, I can connect each problem to a coherent story. Looking forward, I have to put down an appealing new idea while I still want to build it.
+
+“Stay more focused next time” does not tell me how to decide when a teammate genuinely needs a feature. “Build the smallest version first” does not specify what must be present before we can deliver, or what can temporarily be handled by a person. Without conditions that trigger a decision, those conclusions are easily set aside when someone says that this is important too.
+
+There is another kind of satisfaction I need to watch for. Fixing an endpoint, connecting a model and finishing an architecture diagram all have clear completion signals. Helping a stranger understand the work may earn only the response, “I still don't get it.” I am more familiar with the first kind of feedback, so I may keep moving toward tasks where I know how to demonstrate progress.
+
+Engineering work still needs doing. I also need to acknowledge that my preferences affect its priority. If every reflection finds the virtues in those preferences, it will have a hard time changing them.
+
+## My AI collaborator helped the scope grow
+
+Much of this work was done with AI. It can quickly turn an idea into a plan and then into code. When I raise another requirement, it readily keeps going. When I say an implementation is clever, it can turn that ingenuity into a complete engineering retrospective.
+
+The collaboration feels smooth, but it does not necessarily help me contain the scope.
+
+I propose and accept requirements, and I remain responsible for the final choices. At the same time, I want my AI collaborator to do a more explicit job before each expansion: identify the part of the demonstration it will change, the integration work it will add and the existing task it will displace. Fast execution cannot automatically become a reason to execute.
+
+The same applies after the competition. We can quickly turn the experience into several technical articles. Having plenty to write about does not retrospectively prove that the competition scope was appropriate. I need to do the technical documentation and the competition reflection separately, allowing the former to be useful while acknowledging the priority problems exposed by the latter.
+
+## Decisions I want to be able to examine next time
+
+I want this reflection to become a few agreements that affect what I build. They have not been tested in another competition yet. I am writing them here so I can later check whether I followed them.
+
+**Finish a sample that can actually be handed over first.** For a video project like this, choose one clip and one question to explain. Make a complete version with original sound or commentary, the important pictures, data cues and a viewing link. Open it in a fresh browser, enable sound with a click if needed and check that it can be watched to the end. Develop later capabilities around that sample. Screenshots of the console cannot keep standing in for a finished video.
+
+**Every new feature must name the tradeoff.** When I or the AI proposes a capability, we need to identify the moment in the sample it improves and the work we will defer to make room. Ideas that do not affect the current piece can wait, with their purpose and the reason for deferral recorded. Keep those decisions in the collaboration context so that a deferred requirement does not return in the next round dressed up as a new highlight.
+
+**Prioritize a stable deliverable once the complete demonstration works.** Wrong identities, missing audio and inaccessible work still need fixing. Another character or another way to operate the console needs a fresh decision about whether it justifies the integration risk. Calling everything a finishing touch cannot keep delivery from ever reaching a stable version.
+
+**Have someone outside the development process actually watch it.** Give them the final link without standing beside them to explain the buttons or architecture. Then listen to their account of what they saw. If they cannot connect the players, data and changes, improve the presentation and information order first. Consider adding more content once the work explains its question clearly.
+
+I do not want to build a complicated management system for these agreements. A small record of decisions next time is enough: what I declined, why I declined it and where the effort I saved eventually went.
+
+Then the reflection will have a new question to answer. When I wanted to add another feature I really liked, did the conclusion I wrote last time actually change one of my decisions?
+
+---
+
+[Back to the Courtside IQ overview](./index.mdx) · [Read the engineering article](./builder-article) · [Explore the interactive architecture Skill](./interactive-architecture-skill)
