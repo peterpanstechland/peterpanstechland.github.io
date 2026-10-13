@@ -1,0 +1,109 @@
+---
+sidebar_position: 4
+sidebar_label: 六组架构流程动画
+title: "Courtside IQ 六组架构流程：从主播操作到作品回放"
+description: "按需播放六张流程动画，理解媒体处理、视觉证据、Agent 解说与公共回放的实际职责和边界。"
+keywords: [Courtside IQ, AWS架构, 流程动画, GIF, AgentCore, Strands, SageMaker]
+hide_table_of_contents: true
+---
+
+import {useState} from 'react';
+
+export function FlowAnimation({id, title, steps, seconds}) {
+  const [playing, setPlaying] = useState(false);
+  const base = `/img/hackathons/2026/courtside-iq/flows/${id}`;
+  return (
+    <figure style={{margin: '1.25rem 0 1.75rem'}}>
+      <img id={`image-${id}`} key={playing ? 'animation' : 'overview'} className="no-zoom" src={`${base}.${playing ? 'gif' : 'png'}`} alt={`${title}：${playing ? '按步骤高亮节点和连线的流程动画' : '完整静态总览'}`} width="1440" height="900" loading="lazy" style={{display: 'block', width: '100%', height: 'auto', border: '1px solid var(--ifm-toc-border-color)', borderRadius: 12}} />
+      <figcaption style={{display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.75rem 1rem', marginTop: '0.9rem', fontSize: '0.9rem'}}>
+        <button type="button" className="button button--primary button--sm" aria-pressed={playing} aria-controls={`image-${id}`} aria-label={`${playing ? '查看静态总览' : '播放动画'}：${title}`} onClick={() => setPlaying(value => !value)}>{playing ? '查看静态总览' : '播放动画'}</button>
+        <span aria-live="polite">{playing ? '正在循环播放' : '静态总览'} · {steps} 个步骤 · 约 {seconds} 秒</span>
+        <a href={`${base}.png`} target="_blank" rel="noopener noreferrer">查看原尺寸总览</a>
+        <a href={`${base}.gif`} download>下载 GIF 原件</a>
+      </figcaption>
+    </figure>
+  );
+}
+
+# 六条流程，让架构自己讲一遍
+
+**TEAM7 · 战术犯规队 / COURTSIDE IQ**
+
+从主播进入工作台，到一段作品被公开观看，一次操作会经过哪些服务，结果又怎样留下来？这六组流程分别解释入口、媒体任务、视觉证据、Agent 解说、节目回放和运维支路。页面默认展示静态总览；点击 **播放动画**，可以逐步观察高亮的节点与连线，点击 **查看静态总览** 即可停止动画。
+
+这些图来自项目源码中的实现关系，是逻辑流程讲解，**不会调用 AWS，不查询线上账号，也不代表所有支路都会在一次请求中执行**。移动圆点只提示正在讲解的路径，不表示实测延迟或吞吐量。
+
+[项目总览](./index.mdx) · [Builder 文章](./builder-article) · [可点击架构与代码依据](pathname:///labs/courtside-iq-architecture-zh.html) · [可复用架构 Skill](./interactive-architecture-skill)
+
+## 先读懂连线
+
+- **青色实线：** 同步调用或交互。
+- **棕色虚线：** 异步处理或持久任务。
+- **蓝色实线：** 数据、文件或版本。
+- **玫红色实线：** 人工确认或独立支路。
+
+高亮节点表示当前步骤涉及的职责。总览保留了可选路径和支撑关系，不意味着一次操作必须依次调用全部服务。
+
+[01 入口](#entry-control) · [02 媒体](#media-storage) · [03 视觉](#vision-inference) · [04 Agent 与解说](#agent-audio) · [05 公共回放](#production-broadcast) · [06 运维](#operations-external)
+
+## 01 入口与控制面 {#entry-control}
+
+**CloudFront · API Gateway · Cognito**
+
+CloudFront 提供统一的网页入口；进入应用后，HTTP 控制请求、WebSocket 消息和浏览器语音转写分别走自己的路径。Cognito 为直接转写提供临时凭证，主播操作权限则由应用会话令牌控制。
+
+<FlowAnimation id="01-entry-control" title="入口与控制面" steps={7} seconds={16} />
+
+**实现边界：** 网页与公共资源可以缓存，`/api` 不缓存。WebSocket 消息与转写音频不经过静态页面缓存；临时转写凭证也不等于主播权限。可核对[网页分发配置](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/infra/lib/constructs/web.ts)和[浏览器转写代码](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/web/src/lib/voice.ts)。
+
+## 02 媒体任务与版本化存储 {#media-storage}
+
+**S3 · EventBridge · Step Functions · MediaConvert**
+
+先登记素材，再把原片直接上传到 S3；对象事件进入幂等启动逻辑，Step Functions 协调后续阶段，MediaConvert 负责转码和抽帧。媒体及带版本的分析产物进入 S3，状态与索引保存在 DynamoDB。
+
+<FlowAnimation id="02-media-storage" title="媒体任务与版本化存储" steps={8} seconds={17} />
+
+**实现边界：** 图中上传链路针对已登记的 MP4。应用 API 负责登记和签名，大文件不穿过应用 Lambda；桶里任意一个对象变动，也不意味着都会启动分析。可核对[流水线基础设施](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/infra/lib/constructs/pipeline.ts)和[媒体处理工作流](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/services/pipeline/workflow.py)。
+
+## 03 视觉观察与模型推理 {#vision-inference}
+
+**SageMaker AI · Rekognition · Bedrock**
+
+SageMaker 运行自定义视觉容器，Rekognition 从采样画面中读文字，Bedrock 上的 Qwen 结合选定 JPEG 和结构化上下文理解画面。源时间与标注修订号把输入连接起来；官方快照、视觉观察和模型假设仍分别保留。
+
+<FlowAnimation id="03-vision-inference" title="视觉观察与模型推理" steps={7} seconds={16} />
+
+**实现边界：** ViTPose 属于归档请求分支，能否使用取决于模型是否加载。分割轮廓或临时轨迹不能自动证明 NBA 球员身份；相对深度不是米制距离；Qwen 接收选帧，并不直接读取整段 MP4。可核对[视觉服务](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/services/courtvision/server.py)和[画面推理代码](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/services/shared/src/nba_copilot/scene_model.py)。
+
+## 04 Agent 的运行环境与解说资产 {#agent-audio}
+
+**AgentCore · Strands · Bedrock · Transcribe · Polly**
+
+预分析与暂停帧问答分开组织：前者使用三节点 Strands 图，后者使用单 Agent 和证据工具。关键帧稿件保留语言、标注修订号和文本版本，供主播修改、审核；Polly 配音可以复用，Transcribe 则处理显式开启的麦克风输入。
+
+<FlowAnimation id="04-agent-audio" title="Agent 的运行环境与解说资产" steps={8} seconds={17} />
+
+**实现边界：** AgentCore 托管应用代码，Strands 编排 Agent，Bedrock 执行模型推理。当前 Runtime 网络配置为 `PUBLIC`，Claude 使用全局推理配置文件，不能将它画成仅在 VPC 内运行。重做 AI 分析不会覆盖已审核稿件；自动翻译与主播声音克隆没有在本次实现。可核对[运行时配置](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/infra/lib/constructs/agents.ts)和[版本化播报资产](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/services/shared/src/nba_copilot/keyframe_narration.py)。
+
+## 05 从浏览器录制到公共节目 {#production-broadcast}
+
+**Web Audio · S3 · DynamoDB · CloudFront**
+
+浏览器分别保存原片、固定的节目混音音轨和 JSON 操作记录。上传文件通过完整性检查后，作品才成为 `READY`；选中的作品再使用同一个服务器节目时钟，让观众从当前进度加入循环播放的录制节目。
+
+<FlowAnimation id="05-production-broadcast" title="从浏览器录制到公共节目" steps={8} seconds={17} />
+
+**实现边界：** `READY` 检查文件是否完整、结构是否可用，不验证篮球事实。JSON 需要本项目回放器，不是通用 EDL 交换格式。CloudFront 提供观看页面，媒体通过限时签名 URL 读取并续签；开启声音仍受浏览器自动播放策略约束。导出单个合成视频需要渲染和编码。可核对[作品验证逻辑](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/services/shared/src/nba_copilot/productions.py)和[公共回放实现](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/web/src/surfaces/broadcast/PublicProductionPlayback.tsx)。
+
+## 06 运维和可选第三方 {#operations-external}
+
+**IAM · Secrets Manager · CloudWatch · SQS · Roboflow · Tripo**
+
+权限、密钥读取与日志支撑应用运行。失败留存、可选外部图片诊断和角色资产制作各有入口；动画中的讲解顺序，不代表一次请求会线性调用全部服务。
+
+<FlowAnimation id="06-operations-external" title="运维和可选第三方" steps={8} seconds={17} />
+
+**实现边界：** SQS 接收异步 Worker 未处理的失败，不会自动重放。Roboflow 只有显式开启才向外部 API 发送 JPEG；Tripo 属于资产创作阶段，浏览器使用现有 GLB 驱动动作，互动时不会再次调用生成 API。日志与失败指标也不代表已经接通自动处置。可核对[Worker 失败目的地](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/infra/lib/constructs/realtime.ts)、[可选诊断支路](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/services/pipeline/roboflow.py)和[本地角色动作](https://github.com/peterpanstechland/NBAHackathon/blob/f43f4e0b0b1424b2aa36cd09301ac2ac047cc32c/web/src/three/TeamMascotModel.tsx)。
+
+继续阅读 [Builder 文章](./builder-article)，可以了解产品与工程取舍；打开[交互架构](pathname:///labs/courtside-iq-architecture-zh.html)，可以逐个检查节点和代码依据。官方记录、视觉观察、AI 解读与主播确认，在这些流程里始终保留各自的含义。
