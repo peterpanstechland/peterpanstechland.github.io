@@ -300,3 +300,55 @@
     padding: 2rem 1rem;
   }
 }
+
+/* PETERPANS TECHLAND RESPONSIVE PATCH v1 — BEGIN */
+/* Prevent grid children and title from forcing the viewport wider. */
+.hero, .sectionContainer, .features, .showcaseGrid, .featureCard, .projectCard, .projectContent { min-width: 0; }
+.heroTitle { overflow-wrap: normal; }
+.heroGradient { box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+@media (max-width: 1199px) {
+  .sectionContainer { width: 100%; max-width: 100%; padding: 3rem clamp(18px, 4vw, 38px); }
+  .features { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+  .hero { padding-top: clamp(3rem, 6vw, 5rem); }
+}
+@media (max-width: 996px) {
+  .hero { max-width: 740px; padding: 3.6rem 20px 2.5rem; }
+  .heroTitle { font-size: clamp(2.25rem, 5.4vw, 3.15rem); line-height: 1.13; letter-spacing: -.045em; }
+  .heroSubtitle { font-size: clamp(1rem, 2vw, 1.13rem); line-height: 1.65; max-width: 580px; }
+  .showcaseGrid { grid-template-columns: minmax(0, 1fr); }
+  .sectionTitle h2 { font-size: clamp(1.7rem, 3.6vw, 2rem); }
+  .projectCard { min-height: 0; }
+}
+@media (max-width: 599px) {
+  .ambientLight { width: 100vw; height: 100vw; top: 5%; filter: blur(70px); opacity: .6; }
+  .ambientLightAccent { width: 85vw; height: 90vw; filter: blur(70px); opacity: .55; }
+  .hero { padding: clamp(2.35rem, 8vh, 4rem) 16px 1.5rem; }
+  .heroTitle {
+    font-size: clamp(1.82rem, 7.2vw, 2.65rem);
+    letter-spacing: -.047em; line-height: 1.14; margin-bottom: 1.1rem;
+  }
+  .heroGradient { overflow-wrap: normal; }
+  .heroSubtitle { font-size: .98rem; line-height: 1.7; max-width: 34ch; margin-bottom: 1.75rem; }
+  .heroBtns { flex-direction: column; align-items: stretch; gap: .7rem; max-width: 330px; margin: 0 auto; }
+  .btn { display: flex; justify-content: center; align-items: center; width: 100%; min-height: 46px; padding: 11px 16px; }
+  .sectionContainer { padding: 2.3rem 16px; }
+  .sectionTitle { margin-bottom: 1.5rem; }
+  .sectionTitle h2 { font-size: clamp(1.55rem, 6vw, 1.85rem); line-height: 1.2; }
+  .sectionTitle p { font-size: .94rem; line-height: 1.6; }
+  .features, .showcaseGrid { grid-template-columns: minmax(0,1fr); gap: 1rem; }
+  .featureCard, .projectCard { padding: 1.35rem; border-radius: 14px; }
+  .projectCard { min-height: 0; }
+  .iconBox { margin-bottom: 1rem; }
+  .featureTitle { font-size: 1.17rem; }
+  .projectTitle { font-size: 1.3rem; line-height: 1.3; }
+  .projectDesc { margin-bottom: 1rem; }
+}
+@media (max-width: 359px) {
+  .heroTitle { font-size: clamp(1.58rem, 7.5vw, 1.85rem); }
+  .heroSubtitle { font-size: .9rem; }
+  .sectionTitle h2 { font-size: 1.43rem; }
+}
+@media (hover: none) {
+  .featureCard:hover, .projectCard:hover { transform: none; box-shadow: none; }
+}
+/* PETERPANS TECHLAND RESPONSIVE PATCH v1 — END */
