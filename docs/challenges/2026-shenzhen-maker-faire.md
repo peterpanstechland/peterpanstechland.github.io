@@ -3,7 +3,7 @@ id: 2026-shenzhen-maker-faire
 sidebar_position: 2
 title: 2026 Shenzhen Maker Faire · Makers Challenge
 slug: /challenges/2026-shenzhen-maker-faire
-description: Full independent proposal: Beg, Build, Show, on-site scavenging, rules, judging, safety, logistics and running plan.
+description: "Full independent proposal: Beg, Build, Show, on-site scavenging, rules, judging, safety, logistics and running plan."
 keywords: [Maker Faire, Shenzhen, Makers Challenge, challenge rules, hardware, scavenger hunt]
 ---
 
