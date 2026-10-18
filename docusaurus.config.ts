@@ -135,6 +135,16 @@ const config: Config = {
           position: 'left',
           label: 'Hackathons',
         },
+        // Challenge — community maker programs
+        {
+          label: 'Challenge',
+          position: 'left',
+          items: [
+            {to: '/challenge', label: 'Challenge Hub'},
+            {to: '/docs/challenges/2026-shenzhen-maker-faire', label: '2026 Shenzhen Maker Faire · Makers Challenge'},
+            {to: '/docs/challenges/sponsors', label: 'Looking for Sponsors'},
+          ],
+        },
         // Community
         {
           type: 'doc',
