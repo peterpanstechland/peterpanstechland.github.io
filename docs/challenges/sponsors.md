@@ -3,7 +3,7 @@ id: sponsors
 sidebar_position: 3
 title: LOOKING FOR SPONSORS · Products, Equipment & Exhibitors
 slug: /challenges/sponsors
-description: Sponsor and exhibitor call for the independent 2026 Shenzhen Maker Faire Makers Challenge concept: products, equipment loans, shared tools, mentors and funding.
+description: "Sponsor and exhibitor call for the independent 2026 Shenzhen Maker Faire Makers Challenge concept: products, equipment loans, shared tools, mentors and funding."
 keywords: [sponsor, products, equipment, exhibitors, Maker Faire Shenzhen, makers]
 ---
 
