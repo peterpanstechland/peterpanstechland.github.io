@@ -343,3 +343,32 @@
   background: var(--ifm-color-primary);
 }
 
+/* PETERPANS TECHLAND RESPONSIVE PATCH v1 — BEGIN */
+@media (max-width: 599px) {
+  .container[data-position="bottom-right"] {
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    right: calc(14px + env(safe-area-inset-right));
+  }
+  .container[data-position="bottom-left"] {
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    left: calc(14px + env(safe-area-inset-left));
+  }
+  .fab { width: 48px; height: 48px; }
+  .chatWindow {
+    width: calc(100vw - 28px); max-width: 380px; height: min(70dvh, 530px);
+    max-height: calc(100dvh - 90px - env(safe-area-inset-bottom));
+    border-radius: 14px;
+  }
+  .header, .inputArea { padding: .8rem; }
+  .messages { padding: .8rem; }
+  .messageContent { font-size: .86rem; }
+}
+@media (max-width: 359px) {
+  .container[data-position="bottom-right"] { right: 8px; }
+  .container[data-position="bottom-left"] { left: 8px; }
+  .chatWindow { width: calc(100vw - 16px); }
+}
+@media (max-height: 540px) and (max-width: 996px) {
+  .chatWindow { height: calc(100dvh - 72px); max-height: calc(100dvh - 72px); }
+}
+/* PETERPANS TECHLAND RESPONSIVE PATCH v1 — END */
