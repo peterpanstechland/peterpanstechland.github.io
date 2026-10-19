@@ -52,3 +52,59 @@ These are inspiration prompts; producing an actual Tripo export requires generat
 - Desktop: orbit by dragging; wheel to zoom. Mobile: finger drag.
 - Intro overlay has **Enter the Garage** and **Just Read the Blog**.
 - Navigation links remain ordinary HTML, so visitors are not locked out if WebGL or the external Three.js CDN is unavailable.
+
+
+---
+
+## Wave 2 / 2026-10-19 — Roll-up door, maker kiosk and brand assets
+
+**Integration status:** The live Three.js code now includes working roller-door motion, neon breathing, portrait photo plaque, and clickable vending/bench placeholders. These are **implemented in code**, not Tripo renders. All unapproved external GLB slots remain disabled in \`model-slots.json\`. The original art-reference image is \`Peter Pan’s Neon Maker Garage.png\` from the design conversation, **not** a finished 3D mesh. Follow \`design/cyber-maker-garage/ART_DIRECTION_V2.md\` and obtain an approved 2K render before replacing the production environment.
+
+### Asset priority and placement
+
+| Priority | Asset | Export / node guidance | Status |
+| --- | --- | --- | --- |
+| P0 | New architectural garage shell | \`maker-garage-v2.glb\`; floor-centered, +Z front, 17 × 11.6 footprint, roof nodes named \`ROOF_*\` | Tripo/Blender required, NOT generated |
+| P0 | Maker vending machine | \`vending-machine.glb\`; floor-center pivot, +Z front; 1.21 × 2.43 × 0.78 approx.; slot \`models.vending\`; site placement (7.18, 0, 0.45) | Tripo export required, placeholder active |
+| P1 | Workshop modular bench / tools | Integrate into garage environment or export \`maker-workbench.glb\`; avoid duplicate copies of PAN / FlipFate | Tripo/Blender asset needed; hotspot works |
+| P1 | Garage shutter housing | Separate decorative cassette / brackets; **keep functioning segmented shutters** in Three.js until a named rig is implemented | Optional Tripo, current door works |
+| P1 | Neon fascia / tubes | Prefer curves or baked emissive surfaces on garage mesh; **do not generate text and logos via model AI** | Browser-drawn sign and live light motion already work |
+| P0 | Peter Pan's actual brand portrait | **Use \`/img/logo.jpg\` from the existing site** as a browser texture. Do not use a generated cat-head logo or ask Tripo to create the face. | Photo plaque implemented |
+
+### Tripo image-to-3D brief: maker vending machine
+
+Use the existing neon workshop reference for *color/material direction only*. Produce **a standalone original object**, no environment, no floor and no background.
+
+**Prompt (EN):**
+
+> Game-ready miniature cyberpunk maker-parts vending machine, DIY electronics swap kiosk, compact vertical cabinet approximately 1.2 wide by 2.4 tall by 0.8 deep, front-facing +Z, charcoal matte metal case with subtly worn corners, smoky dark-blue glass display showing a few tiny development boards, sensors, motors and neon cables, coral-magenta and cyan accent strips, one small accessible selection keypad, output slot, cute but industrial Shenzhen maker alley aesthetic, handmade collectible diorama proportions, clean silhouette, separate doors and front panel, proper back and side surfaces, physically based materials, 2.5D stylized detail, isolated single prop, no environment, no people, no cat graphics, no existing brand marks, no letterforms, no watermark.
+
+**Prompt (中文)：**
+
+> 赛博朋克深圳创客街区的微缩电子零件自动贩卖机，独立完整道具，宽约 1.2、高约 2.4、深约 0.8 比例，正面朝前，深灰黑磨砂金属外壳、适度旧化边角，烟蓝色透明展示窗展示少量开发板、传感器、微型电机与彩色线材，珊瑚红粉霓虹和青蓝光条，小型选择按键与取物口，精致 2.5D 设计师玩具比例，结构清晰，正反侧面完整，可拆分柜门和透明窗，不要背景、底座、人物、猫头标识、文字、水印。
+
+**Import checklist:** export embedded-texture GLB; front +Z; local pivot at floor center; named \`VENDING_DOOR\`, \`VENDING_GLASS\`, \`VENDING_PICKUP\`, \`VENDING_DISPLAY\`; ~15k–30k triangles preferred for an isolated prop; textures <= 1024px per atlas when reasonable, compressed only if tested; inspect back face, pivot, handedness and click target. Save under \`static/maker-house/models/vending-machine.glb\` and configure \`models.vending.file\` to \`"/maker-house/models/vending-machine.glb"\` **only after visual QA**.
+
+### Tripo brief: main garage environment upgrade
+
+**Prompt (EN):**
+
+> A single cohesive original miniature after-hours maker garage from Shenzhen's futuristic backstreet, diorama game environment, open storefront with one retractable steel roller shutter opening, visible workshop benches, tools and tiny electronics, stacked storage boxes, HVAC ducts and cables, wet pavement edge, compact roof access railing, hand-made industrial wear, charcoal black and smoky purple-gray painted steel, coral pink neon trim, cyan status screens and small amber work lights, believable micro-details and readable silhouette, three-quarter front orthographic view, physically coherent architecture with separate cutaway roof, no generated words or logo decals, no cat head icon, no people or protagonist robots, no background city or sky, game-ready mesh, floor-centered, front +Z, wide ~17 x deep ~11.6 proportions.
+
+**Critical:** Tripo often merges the entire scene. Export separate \`ROOF_LEFT\`, \`ROOF_RIGHT\` meshes in Blender after generation so the existing cutaway can fade. Keep signage/brand portrait as website-rendered layers and keep interactive residents separate. Do not bake the shutter into a static closed facade; it must remain operable.
+
+### Shutter rig contract for later GLB replacement
+
+The v2 website currently animates **13 procedural slats** and uses a clickable physical controller plus a keyboard-accessible on-screen button. Do not replace the moving shutter with a static Tripo mesh. If authored in Blender, name the mechanism \`SHUTTER_ROOT\`, child meshes \`SHUTTER_SLAT_00\` through \`SHUTTER_SLAT_12\`, \`SHUTTER_DRUM\`, \`SHUTTER_SWITCH\`; keep each slat's transform separately editable. A future code change can bind these nodes to the existing \`shutterAmount\` state. For now, Tripo is appropriate only for surrounding cosmetic housing.
+
+### Photo / logo correction
+
+The cyberpunk concept image includes an erroneous neon cat-head *brand* icon. **This is not the site's correct profile photo.** The website photo plaque loads the local \`/img/logo.jpg\` already used by the site's navigation, not an invented/generated icon. Before final visual sign-off, confirm that this image is the intended portrait; if not, update the source image once rather than patching many mesh textures.
+
+### Acceptance gate
+
+- Show a 2048px desktop render, 390px-wide phone crop, four orthographic angles of standalone vending prop, and a front/side view of the complete shop.
+- Check screen-space silhouette, illumination, roof opening and absence of erroneous cat logo.
+- Inspect GLB in Blender/model viewer before setting any \`file\` slot. No invisible duplicates, inverted normals or unreadable textures.
+- Desktop/mobile check: door animation, neon reduced-motion option, viewport controls, clickable objects, bilingual cards, Graceful WebGL fallback.
+- This document is a **production brief**; it does not assert any Tripo generation, 3D mesh approval or browser visual QA has happened.
