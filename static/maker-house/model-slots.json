@@ -1,8 +1,8 @@
 {
-  "_comment": "Six original low-poly procedural GLB models generated during GitHub Pages build by tools/generate_3d_models.py. Local dev without generated files gracefully uses procedural fallbacks. Replace paths with Tripo/Blender models later if desired. Garage front faces +Z; name roof nodes ROOF_*/CEILING_* to fade on Enter.",
+  "_comment": "VISUAL QA HOLD (2026-10-19): generated prototype GLBs failed art-direction review and are disabled from public homepage; keep source/tools but use the existing interactive procedural fallback until redesigned, artist-approved assets are available. Configure validated model URLs only after preview approval.",
   "models": {
     "garage": {
-      "file": "/maker-house/models/maker-garage.glb",
+      "file": "",
       "scale": 1,
       "position": [
         0,
@@ -16,7 +16,7 @@
       ]
     },
     "luckycat": {
-      "file": "/maker-house/models/neko-luckycat.glb",
+      "file": "",
       "scale": 1,
       "position": [
         0,
@@ -30,7 +30,7 @@
       ]
     },
     "pan": {
-      "file": "/maker-house/models/pan-cocktail-robot.glb",
+      "file": "",
       "scale": 1,
       "position": [
         0,
@@ -44,7 +44,7 @@
       ]
     },
     "flipfate": {
-      "file": "/maker-house/models/flipfate-machine.glb",
+      "file": "",
       "scale": 1,
       "position": [
         0,
@@ -58,7 +58,7 @@
       ]
     },
     "bmo": {
-      "file": "/maker-house/models/bmo-companion.glb",
+      "file": "",
       "scale": 1,
       "position": [
         0,
@@ -72,7 +72,7 @@
       ]
     },
     "roomba": {
-      "file": "/maker-house/models/roomba-camera-bot.glb",
+      "file": "",
       "scale": 1,
       "position": [
         0,
