@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+# Serialize deployments to prevent GitHub Pages from rejecting concurrent publishes.
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
 jobs:
   build:
     name: Build Docusaurus
