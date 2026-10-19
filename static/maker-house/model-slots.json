@@ -1,5 +1,5 @@
 {
-  "_comment": "VISUAL QA HOLD (2026-10-19): generated prototype GLBs failed art-direction review and are disabled from public homepage; keep source/tools but use the existing interactive procedural fallback until redesigned, artist-approved assets are available. Configure validated model URLs only after preview approval.",
+  "_comment": "VISUAL QA HOLD (2026-10-19): procedural model slots intentionally disabled pending art-direction approval. Interactive shutter, neon, photo plaque and vending/bench stand-ins remain functional without Tripo. Replace only with reviewed GLBs; do not claim these are Tripo-generated.",
   "models": {
     "garage": {
       "file": "",
@@ -86,6 +86,20 @@
       ]
     },
     "courtside": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "vending": {
       "file": "",
       "scale": 1,
       "position": [
