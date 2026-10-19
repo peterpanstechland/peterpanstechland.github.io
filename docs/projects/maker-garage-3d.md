@@ -6,7 +6,7 @@ description: Layout, character placement, model slots, interactions and the prod
 keywords: [3D, Tripo, Three.js, GLB, maker garage, homepage, scene design]
 ---
 
-# Cyber Maker Garage — Scene Blueprint v1
+# Cyber Maker Garage — Scene Blueprint v2
 
 **One workshop, one story, six hero assets.** Rather than scattering shiny objects all over a webpage, the homepage becomes one miniature workshop in Shenzhen: the house is the world, NEKO is the host, and each project is a small interactive resident.
 
@@ -82,8 +82,17 @@ All asset slots default to an **empty file path**. The homepage therefore works 
 
 ## 06 / What is and isn't built
 
-**Deployed v1:** six source-controlled, reproducibly generated GLB assets (the generator is in `tools/generate_3d_models.py`), imported characters and architectural shell, animated named nodes, interactive camera, category signs, bilingual copy, links, fallback geometry and a roof cutaway. Binary assets are generated during the GitHub Pages build and served at `/maker-house/models/*.glb`. They are original procedural models, not Tripo-generated assets.
+**Implemented prototype:** interactive Three.js stage, working door shutters, neon breathing, site's existing profile-photo plaque, clickable vending and workbench hot spots, camera, bilingual project cards and fallback geometry. Six reproducible procedural GLBs are built by `tools/generate_3d_models.py`, but **all imported GLB slots are currently disabled after visual QA hold**. The procedural runtime stand-ins remain active. No Tripo export has been delivered.
 
-**Future upgrade:** higher-fidelity Tripo/Blender meshes, optional authored animation clips, device-level mobile profiling and final art-direction QA. The programmatic v1 is a complete functional asset pass, not a claim of AI-generated 3D art.
+**Future upgrade:** art-directed Tripo/Blender exterior, vending machine and props; authored shutter and resident motion; mobile rendering tests and final visual approval. See the Wave 2 Tripo production brief at `static/maker-house/TRIPO_MODELS.md`. Keep the GLB slots disabled until approved.
 
 This document describes the [Peter Pan's Techland homepage](/) project. The separate **[Makers Challenge](/challenge)** proposal is linked from the scene but is not an official Maker Faire program.
+
+## 07 / Wave 2 — working controls and Tripo queue (October 2026)
+
+- **Garage shutter:** click the physical switch on the right entry column or use the accessible lower-right button. The slats animate and Enter opens the shutter; reduced-motion users get immediate transitions.
+- **Light animation:** restrained coral-pink and cyan neon breathing, subtle accent light motion, no rapid strobing.
+- **Brand:** the website profile-photo texture is placed on a storefront portrait plaque. The wrong cat-head brand sticker from the concept image is not reproduced.
+- **New clickable objects:** a compact vending-machine placeholder opens a non-commercial concept card; the rear workbench links to build guides.
+- **Tripo pending:** create a cohesive garage exterior first, then a standalone vending GLB. `model-slots.json` exposes a `vending` replacement slot; see the Tripo brief for geometry prompts.
+- **Verification:** the scene module passed a JavaScript syntax check; visual QA and build deployment are separate gates.
