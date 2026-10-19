@@ -3,279 +3,219 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#070810" />
-  <title>Peter Pan's Techland · 3D Maker House</title>
+  <meta name="theme-color" content="#171728" />
+  <title>Maker House / Peter Pan's Techland</title>
   <style>
-    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent;color:#f9c1d8;font-family:system-ui,sans-serif}
-    #fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;opacity:.7;text-align:center;padding:25px;pointer-events:none}
-    #fallback strong{letter-spacing:.14em;font-size:clamp(1.3rem,2vw,2rem);color:#ff6793}#fallback small{color:#cdaedc}
-    canvas{display:block;width:100%;height:100%;touch-action:pan-y;outline:none}
-    #tip{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);padding:7px 12px;border:1px solid rgba(244,63,94,.3);background:rgba(9,7,23,.6);color:#d4b7dc;font:600 10px monospace;white-space:nowrap;pointer-events:none;opacity:.8}
-    @media(max-width:720px){#tip{font-size:9px}}
+    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}
+    body{font-family:system-ui,sans-serif}
+    canvas{width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+    #fallback{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+    #fallback svg{width:min(82%,540px);height:auto;opacity:.83}
+    #fallbackNotice{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;color:#c7bbc9;font-size:11px;letter-spacing:.03em;display:none}
   </style>
 </head>
 <body>
-  <div id="fallback"><strong>THE MAKER HOUSE</strong><small>AI • HARDWARE • ROBOTS • DIY</small></div>
-  <div id="tip">CLICK DOOR / ENTER · CLICK TOOLS · DRAG TO ROTATE</div>
+  <div id="fallback" aria-hidden="true">
+    <svg viewBox="0 0 600 380" role="presentation" xmlns="http://www.w3.org/2000/svg">
+      <path d="M300 23 542 143 300 274 58 143Z" fill="#33324b" stroke="#82729c" stroke-width="2"/>
+      <path d="M58 143v104l242 117V274Z" fill="#29283a" stroke="#645874" stroke-width="2"/>
+      <path d="M542 143v104L300 364v-90Z" fill="#201f33" stroke="#645874" stroke-width="2"/>
+      <path d="M94 143 300 44 506 143 300 247Z" fill="#3c344b" stroke="#605b73"/>
+      <path d="M106 153 179 117 237 146 164 182Z" fill="#9a81b0"/><path d="M106 153v56l58 28v-55Z" fill="#453958"/><path d="M237 146v56l-73 35v-55Z" fill="#716384"/>
+      <path d="m236 183 70-34 73 35-72 36Z" fill="#8c819d"/><path d="m236 183v55l71 35v-53Z" fill="#493f5f"/><path d="m379 184v54l-72 35v-53Z" fill="#716581"/>
+      <path d="m345 112 65-32 81 40-66 32Z" fill="#bf88a5"/><path d="m345 112v43l80 39v-42Z" fill="#6b4264"/><path d="m491 120v43l-66 31v-42Z" fill="#825674"/>
+      <path d="m194 244 104-50 85 41-105 50Z" fill="#a185b4"/><path d="m194 244v31l84 41v-31Z" fill="#53445f"/><path d="m383 235v31l-105 50v-31Z" fill="#695777"/>
+      <path d="m246 197 52-25 45 23-52 23Z" fill="#df9cb9" opacity=".83"/>
+      <path d="m172 115 25-13 20 10-25 12Z" fill="#82c8d1"/><path d="m192 125v-31" stroke="#9de2e9" stroke-width="5"/>
+      <path d="m401 104 45 23" stroke="#f3c1d7" stroke-width="5" stroke-linecap="round"/>
+      <path d="m224 274 53 24" stroke="#f0b6d0" stroke-width="3"/>
+    </svg>
+    <span id="fallbackNotice">Interactive 3D is unavailable; the rest of the site is ready.</span>
+  </div>
   <script type="module">
     let THREE;
-    try {
-      THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');
-    } catch (error) {
-      try {
-        THREE = await import('https://unpkg.com/three@0.170.0/build/three.module.js');
-      } catch {
-        document.querySelector('#fallback small').textContent = '3D requires WebGL and an internet connection. Explore the links on the page.';
-      }
+    try { THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js'); }
+    catch {
+      try { THREE = await import('https://unpkg.com/three@0.170.0/build/three.module.js'); }
+      catch { document.getElementById('fallbackNotice').style.display='block'; }
     }
-    if (THREE) {
-      try { initialize(THREE); }
-      catch(error) {document.querySelector('#fallback small').textContent = '3D unavailable. Use the navigation and tool cards on the page.'; console.warn(error);}
+    if(THREE) {
+      try { start(THREE); }
+      catch(error) { document.getElementById('fallbackNotice').style.display='block'; console.warn('Maker House fallback',error); }
     }
-
-    function initialize(T) {
-      const fallback = document.getElementById('fallback');
-      const renderer = new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'high-performance'});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1,1.7));
-      renderer.setSize(window.innerWidth,window.innerHeight);
-      renderer.setClearColor(0x070810,0);
+    function start(T) {
+      const renderer = new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'default'});
+      renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
+      renderer.setSize(innerWidth,innerHeight);
+      renderer.setClearColor(0x151524,0);
       renderer.outputColorSpace = T.SRGBColorSpace;
-      document.body.insertBefore(renderer.domElement, fallback);
-      fallback.style.display='none';
-
-      const scene = new T.Scene();
-      scene.fog = new T.FogExp2(0x160e2d,0.013);
-      const camera = new T.PerspectiveCamera(43,window.innerWidth/window.innerHeight,.1,150);
-      const light = new T.HemisphereLight(0xc2b9ff,0x17091d,2.7);
-      scene.add(light);
-      const main = new T.DirectionalLight(0xffb2d1,3.4);main.position.set(5,12,8);scene.add(main);
-      const pink = new T.PointLight(0xe6327a,85,24);pink.position.set(-6,4,3);scene.add(pink);
-      const violet = new T.PointLight(0x9255ff,100,24);violet.position.set(5,5,-5);scene.add(violet);
-      const cyan = new T.PointLight(0x4cd8fb,35,14);cyan.position.set(3,2,4);scene.add(cyan);
-
-      const material = (hex,metal=.2,rough=.55) => new T.MeshStandardMaterial({color:hex,metalness:metal,roughness:rough});
-      const dark=material(0x141321),steel=material(0x45445a,.65),soft=material(0x25213f);
-      const neonPink = new T.MeshBasicMaterial({color:0xf14383});
-      const neonBlue = new T.MeshBasicMaterial({color:0x5ad5f7});
-      const neonPurple = new T.MeshBasicMaterial({color:0xa47dff});
-      const floor = new T.Group();scene.add(floor);
-      const box=(parent,w,h,d,x,y,z,mat=dark)=>{const m=new T.Mesh(new T.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);parent.add(m);return m;};
-      const cyl=(parent,r1,r2,h,x,y,z,mat=steel,parts=18)=>{const m=new T.Mesh(new T.CylinderGeometry(r1,r2,h,parts),mat);m.position.set(x,y,z);parent.add(m);return m;};
-      const line=(parent,ax,ay,az,bx,by,bz,color=0xf14383)=>{const pts=[new T.Vector3(ax,ay,az),new T.Vector3(bx,by,bz)];const obj=new T.Line(new T.BufferGeometry().setFromPoints(pts),new T.LineBasicMaterial({color,transparent:true,opacity:.8}));parent.add(obj);return obj;};
-      const platform=box(floor,17,.45,12.8,0,-.24,0,material(0x171627,.7));
-      box(floor,17.5,.11,13.1,0,-.51,0,neonPink);
-      const grid = new T.GridHelper(17,17,0x502650,0x32213e);
-      grid.position.y=.003;scene.add(grid);
-      for (let x=-8;x<=8;x+=2) {
-        line(floor,x,.03,6.2,x,.03,-6.2,0x43284e);
+      renderer.toneMapping = T.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.5;
+      document.body.appendChild(renderer.domElement);
+      document.getElementById('fallback').style.display='none';
+      const scene=new T.Scene();
+      const camera=new T.PerspectiveCamera(39,innerWidth/innerHeight,.1,100);
+      const target=new T.Vector3(0,1.25,0);
+      const look=new T.Vector3().copy(target);
+      let theta=.68,phi=.92,radius=18;
+      let desiredTheta=theta,desiredPhi=phi,desiredRadius=radius;
+      let focusId='bench';
+      const clickable=[];
+      const colors={dark:0x24263a,frame:0x6a6679,top:0x59566a,wall:0x302d42,pink:0xde739e,blue:0x78acbf,ivory:0xe3dce4};
+      const mat=(c,metal=.1,rough=.7)=>new T.MeshStandardMaterial({color:c,metalness:metal,roughness:rough});
+      const dark=mat(colors.dark),metal=mat(colors.frame,.55,.43),tableMat=mat(colors.top,.3,.57);
+      const pink=mat(colors.pink,.1,.42),blue=mat(colors.blue,.18,.5),screen= new T.MeshBasicMaterial({color:0x82a9b9});
+      const addBox=(parent,w,h,d,x,y,z,m=dark)=>{
+        const a=new T.Mesh(new T.BoxGeometry(w,h,d),m);a.position.set(x,y,z);parent.add(a);return a;
+      };
+      const addCyl=(parent,rt,rb,h,x,y,z,m=metal)=>{
+        const a=new T.Mesh(new T.CylinderGeometry(rt,rb,h,16),m);a.position.set(x,y,z);parent.add(a);return a;
+      };
+      const floor=new T.Group();scene.add(floor);
+      addBox(floor,13.6,.34,10,0,-.2,0,mat(0x303044,.23,.82));
+      addBox(floor,13.72,.07,10.14,0,-.41,0,mat(0x7e536d,.3,.52));
+      addBox(floor,13.6,3.2,.16,0,1.47,-5.0,mat(colors.wall,.18,.83));
+      addBox(floor,.14,3.2,10,-6.8,1.47,0,mat(0x333044,.18,.8));
+      // A back-wall tool rack: subtle color highlights instead of repeated labels.
+      addBox(floor,7.8,1.35,.11,-.9,2.2,-4.88,mat(0x3a3548));
+      for(let i=0;i<15;i++) for(let j=0;j<4;j++) addCyl(floor,.025,.025,.03,-4.5+i*.52,1.78+j*.26,-4.80,mat(0x686073));
+      addBox(floor,1.3,1.05,.13,5.3,2.0,-4.88,mat(0x2b3148));
+      addBox(floor,.8,.5,.025,5.3,2.09,-4.78,screen);
+      for(const x of [-5.8,5.8]) addCyl(floor,.09,.09,2.7,x,1.33,-4.65,metal);
+      addBox(floor,12.0,.085,.14,0,3.15,-4.65,pink);
+      // Decorative robot silhouette in the corner.
+      const bot=new T.Group();bot.position.set(-5.6,0,3.0);scene.add(bot);
+      addCyl(bot,.33,.38,.7,0,.65,0,mat(0x75658a));
+      addBox(bot,.7,.6,.48,0,1.28,0,mat(0x504966));
+      for(const x of [-.18,.18])addBox(bot,.12,.08,.035,x,1.35,.26,screen);
+      for(const x of [-.42,.42]){const arm=addBox(bot,.13,.75,.16,x,.98,0,metal);arm.rotation.z=x<0?-.25:.25;}
+      // Low-contrast floor guides visually organize the equipment layout.
+      for(const z of [-2.65,.8])addBox(floor,11.3,.012,.025,0,.016,z,mat(0x5a4b6d));
+      const stations=[];
+      function stand(id,x,z,accent,build){
+        const g=new T.Group();g.position.set(x,0,z);g.userData.id=id;scene.add(g);stations.push(g);clickable.push(g);
+        const glow=new T.Mesh(new T.CircleGeometry(1.27,32),new T.MeshBasicMaterial({color:accent,transparent:true,opacity:.04,depthWrite:false}));
+        glow.rotation.x=-Math.PI/2;glow.position.y=.035;g.add(glow);
+        g.userData.glow=glow;
+        addBox(g,2.35,.12,1.55,0,.84,0,tableMat);
+        for(const x of [-1.01,1.01])for(const z of [-.61,.61])addBox(g,.08,.8,.08,x,.41,z,metal);
+        build(g);
+        return g;
       }
-      for(let z=-6;z<=6;z+=2) line(floor,-8,.03,z,8,.03,z,0x43284e);
-      const house = new T.Group();scene.add(house);
-      box(house,17,.25,.25,0,4.85,-6.35,steel);
-      box(house,17,.25,.25,0,4.85,6.35,steel);
-      for(const x of [-8.3,8.3])for(const z of [-6.3,6.3]){
-        box(house,.22,5,.22,x,2.45,z,steel);
-        box(house,.4,.35,.4,x,4.9,z,neonPink);
-      }
-      box(house,17,4.8,.18,0,2.4,-6.38,material(0x20182e));
-      box(house,.2,4.8,12.6,-8.35,2.4,0,material(0x271e39));
-      box(house,.2,4.8,12.6,8.35,2.4,0,material(0x271e39));
-      for(const x of [-7.7,7.7]) {box(house,.05,3.8,2.7,x,2.5,1.0,neonPurple)}
-      const windows = new T.Group();scene.add(windows);
-      const glass=new T.MeshBasicMaterial({color:0x8c4ddb,transparent:true,opacity:.22,side:T.DoubleSide});
-      for (const x of [-8.23,8.23])box(windows,.03,2.5,4,x,2.5,0,glass);
-      const roof = new T.Group();scene.add(roof);
-      const roofMat = new T.MeshStandardMaterial({color:0x21162d,metalness:.45,roughness:.5,transparent:true,opacity:.96,depthWrite:false,side:T.DoubleSide});
-      const left=box(roof,9.25,.28,13,-4.18,6.05,0,roofMat);left.rotation.z=-.38;
-      const right=box(roof,9.25,.28,13,4.18,6.05,0,roofMat);right.rotation.z=.38;
-      box(roof,.25,.3,13,0,7.68,0,neonPink);
-      for(const z of [-6.2,6.2]){line(roof,-8.6,4.45,z,0,7.68,z,0xfa5d9f);line(roof,0,7.68,z,8.6,4.45,z,0xfa5d9f)}
-      const front = new T.Group();scene.add(front);
-      box(front,5.3,4.1,.17,-.2,2.1,6.31,material(0x26162d));
-      box(front,3.6,3.25,.2,-.2,1.66,6.46,material(0x0a1021));
-      box(front,3.1,.08,.1,-.2,3.23,6.61,neonPink);
-      box(front,3.1,.08,.1,-.2,.17,6.61,neonPink);
-      box(front,.09,3.1,.12,-1.73,1.65,6.62,neonPink);
-      box(front,.09,3.1,.12,1.33,1.65,6.62,neonPink);
-      const door = box(front,3.25,3.0,.14,-.2,1.64,6.55,new T.MeshBasicMaterial({color:0x461e72,transparent:true,opacity:.45,side:T.DoubleSide}));
-      door.userData.action='enter';
-      const doorTitle = sprite('ENTER / 进入','#f43f5e',2.8,.55);doorTitle.position.set(-.2,2.2,6.72);front.add(doorTitle);doorTitle.userData.action='enter';
-      const billboard = new T.Group();scene.add(billboard);
-      billboard.userData.action='billboard';
-      box(billboard,5.7,2.1,.25,0,4.5,-6.13,material(0x120d24));
-      box(billboard,5.93,.08,.31,0,5.55,-6.11,neonPink);
-      box(billboard,5.93,.08,.31,0,3.45,-6.11,neonPurple);
-      const boardLabel = sprite('TECHLAND  /  NAVIGATION','#ff5b9a',4.85,.7);
-      boardLabel.position.set(0,4.56,-5.82);billboard.add(boardLabel);boardLabel.userData.action='billboard';
-      const boardSub=sprite('PROJECTS  ·  GUIDES  ·  BLOG','#a56bff',4.5,.47);
-      boardSub.position.set(0,3.9,-5.82);billboard.add(boardSub);boardSub.userData.action='billboard';
-
-      function sprite(text,color='#f43f5e',w=2,h=.52){
-        const canvas=document.createElement('canvas');canvas.width=1024;canvas.height=174;
-        const ctx=canvas.getContext('2d');
-        ctx.fillStyle='rgba(10,8,25,.86)';ctx.fillRect(0,0,1024,174);
-        ctx.fillStyle=color;ctx.fillRect(0,0,9,174);ctx.fillRect(1015,0,9,174);
-        ctx.fillStyle='#fcf6ff';ctx.textAlign='center';ctx.textBaseline='middle';
-        ctx.font='bold 51px system-ui, sans-serif';ctx.fillText(text,512,88,980);
-        const tex=new T.CanvasTexture(canvas);tex.colorSpace=T.SRGBColorSpace;
-        const obj=new T.Sprite(new T.SpriteMaterial({map:tex,transparent:true,depthTest:false}));
-        obj.scale.set(w,h,1);return obj;
-      }
-      const targets = [];
-      function register(id,name,x,z,accent,build){
-        const group=new T.Group();group.position.set(x,0,z);group.userData.tool=id;
-        scene.add(group);targets.push(group);
-        box(group,2.25,.18,1.55,0,.55,0,steel);
-        for(const sx of [-.94,.94])for(const sz of [-.58,.58])box(group,.1,.57,.1,sx,.26,sz,dark);
-        const marker=cyl(group,.18,.22,.035,0,.69,0,new T.MeshBasicMaterial({color:accent}));
-        marker.userData.tool=id;
-        build(group,accent);
-        const label=sprite(name,accent,2.0,.42);label.position.set(0,2.3,0);group.add(label);
-        return group;
-      }
-      register('printer','3D PRINTER',-5.5,-3.4,'#bb78ff',g=>{
-        box(g,1.34,1.44,.08,0,1.34,-.44,steel);
-        for(const x of [-.67,.67])box(g,.07,1.45,1,x,1.34,0,steel);
-        box(g,1.38,.09,1,0,2.08,0,neonPurple);
-        box(g,.85,.22,.65,0,1.0,0,material(0x7727af));
-        cyl(g,.34,.34,.22,-.65,2.28,-.35,neonPurple);
+      stand('printer',-4.2,-3.1,0xbe93d8,g=>{
+        for(const x of [-.60,.60])addBox(g,.07,1.18,.07,x,1.48,-.15,metal);
+        addBox(g,1.32,.07,.9,0,2.05,-.14,metal);
+        addBox(g,1.15,.10,.8,0,1.03,-.14,dark);
+        addBox(g,.66,.20,.46,0,1.14,0,mat(0x9873ac));
+        addBox(g,.23,.17,.25,0,1.86,-.14,pink);
       });
-      register('laser','LASER CUTTER',-2.8,-3.4,'#5ad5f7',g=>{
-        box(g,1.7,.65,1.08,0,1.02,0,material(0x3f3d60));
-        const lid=box(g,1.6,.09,1.0,0,1.4,.0,new T.MeshBasicMaterial({color:0x38c9e8,transparent:true,opacity:.47}));
-        lid.rotation.x=-.12;
-        box(g,1.2,.12,.12,0,1.3,.48,neonBlue);
+      stand('laser',-1.43,-3.1,0x89b6c5,g=>{
+        addBox(g,1.8,.48,1.18,0,1.16,0,mat(0x55566d));
+        const lid=addBox(g,1.72,.06,1.08,0,1.45,.02,mat(0x90b2c2,.3,.3));
+        lid.rotation.x=-.17;
+        addBox(g,.8,.07,.08,0,1.06,.6,blue);
       });
-      register('pnp','PICK & PLACE',0,-3.4,'#f43f5e',g=>{
-        box(g,1.86,.18,1.05,0,.89,0,soft);
-        for(const x of [-.86,.86])box(g,.08,1,.08,x,1.36,-.42,steel);
-        box(g,1.83,.12,.16,0,1.86,-.44,neonPink);
-        box(g,.35,.52,.22,.25,1.54,-.3,steel);
-        for(let i=0;i<6;i++)box(g,.18,.06,.61,-.73+i*.29,1.01,.12,material(0x6d4e88));
+      stand('pnp',1.38,-3.1,0xe6a1bf,g=>{
+        addBox(g,1.82,.13,1.08,0,1.02,0,dark);
+        for(const x of [-.82,.82])addBox(g,.07,.85,.08,x,1.47,-.35,metal);
+        addBox(g,1.80,.1,.1,0,1.84,-.36,pink);
+        addBox(g,.3,.45,.22,.20,1.58,-.28,metal);
+        for(let i=0;i<5;i++)addBox(g,.20,.06,.56,-.7+i*.32,1.13,.19,mat(0x816d8c));
       });
-      register('solder','SOLDERING',3.2,-3.4,'#ff995c',g=>{
-        box(g,.95,.22,.8,0,.84,0,material(0x454251));
-        cyl(g,.2,.3,.35,.5,1.14,.25,material(0xd5664a));
-        const iron=box(g,.12,.12,1.1,-.2,1.16,0,neonPink);iron.rotation.y=.35;
-        cyl(g,.22,.22,.12,-.76,.83,-.23,material(0xcf7e33));
+      stand('bench',4.22,-3.1,0xf19fbb,g=>{
+        addBox(g,.93,.63,.1,-.46,1.42,-.36,mat(0x2d425e));
+        addBox(g,.78,.53,.1,.5,1.46,-.38,mat(0x484466));
+        addBox(g,1.55,.045,.45,0,1.04,.28,metal);
+        addBox(g,.26,.15,.2,.85,1.10,.39,pink);
       });
-      register('hotair','HOT AIR',5.85,-3.4,'#f59e0b',g=>{
-        box(g,.9,.9,.7,0,1.13,-.08,soft);
-        const nozzle=cyl(g,.11,.16,.9,-.42,1.42,.13,material(0xeda55c));nozzle.rotation.z=.7;
-        box(g,.7,.28,.15,0,1.35,.3,neonPink);
+      stand('scope',-3.4,.65,0x8db3d2,g=>{
+        addBox(g,1.28,.83,.54,0,1.28,-.17,mat(0x424358));
+        addBox(g,.79,.5,.04,-.14,1.3,.12,screen);
+        for(let j=0;j<3;j++)addCyl(g,.07,.07,.03,.44,1.54-j*.22,.14,metal);
       });
-      register('microscope','MICROSCOPE',5.8,1.5,'#4cd8fb',g=>{
-        cyl(g,.48,.48,.12,0,.77,0,steel);
-        cyl(g,.13,.16,1.4,-.32,1.38,-.12,material(0x789aaf));
-        const head=box(g,.5,.55,.6,-.05,1.87,-.04,soft);head.rotation.z=-.22;
-        cyl(g,.23,.32,.44,-.02,1.45,.15,neonBlue);
+      stand('microscope',-.45,.65,0xa6d0d0,g=>{
+        addCyl(g,.39,.42,.12,0,.96,-.1,metal);
+        addCyl(g,.085,.1,1.2,-.27,1.54,-.24,metal);
+        const head=addBox(g,.54,.43,.60,0,1.96,-.14,mat(0x747c96));head.rotation.z=-.20;
+        addCyl(g,.15,.18,.37,.10,1.62,.01,blue);
       });
-      register('scope','OSCILLOSCOPE',2.9,1.5,'#7c9cff',g=>{
-        box(g,1.28,.84,.5,0,1.06,-.08,material(0x292a46));
-        box(g,.82,.49,.04,-.16,1.1,.19,new T.MeshBasicMaterial({color:0x16365b}));
-        line(g,-.53,1.0,.223,-.1,1.2,.223,0x62ffd7);
-        line(g,-.1,1.2,.223,.24,.92,.223,0x62ffd7);
-        for (let i=0;i<3;i++)cyl(g,.06,.06,.04,.44,1.30-i*.21,.2,neonPink);
+      stand('solder',2.37,.65,0xea9d99,g=>{
+        addBox(g,.88,.38,.61,-.26,1.09,-.03,mat(0x5b4c61));
+        addBox(g,.54,.08,.09,-.26,1.22,.29,pink);
+        const iron=addBox(g,.09,.09,.86,.44,1.30,0,metal);iron.rotation.y=.55;
+        addCyl(g,.23,.23,.12,.65,1.03,.25,metal);
       });
-      register('bench',"PETER'S BENCH",-2.7,1.5,'#f77abe',g=>{
-        box(g,2.5,.13,1.6,0,.9,0,material(0x77677b));
-        box(g,.9,.65,.08,-.45,1.4,-.45,material(0x18355b));
-        box(g,.8,.55,.08,.54,1.43,-.4,material(0x3b155d));
-        box(g,1.6,.06,.54,.06,1.03,.32,steel);
-        box(g,.56,.4,.6,-.95,.78,1.0,material(0xa63f80));
+      stand('hotair',4.97,.65,0xe3c59b,g=>{
+        addBox(g,.78,.70,.62,-.22,1.25,-.12,mat(0x555364));
+        addBox(g,.5,.08,.06,-.22,1.43,.2,blue);
+        const nozzle=addCyl(g,.08,.11,.76,.45,1.35,-.06,mat(0xa8a0ae));nozzle.rotation.z=.64;
       });
+      const light=new T.HemisphereLight(0xe9e0f3,0x363247,3.1);scene.add(light);
+      const key=new T.DirectionalLight(0xffe0ea,3.8);key.position.set(4,12,8);scene.add(key);
+      const fill=new T.DirectionalLight(0xa49bd6,1.4);fill.position.set(-5,6,-2);scene.add(fill);
       function post(type,id){window.parent.postMessage({channel:'techland-maker-house',type,id},window.location.origin);}
-      let inside=false;
-      const target = new T.Vector3(2.0,6.7,20.2);
-      const position = target.clone();camera.position.copy(target);
-      const lookTarget=new T.Vector3(0,2.5,0);
-      const look=new T.Vector3(0,2.5,0);
-      let angle=0.55;
-      let distance=13.8;
-      function enter(focusId){
-        inside=true;
-        post('enter');
-        if(focusId){post('tool',focusId);}
+      function focus(id,notify=true){
+        const g=stations.find(s=>s.userData.id===id);
+        if(!g)return;
+        focusId=id;
+        for(const s of stations){s.userData.glow.material.opacity=s===g?.26:.025;}
+        // Overview stays legible: focusing highlights equipment instead of moving the camera aggressively.
+        if(notify)post('tool',id);
       }
-      function exit(){inside=false;post('exit');}
-      function setFocus(id){
-        inside=true;post('tool',id);
-        const g=targets.find(t=>t.userData.tool===id);
-        if(g){lookTarget.set(g.position.x,1.45,g.position.z);}
+      function reset(){
+        desiredTheta=.68;desiredPhi=.92;desiredRadius=18;target.set(0,1.25,0);focus('bench');
       }
-      window.addEventListener('message',e=>{
-        if(e.origin!==window.location.origin || !e.data || e.data.channel!=='techland-maker-house')return;
-        if(e.data.action==='enter')enter();
-        if(e.data.action==='exit')exit();
-        if(e.data.action==='billboard')post('billboard');
-        if(e.data.action==='focus')setFocus(e.data.id);
+      focus('bench',false);
+      window.addEventListener('message',event=>{
+        if(event.origin!==window.location.origin||event.data?.channel!=='techland-maker-house')return;
+        if(event.data.action==='focus')focus(event.data.id);
+        if(event.data.action==='reset')reset();
       });
-      const ray=new T.Raycaster();const pointer=new T.Vector2();
-      let down=null;let dragging=false;
-      renderer.domElement.addEventListener('pointerdown',e=>{
-        down={x:e.clientX,y:e.clientY};dragging=false;
-      });
-      renderer.domElement.addEventListener('pointermove',e=>{
-        if(down && (Math.abs(e.clientX-down.x)+Math.abs(e.clientY-down.y)>5)){
-          dragging=true;
-          if(inside){angle+=e.movementX*.008;angle=Math.max(-.5,Math.min(1.6,angle));}
-        }
-        const rect=renderer.domElement.getBoundingClientRect();
-        pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
+      const ray=new T.Raycaster(),pointer=new T.Vector2();
+      let down=null;
+      function pick(event){
+        const r=renderer.domElement.getBoundingClientRect();
+        pointer.set((event.clientX-r.left)/r.width*2-1,-(event.clientY-r.top)/r.height*2+1);
         ray.setFromCamera(pointer,camera);
-        const hits=ray.intersectObjects([...targets.filter(t=>t.visible),billboard,door,doorTitle],true);
-        renderer.domElement.style.cursor=hits.length?'pointer':'grab';
+        const intersections=ray.intersectObjects(clickable,true);
+        if(!intersections.length)return null;
+        let obj=intersections[0].object;
+        while(obj&&!obj.userData?.id)obj=obj.parent;
+        return obj?.userData?.id||null;
+      }
+      renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY,moved:false};});
+      renderer.domElement.addEventListener('pointermove',e=>{
+        if(down){
+          const dx=e.clientX-down.x,dy=e.clientY-down.y;
+          if(Math.abs(dx)+Math.abs(dy)>4)down.moved=true;
+          if(down.moved){
+            desiredTheta+=dx*.005;
+            desiredPhi=Math.min(1.02,Math.max(.35,desiredPhi+dy*.004));
+            down.x=e.clientX;down.y=e.clientY;
+          }
+        }else{
+          renderer.domElement.style.cursor=pick(e)?'pointer':'grab';
+        }
       });
       renderer.domElement.addEventListener('pointerup',e=>{
-        if(!down || dragging){down=null;return;}
+        if(down&&!down.moved){const id=pick(e);if(id)focus(id);}
         down=null;
-        const rect=renderer.domElement.getBoundingClientRect();
-        pointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);
-        ray.setFromCamera(pointer,camera);
-        const interactive=inside?[...targets,billboard]:[door,doorTitle,billboard];
-        const hits=ray.intersectObjects(interactive,true);
-        if(!hits.length)return;
-        let obj=hits[0].object;
-        while(obj&&!obj.userData?.tool&&!obj.userData?.action)obj=obj.parent;
-        if(!obj)return;
-        if(obj.userData.action==='enter')enter();
-        if(obj.userData.action==='billboard')post('billboard');
-        if(obj.userData.tool)setFocus(obj.userData.tool);
       });
-      renderer.domElement.addEventListener('wheel',e=>{
-        if(!inside)return;
-        e.preventDefault();
-        distance=Math.max(8.5,Math.min(20,distance+e.deltaY*.01));
-      },{passive:false});
-      const resize=()=>{const w=window.innerWidth,h=window.innerHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h);};
-      window.addEventListener('resize',resize);
-      const mobile=window.innerWidth<720;
-      if(mobile){distance=16.5;}
-      const clock=new T.Clock();
-      function tick(){
-        requestAnimationFrame(tick);
-        const time=clock.getElapsedTime();
-        let cx,cy,cz;
-        if(inside){
-          cx=Math.sin(angle)*distance;cz=Math.cos(angle)*distance;
-          cy=mobile?7.2:6.4;
-        } else {cx=mobile?2.5:8.0;cy=mobile?9.0:8.7;cz=mobile?21.0:18.3;}
-        target.set(cx,cy,cz);
-        position.lerp(target,.036);
-        if(!inside)lookTarget.set(0,2.3,0);
-        look.lerp(lookTarget,.04);
-        camera.position.copy(position);
+      renderer.domElement.addEventListener('pointercancel',()=>{down=null;});
+      renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();desiredRadius=Math.max(13.5,Math.min(23,desiredRadius+e.deltaY*.011));},{passive:false});
+      const onResize=()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);};
+      window.addEventListener('resize',onResize);
+      function animate(){
+        requestAnimationFrame(animate);
+        theta+=(desiredTheta-theta)*.09;
+        phi+=(desiredPhi-phi)*.09;
+        radius+=(desiredRadius-radius)*.09;
+        camera.position.set(target.x+radius*Math.sin(phi)*Math.sin(theta),target.y+radius*Math.cos(phi),target.z+radius*Math.sin(phi)*Math.cos(theta));
+        look.lerp(target,.08);
         camera.lookAt(look);
-        roof.visible=!inside || roofMat.opacity>.05;
-        roofMat.opacity+=((inside?0:.95)-roofMat.opacity)*.06;
-        front.visible=!inside;
-        windows.visible=!inside;
-        for(const t of targets)t.visible=inside || roofMat.opacity<.25;
-        pink.intensity=70+Math.sin(time*1.4)*10;
-        neonPurple.color.setHSL(.72,.95,.58+Math.sin(time*.7)*.03);
         renderer.render(scene,camera);
       }
-      post('ready');tick();
+      post('ready');animate();
     }
   </script>
 </body>
