@@ -11,6 +11,7 @@ canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
 #tip{position:absolute;z-index:2;bottom:19%;left:50%;transform:translateX(-50%);border:1px solid #995c91;background:#161024e6;padding:6px 10px;color:#f0d5ee;font:700 11px monospace;letter-spacing:.06em;opacity:0;transition:opacity .12s;pointer-events:none;white-space:nowrap}
 #fallbackNotice{position:absolute;bottom:23%;left:50%;transform:translateX(-50%);text-align:center;color:#f2d8ed;font-size:11px;display:none}
 #doorSwitch{position:absolute;z-index:4;right:16px;bottom:14px;background:#180f25e8;border:1px solid #ff75b5;color:#ffeafa;border-radius:8px;padding:10px 14px;font:700 11px system-ui,Arial;letter-spacing:.04em;cursor:pointer;box-shadow:0 0 18px #a3327040;touch-action:manipulation}
+#doorSwitch:disabled{opacity:.5;cursor:not-allowed}
 #doorSwitch:hover,#doorSwitch:focus-visible{background:#573052;outline:2px solid #ff75b5;outline-offset:2px}
 @media(prefers-reduced-motion:reduce){#doorSwitch{transition:none}}
 @media(max-width:760px){#tip{bottom:23%;font-size:9px}}
@@ -33,7 +34,7 @@ canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
 <path d="M154 381 414 502 673 380" fill="none" stroke="#a96eac" stroke-width="4"/>
 </svg><span id="fallbackNotice">3D unavailable. The site navigation remains accessible.</span></div>
 <div id="tip" role="status" aria-live="polite"></div>
-<button id="doorSwitch" type="button" aria-label="Toggle garage roller shutter" aria-pressed="false">▥ CLOSE SHUTTER / 关门</button>
+<button id="doorSwitch" type="button" disabled aria-label="Toggle garage roller shutter" aria-pressed="false">▥ CLOSE SHUTTER / 关门</button>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 <script type="module">
 let T;
@@ -147,6 +148,7 @@ function init(T){
  const doorSwitch=document.getElementById('doorSwitch');
  function updateDoorLabel(){doorSwitch.textContent=shutterClosed?'▥ OPEN SHUTTER / 开门':'▥ CLOSE SHUTTER / 关门';doorSwitch.setAttribute('aria-pressed',String(shutterClosed));}
  function toggleDoor(){shutterClosed=!shutterClosed;updateDoorLabel();}
+ doorSwitch.disabled=false;
  doorSwitch.addEventListener('click',toggleDoor);
  // Streetscape with subtle utility objects.
  for(const x of [-7.55,7.55]){
