@@ -243,9 +243,9 @@ function init(T){
  let azimuth=.58,elevation=.87,distance=22;
  let desiredAz=azimuth,desiredEl=elevation,desiredDist=distance;
  let focused=false,reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
- function entrance(){focused=true;desiredDist=16.0;desiredAz=.43;desiredEl=.85;cameraTarget.set(1.2,1.9,0); }
+ function enterGarage(){focused=true;desiredDist=16.0;desiredAz=.43;desiredEl=.85;cameraTarget.set(1.2,1.9,0); }
  function reset(){focused=false;desiredDist=22;desiredAz=.58;desiredEl=.87;cameraTarget.set(2.25,2.2,0);}
- function select(id){if(!id)return;focused=true;post('select',id);if(id==='workshop'){entrance();return;}
+ function select(id){if(!id)return;focused=true;post('select',id);if(id==='workshop'){enterGarage();return;}
    desiredDist=17; const found=resolve(id);
    if(found){cameraTarget.set(found.root.position.x+1.3,1.7,found.root.position.z);desiredAz=.43;}
  }
@@ -282,7 +282,7 @@ function init(T){
  renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();desiredDist=Math.max(13,Math.min(29,desiredDist+e.deltaY*.012));},{passive:false});
  window.addEventListener('message',event=>{
    if(event.origin!==window.location.origin||event.data?.channel!=='techland-maker-house')return;
-   if(event.data.action==='enter')entrance();
+   if(event.data.action==='enter')enterGarage();
    if(event.data.action==='reset')reset();
    if(event.data.action==='focus')select(event.data.id);
  });
