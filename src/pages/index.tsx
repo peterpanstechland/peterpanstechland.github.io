@@ -4,9 +4,11 @@ import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import styles from './index.module.css';
 
-type PortalId = 'projects' | 'blog' | 'challenge' | 'guides' | 'workshop' | 'luckycat' | 'pan' | 'flipfate' | 'bmo' | 'roomba' | 'courtside';
+type PortalId = 'projects' | 'blog' | 'challenge' | 'guides' | 'workshop' | 'luckycat' | 'pan' | 'flipfate' | 'bmo' | 'roomba' | 'courtside' | 'vending' | 'workbench';
 type SceneMessage = {channel?: string; type?: string; id?: PortalId};
 const portals: Record<PortalId,{to:string;en:string;zh:string;descriptionEn:string;descriptionZh:string;index:string}> = {
+  vending:{to:'/docs/projects',en:'Maker Vending / Experiment',zh:'创客自动贩卖机 / 实验装置',descriptionEn:'A playful interactive kiosk placeholder. A future Tripo model will replace this greybox. No merchandise is sold here yet.',descriptionZh:'一个可点击的互动贩卖机原型。后续将用 Tripo 模型替换当前占位模型；目前没有正式开售的周边商品。',index:'10'},
+  workbench:{to:'/docs/guides',en:'Maker Workbench / Build Guides',zh:'Maker 工作台 / 技术教程',descriptionEn:'Open the workbench notebook: hardware experiments, diagrams and build guides.',descriptionZh:'打开工作台笔记：硬件实验、接线图、开发与调试教程。',index:'11'},
   luckycat:{to:'/docs/about',en:'NEKO / Garage Host',zh:'赛博招财猫 NEKO',descriptionEn:'The resident lucky cat waves hello — and welcomes new makers into the garage.',descriptionZh:'会挥手的赛博招财猫，是整间创客车库的迎宾店长。',index:'✦'},
   pan:{to:'/docs/hackathons/2026/aix-origin-apex-hand',en:'PΛN / AI Mixologist',zh:'PΛN 智能调酒机器人',descriptionEn:'An interactive robotic bartender with a retro telephone, dexterous hand and AI personality.',descriptionZh:'结合老式电话、灵巧手、AI 交互和饮品调制的具身智能机器人。',index:'05'},
   flipfate:{to:'/docs/projects',en:'FlipFate / Tarot Machine',zh:'FlipFate AI 翻牌机',descriptionEn:'A playful physical tarot experience with card flips, AI interpretation and printed receipts.',descriptionZh:'机械翻牌、AI 解读和热敏小票融合的互动硬件作品。',index:'06'},
