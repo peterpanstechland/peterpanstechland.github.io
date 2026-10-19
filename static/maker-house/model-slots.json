@@ -1,8 +1,8 @@
 {
-  "_comment": "Homepage GLB slots. A blank file keeps the existing procedural asset. Garage model is in world coordinates: X +/-8.4, Z +/-5.8 (front faces +Z), floor Y=0, roof near Y=8. Name the roof/ceiling nodes ROOF_* so Enter mode fades them.",
+  "_comment": "Six original low-poly procedural GLB models generated during GitHub Pages build by tools/generate_3d_models.py. Local dev without generated files gracefully uses procedural fallbacks. Replace paths with Tripo/Blender models later if desired. Garage front faces +Z; name roof nodes ROOF_*/CEILING_* to fade on Enter.",
   "models": {
     "garage": {
-      "file": "",
+      "file": "/maker-house/models/maker-garage.glb",
       "scale": 1,
       "position": [
         0,
@@ -16,7 +16,7 @@
       ]
     },
     "luckycat": {
-      "file": "",
+      "file": "/maker-house/models/neko-luckycat.glb",
       "scale": 1,
       "position": [
         0,
@@ -30,7 +30,7 @@
       ]
     },
     "pan": {
-      "file": "",
+      "file": "/maker-house/models/pan-cocktail-robot.glb",
       "scale": 1,
       "position": [
         0,
@@ -44,7 +44,7 @@
       ]
     },
     "flipfate": {
-      "file": "",
+      "file": "/maker-house/models/flipfate-machine.glb",
       "scale": 1,
       "position": [
         0,
@@ -58,7 +58,7 @@
       ]
     },
     "bmo": {
-      "file": "",
+      "file": "/maker-house/models/bmo-companion.glb",
       "scale": 1,
       "position": [
         0,
@@ -72,7 +72,7 @@
       ]
     },
     "roomba": {
-      "file": "",
+      "file": "/maker-house/models/roomba-camera-bot.glb",
       "scale": 1,
       "position": [
         0,

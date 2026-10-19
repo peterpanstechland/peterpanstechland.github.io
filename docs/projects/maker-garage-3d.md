@@ -82,8 +82,8 @@ All asset slots default to an **empty file path**. The homepage therefore works 
 
 ## 06 / What is and isn't built
 
-**In the repository:** interactive camera, category signs, procedural characters, animations, bilingual labels, links, full fallback scene, optional GLB slots and garage-replacement support.
+**Deployed v1:** six source-controlled, reproducibly generated GLB assets (the generator is in `tools/generate_3d_models.py`), imported characters and architectural shell, animated named nodes, interactive camera, category signs, bilingual copy, links, fallback geometry and a roof cutaway. Binary assets are generated during the GitHub Pages build and served at `/maker-house/models/*.glb`. They are original procedural models, not Tripo-generated assets.
 
-**Still to produce:** authentic Tripo/Blender GLB meshes, optimized animation clips, measured mobile performance with the final models, and a finished visual QA review. Do not present stand-in meshes as actual Tripo outputs.
+**Future upgrade:** higher-fidelity Tripo/Blender meshes, optional authored animation clips, device-level mobile profiling and final art-direction QA. The programmatic v1 is a complete functional asset pass, not a claim of AI-generated 3D art.
 
 This document describes the [Peter Pan's Techland homepage](/) project. The separate **[Makers Challenge](/challenge)** proposal is linked from the scene but is not an official Maker Faire program.

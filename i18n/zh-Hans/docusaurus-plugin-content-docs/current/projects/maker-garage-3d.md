@@ -54,7 +54,7 @@ keywords: [3D, Tripo, Three.js, GLB, 创客车库, 首页, 场景设计]
 | `static/maker-house/scene-layout.svg` | 可以编辑的俯视布局图 |
 | `static/maker-house/TRIPO_MODELS.md` | Tripo 建模提示词和替换说明 |
 
-**目前是程序化占位模型，不是假装完成的 Tripo 成品。** 当你导出模型后，把 `.glb` 放在 `static/maker-house/models/`，再修改 `model-slots.json` 对应的 `file`。不需要重新开发导航、摄像机和交互，也可以逐个替换。
+**v1 已实际生成 6 个独立 GLB 文件，来源是 Python 原创建模脚本，不是 Tripo 出品。** GitHub Pages 在构建时运行 `tools/generate_3d_models.py`，生成文件到 `static/maker-house/models/`，然后网站自动加载。将来用 Tripo / Blender 升级角色，只需把新 `.glb` 放入该目录并修改 `model-slots.json` 对应的 `file`，可以逐个替换，不必重新做交互。
 
 **Maker Garage 结构要求：** 原点位于地面中心，正面朝 +Z，宽约 17、深约 11.6、高约 8 单位；不要烘焙角色、地面背景或贴图天空。屋顶单独分 Mesh 或 Parent，名字包含 `ROOF` 或 `CEILING`，就能在进入时透明淡出。否则直接采用开放式剖面车库。
 
@@ -81,8 +81,8 @@ keywords: [3D, Tripo, Three.js, GLB, 创客车库, 首页, 场景设计]
 
 ## 07 / 实际完成情况
 
-**代码已经具备：**首页真实 Three.js 场景、建筑与角色占位体、摄像机动画、点击入口、双语文字、普通网页导航、加载失败回退图、模型替换配置。
+**已完成 v1：**六个低面数原创 GLB 模型及其可复现建模源码、自动构建部署、模型节点动作、可替换建筑、Three.js 摄像机、点击入口、双语导航、加载失败回退图。网页发布时生成 GLB，默认加载正式文件。
 
-**后续仍需要：**正式 Tripo / Blender GLB 文件、动画片段、实际设备上的性能测试与最终视觉验收。现有程序化物体不能冒充实际生成的 3D 模型。
+**后续升级：**更精致的 Tripo / Blender 视觉模型、可选动画剪辑、实际手机 GPU 与加载性能测试、视觉验收。注意现阶段是程序化原创 GLB 模型，不是 Tripo 生成效果。
 
 相关页面：[返回首页](/) · [Makers Challenge](/challenge) · [赞助展位产品与设备征集](/docs/challenges/sponsors)

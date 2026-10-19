@@ -72,7 +72,7 @@ function init(T){
    const sprite=new T.Sprite(new T.SpriteMaterial({map:texture,transparent:true,depthTest:false}));
    sprite.scale.set(width,height,1);return sprite;
  }
- const clickable=[];const residents=[];const mixers=[];const originals=[];
+ const clickable=[];const residents=[];const mixers=[];const originals=[];const importedRig={};
  const resident=(id,title,x,y,z,build)=>{
    const root=new T.Group();root.position.set(x,y,z);root.userData.id=id;world.add(root);clickable.push(root);
    const stand=new T.Group();root.add(stand);build(stand);
@@ -240,6 +240,7 @@ function init(T){
          if(id==='garage'){
            // Keep the path, character pedestals and interactive signs independent of the shell.
            world.add(model);importedGarage=model;garageShell.visible=false;
+           model.userData.id='workshop';clickable.push(model);
            // Name roof/ceiling nodes ROOF_* to automatically reveal the interior on Enter.
            model.traverse(node=>{
              if(!node.isMesh)return;
@@ -253,6 +254,10 @@ function init(T){
            target.stand.visible=false;
            target.root.add(model);target.imported=model;
          }
+         model.traverse(node=>{
+           if(['PAW_WAVE','HAND_WAVE','CARD_FLIP','CAMERA_HEAD','SCREEN_FACE'].includes(node.name))
+             importedRig[id+'::'+node.name]=node;
+         });
          if(gltf.animations?.length){
            const mix=new T.AnimationMixer(model);
            gltf.animations.forEach(clip=>mix.clipAction(clip).play());
@@ -337,9 +342,13 @@ function init(T){
        if(part.type==='pan')part.pivot.rotation.z=Math.sin(t*1.8)*.22;
        if(part.type==='flip')part.pivot.rotation.y=Math.sin(t*1.18)*.95;
      }
+     const catPaw=importedRig['luckycat::PAW_WAVE'];if(catPaw)catPaw.rotation.z=-.18+Math.sin(t*2.8)*.32;
+     const panHand=importedRig['pan::HAND_WAVE'];if(panHand)panHand.rotation.z=Math.sin(t*1.75)*.26;
+     const flipCard=importedRig['flipfate::CARD_FLIP'];if(flipCard)flipCard.rotation.y=Math.sin(t*1.25)*1.1;
+     const cameraHead=importedRig['roomba::CAMERA_HEAD'];if(cameraHead)cameraHead.rotation.y=Math.sin(t*.9)*.55;
      const bot=resolve('roomba');
-     if(bot&&!bot.imported){bot.root.position.x=3.55+Math.sin(t*.44)*.50;bot.root.rotation.y=Math.sin(t*.53)*.20;}
-     const companion=resolve('bmo');
+     if(bot){bot.root.position.x=3.55+Math.sin(t*.44)*.44;bot.root.rotation.y=Math.sin(t*.53)*.18;}
+     const companion=
      if(companion&&!companion.imported)companion.stand.rotation.z=Math.sin(t*1.20)*.025;
      accent.intensity=75+Math.sin(t*1.4)*4;
    }
