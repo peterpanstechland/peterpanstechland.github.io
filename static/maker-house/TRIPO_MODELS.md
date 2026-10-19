@@ -2,14 +2,24 @@
 
 The homepage includes **animated procedural placeholder characters** and real links to Peter Pan’s published projects. It does **not** yet contain Tripo-generated assets; those can be substituted without changing the interactive routing.
 
-## Replace a resident with a Tripo GLB
+## Replace a resident or the garage shell with a Tripo GLB
 
 1. Generate a consistent 2.5D/low-poly character in Tripo, export a **GLB** with embedded materials/textures.
 2. Put it in this repository under \`static/maker-house/models/\`, e.g. \`lucky-cat.glb\`.
 3. Edit \`static/maker-house/model-slots.json\` and change \`models.luckycat.file\` from \`""\` to \`"/maker-house/models/lucky-cat.glb"\`.
-4. Adjust the scale, position and rotation using the optional JSON fields. All six residents are independently replaceable.
+4. Adjust the scale, position and rotation using the optional JSON fields. All six existing residents plus the **Maker Garage architecture** are independently replaceable. The six priority Tripo assets are the garage, NEKO, PAN, FlipFate, BMO and Roomba; the optional Courtside IQ proxy can stay procedural.
 5. If the GLB includes animation clips, the scene automatically plays them through Three.js AnimationMixer. Motion stops for visitors who prefer reduced motion.
 6. If no file is configured, its existing procedural 3D resident remains visible and animated. If the load fails, the procedural fallback remains visible.
+
+## Spatial and replacement contract
+
+- **World dimensions:** stage about 17 × 11.6 scene units. Garage shell bounds approximately X −8.4…8.4, Z −5.8…5.8, height Y 0…7.8. **Front faces positive Z.**
+- **Imported garage:** configure `models.garage.file` with `/maker-house/models/maker-garage.glb`. Its origin should be floor-center (0,0,0). It hides the procedural architecture but keeps the display platforms, project residents and clickable category signs. For a standalone model, do not embed duplicate residents.
+- **Roof cutaway:** name each roof mesh or parent `ROOF_...` or `CEILING_...`. These parts fade in Enter mode to expose the project displays. Without recognized nodes, export a physically open roof/cutaway instead.
+- **Resident positions in world coordinates:** PAN (−5.8,0.78,−2.25); FlipFate (−2.5,0.77,−2.2); BMO (4.5,0.8,−2.2); Roomba (3.55,0.15,2.35); NEKO (5.55,0.85,6.43). Courtside IQ (1,0.8,−2.2) is an optional extra.
+- The imported character's local origin is at its display base. Keep its meshes above local Y=0; use per-slot `position` offsets and `scale` corrections only if necessary.
+
+Read the [scene blueprint](/docs/projects/maker-garage-3d) and [SVG top-view](/maker-house/scene-layout.svg) before exporting.
 
 ## Style guide
 
@@ -18,6 +28,8 @@ Use **one shared art direction** for all models: adorable hand-built cyberpunk t
 Consider GLB binary and texture budgets: aim for about **1–2 MB per model**, keep materials/meshes few, use compressed textures where practical, and animate at a modest frame rate. Check mobile GPU load before publishing.
 
 ## Prompts / briefs for Tripo
+
+**Maker Garage (highest-priority structural asset):** "Miniature open-front cyberpunk maker workshop in Shenzhen, premium stylized 2.5D diorama, clean cutaway architecture 17:11.6 footprint ratio, dark charcoal walls, purple framework, magenta neon TECHLAND shop fascia, tidy back workstations and subtle cyan screens, welcoming DIY atmosphere, separate named roof geometry for easy hide/fade, no baked background or scenery, no attached people or robots. Three-quarter front visibility, low-poly game-ready GLB, centered floor pivot."
 
 **招财猫 / NEKO:** "A cute miniature Japanese maneki-neko maker mascot, white ceramic-like body, one raised paw in a waving pose, tiny magenta circuit patterns, warm gold maker coin, playful round face, stylized 2.5D low-poly collectible toy, cyberpunk pink and cyan accents, full character, isolated, no stand, no words. Single continuous looping raised-paw waving animation."
 

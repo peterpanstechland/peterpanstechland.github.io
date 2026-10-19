@@ -1,6 +1,20 @@
 {
-  "_comment": "Tripo-ready GLB slots. Leave file empty to keep the procedural animated mascot and project proxy. Export GLB to static/maker-house/models/; URLs are relative to site root. Add explicit animations in GLB for hand waves or moving parts.",
+  "_comment": "Homepage GLB slots. A blank file keeps the existing procedural asset. Garage model is in world coordinates: X +/-8.4, Z +/-5.8 (front faces +Z), floor Y=0, roof near Y=8. Name the roof/ceiling nodes ROOF_* so Enter mode fades them.",
   "models": {
+    "garage": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
     "luckycat": {
       "file": "",
       "scale": 1,

@@ -120,7 +120,7 @@ export default function Home(): React.JSX.Element {
             <p>{lang('Hardware tutorials, creative coding, AI experiments and the lessons worth sharing.','硬件教程、创意编程、AI 实验和可以复用的经验。')}</p><span className={styles.cardAction}>{lang('Read Guides','阅读指南')} ↗</span>
           </Link>
         </div>
-        <div className={styles.chapterBottom}><span>TECHNOLOGY IGNITES THE SOUL OF MACHINES.</span><Link to="/docs/about">{lang('ABOUT THE MAKER','关于彼得潘')} ↗</Link></div>
+        <div className={styles.chapterBottom}><span>TECHNOLOGY IGNITES THE SOUL OF MACHINES.</span><Link to="/docs/projects/maker-garage-3d">{lang("3D GARAGE BLUEPRINT","3D 车库设计图")} ↗</Link><Link to="/docs/about">{lang('ABOUT THE MAKER','关于彼得潘')} ↗</Link></div>
       </section>
     </main>
   </Layout>;

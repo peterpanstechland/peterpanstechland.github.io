@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">Peter Pan's Techland — Maker Garage scene layout v1</title>
+<desc id="desc">Top-view floor plan: PAN, FlipFate, Courtside IQ and BMO along the rear bench; Roomba roaming at front; NEKO at front right entrance; navigation signs across rear wall. Camera points in from the front-right.</desc>
+<defs>
+<pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#553a64" stroke-width=".7" opacity=".35"/></pattern>
+<filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#000" flood-opacity=".45"/></filter>
+<linearGradient id="floor" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#271b35"/><stop offset="1" stop-color="#171322"/></linearGradient>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#ffd480"/></marker>
+</defs>
+<rect width="1200" height="760" fill="#0b0912"/>
+<rect x="42" y="30" width="1116" height="700" rx="14" fill="#100d19" stroke="#3e2c4e"/>
+<text x="82" y="80" fill="#f28fb7" font-family="monospace" font-size="18" font-weight="bold" letter-spacing="3">PETER PAN'S TECHLAND / SCENE BLUEPRINT 001</text>
+<text x="82" y="127" fill="#fff5ff" font-family="Arial,sans-serif" font-size="46" font-weight="900" letter-spacing="-2">CYBER MAKER GARAGE</text>
+<text x="82" y="153" fill="#bdabc6" font-family="monospace" font-size="14">TOP VIEW · LOCAL X/Z · FRONT = +Z · PROPOSED TRIPO ASSET LAYOUT</text>
+<rect x="112" y="190" width="966" height="452" rx="10" fill="url(#floor)" stroke="#ee73ae" stroke-width="3" filter="url(#shadow)"/>
+<rect x="112" y="190" width="966" height="452" rx="10" fill="url(#grid)"/>
+<path d="M114 210H1076" stroke="#9a64ce" stroke-width="8"/>
+<text x="595" y="228" fill="#e7d0ef" font-size="13" font-family="monospace" text-anchor="middle">REAR WALL / NAVIGATION SIGNS</text>
+<g font-family="monospace" text-anchor="middle" font-size="13" font-weight="bold">
+<rect x="185" y="245" width="184" height="39" rx="4" fill="#152c37" stroke="#72d6ed"/><text x="277" y="269" fill="#c4f3ff">PROJECTS</text>
+<rect x="406" y="245" width="184" height="39" rx="4" fill="#341b38" stroke="#ff7ab3"/><text x="498" y="269" fill="#ffd5eb">BLOG</text>
+<rect x="627" y="245" width="184" height="39" rx="4" fill="#38251d" stroke="#ffd480"/><text x="719" y="269" fill="#fff1bb">CHALLENGE</text>
+<rect x="848" y="245" width="184" height="39" rx="4" fill="#152c37" stroke="#72d6ed"/><text x="940" y="269" fill="#c4f3ff">GUIDES</text>
+</g>
+<g font-family="Arial,sans-serif" font-weight="bold" text-anchor="middle">
+<rect x="180" y="335" width="185" height="132" rx="9" fill="#34283f" stroke="#f16caa" stroke-width="2"/>
+<circle cx="271" cy="390" r="32" fill="#e86ca8"/><text x="271" y="401" font-size="26" fill="#170d24">PΛN</text><text x="271" y="447" font-size="16" fill="#fff2f9">AI MIXOLOGIST</text>
+<rect x="402" y="335" width="185" height="132" rx="9" fill="#34283f" stroke="#a78cf7" stroke-width="2"/>
+<rect x="463" y="361" width="64" height="60" rx="6" fill="#b593ef"/><text x="495" y="401" font-size="25" fill="#231529">✦</text><text x="495" y="447" font-size="16" fill="#fff2f9">FLIPFATE</text>
+<rect x="625" y="335" width="185" height="132" rx="9" fill="#34283f" stroke="#64d4e6" stroke-width="2"/>
+<rect x="677" y="359" width="81" height="62" rx="5" fill="#245069" stroke="#72d6ed"/><circle cx="717" cy="388" r="17" fill="none" stroke="#e879b3" stroke-width="5"/><text x="717" y="447" font-size="15" fill="#fff2f9">COURTSIDE IQ</text>
+<rect x="847" y="335" width="185" height="132" rx="9" fill="#34283f" stroke="#8ddec0" stroke-width="2"/>
+<rect x="908" y="357" width="63" height="69" rx="15" fill="#89d6b4"/><text x="940" y="400" font-size="20" fill="#173633">◡</text><text x="940" y="447" font-size="16" fill="#fff2f9">BMO</text>
+</g>
+<path d="M135 550H1070" stroke="#c879b8" stroke-width="2" stroke-dasharray="10 8" opacity=".4"/>
+<text x="220" y="599" fill="#cfb5d7" font-family="monospace" font-size="16">OPEN WORK AREA</text>
+<path d="M675 558Q795 505 881 575" fill="none" stroke="#74d9dc" stroke-width="3" stroke-dasharray="9 7"/>
+<g font-family="monospace" font-weight="bold" text-anchor="middle">
+<circle cx="693" cy="553" r="35" fill="#233a4c" stroke="#7ce7ec" stroke-width="3"/><text x="693" y="550" font-size="13" fill="#cbf9ff">ROOMBA</text><text x="693" y="567" font-size="10" fill="#cbf9ff">ROVER</text>
+<rect x="858" y="520" width="182" height="112" rx="10" fill="#41253c" stroke="#ff76ae" stroke-width="4"/>
+<circle cx="949" cy="565" r="29" fill="#f3dddf"/><text x="949" y="572" font-size="17" fill="#2e1734">ฅ^•ﻌ•^ฅ</text>
+<text x="949" y="616" fill="#fff1f8" font-size="15">NEKO / HOST</text>
+</g>
+<text x="598" y="677" fill="#ffd6ea" font-family="monospace" text-anchor="middle" font-size="14">FRONT / VISITOR ENTRANCE / +Z</text>
+<path d="M1080 675Q1010 660 938 632" fill="none" stroke="#ffd480" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="1072" y="706" fill="#ffd480" text-anchor="end" font-family="monospace" font-size="13">CAMERA / ENTRY</text>
+<text x="82" y="715" fill="#a997b2" font-family="monospace" font-size="12">MODEL MAP: garage · luckycat · pan · flipfate · bmo · roomba · courtside (optional)</text>
+</svg>

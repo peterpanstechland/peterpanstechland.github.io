@@ -36,7 +36,7 @@ let T;
 try{T=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');}
 catch{try{T=await import('https://unpkg.com/three@0.170.0/build/three.module.js');}
 catch{document.getElementById('fallbackNotice').style.display='block';}}
-if(T){try{init(T);}catch(error){console.warn('Garage render failed:',error);document.getElementById('fallbackNotice').style.display='block';}}
+if(T){try{init(T);}catch(error){console.warn('Garage render failed:',error);document.getElementById('fallback').style.display='grid';document.getElementById('fallbackNotice').style.display='block';}}
 function init(T){
  const renderer=new T.WebGLRenderer({alpha:true,antialias:true,powerPreference:'default'});
  renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));
@@ -46,6 +46,9 @@ function init(T){
  const scene=new T.Scene();scene.fog=new T.FogExp2(0x130e23,.010);
  const camera=new T.PerspectiveCamera(42,innerWidth/innerHeight,.1,120);
  const world=new T.Group();world.position.x=1.3;scene.add(world);
+ // The architectural shell is replaceable independently of the stage, characters and category signs.
+ const garageShell=new T.Group();world.add(garageShell);
+ let importedGarage=null;const importedRoofMaterials=[];
  const mainLight=new T.HemisphereLight(0xd5bbff,0x251126,2.7);scene.add(mainLight);
  const key=new T.DirectionalLight(0xffc8e4,3.1);key.position.set(6,12,10);scene.add(key);
  const accent=new T.PointLight(0xf04f9a,80,22);accent.position.set(3,4.5,6);scene.add(accent);
@@ -83,27 +86,27 @@ function init(T){
  box(world,17.3,.045,.23,0,-.43,5.73,neonPink);
  const road=box(world,24,.025,4.5,0,-.48,8.15,asphalt);
  for(let i=-4;i<=4;i++)box(world,1.1,.018,.075,i*2.2,-.455,8.15,neonGold);
- box(world,16.8,.18,.25,0,4.9,-5.72,steel);
- box(world,16.8,.2,.24,0,4.9,5.72,steel);
+ box(garageShell,16.8,.18,.25,0,4.9,-5.72,steel);
+ box(garageShell,16.8,.2,.24,0,4.9,5.72,steel);
  for(const x of [-8.26,8.26]){
-   box(world,.26,5,.27,x,2.35,-5.65,steel);
-   box(world,.26,5,.27,x,2.35,5.65,steel);
+   box(garageShell,.26,5,.27,x,2.35,-5.65,steel);
+   box(garageShell,.26,5,.27,x,2.35,5.65,steel);
  }
- box(world,16.7,4.9,.23,0,2.4,-5.78,wall);
- box(world,.18,4.9,11.6,-8.37,2.4,0,wall);
- box(world,.18,4.9,11.6,8.37,2.4,0,wall);
- const rearPanels=new T.Group();world.add(rearPanels);
+ box(garageShell,16.7,4.9,.23,0,2.4,-5.78,wall);
+ box(garageShell,.18,4.9,11.6,-8.37,2.4,0,wall);
+ box(garageShell,.18,4.9,11.6,8.37,2.4,0,wall);
+ const rearPanels=new T.Group();garageShell.add(rearPanels);
  for(const x of [-6.1,6.1]){
    box(rearPanels,2.7,2.3,.05,x,2.65,-5.6,m(0x3c3150));
    for(let i=0;i<4;i++)box(rearPanels,.1,2.2,.07,x-1.1+i*.74,2.65,-5.52,steel);
  }
  // Polished pitched roof: visible on entrance, hidden when exploring the interior.
- const roof=new T.Group();world.add(roof);
+ const roof=new T.Group();garageShell.add(roof);
  const roofMat=m(0x37213f,.26,.55,{transparent:true,opacity:.98,depthWrite:false,side:T.DoubleSide});
  const roofL=box(roof,9.5,.28,12.25,-4.15,6.11,0,roofMat);roofL.rotation.z=-.39;
  const roofR=box(roof,9.5,.28,12.25,4.15,6.11,0,roofMat);roofR.rotation.z=.39;
  box(roof,.23,.2,12.4,0,7.82,0,neonPink);
- const frontFrame=new T.Group();world.add(frontFrame);
+ const frontFrame=new T.Group();garageShell.add(frontFrame);
  box(frontFrame,6.4,3.3,.16,0,2.08,5.68,wall);
  box(frontFrame,5.6,2.75,.16,0,1.82,5.83,asphalt);
  const shopSign=new T.Group();shopSign.position.set(0,5.33,5.91);shopSign.userData.id='workshop';
@@ -113,7 +116,7 @@ function init(T){
  box(shopSign,7.45,.06,.26,0,-.58,.03,neonCyan);
  const sign=label("PETER PAN'S TECHLAND",6.85,.75);sign.position.set(0,0,.22);shopSign.add(sign);
  // Dedicated door marker / garage hotspot
- const entrance=new T.Group();entrance.position.set(0,0,5.85);entrance.userData.id='workshop';world.add(entrance);clickable.push(entrance);
+ const entrance=new T.Group();entrance.position.set(0,0,5.85);entrance.userData.id='workshop';garageShell.add(entrance);clickable.push(entrance);
  box(entrance,.08,3,.13,-2.75,1.6,.08,neonPink);
  box(entrance,.08,3,.13,2.75,1.6,.08,neonPink);
  box(entrance,5.55,.07,.1,0,3.15,.08,neonCyan);
@@ -226,14 +229,35 @@ function init(T){
    import('three/addons/loaders/GLTFLoader.js').then(mod=>{
      const loader=new mod.GLTFLoader();
      for(const [id,opt] of entries){
-       const target=resolve(id);if(!target)continue;
+       const target=id==='garage'?null:resolve(id);
+       if(!target && id!=='garage')continue;
        loader.load(opt.file,gltf=>{
-         target.stand.visible=false;const model=gltf.scene;
+         const model=gltf.scene;
          model.position.set(...(opt.position||[0,0,0]));
          model.rotation.set(...(opt.rotation||[0,0,0]));
-         const s=Array.isArray(opt.scale)?opt.scale:[opt.scale||1,opt.scale||1,opt.scale||1];model.scale.set(...s);
-         target.root.add(model);target.imported=model;
-         if(gltf.animations?.length){const mix=new T.AnimationMixer(model);gltf.animations.forEach(clip=>mix.clipAction(clip).play());mixers.push(mix);}
+         const s=Array.isArray(opt.scale)?opt.scale:[opt.scale||1,opt.scale||1,opt.scale||1];
+         model.scale.set(...s);
+         if(id==='garage'){
+           // Keep the path, character pedestals and interactive signs independent of the shell.
+           world.add(model);importedGarage=model;garageShell.visible=false;
+           // Name roof/ceiling nodes ROOF_* to automatically reveal the interior on Enter.
+           model.traverse(node=>{
+             if(!node.isMesh)return;
+             let cursor=node,roofNode=false;
+             while(cursor && cursor!==model){if(/roof|ceiling/i.test(cursor.name||'')){roofNode=true;break;}cursor=cursor.parent;}
+             if(!roofNode)return;
+             const copy=mat=>{const cloned=mat.clone();cloned.transparent=true;cloned.depthWrite=false;importedRoofMaterials.push(cloned);return cloned;};
+             node.material=Array.isArray(node.material)?node.material.map(copy):copy(node.material);
+           });
+         }else{
+           target.stand.visible=false;
+           target.root.add(model);target.imported=model;
+         }
+         if(gltf.animations?.length){
+           const mix=new T.AnimationMixer(model);
+           gltf.animations.forEach(clip=>mix.clipAction(clip).play());
+           mixers.push(mix);
+         }
        },undefined,error=>console.warn('Optional Tripo model not available:',id,error));
      }
    }).catch(()=>{});
@@ -294,6 +318,7 @@ function init(T){
  const isMobile=innerWidth<760; if(isMobile){desiredDist=26;distance=26;cameraTarget.set(2.5,2.4,0);}
  function tick(){
    requestAnimationFrame(tick);
+   if(document.hidden){clock.getDelta();return;}
    const dt=Math.min(.1,clock.getDelta()),t=clock.elapsedTime;
    azimuth+=(desiredAz-azimuth)*.075;elevation+=(desiredEl-elevation)*.075;distance+=(desiredDist-distance)*.075;
    smoothTarget.lerp(cameraTarget,.07);
@@ -301,6 +326,7 @@ function init(T){
      smoothTarget.y+distance*Math.cos(elevation),smoothTarget.z+distance*Math.sin(elevation)*Math.cos(azimuth));
    camera.lookAt(smoothTarget);
    const targetOpacity=focused?.07:.98;roofMat.opacity+=(targetOpacity-roofMat.opacity)*.08;
+   for(const material of importedRoofMaterials){material.opacity+=(targetOpacity-material.opacity)*.08;}
    frontFrame.visible=!focused;entrance.visible=!focused;
    // All animations are subtle and respect reduced motion. Imported animated GLBs take precedence.
    if(!reducedMotion){
