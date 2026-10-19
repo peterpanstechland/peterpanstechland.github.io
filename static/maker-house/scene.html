@@ -1,222 +1,323 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#171728" />
-  <title>Maker House / Peter Pan's Techland</title>
-  <style>
-    *{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}
-    body{font-family:system-ui,sans-serif}
-    canvas{width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
-    #fallback{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
-    #fallback svg{width:min(82%,540px);height:auto;opacity:.83}
-    #fallbackNotice{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap;color:#c7bbc9;font-size:11px;letter-spacing:.03em;display:none}
-  </style>
-</head>
-<body>
-  <div id="fallback" aria-hidden="true">
-    <svg viewBox="0 0 600 380" role="presentation" xmlns="http://www.w3.org/2000/svg">
-      <path d="M300 23 542 143 300 274 58 143Z" fill="#33324b" stroke="#82729c" stroke-width="2"/>
-      <path d="M58 143v104l242 117V274Z" fill="#29283a" stroke="#645874" stroke-width="2"/>
-      <path d="M542 143v104L300 364v-90Z" fill="#201f33" stroke="#645874" stroke-width="2"/>
-      <path d="M94 143 300 44 506 143 300 247Z" fill="#3c344b" stroke="#605b73"/>
-      <path d="M106 153 179 117 237 146 164 182Z" fill="#9a81b0"/><path d="M106 153v56l58 28v-55Z" fill="#453958"/><path d="M237 146v56l-73 35v-55Z" fill="#716384"/>
-      <path d="m236 183 70-34 73 35-72 36Z" fill="#8c819d"/><path d="m236 183v55l71 35v-53Z" fill="#493f5f"/><path d="m379 184v54l-72 35v-53Z" fill="#716581"/>
-      <path d="m345 112 65-32 81 40-66 32Z" fill="#bf88a5"/><path d="m345 112v43l80 39v-42Z" fill="#6b4264"/><path d="m491 120v43l-66 31v-42Z" fill="#825674"/>
-      <path d="m194 244 104-50 85 41-105 50Z" fill="#a185b4"/><path d="m194 244v31l84 41v-31Z" fill="#53445f"/><path d="m383 235v31l-105 50v-31Z" fill="#695777"/>
-      <path d="m246 197 52-25 45 23-52 23Z" fill="#df9cb9" opacity=".83"/>
-      <path d="m172 115 25-13 20 10-25 12Z" fill="#82c8d1"/><path d="m192 125v-31" stroke="#9de2e9" stroke-width="5"/>
-      <path d="m401 104 45 23" stroke="#f3c1d7" stroke-width="5" stroke-linecap="round"/>
-      <path d="m224 274 53 24" stroke="#f0b6d0" stroke-width="3"/>
-    </svg>
-    <span id="fallbackNotice">Interactive 3D is unavailable; the rest of the site is ready.</span>
-  </div>
-  <script type="module">
-    let THREE;
-    try { THREE = await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js'); }
-    catch {
-      try { THREE = await import('https://unpkg.com/three@0.170.0/build/three.module.js'); }
-      catch { document.getElementById('fallbackNotice').style.display='block'; }
-    }
-    if(THREE) {
-      try { start(THREE); }
-      catch(error) { document.getElementById('fallbackNotice').style.display='block'; console.warn('Maker House fallback',error); }
-    }
-    function start(T) {
-      const renderer = new T.WebGLRenderer({antialias:true,alpha:true,powerPreference:'default'});
-      renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));
-      renderer.setSize(innerWidth,innerHeight);
-      renderer.setClearColor(0x151524,0);
-      renderer.outputColorSpace = T.SRGBColorSpace;
-      renderer.toneMapping = T.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.5;
-      document.body.appendChild(renderer.domElement);
-      document.getElementById('fallback').style.display='none';
-      const scene=new T.Scene();
-      const camera=new T.PerspectiveCamera(39,innerWidth/innerHeight,.1,100);
-      const target=new T.Vector3(0,1.25,0);
-      const look=new T.Vector3().copy(target);
-      let theta=.68,phi=.92,radius=18;
-      let desiredTheta=theta,desiredPhi=phi,desiredRadius=radius;
-      let focusId='bench';
-      const clickable=[];
-      const colors={dark:0x24263a,frame:0x6a6679,top:0x59566a,wall:0x302d42,pink:0xde739e,blue:0x78acbf,ivory:0xe3dce4};
-      const mat=(c,metal=.1,rough=.7)=>new T.MeshStandardMaterial({color:c,metalness:metal,roughness:rough});
-      const dark=mat(colors.dark),metal=mat(colors.frame,.55,.43),tableMat=mat(colors.top,.3,.57);
-      const pink=mat(colors.pink,.1,.42),blue=mat(colors.blue,.18,.5),screen= new T.MeshBasicMaterial({color:0x82a9b9});
-      const addBox=(parent,w,h,d,x,y,z,m=dark)=>{
-        const a=new T.Mesh(new T.BoxGeometry(w,h,d),m);a.position.set(x,y,z);parent.add(a);return a;
-      };
-      const addCyl=(parent,rt,rb,h,x,y,z,m=metal)=>{
-        const a=new T.Mesh(new T.CylinderGeometry(rt,rb,h,16),m);a.position.set(x,y,z);parent.add(a);return a;
-      };
-      const floor=new T.Group();scene.add(floor);
-      addBox(floor,13.6,.34,10,0,-.2,0,mat(0x303044,.23,.82));
-      addBox(floor,13.72,.07,10.14,0,-.41,0,mat(0x7e536d,.3,.52));
-      addBox(floor,13.6,3.2,.16,0,1.47,-5.0,mat(colors.wall,.18,.83));
-      addBox(floor,.14,3.2,10,-6.8,1.47,0,mat(0x333044,.18,.8));
-      // A back-wall tool rack: subtle color highlights instead of repeated labels.
-      addBox(floor,7.8,1.35,.11,-.9,2.2,-4.88,mat(0x3a3548));
-      for(let i=0;i<15;i++) for(let j=0;j<4;j++) addCyl(floor,.025,.025,.03,-4.5+i*.52,1.78+j*.26,-4.80,mat(0x686073));
-      addBox(floor,1.3,1.05,.13,5.3,2.0,-4.88,mat(0x2b3148));
-      addBox(floor,.8,.5,.025,5.3,2.09,-4.78,screen);
-      for(const x of [-5.8,5.8]) addCyl(floor,.09,.09,2.7,x,1.33,-4.65,metal);
-      addBox(floor,12.0,.085,.14,0,3.15,-4.65,pink);
-      // Decorative robot silhouette in the corner.
-      const bot=new T.Group();bot.position.set(-5.6,0,3.0);scene.add(bot);
-      addCyl(bot,.33,.38,.7,0,.65,0,mat(0x75658a));
-      addBox(bot,.7,.6,.48,0,1.28,0,mat(0x504966));
-      for(const x of [-.18,.18])addBox(bot,.12,.08,.035,x,1.35,.26,screen);
-      for(const x of [-.42,.42]){const arm=addBox(bot,.13,.75,.16,x,.98,0,metal);arm.rotation.z=x<0?-.25:.25;}
-      // Low-contrast floor guides visually organize the equipment layout.
-      for(const z of [-2.65,.8])addBox(floor,11.3,.012,.025,0,.016,z,mat(0x5a4b6d));
-      const stations=[];
-      function stand(id,x,z,accent,build){
-        const g=new T.Group();g.position.set(x,0,z);g.userData.id=id;scene.add(g);stations.push(g);clickable.push(g);
-        const glow=new T.Mesh(new T.CircleGeometry(1.27,32),new T.MeshBasicMaterial({color:accent,transparent:true,opacity:.04,depthWrite:false}));
-        glow.rotation.x=-Math.PI/2;glow.position.y=.035;g.add(glow);
-        g.userData.glow=glow;
-        addBox(g,2.35,.12,1.55,0,.84,0,tableMat);
-        for(const x of [-1.01,1.01])for(const z of [-.61,.61])addBox(g,.08,.8,.08,x,.41,z,metal);
-        build(g);
-        return g;
-      }
-      stand('printer',-4.2,-3.1,0xbe93d8,g=>{
-        for(const x of [-.60,.60])addBox(g,.07,1.18,.07,x,1.48,-.15,metal);
-        addBox(g,1.32,.07,.9,0,2.05,-.14,metal);
-        addBox(g,1.15,.10,.8,0,1.03,-.14,dark);
-        addBox(g,.66,.20,.46,0,1.14,0,mat(0x9873ac));
-        addBox(g,.23,.17,.25,0,1.86,-.14,pink);
-      });
-      stand('laser',-1.43,-3.1,0x89b6c5,g=>{
-        addBox(g,1.8,.48,1.18,0,1.16,0,mat(0x55566d));
-        const lid=addBox(g,1.72,.06,1.08,0,1.45,.02,mat(0x90b2c2,.3,.3));
-        lid.rotation.x=-.17;
-        addBox(g,.8,.07,.08,0,1.06,.6,blue);
-      });
-      stand('pnp',1.38,-3.1,0xe6a1bf,g=>{
-        addBox(g,1.82,.13,1.08,0,1.02,0,dark);
-        for(const x of [-.82,.82])addBox(g,.07,.85,.08,x,1.47,-.35,metal);
-        addBox(g,1.80,.1,.1,0,1.84,-.36,pink);
-        addBox(g,.3,.45,.22,.20,1.58,-.28,metal);
-        for(let i=0;i<5;i++)addBox(g,.20,.06,.56,-.7+i*.32,1.13,.19,mat(0x816d8c));
-      });
-      stand('bench',4.22,-3.1,0xf19fbb,g=>{
-        addBox(g,.93,.63,.1,-.46,1.42,-.36,mat(0x2d425e));
-        addBox(g,.78,.53,.1,.5,1.46,-.38,mat(0x484466));
-        addBox(g,1.55,.045,.45,0,1.04,.28,metal);
-        addBox(g,.26,.15,.2,.85,1.10,.39,pink);
-      });
-      stand('scope',-3.4,.65,0x8db3d2,g=>{
-        addBox(g,1.28,.83,.54,0,1.28,-.17,mat(0x424358));
-        addBox(g,.79,.5,.04,-.14,1.3,.12,screen);
-        for(let j=0;j<3;j++)addCyl(g,.07,.07,.03,.44,1.54-j*.22,.14,metal);
-      });
-      stand('microscope',-.45,.65,0xa6d0d0,g=>{
-        addCyl(g,.39,.42,.12,0,.96,-.1,metal);
-        addCyl(g,.085,.1,1.2,-.27,1.54,-.24,metal);
-        const head=addBox(g,.54,.43,.60,0,1.96,-.14,mat(0x747c96));head.rotation.z=-.20;
-        addCyl(g,.15,.18,.37,.10,1.62,.01,blue);
-      });
-      stand('solder',2.37,.65,0xea9d99,g=>{
-        addBox(g,.88,.38,.61,-.26,1.09,-.03,mat(0x5b4c61));
-        addBox(g,.54,.08,.09,-.26,1.22,.29,pink);
-        const iron=addBox(g,.09,.09,.86,.44,1.30,0,metal);iron.rotation.y=.55;
-        addCyl(g,.23,.23,.12,.65,1.03,.25,metal);
-      });
-      stand('hotair',4.97,.65,0xe3c59b,g=>{
-        addBox(g,.78,.70,.62,-.22,1.25,-.12,mat(0x555364));
-        addBox(g,.5,.08,.06,-.22,1.43,.2,blue);
-        const nozzle=addCyl(g,.08,.11,.76,.45,1.35,-.06,mat(0xa8a0ae));nozzle.rotation.z=.64;
-      });
-      const light=new T.HemisphereLight(0xe9e0f3,0x363247,3.1);scene.add(light);
-      const key=new T.DirectionalLight(0xffe0ea,3.8);key.position.set(4,12,8);scene.add(key);
-      const fill=new T.DirectionalLight(0xa49bd6,1.4);fill.position.set(-5,6,-2);scene.add(fill);
-      function post(type,id){window.parent.postMessage({channel:'techland-maker-house',type,id},window.location.origin);}
-      function focus(id,notify=true){
-        const g=stations.find(s=>s.userData.id===id);
-        if(!g)return;
-        focusId=id;
-        for(const s of stations){s.userData.glow.material.opacity=s===g?.26:.025;}
-        // Overview stays legible: focusing highlights equipment instead of moving the camera aggressively.
-        if(notify)post('tool',id);
-      }
-      function reset(){
-        desiredTheta=.68;desiredPhi=.92;desiredRadius=18;target.set(0,1.25,0);focus('bench');
-      }
-      focus('bench',false);
-      window.addEventListener('message',event=>{
-        if(event.origin!==window.location.origin||event.data?.channel!=='techland-maker-house')return;
-        if(event.data.action==='focus')focus(event.data.id);
-        if(event.data.action==='reset')reset();
-      });
-      const ray=new T.Raycaster(),pointer=new T.Vector2();
-      let down=null;
-      function pick(event){
-        const r=renderer.domElement.getBoundingClientRect();
-        pointer.set((event.clientX-r.left)/r.width*2-1,-(event.clientY-r.top)/r.height*2+1);
-        ray.setFromCamera(pointer,camera);
-        const intersections=ray.intersectObjects(clickable,true);
-        if(!intersections.length)return null;
-        let obj=intersections[0].object;
-        while(obj&&!obj.userData?.id)obj=obj.parent;
-        return obj?.userData?.id||null;
-      }
-      renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY,moved:false};});
-      renderer.domElement.addEventListener('pointermove',e=>{
-        if(down){
-          const dx=e.clientX-down.x,dy=e.clientY-down.y;
-          if(Math.abs(dx)+Math.abs(dy)>4)down.moved=true;
-          if(down.moved){
-            desiredTheta+=dx*.005;
-            desiredPhi=Math.min(1.02,Math.max(.35,desiredPhi+dy*.004));
-            down.x=e.clientX;down.y=e.clientY;
-          }
-        }else{
-          renderer.domElement.style.cursor=pick(e)?'pointer':'grab';
-        }
-      });
-      renderer.domElement.addEventListener('pointerup',e=>{
-        if(down&&!down.moved){const id=pick(e);if(id)focus(id);}
-        down=null;
-      });
-      renderer.domElement.addEventListener('pointercancel',()=>{down=null;});
-      renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();desiredRadius=Math.max(13.5,Math.min(23,desiredRadius+e.deltaY*.011));},{passive:false});
-      const onResize=()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);};
-      window.addEventListener('resize',onResize);
-      function animate(){
-        requestAnimationFrame(animate);
-        theta+=(desiredTheta-theta)*.09;
-        phi+=(desiredPhi-phi)*.09;
-        radius+=(desiredRadius-radius)*.09;
-        camera.position.set(target.x+radius*Math.sin(phi)*Math.sin(theta),target.y+radius*Math.cos(phi),target.z+radius*Math.sin(phi)*Math.cos(theta));
-        look.lerp(target,.08);
-        camera.lookAt(look);
-        renderer.render(scene,camera);
-      }
-      post('ready');animate();
-    }
-  </script>
-</body>
-</html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#0b0813"/><title>Peter Pan's Techland — Cyber Maker Garage</title>
+<style>
+*{box-sizing:border-box}html,body{height:100%;width:100%;overflow:hidden;margin:0;background:transparent}
+body{font:12px system-ui,sans-serif;color:#eedff5}
+canvas{display:block;width:100%;height:100%;touch-action:pan-y;cursor:grab}
+#fallback{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+#fallback svg{height:auto;width:min(85%,620px);opacity:.85;filter:drop-shadow(0 24px 35px #251128)}
+#tip{position:absolute;z-index:2;bottom:19%;left:50%;transform:translateX(-50%);border:1px solid #995c91;background:#161024e6;padding:6px 10px;color:#f0d5ee;font:700 11px monospace;letter-spacing:.06em;opacity:0;transition:opacity .12s;pointer-events:none;white-space:nowrap}
+#fallbackNotice{position:absolute;bottom:23%;left:50%;transform:translateX(-50%);text-align:center;color:#f2d8ed;font-size:11px;display:none}
+@media(max-width:760px){#tip{bottom:23%;font-size:9px}}
+</style></head><body>
+<div id="fallback" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+<defs><linearGradient id="roof" x1="0" x2="1"><stop stop-color="#653861"/><stop offset="1" stop-color="#323047"/></linearGradient></defs>
+<ellipse cx="418" cy="468" rx="325" ry="36" fill="#5e2e62" opacity=".3"/>
+<path d="M115 244 414 105 713 245 414 394Z" fill="#241b35" stroke="#a868aa" stroke-width="3"/>
+<path d="M115 244v124l299 146V394Z" fill="#282137" stroke="#7f567f" stroke-width="3"/>
+<path d="M713 245v124L414 514V394Z" fill="#151425" stroke="#7f567f" stroke-width="3"/>
+<path d="M145 185 414 63 686 188 414 321Z" fill="url(#roof)" stroke="#ef68a1" stroke-width="6"/>
+<path d="M235 239v-95l179-83 178 87v91l-178 91Z" fill="#242139" opacity=".9"/>
+<path d="M235 239 414 153l178 86-178 91Z" fill="#493750" stroke="#885f87" stroke-width="2"/>
+<path d="m300 208 114-53 112 54-112 54Z" fill="#cc8eb1"/><path d="m300 208v49l114 53v-47Z" fill="#674e75"/><path d="m526 209v48l-112 53v-47Z" fill="#81648d"/>
+<path d="m491 313 52-25 53 26-54 27Z" fill="#79b6cd"/><path d="m491 313v63l51 26v-61Z" fill="#3f677f"/>
+<circle cx="268" cy="339" r="43" fill="#e8d8e8"/><path d="m234 311-14-39 35 16m38 20 25-38-1 53" stroke="#e8d8e8" stroke-width="20" fill="#e8d8e8"/>
+<path d="m241 341q12 10 23 0m17 0q12 10 23 0" fill="none" stroke="#3e2549" stroke-width="6" stroke-linecap="round"/><circle cx="270" cy="363" r="7" fill="#f59fbd"/>
+<rect x="294" y="91" width="237" height="52" rx="8" fill="#24162d" stroke="#f26fa4" stroke-width="3"/>
+<text x="413" y="125" text-anchor="middle" font-size="29" font-weight="900" font-family="sans-serif" fill="#fff0fb">TECHLAND</text>
+<path d="M154 381 414 502 673 380" fill="none" stroke="#a96eac" stroke-width="4"/>
+</svg><span id="fallbackNotice">3D unavailable. The site navigation remains accessible.</span></div>
+<div id="tip" role="status" aria-live="polite"></div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<script type="module">
+let T;
+try{T=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js');}
+catch{try{T=await import('https://unpkg.com/three@0.170.0/build/three.module.js');}
+catch{document.getElementById('fallbackNotice').style.display='block';}}
+if(T){try{init(T);}catch(error){console.warn('Garage render failed:',error);document.getElementById('fallbackNotice').style.display='block';}}
+function init(T){
+ const renderer=new T.WebGLRenderer({alpha:true,antialias:true,powerPreference:'default'});
+ renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.7));
+ renderer.setSize(innerWidth,innerHeight);renderer.setClearColor(0x0a0915,0);
+ renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.45;
+ document.body.appendChild(renderer.domElement);document.getElementById('fallback').style.display='none';
+ const scene=new T.Scene();scene.fog=new T.FogExp2(0x130e23,.010);
+ const camera=new T.PerspectiveCamera(42,innerWidth/innerHeight,.1,120);
+ const world=new T.Group();world.position.x=1.3;scene.add(world);
+ const mainLight=new T.HemisphereLight(0xd5bbff,0x251126,2.7);scene.add(mainLight);
+ const key=new T.DirectionalLight(0xffc8e4,3.1);key.position.set(6,12,10);scene.add(key);
+ const accent=new T.PointLight(0xf04f9a,80,22);accent.position.set(3,4.5,6);scene.add(accent);
+ const secondary=new T.PointLight(0x7f77fa,50,18);secondary.position.set(-6,5,-4);scene.add(secondary);
+ const goldLight=new T.PointLight(0xffd48c,18,9);goldLight.position.set(6,2,3);scene.add(goldLight);
+ const m=(color,metal=.15,rough=.65,opts={})=>new T.MeshStandardMaterial({color,metalness:metal,roughness:rough,...opts});
+ const asphalt=m(0x141320,.30,.87),concrete=m(0x303044,.24,.85),steel=m(0x575067,.6,.45),wall=m(0x262033,.18,.8),pink=m(0xce548f),purple=m(0x8860bd),cyan=m(0x56b9cb),gold=m(0xeeb671,.35,.4),cream=m(0xf2dedc,.08,.7),dark=m(0x1d1a29,.3,.5);
+ const emissive=c=>new T.MeshBasicMaterial({color:c});
+ const neonPink=emissive(0xe85b9d),neonCyan=emissive(0x57c9dc),neonGold=emissive(0xffbf77);
+ const box=(g,w,h,d,x,y,z,mat=wall)=>{const a=new T.Mesh(new T.BoxGeometry(w,h,d),mat);a.position.set(x,y,z);g.add(a);return a};
+ const cyl=(g,top,bottom,h,x,y,z,mat=steel,segments=20)=>{const a=new T.Mesh(new T.CylinderGeometry(top,bottom,h,segments),mat);a.position.set(x,y,z);g.add(a);return a};
+ const ball=(g,r,x,y,z,mat=cream)=>{const a=new T.Mesh(new T.SphereGeometry(r,16,12),mat);a.position.set(x,y,z);g.add(a);return a};
+ const torus=(g,r,t,x,y,z,mat=neonPink)=>{const a=new T.Mesh(new T.TorusGeometry(r,t,6,28),mat);a.position.set(x,y,z);g.add(a);return a};
+ function label(text,width=2.5,height=.50,accentColor='#f46aab'){
+   const c=document.createElement('canvas');c.width=1024;c.height=220;
+   const ctx=c.getContext('2d');ctx.fillStyle='rgba(16,12,30,.95)';ctx.fillRect(0,0,1024,220);
+   ctx.fillStyle=accentColor;ctx.fillRect(0,0,1024,8);ctx.fillRect(0,212,1024,8);
+   ctx.font='900 72px system-ui,Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#ffedf9';
+   ctx.fillText(text,512,112,955);
+   const texture=new T.CanvasTexture(c);texture.colorSpace=T.SRGBColorSpace;
+   const sprite=new T.Sprite(new T.SpriteMaterial({map:texture,transparent:true,depthTest:false}));
+   sprite.scale.set(width,height,1);return sprite;
+ }
+ const clickable=[];const residents=[];const mixers=[];const originals=[];
+ const resident=(id,title,x,y,z,build)=>{
+   const root=new T.Group();root.position.set(x,y,z);root.userData.id=id;world.add(root);clickable.push(root);
+   const stand=new T.Group();root.add(stand);build(stand);
+   residents.push({id,title,root,stand,animate:null});
+   return {root,stand};
+ };
+ function resolve(id){return residents.find(r=>r.id===id);}
+ // One coherent compact miniature garage, not a billboard-filled equipment catalog.
+ box(world,17,.44,11.6,0,-.26,0,concrete);
+ box(world,17.3,.13,11.85,0,-.52,0,pink);
+ box(world,17.3,.045,.23,0,-.43,5.73,neonPink);
+ const road=box(world,24,.025,4.5,0,-.48,8.15,asphalt);
+ for(let i=-4;i<=4;i++)box(world,1.1,.018,.075,i*2.2,-.455,8.15,neonGold);
+ box(world,16.8,.18,.25,0,4.9,-5.72,steel);
+ box(world,16.8,.2,.24,0,4.9,5.72,steel);
+ for(const x of [-8.26,8.26]){
+   box(world,.26,5,.27,x,2.35,-5.65,steel);
+   box(world,.26,5,.27,x,2.35,5.65,steel);
+ }
+ box(world,16.7,4.9,.23,0,2.4,-5.78,wall);
+ box(world,.18,4.9,11.6,-8.37,2.4,0,wall);
+ box(world,.18,4.9,11.6,8.37,2.4,0,wall);
+ const rearPanels=new T.Group();world.add(rearPanels);
+ for(const x of [-6.1,6.1]){
+   box(rearPanels,2.7,2.3,.05,x,2.65,-5.6,m(0x3c3150));
+   for(let i=0;i<4;i++)box(rearPanels,.1,2.2,.07,x-1.1+i*.74,2.65,-5.52,steel);
+ }
+ // Polished pitched roof: visible on entrance, hidden when exploring the interior.
+ const roof=new T.Group();world.add(roof);
+ const roofMat=m(0x37213f,.26,.55,{transparent:true,opacity:.98,depthWrite:false,side:T.DoubleSide});
+ const roofL=box(roof,9.5,.28,12.25,-4.15,6.11,0,roofMat);roofL.rotation.z=-.39;
+ const roofR=box(roof,9.5,.28,12.25,4.15,6.11,0,roofMat);roofR.rotation.z=.39;
+ box(roof,.23,.2,12.4,0,7.82,0,neonPink);
+ const frontFrame=new T.Group();world.add(frontFrame);
+ box(frontFrame,6.4,3.3,.16,0,2.08,5.68,wall);
+ box(frontFrame,5.6,2.75,.16,0,1.82,5.83,asphalt);
+ const shopSign=new T.Group();shopSign.position.set(0,5.33,5.91);shopSign.userData.id='workshop';
+ frontFrame.add(shopSign);clickable.push(shopSign);
+ box(shopSign,7.4,1.08,.22,0,0,0,dark);
+ box(shopSign,7.45,.065,.26,0,.58,.03,neonPink);
+ box(shopSign,7.45,.06,.26,0,-.58,.03,neonCyan);
+ const sign=label("PETER PAN'S TECHLAND",6.85,.75);sign.position.set(0,0,.22);shopSign.add(sign);
+ // Dedicated door marker / garage hotspot
+ const entrance=new T.Group();entrance.position.set(0,0,5.85);entrance.userData.id='workshop';world.add(entrance);clickable.push(entrance);
+ box(entrance,.08,3,.13,-2.75,1.6,.08,neonPink);
+ box(entrance,.08,3,.13,2.75,1.6,.08,neonPink);
+ box(entrance,5.55,.07,.1,0,3.15,.08,neonCyan);
+ const entryLabel=label('COME ON IN',2.35,.46,'#a47aff');entryLabel.position.set(0,2.54,.4);entrance.add(entryLabel);
+ // Streetscape with subtle utility objects.
+ for(const x of [-7.55,7.55]){
+   cyl(world,.07,.12,3,x,1.4,5.1,steel);
+   ball(world,.18,x,2.96,5.1,emissive(0xf5b5d7));
+ }
+ for(let i=0;i<7;i++)box(world,.32,.16,.35,-7.5+i*.7,.48,-5.15,dark);
+ // Projects inside the garage — each is a small handmade character instead of a literal full-size machine.
+ const display=world;
+ for(const x of [-5.85,-2.5,1.0,4.5]){
+   box(display,2.8,.18,2.25,x,.64,-2.2,m(0x58506b,.38,.55));
+   for(const lx of [-1.12,1.12])for(const lz of [-.84,.84])box(display,.1,.60,.11,x+lx,.3,-2.2+lz,steel);
+ }
+ // PAN: a playful robot cocktail machine with handset, pumps and tiny waving hand.
+ const pan=resident('pan','PΛN / AI MIXOLOGIST',-5.8,.78,-2.25,g=>{
+   box(g,1.25,1.0,.86,0,.57,0,m(0x38334d,.35));
+   box(g,.75,.50,.06,0,.75,.46,emissive(0x7763bd));
+   for(let i=0;i<3;i++)cyl(g,.11,.12,.53,-.42+i*.41,1.28,-.14,i===1?cyan:pink);
+   cyl(g,.23,.18,.43,.58,.12,.34,cream);
+   const phone=box(g,.62,.15,.18,-.72,1.1,.25,cream);phone.rotation.z=.35;
+   cyl(g,.11,.11,.9,.8,1.38,.05,steel);
+   const pivot=new T.Group();pivot.position.set(.75,1.78,.05);g.add(pivot);
+   box(pivot,.17,.65,.18,.04,.18,0,steel);
+   for(let j=0;j<3;j++)box(pivot,.08,.3,.09,-.16+j*.17,.55,0,cream);
+   originals.push({type:'pan',pivot});
+ });
+ // FlipFate: tarot machine with an animated flipping card.
+ const flip=resident('flipfate','FLIPFATE',-2.5,.77,-2.2,g=>{
+   box(g,1.1,1.4,.62,0,.73,0,m(0x4b2a5f,.4));
+   box(g,.75,.85,.07,0,.98,.38,dark);
+   box(g,.48,.06,.07,0,.24,.39,neonPink);
+   const cardPivot=new T.Group();cardPivot.position.set(0,1.05,.47);g.add(cardPivot);
+   box(cardPivot,.43,.65,.035,0,0,0,m(0xcda6a1));
+   box(cardPivot,.30,.48,.04,0,0,.03,purple);
+   originals.push({type:'flip',pivot:cardPivot});
+ });
+ // Courtside IQ: basketball display and an analysis overlay.
+ resident('courtside','COURTSIDE IQ',1.0,.80,-2.2,g=>{
+   box(g,1.45,.96,.19,0,.82,-.15,steel);
+   box(g,1.24,.76,.025,0,.83,-.02,emissive(0x1c4567));
+   for(let j=0;j<3;j++)box(g,.18,.05,.023,-.35+j*.35,.64,.02,neonCyan);
+   const basket=cyl(g,.16,.16,.035,.48,1.1,.06,neonPink);basket.rotation.x=Math.PI/2;
+   cyl(g,.20,.20,.05,0,.18,.38,m(0xb66b3e));
+ });
+ // BMO: a cute little desk companion mascot.
+ const bmo=resident('bmo','BMO / COMPANION',4.5,.80,-2.2,g=>{
+   box(g,.88,1.15,.58,0,.72,0,m(0x77b7a2,.25,.48));
+   box(g,.60,.55,.04,0,.92,.30,emissive(0xc1e9d6));
+   for(const ex of [-.13,.13])ball(g,.046,ex,1.0,.33,dark);
+   const smile=torus(g,.115,.025,0,.79,.345,dark);smile.rotation.x=Math.PI/2;smile.scale.set(1,.6,1);
+   for(const sx of [-.56,.56]){const hand=ball(g,.16,sx,.59,.01,cream);hand.scale.set(.62,.9,.75);}
+   box(g,.17,.10,.025,-.19,.37,.30,pink);
+   cyl(g,.09,.09,.02,.21,.36,.3,purple);
+ });
+ // Roomba: mobile robot that subtly patrols the front.
+ const roomba=resident('roomba','ROOMBA VLM',3.55,.15,2.35,g=>{
+   cyl(g,.78,.83,.32,0,.16,0,m(0x474052,.48,.42),32);
+   cyl(g,.64,.72,.05,0,.34,0,steel,32);
+   const cam=ball(g,.21,0,.65,-.15,emissive(0x5888af));cam.scale.set(.75,.95,.75);
+   cyl(g,.08,.11,.4,0,.5,-.15,steel);
+   box(g,.46,.075,.12,0,.34,.55,neonPink);
+ });
+ // Happy waving cyber maneki-neko mascot on front display box.
+ const neko = resident('luckycat','NEKO / THE GARAGE HOST',-4.6,.83,2.8,g=>{
+   cyl(g,1.0,1.07,.12,0,.02,0,m(0x54344f));
+   const body=ball(g,.74,0,.90,0,cream);body.scale.set(1,1.06,.83);
+   ball(g,.67,0,2.08,.02,cream);
+   for(const x of [-.45,.45]){
+     const ear=new T.Mesh(new T.ConeGeometry(.24,.43,3),cream);
+     ear.position.set(x,2.70,.01);ear.rotation.z=x<0?.16:-.16;g.add(ear);
+     const inner=new T.Mesh(new T.ConeGeometry(.135,.24,3),pink);
+     inner.position.set(x,2.70,.19);g.add(inner);
+   }
+   for(const x of [-.25,.25]){const eye=ball(g,.055,x,2.14,.58,dark);eye.scale.set(.85,1.23,.7);}
+   ball(g,.06,0,1.98,.67,pink);
+   for(const x of [-.40,.40]){const blush=ball(g,.11,x,1.95,.54,pink);blush.scale.set(1,.58,.28);}
+   for(const x of [-.31,.31])ball(g,.20,x,.34,.42,cream);
+   cyl(g,.095,.095,.11,0,1.12,.61,gold);
+   const raised=new T.Group();raised.position.set(.75,1.46,.08);g.add(raised);
+   const paw=ball(raised,.21,.16,.52,.15,cream);paw.scale.set(.85,1.18,.8);
+   const arm=ball(raised,.19,.12,.21,.08,cream);arm.scale.set(.7,1.5,.74);
+   ball(raised,.085,.12,.60,.36,pink);
+   originals.push({type:'cat',pivot:raised});
+   const leftPaw=ball(g,.24,-.7,1.26,.24,cream);leftPaw.scale.set(.7,1.3,.75);
+   const coin=cyl(g,.25,.25,.065,-.73,1.47,.46,gold,26);coin.rotation.x=Math.PI/2;
+ });
+ // Navigation signs mapped to actual site categories, never to non-existent pages.
+ function navSign(id,name,x,y,z,accentMaterial){
+   const group=new T.Group();group.position.set(x,y,z);group.userData.id=id;world.add(group);clickable.push(group);
+   box(group,2.7,.67,.11,0,0,0,dark);
+   box(group,2.73,.05,.15,0,.37,0,accentMaterial);
+   const sprite=label(name,2.42,.44,id==='challenge'?'#f0b76c':'#c17be1');sprite.position.set(0,0,.12);group.add(sprite);
+ }
+ navSign('projects','PROJECTS',-5.5,3.58,-5.1,neonCyan);
+ navSign('blog','BLOG',-1.82,3.58,-5.1,neonPink);
+ navSign('challenge','CHALLENGE',2.0,3.58,-5.1,neonGold);
+ navSign('guides','GUIDES',5.55,3.58,-5.1,neonCyan);
+ // Optional Tripo exports are overlaid per-character. Empty filenames mean procedural models stay active.
+ let assetConfig={};
+ fetch('/maker-house/model-slots.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{
+   if(!d?.models)return;
+   assetConfig=d.models;
+   const entries=Object.entries(assetConfig).filter(([,v])=>v && typeof v.file==='string' && v.file);
+   if(!entries.length)return;
+   import('three/addons/loaders/GLTFLoader.js').then(mod=>{
+     const loader=new mod.GLTFLoader();
+     for(const [id,opt] of entries){
+       const target=resolve(id);if(!target)continue;
+       loader.load(opt.file,gltf=>{
+         target.stand.visible=false;const model=gltf.scene;
+         model.position.set(...(opt.position||[0,0,0]));
+         model.rotation.set(...(opt.rotation||[0,0,0]));
+         const s=Array.isArray(opt.scale)?opt.scale:[opt.scale||1,opt.scale||1,opt.scale||1];model.scale.set(...s);
+         target.root.add(model);target.imported=model;
+         if(gltf.animations?.length){const mix=new T.AnimationMixer(model);gltf.animations.forEach(clip=>mix.clipAction(clip).play());mixers.push(mix);}
+       },undefined,error=>console.warn('Optional Tripo model not available:',id,error));
+     }
+   }).catch(()=>{});
+ }).catch(()=>{});
+ function post(type,id){window.parent.postMessage({channel:'techland-maker-house',type,id},window.location.origin);}
+ const raycaster=new T.Raycaster(),pointer=new T.Vector2();
+ const cameraTarget=new T.Vector3(2.25,2.20,0);
+ const smoothTarget=cameraTarget.clone();
+ let azimuth=.58,elevation=.87,distance=22;
+ let desiredAz=azimuth,desiredEl=elevation,desiredDist=distance;
+ let focused=false,reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function entrance(){focused=true;desiredDist=16.0;desiredAz=.43;desiredEl=.85;cameraTarget.set(1.2,1.9,0); }
+ function reset(){focused=false;desiredDist=22;desiredAz=.58;desiredEl=.87;cameraTarget.set(2.25,2.2,0);}
+ function select(id){if(!id)return;focused=true;post('select',id);if(id==='workshop'){entrance();return;}
+   desiredDist=17; const found=resolve(id);
+   if(found){cameraTarget.set(found.root.position.x+1.3,1.7,found.root.position.z);desiredAz=.43;}
+ }
+ function project(e){
+   const r=renderer.domElement.getBoundingClientRect();
+   pointer.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);
+   raycaster.setFromCamera(pointer,camera);
+   const hits=raycaster.intersectObjects(clickable,true);
+   if(!hits.length)return null;let obj=hits[0].object;
+   while(obj&&!obj.userData?.id)obj=obj.parent;
+   return obj?.userData?.id||null;
+ }
+ const tip=document.getElementById('tip');
+ const tipLabels={luckycat:'🐱 NEKO — WAVE HELLO',pan:'PΛN — AI MIXOLOGIST',flipfate:'FLIPFATE — TAROT MACHINE',bmo:'BMO — AI COMPANION',roomba:'ROOMBA — CAMERAMAN',courtside:'COURTSIDE IQ',projects:'PROJECTS',blog:'BLOG',challenge:'MAKERS CHALLENGE',guides:'TECH GUIDES',workshop:'WELCOME TO TECHLAND'};
+ let down=null;
+ renderer.domElement.addEventListener('pointerdown',e=>{
+   down={x:e.clientX,y:e.clientY,originX:e.clientX,originY:e.clientY,moved:false};renderer.domElement.setPointerCapture(e.pointerId);
+ });
+ renderer.domElement.addEventListener('pointermove',e=>{
+   if(down){let dx=e.clientX-down.x,dy=e.clientY-down.y;
+     if(Math.abs(e.clientX-down.originX)+Math.abs(e.clientY-down.originY)>6)down.moved=true;
+     if(down.moved){desiredAz+=dx*.006;desiredEl=Math.max(.47,Math.min(1.22,desiredEl+dy*.0039));}
+     down.x=e.clientX;down.y=e.clientY;tip.style.opacity='0';
+   }else{const id=project(e);renderer.domElement.style.cursor=id?'pointer':'grab';tip.textContent=id?tipLabels[id]||id:'';
+      tip.style.opacity=id?'1':'0';
+   }
+ });
+ renderer.domElement.addEventListener('pointerup',e=>{
+   if(down&&!down.moved){const id=project(e);if(id)select(id);}
+   down=null;
+ });
+ renderer.domElement.addEventListener('pointercancel',()=>down=null);
+ renderer.domElement.addEventListener('pointerleave',()=>tip.style.opacity='0');
+ renderer.domElement.addEventListener('wheel',e=>{e.preventDefault();desiredDist=Math.max(13,Math.min(29,desiredDist+e.deltaY*.012));},{passive:false});
+ window.addEventListener('message',event=>{
+   if(event.origin!==window.location.origin||event.data?.channel!=='techland-maker-house')return;
+   if(event.data.action==='enter')entrance();
+   if(event.data.action==='reset')reset();
+   if(event.data.action==='focus')select(event.data.id);
+ });
+ const resize=()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);};
+ window.addEventListener('resize',resize);
+ const clock=new T.Clock();
+ const isMobile=innerWidth<760; if(isMobile){desiredDist=26;distance=26;cameraTarget.set(2.5,2.4,0);}
+ function tick(){
+   requestAnimationFrame(tick);
+   const dt=Math.min(.1,clock.getDelta()),t=clock.elapsedTime;
+   azimuth+=(desiredAz-azimuth)*.075;elevation+=(desiredEl-elevation)*.075;distance+=(desiredDist-distance)*.075;
+   smoothTarget.lerp(cameraTarget,.07);
+   camera.position.set(smoothTarget.x+distance*Math.sin(elevation)*Math.sin(azimuth),
+     smoothTarget.y+distance*Math.cos(elevation),smoothTarget.z+distance*Math.sin(elevation)*Math.cos(azimuth));
+   camera.lookAt(smoothTarget);
+   const targetOpacity=focused?.07:.98;roofMat.opacity+=(targetOpacity-roofMat.opacity)*.08;
+   frontFrame.visible=!focused;entrance.visible=!focused;
+   // All animations are subtle and respect reduced motion. Imported animated GLBs take precedence.
+   if(!reducedMotion){
+     for(const part of originals){
+       const character=part.type==='cat'?'luckycat':part.type==='pan'?'pan':'flipfate';
+       if(resolve(character)?.imported)continue;
+       if(part.type==='cat')part.pivot.rotation.z=-.27+Math.sin(t*3.1)*.33;
+       if(part.type==='pan')part.pivot.rotation.z=Math.sin(t*1.8)*.22;
+       if(part.type==='flip')part.pivot.rotation.y=Math.sin(t*1.18)*.95;
+     }
+     const bot=resolve('roomba');
+     if(bot&&!bot.imported){bot.root.position.x=3.55+Math.sin(t*.44)*.50;bot.root.rotation.y=Math.sin(t*.53)*.20;}
+     const companion=resolve('bmo');
+     if(companion&&!companion.imported)companion.stand.rotation.z=Math.sin(t*1.20)*.025;
+     accent.intensity=75+Math.sin(t*1.4)*4;
+   }
+   mixers.forEach(mix=>mix.update(reducedMotion?0:dt));
+   renderer.render(scene,camera);
+ }
+ post('ready');tick();
+}
+</script></body></html>

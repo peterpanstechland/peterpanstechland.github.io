@@ -1,0 +1,89 @@
+{
+  "_comment": "Tripo-ready GLB slots. Leave file empty to keep the procedural animated mascot and project proxy. Export GLB to static/maker-house/models/; URLs are relative to site root. Add explicit animations in GLB for hand waves or moving parts.",
+  "models": {
+    "luckycat": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "pan": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "flipfate": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "bmo": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "roomba": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "courtside": {
+      "file": "",
+      "scale": 1,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    }
+  }
+}
