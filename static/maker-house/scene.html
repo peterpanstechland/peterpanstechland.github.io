@@ -235,6 +235,25 @@ function init(T){
    const leftPaw=ball(g,.24,-.7,1.26,.24,cream);leftPaw.scale.set(.7,1.3,.75);
    const coin=cyl(g,.25,.25,.065,-.73,1.47,.46,gold,26);coin.rotation.x=Math.PI/2;
  });
+ // Small functional stand-ins for optional high-fidelity Tripo props. Their routes are real site pages, not fake shops.
+ resident('vending','MAKER VENDING MACHINE',7.18,0,.45,g=>{
+   box(g,1.21,2.43,.78,0,1.22,0,m(0x352d49,.48,.32));
+   box(g,.92,1.52,.065,-.09,1.48,.424,m(0x1a2339,.13,.36));
+   for(let row=0;row<3;row++)for(let col=0;col<2;col++){
+     const x=-.32+col*.39,y=1.97-row*.48;
+     box(g,.25,.12,.08,x,y,.48,row===1?cyan:pink);
+   }
+   box(g,.21,.37,.08,.43,1.12,.46,gold);
+   box(g,.72,.07,.10,-.10,.40,.47,neonPink);
+   const header=label('MAKER LAB',1.01,.23,'#5fdce7');header.position.set(0,2.23,.45);g.add(header);
+ });
+ // Existing rear workbench receives a small clickable monitor (rather than another bulky model).
+ resident('workbench','MAKER WORKBENCH',-7.05,.83,-4.65,g=>{
+   box(g,.87,.62,.12,0,.42,0,m(0x252536,.30,.52));
+   box(g,.70,.45,.02,0,.43,.075,emissive(0x285b75));
+   box(g,.11,.10,.035,-.17,.43,.095,neonCyan);
+   box(g,.30,.045,.15,0,.05,-.04,steel);
+ });
  // Navigation signs mapped to actual site categories, never to non-existent pages.
  function navSign(id,name,x,y,z,accentMaterial){
    const group=new T.Group();group.position.set(x,y,z);group.userData.id=id;world.add(group);clickable.push(group);
@@ -317,7 +336,7 @@ function init(T){
    return obj?.userData?.id||null;
  }
  const tip=document.getElementById('tip');
- const tipLabels={luckycat:'🐱 NEKO — WAVE HELLO',pan:'PΛN — AI MIXOLOGIST',flipfate:'FLIPFATE — TAROT MACHINE',bmo:'BMO — AI COMPANION',roomba:'ROOMBA — CAMERAMAN',courtside:'COURTSIDE IQ',projects:'PROJECTS',blog:'BLOG',challenge:'MAKERS CHALLENGE',guides:'TECH GUIDES',workshop:'WELCOME TO TECHLAND','door-control':'ROLLER SHUTTER / 卷帘门'};
+ const tipLabels={luckycat:'🐱 NEKO — WAVE HELLO',pan:'PΛN — AI MIXOLOGIST',flipfate:'FLIPFATE — TAROT MACHINE',bmo:'BMO — AI COMPANION',roomba:'ROOMBA — CAMERAMAN',courtside:'COURTSIDE IQ',projects:'PROJECTS',blog:'BLOG',challenge:'MAKERS CHALLENGE',guides:'TECH GUIDES',workshop:'WELCOME TO TECHLAND','door-control':'ROLLER SHUTTER / 卷帘门',vending:'MAKER VENDING / INTERACTIVE',workbench:'OPEN THE WORKBENCH / GUIDES'};
  let down=null;
  renderer.domElement.addEventListener('pointerdown',e=>{
    down={x:e.clientX,y:e.clientY,originX:e.clientX,originY:e.clientY,moved:false};renderer.domElement.setPointerCapture(e.pointerId);
