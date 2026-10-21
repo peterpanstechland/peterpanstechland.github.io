@@ -1,0 +1,162 @@
+{
+  "revision": "grounded-v4.2",
+  "date": "2026-10-21",
+  "routes": [
+    "/maker-garage-preview/",
+    "/zh-Hans/maker-garage-preview/"
+  ],
+  "loaded_asset_count": 12,
+  "total_asset_slots": 13,
+  "notes": [
+    "Real Tripo model outputs; rejected tools-zone output is excluded without a substitute.",
+    "Original downloads and complete production logs are retained locally.",
+    "Accurate brand signs, grounding supports, the beckon animation and lighting are locally authored; these are not additional Tripo outputs.",
+    "Existing homepage, blog posts, docs and Challenge content are preserved."
+  ],
+  "assets": [
+    {
+      "id": "01_garage_shell",
+      "label": {
+        "en": "Garage shell",
+        "zh": "车库外壳"
+      },
+      "task_id": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "status": "verified",
+      "website_path": "static/maker-garage-preview/models/01_garage_shell.glb",
+      "sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116"
+    },
+    {
+      "id": "02_roller_shutter",
+      "label": {
+        "en": "Roller shutter",
+        "zh": "独立卷帘门"
+      },
+      "task_id": "60038920-5601-4de0-9202-b4620bd5b1c8",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/02_roller_shutter.glb",
+      "sha256": "efa27b81062656c3a6a91e80be47e64cfbf010fb95a152e2d2048b6864fb5cf9"
+    },
+    {
+      "id": "03_profile_sign",
+      "label": {
+        "en": "Portrait frame",
+        "zh": "头像招牌框"
+      },
+      "task_id": "a4544685-ffb3-46e6-a49e-c0dae342e326",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/03_profile_sign.glb",
+      "sha256": "3488a33dbb7c2e857e8e7be00d22af627cf320dad4d7b47ade74c45febf9f83c"
+    },
+    {
+      "id": "04_lucky_cat",
+      "label": {
+        "en": "Cyber lucky cat",
+        "zh": "英短赛博招财猫"
+      },
+      "task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+      "status": "verified",
+      "website_path": "static/maker-garage-preview/models/04_cyber_lucky_cat.glb",
+      "sha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
+      "rig_task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72"
+    },
+    {
+      "id": "05_project_vending",
+      "label": {
+        "en": "Project vending machine",
+        "zh": "项目自动贩卖机"
+      },
+      "task_id": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/05_project_vending.glb",
+      "sha256": "05ef07a2940582ef4abeb55b49dc73b43509ab4f9d9ab15b004e810196ec6fa3"
+    },
+    {
+      "id": "06_showcase_zone",
+      "label": {
+        "en": "Project showcase",
+        "zh": "作品展示区"
+      },
+      "task_id": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/06_showcase_zone.glb",
+      "sha256": "7449f2f5f1cf70e9380efe52a1e2725302df54adef934ffe266e0e2cecb2f61d"
+    },
+    {
+      "id": "07_tools_zone",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工具创作区"
+      },
+      "task_id": null,
+      "status": "rejected",
+      "website_path": null,
+      "sha256": null
+    },
+    {
+      "id": "08_street_lamp",
+      "label": {
+        "en": "Street lamp",
+        "zh": "路灯"
+      },
+      "task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/08_street_lamp.glb",
+      "sha256": "edeae357d10ce8917eb2b482e77bbd636616feac1657f48ce95322c5e8edb13f"
+    },
+    {
+      "id": "09_trash_bin",
+      "label": {
+        "en": "Street bin",
+        "zh": "垃圾桶"
+      },
+      "task_id": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/09_trash_bin.glb",
+      "sha256": "fecc8578fd6f8965e5ac9384b9919cf0653ed1c8528e8af447e4649096588a8e"
+    },
+    {
+      "id": "10_utility_cabinet",
+      "label": {
+        "en": "Utility cabinet",
+        "zh": "电箱"
+      },
+      "task_id": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/10_utility_cabinet.glb",
+      "sha256": "29534a8675f8efea6545b4b183964bda853c565e3c70e40bdb57fac6c293ae11"
+    },
+    {
+      "id": "11_tree",
+      "label": {
+        "en": "Street tree",
+        "zh": "小树"
+      },
+      "task_id": "f83af78c-7c37-48c0-8de7-e2706f983982",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/11_tree.glb",
+      "sha256": "327f4b49457796446156c363efc260622a197ed28810fc06cd757ca14865c5c7"
+    },
+    {
+      "id": "12_plants_grass",
+      "label": {
+        "en": "Planters and grass",
+        "zh": "盆栽草地"
+      },
+      "task_id": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/12_plants_grass.glb",
+      "sha256": "a931aca508cd09cb0b2e33027b2f043b1302e95eb48691b0635ec92bdc0d0ca3"
+    },
+    {
+      "id": "13_street_base",
+      "label": {
+        "en": "Street and curb",
+        "zh": "街道路沿"
+      },
+      "task_id": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+      "status": "verified_with_notes",
+      "website_path": "static/maker-garage-preview/models/13_street_base.glb",
+      "sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21"
+    }
+  ]
+}

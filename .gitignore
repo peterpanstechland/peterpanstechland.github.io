@@ -20,3 +20,15 @@ coverage
 types
 
 .netlify
+
+# Local Tripo CLI session state and Python bytecode (not model deliverables).
+.tripo/
+/tripo-out/
+__pycache__/
+*.pyc
+
+# Checked-in Three.js runtime used by the standalone model previews.
+!static/maker-garage-preview/vendor/three/build/
+!static/maker-garage-preview/vendor/three/build/three.module.js
+!assets/tripo/preview/vendor/three/build/
+!assets/tripo/preview/vendor/three/build/three.module.js

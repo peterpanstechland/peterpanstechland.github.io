@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "01_garage_shell",
+      "label": {
+        "en": "Garage shell",
+        "zh": "车库外壳"
+      },
+      "file": "models/01_garage_shell.glb",
+      "status": "verified",
+      "targetSize": [
+        4.5,
+        3.2,
+        3.5
+      ],
+      "rotationY": -1.5707963267948966,
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "taskId": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "href": "/docs/about"
+    },
+    {
+      "id": "02_roller_shutter",
+      "label": {
+        "en": "Roller shutter",
+        "zh": "独立卷帘门"
+      },
+      "status": "verified_with_notes",
+      "position": [
+        0,
+        0,
+        1.78
+      ],
+      "normalized": true,
+      "file": "models/02_roller_shutter.glb",
+      "taskId": "60038920-5601-4de0-9202-b4620bd5b1c8"
+    },
+    {
+      "id": "03_profile_sign",
+      "label": {
+        "en": "Portrait frame",
+        "zh": "头像招牌框"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 0.8,
+      "rotationY": -1.5707963267948966,
+      "position": [
+        -1.65,
+        2.55,
+        1.87
+      ],
+      "href": "/docs/about",
+      "file": "models/03_profile_sign.glb",
+      "taskId": "a4544685-ffb3-46e6-a49e-c0dae342e326"
+    },
+    {
+      "id": "04_lucky_cat",
+      "label": {
+        "en": "Cyber lucky cat",
+        "zh": "英短赛博招财猫"
+      },
+      "file": "models/04_cyber_lucky_cat.glb",
+      "status": "verified",
+      "normalized": true,
+      "position": [
+        -1.4,
+        0,
+        2.25
+      ],
+      "taskId": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+      "rigTaskId": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+      "href": "/docs/about"
+    },
+    {
+      "id": "05_project_vending",
+      "label": {
+        "en": "Project vending machine",
+        "zh": "项目自动贩卖机"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 1.8,
+      "rotationY": -1.5707963267948966,
+      "position": [
+        1.55,
+        0,
+        2.12
+      ],
+      "href": "/docs/projects",
+      "file": "models/05_project_vending.glb",
+      "taskId": "54b92a08-ba80-4d36-ae83-1352ae38cac7"
+    },
+    {
+      "id": "06_showcase_zone",
+      "label": {
+        "en": "Project showcase",
+        "zh": "作品展示区"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 2.35,
+      "rotationY": 0,
+      "position": [
+        0.25,
+        0,
+        -0.75
+      ],
+      "href": "/docs/projects",
+      "normalized": true,
+      "file": "models/06_showcase_zone.glb",
+      "taskId": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
+    },
+    {
+      "id": "07_tools_zone",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工具创作区"
+      },
+      "status": "rejected",
+      "targetHeight": 2.3,
+      "rotationY": 0,
+      "position": [
+        -1.7,
+        0,
+        -0.35
+      ],
+      "href": "/docs/guides"
+    },
+    {
+      "id": "08_street_lamp",
+      "label": {
+        "en": "Street lamp",
+        "zh": "路灯"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 2.8,
+      "rotationY": -1.5707963267948966,
+      "position": [
+        -2.95,
+        0,
+        1.8
+      ],
+      "file": "models/08_street_lamp.glb",
+      "taskId": "b369cdad-33bf-4cea-916a-42822d021d60"
+    },
+    {
+      "id": "09_trash_bin",
+      "label": {
+        "en": "Street bin",
+        "zh": "垃圾桶"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 0.95,
+      "rotationY": -1.5707963267948966,
+      "position": [
+        -2.45,
+        0,
+        0.25
+      ],
+      "file": "models/09_trash_bin.glb",
+      "taskId": "1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+    },
+    {
+      "id": "10_utility_cabinet",
+      "label": {
+        "en": "Utility cabinet",
+        "zh": "电箱"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 1.65,
+      "rotationY": -1.5707963267948966,
+      "position": [
+        2.35,
+        0,
+        0.3
+      ],
+      "file": "models/10_utility_cabinet.glb",
+      "taskId": "79c20750-5f2b-4e8f-bf11-b39338c883f4"
+    },
+    {
+      "id": "11_tree",
+      "label": {
+        "en": "Street tree",
+        "zh": "小树"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 2.2,
+      "rotationY": 0,
+      "position": [
+        -2.35,
+        0,
+        -0.9
+      ],
+      "normalized": true,
+      "file": "models/11_tree.glb",
+      "taskId": "f83af78c-7c37-48c0-8de7-e2706f983982"
+    },
+    {
+      "id": "12_plants_grass",
+      "label": {
+        "en": "Planters and grass",
+        "zh": "盆栽草地"
+      },
+      "status": "verified_with_notes",
+      "targetHeight": 0.8,
+      "rotationY": 0,
+      "position": [
+        2.35,
+        0,
+        1.0
+      ],
+      "normalized": true,
+      "file": "models/12_plants_grass.glb",
+      "taskId": "14dc3618-4de8-4bee-959b-3a807a17bdbb"
+    },
+    {
+      "id": "13_street_base",
+      "label": {
+        "en": "Street and curb",
+        "zh": "街道路沿"
+      },
+      "status": "verified_with_notes",
+      "targetSize": [
+        8.5,
+        0.3,
+        6.6
+      ],
+      "rotationY": -1.5707963267948966,
+      "position": [
+        0,
+        -0.3,
+        0.6
+      ],
+      "file": "models/13_street_base.glb",
+      "taskId": "38eb318a-5bfd-492d-91e0-cdc0e25973f5"
+    }
+  ]
+}
