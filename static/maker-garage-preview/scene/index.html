@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <base href="../">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Cyber Maker Garage · Peter Pan’s Techland</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #f2edf7; background: #070b14; color-scheme: dark; }
+    body { margin: 0; overflow: hidden; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button, select { font: inherit; }
+    button { color: inherit; cursor: pointer; }
+    button:disabled { opacity: .45; cursor: default; }
+    button:focus-visible, a:focus-visible, #stage:focus-visible { outline: 2px solid #8ee8ed; outline-offset: 4px; }
+    [hidden] { display: none !important; }
+    #stage { position: fixed; inset: 0; overflow: hidden; }
+    #stage canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    .topbar { pointer-events: none; position: fixed; z-index: 2; top: 0; inset-inline: 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding: 24px 26px 54px; background: linear-gradient(#0d0b14d9, transparent); }
+    .eyebrow { margin: 0 0 7px; color: #c3a4df; font-size: 10px; letter-spacing: .2em; font-weight: 650; }
+    h1 { margin: 0; font-size: clamp(17px,2.4vw,24px); line-height: 1.15; letter-spacing: -.035em; }
+    .badge { border: 1px solid #685678; border-radius: 30px; padding: 7px 11px; color: #dcc6ee; font-size: 10px; white-space: nowrap; letter-spacing: .07em; }
+    #load-state { margin: 8px 0 0; max-width: 530px; font-size: 11px; line-height: 1.5; color: #bab0c8; }
+    .toolbar { position: fixed; z-index: 3; bottom: 18px; left: 22px; right: 22px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; pointer-events: none; }
+    .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; max-width: 650px; pointer-events: auto; }
+    .control { min-height: 38px; border: 1px solid #524460; border-radius: 9px; padding: 9px 12px; background: #17121fe8; box-shadow: 0 3px 18px #0003; font-size: 11px; line-height: 1.25; backdrop-filter: blur(15px); }
+    .control:hover:not(:disabled) { border-color: #c783d5; background: #2a1a35; }
+    .control[aria-pressed="true"] { border-color: #64d2da; color: #9beff1; background: #15262ee8; }
+    .hint { margin: 0; max-width: 210px; font-size: 10px; color: #9e94b0; line-height: 1.5; text-align: right; }
+    .panel { position: fixed; z-index: 4; border: 1px solid #5b446b; border-radius: 15px; background: #18111fec; box-shadow: 0 20px 55px #0008; backdrop-filter: blur(22px); }
+    #info { width: 285px; bottom: 82px; left: 22px; padding: 20px; }
+    .close { position: absolute; right: 9px; top: 9px; width: 30px; height: 30px; border: 0; background: transparent; color: #ad9fb9; font-size: 20px; }
+    #info h2 { font-size: 18px; margin: 7px 25px 8px 0; letter-spacing: -.025em; }
+    #info p { font-size: 12px; color: #c0b2cd; line-height: 1.65; margin: 8px 0; }
+    #info-state { display: inline-block; font-size: 10px; color: #80e2d9; letter-spacing: .06em; }
+    #info-link { display: inline-flex; margin-top: 8px; color: #ffc88c; font-size: 12px; text-decoration: none; }
+    #info-link:hover { text-decoration: underline; }
+    #asset-panel { width: 310px; right: 22px; bottom: 76px; max-height: min(62vh,560px); overflow-y: auto; padding: 20px 13px 13px; }
+    #asset-panel h2 { margin: 0 22px 14px 6px; font-size: 15px; }
+    #texture-state { margin: -4px 6px 12px; font-size: 10px; line-height: 1.5; color: #aca0ba; }
+    #asset-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+    .asset-row { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 12px; text-align: left; padding: 10px 8px; background: transparent; border: 1px solid transparent; border-radius: 7px; font-size: 11px; }
+    .asset-row:hover { background: #30213c; border-color: #624571; }
+    .asset-row span:last-child { flex-shrink: 0; color: #aca0ba; font-size: 9px; }
+    .asset-row[data-state="ready"] span:last-child { color: #81dbcb; }
+    .asset-row[data-state="error"] span:last-child { color: #ffaf92; }
+    #fatal { inset: 50% auto auto 50%; transform: translate(-50%,-50%); width: min(440px,calc(100% - 44px)); padding: 25px; text-align: center; }
+    #fatal h2 { font-size: 21px; margin: 0 0 12px; }
+    #fatal p { color: #c9bad5; font-size: 13px; line-height: 1.7; }
+    .retry { margin-top: 10px; border-color: #b08158; color: #ffcb98; }
+    .embedded .topbar { display: none; }
+    .embedded .toolbar { left: 4%; right: 4%; bottom: 20px; }
+    .embedded .hint { display: none; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    @media (max-width: 650px) {
+      .topbar { padding: 18px 16px 42px; gap: 8px; }.badge { font-size: 8px; padding: 6px 8px; }
+      .toolbar { left: 12px; right: 12px; bottom: max(12px,env(safe-area-inset-bottom)); }.hint { display: none; }
+      .controls { gap: 5px; }.control { font-size: 10px; min-height: 36px; padding: 8px 10px; }
+      #info { left: 12px; bottom: 108px; width: min(285px,calc(100% - 24px)); padding: 17px; }
+      #asset-panel { right: 12px; bottom: 108px; width: min(310px,calc(100% - 24px)); }
+    }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; } }
+  </style>
+  <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
+</head>
+<body>
+  <main id="stage" tabindex="0" data-state="initializing" aria-label="Interactive Cyber Maker Garage. Arrow keys rotate; plus and minus zoom."></main>
+  <header class="topbar">
+    <div><p class="eyebrow">PETER PAN’S TECHLAND</p><h1>Cyber Maker Garage</h1><p id="load-state" role="status" aria-live="polite">Loading the garage…</p></div>
+    <span class="badge" data-i18n="badge">WORK IN PROGRESS</span>
+  </header>
+  <nav class="toolbar" aria-label="Garage controls">
+    <div class="controls">
+      <button class="control" id="overview" data-i18n="overview">Overview</button>
+      <button class="control" id="front" data-i18n="front">Front view</button>
+      <button class="control" id="cat-wave" disabled aria-pressed="false" data-i18n="wave">Beckon</button>
+      <button class="control" id="effects" disabled aria-pressed="false" data-i18n="effects">Local effects</button>
+      <button class="control" id="shutter" disabled aria-pressed="false" data-i18n="shutter">Garage door</button>
+      <button class="control" id="asset-toggle" aria-expanded="false" aria-controls="asset-panel" data-i18n="assets">Assets</button>
+      <button class="control retry" id="retry-failed" hidden data-i18n="retryFailed">Retry failed loads</button>
+    </div>
+    <p class="hint" data-i18n="hint">Drag to orbit · Pinch to zoom<br>Click an object to explore</p>
+  </nav>
+  <section id="info" class="panel" hidden aria-labelledby="info-title">
+    <button class="close" id="info-close" aria-label="Close">×</button>
+    <span id="info-state"></span><h2 id="info-title"></h2><p id="info-description"></p>
+    <a id="info-link" hidden target="_top" rel="noopener"></a>
+  </section>
+  <section id="asset-panel" class="panel" hidden aria-labelledby="assets-title">
+    <button class="close" id="asset-close" aria-label="Close">×</button>
+    <h2 id="assets-title" data-i18n="assetTitle">13 independent assets</h2>
+    <p id="texture-state" title="RGBA8 material textures including mipmaps; excludes render targets, geometry and CPU memory."></p>
+    <ul id="asset-list"></ul>
+  </section>
+  <section id="fatal" class="panel" hidden role="alert">
+    <h2 data-i18n="unavailable">The garage could not open</h2><p id="fatal-message"></p>
+    <button id="reload" class="control retry" data-i18n="reload">Reload preview</button>
+  </section>
+  <script>
+    (() => {
+      const zh = new URLSearchParams(location.search).get('lang') === 'zh-Hans' || location.pathname.startsWith('/zh-Hans/');
+      document.documentElement.lang = zh ? 'zh-Hans' : 'en';
+      document.documentElement.classList.toggle('embedded', window.parent !== window);
+      window.setTimeout(() => {
+        const stage = document.getElementById('stage');
+        if (stage.dataset.state === 'initializing') {
+          stage.dataset.state = 'error';
+          document.getElementById('fatal').hidden = false;
+          document.getElementById('fatal-message').textContent = zh ? '3D 查看器未能初始化，请检查网络后重新加载。' : 'The 3D viewer could not initialize. Check your connection and reload.';
+          document.getElementById('load-state').textContent = zh ? '查看器加载失败' : 'Viewer failed to load';
+          window.parent.postMessage({ type: 'techland-garage-status', loaded: 0, total: 1, failed: 1 }, location.origin);
+        }
+      }, 30000);
+      document.getElementById('reload').addEventListener('click', () => location.reload());
+    })();
+  </script>
+  <script type="module" src="./scene.js?v=grounded-v4.2"></script>
+</body>
+</html>

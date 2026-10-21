@@ -11,6 +11,10 @@
     "message": "开始",
     "description": "Navbar item with label Start Here"
   },
+  "item.label.Maker Garage": {
+    "message": "创客车库",
+    "description": "Navbar link to the real 3D maker garage"
+  },
   "item.label.Projects": {
     "message": "项目",
     "description": "Navbar item with label Projects"

@@ -100,6 +100,11 @@ const config: Config = {
         height: 32,
       },
       items: [
+        {
+          to: '/maker-garage-preview',
+          position: 'left',
+          label: 'Maker Garage',
+        },
         // Start Here
         {
           type: 'doc',
