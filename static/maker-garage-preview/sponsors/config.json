@@ -1,0 +1,7 @@
+{
+  "tiers": [
+    {"id":"core","sponsors":[]},
+    {"id":"hardware","sponsors":[]},
+    {"id":"community","sponsors":[]}
+  ]
+}

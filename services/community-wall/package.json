@@ -1,0 +1,11 @@
+{
+  "name": "techland-community-wall",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "test": "node --test test/*.test.mjs",
+    "deploy": "node tools/sync-sponsor-assets.mjs && wrangler deploy"
+  },
+  "devDependencies": {"wrangler": "^4.0.0"}
+}

@@ -1,3 +1,4 @@
+import {createRosewoodStand} from './rosewood-stand.js?v=rosewood-carved-v3';
 /**
  * Ground the real GLBs using their evaluated triangles and low foot vertices.
  * This module never changes source geometry/materials/textures or GLB files.
@@ -28,6 +29,9 @@ export function settleGarageAssets(THREE, scene, entries) {
     if (entry.state !== 'ready' || !entry.mount || !entry.model) continue;
     const p = entry.config.position;
     entry.mount.position.fromArray(Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) ? p : [0, 0, 0]);
+    // Turn the complete display, including its cabinet-local neon header,
+    // after the source mesh has been fitted in its canonical front frame.
+    if (Number.isFinite(entry.config.placementYaw)) entry.mount.rotation.y = entry.config.placementYaw;
     updateBounds(entry);
   }
   scene.updateMatrixWorld(true);
@@ -159,6 +163,32 @@ export function settleGarageAssets(THREE, scene, entries) {
   } else if (shell) record(shell, {status: 'support-unavailable', supportId: '13_street_base'});
 
   for (const id of ['04_lucky_cat', '05_project_vending', '08_street_lamp', '09_trash_bin', '10_utility_cabinet', '11_tree', '12_plants_grass']) settle(ready(id), streetSurface, '13_street_base');
+  const luckyCat = ready('04_lucky_cat');
+  if (luckyCat && streetSurface) {
+    // Center the supporting paws/haunches, not the raised paw and extended tail.
+    const seatBounds = new THREE.Box3();
+    evaluatedMeshes(luckyCat, (_mesh, points) => {
+      for (let i=0;i<points.length;i+=3) {
+        if(points[i+1] <= luckyCat.bounds.min.y+.08) seatBounds.expandByPoint(new THREE.Vector3(points[i],points[i+1],points[i+2]));
+      }
+    });
+    if(seatBounds.isEmpty()) seatBounds.copy(luckyCat.bounds);
+    const center = seatBounds.getCenter(new THREE.Vector3());
+    const width = .64, depth = .64;
+    const edgeClearance = {left:seatBounds.min.x-(center.x-width/2),right:center.x+width/2-seatBounds.max.x,front:center.z+depth/2-seatBounds.max.z,back:seatBounds.min.z-(center.z-depth/2)};
+    const a=width/2-.04,b=depth/2-.10;
+    const corners=[[-b,-a],[b,-a],[a,-b],[a,b],[b,a],[-b,a],[-a,b],[-a,-b]].map(([x,z])=>[center.x+x,center.z+z]);
+    const heights = corners.map(([x,z]) => streetSurface.ray(x,z));
+    if (heights.every(Number.isFinite)) {
+      const standHeight = .96, top = Math.max(...heights) + standHeight;
+      const stand=createRosewoodStand(THREE,{center,width,depth,top,feet:corners,heights});
+      supports.add(stand);
+      const deltaY=top-.002-luckyCat.bounds.min.y;
+      luckyCat.mount.position.y+=deltaY;
+      record(luckyCat,{status:'settled',supportId:stand.name,deltaY,standTopY:top,standSize:[width,standHeight,depth],feetOnStreet:corners.map(([x,z],i)=>[x,heights[i],z]),seatingOverlap:.002});
+      report.catStand={style:'Eight-legged pierced rosewood flower stand',legs:8,batMotifs:4,piercedCarving:true,topY:top,size:[width,standHeight,depth],centerXZ:[center.x,center.z],seatEdgeClearance:edgeClearance,sourceGeometryModified:false,rigModified:false};
+    }
+  }
   const floor = shell ? upwardSurface(shell, shell.mount.position.y + 0.08, shell.mount.position.y + 0.40) : null;
   settle(ready('06_showcase_zone'), floor, '01_garage_shell/interior-floor');
 
@@ -236,7 +266,7 @@ export function settleGarageAssets(THREE, scene, entries) {
     record(entry, {status: 'reviewed-facade-anchor', supportId: '01_garage_shell', facadeZ: 1.05, localAnchor: [entry.mount.position.x - shell.mount.position.x, y, z]});
   }
 
-  if (streetSurface) {
+  if (streetSurface && !street.config.solidFoundation) {
     // Use actual upward source triangles as the exact upper outline. No new
     // top surface is made: the original textured road stays fully visible.
     const floorY = -0.36, positions = [], edges = new Map();
@@ -275,6 +305,9 @@ export function settleGarageAssets(THREE, scene, entries) {
     }
     report.support = {sourceTaskId: street.config.taskId, floorY, sourceUpwardTriangles: streetSurface.triangles.length, bottomTriangles, skirtTriangles, ambiguousEdges, topSurfaceAdded: false, provenance: 'Local underside closure from real street triangle boundaries; original GLB and textures unchanged', limitation: 'Retains source irregular outline and holes; not a watertight manufacturing certification.'};
     if (ambiguousEdges) report.warnings.push(`Street source has ${ambiguousEdges} ambiguous upward-surface edges; underside closure is a preview support, not a watertight repair.`);
+  }
+  if (streetSurface && street.config.solidFoundation) {
+    report.support = {sourceTaskId: street.config.taskId, solidFoundation: true, provenance: 'Closed Blender foundation with original Tripo road color rebaked; no additional runtime underside.'};
   }
   supports.userData.report = report.support;
   scene.add(supports);

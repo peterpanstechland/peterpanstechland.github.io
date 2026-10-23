@@ -1,5 +1,5 @@
 {
-  "revision": "interior-v1",
+  "revision": "interior-blender-repair-v1",
   "date": "2026-10-23",
   "branch": "codex/garage-interior-equipment",
   "publication": "local_preview_only",
@@ -27,7 +27,7 @@
       "source_triangle_count": 6734,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/14_bambu_x1c.glb",
-      "website_sha256": "472b076a84ca0885f4eacecd6b039c064afcc210d22079bd55fb98ab40b218f0",
+      "website_sha256": "61584d58f0727e104c1e61ceb0ee2e35b5102a7b5c3a5205e685b6b423ff2e10",
       "display_size_m_xyz": [
         0.389,
         0.457,
@@ -38,8 +38,16 @@
       "instances": 1,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Preserved thin double-wall spacing and repaired panel shading. Removed the warped build platform and rebuilt a flat PEI sheet, heated substrate, underframe and rear support; original chassis, toolhead and screen retained. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/14_bambu_x1c.json",
+        "blend": "assets/tripo/blender-repair/blend/14_bambu_x1c.blend",
+        "input_sha256": "472b076a84ca0885f4eacecd6b039c064afcc210d22079bd55fb98ab40b218f0",
+        "output_sha256": "61584d58f0727e104c1e61ceb0ee2e35b5102a7b5c3a5205e685b6b423ff2e10",
+        "credits": 0
+      }
     },
     {
       "id": "15_makeblock_laserbox",
@@ -55,7 +63,7 @@
       "source_triangle_count": 6495,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/15_makeblock_laserbox.glb",
-      "website_sha256": "3d2d776b80bd14871b0a23ed809571bd9bb5a1f5ead93ffa64bc6efb4215cc2e",
+      "website_sha256": "c90c0f8070887979ed19b2a1823b3a9e5253f1948b44b94d798f2186a3aee1eb",
       "display_size_m_xyz": [
         0.958,
         0.268,
@@ -66,8 +74,16 @@
       "instances": 1,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Straightened outer side walls. Cut away the crumpled window geometry and installed a flat, solid smoked inspection insert; enclosure and lid frame retained. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/15_makeblock_laserbox.json",
+        "blend": "assets/tripo/blender-repair/blend/15_makeblock_laserbox.blend",
+        "input_sha256": "3d2d776b80bd14871b0a23ed809571bd9bb5a1f5ead93ffa64bc6efb4215cc2e",
+        "output_sha256": "c90c0f8070887979ed19b2a1823b3a9e5253f1948b44b94d798f2186a3aee1eb",
+        "credits": 0
+      }
     },
     {
       "id": "16_openpnp_machine",
@@ -83,7 +99,7 @@
       "source_triangle_count": 9338,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/16_openpnp_machine.glb",
-      "website_sha256": "2960e300b1a75beb8d14c20f864676e9e918186cd8c0eb61f92339877a7db996",
+      "website_sha256": "0087612ede91971a46882d8fcf3a24a4159e9b2cf8c5e6ddd0f1e43759263cd1",
       "display_size_m_xyz": [
         0.7,
         0.45,
@@ -94,8 +110,16 @@
       "instances": 1,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Regularized base front and outer gantry supports; nozzle, feeders and PCB kept. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/16_openpnp_machine.json",
+        "blend": "assets/tripo/blender-repair/blend/16_openpnp_machine.blend",
+        "input_sha256": "2960e300b1a75beb8d14c20f864676e9e918186cd8c0eb61f92339877a7db996",
+        "output_sha256": "0087612ede91971a46882d8fcf3a24a4159e9b2cf8c5e6ddd0f1e43759263cd1",
+        "credits": 0
+      }
     },
     {
       "id": "17_soldering_station",
@@ -111,7 +135,7 @@
       "source_triangle_count": 3104,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/17_soldering_station.glb",
-      "website_sha256": "831fc5749f16315c13f961ad5f27ccb6c25c4e9f18efba3bdf4839b6e9f38646",
+      "website_sha256": "1034a715058ea8127902ed879e616bbbb871b836e3208599df61c2b246b784ae",
       "display_size_m_xyz": [
         0.24,
         0.18,
@@ -122,8 +146,16 @@
       "instances": 1,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Flattened controller top and sides; iron, connector, knob and cable untouched. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/17_soldering_station.json",
+        "blend": "assets/tripo/blender-repair/blend/17_soldering_station.blend",
+        "input_sha256": "831fc5749f16315c13f961ad5f27ccb6c25c4e9f18efba3bdf4839b6e9f38646",
+        "output_sha256": "1034a715058ea8127902ed879e616bbbb871b836e3208599df61c2b246b784ae",
+        "credits": 0
+      }
     },
     {
       "id": "18_hot_air_station",
@@ -139,7 +171,7 @@
       "source_triangle_count": 3140,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/18_hot_air_station.glb",
-      "website_sha256": "b33177cc48b1d19dcf264f4f0c70f6fa435ff0a9636fbdde0d57cff2a28c798d",
+      "website_sha256": "4a0e9063eb377b55205f5f77d9d777185a1121264f4c0b98ec046aa6a98c3864",
       "display_size_m_xyz": [
         0.22,
         0.22,
@@ -150,8 +182,16 @@
       "instances": 1,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Flattened base deck and controller side; gun, holder and hose retained. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/18_hot_air_station.json",
+        "blend": "assets/tripo/blender-repair/blend/18_hot_air_station.blend",
+        "input_sha256": "b33177cc48b1d19dcf264f4f0c70f6fa435ff0a9636fbdde0d57cff2a28c798d",
+        "output_sha256": "4a0e9063eb377b55205f5f77d9d777185a1121264f4c0b98ec046aa6a98c3864",
+        "credits": 0
+      }
     },
     {
       "id": "19_oscilloscope",
@@ -167,7 +207,7 @@
       "source_triangle_count": 4565,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/19_oscilloscope.glb",
-      "website_sha256": "422967b613947c854e9ffc87f4a7c2585aea6970f25730ebde4640e24d1d6ad1",
+      "website_sha256": "c4ed2d5ac4836043060564d1fdccf24f989b95a750703c2afce6e758a620e333",
       "display_size_m_xyz": [
         0.32,
         0.16,
@@ -178,8 +218,16 @@
       "instances": 1,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Flattened top housing and repaired shading; screen recess, rounded side walls, handle and front controls retained. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/19_oscilloscope.json",
+        "blend": "assets/tripo/blender-repair/blend/19_oscilloscope.blend",
+        "input_sha256": "422967b613947c854e9ffc87f4a7c2585aea6970f25730ebde4640e24d1d6ad1",
+        "output_sha256": "c4ed2d5ac4836043060564d1fdccf24f989b95a750703c2afce6e758a620e333",
+        "credits": 0
+      }
     },
     {
       "id": "20_pc_tower",
@@ -222,7 +270,7 @@
       "source_triangle_count": 2523,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/21_monitor.glb",
-      "website_sha256": "c74855cb1c7e6ea6735da94904ca38b941bab5dd4e21ca09aabe0ca7e90856b2",
+      "website_sha256": "beaf0d3d0847d58ecac96cce9aa68639149a4d4adccbd3b5804acd3a61116013",
       "display_size_m_xyz": [
         0.55,
         0.4,
@@ -233,8 +281,16 @@
       "instances": 2,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Flattened screen face and base contact plane; original stand and rear casing retained. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/21_monitor.json",
+        "blend": "assets/tripo/blender-repair/blend/21_monitor.blend",
+        "input_sha256": "c74855cb1c7e6ea6735da94904ca38b941bab5dd4e21ca09aabe0ca7e90856b2",
+        "output_sha256": "beaf0d3d0847d58ecac96cce9aa68639149a4d4adccbd3b5804acd3a61116013",
+        "credits": 0
+      }
     },
     {
       "id": "22_office_desk",
@@ -250,7 +306,7 @@
       "source_triangle_count": 4691,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/22_office_desk.glb",
-      "website_sha256": "68dc16658a9e1ba57ca353573faa4a7331dd57d0dee2a000949db2685b82d809",
+      "website_sha256": "f47443f0548747ed4fc92940e6d034913d66aa90853a4e1a55ae6efebb5c7fe6",
       "display_size_m_xyz": [
         1.25,
         0.72,
@@ -261,8 +317,16 @@
       "instances": 1,
       "notes": [
         "Display transform only; approximate scene dimensions, not mechanical CAD.",
-        "Brand lettering and screen contents are local overlays."
-      ]
+        "Brand lettering and screen contents are local overlays.",
+        "Blender repair: Retained textured wooden top/drawers. Replaced malformed metal legs with four square tubes, support rails and level rubber feet. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/22_office_desk.json",
+        "blend": "assets/tripo/blender-repair/blend/22_office_desk.blend",
+        "input_sha256": "68dc16658a9e1ba57ca353573faa4a7331dd57d0dee2a000949db2685b82d809",
+        "output_sha256": "f47443f0548747ed4fc92940e6d034913d66aa90853a4e1a55ae6efebb5c7fe6",
+        "credits": 0
+      }
     },
     {
       "id": "23_workbench",
@@ -278,7 +342,7 @@
       "source_triangle_count": 5624,
       "embedded_images_decoded": 3,
       "website_glb": "static/maker-garage-preview/models/23_workbench.glb",
-      "website_sha256": "05737ab798880de76217c2cd331b3e9b1c0d2757f68474d45ebdadea298182cc",
+      "website_sha256": "985ddfa2b1753faea567230f6ae88c432d28f678ee1410f91bc39e494f201069",
       "display_size_m_xyz": [
         2.2,
         0.75,
@@ -288,8 +352,16 @@
       "display_pivot": "bottom centre",
       "instances": 1,
       "notes": [
-        "Original Tripo frame retained. Generated clutter clipped from tabletop. Local steel top and lower-shelf inserts close the cut and source holes. Raw source unchanged."
-      ]
+        "Original Tripo frame retained. Generated clutter clipped from tabletop. Local steel top and lower-shelf inserts close the cut and source holes. Raw source unchanged.",
+        "Blender repair: Retained textured Tripo upper apron. Rebuilt torn lower shelf, irregular legs and both work surfaces as solid beveled steel parts. Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+      ],
+      "blender_repair": {
+        "report": "assets/tripo/blender-repair/reports/23_workbench.json",
+        "blend": "assets/tripo/blender-repair/blend/23_workbench.blend",
+        "input_sha256": "05737ab798880de76217c2cd331b3e9b1c0d2757f68474d45ebdadea298182cc",
+        "output_sha256": "985ddfa2b1753faea567230f6ae88c432d28f678ee1410f91bc39e494f201069",
+        "credits": 0
+      }
     },
     {
       "id": "20_pc_tower_v2",
@@ -339,7 +411,20 @@
       "Docusaurus update check could not access its local config store"
     ],
     "retry_pc_browser": "Rejected: severe mesh deformation; all three embedded images decode but that does not imply usable geometry.",
-    "blog_parent_console_note": "One MutationObserver exception without a source URL was observed in the parent blog page. The standalone garage had no console errors; the blog page and all accepted scene assets loaded successfully."
+    "blog_parent_console_note": "One MutationObserver exception without a source URL was observed in the parent blog page. The standalone garage had no console errors; the blog page and all accepted scene assets loaded successfully.",
+    "blender_repairs": {
+      "typecheck": "passed",
+      "english_chinese_build": "passed",
+      "native_blend_reopen": "9 passed, all images packed",
+      "real_mesh_contact": "10 instances supported",
+      "placement_idempotent": true,
+      "missing_table_fallback_and_recovery": "passed",
+      "built_glbs_match_sources_in_both_locales": true,
+      "browser_desktop": "21/22 loaded; rejected PC remains absent; no warning/error logs",
+      "browser_mobile": "390x640 CSS-pixel iframe reviewed",
+      "comparison_page": "asset selection and GLB/Blender links verified",
+      "visual_review": "Front and rear renders inspected; accepted with documented small-detail limitations"
+    }
   },
   "limitations": [
     "Visual display assets, not manufacturer CAD.",
@@ -349,7 +434,8 @@
   "screenshots": {
     "desktop": "assets/tripo/equipment-previews/interior-desktop.png",
     "mobile": "assets/tripo/equipment-previews/interior-mobile.png",
-    "failure": "assets/tripo/equipment-previews/failure-fallback.png"
+    "failure": "assets/tripo/equipment-previews/failure-fallback.png",
+    "blender_desktop": "assets/tripo/blender-repair/renders/garage-desktop.png"
   },
   "requested_unique_assets": 10,
   "generation_tasks": 11,
@@ -358,5 +444,11 @@
   "rejected_generation_tasks": 2,
   "undelivered_requested_assets": [
     "20_pc_tower"
-  ]
+  ],
+  "blender_repair_summary": {
+    "models": 9,
+    "credits": 0,
+    "report": "assets/tripo/BLENDER_REPAIR_REPORT.json",
+    "publication": "local_preview_only"
+  }
 }

@@ -129,17 +129,9 @@ export function addPracticalLights(THREE, scene, entries) {
   group.userData = {locallyAuthored: true, lightingOnly: true};
   // Interior illumination comes from the scene lights. Do not add unattached
   // luminous bars across the workshop opening or in front of the display.
-  const sign = entries.get('03_profile_sign');
-  if (sign?.state === 'ready') {
-    const center = sign.bounds.getCenter(new THREE.Vector3());
-    const radius = sign.bounds.getSize(new THREE.Vector3()).y * 0.44;
-    for (const [r, color, from, length] of [[radius, '#ff1586', 0, Math.PI * 1.65], [radius * .86, '#2addff', Math.PI * .8, Math.PI * .7]]) {
-      const tube = new THREE.Mesh(new THREE.TorusGeometry(r, 0.009, 6, 64, length), new THREE.MeshBasicMaterial({color: new THREE.Color(color).multiplyScalar(2.4), toneMapped: false}));
-      tube.rotation.z = from;
-      tube.position.set(center.x, center.y, sign.bounds.max.z + 0.014);
-      group.add(tube);
-    }
-  }
+  // The real GLB already contains cyan/pink light segments. Extra world-space
+  // toruses used a stem-inclusive bounding centre and produced doubled rings.
+  group.userData.portraitLighting = 'Original GLB light segments only; duplicate overlay tubes removed';
   scene.add(group);
   return group;
 }

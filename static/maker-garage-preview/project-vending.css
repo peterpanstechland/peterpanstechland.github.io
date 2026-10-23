@@ -1,0 +1,38 @@
+#project-vending { width:min(760px,calc(100% - 28px));max-height:calc(100dvh - 28px);overflow:auto;padding:28px;color:#fff1ed;border:1px solid #bd627a;border-radius:18px;background:linear-gradient(135deg,#391323,#160f1a 60%);box-shadow:0 24px 100px #000b; }
+#project-vending::backdrop { background:#07071388;backdrop-filter:blur(3px); }
+.vending-close { position:absolute;top:12px;right:12px;width:40px;height:40px;border:1px solid #7a4356;border-radius:50%;background:#210f1d;color:#eabfc9;font-size:25px; }
+.vending-kicker { color:#ef9cae;font:10px ui-monospace,monospace;letter-spacing:.12em; }
+#project-vending h2 { margin:12px 30px 8px 0;font-size:25px;line-height:1.3;letter-spacing:-.035em; }
+.vending-intro { margin:0 0 24px;color:#c1a6b3;font-size:12px;line-height:1.7; }
+.vending-body { display:grid;grid-template-columns:1fr 1.15fr;gap:24px; }
+.vending-slots { display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start; }
+.vending-slot { min-height:112px;text-align:left;padding:13px 10px;border:1px solid #623648;border-radius:10px;background:#1a131e;color:#f3dfdf;transition:border-color .16s,background .16s; }
+.slot-code { display:block;margin-bottom:12px;color:#b68596;font:11px ui-monospace,monospace; }
+.vending-slot strong { display:block;font-size:13px;font-weight:600; }
+.vending-slot small { display:block;font-size:9px;line-height:1.4;color:#b8a4b1;margin-top:6px; }
+.vending-slot:hover { border-color:#df8ca1; }
+.vending-slot[aria-pressed="true"] { border-color:#80e3e2;background:#193031;box-shadow:inset 0 0 0 1px #80e3e233; }
+.vending-slot[aria-pressed="true"] .slot-code { color:#9cf5ea; }
+.vending-photo { position:relative;aspect-ratio:16/10;border-radius:9px;overflow:hidden;background:linear-gradient(140deg,#4b2834,#101d28);border:1px solid #734356; }
+.vending-photo img { width:100%;height:100%;object-fit:cover;display:block; }
+.vending-number { position:absolute;left:10px;top:10px;padding:5px 8px;border-radius:5px;background:#160f1de8;color:#a8f4e7;font:12px ui-monospace,monospace; }
+.vending-category { font:10px ui-monospace,monospace;color:#e6a1b1;letter-spacing:.06em;margin:17px 0 8px; }
+.vending-selection h3 { font-size:24px;letter-spacing:-.03em;margin:0 0 10px; }
+.vending-description { min-height:63px;font-size:12px;line-height:1.75;color:#cbbac5;margin:0 0 20px; }
+.vending-read { display:block;padding:13px 18px;background:#ade8dc;color:#182827;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;text-align:center; }
+.vending-read:hover { background:#d0fff4; }
+#project-vending footer { display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:24px;padding-top:16px;border-top:1px solid #603246; }
+#project-vending footer span { font:10px ui-monospace,monospace;color:#bfa8b4;letter-spacing:.1em; }
+.vending-all { font-size:11px;color:#e6aebe;text-decoration:none; }
+#projects { color:#adf0e4;border-color:#589b93; }
+@media(max-width:600px) {
+  #project-vending { padding:20px; }
+  #project-vending h2 { font-size:21px; }
+  .vending-body { grid-template-columns:1fr;gap:18px; }
+  .vending-slots { grid-template-columns:repeat(3,1fr);gap:7px; }
+  .vending-slot { min-height:82px;padding:9px 7px; }
+  .slot-code { margin-bottom:7px; }.vending-slot strong { font-size:11px; }.vending-slot small { font-size:8px; }
+  .vending-photo { aspect-ratio:2.7; }.vending-description { min-height:0;margin-bottom:14px; }
+  .vending-intro { margin-bottom:16px; }#project-vending footer { margin-top:17px; }
+}
+@media(prefers-reduced-motion:reduce) { .vending-slot { transition:none; } }

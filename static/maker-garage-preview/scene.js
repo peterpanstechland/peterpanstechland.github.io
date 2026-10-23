@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { Reflector } from 'three/addons/objects/Reflector.js';
@@ -7,16 +8,25 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { createGarageGraphics } from './art-direction.js?v=interior-v1';
-import { createNightEnvironment, addPracticalLights } from './night-environment.js?v=interior-v2';
-import { settleGarageAssets } from './ground-contact.js?v=interior-v1';
+import { createGarageGraphics } from './art-direction.js?v=city-neon-v1';
+import { createNightEnvironment, addPracticalLights } from './night-environment.js?v=sign-detail-v1';
+import { settleGarageAssets } from './ground-contact.js?v=vending-placement-v1';
 import { createWorkshopDetails } from './workshop-details.js?v=interior-v1';
+import { createProjectVending } from './project-vending.js?v=projects-v1';
+import { addVendingNeon } from './neon-lettering.js?v=vending-integrated-v3';
+import {createCommunityWall} from './community-wall.js?v=community-v1';
+import {createCommunityInstallation} from './community-installation.js?v=community-v1';
+import {createSponsorBillboard} from './sponsor-billboard.js?v=sponsor-portal-v1';
+import {createAmbientMotion,installVendingMotion} from './ambient-motion.js?v=ambient-v1';
 
 const zh = new URLSearchParams(location.search).get('lang') === 'zh-Hans' || location.pathname.startsWith('/zh-Hans/');
 const copy = {
   badge: ['LIVE ASSET PREVIEW', '真实资产预览'], overview: ['Overview', '整体视角'], front: ['Front view', '正面视角'],
+  projects: ['Project vending machine', '项目贩卖机'],
+  rear: ['Community wall', '共创后墙'], leaveTrace: ['Leave a trace', '到此一游'],
+  sponsors: ['Partners', '赞助伙伴'],
   interior: ['Workshop', '室内工具'], supportMissing: ['Its supporting surface is unavailable; this device is temporarily hidden.', '支撑面暂不可用，此设备暂时隐藏。'],
-  wave: ['Beckon', '招财猫招手'], effects: ['Local effects', '局部特效'], shutter: ['Garage door', '卷帘门'], assets: ['Assets', '资产清单'],
+  wave: ['Beckon', '招财猫招手'], effects: ['Ambient motion', '环境动态'], shutter: ['Garage door', '卷帘门'], assets: ['Assets', '资产清单'],
   retryFailed: ['Retry failed loads', '重试加载失败项'], hint: ['Drag to orbit · Pinch to zoom\nClick an object to explore', '拖动旋转 · 双指缩放\n点选模型查看详情'],
   assetTitle: ['Independent assets', '独立资产'], unavailable: ['The garage could not open', '车库预览暂时无法打开'], reload: ['Reload preview', '重新加载预览'],
   pending: ['In production', '制作中'], loading: ['Loading', '加载中'], ready: ['Real GLB loaded', '真实 GLB 已加载'], error: ['Unavailable', '暂不可用'],
@@ -28,6 +38,9 @@ const copy = {
   waveMissing: ['Waiting for the cat’s authored beckoning clip.', '等待招财猫的本地招手动画片段。'],
   shutterPending: ['The independent shutter is waiting for its slat animation.', '独立卷帘门正在接入分片开关动画。'],
   shutterOpen: ['Open garage door', '打开卷帘门'], shutterClose: ['Close garage door', '关闭卷帘门'],
+    shutterPause: ['Pause door', '暂停卷帘门'], shutterResume: ['Resume door', '继续卷帘门'],
+    shutterOpened: ['Door open', '卷帘门已打开'], shutterClosed: ['Door closed', '卷帘门已关闭'],
+    shutterOpening: ['Opening', '正在开门'], shutterClosing: ['Closing', '正在关门'], shutterPaused: ['Paused', '卷帘门已暂停'],
   reduced: ['Effects are off because reduced motion is enabled.', '已根据减少动态效果偏好关闭特效。'],
   webgl: ['WebGL is unavailable. Try a browser with hardware acceleration enabled.', 'WebGL 不可用，请使用支持硬件加速的浏览器。'],
   context: ['The graphics context was lost. Reload this preview to recover.', '图形上下文已丢失，请重新加载预览。'],
@@ -40,6 +53,15 @@ $('stage').setAttribute('aria-label', zh ? '可交互车库。方向键旋转，
 $('cat-wave').title = t('waveMissing');
 $('shutter').title = t('shutterPending');
 const stage = $('stage');
+const projectVending = createProjectVending(zh);
+const communityWall = createCommunityWall(zh, () => refreshCommunityInstallation());
+$('rear').addEventListener('click',()=>{closeInfo();fitCamera('rear');});
+$('leave-trace').addEventListener('click',()=>openCommunityWall());
+function openCommunityWall(kind){closeInfo();toggleAssetPanel(false);communityWall.open(kind);}
+if (new URLSearchParams(location.search).get('view') === 'projects') projectVending.open();
+function openProjectVending() { closeInfo(); toggleAssetPanel(false); projectVending.open(); }
+$('projects').addEventListener('click',openProjectVending);
+$('sponsors').addEventListener('click',()=>{closeInfo();toggleAssetPanel(false);sponsorBillboard?.open();});
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const smallScreen = matchMedia('(max-width: 650px)');
 // Fix the texture tier for this visit so rotating a phone cannot raise its
@@ -54,9 +76,11 @@ let controls;
 let contextLost = false;
 let selectedId = null;
 let cat = null;
-let effectsEnabled = false;
+let effectsEnabled = !motion.matches;
 let waveEnabled = false;
-let framing = new URLSearchParams(location.search).get('view') === 'interior' ? 'interior' : 'overview';
+let waveRequested = !motion.matches;
+let ambientMotion = null;
+let framing = ['interior','rear'].includes(new URLSearchParams(location.search).get('view')) ? new URLSearchParams(location.search).get('view') : 'overview';
 let configurationLoaded = false;
 let frameRequested = false;
 let lastFrame = 0;
@@ -64,11 +88,14 @@ let elapsed = 0;
 let branding = null;
 let practicalLights = null;
 let plantInstances = null;
+let profileImage = null;
 let composer = null;
 let groundSupports = null;
 let workshopDetails = null;
+let communityInstallation = null;
+let sponsorBillboard = null;
 let shutter = null;
-const nominalBounds = new THREE.Box3(new THREE.Vector3(-3.1, -0.3, -1.8), new THREE.Vector3(3.1, 3.38, 2.95));
+const nominalBounds = new THREE.Box3(new THREE.Vector3(-3.1, -0.3, -1.8), new THREE.Vector3(3.4, 5.65, 2.95));
 const worldBounds = nominalBounds.clone();
 
 function displayState(entry) {
@@ -121,6 +148,7 @@ function updateRow(entry) {
   if (selectedId === entry.config.id) showInfo(entry.config.id, false);
 }
 function showInfo(id, focus = false) {
+  if (id === '05_project_vending') { openProjectVending(); return; }
   const entry = entries.get(id);
   if (!entry) return;
   selectedId = id;
@@ -179,11 +207,12 @@ function fitCamera(view = framing) {
     controls.update(); requestFrame(); return;
   }
   camera.fov = 36;
-  const size = worldBounds.getSize(new THREE.Vector3());
-  const center = worldBounds.getCenter(new THREE.Vector3());
+  const framingBounds=view==='rear'?new THREE.Box3(new THREE.Vector3(-2.45,-.25,-2.05),new THREE.Vector3(2.45,3.15,-1.35)):worldBounds;
+  const size = framingBounds.getSize(new THREE.Vector3());
+  const center = framingBounds.getCenter(new THREE.Vector3());
   const vertical = THREE.MathUtils.degToRad(camera.fov);
   const horizontal = 2 * Math.atan(Math.tan(vertical / 2) * camera.aspect);
-  const direction = (view === 'front' ? new THREE.Vector3(0, 0.09, 1) : new THREE.Vector3(0.43, 0.22, 1.3)).normalize();
+  const direction = (view==='rear'?new THREE.Vector3(0,.08,-1):view === 'front' ? new THREE.Vector3(0, 0.09, 1) : new THREE.Vector3(0.43, 0.22, 1.3)).normalize();
   const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), direction).normalize();
   const up = new THREE.Vector3().crossVectors(direction, right).normalize();
   let distance = 1;
@@ -215,16 +244,31 @@ function renderFrame(now) {
   elapsed += delta;
   if (waveEnabled && cat?.mixer) cat.mixer.update(delta);
   if (shutter?.moving) animateShutter(delta);
-  if (effectsEnabled && cat?.fx) animateEffects(elapsed);
+  for (const entry of entries.values()) entry.vendingMotion?.animate(delta, effectsEnabled);
   const cameraChanged = controls.update();
+  const ambientMoving=ambientMotion?.animate(delta,effectsEnabled&&!motion.matches,camera);
+  const marqueeMoving=sponsorBillboard?.animate(elapsed,motion.matches,camera);
   if (composer) composer.render(delta);
   else renderer.render(scene, camera);
-  if (waveEnabled || effectsEnabled || shutter?.moving || cameraChanged) requestFrame();
+  if (waveEnabled || effectsEnabled || ambientMoving || shutter?.moving || cameraChanged || marqueeMoving) requestFrame();
 }
 document.addEventListener('visibilitychange', () => { lastFrame = 0; if (!document.hidden) requestFrame(); });
 
 function shutterSnapshot() {
   return shutter ? { progress: shutter.progress, target: shutter.target, moving: shutter.moving, slatCount: shutter.slats.length, top: shutter.spec.top, radius: shutter.spec.radius, travel: shutter.spec.travel } : null;
+}
+function updateShutterControls() {
+  if (!shutter) return;
+  const percent = Math.round(shutter.progress * 100);
+  const paused = !shutter.moving && shutter.progress > 0.0001 && shutter.progress < 0.9999;
+  const state = shutter.moving ? t(shutter.target ? 'shutterOpening' : 'shutterClosing') : paused ? t('shutterPaused') : t(shutter.progress > .5 ? 'shutterOpened' : 'shutterClosed');
+  $('shutter-status').textContent = shutter.moving || paused ? `${state} · ${percent}% ${zh ? '开启' : 'open'}` : state;
+  $('shutter-status').dataset.state = shutter.moving ? (shutter.target ? 'opening' : 'closing') : paused ? 'paused' : shutter.progress > .5 ? 'open' : 'closed';
+  $('shutter-pause').disabled = !shutter.moving && !paused;
+  $('shutter-pause').textContent = t(paused ? 'shutterResume' : 'shutterPause');
+  $('shutter').setAttribute('aria-pressed', String(shutter.target === 1));
+  $('shutter').textContent = t(shutter.target === 1 ? 'shutterClose' : 'shutterOpen');
+  branding?.userData.updateDoorPlaque?.(shutter.target);
 }
 function applyShutter(progress) {
   if (!shutter) return;
@@ -239,7 +283,9 @@ function applyShutter(progress) {
     slat.node.quaternion.copy(slat.originalQuaternion).multiply(rotation.setFromAxisAngle(axis, -theta));
   }
   shutter.entry.mount.updateMatrixWorld(true);
+  branding?.userData.syncShutterGraffiti?.();
   $('shutter').dataset.progress = shutter.progress.toFixed(4);
+  updateShutterControls();
   if (window.techlandGarageState) window.techlandGarageState.shutter = shutterSnapshot();
 }
 function setShutterOpen(open) {
@@ -247,13 +293,19 @@ function setShutterOpen(open) {
   shutter.target = open ? 1 : 0;
   shutter.start = shutter.progress;
   shutter.elapsed = 0;
-  shutter.duration = 2.2 * Math.abs(shutter.target - shutter.start);
+  shutter.duration = 3.2 * Math.abs(shutter.target - shutter.start);
   shutter.moving = !motion.matches && shutter.duration > 0.001;
-  $('shutter').setAttribute('aria-pressed', String(open));
-  $('shutter').textContent = t(open ? 'shutterClose' : 'shutterOpen');
+  updateShutterControls();
   if (!shutter.moving) applyShutter(shutter.target);
   notifyStatus(); requestFrame();
   return true;
+}
+function toggleShutterFromScene() {
+  if (!shutter) return;
+  closeInfo();
+  // A closing door should be visible from outside, not behind the workshop camera.
+  if (framing === 'interior') fitCamera('front');
+  setShutterOpen(shutter.target !== 1);
 }
 function animateShutter(delta) {
   shutter.elapsed += delta;
@@ -280,16 +332,22 @@ function configureShutter(entry) {
     slats.push({ node, closedX, closedY, closedZ, originalQuaternion: node.quaternion.clone() });
   });
   if (slats.length !== spec.slatCount) throw new Error('The real shutter slat count does not match its metadata.');
-  shutter = { entry, spec, slats, progress: 1, target: 1, moving: false, elapsed: 0, duration: 0, start: 1 };
+  const initial = framing === 'interior' ? 1 : 0;
+  shutter = { entry, spec, slats, progress: initial, target: initial, moving: false, elapsed: 0, duration: 0, start: initial };
   entry.shutter = shutter;
-  // Present the workshop open immediately. There is no autoplay animation.
-  applyShutter(1);
+  // Start closed so the door and its opening action are discoverable. Direct
+  // workshop links remain open; animation is always initiated by the visitor.
+  applyShutter(initial);
   $('shutter').disabled = false;
   $('shutter').title = zh ? `真实 ${slats.length} 片卷帘门` : `${slats.length} real articulated shutter slats`;
-  $('shutter').textContent = t('shutterClose');
-  $('shutter').setAttribute('aria-pressed', 'true');
+  updateShutterControls();
 }
-$('shutter').addEventListener('click', () => setShutterOpen(shutter?.target !== 1));
+$('shutter').addEventListener('click', toggleShutterFromScene);
+$('shutter-pause').addEventListener('click', () => {
+  if (!shutter) return;
+  if (shutter.moving) { shutter.moving = false; updateShutterControls(); notifyStatus(); requestFrame(); }
+  else setShutterOpen(shutter.target === 1);
+});
 $('interior').addEventListener('click', () => { closeInfo(); if (shutter) setShutterOpen(true); fitCamera('interior'); });
 
 function refreshArtDirection() {
@@ -305,9 +363,9 @@ function refreshArtDirection() {
     if (entry.config.id !== '13_street_base') worldBounds.union(entry.bounds);
     entry.normalization.displaySize = entry.bounds.getSize(new THREE.Vector3()).toArray();
     if (entry.lamp) {
-      entry.lamp.position.copy(entry.bounds.getCenter(new THREE.Vector3()));
-      entry.lamp.position.y = entry.bounds.max.y - 0.1;
-      entry.lamp.position.z += 0.1;
+      entry.lamp.position.copy(entry.mount.localToWorld(new THREE.Vector3(...entry.config.lightAnchor)));
+      const door = entries.get('02_roller_shutter');
+      entry.lamp.target.position.set(.3, (door?.mount.position.y || 0) + 1.1, 1.1);
     }
     updateRow(entry);
   }
@@ -319,7 +377,7 @@ function refreshArtDirection() {
   scene.add(plantInstances);
   const plant = entries.get('12_plants_grass');
   if (plant?.state === 'ready') {
-    const placements = [[-1.85, 0, 2.05, 0.55, 'street']];
+    const placements = [[-2.35, 0, 2.10, 0.45, 'street']];
     const shell = entries.get('01_garage_shell');
     if (shell?.state === 'ready') placements.push([-0.6, shell.mount.position.y + 2.925, -0.1, 0.4, 'roof'], [0.9, shell.mount.position.y + 2.841, 0.2, 0.4, 'roof']);
     for (const [index, [x, y, z, scale, support]] of placements.entries()) {
@@ -331,9 +389,11 @@ function refreshArtDirection() {
       instance.userData.groundContact = grounded.settleInstance(instance, support, `plant-instance-${index}`);
     }
   }
-  branding = createGarageGraphics(THREE, scene, entries);
+  branding = createGarageGraphics(THREE, scene, entries, profileImage);
   workshopDetails = createWorkshopDetails(THREE, scene, entries);
+  refreshCommunityInstallation();
   practicalLights = addPracticalLights(THREE, scene, entries);
+  ambientMotion?.rebuild(entries);
   preparePreviewTextures(branding);
   preparePreviewTextures(workshopDetails);
   $('asset-panel').dataset.groundContact = JSON.stringify(grounded.report);
@@ -343,45 +403,23 @@ function refreshArtDirection() {
   requestFrame();
 }
 
+function refreshCommunityInstallation(){
+  if(!scene)return;
+  if(communityInstallation){communityInstallation.removeFromParent();disposeObject(communityInstallation);}
+  communityInstallation=createCommunityInstallation(THREE,entries,communityWall.getEntries(),zh,requestFrame);
+  if(communityInstallation)scene.add(communityInstallation);
+  requestFrame();
+}
+
 function createVendingBranding(entry) {
-  // These are accurate, authored labels applied after generation. The Tripo
-  // vending-machine geometry and its product display remain unchanged.
+  // Only the header receives an authored neon marquee. Keep the generated
+  // cabinet, lower-front artwork and product display exposed.
   const size = entry.bounds.getSize(new THREE.Vector3());
   const center = entry.bounds.getCenter(new THREE.Vector3());
   const labels = new THREE.Group();
-  labels.name = 'VENDING_ACCURATE_BRAND_LABELS';
+  labels.name = 'VENDING_NEON_HEADER';
   entry.mount.add(labels);
   entry.postBranding = labels;
-  const makeTexture = (lines, vertical = false, accent = '#83e6ef', square = false) => {
-    const canvas = document.createElement('canvas');
-    canvas.width = vertical || square ? 768 : 1536;
-    canvas.height = square ? 768 : vertical ? 1536 : 384;
-    const context = canvas.getContext('2d');
-    const gradient = context.createLinearGradient(0, 0, canvas.width, canvas.height);
-    gradient.addColorStop(0, '#271124'); gradient.addColorStop(1, '#42112d');
-    context.fillStyle = gradient; context.fillRect(0, 0, canvas.width, canvas.height);
-    context.strokeStyle = '#b83275'; context.lineWidth = 12;
-    context.strokeRect(12, 12, canvas.width - 24, canvas.height - 24);
-    context.textAlign = 'center'; context.textBaseline = 'middle';
-    const rowHeight = canvas.height / (lines.length + 1);
-    lines.forEach((line, index) => {
-      context.fillStyle = index === lines.length - 1 && vertical ? '#ffc69b' : accent;
-      context.font = `700 ${square ? 104 : vertical ? 102 : lines.length > 1 ? 100 : 172}px Arial, sans-serif`;
-      context.fillText(line, canvas.width / 2, rowHeight * (index + 1), canvas.width - 100);
-    });
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = Math.min(renderer.capabilities.getMaxAnisotropy(), 8);
-    return texture;
-  };
-  const addLabel = (name, width, height, position, rotationY, texture) => {
-    const label = new THREE.Mesh(new THREE.PlaneGeometry(width, height), new THREE.MeshBasicMaterial({ map: texture, toneMapped: false, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -1 }));
-    label.name = name;
-    label.position.copy(entry.mount.worldToLocal(position));
-    label.rotation.y = rotationY;
-    label.userData.assetId = entry.config.id;
-    labels.add(label);
-  };
   const frontZ = entry.bounds.max.z;
   const decalAnchors = [];
   const attachToSurface = (position, rotationY) => {
@@ -393,22 +431,46 @@ function createVendingBranding(entry) {
     decalAnchors.push({position: anchor.toArray(), sourceSurface: hit.point.toArray(), offset: 0.002});
     return anchor;
   };
-  const addAttachedLabel = (name, width, height, position, rotationY, texture) => {
-    const anchor = attachToSurface(position, rotationY);
-    if (anchor) addLabel(name, width, height, anchor, rotationY, texture);
-    else texture.dispose();
-  };
-  addAttachedLabel('VENDING_HEADER_PROJECTS', size.x * 0.86, size.y * 0.115,
-    new THREE.Vector3(center.x, entry.bounds.min.y + size.y * 0.903, frontZ), 0, makeTexture(['PROJECTS']));
-  addAttachedLabel('VENDING_FRONT_BRAND', size.x * 0.48, size.y * 0.235,
-    new THREE.Vector3(center.x + size.x * 0.245, entry.bounds.min.y + size.y * 0.155, frontZ), 0, makeTexture(['Peter Pan’s', 'Techland'], false, '#ffd3e8', true));
-  const sideTexture = makeTexture(['Peter Pan’s', 'Techland', 'PROJECTS'], true, '#f7b5d9');
-  for (const side of [-1, 1]) {
-    addAttachedLabel(side > 0 ? 'VENDING_RIGHT_BRAND' : 'VENDING_LEFT_BRAND', size.z * 0.79, size.y * 0.73,
-      new THREE.Vector3(center.x + side * (size.x / 2 + 0.005), entry.bounds.min.y + size.y * 0.51, center.z), side * Math.PI / 2, sideTexture);
+  const headerWidth=size.x*.86,headerHeight=size.y*.115;
+  const headerCenter=new THREE.Vector3(center.x,entry.bounds.min.y+size.y*.903,frontZ);
+  // Seat the shallow marquee beyond the highest sampled header face. The old
+  // centre-only decal clipped through the irregular original face at its ends.
+  const headerContacts=[];
+  for(const x of [-.45,0,.45])for(const y of [-.36,0,.36]){
+    const sample=headerCenter.clone().add(new THREE.Vector3(x*headerWidth,y*headerHeight,0));
+    const contact=attachToSurface(sample,0);if(contact)headerContacts.push(contact);
   }
+  if(headerContacts.length>=3){
+    // Refinish the existing header faces, rather than place a rectangular
+    // backing over them. Triangle-clipped paint follows the original housing.
+    const low=Math.min(...headerContacts.map(p=>p.z))-.002;
+    const high=Math.max(...headerContacts.map(p=>p.z))-.002;
+    const paintCenter=headerCenter.clone();paintCenter.z=(low+high)/2;
+    const paintMaterial=new THREE.MeshStandardMaterial({color:'#17121b',roughness:.38,metalness:.42,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-3});
+    const localInverse=entry.mount.matrixWorld.clone().invert();
+    entry.model.traverse(mesh=>{
+      if(!mesh.isMesh)return;
+      const geo=new DecalGeometry(mesh,paintCenter,new THREE.Euler(),new THREE.Vector3(headerWidth,headerHeight,high-low+.024));
+      const points=geo.attributes.position,front=[];
+      for(let i=0;i<points.count;i+=3){
+        const ax=points.getX(i+1)-points.getX(i),ay=points.getY(i+1)-points.getY(i);
+        const bx=points.getX(i+2)-points.getX(i),by=points.getY(i+2)-points.getY(i);
+        if(ax*by-ay*bx>1e-10)front.push(i,i+1,i+2);
+      }
+      if(!front.length){geo.dispose();return;}geo.setIndex(front);geo.applyMatrix4(localInverse);
+      const paint=new THREE.Mesh(geo,paintMaterial);paint.name='VENDING_NATIVE_HEADER_FINISH';paint.userData={assetId:entry.config.id,locallyAuthored:true,surfacePaint:true};labels.add(paint);
+    });
+    headerCenter.z=Math.max(...headerContacts.map(p=>p.z))+.003;
+    const marquee=new THREE.Group();marquee.name='VENDING_HEADER_PROJECTS';
+    marquee.position.copy(entry.mount.worldToLocal(headerCenter));labels.add(marquee);
+    addVendingNeon(marquee,headerWidth*.98,headerHeight*.96);
+    marquee.traverse(object=>{object.userData={...object.userData,assetId:entry.config.id,locallyAuthored:true};});
+    marquee.userData.surfaceContacts=headerContacts.map(p=>p.toArray());
+  }
+  // Keep the original side graffiti visible. Surface repairs belong in the
+  // source mesh; large floating brand panels must not conceal its texture.
   preparePreviewTextures(labels);
-  entry.branding = { authoredPostprocess: true, text: ['Peter Pan’s Techland', 'PROJECTS'], regions: ['front-header', 'front-lower-right', 'left-side', 'right-side'], decalAnchors };
+  entry.branding = { authoredPostprocess: true, text: ['PROJECTS'], regions: ['front-header'], decalAnchors };
 }
 
 function createEffects(entry) {
@@ -454,20 +516,23 @@ function animateEffects(time) {
   arc.needsUpdate = true;
 }
 function setEffects(enabled) {
-  effectsEnabled = Boolean(enabled && cat?.fx && !motion.matches);
-  if (cat?.fx) cat.fx.group.visible = effectsEnabled;
+  effectsEnabled = Boolean(enabled && !motion.matches);
+  if (cat?.fx) cat.fx.group.visible = false;
   $('effects').setAttribute('aria-pressed', String(effectsEnabled));
-  $('effects').disabled = !cat?.fx || motion.matches;
+  $('effects').disabled = motion.matches;
   $('effects').title = motion.matches ? t('reduced') : '';
   notifyStatus(); requestFrame();
 }
 function setWave(enabled) {
-  waveEnabled = Boolean(enabled && cat?.action);
+  waveRequested = Boolean(enabled && !motion.matches);
+  waveEnabled = Boolean(waveRequested && cat?.action);
   if (cat?.action) {
     if (waveEnabled) cat.action.reset().play();
     else { cat.mixer.stopAllAction(); cat.mixer.update(0); }
   }
   $('cat-wave').setAttribute('aria-pressed', String(waveEnabled));
+  $('cat-wave').disabled = !cat?.action || motion.matches;
+  $('cat-wave').title = motion.matches ? t('reduced') : cat?.action ? '' : t('waveMissing');
   notifyStatus(); requestFrame();
 }
 $('effects').addEventListener('click', () => setEffects(!effectsEnabled));
@@ -475,6 +540,7 @@ $('cat-wave').addEventListener('click', () => setWave(!waveEnabled));
 motion.addEventListener('change', () => {
   if (controls) controls.enableDamping = !motion.matches;
   if (motion.matches) setWave(false);
+  else $('cat-wave').disabled = !cat?.action;
   setEffects(false);
   if (motion.matches && shutter) setShutterOpen(shutter.target === 1);
 });
@@ -515,8 +581,9 @@ function preparePreviewTextures(root) {
     const sourceWidth = image.naturalWidth || image.width;
     const sourceHeight = image.naturalHeight || image.height;
     if (!Number.isFinite(sourceWidth) || !Number.isFinite(sourceHeight) || sourceWidth <= 0 || sourceHeight <= 0) throw new Error('A texture has invalid image dimensions.');
-    if (Math.max(sourceWidth, sourceHeight) <= textureLimit) continue;
-    const scale = textureLimit / Math.max(sourceWidth, sourceHeight);
+    const imageLimit = Math.max(textureLimit, ...textures.map(texture => Math.min(texture.userData?.previewTextureLimit || textureLimit, renderer.capabilities.maxTextureSize)));
+    if (Math.max(sourceWidth, sourceHeight) <= imageLimit) continue;
+    const scale = imageLimit / Math.max(sourceWidth, sourceHeight);
     const canvas = document.createElement('canvas');
     canvas.width = Math.max(1, Math.round(sourceWidth * scale));
     canvas.height = Math.max(1, Math.round(sourceHeight * scale));
@@ -589,7 +656,9 @@ async function loadAsset(entry) {
     const manager = new THREE.LoadingManager();
     const failedResources = [];
     manager.onError = (url) => failedResources.push(url);
-    const request = new GLTFLoader(manager).loadAsync(allowedModelURL(entry.config.file));
+    const modelURL = new URL(allowedModelURL(entry.config.file));
+    if (entry.config.modelRevision) modelURL.searchParams.set('v', entry.config.modelRevision);
+    const request = new GLTFLoader(manager).loadAsync(modelURL.href);
     request.then((result) => { if (expired) disposeObject(result.scene); }, () => {});
     const gltf = await Promise.race([request, new Promise((_, reject) => { timeout = setTimeout(() => { expired = true; reject(new Error('Model loading timed out.')); }, 90000); })]);
     clearTimeout(timeout);
@@ -680,7 +749,14 @@ async function loadAsset(entry) {
       scene.add(instanceMount);
       entry.instances.push({config, mount: instanceMount, model: instanceMount, state: 'ready', normalization: {...entry.normalization}});
     }
-    if (/project_vending/i.test(entry.config.id)) createVendingBranding(entry);
+    if (/project_vending/i.test(entry.config.id)) {
+      createVendingBranding(entry);
+      try {
+        const response=await fetch(new URL('./vending-motion.json',import.meta.url));
+        if(!response.ok)throw Error('Missing product partition');
+        entry.vendingMotion=installVendingMotion(model,await response.json());
+      } catch(error) { console.warn('Vending products remain static:',error); }
+    }
     if (/roller_shutter/i.test(entry.config.id)) configureShutter(entry);
     if (/lucky_cat/i.test(entry.config.id)) {
       const clip = gltf.animations.find((animation) => animation.name === 'Techland_Beckon');
@@ -689,12 +765,15 @@ async function loadAsset(entry) {
       cat.fx = createEffects(entry);
       $('cat-wave').disabled = !clip;
       $('cat-wave').title = clip ? '' : t('waveMissing');
-      setEffects(false);
+      if(cat.action)cat.action.timeScale=.72;
+      setWave(waveRequested);
+      setEffects(effectsEnabled);
     }
     if (/street_lamp/i.test(entry.config.id)) {
-      const lamp = new THREE.PointLight('#ffc17a', 10, 5, 2);
-      lamp.position.set(entry.bounds.getCenter(new THREE.Vector3()).x, entry.bounds.max.y - 0.1, entry.bounds.getCenter(new THREE.Vector3()).z + 0.1);
-      scene.add(lamp);
+      const lamp = new THREE.SpotLight('#ffc17a', 14, 6, Math.PI / 4, .65, 2);
+      lamp.position.copy(mount.localToWorld(new THREE.Vector3(...entry.config.lightAnchor)));
+      lamp.target.position.set(.3, 1.1, 1.1);
+      scene.add(lamp, lamp.target);
       entry.lamp = lamp;
     }
     fitCamera();
@@ -709,6 +788,7 @@ async function loadAsset(entry) {
     if (shutter?.entry === entry) {
       shutter = null; entry.shutter = null;
       $('shutter').disabled = true; $('shutter').setAttribute('aria-pressed', 'false');
+      $('shutter-pause').disabled = true; $('shutter-status').textContent = t('shutterPending');
       $('shutter').textContent = t('shutter'); $('shutter').title = t('shutterPending');
     }
     if (branding?.userData.assetId === entry.config.id) {
@@ -722,7 +802,7 @@ async function loadAsset(entry) {
       $('cat-wave').disabled = true; $('cat-wave').setAttribute('aria-pressed', 'false');
       $('effects').disabled = true; $('effects').setAttribute('aria-pressed', 'false');
     }
-    entry.lamp?.removeFromParent(); entry.lamp = null;
+    entry.lamp?.target?.removeFromParent(); entry.lamp?.removeFromParent(); entry.lamp = null;
     entry.mount = null; entry.model = null; entry.animations = null; entry.bounds = null; entry.normalization = null;
     worldBounds.copy(nominalBounds);
     for (const other of entries.values()) if (other.state === 'ready' && other.bounds) worldBounds.union(other.bounds);
@@ -777,6 +857,14 @@ function setupPicking() {
   const pointer = new THREE.Vector2();
   let down = null;
   const activePointers = new Set();
+  stage.addEventListener('pointerleave',()=>{stage.style.cursor='';});
+  stage.addEventListener('pointermove',event=>{
+    if(down||event.pointerType==='touch'||!sponsorBillboard)return;
+    const rect=renderer.domElement.getBoundingClientRect();
+    pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);
+    raycaster.setFromCamera(pointer,camera);
+    stage.style.cursor=raycaster.intersectObject(sponsorBillboard.group,true).length?'pointer':'';
+  });
   stage.addEventListener('pointerdown', (event) => {
     activePointers.add(event.pointerId);
     down = activePointers.size === 1 && event.button === 0 ? { x: event.clientX, y: event.clientY, id: event.pointerId, moved: false } : null;
@@ -794,8 +882,13 @@ function setupPicking() {
     const targets = [...entries.values()].filter((entry) => entry.state === 'ready' && entry.mount.visible).flatMap((entry) => [entry.mount, ...(entry.instances || []).filter((instance) => instance.mount.visible).map((instance) => instance.mount)]);
     if (branding) targets.push(branding);
     if (plantInstances) targets.push(plantInstances);
+    if (communityInstallation) targets.push(communityInstallation);
+    if (sponsorBillboard) targets.push(sponsorBillboard.group);
     const hit = raycaster.intersectObjects(targets, true).find((intersection) => intersection.object.userData.assetId);
-    if (hit) showInfo(hit.object.userData.assetId); else closeInfo();
+    if(hit?.object.userData.sponsorBoard)sponsorBillboard.activate(hit.object.userData);
+    else if(hit?.object.userData.communityWall)openCommunityWall(hit.object.userData.wallKind);
+    else if (hit?.object.userData.assetId === '02_roller_shutter') toggleShutterFromScene();
+    else if (hit) showInfo(hit.object.userData.assetId); else closeInfo();
   });
   stage.addEventListener('keydown', (event) => {
     const offset = camera.position.clone().sub(controls.target);
@@ -831,6 +924,7 @@ async function start() {
   stage.append(renderer.domElement);
   renderer.domElement.addEventListener('webglcontextlost', (event) => { event.preventDefault(); contextLost = true; fatal(t('context')); });
   scene = new THREE.Scene();
+  ambientMotion = createAmbientMotion(scene);
   scene.background = new THREE.Color('#070b14');
   scene.fog = new THREE.FogExp2('#070b14', 0.025);
   const studio = new RoomEnvironment();
@@ -861,11 +955,20 @@ async function start() {
   };
   new ResizeObserver(resize).observe(stage);
   resize(); setupPicking(); requestFrame();
+  setEffects(effectsEnabled);
   window.techlandGarage = {
     getAsset: (id) => entries.get(id), getCounts: statusCounts,
     fitCamera, setWave, setEffects, setShutterOpen,
     get configurationLoaded() { return configurationLoaded; },
   };
+  try {
+    sponsorBillboard=await createSponsorBillboard(THREE,zh,requestFrame);
+    scene.add(sponsorBillboard.group);requestFrame();
+    profileImage = await new THREE.ImageLoader().loadAsync(new URL('../img/logo.jpg', import.meta.url).href);
+  } catch (error) {
+    // A missing portrait must leave the original neon frame usable.
+    console.warn('Garage profile image unavailable:', error);
+  }
   await loadConfiguration();
 }
 start().catch((error) => { console.error(error); fatal(error.message || String(error)); });

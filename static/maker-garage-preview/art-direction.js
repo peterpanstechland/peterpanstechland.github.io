@@ -1,9 +1,11 @@
+import {addNeonLetters,addShutterGraffiti} from './neon-shutter.js?v=neon-design-v2';
+import {addCityNeon} from './neon-lettering.js?v=city-neon-v1';
 /**
  * Locally authored mounted signs for the existing, real Tripo garage.
  * Typography and sign hardware are post-production additions, not Tripo assets.
  * No remote fonts, images, dependencies, lighting, or animation are required.
  */
-export function createGarageGraphics(THREE, scene, entries) {
+export function createGarageGraphics(THREE, scene, entries, profileImage = null) {
   const groupName = 'TECHLAND_LOCAL_GARAGE_GRAPHICS';
   const existing = scene.getObjectByName(groupName);
   if (existing) return existing;
@@ -26,7 +28,7 @@ export function createGarageGraphics(THREE, scene, entries) {
   }
 
   const mobile = typeof matchMedia === 'function' && matchMedia('(max-width: 650px)').matches;
-  const maximumTextureSize = mobile ? 512 : 1024;
+  const maximumTextureSize = mobile ? 1024 : 2048;
   const bounds = shell.bounds;
   const center = bounds.getCenter(new THREE.Vector3());
   const groundY = bounds.min.y;
@@ -56,8 +58,8 @@ export function createGarageGraphics(THREE, scene, entries) {
   function makeGraphic(name, canvas, width, height, position, content, parent = group) {
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = mobile ? 2 : 4;
-    texture.userData = { ...attribution, content, pixelSize: [canvas.width, canvas.height] };
+    texture.anisotropy = mobile ? 4 : 8;
+    texture.userData = { ...attribution, content, pixelSize: [canvas.width, canvas.height], previewTextureLimit: maximumTextureSize };
     const material = new THREE.MeshBasicMaterial({
       map: texture,
       transparent: true,
@@ -118,15 +120,22 @@ export function createGarageGraphics(THREE, scene, entries) {
     const shape = new THREE.Shape();
     const outline = [[-width / 2 + cut, -height / 2], [width / 2 - cut, -height / 2], [width / 2, -height / 2 + cut], [width / 2, height / 2 - cut], [width / 2 - cut, height / 2], [-width / 2 + cut, height / 2], [-width / 2, height / 2 - cut], [-width / 2, -height / 2 + cut]];
     outline.forEach(([x, y], index) => index ? shape.lineTo(x, y) : shape.moveTo(x, y)); shape.closePath();
-    const casing = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: 0.004, bevelSize: 0.004, bevelSegments: 1, steps: 1 });
+    const casing = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelThickness: 0.004, bevelSize: 0.004, bevelSegments: 3, steps: 1 });
     casing.translate(0, 0, -depth / 2);
     hardware(`${name}_METAL_CASING`, casing, metal, new THREE.Vector3(), sign);
     for (const side of [-1, 1]) {
       const z = side * (depth / 2 + 0.004);
-      for (const edge of [-1, 1]) {
-        box(`${name}_FRAME_HORIZONTAL_${side}_${edge}`, [width - 2 * cut, 0.018, 0.012], [0, edge * (height / 2 - 0.018), z], edgeMetal, sign);
-        box(`${name}_FRAME_VERTICAL_${side}_${edge}`, [0.018, height - 2 * cut, 0.012], [edge * (width / 2 - 0.018), 0, z], edgeMetal, sign);
-      }
+      // One closed chamfered bezel: separate edge bars left open corner seams.
+      const bezel = new THREE.Shape();
+      const inset = 0.010, band = 0.014;
+      const rim = outline.map(([x,y]) => [x * (width - 2 * inset) / width, y * (height - 2 * inset) / height]);
+      rim.forEach(([x,y],i)=>i ? bezel.lineTo(x,y) : bezel.moveTo(x,y)); bezel.closePath();
+      const hole = new THREE.Path();
+      const inner = outline.map(([x,y]) => [x * (width - 2 * (inset + band)) / width, y * (height - 2 * (inset + band)) / height]).reverse();
+      inner.forEach(([x,y],i)=>i ? hole.lineTo(x,y) : hole.moveTo(x,y));hole.closePath();bezel.holes.push(hole);
+      const rimGeometry = new THREE.ExtrudeGeometry(bezel, {depth:0.007,bevelEnabled:true,bevelThickness:0.0015,bevelSize:0.0015,bevelSegments:2,steps:1});
+      rimGeometry.translate(0,0,-0.0035);
+      hardware(`${name}_CONTINUOUS_BEZEL_${side}`,rimGeometry,edgeMetal,new THREE.Vector3(0,0,z),sign);
       for (const x of [-width / 2 + 0.045, width / 2 - 0.045]) for (const y of [-height / 2 + 0.045, height / 2 - 0.045]) {
         const tip = side * (depth / 2 + 0.011);
         rod(`${name}_BOLT_${side}_${x}_${y}`, new THREE.Vector3(x, y, tip - 0.004), new THREE.Vector3(x, y, tip + 0.004), 0.009, boltMetal, sign);
@@ -283,57 +292,41 @@ export function createGarageGraphics(THREE, scene, entries) {
 
   // The 55 mm metal tray sits just in front of the true upper wall. Four short
   // standoffs terminate inside actual ray-hit fascia faces, not empty bounds.
-  const brandWidth = 3.1;
-  const brandHeight = 0.80;
+  // Clear the portrait at x≈-1.28 and the original right lamp at x≈1.45.
+  const brandWidth = 2.60;
+  const brandHeight = 0.72;
   const brandDepth = 0.055;
   const fasciaFrontZ = Math.max(shellCenterZ + 1.14, ...fasciaAnchors.map((point) => point.z));
-  const brandPosition = new THREE.Vector3(center.x + 0.15, groundY + 2.96, fasciaFrontZ + 0.065 + brandDepth / 2);
+  const brandPosition = new THREE.Vector3(center.x + 0.10, groundY + 2.96, fasciaFrontZ + 0.065 + brandDepth / 2);
   if (fasciaAnchors.length >= 2) {
     const brandCase = signCase('LOCAL_TECHLAND_BOLTED_SIGN', brandWidth, brandHeight, brandDepth, brandPosition);
-    const brandMesh = makeGraphic('LOCAL_TECHLAND_GRAFFITI_LETTERING', brand.canvas, brandWidth - 0.055, brandHeight - 0.055,
-      new THREE.Vector3(0, 0, brandDepth / 2 + 0.006), ['PETER PAN’S', 'TECHLAND'], brandCase);
-    brandMesh.userData.letteringMethod = 'Original per-letter Path2D silhouettes; no font-rendered brand glyphs';
+    addNeonLetters(brandCase,brandDepth/2+.027);
     for (const [index, anchor] of fasciaAnchors.entries()) {
       const end = new THREE.Vector3(anchor.x, anchor.y, brandPosition.z - brandDepth / 2 + 0.008);
       const embeddedStart = anchor.clone(); embeddedStart.z -= 0.014;
       rod(`LOCAL_BRAND_WALL_STANDOFF_${index}`, embeddedStart, end, 0.018);
       box(`LOCAL_BRAND_WALL_FOOT_${index}`, [0.12, 0.10, 0.025], [anchor.x, anchor.y, anchor.z + 0.003], edgeMetal);
-      // Lower wall anchors join visible vertical rails; the rails overlap the
-      // tray even when an anchor is just below the lettering's lower edge.
-      box(`LOCAL_BRAND_REAR_RAIL_${index}`, [0.055, 0.58, 0.032], [anchor.x, groundY + 2.76, end.z], metal);
+      // Keep each rail inside the tray; the old fixed rails dangled below it.
+      box(`LOCAL_BRAND_REAR_RAIL_${index}`, [0.055, 0.24, 0.032], [anchor.x, anchor.y + 0.02, end.z], metal);
     }
     brandCase.userData.mounting = { method: 'Four ray-sampled fascia contacts and rear rails', contactsWorld: fasciaAnchors.map((point) => point.toArray()) };
   }
 
-  const city = canvasWithLogicalSize(512, 768, maximumTextureSize);
-  const panel = city.context;
-  panel.fillStyle = '#36212f'; panel.fillRect(0, 0, 512, 768);
-  panel.strokeStyle = '#f197a9'; panel.lineWidth = 5;
-  panel.strokeRect(19, 19, 474, 730);
-  panel.strokeStyle = '#8b506b'; panel.lineWidth = 2;
-  panel.strokeRect(31, 31, 450, 706);
-  panel.textAlign = 'center'; panel.textBaseline = 'middle';
-  panel.font = '700 255px "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif';
-  panel.fillStyle = '#fff7e8';
-  panel.fillText('深', 256, 218);
-  panel.fillText('圳', 256, 492);
-  panel.font = '700 44px Arial, sans-serif'; panel.fillStyle = '#ffd5c9';
-  panel.fillText('SHENZHEN', 256, 679, 398);
-
   // The source GLB contains the old orange, misspelled plaque on its left side:
   // x=-1.660..-1.586, y=1.44..2.30, z=.23...78 in the fitted shell before its
   // ground offset. This removable metal sleeve encloses that actual plaque.
-  // Its two independent prints face opposite ways; neither uses DoubleSide or
+  // Its two independent lightbox faces face opposite ways; neither uses DoubleSide or
   // mirrored lettering. The inherited original plaque/mount remains unchanged.
   const cityPosition = new THREE.Vector3(center.x - 1.625, groundY + 1.88, shellCenterZ + 0.505);
   const cityWidth = 0.64, cityHeight = 1.00, cityDepth = 0.16;
   const cityCase = signCase('LOCAL_SHENZHEN_METAL_SIGN', cityWidth, cityHeight, cityDepth, cityPosition, -Math.PI / 2);
   for (const side of [1, -1]) {
-    const cityFace = makeGraphic(`LOCAL_VERTICAL_SHENZHEN_SIGN_${side === 1 ? 'OUTER' : 'INNER'}`, city.canvas,
-      cityWidth - 0.055, cityHeight - 0.055, new THREE.Vector3(0, 0, side * (cityDepth / 2 + 0.006)), ['深圳', 'SHENZHEN'], cityCase);
-    cityFace.rotation.y = side === 1 ? 0 : Math.PI;
-    cityFace.userData.face = side === 1 ? 'Outer left-facing print' : 'Independent right-facing print; not mirrored';
+    const mount=new THREE.Group();mount.position.z=side*(cityDepth/2+.031);mount.rotation.y=side===1?0:Math.PI;cityCase.add(mount);
+    const cityFace=addCityNeon(mount,0);
+    cityFace.userData.face=side===1?'Outer left-facing neon':'Independent right-facing neon; not mirrored';
   }
+  const citySideGlow=new THREE.MeshStandardMaterial({color:'#ff308f',emissive:'#ff308f',emissiveIntensity:2.5,roughness:.3});
+  for(const x of [-1,1])box('LOCAL_CITY_LIGHTBOX_SIDE_DIFFUSER',[.006,.72,.07],[x*(cityWidth/2+.003),0,0],citySideGlow,cityCase);
 
   // Four clamping bolts engage the inspected original plaque substrate. Two
   // short lateral tabs visibly connect the sleeve to the surviving upper and
@@ -352,10 +345,41 @@ export function createGarageGraphics(THREE, scene, entries) {
 
   // The independently generated portrait ring has a real narrow bottom stem.
   // Measure its lower vertices in world space instead of placing a support at
-  // the ring's empty centre or inventing a replacement frame/avatar.
+  // the ring's centre. The portrait below uses the site's actual profile image.
   const portrait = entries.get('03_profile_sign');
   if (portrait?.state === 'ready' && portrait.bounds && portrait.model) {
     portrait.mount.updateWorldMatrix(true, true);
+    if (profileImage) {
+      const diskSize = portrait.bounds.getSize(new THREE.Vector3()).x;
+      const radius = diskSize * .365;
+      const center = portrait.bounds.getCenter(new THREE.Vector3());
+      // Exclude the narrow mounting stem when finding the round face centre.
+      center.y = portrait.bounds.max.y - diskSize / 2;
+      const faceDepths = [];
+      const ray = new THREE.Raycaster();
+      for (const [dx, dy] of [[0,0],[-.7,0],[.7,0],[0,-.7],[0,.7]]) {
+        ray.set(new THREE.Vector3(center.x + dx * radius, center.y + dy * radius, portrait.bounds.max.z + .2), new THREE.Vector3(0,0,-1));
+        const hit = ray.intersectObject(portrait.model,true)[0];
+        if (hit) faceDepths.push(hit.point.z);
+      }
+      if (faceDepths.length === 5) {
+        center.z = Math.max(...faceDepths) + .004;
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = mobile ? 512 : 1024;
+        const context = canvas.getContext('2d');
+        // Focus the existing 800×800 profile artwork on the face and shoulders.
+        context.drawImage(profileImage, profileImage.width * .175, profileImage.height * .0625,
+          profileImage.width * .65, profileImage.height * .65, 0, 0, canvas.width, canvas.height);
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.colorSpace = THREE.SRGBColorSpace; texture.anisotropy = mobile ? 4 : 8;
+        texture.userData.previewTextureLimit = canvas.width;
+        const face = new THREE.Mesh(new THREE.CircleGeometry(radius,96), new THREE.MeshBasicMaterial({map:texture,toneMapped:false}));
+        face.name = 'PETER_EXISTING_PROFILE_PHOTO'; face.position.copy(center);
+        face.userData = {locallyAuthored:true,assetId:'03_profile_sign',sourceImage:'img/logo.jpg',purpose:'Existing blog profile artwork mounted inside the original neon ring'};
+        group.add(face);
+        group.userData.profilePhoto = {source:'img/logo.jpg',radius,position:center.toArray(),surfaceDepths:faceDepths};
+      }
+    }
     const stem = new THREE.Vector3();
     const sample = new THREE.Vector3();
     const lowerBandTop = portrait.bounds.min.y + Math.min(0.055, portrait.bounds.getSize(new THREE.Vector3()).y * 0.07);
@@ -408,14 +432,85 @@ export function createGarageGraphics(THREE, scene, entries) {
           portraitGeometryModified: false, avatarAdded: false,
         };
       } else {
-        group.userData.portraitFrameMount = { status: 'No bracket added: both physical jamb contacts could not be verified' };
+        // A repaired facade may have no lower jamb at the old stem location.
+        // Mount the disk from its rear to an actual upper fascia contact.
+        const rear = portrait.bounds.getCenter(new THREE.Vector3());
+        rear.z = portrait.bounds.min.z + 0.012;
+        mountingRay.set(new THREE.Vector3(stem.x + 0.20, rear.y - 0.10, shellCenterZ + 3), new THREE.Vector3(0,0,-1));
+        const hit = mountingRay.intersectObject(shell.model || shell.mount,true)
+          .find(item=>item.point.z>shellCenterZ+0.7 && item.point.z<rear.z);
+        if (hit) {
+          const foot=hit.point.clone();foot.z-=0.012;
+          const elbow=new THREE.Vector3(foot.x,rear.y,rear.z-0.025);
+          box('LOCAL_PORTRAIT_REAR_PLATE',[0.13,0.12,0.028],rear.toArray(),edgeMetal);
+          rod('LOCAL_PORTRAIT_REAR_ARM',rear,elbow,0.022,metal);
+          rod('LOCAL_PORTRAIT_REAR_BRACE',elbow,foot,0.022,metal);
+          box('LOCAL_PORTRAIT_REAR_WALL_FOOT',[0.095,0.075,0.03],[foot.x,foot.y,foot.z+0.015],edgeMetal);
+          group.userData.portraitFrameMount={method:'Rear disk plate and triangulated arm to ray-verified upper fascia',rearContactWorld:rear.toArray(),wallContactWorld:hit.point.toArray(),portraitGeometryModified:false,avatarAdded:false};
+        } else group.userData.portraitFrameMount = { status: 'No bracket added: physical contact could not be verified' };
       }
     }
   }
 
+  if (group.userData.portraitFrameMount) group.userData.portraitFrameMount.avatarAdded = Boolean(group.userData.profilePhoto);
+  const door=entries.get('02_roller_shutter');
+  const guide=door?.state==='ready' && door.model.getObjectByName('SHUTTER_GUIDE_LEFT');
+  if(guide && door.shutter) {
+    guide.updateWorldMatrix(true,true);
+    const guideBounds=new THREE.Box3().setFromObject(guide);
+    const position=new THREE.Vector3(guideBounds.max.x+.32,guideBounds.max.y+.14,guideBounds.max.z+.10);
+    const plaque=new THREE.Group();plaque.name='LOCAL_DOOR_ACTION_PLAQUE';plaque.position.copy(position);group.add(plaque);
+    // Compact access terminal: asymmetric machined corners, smoked display and
+    // one illuminated edge. Keep the original verified guide mounting point.
+    const caseShape=new THREE.Shape();
+    [[-.32,-.085],[-.29,-.115],[.32,-.115],[.32,.078],[.283,.115],[-.32,.115]].forEach(([x,y],i)=>i?caseShape.lineTo(x,y):caseShape.moveTo(x,y));caseShape.closePath();
+    const caseGeometry=new THREE.ExtrudeGeometry(caseShape,{depth:.028,bevelEnabled:true,bevelThickness:.002,bevelSize:.003,bevelSegments:2,steps:1});caseGeometry.translate(0,0,-.014);
+    hardware('LOCAL_DOOR_CONTROL_CHASSIS',caseGeometry,new THREE.MeshStandardMaterial({color:'#111923',metalness:.7,roughness:.34}),new THREE.Vector3(),plaque);
+    const edgeLight=new THREE.MeshStandardMaterial({color:'#37e6e2',emissive:'#37e6e2',emissiveIntensity:2.3,roughness:.3});
+    box('LOCAL_DOOR_CONTROL_EDGE',[.004,.14,.005],[-.319,.012,.011],edgeLight,plaque);
+    box('LOCAL_DOOR_CONTROL_TOP_EDGE',[.13,.003,.005],[-.247,.116,.011],edgeLight,plaque);
+    const label=canvasWithLogicalSize(640,230,1024);
+    const print=makeGraphic('LOCAL_CLICKABLE_DOOR_LABEL',label.canvas,.617,.215,new THREE.Vector3(0,0,.019),['Door open / close control'],plaque);
+    // The angled bracket terminates in the fixed guide, clear of moving slats.
+    const start=new THREE.Vector3(guideBounds.getCenter(new THREE.Vector3()).x,guideBounds.max.y-.065,guideBounds.max.z-.007);
+    const end=position.clone().add(new THREE.Vector3(-.28,-.075,-.024));
+    rod('LOCAL_DOOR_PLAQUE_BRACKET',start,end,.014,edgeMetal);
+    plaque.traverse(mesh=>{mesh.userData={...mesh.userData,assetId:'02_roller_shutter',doorControl:true};});
+    let lastState='';
+    group.userData.updateDoorPlaque=(target)=>{
+      const zh=document.documentElement.lang==='zh-Hans',key=`${zh}:${target}`;
+      if(key===lastState)return;lastState=key;
+      const c=label.context;c.clearRect(0,0,640,230);
+      c.save();c.beginPath();c.moveTo(0,0);c.lineTo(605,0);c.lineTo(640,35);c.lineTo(640,230);c.lineTo(29,230);c.lineTo(0,201);c.closePath();c.clip();
+      const bg=c.createLinearGradient(0,0,640,230);bg.addColorStop(0,'#10232e');bg.addColorStop(.40,'#09131e');bg.addColorStop(1,'#11121e');c.fillStyle=bg;c.fillRect(0,0,640,230);
+      // Quiet industrial indexing, without decorative borders or corner flowers.
+      c.fillStyle='#172d39';for(let x=495;x<640;x+=14){c.beginPath();c.moveTo(x,230);c.lineTo(x+34,190);c.lineTo(x+39,190);c.lineTo(x+5,230);c.fill();}
+      c.fillStyle='#829aa9';c.textAlign='left';c.textBaseline='middle';c.font='600 22px Consolas,monospace';c.fillText('GARAGE / ACCESS',192,34);
+      c.fillStyle='#4cf3df';c.fillRect(566,24,8,8);c.fillStyle='#a7c0ca';c.font='20px Consolas,monospace';c.fillText('01',586,30);
+      // The shutter pictogram and action arrow form the touch target on the left.
+      const tile=c.createLinearGradient(25,50,164,185);tile.addColorStop(0,'#173b49');tile.addColorStop(1,'#0c242f');c.fillStyle=tile;c.fillRect(25,56,134,132);
+      c.strokeStyle='#396373';c.lineWidth=2;c.beginPath();c.moveTo(25,88);c.lineTo(25,56);c.lineTo(58,56);c.moveTo(128,188);c.lineTo(159,188);c.lineTo(159,155);c.stroke();
+      c.strokeStyle='#53eae5';c.lineWidth=5;c.lineCap='round';c.lineJoin='round';
+      c.beginPath();c.moveTo(51,155);c.lineTo(51,80);c.lineTo(133,80);c.lineTo(133,155);c.stroke();
+      for(const y of [94,107,120]){c.beginPath();c.moveTo(61,y);c.lineTo(123,y);c.stroke();}
+      c.strokeStyle=target?'#ff76b7':'#82fff0';c.lineWidth=6;
+      c.beginPath();c.moveTo(92,target?132:168);c.lineTo(92,target?168:132);c.moveTo(80,target?156:144);c.lineTo(92,target?168:132);c.lineTo(104,target?156:144);c.stroke();
+      c.fillStyle='#d6ffff';c.font=`italic 700 ${target?67:76}px Arial,sans-serif`;c.fillText(target?'CLOSE':'OPEN',188,107,376);
+      c.fillStyle='#b5cbd5';c.font='500 29px "Microsoft YaHei",sans-serif';c.fillText(zh?(target?'点击关闭':'点击开启'):(target?'TAP TO CLOSE':'TAP TO OPEN'),193,168,365);
+      // A magenta command chevron and fine cyan baseline echo the garage neon.
+      c.strokeStyle='#ff5da8';c.lineWidth=4;c.beginPath();c.moveTo(584,88);c.lineTo(600,104);c.lineTo(584,120);c.stroke();
+      c.fillStyle='#274350';c.fillRect(193,201,345,2);c.fillStyle='#35dcd9';c.fillRect(193,201,85,2);
+      c.restore();
+      print.material.map.needsUpdate=true;
+    };
+    group.userData.updateDoorPlaque(door.shutter.target);
+    group.userData.doorPlaque={position:position.toArray(),clickable:true,mountedTo:'SHUTTER_GUIDE_LEFT',design:'Machined access terminal, shutter pictogram, cyan edge light and bilingual action'};
+  }
   // Preserve world placement while parenting to the placed shell. A later shell
   // grounding translation now moves every graphic and every fastener with it.
+  addShutterGraffiti(group,entries.get('02_roller_shutter'),brand.canvas);
   shell.mount.attach(group);
+  group.userData.syncShutterGraffiti?.();
   group.userData.status = fasciaAnchors.length >= 2 ? 'Two locally authored metal signs physically mounted to inspected garage geometry' : 'City sleeve mounted; main sign omitted because fascia contacts were unavailable';
   group.userData.maximumTextureSize = maximumTextureSize;
   group.userData.brandPlacement = { position: brandPosition.toArray(), width: brandWidth, height: brandHeight, lowerEdge: brandPosition.y - brandHeight / 2 };

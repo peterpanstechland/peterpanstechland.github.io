@@ -1,0 +1,12 @@
+{
+  "products": 11,
+  "originalTriangles": 9783,
+  "minimumShelfClearance": 0.019760984438623508,
+  "depthEnvelope": [
+    0.040002006266141366,
+    0.3899999872946641
+  ],
+  "pausedTransformsStable": true,
+  "voltageRestores": true,
+  "fullRevolutionsTestedSeconds": 72
+}
