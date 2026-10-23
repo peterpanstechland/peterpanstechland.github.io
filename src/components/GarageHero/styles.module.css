@@ -38,10 +38,8 @@
 .reloadButton { width: 36px; height: 36px; padding: 0; border: 1px solid #2b3446; border-radius: 50%; color: #aab9ca; background: #0b1221b3; font-size: 21px; line-height: 1; cursor: pointer; }
 .reloadButton:hover { color: #fff; border-color: var(--garage-cyan); background: #14243a; }
 .primaryAction:focus-visible, .secondaryAction:focus-visible, .reloadButton:focus-visible, .primaryButton:focus-visible, .destination:focus-visible { outline: 2px solid var(--garage-cyan); outline-offset: 4px; }
-.loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; background: #070b14ef; padding: 24px; text-align: center; pointer-events: none; }
-.loading strong { font-size: 14px; font-weight: 550; color: #d4dce8; }
-.loading p { margin: 9px 0 0; color: #7f90a9; font-size: 12px; }
-.loadingGlyph { width: 27px; height: 27px; margin-bottom: 23px; border: 1px solid #28354b; border-top-color: var(--garage-pink); border-right-color: var(--garage-cyan); border-radius: 50%; animation: rotate 1.8s linear infinite; }
+.loading { position: absolute; inset: 0; display: grid; place-items: center; background: #070b14; padding: 24px; text-align: center; pointer-events: none; opacity:1; transition:opacity 220ms ease; }
+.loadingLeaving { opacity:0; }
 .errorCard { position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(400px, calc(100% - 44px)); padding: 27px; background: #0c1322f5; border: 1px solid #69516c; border-radius: 6px; box-shadow: 0 20px 70px #0007; }
 .errorLabel { color: var(--garage-amber); font-size: 9px; letter-spacing: .12em; }
 .errorCard h2 { color: #f3f5fa; font-size: 21px; line-height: 1.4; margin: 13px 0; letter-spacing: -.035em; }
@@ -59,7 +57,6 @@
 .destination > span { color: #536780; font-size: 14px; }
 .destination:hover { color: #fff; }
 .destination:hover > span { color: var(--garage-pink); }
-@keyframes rotate { to { transform: rotate(360deg); } }
 @media (max-width: 1050px) {
   .heroCopy { left: 25px; width: 285px; }
   .headline { font-size: 40px; }
@@ -95,6 +92,6 @@
   .destination { font-size: 11px; gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .loadingGlyph { animation: none; }
+  .loading { transition:none; }
   .primaryAction, .secondaryAction { transition: none; }
 }

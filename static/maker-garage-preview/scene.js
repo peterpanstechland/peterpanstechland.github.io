@@ -18,7 +18,7 @@ import {createCommunityWall} from './community-wall.js?v=community-v1';
 import {createCommunityInstallation} from './community-installation.js?v=community-v1';
 import {createSponsorBillboard} from './sponsor-billboard.js?v=loading-v1';
 import {createAmbientMotion,installVendingMotion} from './ambient-motion.js?v=ambient-v1';
-import {loadingPhases,runLoadingPhase,optimizedModel} from './loading-plan.js?v=loading-v1';
+import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress} from './loading-plan.js?v=neko-loader-v1';
 
 const zh = new URLSearchParams(location.search).get('lang') === 'zh-Hans' || location.pathname.startsWith('/zh-Hans/');
 const copy = {
@@ -131,7 +131,7 @@ function notifyStatus() {
     ? `预览贴图：${resources.textureCount} 张 · 最大 ${resources.maxTextureEdge} px · 估算 ${resources.estimatedRgbaMiB.toFixed(1)} MiB`
     : `Preview textures: ${resources.textureCount} maps · max ${resources.maxTextureEdge} px · approx. ${resources.estimatedRgbaMiB.toFixed(1)} MiB`;
   const parentCounts = contextLost ? { loaded: 0, total: Math.max(counts.total, 1), failed: Math.max(counts.total, 1) } : counts;
-  window.parent.postMessage({ type: 'techland-garage-status', ...parentCounts, ready:heroReady }, location.origin);
+  window.parent.postMessage({ type: 'techland-garage-status', ...parentCounts, ready:heroReady, initial:initialLoadingProgress(entries.values()) }, location.origin);
   $('asset-panel').dataset.loadingProfile=JSON.stringify(loadingProfile);
   window.techlandGarageState = { ...counts, state: stage.dataset.state, effectsEnabled, waveEnabled, textureLimit, resources, shutter: shutterSnapshot(), assets: [...entries.values()].map((entry) => ({ id: entry.config.id, state: entry.state, error: entry.error || null, file: entry.config.file || null, normalization: entry.normalization || null, branding: entry.branding || null })) };
 }

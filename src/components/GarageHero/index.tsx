@@ -2,9 +2,16 @@ import React, {useEffect, useRef, useState} from 'react';
 import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import GarageLoader from '../GarageLoader';
 import styles from './styles.module.css';
 
-type AssetCounts = {loaded: number; total: number; failed: number; ready?: boolean};
+type AssetCounts = {
+  loaded: number;
+  total: number;
+  failed: number;
+  ready?: boolean;
+  initial?: {completed: number; total: number};
+};
 type PreviewStatus = 'loading' | 'ready' | 'error';
 
 function readCounts(data: unknown): AssetCounts | null {
@@ -16,7 +23,16 @@ function readCounts(data: unknown): AssetCounts | null {
     typeof value === 'number' && Number.isSafeInteger(value) && value >= 0,
   )) return null;
   if ((loaded as number) + (failed as number) > (total as number)) return null;
-  return {loaded: loaded as number, total: total as number, failed: failed as number, ready:typeof message.ready==='boolean'?message.ready:undefined};
+  const initial = message.initial as AssetCounts['initial'];
+  const validInitial = initial &&
+    Number.isSafeInteger(initial.completed) && Number.isSafeInteger(initial.total) &&
+    initial.total > 0 && initial.total <= Number(total) &&
+    initial.completed >= 0 && initial.completed <= initial.total;
+  return {
+    loaded: loaded as number, total: total as number, failed: failed as number,
+    ready: typeof message.ready === 'boolean' ? message.ready : undefined,
+    initial: validInitial ? {completed: initial.completed, total: initial.total} : undefined,
+  };
 }
 
 export default function GarageHero({home = false}: {home?: boolean}): React.JSX.Element {
@@ -28,6 +44,14 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
   const [attempt, setAttempt] = useState(0);
   const [status, setStatus] = useState<PreviewStatus>('loading');
   const [counts, setCounts] = useState<AssetCounts | null>(null);
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    if (status === 'loading') { setShowLoader(true); return; }
+    if (status === 'error') { setShowLoader(false); return; }
+    const exit = window.setTimeout(() => setShowLoader(false), 220);
+    return () => window.clearTimeout(exit);
+  }, [status]);
 
   useEffect(() => {
     setStatus('loading');
@@ -62,7 +86,14 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
     };
   }, [attempt]);
 
-  const reload = () => setAttempt(value => value + 1);
+  const reload = () => {
+    setShowLoader(true);
+    setStatus('loading');
+    setCounts(null);
+    setAttempt(value => value + 1);
+  };
+  const boot = counts?.initial;
+  const bootProgress = boot ? Math.round(boot.completed / boot.total * 100) : undefined;
   const statusText = status === 'error'
     ? text('Preview unavailable', '预览暂不可用')
     : status === 'loading'
@@ -117,7 +148,7 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=loading-v2`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=neko-loader-v1`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"
@@ -125,11 +156,10 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 allowFullScreen
                 onError={() => setStatus('error')}
               />
-              {status === 'loading' && (
-                <div className={styles.loading} role="status">
-                  <span className={styles.loadingGlyph} aria-hidden="true" />
-                  <strong>{text('Opening the garage', '正在打开车库')}</strong>
-                  <p>{text('A few things are taking their places.', '让每一件作品就位。')}</p>
+              {showLoader && status !== 'error' && (
+                <div className={`${styles.loading} ${status === 'ready' ? styles.loadingLeaving : ''}`}>
+                  <GarageLoader zh={zh} progress={bootProgress} completed={boot?.completed}
+                    total={boot?.total} finishing={status === 'ready'} />
                 </div>
               )}
               {status === 'error' && (

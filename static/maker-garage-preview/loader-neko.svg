@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="208" viewBox="0 0 240 208" role="img" aria-labelledby="title desc">
+  <title id="title">Neko, the little cybernetic garage cat</title>
+  <desc id="desc">A friendly silver robot cat with glowing blue eyes, a pink waving paw and a golden power heart, floating above a cyan charging ring.</desc>
+  <defs>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#eefbff"/><stop offset=".54" stop-color="#c6dce8"/><stop offset="1" stop-color="#819cac"/></linearGradient>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e1eff6"/><stop offset="1" stop-color="#91a8bd"/></linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#283e55"/><stop offset="1" stop-color="#101f36"/></linearGradient>
+    <linearGradient id="ear" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffb4d5"/><stop offset="1" stop-color="#e976ae"/></linearGradient>
+    <linearGradient id="halo"><stop stop-color="#78f7ed"/><stop offset=".6" stop-color="#6bcbdc"/><stop offset="1" stop-color="#ef90c8"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#5acbc5" stop-opacity=".2"/><stop offset="1" stop-color="#5acbc5" stop-opacity="0"/></radialGradient>
+    <filter id="light" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="2.5"/></filter>
+    <style>
+      .float{animation:float 3.8s ease-in-out infinite;transform-origin:120px 120px}
+      .paw{animation:wave 2.8s ease-in-out infinite;transform-origin:164px 119px}
+      .eyes{animation:blink 5.6s linear infinite;transform-origin:120px 88px}
+      .heartglow{animation:heart 3.8s ease-in-out infinite}
+      .orbit{animation:orbit 12s linear infinite;transform:translate(62px,0)}
+      .spark{animation:spark 4s ease-in-out infinite}
+      @keyframes float{0%,100%{transform:translateY(1px)}50%{transform:translateY(-4px)}}
+      @keyframes wave{0%,12%,55%,100%{transform:rotate(0)}28%{transform:rotate(13deg)}40%{transform:rotate(-5deg)}}
+      @keyframes blink{0%,43%,47%,100%{transform:scaleY(1)}45%{transform:scaleY(.08)}}
+      @keyframes heart{0%,100%{opacity:.3}50%{opacity:.7}}
+      @keyframes orbit{0%,100%{transform:translate(62px,0)}12.5%{transform:translate(44px,7px)}25%{transform:translate(0,10px)}37.5%{transform:translate(-44px,7px)}50%{transform:translate(-62px,0)}62.5%{transform:translate(-44px,-7px)}75%{transform:translate(0,-10px)}87.5%{transform:translate(44px,-7px)}}
+      @keyframes spark{0%,100%{opacity:.3}50%{opacity:.9}}
+      @media(prefers-reduced-motion:reduce){.float,.paw,.eyes,.heartglow,.orbit,.spark{animation:none}}
+    </style>
+  </defs>
+  <ellipse cx="120" cy="178" rx="94" ry="31" fill="url(#glow)"/>
+  <ellipse cx="120" cy="181" rx="68" ry="13" fill="#112332" stroke="#294a58"/>
+  <ellipse cx="120" cy="179" rx="62" ry="10.5" fill="none" stroke="#73e8df" stroke-width="2" opacity=".35" filter="url(#light)"/>
+  <ellipse cx="120" cy="179" rx="62" ry="10.5" fill="none" stroke="url(#halo)" stroke-width="1.3" stroke-dasharray="115 24 26 14"/>
+  <path d="M65 182v4m110-4v4m-57 4v4m6-4v4" fill="none" stroke="#577b89" stroke-width="1"/>
+  <circle class="orbit" cx="120" cy="180" r="2.5" fill="#9bf9e8"/>
+  <circle class="orbit" style="animation-delay:-6s;transform:translate(-62px,0)" cx="120" cy="180" r="1.7" fill="#f69bc9"/>
+  <g opacity=".75" class="spark" fill="none" stroke-linecap="round">
+    <path d="M48 69h7m-3.5-3.5v7" stroke="#91eae7"/>
+    <path d="M185 44h5m-2.5-2.5v5" stroke="#ffb0d5"/>
+    <path d="M185 137h5m-2.5-2.5v5" stroke="#91eae7"/>
+    <circle cx="53" cy="132" r="1" stroke="#d0adc9"/>
+  </g>
+  <g class="float" stroke-linejoin="round">
+    <!-- Curled cable tail, with a soft pink illuminated tip. -->
+    <path d="M144 147c23 7 38-1 37-15-.4-6-5-9-10-6" fill="none" stroke="#40586d" stroke-width="12" stroke-linecap="round"/>
+    <path d="M144 147c23 7 38-1 37-15-.4-6-5-9-10-6" fill="none" stroke="#96b2c4" stroke-width="7" stroke-linecap="round"/>
+    <path d="M180 131c-1-5-5-7-9-5" fill="none" stroke="#ff9fc8" stroke-width="7" stroke-linecap="round"/>
+    <!-- Small, rounded chassis and resting foot pads. -->
+    <path d="M94 111c-9 10-14 29-9 42 7 16 53 19 65 3 9-13 1-37-9-46Z" fill="url(#body)" stroke="#536c83" stroke-width="1.7"/>
+    <path d="M91 136c3-8 8-13 15-15" fill="none" stroke="#effbff" stroke-width="2" opacity=".7"/>
+    <ellipse cx="103" cy="159" rx="17" ry="9" fill="url(#shell)" stroke="#536c83" stroke-width="1.5"/>
+    <ellipse cx="137" cy="159" rx="17" ry="9" fill="url(#shell)" stroke="#536c83" stroke-width="1.5"/>
+    <path d="M95 159v4m7-4v4m7-4v4m20-4v4m7-4v4m7-4v4" stroke="#688297" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="98" y="120" width="43" height="28" rx="12" fill="#233d50" stroke="#6e8c9c" stroke-width="1.4"/>
+    <path class="heartglow" d="M120 141s-13-7-11-13c2-6 9-4 11-1 3-4 10-4 11 1 2 6-11 13-11 13" fill="#ffc16f" filter="url(#light)"/>
+    <path d="M120 141s-11-6-10-11c1-5 7-5 10-1 3-4 9-4 10 1 1 5-10 11-10 11" fill="#ffd084" stroke="#ffedba" stroke-width=".9"/>
+    <path d="m120 129-2 5h4l-2 5" fill="none" stroke="#a66b3c" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="94" cy="132" r="2" fill="#84efe7"/><path d="M144 131h3m-3 4h3" stroke="#678797" stroke-linecap="round"/>
+    <!-- Resting left arm, and a separately hinged beckoning paw. -->
+    <path d="M93 114c-13-2-19 5-16 16 2 7 8 11 15 6" fill="url(#shell)" stroke="#536c83" stroke-width="1.5"/>
+    <ellipse cx="83" cy="126" rx="5" ry="7" transform="rotate(-21 83 126)" fill="#e58db5"/>
+    <g class="paw">
+      <path d="M145 120c7 6 16 5 21-1l6-23-18-6-12 22" fill="url(#shell)" stroke="#536c83" stroke-width="1.6"/>
+      <circle cx="154" cy="117" r="4.5" fill="#3f617a" stroke="#6e94a7"/>
+      <circle cx="154" cy="117" r="1.7" fill="#8af4eb"/>
+      <path d="M153 96c-4-4-5-10-2-14 3-3 5-1 6 1-2-9 2-14 6-9 1-7 7-6 8-1 4-4 9 0 7 5 6-2 8 4 4 10-4 9-16 15-24 10Z" fill="url(#shell)" stroke="#536c83" stroke-width="1.6"/>
+      <ellipse cx="167" cy="88" rx="7.5" ry="6" transform="rotate(-16 167 88)" fill="url(#ear)"/>
+      <circle cx="157" cy="83" r="2.1" fill="#ef9bc2"/><circle cx="163" cy="78" r="2.1" fill="#ef9bc2"/><circle cx="170" cy="77" r="2.1" fill="#ef9bc2"/><circle cx="176" cy="81" r="2.1" fill="#ef9bc2"/>
+    </g>
+    <!-- Rounded triangular ears and a softly reflective face shell. -->
+    <path d="M83 66c-6-11-8-31-2-34 6-2 21 8 28 17l-4 19Z" fill="url(#shell)" stroke="#536c83" stroke-width="1.7"/>
+    <path d="M135 50c8-11 23-21 28-17 4 3 3 21-3 34l-16 1Z" fill="url(#shell)" stroke="#536c83" stroke-width="1.7"/>
+    <path d="m84 41 16 14-14 5Z" fill="url(#ear)"/><path d="m158 42-15 14 13 4Z" fill="url(#ear)"/>
+    <path d="M78 77c1-20 18-31 41-31 25 0 43 11 45 31 4 26-15 39-44 39-29 0-45-13-42-39Z" fill="url(#shell)" stroke="#536c83" stroke-width="1.7"/>
+    <path d="M88 66c8-10 22-14 37-13" fill="none" stroke="#f6ffff" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <path d="M88 78c4-11 20-12 32-9 14-3 29-1 33 9 7 17-8 27-33 27-25 0-39-10-32-27Z" fill="url(#dark)" stroke="#526d83" stroke-width="1"/>
+    <g class="eyes">
+      <ellipse cx="103" cy="86" rx="5.3" ry="7.5" fill="#74e9e8"/>
+      <ellipse cx="137" cy="86" rx="5.3" ry="7.5" fill="#74e9e8"/>
+      <ellipse cx="102" cy="83.5" rx="1.4" ry="2" fill="#edffff"/>
+      <ellipse cx="136" cy="83.5" rx="1.4" ry="2" fill="#edffff"/>
+    </g>
+    <path d="m117 91 3 2 3-2m-3 2v3m-5-1c1 4 4 3 5 1 2 3 5 3 6-1" fill="none" stroke="#c5eff2" stroke-width="1.5" stroke-linecap="round"/>
+    <ellipse cx="95" cy="96" rx="4" ry="2" fill="#e983b0" opacity=".65"/><ellipse cx="145" cy="96" rx="4" ry="2" fill="#e983b0" opacity=".65"/>
+    <path d="m76 89 10 2m-11 4 10-1m70-3 10-2m-10 5 10 1" fill="none" stroke="#a6d9df" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M113 51v5h5m4-5v5h5" fill="none" stroke="#7e9eaf" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="130" cy="55" r="2" fill="#89ece5"/>
+    <path d="M98 112c15 5 31 5 45 0" fill="none" stroke="#f29abf" stroke-width="3.7" stroke-linecap="round"/>
+    <circle cx="120" cy="115" r="3.5" fill="#ffcf85" stroke="#ffebbc" stroke-width="1"/>
+    <path d="M119 115h2" stroke="#a97a45" stroke-linecap="round"/>
+  </g>
+</svg>

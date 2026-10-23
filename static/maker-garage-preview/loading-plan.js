@@ -1,5 +1,9 @@
 // Present a grounded, branded exterior before downloading the workshop tools.
 const hero=['13_street_base','01_garage_shell','02_roller_shutter','03_profile_sign','04_lucky_cat','05_project_vending','08_street_lamp'];
+export function initialLoadingProgress(entries) {
+  const initial=[...entries].filter(entry=>entry.config.file&&hero.includes(entry.config.id));
+  return {completed:initial.filter(entry=>entry.state==='ready').length,total:initial.length};
+}
 export function loadingPhases(entries,view='overview') {
   const available=[...entries].filter(entry=>entry.config.file);
   const first=hero.map(id=>available.find(entry=>entry.config.id===id)).filter(Boolean);
