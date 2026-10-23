@@ -85,6 +85,7 @@ let ambientMotion = null;
 let framing = ['interior','rear'].includes(new URLSearchParams(location.search).get('view')) ? new URLSearchParams(location.search).get('view') : 'overview';
 let configurationLoaded = false;
 let heroReady = false;
+let heroPending = false;
 let optimizedAssets = null;
 const loadingProfile = {started:performance.now(),tier:textureLimit===512?'mobile':'desktop',heroMs:null,completeMs:null};
 let frameRequested = false;
@@ -256,6 +257,11 @@ function renderFrame(now) {
   const marqueeMoving=sponsorBillboard?.animate(elapsed,motion.matches,camera);
   if (composer) composer.render(delta);
   else renderer.render(scene, camera);
+  if(heroPending){
+    heroPending=false;
+    heroReady=['13_street_base','01_garage_shell'].every(id=>entries.get(id)?.state==='ready');
+    loadingProfile.heroMs=Math.round(performance.now()-loadingProfile.started);notifyStatus();
+  }
   if (waveEnabled || effectsEnabled || ambientMoving || shutter?.moving || cameraChanged || marqueeMoving) requestFrame();
 }
 document.addEventListener('visibilitychange', () => { lastFrame = 0; if (!document.hidden) requestFrame(); });
@@ -856,9 +862,9 @@ async function loadConfiguration() {
     await runLoadingPhase(phase,loadAsset);
     refreshArtDirection(index===0);
     if(index===0){
-      await new Promise(resolve=>requestAnimationFrame(resolve));
-      heroReady=['13_street_base','01_garage_shell'].every(id=>entries.get(id)?.state==='ready');
-      loadingProfile.heroMs=Math.round(performance.now()-loadingProfile.started);notifyStatus();
+      // Background tabs suspend RAF. Keep downloading the next phase and only
+      // reveal the iframe when renderFrame has actually painted the exterior.
+      heroPending=true;requestFrame();
     }
     // Let the completed exterior paint before spending CPU on the next phase.
     await new Promise(resolve=>setTimeout(resolve,0));
