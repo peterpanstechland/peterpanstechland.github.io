@@ -29,6 +29,8 @@
     #load-state { margin: 8px 0 0; max-width: 530px; font-size: 11px; line-height: 1.5; color: #bab0c8; }
     .toolbar { position: fixed; z-index: 3; bottom: 18px; left: 22px; right: 22px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; pointer-events: none; }
     .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; max-width: 650px; pointer-events: auto; }
+    .view-controls, .action-controls, .more-controls, .secondary-controls { display: contents; }
+    .control-disclosure, .controls-title { display: none; }
     .control { min-height: 38px; border: 1px solid #524460; border-radius: 9px; padding: 9px 12px; background: #17121fe8; box-shadow: 0 3px 18px #0003; font-size: 11px; line-height: 1.25; backdrop-filter: blur(15px); }
     .control:hover:not(:disabled) { border-color: #c783d5; background: #2a1a35; }
     .control[aria-pressed="true"] { border-color: #64d2da; color: #9beff1; background: #15262ee8; }
@@ -69,6 +71,7 @@
     }
     @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; } }
   </style>
+  <link rel="stylesheet" href="./scene/style.css?v=mobile-garage-v1">
   <script type="importmap">{"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}</script>
 </head>
 <body>
@@ -79,13 +82,24 @@
   </header>
   <nav class="toolbar" aria-label="Garage controls">
     <div class="controls">
+      <div class="view-controls" role="group" aria-label="Camera views">
       <button class="control" id="overview" data-i18n="overview">Overview</button>
       <button class="control" id="front" data-i18n="front">Front view</button>
       <button class="control" id="interior" data-i18n="interior">Workshop</button>
       <button class="control" id="rear" data-i18n="rear">Community wall</button>
+      </div>
+      <div class="action-controls">
       <button class="control" id="leave-trace" data-i18n="leaveTrace" aria-haspopup="dialog">Leave a trace</button>
       <button class="control" id="projects" data-i18n="projects" aria-haspopup="dialog">Project vending machine</button>
       <button class="control" id="sponsors" data-i18n="sponsors" aria-haspopup="dialog">Sponsors</button>
+      </div>
+      <details class="more-controls" open>
+        <summary class="control control-disclosure" aria-controls="secondary-controls" aria-label="More controls">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h5m4 0h7M4 12h10m4 0h2M4 18h3m4 0h9"/><path d="M9 3v6m5 0v6m-7 0v6"/></svg>
+          <span data-control-copy="more">More</span>
+        </summary>
+        <div class="secondary-controls" id="secondary-controls">
+          <p class="controls-title" data-control-copy="title">GARAGE / CONTROLS</p>
       <button class="control" id="cat-wave" disabled aria-pressed="false" data-i18n="wave">Beckon</button>
       <button class="control" id="effects" disabled aria-pressed="false" data-i18n="effects">Local effects</button>
       <div class="door-controls" role="group" aria-label="Garage door">
@@ -95,6 +109,8 @@
       </div>
       <button class="control" id="asset-toggle" aria-expanded="false" aria-controls="asset-panel" data-i18n="assets">Assets</button>
       <button class="control retry" id="retry-failed" hidden data-i18n="retryFailed">Retry failed loads</button>
+        </div>
+      </details>
     </div>
     <p class="hint" data-i18n="hint">Drag to orbit · Pinch to zoom<br>Click an object to explore</p>
   </nav>
@@ -131,6 +147,7 @@
       document.getElementById('reload').addEventListener('click', () => location.reload());
     })();
   </script>
-  <script type="module" src="./scene.js?v=sponsor-labels-v1"></script>
+  <script src="./scene/mobile-controls.js?v=mobile-garage-v1"></script>
+  <script type="module" src="./scene.js?v=mobile-garage-v1"></script>
 </body>
 </html>
