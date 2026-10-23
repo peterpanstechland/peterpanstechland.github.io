@@ -13,7 +13,7 @@ export async function createSponsorService(){
 }
 export function createSponsorApplication(service,zh){
  const dialog=document.createElement('dialog');dialog.id='sponsor-application';dialog.setAttribute('aria-labelledby','sa-title');
- dialog.innerHTML=`<button type="button" class="sp-close" aria-label="关闭申请">×</button><header><span class="sp-kicker">PARTNER WITH TECHLAND</span><h2 id="sa-title">把你的品牌，带进创造现场。</h2><p>先提交合作意向，Peter 审核并确认收款或合作资源后安排投放。</p></header>
+ dialog.innerHTML=`<button type="button" class="sp-close" aria-label="关闭申请">×</button><header><span class="sp-kicker">SPONSOR TECHLAND</span><h2 id="sa-title">把你的品牌，带进创造现场。</h2><p>先提交合作意向，Peter 审核并确认收款或合作资源后安排投放。</p></header>
  <form class="sa-form"><div class="sa-grid">
  <label>合作类别<select name="tier"><option value="core">核心赞助</option><option value="hardware">硬件赞助</option><option value="community">社区赞助</option></select></label>
  <label>轮播页面<select name="page"><option value="1">第 1 页</option><option value="2">第 2 页</option><option value="3">第 3 页</option></select></label>

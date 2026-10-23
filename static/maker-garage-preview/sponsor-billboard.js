@@ -1,8 +1,8 @@
-import {createSponsorService,createSponsorApplication} from './sponsor-applications.js?v=sponsor-portal-v1';
+import {createSponsorService,createSponsorApplication} from './sponsor-applications.js?v=sponsor-labels-v1';
 const definitions = [
-  {id:'core', en:'CORE PARTNER', zh:'核心赞助商', color:'#b5f5e4', description:['Support long-term making, open projects and the next ambitious idea.','支持长期创作、开源项目，以及下一个大胆的想法。']},
-  {id:'hardware', en:'HARDWARE PARTNER', zh:'硬件赞助商', color:'#f3c891', description:['Put tools, components and devices into real builds.','让工具、元器件和设备走进真实的制作过程。']},
-  {id:'community', en:'COMMUNITY PARTNER', zh:'社区赞助商', color:'#d3b8f3', description:['Connect makers through shared knowledge, events and collaboration.','用知识分享、活动与协作，连接更多创作者。']},
+  {id:'core', en:'CORE SPONSOR', zh:'核心赞助商', color:'#b5f5e4', description:['Support long-term making, open projects and the next ambitious idea.','支持长期创作、开源项目，以及下一个大胆的想法。']},
+  {id:'hardware', en:'HARDWARE SPONSOR', zh:'硬件赞助商', color:'#f3c891', description:['Put tools, components and devices into real builds.','让工具、元器件和设备走进真实的制作过程。']},
+  {id:'community', en:'COMMUNITY SPONSOR', zh:'社区赞助商', color:'#d3b8f3', description:['Connect makers through shared knowledge, events and collaboration.','用知识分享、活动与协作，连接更多创作者。']},
 ];
 const configURL = new URL('./sponsors/config.json',import.meta.url);
 function website(value){try{const url=new URL(value);return url.protocol==='https:'?url.href:null;}catch{return null;}}
@@ -14,11 +14,11 @@ export async function createSponsorBillboard(THREE,zh,onLoad){
   let page=0,previousPage=0,pageElapsed=0,transition=1,paused=false,lastSeconds=null;
   const tiles=[],imageCache=new Map();
   const dialog=document.createElement('dialog');dialog.id='sponsor-dialog';dialog.setAttribute('aria-labelledby','sponsor-title');
-  dialog.innerHTML='<button class="sp-close" type="button">×</button><header><span class="sp-kicker">TECHLAND / PARTNER NETWORK</span><h2 id="sponsor-title"></h2><p class="sp-intro"></p></header><div class="sp-playback"><span class="sp-page-status" aria-live="polite"></span><button type="button" class="sp-prev">← 上一页</button><button type="button" class="sp-next">下一页 →</button><button type="button" class="sp-pause">暂停轮播</button></div><div class="sp-tiers"></div><footer>INDEPENDENT MAKERS. SHARED POSSIBILITIES.</footer>';
+  dialog.innerHTML='<button class="sp-close" type="button">×</button><header><span class="sp-kicker">TECHLAND / SPONSOR NETWORK</span><h2 id="sponsor-title"></h2><p class="sp-intro"></p></header><div class="sp-playback"><span class="sp-page-status" aria-live="polite"></span><button type="button" class="sp-prev">← 上一页</button><button type="button" class="sp-next">下一页 →</button><button type="button" class="sp-pause">暂停轮播</button></div><div class="sp-tiers"></div><footer>INDEPENDENT MAKERS. SHARED POSSIBILITIES.</footer>';
   const sections=new Map();
-  dialog.querySelector('.sp-close').setAttribute('aria-label',zh?'关闭赞助伙伴':'Close partners');dialog.querySelector('.sp-close').onclick=()=>dialog.close();
+  dialog.querySelector('.sp-close').setAttribute('aria-label',zh?'关闭赞助商':'Close sponsors');dialog.querySelector('.sp-close').onclick=()=>dialog.close();
   dialog.querySelector('h2').textContent=zh?'一起，让想法发生。':'Build what comes next.';
-  dialog.querySelector('.sp-intro').textContent=zh?'三页循环播放 · 每页 8 秒 · 审核通过并进入档期后展示。':'Three pages · 8 seconds each · Approved, scheduled partners.';
+  dialog.querySelector('.sp-intro').textContent=zh?'三页循环播放 · 每页 8 秒 · 审核通过并进入档期后展示。':'Three pages · 8 seconds each · Approved, scheduled sponsors.';
   function populate(){
     sections.clear();dialog.querySelector('.sp-tiers').replaceChildren();
     for(const [i,tier] of tiers.entries()){
@@ -27,7 +27,7 @@ export async function createSponsorBillboard(THREE,zh,onLoad){
       const heading=document.createElement('h3');heading.textContent=zh?tier.zh:tier.en;
       const description=document.createElement('p');description.textContent=tier.description[zh?1:0];section.append(code,heading,description);
       const active=feed.filter(s=>s.tier===tier.id&&s.page===page+1&&s.endAt>Date.now()+serverOffset);
-      if(!active.length){const empty=document.createElement('div');empty.className='sp-recruit';empty.textContent=feedReady?(zh?'招募中':'OPEN FOR PARTNERS'):(zh?'暂未连接':'UNAVAILABLE');section.append(empty);}
+      if(!active.length){const empty=document.createElement('div');empty.className='sp-recruit';empty.textContent=feedReady?(zh?'招募中':'OPEN FOR SPONSORS'):(zh?'暂未连接':'UNAVAILABLE');section.append(empty);}
       for(const s of active){const card=document.createElement('a');card.className='sp-brand';card.href=s.url;card.target='_blank';card.rel='noopener noreferrer';const img=document.createElement('img');img.src=s.logo;img.alt=s.name;const name=document.createElement('span');name.textContent=s.name+' ↗';card.append(img,name);section.append(card);}
       const pricing=document.createElement('small');pricing.className='sp-price';pricing.textContent=tier.id==='core'?(service?`¥${service.plans.prices[page+1].month/100} / 月 · ¥${service.plans.prices[page+1].year/100} / 年`:''):(tier.id==='hardware'?'项目制 · 硬件与技术支持':'活动制 · 展位 / swag');section.append(pricing);
       const apply=document.createElement('button');apply.className='sp-apply';apply.textContent=zh?'申请合作 / 查看进度 ↗':'Apply / My applications ↗';apply.disabled=!application;apply.onclick=()=>application.open(tier.id,page+1);section.append(apply);
@@ -117,7 +117,7 @@ export async function createSponsorBillboard(THREE,zh,onLoad){
         if(image?.complete&&image.naturalWidth){const scale=Math.min((iw-20)/image.width,(ih-12)/image.height);ctx.drawImage(image,ix+(iw-image.width*scale)/2,iy+(ih-image.height*scale)/2,image.width*scale,image.height*scale);}
         else {ctx.fillStyle='#132b32';ctx.font=`600 ${hero?48:30}px system-ui`;ctx.fillText(brand.name,ix+15,iy+ih*.65,iw-30);if(!image){const img=new Image();img.crossOrigin='anonymous';imageCache.set(brand.logo,img);img.onload=()=>{repaintPages();onLoad();};img.src=brand.logo;}}
         ctx.fillStyle=tier.color;ctx.font=hero?'65px system-ui':'42px system-ui';ctx.fillText('↗',w-90,hero?230:140);if(hero){ctx.font='25px system-ui';ctx.fillText(brand.tagline||brand.name,34,h-38,w-65);}
-      }else{ctx.fillStyle=tier.color;ctx.font=`600 ${hero?126:48}px system-ui`;ctx.fillText(feedReady?(zh?'招募中':'OPEN CALL'):(zh?'加载中':'LOADING'),hero?32:22,hero?252:145);ctx.textAlign='right';ctx.font=`300 ${hero?80:48}px system-ui`;ctx.fillText('↗',w-28,hero?252:145);if(hero){ctx.textAlign='left';ctx.font='23px system-ui';ctx.fillStyle='#90acae';ctx.fillText(service?`PAGE ${p}  /  ¥${service.plans.prices[p].month/100} 月 · ¥${service.plans.prices[p].year/100} 年`:'PARTNER NETWORK',34,h-40);}}
+      }else{ctx.fillStyle=tier.color;ctx.font=`600 ${hero?126:48}px system-ui`;ctx.fillText(feedReady?(zh?'招募中':'OPEN CALL'):(zh?'加载中':'LOADING'),hero?32:22,hero?252:145);ctx.textAlign='right';ctx.font=`300 ${hero?80:48}px system-ui`;ctx.fillText('↗',w-28,hero?252:145);if(hero){ctx.textAlign='left';ctx.font='23px system-ui';ctx.fillStyle='#90acae';ctx.fillText(service?`PAGE ${p}  /  ¥${service.plans.prices[p].month/100} 月 · ¥${service.plans.prices[p].year/100} 年`:'SPONSOR NETWORK',34,h-40);}}
       tile.pages.push(canvas);
     }}drawPanels();
   }
@@ -127,7 +127,7 @@ export async function createSponsorBillboard(THREE,zh,onLoad){
       if(transition<1){tile.ctx.drawImage(tile.pages[previousPage],-progress*w,0);tile.ctx.drawImage(tile.pages[page],(1-progress)*w,0);}else tile.ctx.drawImage(tile.pages[page],0,0);
       tile.texture.needsUpdate=true;const brand=feed.find(s=>s.tier===tile.tier.id&&s.page===page+1&&s.endAt>Date.now()+serverOffset);tile.mesh.userData.sponsorURL=transition===1?brand?.url:null;
     }
-    const {ctx,canvas,texture}=masthead;ctx.fillStyle='#0a141d';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#a6c1c5';ctx.font='600 24px monospace';ctx.fillText('TECHLAND  /  BUILT TOGETHER',18,49);ctx.textAlign='right';ctx.font='22px monospace';ctx.fillText(`PARTNER NETWORK   ${page+1} / 3`,canvas.width-18,49);ctx.textAlign='left';texture.needsUpdate=true;
+    const {ctx,canvas,texture}=masthead;ctx.fillStyle='#0a141d';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#a6c1c5';ctx.font='600 24px monospace';ctx.fillText('TECHLAND  /  BUILT TOGETHER',18,49);ctx.textAlign='right';ctx.font='22px monospace';ctx.fillText(`SPONSOR NETWORK   ${page+1} / 3`,canvas.width-18,49);ctx.textAlign='left';texture.needsUpdate=true;
   }
   repaintPages();
   createSponsorService().then(value=>{service=value;application=createSponsorApplication(service,zh);populate();refreshFeed();onLoad();}).catch(()=>populate());
