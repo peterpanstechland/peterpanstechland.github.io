@@ -453,11 +453,15 @@
         -0.88
       ],
       "rotationY": 0,
-      "taskId": "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+      "taskId": "d2c41660-0e1e-4457-8699-d99155d3572c",
       "description": {
-        "en": "Generation completed, but the geometry failed visual review. No substitute is displayed.",
-        "zh": "任务完成，但几何变形，未通过验收；场景中不显示替代模型。"
-      }
+        "en": "Both the initial generation and authorized retry produced deformed geometry. Neither is displayed.",
+        "zh": "首次生成和已授权补做均出现几何变形，未通过验收；两份模型均未接入。"
+      },
+      "attemptedTaskIds": [
+        "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+        "d2c41660-0e1e-4457-8699-d99155d3572c"
+      ]
     },
     {
       "id": "21_monitor",

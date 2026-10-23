@@ -250,13 +250,25 @@
         "en": "PC tower — rejected",
         "zh": "电脑主机"
       },
-      "task_id": "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+      "task_id": "d2c41660-0e1e-4457-8699-d99155d3572c",
       "status": "rejected_visual",
-      "actual_credits": 20,
+      "actual_credits": 50,
       "website_path": null,
       "sha256": null,
       "notes": [
-        "Provider completed and charged 20 credits, but the mesh is severely deformed. Excluded from scene. No automatic retry. Separate 30-credit image-to-model proposal remains unsubmitted pending confirmation."
+        "Both provider-success outputs failed visual acceptance and are excluded. Total spent on this asset: 50 credits."
+      ],
+      "attempts": [
+        {
+          "task_id": "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+          "actual_credits": 20,
+          "acceptance": "rejected_visual"
+        },
+        {
+          "task_id": "d2c41660-0e1e-4457-8699-d99155d3572c",
+          "actual_credits": 30,
+          "acceptance": "rejected_visual"
+        }
       ]
     },
     {

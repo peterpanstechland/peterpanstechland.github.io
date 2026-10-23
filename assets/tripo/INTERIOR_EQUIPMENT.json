@@ -4,13 +4,12 @@
   "branch": "codex/garage-interior-equipment",
   "publication": "local_preview_only",
   "approved_batch_credits": 220,
-  "actual_total_credits": 220,
-  "balance_after": 125,
+  "actual_total_credits": 250,
+  "balance_after": 95,
   "frozen_after": 0,
-  "generated_unique_models": 10,
   "accepted_unique_models": 9,
   "accepted_scene_instances": 10,
-  "rejected_unique_models": 1,
+  "rejected_unique_models": 2,
   "automatic_retries": 0,
   "credits_purchased": false,
   "items": [
@@ -206,7 +205,7 @@
       "display_pivot": "bottom centre",
       "instances": 0,
       "notes": [
-        "Provider completed and charged 20 credits, but the mesh is severely deformed. Excluded from scene. No automatic retry. Separate 30-credit image-to-model proposal remains unsubmitted pending confirmation."
+        "Provider completed and charged 20 credits, but the mesh was severely deformed. Excluded from scene. See separately authorized retry below."
       ]
     },
     {
@@ -291,6 +290,35 @@
       "notes": [
         "Original Tripo frame retained. Generated clutter clipped from tabletop. Local steel top and lower-shelf inserts close the cut and source holes. Raw source unchanged."
       ]
+    },
+    {
+      "id": "20_pc_tower_v2",
+      "name": "电脑主机（已授权补做）",
+      "task_type": "image_to_model",
+      "task_id": "d2c41660-0e1e-4457-8699-d99155d3572c",
+      "provider_status": "success",
+      "acceptance": "rejected_visual",
+      "actual_credits": 30,
+      "raw_glb": "assets/tripo/raw/tripo-out/20-pc-tower-v2-d2c41660/model.glb",
+      "raw_sha256": "57fe4095ba3683d26a775a964237761900d9b636cc2369900e71df77096896e3",
+      "preview": "assets/tripo/equipment-previews/20_pc_tower_v2.png",
+      "source_triangle_count": 5461,
+      "embedded_images_decoded": 3,
+      "website_glb": null,
+      "website_sha256": null,
+      "display_size_m_xyz": [
+        0.22,
+        0.44,
+        0.4
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 0,
+      "notes": [
+        "One explicitly authorized image-to-model retry. Provider completed and charged 30 credits; geometry again severely deformed in both provider preview and GLB browser review. Rejected and excluded.",
+        "Free task inspection returned only one model output; no usable alternate output was available. No further paid submissions."
+      ],
+      "requested_asset_id": "20_pc_tower"
     }
   ],
   "validation": {
@@ -309,16 +337,26 @@
       "Existing vscode-languageserver-types dynamic require warning",
       "Webpack persistent cache could not snapshot dependencies; compilation succeeded",
       "Docusaurus update check could not access its local config store"
-    ]
+    ],
+    "retry_pc_browser": "Rejected: severe mesh deformation; all three embedded images decode but that does not imply usable geometry.",
+    "blog_parent_console_note": "One MutationObserver exception without a source URL was observed in the parent blog page. The standalone garage had no console errors; the blog page and all accepted scene assets loaded successfully."
   },
   "limitations": [
     "Visual display assets, not manufacturer CAD.",
     "OpenPnP machine is a generic compatible concept.",
-    "PC tower remains undelivered unless separately approved retry passes review."
+    "PC tower remains undelivered after two paid provider-success outputs failed visual QA. Both original outputs are preserved; spending stopped at the authorized 250 credits."
   ],
   "screenshots": {
     "desktop": "assets/tripo/equipment-previews/interior-desktop.png",
     "mobile": "assets/tripo/equipment-previews/interior-mobile.png",
     "failure": "assets/tripo/equipment-previews/failure-fallback.png"
-  }
+  },
+  "requested_unique_assets": 10,
+  "generation_tasks": 11,
+  "approved_retry_credits": 30,
+  "approved_total_credits": 250,
+  "rejected_generation_tasks": 2,
+  "undelivered_requested_assets": [
+    "20_pc_tower"
+  ]
 }

@@ -1,8 +1,8 @@
 {
   "revision": "interior-equipment-v1",
-  "status": "nine_models_accepted_pc_rejected_pending_separate_retry_confirmation",
+  "status": "nine_assets_delivered_pc_rejected_after_authorized_retry",
   "requested_at": "2026-10-22",
-  "paid_calls_submitted": 10,
+  "paid_calls_submitted": 11,
   "unique_models": 10,
   "scene_instances": 11,
   "policy": {
@@ -623,11 +623,30 @@
     "checked_date": "2026-10-23"
   },
   "authorization": "User explicitly confirmed this batch: 220 Tripo credits; first X1C review gate; no paid retry or purchase.",
-  "actual_credits_total": 220,
+  "actual_credits_total": 250,
   "balance_after_batch": {
-    "balance": 125,
+    "balance": 95,
     "frozen": 0
   },
   "accepted_unique_models": 9,
-  "rejected_unique_models": 1
+  "rejected_unique_models": 1,
+  "retry_authorization": {
+    "asset_id": "20_pc_tower",
+    "date": "2026-10-23",
+    "user_confirmation": "确认追加 30 积分补做主机",
+    "additional_credit_limit": 30,
+    "total_credit_limit": 250,
+    "input": "assets/tripo/raw/tripo-out/20-pc-tower-137d1134/generated_image.jpeg",
+    "model": "v3.1-20260211",
+    "face_limit": 6000,
+    "texture_quality": "standard",
+    "pbr": true,
+    "auto_size": true,
+    "task_id": "d2c41660-0e1e-4457-8699-d99155d3572c",
+    "status": "provider_success_visual_rejected",
+    "automatic_retries": 0,
+    "credits_consumed": 30,
+    "raw_glb": "assets/tripo/raw/tripo-out/20-pc-tower-v2-d2c41660/model.glb",
+    "preview": "assets/tripo/raw/tripo-out/20-pc-tower-v2-d2c41660/preview.png"
+  }
 }
