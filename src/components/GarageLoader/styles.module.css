@@ -1,0 +1,86 @@
+.loader {
+  --loader-cyan: #8bf4ed;
+  --loader-pink: #ff8cc6;
+  color: #f4f9ff;
+  width: min(100%, 380px);
+  box-sizing: border-box;
+  padding: 18px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: var(--ifm-font-family-base, system-ui, sans-serif);
+}
+.bootLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #a5bdcd;
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+.statusDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--loader-cyan);
+  box-shadow: 0 0 9px #64ddd980;
+}
+.labelDivider {color: #506270; margin: 0 2px;}
+.stage {
+  position: relative;
+  display: flex;
+  width: 256px;
+  height: 188px;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0 0;
+  background: radial-gradient(ellipse at 50% 55%, #3cabb011 0, #3cabb008 42%, transparent 70%);
+}
+.cat {display: block; width: 224px; height: 194px; max-width: none; user-select: none;}
+.stageCorner {
+  position: absolute;
+  top: 33px;
+  left: 18px;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid #6bb3be55;
+  border-left: 1px solid #6bb3be55;
+}
+.stageCorner::after {content: ''; position: absolute; width: 12px; height: 12px; left: 208px; top: 112px; border-right: 1px solid #6bb3be55; border-bottom: 1px solid #6bb3be55;}
+.serial, .stageReadout {
+  position: absolute;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  color: #79929f;
+  font-size: 7px;
+  letter-spacing: 1px;
+}
+.serial {bottom: 13px; left: 19px;}
+.stageReadout {top: 40px; right: 13px; color: #d594b1; font-size: 6px; writing-mode: vertical-rl;}
+.title {margin: 0; color: #f4f9ff; font-size: 24px; font-weight: 740; line-height: 1.3; letter-spacing: .5px;}
+.subtitle {margin: 8px 0 22px; color: #a5b8c8; font-size: 12px; line-height: 1.6;}
+.progressArea {width: 100%;}
+.progressMeta {display: flex; justify-content: space-between; align-items: baseline; gap: 10px; color: #c1d0dc; font-size: 10px; line-height: 1.5;}
+.progressNumber {color: var(--loader-cyan); font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; font-variant-numeric: tabular-nums; white-space: nowrap;}
+.track {position: relative; overflow: hidden; width: 100%; height: 6px; margin-top: 8px; border-radius: 2px; background: #233340; box-shadow: 0 0 0 1px #88c4d013;}
+.fill {display: block; height: 100%; background: linear-gradient(90deg, #5ad4cf, #b3f6e4 65%, #ff9bc9); border-radius: 2px; transition: width 350ms ease; box-shadow: 0 0 10px #88e9e744;}
+.trackSegments {position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent calc(10% - 2px), #101a27aa calc(10% - 2px), #101a27aa 10%); pointer-events: none;}
+.indeterminate .fill {width: 32%; animation: loadingDrift 2.8s ease-in-out infinite;}
+.progressFoot {display: flex; justify-content: space-between; gap: 12px; margin-top: 9px; color: #8196a8; font-size: 9px; line-height: 1.6;}
+.count {font-family: ui-monospace, SFMono-Regular, Consolas, monospace; color: #a8bdca; white-space: nowrap; font-variant-numeric: tabular-nums;}
+.finishing .statusDot {background: #ffd28d; box-shadow: 0 0 10px #ffd28d66;}
+@keyframes loadingDrift {0%, 100% {transform: translateX(-100%);} 50% {transform: translateX(315%);}}
+@media (max-width: 440px) {
+  .loader {padding: 16px 24px 18px;}
+  .bootLabel {font-size: 8px; letter-spacing: 1.1px; gap: 6px;}
+  .stage {height: 176px; margin-top: 5px; transform: scale(.94);}
+  .title {font-size: 22px;}
+  .subtitle {font-size: 11px; margin-bottom: 18px;}
+  .progressFoot {font-size: 8px;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .fill {transition: none;}
+  .indeterminate .fill {animation: none; transform: none; width: 100%; opacity: .55;}
+}

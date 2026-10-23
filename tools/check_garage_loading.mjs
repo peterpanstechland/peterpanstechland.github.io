@@ -1,11 +1,17 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import {loadingPhases,runLoadingPhase,optimizedModel} from '../static/maker-garage-preview/loading-plan.js';
+import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress} from '../static/maker-garage-preview/loading-plan.js';
 const config=JSON.parse(await fs.readFile('static/maker-garage-preview/assets.json','utf8'));
 const manifest=JSON.parse(await fs.readFile('static/maker-garage-preview/optimized-assets.json','utf8'));
 const entries=config.assets.map(config=>({config}));
 const phases=loadingPhases(entries);
 assert.equal(phases[0].length,7);
+assert.deepEqual(initialLoadingProgress([]),{completed:0,total:0});
+assert.deepEqual(initialLoadingProgress(entries),{completed:0,total:7});
+const states=entries.map(entry=>({...entry,state:entry.config.id==='04_lucky_cat'?'ready':'pending'}));
+assert.deepEqual(initialLoadingProgress(states),{completed:1,total:7});
+for(const entry of states)if(!phases[0].some(hero=>hero.config.id===entry.config.id))entry.state='ready';
+assert.deepEqual(initialLoadingProgress(states),{completed:1,total:7},'Background equipment must not inflate initial progress');
 assert.ok(phases[0].some(e=>e.config.id==='04_lucky_cat'));
 const all=phases.flat();assert.equal(new Set(all).size,21);assert.equal(all.length,21);
 assert.ok(phases[2].some(e=>e.config.id==='23_workbench'));
