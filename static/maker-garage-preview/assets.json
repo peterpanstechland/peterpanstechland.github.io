@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "assets": [
     {
       "id": "01_garage_shell",
@@ -7,7 +7,7 @@
         "en": "Garage shell",
         "zh": "车库外壳"
       },
-      "file": "models/01_garage_shell.glb",
+      "file": "models/01_garage_shell-clearance.glb",
       "status": "verified",
       "targetSize": [
         4.5,
@@ -21,7 +21,13 @@
         0
       ],
       "taskId": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
-      "href": "/docs/about"
+      "href": "/docs/about",
+      "modelRevision": "e6cd505d7b1d",
+      "postprocess": "blender-surface-refinement-and-shutter-clearance-v1",
+      "description": {
+        "zh": "保留原网格、UV、贴图与局部校平；门口原生花盆及小枝条向车库内移动 0.28 米，避开卷帘门。",
+        "en": "Original mesh, UVs, textures and conservative surface refinement retained. Native doorway planter and small stem moved 0.28 m inward to clear the shutter."
+      }
     },
     {
       "id": "02_roller_shutter",
@@ -37,7 +43,13 @@
       ],
       "normalized": true,
       "file": "models/02_roller_shutter.glb",
-      "taskId": "60038920-5601-4de0-9202-b4620bd5b1c8"
+      "taskId": "60038920-5601-4de0-9202-b4620bd5b1c8",
+      "modelRevision": "dc0403fc97df",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：逐片清理门片与着色，保留 26 片独立轴心、涂鸦和开关参数。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Cleaned each of the 26 door slats independently; preserved names, individual pivots, roll metadata and continuous graffiti UVs. Original source retained."
+      }
     },
     {
       "id": "03_profile_sign",
@@ -55,7 +67,13 @@
       ],
       "href": "/docs/about",
       "file": "models/03_profile_sign.glb",
-      "taskId": "a4544685-ffb3-46e6-a49e-c0dae342e326"
+      "taskId": "a4544685-ffb3-46e6-a49e-c0dae342e326",
+      "modelRevision": "f547f382efcd",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：清理圆形招牌框接缝与异常反光，保留霓虹分段。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Cleaned circular frame seams and reduced noisy metal highlights; original neon segments and empty portrait area retained. Original source retained."
+      }
     },
     {
       "id": "04_lucky_cat",
@@ -67,13 +85,19 @@
       "status": "verified",
       "normalized": true,
       "position": [
-        -1.4,
+        -1.85,
         0,
-        2.25
+        1.85
       ],
       "taskId": "36e3dca6-efcb-428b-a335-ef2058d6786f",
       "rigTaskId": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
-      "href": "/docs/about"
+      "href": "/docs/about",
+      "modelRevision": "730e14e7524b",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：改善猫身着色，保留原骨骼、权重与招手动作。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Smoothed skin shading and reduced excessive normal-map relief; no remeshing or weight changes. Original source retained."
+      }
     },
     {
       "id": "05_project_vending",
@@ -84,14 +108,21 @@
       "status": "verified_with_notes",
       "targetHeight": 1.8,
       "rotationY": -1.5707963267948966,
+      "placementYaw": -0.4363323129985824,
       "position": [
-        1.55,
+        2.05,
         0,
-        2.12
+        1.85
       ],
       "href": "/docs/projects",
       "file": "models/05_project_vending.glb",
-      "taskId": "54b92a08-ba80-4d36-ae83-1352ae38cac7"
+      "taskId": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "modelRevision": "23255d23af7b",
+      "postprocess": "blender-surface-refinement-v1",
+      "description": {
+        "zh": "Blender 局部校平原机壳网格，保留原始侧面涂鸦；去掉侧面大品牌覆盖牌。",
+        "en": "Conservative Blender vertex refinement of the original textured mesh. Original faces, UVs and details retained; oversized covering panels removed."
+      }
     },
     {
       "id": "06_showcase_zone",
@@ -101,32 +132,23 @@
       },
       "status": "verified_with_notes",
       "targetHeight": 2.35,
-      "rotationY": 0,
+      "rotationY": 1.5707963267948966,
       "position": [
-        0.25,
+        -1.04,
         0,
-        -0.75
+        -0.3
       ],
       "href": "/docs/projects",
       "normalized": true,
       "file": "models/06_showcase_zone.glb",
-      "taskId": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
-    },
-    {
-      "id": "07_tools_zone",
-      "label": {
-        "en": "Maker workbench",
-        "zh": "工具创作区"
-      },
-      "status": "rejected",
-      "targetHeight": 2.3,
-      "rotationY": 0,
-      "position": [
-        -1.7,
-        0,
-        -0.35
-      ],
-      "href": "/docs/guides"
+      "taskId": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "uniformScale": 0.78,
+      "modelRevision": "e74514f84417",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：把破损搁板补为三层实体钢搁板，保留分隔与下柜。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Replaced torn horizontal shelf surfaces with three solid steel inserts. Original vertical partitions, lower doors, trim and empty project slots retained. Original source retained."
+      }
     },
     {
       "id": "08_street_lamp",
@@ -136,14 +158,27 @@
       },
       "status": "verified_with_notes",
       "targetHeight": 2.8,
-      "rotationY": -1.5707963267948966,
+      "rotationY": 0,
       "position": [
         -2.95,
         0,
         1.8
       ],
       "file": "models/08_street_lamp.glb",
-      "taskId": "b369cdad-33bf-4cea-916a-42822d021d60"
+      "taskId": "b369cdad-33bf-4cea-916a-42822d021d60",
+      "modelRevision": "d7dae169a919",
+      "postprocess": "blender-street-detail-v1",
+      "description": {
+        "zh": "原始 Tripo 路灯经 Blender 调整：灯头朝向车库门，灯杆和底座保持位置；原架子上增加本地制作的电子盆栽、固定托板和青蓝灯环。",
+        "en": "Real Tripo lamp refined in Blender: head turned toward the garage, pole/base retained. Locally authored electronic planter, mounting plate and cyan light ring added to the existing shelf."
+      },
+      "normalized": true,
+      "uniformScale": 1,
+      "lightAnchor": [
+        0.7149999737739563,
+        2.569999933242798,
+        0.7350000143051147
+      ]
     },
     {
       "id": "09_trash_bin",
@@ -160,7 +195,13 @@
         0.25
       ],
       "file": "models/09_trash_bin.glb",
-      "taskId": "1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+      "taskId": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
+      "modelRevision": "3d7838db3984",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：清理底部尖刺与后部破片，补制平整底座和后板。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Removed torn ground scraps, bottom spikes and the broken rear flap; rebuilt a level bottom and solid rear panel. Rusty blue front, lid and handles retained. Original source retained."
+      }
     },
     {
       "id": "10_utility_cabinet",
@@ -177,7 +218,13 @@
         0.3
       ],
       "file": "models/10_utility_cabinet.glb",
-      "taskId": "79c20750-5f2b-4e8f-bf11-b39338c883f4"
+      "taskId": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
+      "modelRevision": "f9e28708d87c",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：校平顶盖并修正机柜着色，保留通风口、铰链与把手。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Flattened the broad cabinet top and repaired side-panel shading; hinges, vents, handles and weathered marks retained. Original source retained."
+      }
     },
     {
       "id": "11_tree",
@@ -195,7 +242,13 @@
       ],
       "normalized": true,
       "file": "models/11_tree.glb",
-      "taskId": "f83af78c-7c37-48c0-8de7-e2706f983982"
+      "taskId": "f83af78c-7c37-48c0-8de7-e2706f983982",
+      "modelRevision": "9632cddca194",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：清理冗余几何与底部接触面，保留树叶轮廓。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Removed redundant coincident/degenerate geometry and stabilized base contact. Preserved leaf silhouettes, plant separation and source color; no blanket leaf decimation or smoothing. Original source retained."
+      }
     },
     {
       "id": "12_plants_grass",
@@ -213,7 +266,13 @@
       ],
       "normalized": true,
       "file": "models/12_plants_grass.glb",
-      "taskId": "14dc3618-4de8-4bee-959b-3a807a17bdbb"
+      "taskId": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
+      "modelRevision": "23cedbdd1d10",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：清理几何、稳定盆底接触面，保留植物与草地分离。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Removed redundant coincident/degenerate geometry and stabilized base contact. Preserved leaf silhouettes, plant separation and source color; no blanket leaf decimation or smoothing. Original source retained."
+      }
     },
     {
       "id": "13_street_base",
@@ -234,7 +293,391 @@
         0.6
       ],
       "file": "models/13_street_base.glb",
-      "taskId": "38eb318a-5bfd-492d-91e0-cdc0e25973f5"
+      "taskId": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+      "modelRevision": "540b4ecf97cd",
+      "postprocess": "blender-garage-v1",
+      "description": {
+        "zh": "Blender 优化：把薄片街道重建为闭合实体底座，烘焙保留原路面颜色与表面细节。 原始 Tripo 输出保留。",
+        "en": "Blender repair: Rebuilt the torn paper-thin street as a closed beveled foundation. Original Tripo road color was baked in Blender onto the new top; new side walls use local concrete material. Original source retained."
+      },
+      "solidFoundation": true
+    },
+    {
+      "id": "14_bambu_x1c",
+      "label": {
+        "en": "Bambu Lab X1 Carbon",
+        "zh": "拓竹 X1 Carbon"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0.8,
+        -0.9405
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "c3ccb749-d329-4ee6-a427-9944d5fffd8a",
+      "file": "models/14_bambu_x1c.glb",
+      "supportAsset": "23_workbench",
+      "description": {
+        "zh": "Blender 修复：打印平台补制为平整打印板、加热底板和支架，保留原机舱与打印头。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Preserved thin double-wall spacing and repaired panel shading. Removed the warped build platform and rebuilt a flat PEI sheet, heated substrate, underframe and rear support; original chassis, toolhead and screen retained. Original download preserved; display model, not manufacturer CAD."
+      },
+      "labels": [
+        {
+          "text": "Bambu Lab",
+          "subtext": "X1 CARBON",
+          "center": [
+            -0.194,
+            0.245,
+            0
+          ],
+          "size": [
+            0.28,
+            0.21
+          ],
+          "face": "left"
+        },
+        {
+          "text": "Bambu Lab",
+          "subtext": "X1 CARBON",
+          "center": [
+            0.194,
+            0.245,
+            0
+          ],
+          "size": [
+            0.28,
+            0.21
+          ],
+          "face": "right"
+        },
+        {
+          "text": "X1 Carbon",
+          "center": [
+            0.065,
+            0.415,
+            0.194
+          ],
+          "size": [
+            0.11,
+            0.03
+          ]
+        }
+      ],
+      "modelRevision": "61584d58f072",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "15_makeblock_laserbox",
+      "label": {
+        "en": "Makeblock Laserbox",
+        "zh": "Makeblock Laserbox"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0.8,
+        0.513
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "02b354be-e446-4be5-92b0-fa6d86c707be",
+      "file": "models/15_makeblock_laserbox.glb",
+      "supportAsset": "23_workbench",
+      "description": {
+        "zh": "Blender 修复：替换破碎观察窗，校正侧板，保留原外壳。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Straightened outer side walls. Cut away the crumpled window geometry and installed a flat, solid smoked inspection insert; enclosure and lid frame retained. Original download preserved; display model, not manufacturer CAD."
+      },
+      "labels": [
+        {
+          "text": "Makeblock",
+          "subtext": "LASERBOX",
+          "center": [
+            0,
+            0.16,
+            0.264
+          ],
+          "size": [
+            0.28,
+            0.1
+          ]
+        }
+      ],
+      "modelRevision": "c90c0f807088",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "16_openpnp_machine",
+      "label": {
+        "en": "OpenPnP pick-and-place",
+        "zh": "OpenPnP 桌面贴片机"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0.8,
+        -0.356
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "fa25ef33-b2e9-42a3-8538-c7e7b37ef34e",
+      "file": "models/16_openpnp_machine.glb",
+      "supportAsset": "23_workbench",
+      "description": {
+        "zh": "Blender 修复：校正底座与龙门支架表面，保留吸嘴、送料区和 PCB。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Regularized base front and outer gantry supports; nozzle, feeders and PCB kept. Original download preserved; display model, not manufacturer CAD."
+      },
+      "labels": [
+        {
+          "text": "OpenPnP",
+          "center": [
+            0,
+            0.05,
+            0.3
+          ],
+          "size": [
+            0.2,
+            0.04
+          ]
+        }
+      ],
+      "modelRevision": "0087612ede91",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "17_soldering_station",
+      "label": {
+        "en": "Soldering station",
+        "zh": "焊台"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        -0.09,
+        0.75,
+        -0.7
+      ],
+      "rotationY": 0,
+      "taskId": "86e23643-ce8d-418b-bbec-64e1c813e73c",
+      "file": "models/17_soldering_station.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "zh": "Blender 修复：校平控制器顶面与侧壁，修正异常反光。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Flattened controller top and sides; iron, connector, knob and cable untouched. Original download preserved; display model, not manufacturer CAD."
+      },
+      "modelRevision": "1034a715058e",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "18_hot_air_station",
+      "label": {
+        "en": "Hot-air rework station",
+        "zh": "热风枪与控制台"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        0.25,
+        0.75,
+        -0.7
+      ],
+      "rotationY": 0,
+      "taskId": "dc664096-8d52-4c65-b868-ac72f30536e8",
+      "file": "models/18_hot_air_station.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "zh": "Blender 修复：校平底座台面与控制器侧壁，保留热风枪与软管。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Flattened base deck and controller side; gun, holder and hose retained. Original download preserved; display model, not manufacturer CAD."
+      },
+      "modelRevision": "4a0e9063eb37",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "19_oscilloscope",
+      "label": {
+        "en": "Oscilloscope",
+        "zh": "示波器"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        -0.42,
+        0.75,
+        -0.7
+      ],
+      "rotationY": 0,
+      "taskId": "ea6b739a-3bdb-46f9-ba7e-330aa3201818",
+      "file": "models/19_oscilloscope.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "zh": "Blender 修复：校平机壳顶面并修正着色，保留面板和接口。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Flattened top housing and repaired shading; screen recess, rounded side walls, handle and front controls retained. Original download preserved; display model, not manufacturer CAD."
+      },
+      "labels": [
+        {
+          "text": "SIGNAL / CH1",
+          "screen": "scope",
+          "center": [
+            -0.067,
+            0.085,
+            0.07
+          ],
+          "size": [
+            0.135,
+            0.078
+          ]
+        }
+      ],
+      "modelRevision": "c4ed2d5ac483",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "20_pc_tower",
+      "label": {
+        "en": "PC tower — rejected",
+        "zh": "电脑主机"
+      },
+      "status": "rejected",
+      "normalized": true,
+      "position": [
+        0.34,
+        0,
+        -0.88
+      ],
+      "rotationY": 0,
+      "taskId": "d2c41660-0e1e-4457-8699-d99155d3572c",
+      "description": {
+        "en": "Both the initial generation and authorized retry produced deformed geometry. Neither is displayed.",
+        "zh": "首次生成和已授权补做均出现几何变形，未通过验收；两份模型均未接入。"
+      },
+      "attemptedTaskIds": [
+        "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+        "d2c41660-0e1e-4457-8699-d99155d3572c"
+      ]
+    },
+    {
+      "id": "21_monitor",
+      "label": {
+        "en": "Dual monitors",
+        "zh": "双显示器"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        -0.29,
+        0.75,
+        -1.07
+      ],
+      "rotationY": 0,
+      "taskId": "ca03c270-717b-437b-8c1a-9bed3f606071",
+      "file": "models/21_monitor.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "zh": "Blender 修复：校平屏幕与底部接触面，保留支架与后壳。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Flattened screen face and base contact plane; original stand and rear casing retained. Original download preserved; display model, not manufacturer CAD."
+      },
+      "labels": [
+        {
+          "text": "TECHLAND / DESIGN",
+          "screen": "cad",
+          "center": [
+            0,
+            0.262,
+            0.09
+          ],
+          "size": [
+            0.515,
+            0.272
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "position": [
+            0.29,
+            0.75,
+            -1.07
+          ],
+          "labels": [
+            {
+              "text": "TECHLAND / BUILD",
+              "screen": "terminal",
+              "center": [
+                0,
+                0.262,
+                0.09
+              ],
+              "size": [
+                0.515,
+                0.272
+              ]
+            }
+          ]
+        }
+      ],
+      "modelRevision": "beaf0d3d0847",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "22_office_desk",
+      "label": {
+        "en": "Office desk",
+        "zh": "办公桌"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        0,
+        0,
+        -0.88
+      ],
+      "rotationY": 0,
+      "taskId": "6fd28df2-a825-42f7-af68-68531cc8cc72",
+      "file": "models/22_office_desk.glb",
+      "supportAsset": "01_garage_shell",
+      "description": {
+        "zh": "Blender 修复：保留木桌面和抽屉，补制规整方管桌架、横撑和脚垫。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Retained textured wooden top/drawers. Replaced malformed metal legs with four square tubes, support rails and level rubber feet. Original download preserved; display model, not manufacturer CAD."
+      },
+      "tabletop": true,
+      "levelFeet": true,
+      "modelRevision": "f47443f05487",
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "23_workbench",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工作台"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0,
+        -0.07
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "039ec198-a648-4b4e-b8e8-306e1440b3ea",
+      "file": "models/23_workbench.glb",
+      "supportAsset": "01_garage_shell",
+      "description": {
+        "zh": "Blender 修复：保留原贴图上围边，重建桌架、实体钢台面和下层搁板。 原始 Tripo 输出保留；这是场景展示模型，品牌与屏幕文字后期制作。",
+        "en": "Blender repair of the real Tripo source. Retained textured Tripo upper apron. Rebuilt torn lower shelf, irregular legs and both work surfaces as solid beveled steel parts. Original download preserved; display model, not manufacturer CAD."
+      },
+      "tabletop": true,
+      "levelFeet": true,
+      "modelRevision": "985ddfa2b175",
+      "postprocess": "blender-repair-v1"
+    }
+  ],
+  "supersededAssets": [
+    {
+      "id": "07_tools_zone",
+      "status": "rejected",
+      "replacement": "23_workbench",
+      "reason": "Original output failed visual QA; retained only in production history."
     }
   ]
 }

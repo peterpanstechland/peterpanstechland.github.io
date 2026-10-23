@@ -1,0 +1,5 @@
+{
+  "apiBase": "https://techland-community-wall.peter-7dc.workers.dev/api/",
+  "mode": "shared",
+  "maxLocalEntries": 48
+}

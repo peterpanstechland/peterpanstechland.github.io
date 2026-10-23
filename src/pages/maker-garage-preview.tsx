@@ -113,10 +113,11 @@ export default function MakerGaragePreview(): React.JSX.Element {
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=grounded-v4.2`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=ambient-v1`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"
+                allow="camera 'self'"
                 allowFullScreen
                 onError={() => setStatus('error')}
               />

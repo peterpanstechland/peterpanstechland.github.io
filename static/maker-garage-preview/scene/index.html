@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <title>Cyber Maker Garage · Peter Pan’s Techland</title>
+  <link rel="stylesheet" href="./project-vending.css?v=city-neon-v1">
+  <link rel="stylesheet" href="./community-wall.css?v=community-v1">
+  <link rel="stylesheet" href="./sponsor-billboard.css?v=sponsor-portal-v1">
   <style>
     * { box-sizing: border-box; }
     :root { font-family: Inter, ui-sans-serif, system-ui, sans-serif; color: #f2edf7; background: #070b14; color-scheme: dark; }
@@ -28,6 +31,8 @@
     .control { min-height: 38px; border: 1px solid #524460; border-radius: 9px; padding: 9px 12px; background: #17121fe8; box-shadow: 0 3px 18px #0003; font-size: 11px; line-height: 1.25; backdrop-filter: blur(15px); }
     .control:hover:not(:disabled) { border-color: #c783d5; background: #2a1a35; }
     .control[aria-pressed="true"] { border-color: #64d2da; color: #9beff1; background: #15262ee8; }
+    .door-controls { display:flex; align-items:center; gap:6px; flex-wrap:wrap; padding:6px; border:1px solid #62516f; border-radius:12px; background:#13101bea; }
+    #shutter-status { color:#a6e6e1; font-size:10px; min-width:100px; padding:0 5px; }
     .hint { margin: 0; max-width: 210px; font-size: 10px; color: #9e94b0; line-height: 1.5; text-align: right; }
     .panel { position: fixed; z-index: 4; border: 1px solid #5b446b; border-radius: 15px; background: #18111fec; box-shadow: 0 20px 55px #0008; backdrop-filter: blur(22px); }
     #info { width: 285px; bottom: 82px; left: 22px; padding: 20px; }
@@ -75,9 +80,18 @@
     <div class="controls">
       <button class="control" id="overview" data-i18n="overview">Overview</button>
       <button class="control" id="front" data-i18n="front">Front view</button>
+      <button class="control" id="interior" data-i18n="interior">Workshop</button>
+      <button class="control" id="rear" data-i18n="rear">Community wall</button>
+      <button class="control" id="leave-trace" data-i18n="leaveTrace" aria-haspopup="dialog">Leave a trace</button>
+      <button class="control" id="projects" data-i18n="projects" aria-haspopup="dialog">Project vending machine</button>
+      <button class="control" id="sponsors" data-i18n="sponsors" aria-haspopup="dialog">Partners</button>
       <button class="control" id="cat-wave" disabled aria-pressed="false" data-i18n="wave">Beckon</button>
       <button class="control" id="effects" disabled aria-pressed="false" data-i18n="effects">Local effects</button>
-      <button class="control" id="shutter" disabled aria-pressed="false" data-i18n="shutter">Garage door</button>
+      <div class="door-controls" role="group" aria-label="Garage door">
+        <button class="control" id="shutter" disabled aria-pressed="false" data-i18n="shutter">Garage door</button>
+        <button class="control" id="shutter-pause" disabled data-i18n="shutterPause">Pause door</button>
+        <span id="shutter-status" aria-live="off"></span>
+      </div>
       <button class="control" id="asset-toggle" aria-expanded="false" aria-controls="asset-panel" data-i18n="assets">Assets</button>
       <button class="control retry" id="retry-failed" hidden data-i18n="retryFailed">Retry failed loads</button>
     </div>
@@ -116,6 +130,6 @@
       document.getElementById('reload').addEventListener('click', () => location.reload());
     })();
   </script>
-  <script type="module" src="./scene.js?v=grounded-v4.2"></script>
+  <script type="module" src="./scene.js?v=ambient-v1"></script>
 </body>
 </html>

@@ -1,0 +1,881 @@
+{
+  "version": 1,
+  "workshopInstances": 10,
+  "idempotent": true,
+  "allSupported": true,
+  "failures": [],
+  "report": {
+    "version": 1,
+    "method": "evaluated foot vertices and downward triangle rays",
+    "assets": {
+      "13_street_base": {
+        "status": "source-placement-preserved",
+        "deltaY": 0,
+        "finalPosition": [
+          0,
+          -0.3,
+          0.6
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -4.25,
+            -0.3,
+            -2.6999999999999993
+          ],
+          "max": [
+            4.25,
+            0,
+            3.8999999999999995
+          ]
+        }
+      },
+      "01_garage_shell": {
+        "status": "reviewed-native-plinth-offset",
+        "supportId": "13_street_base",
+        "deltaY": -0.22,
+        "nativeInteriorFloorAboveMount": [
+          0.2,
+          0.25
+        ],
+        "finalPosition": [
+          0,
+          -0.22,
+          0
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -2.2499999999999996,
+            -0.21999999999999997,
+            -1.75
+          ],
+          "max": [
+            2.25,
+            2.9800000000000004,
+            1.75
+          ]
+        }
+      },
+      "04_lucky_cat": {
+        "status": "settled",
+        "supportId": "13_street_base",
+        "deltaY": -0.001999808477878227,
+        "sampleCount": 40,
+        "supportedSamples": 40,
+        "supportY": [
+          0,
+          0
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -1.4,
+          -0.001999808477878227,
+          2.25
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -1.7551832104123617,
+            -0.002000000029799387,
+            1.9499780870294607
+          ],
+          "max": [
+            -1.04481674837927,
+            0.7980000658075136,
+            2.5500218814095823
+          ]
+        }
+      },
+      "05_project_vending": {
+        "status": "settled",
+        "supportId": "13_street_base",
+        "deltaY": -0.002,
+        "sampleCount": 70,
+        "supportedSamples": 70,
+        "supportY": [
+          0,
+          0
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          1.55,
+          -0.002,
+          2.12
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            0.7403631474351626,
+            -0.0020000000000000018,
+            1.6726000408911987
+          ],
+          "max": [
+            2.3596368525648375,
+            1.7980000000000003,
+            2.5673999591088013
+          ]
+        }
+      },
+      "08_street_lamp": {
+        "status": "settled",
+        "supportId": "13_street_base",
+        "deltaY": -0.002,
+        "sampleCount": 83,
+        "supportedSamples": 83,
+        "supportY": [
+          0,
+          0
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -2.95,
+          -0.002,
+          1.8
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -3.600712847883703,
+            -0.0020000000000000018,
+            1.0340544305948005
+          ],
+          "max": [
+            -2.299287152116297,
+            2.798,
+            2.5659455694051996
+          ]
+        }
+      },
+      "09_trash_bin": {
+        "status": "settled",
+        "supportId": "13_street_base",
+        "deltaY": -0.002000000000000014,
+        "sampleCount": 4,
+        "supportedSamples": 4,
+        "supportY": [
+          0,
+          0
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -2.45,
+          -0.002000000000000014,
+          0.25
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -2.7912562163770143,
+            -0.001999999999999988,
+            -0.052708946418905445
+          ],
+          "max": [
+            -2.1087437836229856,
+            0.948,
+            0.5527089464189054
+          ]
+        }
+      },
+      "10_utility_cabinet": {
+        "status": "settled",
+        "supportId": "13_street_base",
+        "deltaY": -0.002,
+        "sampleCount": 82,
+        "supportedSamples": 82,
+        "supportY": [
+          0,
+          0
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          2.35,
+          -0.002,
+          0.3
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            2.0094240345934797,
+            -0.0020000000000000018,
+            -0.05969581478321312
+          ],
+          "max": [
+            2.69057596540652,
+            1.648,
+            0.659695814783213
+          ]
+        }
+      },
+      "11_tree": {
+        "status": "settled",
+        "supportId": "13_street_base",
+        "deltaY": -0.002,
+        "sampleCount": 30,
+        "supportedSamples": 30,
+        "supportY": [
+          0,
+          0
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -2.35,
+          -0.002,
+          -0.9
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -3.328031635284424,
+            -0.002,
+            -1.7294055461883544
+          ],
+          "max": [
+            -1.3719683647155763,
+            2.198000047683716,
+            -0.07059445381164553
+          ]
+        }
+      },
+      "12_plants_grass": {
+        "status": "settled",
+        "supportId": "13_street_base",
+        "deltaY": -0.002,
+        "sampleCount": 31,
+        "supportedSamples": 31,
+        "supportY": [
+          0,
+          0
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          2.35,
+          -0.002,
+          1
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            1.9093090355396272,
+            -0.002,
+            0.6209687292575836
+          ],
+          "max": [
+            2.790690964460373,
+            0.798000011920929,
+            1.3790312707424164
+          ]
+        }
+      },
+      "06_showcase_zone": {
+        "status": "settled",
+        "supportId": "01_garage_shell/interior-floor",
+        "deltaY": 0.027999958276749344,
+        "sampleCount": 34,
+        "supportedSamples": 34,
+        "supportY": [
+          0.029999958276749346,
+          0.029999958276749346
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -1.04,
+          0.027999958276749344,
+          -0.3
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -1.2740000051879885,
+            0.027999958276749344,
+            -1.1580000090885156
+          ],
+          "max": [
+            -0.8059999948120118,
+            1.8609998449373197,
+            0.5580000090885158
+          ]
+        }
+      },
+      "22_office_desk": {
+        "status": "settled",
+        "supportId": "01_garage_shell/interior-floor",
+        "deltaY": 0.027999958276749344,
+        "sampleCount": 6,
+        "supportedSamples": 6,
+        "supportY": [
+          0.029999958276749346,
+          0.029999958276749346
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          0,
+          0.027999958276749344,
+          -0.88
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -0.6249999403953552,
+            0.027999958276749344,
+            -1.229999994431826
+          ],
+          "max": [
+            0.625,
+            0.7479999868869789,
+            -0.5300000056532258
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          -0.0020000000000000018
+        ],
+        "adjustableFeet": [
+          {
+            "x": -0.6055000387132168,
+            "z": -1.1880069124698638,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          },
+          {
+            "x": -0.6055000387132168,
+            "z": -0.5546123797569505,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          },
+          {
+            "x": 0.564499918371439,
+            "z": -1.1880069124698638,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          },
+          {
+            "x": 0.564499918371439,
+            "z": -0.5546123797569505,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          }
+        ]
+      },
+      "23_workbench": {
+        "status": "settled",
+        "supportId": "01_garage_shell/interior-floor",
+        "deltaY": 0.027999958276749344,
+        "sampleCount": 16,
+        "supportedSamples": 16,
+        "supportY": [
+          0.029999958276749346,
+          0.029999958276749346
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          1.3,
+          0.027999958276749344,
+          -0.07
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            0.969999986886978,
+            0.027999958276749344,
+            -1.170000023841858
+          ],
+          "max": [
+            1.6300000131130221,
+            0.7779999582767494,
+            1.0300000238418578
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          -0.0020000000000000018
+        ],
+        "adjustableFeet": [
+          {
+            "x": 1.5849999964237211,
+            "z": -1.079999990463257,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          },
+          {
+            "x": 1.0150000035762785,
+            "z": -1.079999990463257,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          },
+          {
+            "x": 1.5849999964237216,
+            "z": 0.9399999904632568,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          },
+          {
+            "x": 1.015000003576279,
+            "z": 0.9399999904632568,
+            "bottom": 0.029999958276749346,
+            "top": 0.03199995827674934,
+            "height": 0.004,
+            "locallyAuthored": true
+          }
+        ]
+      },
+      "14_bambu_x1c": {
+        "status": "settled",
+        "supportId": "23_workbench",
+        "deltaY": -0.0240000510364764,
+        "sampleCount": 36,
+        "supportedSamples": 36,
+        "supportY": [
+          0.7779999340623625,
+          0.7779999340623625
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          1.3,
+          0.7759999489635236,
+          -0.9405
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            1.1055000007152558,
+            0.7759999340623625,
+            -1.1349999843835832
+          ],
+          "max": [
+            1.4944999992847443,
+            1.2329999661296613,
+            -0.7459999858140945
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          -0.0018981207609176654
+        ]
+      },
+      "15_makeblock_laserbox": {
+        "status": "settled",
+        "supportId": "23_workbench",
+        "deltaY": -0.024000065937637594,
+        "sampleCount": 105,
+        "supportedSamples": 105,
+        "supportY": [
+          0.7779999340623625,
+          0.7779999340623625
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          1.3,
+          0.7759999340623625,
+          0.513
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            1.036000031232834,
+            0.7759999340623625,
+            0.03401230621337892
+          ],
+          "max": [
+            1.5639999687671662,
+            1.0439999407380827,
+            0.9916929488182068
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          0.011845019042491911
+        ]
+      },
+      "16_openpnp_machine": {
+        "status": "settled",
+        "supportId": "23_workbench",
+        "deltaY": -0.0240000510364764,
+        "sampleCount": 17,
+        "supportedSamples": 17,
+        "supportY": [
+          0.7779999340623625,
+          0.7779999340623625
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          1.3,
+          0.7759999489635236,
+          -0.356
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            1.0000000178813935,
+            0.7759999340623625,
+            -0.7059999642372132
+          ],
+          "max": [
+            1.6000000417232514,
+            1.2259999370425947,
+            -0.0059999761581421285
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          0.015343834042549132
+        ]
+      },
+      "17_soldering_station": {
+        "status": "settled",
+        "supportId": "22_office_desk",
+        "deltaY": -0.004000020563601712,
+        "sampleCount": 12,
+        "supportedSamples": 12,
+        "supportY": [
+          0.7479999868869789,
+          0.7479999868869789
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -0.09,
+          0.7459999794363983,
+          -0.7
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -0.21000000476837158,
+            0.7459999868869789,
+            -0.789999996125698
+          ],
+          "max": [
+            0.02999999731779099,
+            0.9259999865889557,
+            -0.6099999964237213
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          0.004082192063331602
+        ]
+      },
+      "18_hot_air_station": {
+        "status": "settled",
+        "supportId": "22_office_desk",
+        "deltaY": -0.004000013113021115,
+        "sampleCount": 17,
+        "supportedSamples": 17,
+        "supportY": [
+          0.7479999868869789,
+          0.7479999868869789
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          0.25,
+          0.7459999868869789,
+          -0.7
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            0.13999999314546585,
+            0.7459999868869789,
+            -0.8099999994039535
+          ],
+          "max": [
+            0.35999999195337296,
+            0.965999985694886,
+            -0.5899999931454658
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          0.012972664415836332
+        ]
+      },
+      "19_oscilloscope": {
+        "status": "settled",
+        "supportId": "22_office_desk",
+        "deltaY": -0.004000020563601712,
+        "sampleCount": 18,
+        "supportedSamples": 18,
+        "supportY": [
+          0.7479999868869789,
+          0.7479999868869789
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -0.42,
+          0.7459999794363983,
+          -0.7
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -0.5799999964237212,
+            0.7459999868869789,
+            -0.769999985396862
+          ],
+          "max": [
+            -0.26000000357627867,
+            0.9059999758601196,
+            -0.6300000071525573
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          0.011460963964462278
+        ]
+      },
+      "21_monitor": {
+        "status": "settled",
+        "supportId": "22_office_desk",
+        "deltaY": -0.004000013113021115,
+        "sampleCount": 24,
+        "supportedSamples": 24,
+        "supportY": [
+          0.7479999868869789,
+          0.7479999868869789
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          -0.29,
+          0.7459999868869789,
+          -1.07
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -0.5650000059604645,
+            0.7459999868869789,
+            -1.1600000110268593
+          ],
+          "max": [
+            -0.014999994039535502,
+            1.1459999928474434,
+            -0.9800000187754632
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          0.003294710397720335
+        ]
+      },
+      "21_monitor_instance_1": {
+        "status": "settled",
+        "supportId": "22_office_desk",
+        "deltaY": -0.004000013113021115,
+        "sampleCount": 24,
+        "supportedSamples": 24,
+        "supportY": [
+          0.7479999868869789,
+          0.7479999868869789
+        ],
+        "supportHeightSpread": 0,
+        "seatingOverlap": 0.002,
+        "finalPosition": [
+          0.29,
+          0.7459999868869789,
+          -1.07
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            0.014999994039535502,
+            0.7459999868869789,
+            -1.1600000110268593
+          ],
+          "max": [
+            0.5650000059604645,
+            1.1459999928474434,
+            -0.9800000187754632
+          ]
+        },
+        "actualFootGapRange": [
+          -0.0020000000000000018,
+          0.003294710397720335
+        ]
+      },
+      "02_roller_shutter": {
+        "status": "reviewed-facade-anchor",
+        "supportId": "01_garage_shell",
+        "facadeZ": 1.05,
+        "localAnchor": [
+          0.3,
+          0.2,
+          1.13
+        ],
+        "finalPosition": [
+          0.3,
+          -0.01999999999999999,
+          1.13
+        ],
+        "finalScale": [
+          1,
+          0.71,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -1.5999999910593032,
+            -0.01999999999999999,
+            1.0499999986449255
+          ],
+          "max": [
+            2.199999991059303,
+            1.7904999661445617,
+            1.2099999968730843
+          ]
+        }
+      },
+      "03_profile_sign": {
+        "status": "reviewed-facade-anchor",
+        "supportId": "01_garage_shell",
+        "facadeZ": 1.05,
+        "localAnchor": [
+          -1.65,
+          2.55,
+          1.25
+        ],
+        "finalPosition": [
+          -1.65,
+          2.3299999999999996,
+          1.25
+        ],
+        "finalScale": [
+          1,
+          1,
+          1
+        ],
+        "bounds": {
+          "min": [
+            -2.020710787214128,
+            2.3299999999999996,
+            1.1618967708395718
+          ],
+          "max": [
+            -1.279289212785872,
+            3.13,
+            1.338103229160428
+          ]
+        }
+      }
+    },
+    "warnings": [],
+    "support": {
+      "sourceTaskId": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+      "solidFoundation": true,
+      "provenance": "Closed Blender foundation with original Tripo road color rebaked; no additional runtime underside."
+    },
+    "instances": {}
+  },
+  "missingWorkbenchHidesAllDevices": true,
+  "workbenchRecoveryRestoresDevices": true
+}

@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-23",
+  "preview": "http://127.0.0.1:4174/maker-garage-preview/scene/?lang=zh-Hans&v=ambient-v1",
+  "defaultCatWave": true,
+  "defaultAmbient": true,
+  "products": 11,
+  "effects": [
+    "independent product spin and bob",
+    "cyan maglev coils",
+    "neon voltage dips",
+    "socket sparks",
+    "street lamp voltage dips"
+  ],
+  "checks": [
+    "72-second geometry simulation",
+    "disjoint spin envelopes",
+    "shelf and cavity clearance",
+    "pause and light restoration",
+    "browser toggles",
+    "typecheck",
+    "English build",
+    "Chinese build"
+  ],
+  "sourceGLBUnchanged": true,
+  "published": false
+}

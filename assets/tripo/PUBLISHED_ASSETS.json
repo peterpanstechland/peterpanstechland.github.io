@@ -1,17 +1,20 @@
 {
-  "revision": "grounded-v4.2",
-  "date": "2026-10-21",
+  "revision": "whole-garage-blender-v1",
+  "date": "2026-10-23",
   "routes": [
     "/maker-garage-preview/",
     "/zh-Hans/maker-garage-preview/"
   ],
-  "loaded_asset_count": 12,
-  "total_asset_slots": 13,
+  "loaded_asset_count": 21,
+  "total_asset_slots": 22,
   "notes": [
-    "Real Tripo model outputs; rejected tools-zone output is excluded without a substitute.",
+    "Real Tripo models. Original tools-zone output was rejected and replaced by separately generated equipment; rejected PC mesh is excluded.",
     "Original downloads and complete production logs are retained locally.",
     "Accurate brand signs, grounding supports, the beckon animation and lighting are locally authored; these are not additional Tripo outputs.",
-    "Existing homepage, blog posts, docs and Challenge content are preserved."
+    "Existing homepage, blog posts, docs and Challenge content are preserved.",
+    "Interior additions: 9 accepted unique models / 10 instances; generated PC tower failed visual acceptance. See INTERIOR_EQUIPMENT.json.",
+    "Blender repair: nine interior assets locally repaired; see blender-repair/validation.json. No additional Tripo credits spent.",
+    "Whole garage Blender: 12 exterior/character assets plus 9 interior assets locally repaired. Original downloads retained. No additional Tripo credits. Rejected historical tools zone and PC generations remain excluded."
   ],
   "assets": [
     {
@@ -22,8 +25,11 @@
       },
       "task_id": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
       "status": "verified",
-      "website_path": "static/maker-garage-preview/models/01_garage_shell.glb",
-      "sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116"
+      "website_path": "static/maker-garage-preview/models/01_garage_shell-clearance.glb",
+      "sha256": "e6cd505d7b1d6101b715fb5c3d42124c3afd785b65e215d1432504484d37c422",
+      "postprocess": "blender-surface-refinement-and-shutter-clearance-v1",
+      "repair_record": "assets/tripo/shutter-clearance/repair.json",
+      "local_revision_status": "local preview only; not deployed"
     },
     {
       "id": "02_roller_shutter",
@@ -34,7 +40,8 @@
       "task_id": "60038920-5601-4de0-9202-b4620bd5b1c8",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/02_roller_shutter.glb",
-      "sha256": "efa27b81062656c3a6a91e80be47e64cfbf010fb95a152e2d2048b6864fb5cf9"
+      "sha256": "dc0403fc97df4d8500e423d49cfbc7eca0472cea598c1ccdb2f37f6cc52214cf",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "03_profile_sign",
@@ -45,7 +52,8 @@
       "task_id": "a4544685-ffb3-46e6-a49e-c0dae342e326",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/03_profile_sign.glb",
-      "sha256": "3488a33dbb7c2e857e8e7be00d22af627cf320dad4d7b47ade74c45febf9f83c"
+      "sha256": "f547f382efcd4440a8f628008db098bf328fa9c5e45314526f96a061b53e3854",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "04_lucky_cat",
@@ -56,8 +64,9 @@
       "task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
       "status": "verified",
       "website_path": "static/maker-garage-preview/models/04_cyber_lucky_cat.glb",
-      "sha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
-      "rig_task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72"
+      "sha256": "730e14e7524bbcbc2f3087f165eca540d1e5e0a7a65bf820f81250c6a1bcb3d1",
+      "rig_task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "05_project_vending",
@@ -68,7 +77,10 @@
       "task_id": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/05_project_vending.glb",
-      "sha256": "05ef07a2940582ef4abeb55b49dc73b43509ab4f9d9ab15b004e810196ec6fa3"
+      "sha256": "23255d23af7b83d0e68d57f9f3b45ee3c96b2e0bb3e48eaadd539d70b7b3d920",
+      "postprocess": "blender-surface-refinement-v1",
+      "repair_record": "assets/tripo/surface-refinement/reports/05_project_vending.json",
+      "local_revision_status": "local preview only; not deployed"
     },
     {
       "id": "06_showcase_zone",
@@ -79,18 +91,8 @@
       "task_id": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/06_showcase_zone.glb",
-      "sha256": "7449f2f5f1cf70e9380efe52a1e2725302df54adef934ffe266e0e2cecb2f61d"
-    },
-    {
-      "id": "07_tools_zone",
-      "label": {
-        "en": "Maker workbench",
-        "zh": "工具创作区"
-      },
-      "task_id": null,
-      "status": "rejected",
-      "website_path": null,
-      "sha256": null
+      "sha256": "e74514f844172d3c1f1d1cd3ee22b1b8cc2efe5fafda98a8fca861de2cf721ff",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "08_street_lamp",
@@ -101,7 +103,10 @@
       "task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/08_street_lamp.glb",
-      "sha256": "edeae357d10ce8917eb2b482e77bbd636616feac1657f48ce95322c5e8edb13f"
+      "sha256": "d7dae169a919478eee129a593124a0073b83ff283b41b148678f5095cc9d11ff",
+      "postprocess": "blender-street-detail-v1",
+      "local_revision_status": "local preview only; not deployed",
+      "repair_record": "assets/tripo/street-detail/record.json"
     },
     {
       "id": "09_trash_bin",
@@ -112,7 +117,8 @@
       "task_id": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/09_trash_bin.glb",
-      "sha256": "fecc8578fd6f8965e5ac9384b9919cf0653ed1c8528e8af447e4649096588a8e"
+      "sha256": "3d7838db398492c0ebaa4118f373069e49168bb0a2fe76ae205f89ebfd7ec1ef",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "10_utility_cabinet",
@@ -123,7 +129,8 @@
       "task_id": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/10_utility_cabinet.glb",
-      "sha256": "29534a8675f8efea6545b4b183964bda853c565e3c70e40bdb57fac6c293ae11"
+      "sha256": "f9e28708d87c10fa87432f78d2eafce906bae3865e7a8a4e5223b5ecd24bbf70",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "11_tree",
@@ -134,7 +141,8 @@
       "task_id": "f83af78c-7c37-48c0-8de7-e2706f983982",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/11_tree.glb",
-      "sha256": "327f4b49457796446156c363efc260622a197ed28810fc06cd757ca14865c5c7"
+      "sha256": "9632cddca1946313a37734f8d12dc4bdcf12e3bdc76e5777ba0675585aeee5c1",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "12_plants_grass",
@@ -145,7 +153,8 @@
       "task_id": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/12_plants_grass.glb",
-      "sha256": "a931aca508cd09cb0b2e33027b2f043b1302e95eb48691b0635ec92bdc0d0ca3"
+      "sha256": "23cedbdd1d10a54873786f93f50e2ec570278d1c6f399f4b7004d17bdc0b8da2",
+      "postprocess": "blender-garage-v1"
     },
     {
       "id": "13_street_base",
@@ -156,7 +165,201 @@
       "task_id": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/13_street_base.glb",
-      "sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21"
+      "sha256": "540b4ecf97cd88d909d36d71a1f708b6bdc5efda887ef8ac1a01ebdd98c9db50",
+      "postprocess": "blender-garage-v1"
+    },
+    {
+      "id": "14_bambu_x1c",
+      "label": {
+        "en": "Bambu Lab X1 Carbon",
+        "zh": "拓竹 X1 Carbon"
+      },
+      "task_id": "c3ccb749-d329-4ee6-a427-9944d5fffd8a",
+      "status": "verified_with_notes",
+      "actual_credits": 30,
+      "website_path": "static/maker-garage-preview/models/14_bambu_x1c.glb",
+      "sha256": "61584d58f0727e104c1e61ceb0ee2e35b5102a7b5c3a5205e685b6b423ff2e10",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "15_makeblock_laserbox",
+      "label": {
+        "en": "Makeblock Laserbox",
+        "zh": "Makeblock Laserbox"
+      },
+      "task_id": "02b354be-e446-4be5-92b0-fa6d86c707be",
+      "status": "verified_with_notes",
+      "actual_credits": 30,
+      "website_path": "static/maker-garage-preview/models/15_makeblock_laserbox.glb",
+      "sha256": "c90c0f8070887979ed19b2a1823b3a9e5253f1948b44b94d798f2186a3aee1eb",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "16_openpnp_machine",
+      "label": {
+        "en": "OpenPnP pick-and-place",
+        "zh": "OpenPnP 桌面贴片机"
+      },
+      "task_id": "fa25ef33-b2e9-42a3-8538-c7e7b37ef34e",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/16_openpnp_machine.glb",
+      "sha256": "0087612ede91971a46882d8fcf3a24a4159e9b2cf8c5e6ddd0f1e43759263cd1",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "17_soldering_station",
+      "label": {
+        "en": "Soldering station",
+        "zh": "焊台"
+      },
+      "task_id": "86e23643-ce8d-418b-bbec-64e1c813e73c",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/17_soldering_station.glb",
+      "sha256": "1034a715058ea8127902ed879e616bbbb871b836e3208599df61c2b246b784ae",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "18_hot_air_station",
+      "label": {
+        "en": "Hot-air rework station",
+        "zh": "热风枪与控制台"
+      },
+      "task_id": "dc664096-8d52-4c65-b868-ac72f30536e8",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/18_hot_air_station.glb",
+      "sha256": "4a0e9063eb377b55205f5f77d9d777185a1121264f4c0b98ec046aa6a98c3864",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "19_oscilloscope",
+      "label": {
+        "en": "Oscilloscope",
+        "zh": "示波器"
+      },
+      "task_id": "ea6b739a-3bdb-46f9-ba7e-330aa3201818",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/19_oscilloscope.glb",
+      "sha256": "c4ed2d5ac4836043060564d1fdccf24f989b95a750703c2afce6e758a620e333",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "20_pc_tower",
+      "label": {
+        "en": "PC tower — rejected",
+        "zh": "电脑主机"
+      },
+      "task_id": "d2c41660-0e1e-4457-8699-d99155d3572c",
+      "status": "rejected_visual",
+      "actual_credits": 50,
+      "website_path": null,
+      "sha256": null,
+      "notes": [
+        "Both provider-success outputs failed visual acceptance and are excluded. Total spent on this asset: 50 credits."
+      ],
+      "attempts": [
+        {
+          "task_id": "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+          "actual_credits": 20,
+          "acceptance": "rejected_visual"
+        },
+        {
+          "task_id": "d2c41660-0e1e-4457-8699-d99155d3572c",
+          "actual_credits": 30,
+          "acceptance": "rejected_visual"
+        }
+      ]
+    },
+    {
+      "id": "21_monitor",
+      "label": {
+        "en": "Dual monitors",
+        "zh": "双显示器"
+      },
+      "task_id": "ca03c270-717b-437b-8c1a-9bed3f606071",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/21_monitor.glb",
+      "sha256": "beaf0d3d0847d58ecac96cce9aa68639149a4d4adccbd3b5804acd3a61116013",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "22_office_desk",
+      "label": {
+        "en": "Office desk",
+        "zh": "办公桌"
+      },
+      "task_id": "6fd28df2-a825-42f7-af68-68531cc8cc72",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/22_office_desk.glb",
+      "sha256": "f47443f0548747ed4fc92940e6d034913d66aa90853a4e1a55ae6efebb5c7fe6",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ],
+      "postprocess": "blender-repair-v1"
+    },
+    {
+      "id": "23_workbench",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工作台"
+      },
+      "task_id": "039ec198-a648-4b4e-b8e8-306e1440b3ea",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/23_workbench.glb",
+      "sha256": "985ddfa2b1753faea567230f6ae88c432d28f678ee1410f91bc39e494f201069",
+      "notes": [
+        "Original Tripo frame retained. Generated clutter clipped from tabletop. Local steel top and lower-shelf inserts close the cut and source holes. Raw source unchanged."
+      ],
+      "postprocess": "blender-repair-v1"
+    }
+  ],
+  "publication_status": "local_preview_not_deployed",
+  "superseded_assets": [
+    {
+      "id": "07_tools_zone",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工具创作区"
+      },
+      "task_id": null,
+      "status": "rejected",
+      "website_path": null,
+      "sha256": null
     }
   ]
 }

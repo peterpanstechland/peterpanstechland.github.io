@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "techland-community-wall",
+  "account_id": "7dcc510607f674b671c0d59d96b5b421",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "assets": {"directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*", "/admin"]},
+  "vars": {
+    "ALLOWED_ORIGINS": "https://peterpanstechland.github.io,http://127.0.0.1:4173,http://127.0.0.1:4174,http://localhost:4173,http://localhost:4174",
+    "MAX_PENDING": "1000"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "techland-community-wall",
+    "database_id": "43cd927b-ad0f-4a1a-80a3-48d45cfdbe72",
+    "migrations_dir": "migrations"
+  }],
+  "r2_buckets": [{"binding": "PHOTOS", "bucket_name": "techland-community-photos"}],
+  "triggers": {"crons": ["23 3 * * *"]},
+  "observability": {"enabled": false}
+}
