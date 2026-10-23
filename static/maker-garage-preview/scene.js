@@ -16,7 +16,7 @@ import { createProjectVending } from './project-vending.js?v=projects-v1';
 import { addVendingNeon } from './neon-lettering.js?v=vending-integrated-v3';
 import {createCommunityWall} from './community-wall.js?v=community-v1';
 import {createCommunityInstallation} from './community-installation.js?v=community-v1';
-import {createSponsorBillboard} from './sponsor-billboard.js?v=loading-v1';
+import {createSponsorBillboard} from './sponsor-billboard.js?v=sponsor-labels-v1';
 import {createAmbientMotion,installVendingMotion} from './ambient-motion.js?v=ambient-v1';
 import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress} from './loading-plan.js?v=neko-loader-v1';
 
@@ -25,7 +25,7 @@ const copy = {
   badge: ['LIVE ASSET PREVIEW', '真实资产预览'], overview: ['Overview', '整体视角'], front: ['Front view', '正面视角'],
   projects: ['Project vending machine', '项目贩卖机'],
   rear: ['Community wall', '共创后墙'], leaveTrace: ['Leave a trace', '到此一游'],
-  sponsors: ['Partners', '赞助伙伴'],
+  sponsors: ['Sponsors', '赞助商'],
   interior: ['Workshop', '室内工具'], supportMissing: ['Its supporting surface is unavailable; this device is temporarily hidden.', '支撑面暂不可用，此设备暂时隐藏。'],
   wave: ['Beckon', '招财猫招手'], effects: ['Ambient motion', '环境动态'], shutter: ['Garage door', '卷帘门'], assets: ['Assets', '资产清单'],
   retryFailed: ['Retry failed loads', '重试加载失败项'], hint: ['Drag to orbit · Pinch to zoom\nClick an object to explore', '拖动旋转 · 双指缩放\n点选模型查看详情'],
