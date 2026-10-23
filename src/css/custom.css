@@ -957,6 +957,7 @@ blockquote p {
   .footer__col { min-width: 0; }
   .footer__links { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); }
   .footer__title, .footer__link-item { overflow-wrap: anywhere; }
+  .footer__link-item { max-width: 100%; white-space: normal; }
 }
 @media (max-width: 359px) {
   .navbar__title { font-size: .79rem; }
