@@ -65,6 +65,7 @@ $('projects').addEventListener('click',openProjectVending);
 $('sponsors').addEventListener('click',()=>{closeInfo();toggleAssetPanel(false);sponsorBillboard?.open();});
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const smallScreen = matchMedia('(max-width: 650px)');
+const compactScene = matchMedia('(max-width: 700px), (max-width: 996px) and (max-height: 500px)');
 // Fix the texture tier for this visit so rotating a phone cannot raise its
 // resident texture budget. Raw GLBs remain unchanged on disk.
 const textureLimit = smallScreen.matches || matchMedia('(pointer: coarse)').matches ? 512 : 1024;
@@ -82,7 +83,7 @@ let effectsEnabled = !motion.matches;
 let waveEnabled = false;
 let waveRequested = !motion.matches;
 let ambientMotion = null;
-let framing = ['interior','rear'].includes(new URLSearchParams(location.search).get('view')) ? new URLSearchParams(location.search).get('view') : 'overview';
+let framing = ['front','interior','rear'].includes(new URLSearchParams(location.search).get('view')) ? new URLSearchParams(location.search).get('view') : 'overview';
 let configurationLoaded = false;
 let heroReady = false;
 let heroPending = false;
@@ -203,6 +204,7 @@ document.addEventListener('keydown', (event) => {
 function fitCamera(view = framing) {
   if (!camera || !controls) return;
   framing = view;
+  for (const id of ['overview','front','interior','rear']) $(id).setAttribute('aria-pressed',String(id===view));
   if (view === 'interior') {
     camera.fov = camera.aspect < 0.9 ? 90 : 80;
     controls.target.set(0.55, 0.9, -0.4);
@@ -214,20 +216,28 @@ function fitCamera(view = framing) {
     controls.update(); requestFrame(); return;
   }
   camera.fov = 36;
-  const framingBounds=view==='rear'?new THREE.Box3(new THREE.Vector3(-2.45,-.25,-2.05),new THREE.Vector3(2.45,3.15,-1.35)):worldBounds;
-  const size = framingBounds.getSize(new THREE.Vector3());
+  const mobileExterior = compactScene.matches && view !== 'rear';
+  // Fit each exterior part separately on phones. One combined deep box creates
+  // empty upper corners between the narrow billboard and the wider garage.
+  const visibleParts = mobileExterior ? [
+    new THREE.Box3(new THREE.Vector3(-2.8,3.75,-.1),new THREE.Vector3(3.3,5.7,.3)),
+    new THREE.Box3(new THREE.Vector3(-2.85,-.05,-.9),new THREE.Vector3(3.4,4.1,-.4)),
+    ...[...entries.values()].filter(entry => entry.state === 'ready' && entry.bounds && entry.config.id !== '13_street_base').map(entry => entry.bounds),
+  ] : [view === 'rear' ? new THREE.Box3(new THREE.Vector3(-2.45,-.25,-2.05),new THREE.Vector3(2.45,3.15,-1.35)) : worldBounds];
+  const framingBounds = new THREE.Box3();
+  for (const bounds of visibleParts) framingBounds.union(bounds);
   const center = framingBounds.getCenter(new THREE.Vector3());
   const vertical = THREE.MathUtils.degToRad(camera.fov);
   const horizontal = 2 * Math.atan(Math.tan(vertical / 2) * camera.aspect);
-  const direction = (view==='rear'?new THREE.Vector3(0,.08,-1):view === 'front' ? new THREE.Vector3(0, 0.09, 1) : new THREE.Vector3(0.43, 0.22, 1.3)).normalize();
+  const direction = (view==='rear'?new THREE.Vector3(0,.08,-1):view === 'front' ? new THREE.Vector3(0, 0.09, 1) : mobileExterior ? new THREE.Vector3(.14,.20,1.3) : new THREE.Vector3(0.43, 0.22, 1.3)).normalize();
   const right = new THREE.Vector3().crossVectors(new THREE.Vector3(0, 1, 0), direction).normalize();
   const up = new THREE.Vector3().crossVectors(direction, right).normalize();
   let distance = 1;
-  for (const x of [-1, 1]) for (const y of [-1, 1]) for (const z of [-1, 1]) {
-    const corner = new THREE.Vector3(x * size.x / 2, y * size.y / 2, z * size.z / 2);
+  for (const bounds of visibleParts) for (const x of [bounds.min.x, bounds.max.x]) for (const y of [bounds.min.y, bounds.max.y]) for (const z of [bounds.min.z, bounds.max.z]) {
+    const corner = new THREE.Vector3(x,y,z).sub(center);
     distance = Math.max(distance, corner.dot(direction) + Math.abs(corner.dot(right)) / Math.tan(horizontal / 2), corner.dot(direction) + Math.abs(corner.dot(up)) / Math.tan(vertical / 2));
   }
-  distance *= smallScreen.matches ? 1.03 : 0.96;
+  distance *= mobileExterior ? 1.04 : smallScreen.matches ? 1.03 : 0.96;
   controls.target.copy(center);
   camera.position.copy(center).addScaledVector(direction, distance);
   camera.near = 0.03;

@@ -141,14 +141,13 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
             </p>
           </header>
 
-          <section className={styles.viewer} aria-label={text('Interactive garage preview', '交互式车库预览')}>
+          <section id="garage-scene" className={styles.viewer} aria-label={text('Interactive garage preview', '交互式车库预览')}>
             <div className={styles.stage}>
               <iframe
-                id="garage-scene"
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=sponsor-labels-v1`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=mobile-garage-v1`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"
@@ -181,6 +180,12 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 <span className={`${styles.statusDot} ${status === 'ready' ? styles.statusReady : ''} ${status === 'error' ? styles.statusError : ''}`} aria-hidden="true" />
                 <span>{statusText}</span>
               </div>
+              <a className={styles.expandButton}
+                href={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&v=mobile-garage-v1`}
+                target="_blank" rel="noopener noreferrer"
+                aria-label={text('Open an immersive garage view', '打开沉浸车库视图')}>
+                <span aria-hidden="true">⤢</span>{text('Expand', '展开')}
+              </a>
               <button type="button" onClick={reload} className={styles.reloadButton}
                 title={text('Reload preview', '刷新预览')} aria-label={text('Reload preview', '刷新预览')}>↻</button>
             </div>
