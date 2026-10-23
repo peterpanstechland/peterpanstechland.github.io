@@ -80,6 +80,7 @@
   .primaryAction, .secondaryAction { min-height: 43px; padding: 11px 13px; gap: 10px; font-size: 9px; }
   .previewLabel { margin-top: 16px; font-size: 7px; gap: 7px; }
   .viewer { position: relative; inset: auto; width: 100%; height: clamp(400px, 58svh, 620px); }
+  .home .viewer { height: clamp(680px, 82svh, 780px); }
   .viewer::after { display: none; }
   .viewerTools { right: 14px; top: 10px; gap: 10px; }
   .status { font-size: 7px; }
