@@ -6,6 +6,8 @@ Model transfer totals: original 64,328,804 bytes; desktop 25,221,484 bytes (-60.
 
 The street, shell, shutter, portrait, cat, vending machine and lamp load first. Once grounded and drawn, they become interactive while exterior details and workshop equipment continue loading. Sponsor API requests and the profile image are independent of model startup. Three model decode slots limit transient memory, and phase completion no longer repeatedly resets the visitor's camera.
 
+Background download progression is independent of requestAnimationFrame: hidden tabs continue loading subsequent phases, and the parent reveals the exterior only after a real render. The parent loading watchdog resets when model counts make progress, so a slow but advancing connection does not trigger an incorrect failure after 45 seconds.
+
 Controlled browser benchmark, cold resources, locally shaped shared download bandwidth of 10 Mbps, same desktop/browser: previous release completed decoration at 53,028 ms; optimized desktop exterior became ready at 9,860 ms and all models completed at 23,040 ms. At a 390px viewport the optimized mobile exterior became ready at 5,915 ms and completed at 12,372 ms. Times start at scene-module evaluation; they exclude the blog document and initial JavaScript module download. The baseline and new scene both loaded the same 21 delivered models. These are controlled measurements, not a guarantee for every visitor's network/device.
 
 Checks: all 42 generated GLBs validated against originals; phase membership/concurrency/path fallback tests; English and Simplified Chinese builds; TypeScript check; desktop and mobile visual checks. Existing rejected PC asset remains excluded.

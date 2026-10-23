@@ -33,13 +33,21 @@ export default function MakerGaragePreview(): React.JSX.Element {
   useEffect(() => {
     setStatus('loading');
     setCounts(null);
-    const timeout = window.setTimeout(() => setStatus('error'), 45000);
+    let timeout: number;
+    let lastProgress = 0;
+    const armTimeout = () => {
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => setStatus('error'), 45000);
+    };
+    armTimeout();
     const onMessage = (event: MessageEvent<unknown>) => {
       if (event.origin !== window.location.origin ||
           event.source !== frameRef.current?.contentWindow) return;
       const next = readCounts(event.data);
       if (!next) return;
       setCounts(next);
+      const progress = next.loaded + next.failed;
+      if (progress > lastProgress) { lastProgress = progress; armTimeout(); }
       if (next.loaded > 0 && next.ready !== false) {
         window.clearTimeout(timeout);
         setStatus('ready');
@@ -113,7 +121,7 @@ export default function MakerGaragePreview(): React.JSX.Element {
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=loading-v1`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=loading-v2`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"
