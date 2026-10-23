@@ -5,7 +5,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import styles from './maker-garage-preview.module.css';
 
-type AssetCounts = {loaded: number; total: number; failed: number};
+type AssetCounts = {loaded: number; total: number; failed: number; ready?: boolean};
 type PreviewStatus = 'loading' | 'ready' | 'error';
 
 function readCounts(data: unknown): AssetCounts | null {
@@ -17,7 +17,7 @@ function readCounts(data: unknown): AssetCounts | null {
     typeof value === 'number' && Number.isSafeInteger(value) && value >= 0,
   )) return null;
   if ((loaded as number) + (failed as number) > (total as number)) return null;
-  return {loaded: loaded as number, total: total as number, failed: failed as number};
+  return {loaded: loaded as number, total: total as number, failed: failed as number, ready:typeof message.ready==='boolean'?message.ready:undefined};
 }
 
 export default function MakerGaragePreview(): React.JSX.Element {
@@ -40,7 +40,7 @@ export default function MakerGaragePreview(): React.JSX.Element {
       const next = readCounts(event.data);
       if (!next) return;
       setCounts(next);
-      if (next.loaded > 0) {
+      if (next.loaded > 0 && next.ready !== false) {
         window.clearTimeout(timeout);
         setStatus('ready');
       } else if (next.total > 0 && next.failed === next.total) {
@@ -113,7 +113,7 @@ export default function MakerGaragePreview(): React.JSX.Element {
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=ambient-v1`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=loading-v1`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"

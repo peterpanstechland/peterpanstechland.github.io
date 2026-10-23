@@ -1,0 +1,20 @@
+{
+  "bandwidthBitsPerSecond": 10000000,
+  "coldResources": true,
+  "timingStartsAt": "scene module evaluation",
+  "baseline": {
+    "completeMs": 53028
+  },
+  "desktop": {
+    "heroMs": 9860,
+    "completeMs": 23040
+  },
+  "mobile390px": {
+    "heroMs": 5915,
+    "completeMs": 12372
+  },
+  "sourceBytes": 64328804,
+  "desktopBytes": 25221484,
+  "mobileBytes": 12628536,
+  "generatedVariants": 42
+}

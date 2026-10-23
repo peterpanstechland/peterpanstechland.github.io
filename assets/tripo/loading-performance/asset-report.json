@@ -1,0 +1,3494 @@
+{
+  "version": 1,
+  "tool": "tools/optimize_preview_downloads.py",
+  "pillowVersion": "12.3.0",
+  "strategy": "Resize embedded textures only; opaque color JPEG q88 4:4:4 progressive; data maps 6-bit/channel PNG (maximum 2/255 rounding error)",
+  "sourceFilesUnchanged": true,
+  "modelCount": 21,
+  "variantCount": 42,
+  "totals": {
+    "sourceBytes": 64328804,
+    "sourceTextureBytes": 57700415,
+    "profiles": {
+      "desktop": {
+        "bytes": 25221484,
+        "savedBytes": 39107320,
+        "savedPercent": 60.79
+      },
+      "mobile": {
+        "bytes": 12628536,
+        "savedBytes": 51700268,
+        "savedPercent": 80.37
+      }
+    }
+  },
+  "assets": [
+    {
+      "id": "01_garage_shell",
+      "file": "models/01_garage_shell-clearance.glb",
+      "sourceBytes": 3456528,
+      "sourceTextureBytes": 2897080,
+      "sourceOtherBytes": 559448,
+      "profiles": {
+        "desktop": {
+          "bytes": 1622904,
+          "savedPercent": 53.05,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 557072,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1176193,
+              "bytes": 191317,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_de47b250-7bce-40ba-b2fe-4a11374a7a72"
+            },
+            {
+              "sourceBytes": 984812,
+              "bytes": 260984,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 40.25,
+              "index": 1,
+              "name": "Color_de47b250-7bce-40ba-b2fe-4a11374a7a72"
+            },
+            {
+              "sourceBytes": 736075,
+              "bytes": 611159,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_de47b250-7bce-40ba-b2fe-4a11374a7a72"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 895052,
+          "savedPercent": 74.11,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 557072,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1176193,
+              "bytes": 52903,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_de47b250-7bce-40ba-b2fe-4a11374a7a72"
+            },
+            {
+              "sourceBytes": 984812,
+              "bytes": 90564,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 37.04,
+              "index": 1,
+              "name": "Color_de47b250-7bce-40ba-b2fe-4a11374a7a72"
+            },
+            {
+              "sourceBytes": 736075,
+              "bytes": 192148,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_de47b250-7bce-40ba-b2fe-4a11374a7a72"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "02_roller_shutter",
+      "file": "models/02_roller_shutter.glb",
+      "sourceBytes": 4407264,
+      "sourceTextureBytes": 2904056,
+      "sourceOtherBytes": 1503208,
+      "profiles": {
+        "desktop": {
+          "bytes": 2435084,
+          "savedPercent": 44.75,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 1445064,
+            "accessors": 232,
+            "nodes": 30,
+            "meshes": 29,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1581335,
+              "bytes": 248005,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_60038920-5601-4de0-9202-b4620bd5b1c8"
+            },
+            {
+              "sourceBytes": 733579,
+              "bytes": 190263,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 42.56,
+              "index": 1,
+              "name": "Color_60038920-5601-4de0-9202-b4620bd5b1c8"
+            },
+            {
+              "sourceBytes": 589142,
+              "bytes": 493616,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_60038920-5601-4de0-9202-b4620bd5b1c8"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 1797044,
+          "savedPercent": 59.23,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 1445064,
+            "accessors": 232,
+            "nodes": 30,
+            "meshes": 29,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1581335,
+              "bytes": 71644,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_60038920-5601-4de0-9202-b4620bd5b1c8"
+            },
+            {
+              "sourceBytes": 733579,
+              "bytes": 66743,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 39.42,
+              "index": 1,
+              "name": "Color_60038920-5601-4de0-9202-b4620bd5b1c8"
+            },
+            {
+              "sourceBytes": 589142,
+              "bytes": 155561,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_60038920-5601-4de0-9202-b4620bd5b1c8"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "03_profile_sign",
+      "file": "models/03_profile_sign.glb",
+      "sourceBytes": 2567788,
+      "sourceTextureBytes": 2378587,
+      "sourceOtherBytes": 189201,
+      "profiles": {
+        "desktop": {
+          "bytes": 1157256,
+          "savedPercent": 54.93,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 186970,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 982581,
+              "bytes": 110052,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_a4544685-ffb3-46e6-a49e-c0dae342e326"
+            },
+            {
+              "sourceBytes": 614574,
+              "bytes": 176436,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 42.45,
+              "index": 1,
+              "name": "Color_a4544685-ffb3-46e6-a49e-c0dae342e326"
+            },
+            {
+              "sourceBytes": 781432,
+              "bytes": 681573,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_a4544685-ffb3-46e6-a49e-c0dae342e326"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 509196,
+          "savedPercent": 80.17,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 186970,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 982581,
+              "bytes": 31159,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_a4544685-ffb3-46e6-a49e-c0dae342e326"
+            },
+            {
+              "sourceBytes": 614574,
+              "bytes": 68527,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 38.58,
+              "index": 1,
+              "name": "Color_a4544685-ffb3-46e6-a49e-c0dae342e326"
+            },
+            {
+              "sourceBytes": 781432,
+              "bytes": 220317,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_a4544685-ffb3-46e6-a49e-c0dae342e326"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "04_lucky_cat",
+      "file": "models/04_cyber_lucky_cat.glb",
+      "sourceBytes": 5690368,
+      "sourceTextureBytes": 5048331,
+      "sourceOtherBytes": 642037,
+      "profiles": {
+        "desktop": {
+          "bytes": 2352968,
+          "savedPercent": 58.65,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 599512,
+            "accessors": 138,
+            "nodes": 48,
+            "meshes": 1,
+            "skins": 1,
+            "animations": 1,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 2867514,
+              "bytes": 658124,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_36e3dca6-efcb-428b-a335-ef2058d6786f"
+            },
+            {
+              "sourceBytes": 1320862,
+              "bytes": 330882,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 38.44,
+              "index": 1,
+              "name": "Color_36e3dca6-efcb-428b-a335-ef2058d6786f"
+            },
+            {
+              "sourceBytes": 859955,
+              "bytes": 721932,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_36e3dca6-efcb-428b-a335-ef2058d6786f"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 1193044,
+          "savedPercent": 79.03,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 599512,
+            "accessors": 138,
+            "nodes": 48,
+            "meshes": 1,
+            "skins": 1,
+            "animations": 1,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 2867514,
+              "bytes": 196177,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_36e3dca6-efcb-428b-a335-ef2058d6786f"
+            },
+            {
+              "sourceBytes": 1320862,
+              "bytes": 116571,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 35.4,
+              "index": 1,
+              "name": "Color_36e3dca6-efcb-428b-a335-ef2058d6786f"
+            },
+            {
+              "sourceBytes": 859955,
+              "bytes": 238264,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_36e3dca6-efcb-428b-a335-ef2058d6786f"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "05_project_vending",
+      "file": "models/05_project_vending.glb",
+      "sourceBytes": 3637932,
+      "sourceTextureBytes": 3335079,
+      "sourceOtherBytes": 302853,
+      "profiles": {
+        "desktop": {
+          "bytes": 1528472,
+          "savedPercent": 57.99,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 300522,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1487642,
+              "bytes": 264139,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_54b92a08-ba80-4d36-ae83-1352ae38cac7"
+            },
+            {
+              "sourceBytes": 1109860,
+              "bytes": 324384,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 38.34,
+              "index": 1,
+              "name": "Color_54b92a08-ba80-4d36-ae83-1352ae38cac7"
+            },
+            {
+              "sourceBytes": 737577,
+              "bytes": 637104,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_54b92a08-ba80-4d36-ae83-1352ae38cac7"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 704472,
+          "savedPercent": 80.64,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 300522,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1487642,
+              "bytes": 75776,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_54b92a08-ba80-4d36-ae83-1352ae38cac7"
+            },
+            {
+              "sourceBytes": 1109860,
+              "bytes": 118379,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 34.77,
+              "index": 1,
+              "name": "Color_54b92a08-ba80-4d36-ae83-1352ae38cac7"
+            },
+            {
+              "sourceBytes": 737577,
+              "bytes": 207470,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_54b92a08-ba80-4d36-ae83-1352ae38cac7"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "06_showcase_zone",
+      "file": "models/06_showcase_zone.glb",
+      "sourceBytes": 2943836,
+      "sourceTextureBytes": 2610309,
+      "sourceOtherBytes": 333527,
+      "profiles": {
+        "desktop": {
+          "bytes": 1332508,
+          "savedPercent": 54.74,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 327906,
+            "accessors": 14,
+            "nodes": 4,
+            "meshes": 4,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1173747,
+              "bytes": 179480,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
+            },
+            {
+              "sourceBytes": 713708,
+              "bytes": 187351,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 43.14,
+              "index": 1,
+              "name": "Color_2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
+            },
+            {
+              "sourceBytes": 722854,
+              "bytes": 632155,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 658020,
+          "savedPercent": 77.65,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 327906,
+            "accessors": 14,
+            "nodes": 4,
+            "meshes": 4,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1173747,
+              "bytes": 52023,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
+            },
+            {
+              "sourceBytes": 713708,
+              "bytes": 67263,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 40.05,
+              "index": 1,
+              "name": "Color_2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
+            },
+            {
+              "sourceBytes": 722854,
+              "bytes": 205214,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "08_street_lamp",
+      "file": "models/08_street_lamp.glb",
+      "sourceBytes": 2673972,
+      "sourceTextureBytes": 2242548,
+      "sourceOtherBytes": 431424,
+      "profiles": {
+        "desktop": {
+          "bytes": 1152932,
+          "savedPercent": 56.88,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 389104,
+            "accessors": 138,
+            "nodes": 40,
+            "meshes": 40,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1123693,
+              "bytes": 168156,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_b369cdad-33bf-4cea-916a-42822d021d60"
+            },
+            {
+              "sourceBytes": 679712,
+              "bytes": 194931,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 42.89,
+              "index": 1,
+              "name": "Color_b369cdad-33bf-4cea-916a-42822d021d60"
+            },
+            {
+              "sourceBytes": 439143,
+              "bytes": 358425,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_b369cdad-33bf-4cea-916a-42822d021d60"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 676960,
+          "savedPercent": 74.68,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 389104,
+            "accessors": 138,
+            "nodes": 40,
+            "meshes": 40,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1123693,
+              "bytes": 58306,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_b369cdad-33bf-4cea-916a-42822d021d60"
+            },
+            {
+              "sourceBytes": 679712,
+              "bytes": 72962,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 39.05,
+              "index": 1,
+              "name": "Color_b369cdad-33bf-4cea-916a-42822d021d60"
+            },
+            {
+              "sourceBytes": 439143,
+              "bytes": 114271,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_b369cdad-33bf-4cea-916a-42822d021d60"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "09_trash_bin",
+      "file": "models/09_trash_bin.glb",
+      "sourceBytes": 2883248,
+      "sourceTextureBytes": 2663106,
+      "sourceOtherBytes": 220142,
+      "profiles": {
+        "desktop": {
+          "bytes": 1017648,
+          "savedPercent": 64.7,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 215072,
+            "accessors": 12,
+            "nodes": 3,
+            "meshes": 3,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1347798,
+              "bytes": 211438,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+            },
+            {
+              "sourceBytes": 879773,
+              "bytes": 256745,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 39.93,
+              "index": 1,
+              "name": "Color_1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+            },
+            {
+              "sourceBytes": 435535,
+              "bytes": 329325,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 476320,
+          "savedPercent": 83.48,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 215072,
+            "accessors": 12,
+            "nodes": 3,
+            "meshes": 3,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1347798,
+              "bytes": 58927,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+            },
+            {
+              "sourceBytes": 879773,
+              "bytes": 94719,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 36.34,
+              "index": 1,
+              "name": "Color_1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+            },
+            {
+              "sourceBytes": 435535,
+              "bytes": 102544,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_1ae8df17-06d6-4fc6-a7f2-72f64265c855"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "10_utility_cabinet",
+      "file": "models/10_utility_cabinet.glb",
+      "sourceBytes": 3192616,
+      "sourceTextureBytes": 3005589,
+      "sourceOtherBytes": 187027,
+      "profiles": {
+        "desktop": {
+          "bytes": 1251532,
+          "savedPercent": 60.8,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 184788,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1721176,
+              "bytes": 293602,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_79c20750-5f2b-4e8f-bf11-b39338c883f4"
+            },
+            {
+              "sourceBytes": 615119,
+              "bytes": 148096,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 44.22,
+              "index": 1,
+              "name": "Color_79c20750-5f2b-4e8f-bf11-b39338c883f4"
+            },
+            {
+              "sourceBytes": 669294,
+              "bytes": 622810,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_79c20750-5f2b-4e8f-bf11-b39338c883f4"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 526128,
+          "savedPercent": 83.52,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 184788,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1721176,
+              "bytes": 89042,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_79c20750-5f2b-4e8f-bf11-b39338c883f4"
+            },
+            {
+              "sourceBytes": 615119,
+              "bytes": 51873,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 41.43,
+              "index": 1,
+              "name": "Color_79c20750-5f2b-4e8f-bf11-b39338c883f4"
+            },
+            {
+              "sourceBytes": 669294,
+              "bytes": 198192,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_79c20750-5f2b-4e8f-bf11-b39338c883f4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "11_tree",
+      "file": "models/11_tree.glb",
+      "sourceBytes": 3388652,
+      "sourceTextureBytes": 2984107,
+      "sourceOtherBytes": 404545,
+      "profiles": {
+        "desktop": {
+          "bytes": 1572324,
+          "savedPercent": 53.6,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 402574,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1217946,
+              "bytes": 274228,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_f83af78c-7c37-48c0-8de7-e2706f983982"
+            },
+            {
+              "sourceBytes": 981934,
+              "bytes": 233786,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 41.58,
+              "index": 1,
+              "name": "Color_f83af78c-7c37-48c0-8de7-e2706f983982"
+            },
+            {
+              "sourceBytes": 784227,
+              "bytes": 659772,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_f83af78c-7c37-48c0-8de7-e2706f983982"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 754064,
+          "savedPercent": 77.75,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 402574,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1217946,
+              "bytes": 70548,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_f83af78c-7c37-48c0-8de7-e2706f983982"
+            },
+            {
+              "sourceBytes": 981934,
+              "bytes": 77494,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 38.8,
+              "index": 1,
+              "name": "Color_f83af78c-7c37-48c0-8de7-e2706f983982"
+            },
+            {
+              "sourceBytes": 784227,
+              "bytes": 201488,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_f83af78c-7c37-48c0-8de7-e2706f983982"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "12_plants_grass",
+      "file": "models/12_plants_grass.glb",
+      "sourceBytes": 2958800,
+      "sourceTextureBytes": 2899168,
+      "sourceOtherBytes": 59632,
+      "profiles": {
+        "desktop": {
+          "bytes": 1230732,
+          "savedPercent": 58.4,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 57494,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1223529,
+              "bytes": 201463,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_14dc3618-4de8-4bee-959b-3a807a17bdbb"
+            },
+            {
+              "sourceBytes": 803424,
+              "bytes": 212691,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 42.19,
+              "index": 1,
+              "name": "Color_14dc3618-4de8-4bee-959b-3a807a17bdbb"
+            },
+            {
+              "sourceBytes": 872215,
+              "bytes": 756949,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_14dc3618-4de8-4bee-959b-3a807a17bdbb"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 432700,
+          "savedPercent": 85.38,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 57494,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1223529,
+              "bytes": 56583,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_14dc3618-4de8-4bee-959b-3a807a17bdbb"
+            },
+            {
+              "sourceBytes": 803424,
+              "bytes": 75189,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 38.86,
+              "index": 1,
+              "name": "Color_14dc3618-4de8-4bee-959b-3a807a17bdbb"
+            },
+            {
+              "sourceBytes": 872215,
+              "bytes": 241303,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_14dc3618-4de8-4bee-959b-3a807a17bdbb"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "13_street_base",
+      "file": "models/13_street_base.glb",
+      "sourceBytes": 5338800,
+      "sourceTextureBytes": 5331032,
+      "sourceOtherBytes": 7768,
+      "profiles": {
+        "desktop": {
+          "bytes": 529740,
+          "savedPercent": 90.08,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 4840,
+            "accessors": 8,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 1,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 3001130,
+              "bytes": 441376,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "ROAD_SOURCE_NORMAL_BAKE"
+            },
+            {
+              "sourceBytes": 2329902,
+              "bytes": 80604,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 47.43,
+              "index": 1,
+              "name": "ROAD_SOURCE_COLOR_BAKE"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 190364,
+          "savedPercent": 96.43,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 4840,
+            "accessors": 8,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 1,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 3001130,
+              "bytes": 154916,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "ROAD_SOURCE_NORMAL_BAKE"
+            },
+            {
+              "sourceBytes": 2329902,
+              "bytes": 27685,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 45.39,
+              "index": 1,
+              "name": "ROAD_SOURCE_COLOR_BAKE"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "14_bambu_x1c",
+      "file": "models/14_bambu_x1c.glb",
+      "sourceBytes": 2252132,
+      "sourceTextureBytes": 1923354,
+      "sourceOtherBytes": 328778,
+      "profiles": {
+        "desktop": {
+          "bytes": 917064,
+          "savedPercent": 59.28,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 321028,
+            "accessors": 23,
+            "nodes": 6,
+            "meshes": 6,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 860768,
+              "bytes": 82460,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_c3ccb749-d329-4ee6-a427-9944d5fffd8a"
+            },
+            {
+              "sourceBytes": 631073,
+              "bytes": 155371,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 43.46,
+              "index": 1,
+              "name": "Color_c3ccb749-d329-4ee6-a427-9944d5fffd8a"
+            },
+            {
+              "sourceBytes": 431513,
+              "bytes": 350462,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_c3ccb749-d329-4ee6-a427-9944d5fffd8a"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 523100,
+          "savedPercent": 76.77,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 321028,
+            "accessors": 23,
+            "nodes": 6,
+            "meshes": 6,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 860768,
+              "bytes": 23229,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_c3ccb749-d329-4ee6-a427-9944d5fffd8a"
+            },
+            {
+              "sourceBytes": 631073,
+              "bytes": 57309,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 40.56,
+              "index": 1,
+              "name": "Color_c3ccb749-d329-4ee6-a427-9944d5fffd8a"
+            },
+            {
+              "sourceBytes": 431513,
+              "bytes": 113787,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_c3ccb749-d329-4ee6-a427-9944d5fffd8a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "15_makeblock_laserbox",
+      "file": "models/15_makeblock_laserbox.glb",
+      "sourceBytes": 1668388,
+      "sourceTextureBytes": 1465629,
+      "sourceOtherBytes": 202759,
+      "profiles": {
+        "desktop": {
+          "bytes": 583964,
+          "savedPercent": 65.0,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 199452,
+            "accessors": 8,
+            "nodes": 2,
+            "meshes": 2,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 771568,
+              "bytes": 100810,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_02b354be-e446-4be5-92b0-fa6d86c707be"
+            },
+            {
+              "sourceBytes": 439157,
+              "bytes": 104560,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 45.35,
+              "index": 1,
+              "name": "Color_02b354be-e446-4be5-92b0-fa6d86c707be"
+            },
+            {
+              "sourceBytes": 254904,
+              "bytes": 175839,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_02b354be-e446-4be5-92b0-fa6d86c707be"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 338332,
+          "savedPercent": 79.72,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 199452,
+            "accessors": 8,
+            "nodes": 2,
+            "meshes": 2,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 771568,
+              "bytes": 34778,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_02b354be-e446-4be5-92b0-fa6d86c707be"
+            },
+            {
+              "sourceBytes": 439157,
+              "bytes": 40993,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 42.28,
+              "index": 1,
+              "name": "Color_02b354be-e446-4be5-92b0-fa6d86c707be"
+            },
+            {
+              "sourceBytes": 254904,
+              "bytes": 59804,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_02b354be-e446-4be5-92b0-fa6d86c707be"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "16_openpnp_machine",
+      "file": "models/16_openpnp_machine.glb",
+      "sourceBytes": 3122508,
+      "sourceTextureBytes": 2736781,
+      "sourceOtherBytes": 385727,
+      "profiles": {
+        "desktop": {
+          "bytes": 1396756,
+          "savedPercent": 55.27,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 383600,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1340905,
+              "bytes": 220883,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e"
+            },
+            {
+              "sourceBytes": 715653,
+              "bytes": 174153,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 43.0,
+              "index": 1,
+              "name": "Color_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e"
+            },
+            {
+              "sourceBytes": 680223,
+              "bytes": 615998,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 717804,
+          "savedPercent": 77.01,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 383600,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1340905,
+              "bytes": 69297,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e"
+            },
+            {
+              "sourceBytes": 715653,
+              "bytes": 61140,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 40.13,
+              "index": 1,
+              "name": "Color_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e"
+            },
+            {
+              "sourceBytes": 680223,
+              "bytes": 201651,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "17_soldering_station",
+      "file": "models/17_soldering_station.glb",
+      "sourceBytes": 2320876,
+      "sourceTextureBytes": 2211779,
+      "sourceOtherBytes": 109097,
+      "profiles": {
+        "desktop": {
+          "bytes": 883364,
+          "savedPercent": 61.94,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 106984,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1147103,
+              "bytes": 177106,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_86e23643-ce8d-418b-bbec-64e1c813e73c"
+            },
+            {
+              "sourceBytes": 511027,
+              "bytes": 116221,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 45.35,
+              "index": 1,
+              "name": "Color_86e23643-ce8d-418b-bbec-64e1c813e73c"
+            },
+            {
+              "sourceBytes": 553649,
+              "bytes": 480943,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_86e23643-ce8d-418b-bbec-64e1c813e73c"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 369844,
+          "savedPercent": 84.06,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 106984,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1147103,
+              "bytes": 58699,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_86e23643-ce8d-418b-bbec-64e1c813e73c"
+            },
+            {
+              "sourceBytes": 511027,
+              "bytes": 42464,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 42.42,
+              "index": 1,
+              "name": "Color_86e23643-ce8d-418b-bbec-64e1c813e73c"
+            },
+            {
+              "sourceBytes": 553649,
+              "bytes": 159591,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_86e23643-ce8d-418b-bbec-64e1c813e73c"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "18_hot_air_station",
+      "file": "models/18_hot_air_station.glb",
+      "sourceBytes": 2636908,
+      "sourceTextureBytes": 2483847,
+      "sourceOtherBytes": 153061,
+      "profiles": {
+        "desktop": {
+          "bytes": 1009308,
+          "savedPercent": 61.72,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 150968,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1260015,
+              "bytes": 179749,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_dc664096-8d52-4c65-b868-ac72f30536e8"
+            },
+            {
+              "sourceBytes": 584374,
+              "bytes": 138065,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 44.59,
+              "index": 1,
+              "name": "Color_dc664096-8d52-4c65-b868-ac72f30536e8"
+            },
+            {
+              "sourceBytes": 639458,
+              "bytes": 538435,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_dc664096-8d52-4c65-b868-ac72f30536e8"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 426224,
+          "savedPercent": 83.84,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 150968,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1260015,
+              "bytes": 51942,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_dc664096-8d52-4c65-b868-ac72f30536e8"
+            },
+            {
+              "sourceBytes": 584374,
+              "bytes": 48427,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 41.82,
+              "index": 1,
+              "name": "Color_dc664096-8d52-4c65-b868-ac72f30536e8"
+            },
+            {
+              "sourceBytes": 639458,
+              "bytes": 172797,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_dc664096-8d52-4c65-b868-ac72f30536e8"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "19_oscilloscope",
+      "file": "models/19_oscilloscope.glb",
+      "sourceBytes": 2333856,
+      "sourceTextureBytes": 2168908,
+      "sourceOtherBytes": 164948,
+      "profiles": {
+        "desktop": {
+          "bytes": 687524,
+          "savedPercent": 70.54,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 162834,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1341129,
+              "bytes": 181363,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_ea6b739a-3bdb-46f9-ba7e-330aa3201818"
+            },
+            {
+              "sourceBytes": 530743,
+              "bytes": 125111,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 44.56,
+              "index": 1,
+              "name": "Color_ea6b739a-3bdb-46f9-ba7e-330aa3201818"
+            },
+            {
+              "sourceBytes": 297036,
+              "bytes": 216107,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_ea6b739a-3bdb-46f9-ba7e-330aa3201818"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 337472,
+          "savedPercent": 85.54,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 162834,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1341129,
+              "bytes": 54441,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_ea6b739a-3bdb-46f9-ba7e-330aa3201818"
+            },
+            {
+              "sourceBytes": 530743,
+              "bytes": 45735,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 41.79,
+              "index": 1,
+              "name": "Color_ea6b739a-3bdb-46f9-ba7e-330aa3201818"
+            },
+            {
+              "sourceBytes": 297036,
+              "bytes": 72354,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_ea6b739a-3bdb-46f9-ba7e-330aa3201818"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "21_monitor",
+      "file": "models/21_monitor.glb",
+      "sourceBytes": 1750184,
+      "sourceTextureBytes": 1661338,
+      "sourceOtherBytes": 88846,
+      "profiles": {
+        "desktop": {
+          "bytes": 527644,
+          "savedPercent": 69.85,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 86754,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 921214,
+              "bytes": 88683,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_ca03c270-717b-437b-8c1a-9bed3f606071"
+            },
+            {
+              "sourceBytes": 398847,
+              "bytes": 95677,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 47.38,
+              "index": 1,
+              "name": "Color_ca03c270-717b-437b-8c1a-9bed3f606071"
+            },
+            {
+              "sourceBytes": 341277,
+              "bytes": 254446,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_ca03c270-717b-437b-8c1a-9bed3f606071"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 234240,
+          "savedPercent": 86.62,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 86754,
+            "accessors": 4,
+            "nodes": 1,
+            "meshes": 1,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 921214,
+              "bytes": 28014,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_ca03c270-717b-437b-8c1a-9bed3f606071"
+            },
+            {
+              "sourceBytes": 398847,
+              "bytes": 35772,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 44.27,
+              "index": 1,
+              "name": "Color_ca03c270-717b-437b-8c1a-9bed3f606071"
+            },
+            {
+              "sourceBytes": 341277,
+              "bytes": 81620,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_ca03c270-717b-437b-8c1a-9bed3f606071"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "22_office_desk",
+      "file": "models/22_office_desk.glb",
+      "sourceBytes": 2602648,
+      "sourceTextureBytes": 2391400,
+      "sourceOtherBytes": 211248,
+      "profiles": {
+        "desktop": {
+          "bytes": 1127084,
+          "savedPercent": 56.69,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 195390,
+            "accessors": 48,
+            "nodes": 15,
+            "meshes": 15,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1134808,
+              "bytes": 194749,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_6fd28df2-a825-42f7-af68-68531cc8cc72"
+            },
+            {
+              "sourceBytes": 633692,
+              "bytes": 158017,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 44.71,
+              "index": 1,
+              "name": "Color_6fd28df2-a825-42f7-af68-68531cc8cc72"
+            },
+            {
+              "sourceBytes": 622900,
+              "bytes": 563068,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_6fd28df2-a825-42f7-af68-68531cc8cc72"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 504596,
+          "savedPercent": 80.61,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 195390,
+            "accessors": 48,
+            "nodes": 15,
+            "meshes": 15,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1134808,
+              "bytes": 53878,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_6fd28df2-a825-42f7-af68-68531cc8cc72"
+            },
+            {
+              "sourceBytes": 633692,
+              "bytes": 55068,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 41.96,
+              "index": 1,
+              "name": "Color_6fd28df2-a825-42f7-af68-68531cc8cc72"
+            },
+            {
+              "sourceBytes": 622900,
+              "bytes": 184408,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_6fd28df2-a825-42f7-af68-68531cc8cc72"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "23_workbench",
+      "file": "models/23_workbench.glb",
+      "sourceBytes": 2501500,
+      "sourceTextureBytes": 2358387,
+      "sourceOtherBytes": 143113,
+      "profiles": {
+        "desktop": {
+          "bytes": 904676,
+          "savedPercent": 63.83,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 124130,
+            "accessors": 61,
+            "nodes": 19,
+            "meshes": 19,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1197066,
+              "bytes": 191955,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_039ec198-a648-4b4e-b8e8-306e1440b3ea"
+            },
+            {
+              "sourceBytes": 632473,
+              "bytes": 126889,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 45.17,
+              "index": 1,
+              "name": "Color_039ec198-a648-4b4e-b8e8-306e1440b3ea"
+            },
+            {
+              "sourceBytes": 528848,
+              "bytes": 442723,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                1024,
+                1024
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_039ec198-a648-4b4e-b8e8-306e1440b3ea"
+            }
+          ]
+        },
+        "mobile": {
+          "bytes": 363560,
+          "savedPercent": 85.47,
+          "validation": {
+            "metadataEquivalent": true,
+            "nonImageBufferViewsEquivalent": true,
+            "nonImageBytesVerified": 124130,
+            "accessors": 61,
+            "nodes": 19,
+            "meshes": 19,
+            "skins": 0,
+            "animations": 0,
+            "dataImagesVerified": 2,
+            "dataMaxObservedChannelErrorAgainstResizedSource": 2,
+            "addedExtensions": []
+          },
+          "images": [
+            {
+              "sourceBytes": 1197066,
+              "bytes": 42159,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 0,
+              "name": "NormalGL_039ec198-a648-4b4e-b8e8-306e1440b3ea"
+            },
+            {
+              "sourceBytes": 632473,
+              "bytes": 42029,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "color"
+              ],
+              "mimeType": "image/jpeg",
+              "dataMaxChannelRoundingError": 0,
+              "colorPsnrDbAgainstResizedSource": 43.07,
+              "index": 1,
+              "name": "Color_039ec198-a648-4b4e-b8e8-306e1440b3ea"
+            },
+            {
+              "sourceBytes": 528848,
+              "bytes": 136267,
+              "sourceSize": [
+                2048,
+                2048
+              ],
+              "size": [
+                512,
+                512
+              ],
+              "roles": [
+                "data"
+              ],
+              "mimeType": "image/png",
+              "dataMaxChannelRoundingError": 2,
+              "colorPsnrDbAgainstResizedSource": null,
+              "index": 2,
+              "name": "ORM_039ec198-a648-4b4e-b8e8-306e1440b3ea"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
