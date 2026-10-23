@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "profiles": {
+    "desktop": {
+      "maxTextureSize": 1024
+    },
+    "mobile": {
+      "maxTextureSize": 512
+    }
+  },
+  "assets": {
+    "models/01_garage_shell-clearance.glb": {
+      "sourceSha256": "e6cd505d7b1d6101b715fb5c3d42124c3afd785b65e215d1432504484d37c422",
+      "sourceBytes": 3456528,
+      "desktop": {
+        "file": "models/optimized/desktop/01_garage_shell-clearance.glb",
+        "sha256": "7225fd3b3cf66104e845d6fbf3703e2b7286329729ecdc0b2945428d7a2e6232",
+        "bytes": 1622904,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/01_garage_shell-clearance.glb",
+        "sha256": "3383ba66eaace530c51a7af3fea94cb7fa63850617e867b0231622597733aa1f",
+        "bytes": 895052,
+        "maxTextureSize": 512
+      }
+    },
+    "models/02_roller_shutter.glb": {
+      "sourceSha256": "dc0403fc97df4d8500e423d49cfbc7eca0472cea598c1ccdb2f37f6cc52214cf",
+      "sourceBytes": 4407264,
+      "desktop": {
+        "file": "models/optimized/desktop/02_roller_shutter.glb",
+        "sha256": "6d0788234ce66ebafe1aaaafe9e36e1cbb198afb1784fe88fcb4ba780169302b",
+        "bytes": 2435084,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/02_roller_shutter.glb",
+        "sha256": "4307723e71cb43b793b6e22236909877394880081b1380c543c14c7f01c77822",
+        "bytes": 1797044,
+        "maxTextureSize": 512
+      }
+    },
+    "models/03_profile_sign.glb": {
+      "sourceSha256": "f547f382efcd4440a8f628008db098bf328fa9c5e45314526f96a061b53e3854",
+      "sourceBytes": 2567788,
+      "desktop": {
+        "file": "models/optimized/desktop/03_profile_sign.glb",
+        "sha256": "ac29d279509df20a3b03dbd14e92973c31393bcb71d23ba39dcf264fbe8c1b1c",
+        "bytes": 1157256,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/03_profile_sign.glb",
+        "sha256": "75b613f41332a2dbac4b18d9be990419eb1a7feedb2520fe08ba492aca6690d9",
+        "bytes": 509196,
+        "maxTextureSize": 512
+      }
+    },
+    "models/04_cyber_lucky_cat.glb": {
+      "sourceSha256": "730e14e7524bbcbc2f3087f165eca540d1e5e0a7a65bf820f81250c6a1bcb3d1",
+      "sourceBytes": 5690368,
+      "desktop": {
+        "file": "models/optimized/desktop/04_cyber_lucky_cat.glb",
+        "sha256": "4d58a2065af2e9adb721cb6ba4a1d6c10694f5d2bbc0d8b8752f2a751dccf9cc",
+        "bytes": 2352968,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/04_cyber_lucky_cat.glb",
+        "sha256": "4005ac090050e77d4993e58f26cd5716512b7c06c8e33f08d5519f9507703b6f",
+        "bytes": 1193044,
+        "maxTextureSize": 512
+      }
+    },
+    "models/05_project_vending.glb": {
+      "sourceSha256": "23255d23af7b83d0e68d57f9f3b45ee3c96b2e0bb3e48eaadd539d70b7b3d920",
+      "sourceBytes": 3637932,
+      "desktop": {
+        "file": "models/optimized/desktop/05_project_vending.glb",
+        "sha256": "14758b56a8ca8814af53dc57df246b35e42ba9f33c91b0764bcbd9a1671ac8db",
+        "bytes": 1528472,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/05_project_vending.glb",
+        "sha256": "4f6958e8289beec992bc39a5fdfc3452e0f189cefa562e7ec1a10b19f577bde7",
+        "bytes": 704472,
+        "maxTextureSize": 512
+      }
+    },
+    "models/06_showcase_zone.glb": {
+      "sourceSha256": "e74514f844172d3c1f1d1cd3ee22b1b8cc2efe5fafda98a8fca861de2cf721ff",
+      "sourceBytes": 2943836,
+      "desktop": {
+        "file": "models/optimized/desktop/06_showcase_zone.glb",
+        "sha256": "87c970aaed2c0ded0c5a5a7f9aefa78ee77e4da82ae5146375aade7459f8aac0",
+        "bytes": 1332508,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/06_showcase_zone.glb",
+        "sha256": "0a09b1b4f0c8dee002f812ed9b85637fdaf99f94ebc702a8028b33bfad532c21",
+        "bytes": 658020,
+        "maxTextureSize": 512
+      }
+    },
+    "models/08_street_lamp.glb": {
+      "sourceSha256": "d7dae169a919478eee129a593124a0073b83ff283b41b148678f5095cc9d11ff",
+      "sourceBytes": 2673972,
+      "desktop": {
+        "file": "models/optimized/desktop/08_street_lamp.glb",
+        "sha256": "3d9f166610c8a07e93cae87265bd8e5ccd606cd6c19020029bfa7e05e55bb07a",
+        "bytes": 1152932,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/08_street_lamp.glb",
+        "sha256": "f78d520cb1911c5c5542696e90a76fe9d70470fabd49019f605c901fd7ca4123",
+        "bytes": 676960,
+        "maxTextureSize": 512
+      }
+    },
+    "models/09_trash_bin.glb": {
+      "sourceSha256": "3d7838db398492c0ebaa4118f373069e49168bb0a2fe76ae205f89ebfd7ec1ef",
+      "sourceBytes": 2883248,
+      "desktop": {
+        "file": "models/optimized/desktop/09_trash_bin.glb",
+        "sha256": "b29e9321eae5b43f5ae88d47f73e28804ced0d262d2ab1e00aca60e44cbd87f4",
+        "bytes": 1017648,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/09_trash_bin.glb",
+        "sha256": "0bf8a67d1e552bfb0f2c27b41becc258031567e299c4767126f2c037362712ab",
+        "bytes": 476320,
+        "maxTextureSize": 512
+      }
+    },
+    "models/10_utility_cabinet.glb": {
+      "sourceSha256": "f9e28708d87c10fa87432f78d2eafce906bae3865e7a8a4e5223b5ecd24bbf70",
+      "sourceBytes": 3192616,
+      "desktop": {
+        "file": "models/optimized/desktop/10_utility_cabinet.glb",
+        "sha256": "3d32cc24367d7bbef869f4aa3566d1198dfde3029a2d3ad74a27bc73a867d0f4",
+        "bytes": 1251532,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/10_utility_cabinet.glb",
+        "sha256": "d983610f87f737301eb151db94bcddfd55e6e297d92a6a9cdcaf6cd9fb783265",
+        "bytes": 526128,
+        "maxTextureSize": 512
+      }
+    },
+    "models/11_tree.glb": {
+      "sourceSha256": "9632cddca1946313a37734f8d12dc4bdcf12e3bdc76e5777ba0675585aeee5c1",
+      "sourceBytes": 3388652,
+      "desktop": {
+        "file": "models/optimized/desktop/11_tree.glb",
+        "sha256": "3c61e823c89f3041edf9725f058effc0d0b8923eecf301974e30a2ae21075adb",
+        "bytes": 1572324,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/11_tree.glb",
+        "sha256": "495fb8d602bb88b609a4b32dbd691495eba0250551c58ee4032b14e92cc38f40",
+        "bytes": 754064,
+        "maxTextureSize": 512
+      }
+    },
+    "models/12_plants_grass.glb": {
+      "sourceSha256": "23cedbdd1d10a54873786f93f50e2ec570278d1c6f399f4b7004d17bdc0b8da2",
+      "sourceBytes": 2958800,
+      "desktop": {
+        "file": "models/optimized/desktop/12_plants_grass.glb",
+        "sha256": "f3a13754106f4a8d47ef7731d6e3baf9c84cf11cf3937b2b184b1a9320d8391a",
+        "bytes": 1230732,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/12_plants_grass.glb",
+        "sha256": "fa1f5e138529097c3e8f9a17e777c290699318e7e40cf0f99043faaea5149ff6",
+        "bytes": 432700,
+        "maxTextureSize": 512
+      }
+    },
+    "models/13_street_base.glb": {
+      "sourceSha256": "540b4ecf97cd88d909d36d71a1f708b6bdc5efda887ef8ac1a01ebdd98c9db50",
+      "sourceBytes": 5338800,
+      "desktop": {
+        "file": "models/optimized/desktop/13_street_base.glb",
+        "sha256": "30a4ccbd424286fb6d18113acf8d191d0af6694bd89ab0d2911f52e8ca7c8bcb",
+        "bytes": 529740,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/13_street_base.glb",
+        "sha256": "3ac00ecf803a9c914ad8d3a9305ca0a6d7506ef980b5cdb80087dfe5e0e8a69a",
+        "bytes": 190364,
+        "maxTextureSize": 512
+      }
+    },
+    "models/14_bambu_x1c.glb": {
+      "sourceSha256": "61584d58f0727e104c1e61ceb0ee2e35b5102a7b5c3a5205e685b6b423ff2e10",
+      "sourceBytes": 2252132,
+      "desktop": {
+        "file": "models/optimized/desktop/14_bambu_x1c.glb",
+        "sha256": "b67ae14842a9a6ec55e9155152eb3512a9d5b34fd6002215355b366a51356d9b",
+        "bytes": 917064,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/14_bambu_x1c.glb",
+        "sha256": "fd43943ec0ac8cea224548f12d900c29cef5be977529eba091641072f6ddd3f4",
+        "bytes": 523100,
+        "maxTextureSize": 512
+      }
+    },
+    "models/15_makeblock_laserbox.glb": {
+      "sourceSha256": "c90c0f8070887979ed19b2a1823b3a9e5253f1948b44b94d798f2186a3aee1eb",
+      "sourceBytes": 1668388,
+      "desktop": {
+        "file": "models/optimized/desktop/15_makeblock_laserbox.glb",
+        "sha256": "c6f43db0a1d00f285cdf2181a84b35a05ae0344103af7bb06db505add8e07786",
+        "bytes": 583964,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/15_makeblock_laserbox.glb",
+        "sha256": "3acee7d66df6b5aa4bf949e3f026f39ce8f17dedbece1ed688235fb062a6f20d",
+        "bytes": 338332,
+        "maxTextureSize": 512
+      }
+    },
+    "models/16_openpnp_machine.glb": {
+      "sourceSha256": "0087612ede91971a46882d8fcf3a24a4159e9b2cf8c5e6ddd0f1e43759263cd1",
+      "sourceBytes": 3122508,
+      "desktop": {
+        "file": "models/optimized/desktop/16_openpnp_machine.glb",
+        "sha256": "5a3323bc3cc56d6123b49b6b100e3f379036d8bd8334d3bd8d335eb5a712db5f",
+        "bytes": 1396756,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/16_openpnp_machine.glb",
+        "sha256": "bf0901b3cff4005b0ab40bf93e1549e14ec4bcfddaa9cc8cc71a1db0cf3e83e6",
+        "bytes": 717804,
+        "maxTextureSize": 512
+      }
+    },
+    "models/17_soldering_station.glb": {
+      "sourceSha256": "1034a715058ea8127902ed879e616bbbb871b836e3208599df61c2b246b784ae",
+      "sourceBytes": 2320876,
+      "desktop": {
+        "file": "models/optimized/desktop/17_soldering_station.glb",
+        "sha256": "b2ea9b0f20a0a204bdb38b47654a122457fb7063cf38fc7bc47712b81b06ffc0",
+        "bytes": 883364,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/17_soldering_station.glb",
+        "sha256": "898e7afee34624ca9055609c3dc923853f3ad69746d852bef4cd062165000a66",
+        "bytes": 369844,
+        "maxTextureSize": 512
+      }
+    },
+    "models/18_hot_air_station.glb": {
+      "sourceSha256": "4a0e9063eb377b55205f5f77d9d777185a1121264f4c0b98ec046aa6a98c3864",
+      "sourceBytes": 2636908,
+      "desktop": {
+        "file": "models/optimized/desktop/18_hot_air_station.glb",
+        "sha256": "a1e0ecc9c52f552c069bcbab4fccf13aa5bfe6fea0c67b628ba9905c3f70bafa",
+        "bytes": 1009308,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/18_hot_air_station.glb",
+        "sha256": "a882c09e7c5d14febcb899ca4a3caf9b02631b780a99347136bd0771348745e5",
+        "bytes": 426224,
+        "maxTextureSize": 512
+      }
+    },
+    "models/19_oscilloscope.glb": {
+      "sourceSha256": "c4ed2d5ac4836043060564d1fdccf24f989b95a750703c2afce6e758a620e333",
+      "sourceBytes": 2333856,
+      "desktop": {
+        "file": "models/optimized/desktop/19_oscilloscope.glb",
+        "sha256": "f5502b8d443bd2242208ba8fbda04bac90466c5c7991fc5616c41e3bfc7a3996",
+        "bytes": 687524,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/19_oscilloscope.glb",
+        "sha256": "07c35f389e07d1ef65474bed50fe47ee05977d19a578d71f01de3841fd0970b1",
+        "bytes": 337472,
+        "maxTextureSize": 512
+      }
+    },
+    "models/21_monitor.glb": {
+      "sourceSha256": "beaf0d3d0847d58ecac96cce9aa68639149a4d4adccbd3b5804acd3a61116013",
+      "sourceBytes": 1750184,
+      "desktop": {
+        "file": "models/optimized/desktop/21_monitor.glb",
+        "sha256": "be9b5c181f73aff9b3c07eb7fc1c5b7e14ce3df5aa20030a155687f556d97d20",
+        "bytes": 527644,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/21_monitor.glb",
+        "sha256": "b34f99cadd392cc59563f9a9bd843d33bbca5dfbcf5782f5c80a3e2a23706d24",
+        "bytes": 234240,
+        "maxTextureSize": 512
+      }
+    },
+    "models/22_office_desk.glb": {
+      "sourceSha256": "f47443f0548747ed4fc92940e6d034913d66aa90853a4e1a55ae6efebb5c7fe6",
+      "sourceBytes": 2602648,
+      "desktop": {
+        "file": "models/optimized/desktop/22_office_desk.glb",
+        "sha256": "f9f6033f270ad6a0a8c511b7b78d612085729330d9190c99796b67fc12bfe1a6",
+        "bytes": 1127084,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/22_office_desk.glb",
+        "sha256": "065b0a3092c8d6c5795e1593845feeeabee291c83d03c4545e868f99a6c16142",
+        "bytes": 504596,
+        "maxTextureSize": 512
+      }
+    },
+    "models/23_workbench.glb": {
+      "sourceSha256": "985ddfa2b1753faea567230f6ae88c432d28f678ee1410f91bc39e494f201069",
+      "sourceBytes": 2501500,
+      "desktop": {
+        "file": "models/optimized/desktop/23_workbench.glb",
+        "sha256": "3d07bc6d6b3ced3a3dae2860ef0cb4b9d80633a37f28a4870b28a3aecfca245d",
+        "bytes": 904676,
+        "maxTextureSize": 1024
+      },
+      "mobile": {
+        "file": "models/optimized/mobile/23_workbench.glb",
+        "sha256": "52bfbf7324abaaa6467691a6853664c3df9d26f8e5af82b9826fad8b9ba73c4b",
+        "bytes": 363560,
+        "maxTextureSize": 512
+      }
+    }
+  }
+}

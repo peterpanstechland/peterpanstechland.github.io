@@ -10,7 +10,6 @@ function logoURL(value){try{const url=new URL(value,configURL);return ['https:',
 
 export async function createSponsorBillboard(THREE,zh,onLoad){
   let service=null,application=null,feed=[],serverOffset=0,feedReady=false;
-  try{service=await createSponsorService();application=createSponsorApplication(service,zh);}catch{}
   const tiers=definitions.map(t=>({...t}));
   let page=0,previousPage=0,pageElapsed=0,transition=1,paused=false,lastSeconds=null;
   const tiles=[],imageCache=new Map();
@@ -130,7 +129,8 @@ export async function createSponsorBillboard(THREE,zh,onLoad){
     }
     const {ctx,canvas,texture}=masthead;ctx.fillStyle='#0a141d';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#a6c1c5';ctx.font='600 24px monospace';ctx.fillText('TECHLAND  /  BUILT TOGETHER',18,49);ctx.textAlign='right';ctx.font='22px monospace';ctx.fillText(`PARTNER NETWORK   ${page+1} / 3`,canvas.width-18,49);ctx.textAlign='left';texture.needsUpdate=true;
   }
-  repaintPages();refreshFeed();
+  repaintPages();
+  createSponsorService().then(value=>{service=value;application=createSponsorApplication(service,zh);populate();refreshFeed();onLoad();}).catch(()=>populate());
   // Cabinet and supports occlude clicks but never link to a brand.
   group.traverse(node=>{if(node.isMesh&&!node.userData.sponsorBoard)node.userData={assetId:'sponsor-board',sponsorBoard:true};});
   return {group,open,animate,activate(data){if(data.sponsorURL)window.open(data.sponsorURL,'_blank','noopener,noreferrer');else open(data.tier);}};

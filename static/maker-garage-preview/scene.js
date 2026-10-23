@@ -16,8 +16,9 @@ import { createProjectVending } from './project-vending.js?v=projects-v1';
 import { addVendingNeon } from './neon-lettering.js?v=vending-integrated-v3';
 import {createCommunityWall} from './community-wall.js?v=community-v1';
 import {createCommunityInstallation} from './community-installation.js?v=community-v1';
-import {createSponsorBillboard} from './sponsor-billboard.js?v=sponsor-portal-v1';
+import {createSponsorBillboard} from './sponsor-billboard.js?v=loading-v1';
 import {createAmbientMotion,installVendingMotion} from './ambient-motion.js?v=ambient-v1';
+import {loadingPhases,runLoadingPhase,optimizedModel} from './loading-plan.js?v=loading-v1';
 
 const zh = new URLSearchParams(location.search).get('lang') === 'zh-Hans' || location.pathname.startsWith('/zh-Hans/');
 const copy = {
@@ -69,6 +70,7 @@ const smallScreen = matchMedia('(max-width: 650px)');
 const textureLimit = smallScreen.matches || matchMedia('(pointer: coarse)').matches ? 512 : 1024;
 const releasedImages = new WeakSet();
 const entries = new Map();
+const vendingMotionData=fetch(new URL('./vending-motion.json',import.meta.url),{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null);
 let renderer;
 let scene;
 let camera;
@@ -82,6 +84,9 @@ let waveRequested = !motion.matches;
 let ambientMotion = null;
 let framing = ['interior','rear'].includes(new URLSearchParams(location.search).get('view')) ? new URLSearchParams(location.search).get('view') : 'overview';
 let configurationLoaded = false;
+let heroReady = false;
+let optimizedAssets = null;
+const loadingProfile = {started:performance.now(),tier:textureLimit===512?'mobile':'desktop',heroMs:null,completeMs:null};
 let frameRequested = false;
 let lastFrame = 0;
 let elapsed = 0;
@@ -125,7 +130,8 @@ function notifyStatus() {
     ? `预览贴图：${resources.textureCount} 张 · 最大 ${resources.maxTextureEdge} px · 估算 ${resources.estimatedRgbaMiB.toFixed(1)} MiB`
     : `Preview textures: ${resources.textureCount} maps · max ${resources.maxTextureEdge} px · approx. ${resources.estimatedRgbaMiB.toFixed(1)} MiB`;
   const parentCounts = contextLost ? { loaded: 0, total: Math.max(counts.total, 1), failed: Math.max(counts.total, 1) } : counts;
-  window.parent.postMessage({ type: 'techland-garage-status', ...parentCounts }, location.origin);
+  window.parent.postMessage({ type: 'techland-garage-status', ...parentCounts, ready:heroReady }, location.origin);
+  $('asset-panel').dataset.loadingProfile=JSON.stringify(loadingProfile);
   window.techlandGarageState = { ...counts, state: stage.dataset.state, effectsEnabled, waveEnabled, textureLimit, resources, shutter: shutterSnapshot(), assets: [...entries.values()].map((entry) => ({ id: entry.config.id, state: entry.state, error: entry.error || null, file: entry.config.file || null, normalization: entry.normalization || null, branding: entry.branding || null })) };
 }
 function fatal(message) {
@@ -350,7 +356,7 @@ $('shutter-pause').addEventListener('click', () => {
 });
 $('interior').addEventListener('click', () => { closeInfo(); if (shutter) setShutterOpen(true); fitCamera('interior'); });
 
-function refreshArtDirection() {
+function refreshArtDirection(reframe = false) {
   if (branding) { branding.removeFromParent(); disposeObject(branding); }
   if (practicalLights) { practicalLights.removeFromParent(); disposeObject(practicalLights); }
   if (groundSupports) { groundSupports.removeFromParent(); disposeObject(groundSupports); }
@@ -399,7 +405,7 @@ function refreshArtDirection() {
   $('asset-panel').dataset.groundContact = JSON.stringify(grounded.report);
   $('asset-panel').dataset.workshopLabels = JSON.stringify(workshopDetails.userData.anchors);
   notifyStatus();
-  fitCamera();
+  if(reframe)fitCamera();
   requestFrame();
 }
 
@@ -656,8 +662,9 @@ async function loadAsset(entry) {
     const manager = new THREE.LoadingManager();
     const failedResources = [];
     manager.onError = (url) => failedResources.push(url);
-    const modelURL = new URL(allowedModelURL(entry.config.file));
-    if (entry.config.modelRevision) modelURL.searchParams.set('v', entry.config.modelRevision);
+    const download=optimizedModel(entry.config,optimizedAssets,loadingProfile.tier);
+    const modelURL = new URL(allowedModelURL(download.file));
+    if (download.revision) modelURL.searchParams.set('v', download.revision);
     const request = new GLTFLoader(manager).loadAsync(modelURL.href);
     request.then((result) => { if (expired) disposeObject(result.scene); }, () => {});
     const gltf = await Promise.race([request, new Promise((_, reject) => { timeout = setTimeout(() => { expired = true; reject(new Error('Model loading timed out.')); }, 90000); })]);
@@ -752,9 +759,9 @@ async function loadAsset(entry) {
     if (/project_vending/i.test(entry.config.id)) {
       createVendingBranding(entry);
       try {
-        const response=await fetch(new URL('./vending-motion.json',import.meta.url));
-        if(!response.ok)throw Error('Missing product partition');
-        entry.vendingMotion=installVendingMotion(model,await response.json());
+        const partition=await vendingMotionData;
+        if(!partition)throw Error('Missing product partition');
+        entry.vendingMotion=installVendingMotion(model,partition);
       } catch(error) { console.warn('Vending products remain static:',error); }
     }
     if (/roller_shutter/i.test(entry.config.id)) configureShutter(entry);
@@ -776,7 +783,7 @@ async function loadAsset(entry) {
       scene.add(lamp, lamp.target);
       entry.lamp = lamp;
     }
-    fitCamera();
+    requestFrame();
   } catch (error) {
     clearTimeout(timeout);
     entry.state = 'error'; entry.error = error.message || String(error);
@@ -816,7 +823,11 @@ async function loadConfiguration() {
   const timeout = setTimeout(() => controller.abort(), 20000);
   let config;
   try {
-    const response = await fetch('./assets.json', { cache: 'no-cache', signal: controller.signal });
+    const [response,variants]=await Promise.all([
+      fetch('./assets.json', { cache: 'no-cache', signal: controller.signal }),
+      fetch('./optimized-assets.json',{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
+    ]);
+    optimizedAssets=variants;
     if (!response.ok) throw new Error(zh ? '资产清单加载失败，请重新加载预览。' : 'The asset manifest could not load. Please reload the preview.');
     config = await response.json();
   } catch (error) {
@@ -839,12 +850,20 @@ async function loadConfiguration() {
   }
   configurationLoaded = true;
   notifyStatus();
-  // Limit simultaneous decoding to keep mobile memory use predictable.
-  const queue = [...entries.values()].filter((entry) => entry.config.file);
-  await Promise.all([0, 1, 2].map(async () => {
-    while (queue.length) await loadAsset(queue.shift());
-  }));
-  refreshArtDirection();
+  // Reuse the same three decode slots, but finish the visible facade first.
+  // Each phase is settled once; no orbit reset as background tools arrive.
+  for(const [index,phase] of loadingPhases(entries.values(),framing).entries()){
+    await runLoadingPhase(phase,loadAsset);
+    refreshArtDirection(index===0);
+    if(index===0){
+      await new Promise(resolve=>requestAnimationFrame(resolve));
+      heroReady=['13_street_base','01_garage_shell'].every(id=>entries.get(id)?.state==='ready');
+      loadingProfile.heroMs=Math.round(performance.now()-loadingProfile.started);notifyStatus();
+    }
+    // Let the completed exterior paint before spending CPU on the next phase.
+    await new Promise(resolve=>setTimeout(resolve,0));
+  }
+  loadingProfile.completeMs=Math.round(performance.now()-loadingProfile.started);notifyStatus();
 }
 $('retry-failed').addEventListener('click', async () => {
   const failed = [...entries.values()].filter((entry) => entry.state === 'error' && entry.config.file);
@@ -961,14 +980,13 @@ async function start() {
     fitCamera, setWave, setEffects, setShutterOpen,
     get configurationLoaded() { return configurationLoaded; },
   };
-  try {
-    sponsorBillboard=await createSponsorBillboard(THREE,zh,requestFrame);
-    scene.add(sponsorBillboard.group);requestFrame();
-    profileImage = await new THREE.ImageLoader().loadAsync(new URL('../img/logo.jpg', import.meta.url).href);
-  } catch (error) {
-    // A missing portrait must leave the original neon frame usable.
-    console.warn('Garage profile image unavailable:', error);
-  }
+  // Cooperation API and portrait latency must never hold up model downloads.
+  createSponsorBillboard(THREE,zh,requestFrame).then(board=>{
+    sponsorBillboard=board;scene.add(board.group);requestFrame();
+  }).catch(error=>console.warn('Garage billboard unavailable:',error));
+  new THREE.ImageLoader().loadAsync(new URL('../img/logo.jpg', import.meta.url).href).then(image=>{
+    profileImage=image;if(loadingProfile.completeMs!==null)refreshArtDirection();
+  }).catch(error=>console.warn('Garage profile image unavailable:',error));
   await loadConfiguration();
 }
 start().catch((error) => { console.error(error); fatal(error.message || String(error)); });
