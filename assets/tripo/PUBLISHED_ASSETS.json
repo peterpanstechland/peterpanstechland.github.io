@@ -1,17 +1,18 @@
 {
-  "revision": "grounded-v4.2",
-  "date": "2026-10-21",
+  "revision": "interior-v1",
+  "date": "2026-10-23",
   "routes": [
     "/maker-garage-preview/",
     "/zh-Hans/maker-garage-preview/"
   ],
-  "loaded_asset_count": 12,
-  "total_asset_slots": 13,
+  "loaded_asset_count": 21,
+  "total_asset_slots": 22,
   "notes": [
-    "Real Tripo model outputs; rejected tools-zone output is excluded without a substitute.",
+    "Real Tripo models. Original tools-zone output was rejected and replaced by separately generated equipment; rejected PC mesh is excluded.",
     "Original downloads and complete production logs are retained locally.",
     "Accurate brand signs, grounding supports, the beckon animation and lighting are locally authored; these are not additional Tripo outputs.",
-    "Existing homepage, blog posts, docs and Challenge content are preserved."
+    "Existing homepage, blog posts, docs and Challenge content are preserved.",
+    "Interior additions: 9 accepted unique models / 10 instances; generated PC tower failed visual acceptance. See INTERIOR_EQUIPMENT.json."
   ],
   "assets": [
     {
@@ -82,17 +83,6 @@
       "sha256": "7449f2f5f1cf70e9380efe52a1e2725302df54adef934ffe266e0e2cecb2f61d"
     },
     {
-      "id": "07_tools_zone",
-      "label": {
-        "en": "Maker workbench",
-        "zh": "工具创作区"
-      },
-      "task_id": null,
-      "status": "rejected",
-      "website_path": null,
-      "sha256": null
-    },
-    {
       "id": "08_street_lamp",
       "label": {
         "en": "Street lamp",
@@ -157,6 +147,178 @@
       "status": "verified_with_notes",
       "website_path": "static/maker-garage-preview/models/13_street_base.glb",
       "sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21"
+    },
+    {
+      "id": "14_bambu_x1c",
+      "label": {
+        "en": "Bambu Lab X1 Carbon",
+        "zh": "拓竹 X1 Carbon"
+      },
+      "task_id": "c3ccb749-d329-4ee6-a427-9944d5fffd8a",
+      "status": "verified_with_notes",
+      "actual_credits": 30,
+      "website_path": "static/maker-garage-preview/models/14_bambu_x1c.glb",
+      "sha256": "472b076a84ca0885f4eacecd6b039c064afcc210d22079bd55fb98ab40b218f0",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "15_makeblock_laserbox",
+      "label": {
+        "en": "Makeblock Laserbox",
+        "zh": "Makeblock Laserbox"
+      },
+      "task_id": "02b354be-e446-4be5-92b0-fa6d86c707be",
+      "status": "verified_with_notes",
+      "actual_credits": 30,
+      "website_path": "static/maker-garage-preview/models/15_makeblock_laserbox.glb",
+      "sha256": "3d2d776b80bd14871b0a23ed809571bd9bb5a1f5ead93ffa64bc6efb4215cc2e",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "16_openpnp_machine",
+      "label": {
+        "en": "OpenPnP pick-and-place",
+        "zh": "OpenPnP 桌面贴片机"
+      },
+      "task_id": "fa25ef33-b2e9-42a3-8538-c7e7b37ef34e",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/16_openpnp_machine.glb",
+      "sha256": "2960e300b1a75beb8d14c20f864676e9e918186cd8c0eb61f92339877a7db996",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "17_soldering_station",
+      "label": {
+        "en": "Soldering station",
+        "zh": "焊台"
+      },
+      "task_id": "86e23643-ce8d-418b-bbec-64e1c813e73c",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/17_soldering_station.glb",
+      "sha256": "831fc5749f16315c13f961ad5f27ccb6c25c4e9f18efba3bdf4839b6e9f38646",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "18_hot_air_station",
+      "label": {
+        "en": "Hot-air rework station",
+        "zh": "热风枪与控制台"
+      },
+      "task_id": "dc664096-8d52-4c65-b868-ac72f30536e8",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/18_hot_air_station.glb",
+      "sha256": "b33177cc48b1d19dcf264f4f0c70f6fa435ff0a9636fbdde0d57cff2a28c798d",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "19_oscilloscope",
+      "label": {
+        "en": "Oscilloscope",
+        "zh": "示波器"
+      },
+      "task_id": "ea6b739a-3bdb-46f9-ba7e-330aa3201818",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/19_oscilloscope.glb",
+      "sha256": "422967b613947c854e9ffc87f4a7c2585aea6970f25730ebde4640e24d1d6ad1",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "20_pc_tower",
+      "label": {
+        "en": "PC tower — rejected",
+        "zh": "电脑主机"
+      },
+      "task_id": "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+      "status": "rejected_visual",
+      "actual_credits": 20,
+      "website_path": null,
+      "sha256": null,
+      "notes": [
+        "Provider completed and charged 20 credits, but the mesh is severely deformed. Excluded from scene. No automatic retry. Separate 30-credit image-to-model proposal remains unsubmitted pending confirmation."
+      ]
+    },
+    {
+      "id": "21_monitor",
+      "label": {
+        "en": "Dual monitors",
+        "zh": "双显示器"
+      },
+      "task_id": "ca03c270-717b-437b-8c1a-9bed3f606071",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/21_monitor.glb",
+      "sha256": "c74855cb1c7e6ea6735da94904ca38b941bab5dd4e21ca09aabe0ca7e90856b2",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "22_office_desk",
+      "label": {
+        "en": "Office desk",
+        "zh": "办公桌"
+      },
+      "task_id": "6fd28df2-a825-42f7-af68-68531cc8cc72",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/22_office_desk.glb",
+      "sha256": "68dc16658a9e1ba57ca353573faa4a7331dd57d0dee2a000949db2685b82d809",
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "23_workbench",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工作台"
+      },
+      "task_id": "039ec198-a648-4b4e-b8e8-306e1440b3ea",
+      "status": "verified_with_notes",
+      "actual_credits": 20,
+      "website_path": "static/maker-garage-preview/models/23_workbench.glb",
+      "sha256": "05737ab798880de76217c2cd331b3e9b1c0d2757f68474d45ebdadea298182cc",
+      "notes": [
+        "Original Tripo frame retained. Generated clutter clipped from tabletop. Local steel top and lower-shelf inserts close the cut and source holes. Raw source unchanged."
+      ]
+    }
+  ],
+  "publication_status": "local_preview_not_deployed",
+  "superseded_assets": [
+    {
+      "id": "07_tools_zone",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工具创作区"
+      },
+      "task_id": null,
+      "status": "rejected",
+      "website_path": null,
+      "sha256": null
     }
   ]
 }

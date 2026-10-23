@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "assets": [
     {
       "id": "01_garage_shell",
@@ -101,32 +101,17 @@
       },
       "status": "verified_with_notes",
       "targetHeight": 2.35,
-      "rotationY": 0,
+      "rotationY": 1.5707963267948966,
       "position": [
-        0.25,
+        -1.04,
         0,
-        -0.75
+        -0.3
       ],
       "href": "/docs/projects",
       "normalized": true,
       "file": "models/06_showcase_zone.glb",
-      "taskId": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c"
-    },
-    {
-      "id": "07_tools_zone",
-      "label": {
-        "en": "Maker workbench",
-        "zh": "工具创作区"
-      },
-      "status": "rejected",
-      "targetHeight": 2.3,
-      "rotationY": 0,
-      "position": [
-        -1.7,
-        0,
-        -0.35
-      ],
-      "href": "/docs/guides"
+      "taskId": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "uniformScale": 0.78
     },
     {
       "id": "08_street_lamp",
@@ -235,6 +220,361 @@
       ],
       "file": "models/13_street_base.glb",
       "taskId": "38eb318a-5bfd-492d-91e0-cdc0e25973f5"
+    },
+    {
+      "id": "14_bambu_x1c",
+      "label": {
+        "en": "Bambu Lab X1 Carbon",
+        "zh": "拓竹 X1 Carbon"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0.8,
+        -0.9405
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "c3ccb749-d329-4ee6-a427-9944d5fffd8a",
+      "file": "models/14_bambu_x1c.glb",
+      "supportAsset": "23_workbench",
+      "description": {
+        "en": "Real Tripo display asset. Approximate proportions; locally authored labels and screen graphics.",
+        "zh": "实际 Tripo 展示模型，比例用于场景展示；品牌文字和屏幕画面为后期制作。"
+      },
+      "labels": [
+        {
+          "text": "Bambu Lab",
+          "subtext": "X1 CARBON",
+          "center": [
+            -0.194,
+            0.245,
+            0
+          ],
+          "size": [
+            0.28,
+            0.21
+          ],
+          "face": "left"
+        },
+        {
+          "text": "Bambu Lab",
+          "subtext": "X1 CARBON",
+          "center": [
+            0.194,
+            0.245,
+            0
+          ],
+          "size": [
+            0.28,
+            0.21
+          ],
+          "face": "right"
+        },
+        {
+          "text": "X1 Carbon",
+          "center": [
+            0.065,
+            0.415,
+            0.194
+          ],
+          "size": [
+            0.11,
+            0.03
+          ]
+        }
+      ]
+    },
+    {
+      "id": "15_makeblock_laserbox",
+      "label": {
+        "en": "Makeblock Laserbox",
+        "zh": "Makeblock Laserbox"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0.8,
+        0.513
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "02b354be-e446-4be5-92b0-fa6d86c707be",
+      "file": "models/15_makeblock_laserbox.glb",
+      "supportAsset": "23_workbench",
+      "description": {
+        "en": "Real Tripo display asset. Approximate proportions; locally authored labels and screen graphics.",
+        "zh": "实际 Tripo 展示模型，比例用于场景展示；品牌文字和屏幕画面为后期制作。"
+      },
+      "labels": [
+        {
+          "text": "Makeblock",
+          "subtext": "LASERBOX",
+          "center": [
+            0,
+            0.16,
+            0.264
+          ],
+          "size": [
+            0.28,
+            0.1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "16_openpnp_machine",
+      "label": {
+        "en": "OpenPnP pick-and-place",
+        "zh": "OpenPnP 桌面贴片机"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0.8,
+        -0.356
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "fa25ef33-b2e9-42a3-8538-c7e7b37ef34e",
+      "file": "models/16_openpnp_machine.glb",
+      "supportAsset": "23_workbench",
+      "description": {
+        "en": "Generic OpenPnP-compatible desktop machine concept; OpenPnP does not prescribe one machine enclosure.",
+        "zh": "OpenPnP 兼容桌面贴片机的展示概念；OpenPnP 没有统一的机器外壳型号。"
+      },
+      "labels": [
+        {
+          "text": "OpenPnP",
+          "center": [
+            0,
+            0.05,
+            0.3
+          ],
+          "size": [
+            0.2,
+            0.04
+          ]
+        }
+      ]
+    },
+    {
+      "id": "17_soldering_station",
+      "label": {
+        "en": "Soldering station",
+        "zh": "焊台"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        -0.09,
+        0.75,
+        -0.7
+      ],
+      "rotationY": 0,
+      "taskId": "86e23643-ce8d-418b-bbec-64e1c813e73c",
+      "file": "models/17_soldering_station.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "en": "Real Tripo display asset. Approximate proportions; locally authored labels and screen graphics.",
+        "zh": "实际 Tripo 展示模型，比例用于场景展示；品牌文字和屏幕画面为后期制作。"
+      }
+    },
+    {
+      "id": "18_hot_air_station",
+      "label": {
+        "en": "Hot-air rework station",
+        "zh": "热风枪与控制台"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        0.25,
+        0.75,
+        -0.7
+      ],
+      "rotationY": 0,
+      "taskId": "dc664096-8d52-4c65-b868-ac72f30536e8",
+      "file": "models/18_hot_air_station.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "en": "Real Tripo display asset. Approximate proportions; locally authored labels and screen graphics.",
+        "zh": "实际 Tripo 展示模型，比例用于场景展示；品牌文字和屏幕画面为后期制作。"
+      }
+    },
+    {
+      "id": "19_oscilloscope",
+      "label": {
+        "en": "Oscilloscope",
+        "zh": "示波器"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        -0.42,
+        0.75,
+        -0.7
+      ],
+      "rotationY": 0,
+      "taskId": "ea6b739a-3bdb-46f9-ba7e-330aa3201818",
+      "file": "models/19_oscilloscope.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "en": "Real Tripo display asset. Approximate proportions; locally authored labels and screen graphics.",
+        "zh": "实际 Tripo 展示模型，比例用于场景展示；品牌文字和屏幕画面为后期制作。"
+      },
+      "labels": [
+        {
+          "text": "SIGNAL / CH1",
+          "screen": "scope",
+          "center": [
+            -0.067,
+            0.085,
+            0.07
+          ],
+          "size": [
+            0.135,
+            0.078
+          ]
+        }
+      ]
+    },
+    {
+      "id": "20_pc_tower",
+      "label": {
+        "en": "PC tower — rejected",
+        "zh": "电脑主机"
+      },
+      "status": "rejected",
+      "normalized": true,
+      "position": [
+        0.34,
+        0,
+        -0.88
+      ],
+      "rotationY": 0,
+      "taskId": "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+      "description": {
+        "en": "Generation completed, but the geometry failed visual review. No substitute is displayed.",
+        "zh": "任务完成，但几何变形，未通过验收；场景中不显示替代模型。"
+      }
+    },
+    {
+      "id": "21_monitor",
+      "label": {
+        "en": "Dual monitors",
+        "zh": "双显示器"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        -0.29,
+        0.75,
+        -1.07
+      ],
+      "rotationY": 0,
+      "taskId": "ca03c270-717b-437b-8c1a-9bed3f606071",
+      "file": "models/21_monitor.glb",
+      "supportAsset": "22_office_desk",
+      "description": {
+        "en": "Real Tripo display asset. Approximate proportions; locally authored labels and screen graphics.",
+        "zh": "实际 Tripo 展示模型，比例用于场景展示；品牌文字和屏幕画面为后期制作。"
+      },
+      "labels": [
+        {
+          "text": "TECHLAND / DESIGN",
+          "screen": "cad",
+          "center": [
+            0,
+            0.262,
+            0.09
+          ],
+          "size": [
+            0.515,
+            0.272
+          ]
+        }
+      ],
+      "instances": [
+        {
+          "position": [
+            0.29,
+            0.75,
+            -1.07
+          ],
+          "labels": [
+            {
+              "text": "TECHLAND / BUILD",
+              "screen": "terminal",
+              "center": [
+                0,
+                0.262,
+                0.09
+              ],
+              "size": [
+                0.515,
+                0.272
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "22_office_desk",
+      "label": {
+        "en": "Office desk",
+        "zh": "办公桌"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        0,
+        0,
+        -0.88
+      ],
+      "rotationY": 0,
+      "taskId": "6fd28df2-a825-42f7-af68-68531cc8cc72",
+      "file": "models/22_office_desk.glb",
+      "supportAsset": "01_garage_shell",
+      "description": {
+        "en": "Real Tripo display asset. Approximate proportions; locally authored labels and screen graphics.",
+        "zh": "实际 Tripo 展示模型，比例用于场景展示；品牌文字和屏幕画面为后期制作。"
+      },
+      "tabletop": true,
+      "levelFeet": true
+    },
+    {
+      "id": "23_workbench",
+      "label": {
+        "en": "Maker workbench",
+        "zh": "工作台"
+      },
+      "status": "verified_with_notes",
+      "normalized": true,
+      "position": [
+        1.3,
+        0,
+        -0.07
+      ],
+      "rotationY": -1.5707963267948966,
+      "taskId": "039ec198-a648-4b4e-b8e8-306e1440b3ea",
+      "file": "models/23_workbench.glb",
+      "supportAsset": "01_garage_shell",
+      "description": {
+        "en": "Tripo bench frame, with generated top clutter removed and a locally authored steel work surface. Adjustable feet follow the real floor.",
+        "zh": "保留 Tripo 工作台主体，清理台面多余凸起并补制钢台面；调平脚垫贴合实际地板。"
+      },
+      "tabletop": true,
+      "levelFeet": true
+    }
+  ],
+  "supersededAssets": [
+    {
+      "id": "07_tools_zone",
+      "status": "rejected",
+      "replacement": "23_workbench",
+      "reason": "Original output failed visual QA; retained only in production history."
     }
   ]
 }

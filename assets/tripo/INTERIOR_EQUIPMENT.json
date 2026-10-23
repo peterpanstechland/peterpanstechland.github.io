@@ -1,0 +1,324 @@
+{
+  "revision": "interior-v1",
+  "date": "2026-10-23",
+  "branch": "codex/garage-interior-equipment",
+  "publication": "local_preview_only",
+  "approved_batch_credits": 220,
+  "actual_total_credits": 220,
+  "balance_after": 125,
+  "frozen_after": 0,
+  "generated_unique_models": 10,
+  "accepted_unique_models": 9,
+  "accepted_scene_instances": 10,
+  "rejected_unique_models": 1,
+  "automatic_retries": 0,
+  "credits_purchased": false,
+  "items": [
+    {
+      "id": "14_bambu_x1c",
+      "name": "拓竹 X1 Carbon",
+      "task_type": "image_to_model",
+      "task_id": "c3ccb749-d329-4ee6-a427-9944d5fffd8a",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 30,
+      "raw_glb": "assets/tripo/raw/tripo-out/14-bambu-x1c-c3ccb749/model.glb",
+      "raw_sha256": "1e516d13cddef7f980d8e789f875ac813c31b307722db1057bd4e039c4da61a9",
+      "preview": "assets/tripo/equipment-previews/14_bambu_x1c.png",
+      "source_triangle_count": 6734,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/14_bambu_x1c.glb",
+      "website_sha256": "472b076a84ca0885f4eacecd6b039c064afcc210d22079bd55fb98ab40b218f0",
+      "display_size_m_xyz": [
+        0.389,
+        0.457,
+        0.389
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "15_makeblock_laserbox",
+      "name": "Makeblock Laserbox",
+      "task_type": "image_to_model",
+      "task_id": "02b354be-e446-4be5-92b0-fa6d86c707be",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 30,
+      "raw_glb": "assets/tripo/raw/tripo-out/15-makeblock-laserbox-02b354be/model.glb",
+      "raw_sha256": "71d780a00e65a1acd6a6a3fc951ce18e45ac10afb9e0dfd27710912445e1d4d1",
+      "preview": "assets/tripo/equipment-previews/15_makeblock_laserbox.png",
+      "source_triangle_count": 6495,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/15_makeblock_laserbox.glb",
+      "website_sha256": "3d2d776b80bd14871b0a23ed809571bd9bb5a1f5ead93ffa64bc6efb4215cc2e",
+      "display_size_m_xyz": [
+        0.958,
+        0.268,
+        0.528
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "16_openpnp_machine",
+      "name": "OpenPnP 桌面贴片机",
+      "task_type": "text_to_model",
+      "task_id": "fa25ef33-b2e9-42a3-8538-c7e7b37ef34e",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/16-openpnp-machine-fa25ef33/model.glb",
+      "raw_sha256": "1567f28b0d8e598502569321d3274942ff79e228506a850160bd6eb4e57b6267",
+      "preview": "assets/tripo/equipment-previews/16_openpnp_machine.png",
+      "source_triangle_count": 9338,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/16_openpnp_machine.glb",
+      "website_sha256": "2960e300b1a75beb8d14c20f864676e9e918186cd8c0eb61f92339877a7db996",
+      "display_size_m_xyz": [
+        0.7,
+        0.45,
+        0.6
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "17_soldering_station",
+      "name": "焊台",
+      "task_type": "text_to_model",
+      "task_id": "86e23643-ce8d-418b-bbec-64e1c813e73c",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/17-soldering-station-86e23643/model.glb",
+      "raw_sha256": "b64e440156e7f15c2bde34d9c104a7e7f50ca7a91254df6ddbc470d2271f2503",
+      "preview": "assets/tripo/equipment-previews/17_soldering_station.png",
+      "source_triangle_count": 3104,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/17_soldering_station.glb",
+      "website_sha256": "831fc5749f16315c13f961ad5f27ccb6c25c4e9f18efba3bdf4839b6e9f38646",
+      "display_size_m_xyz": [
+        0.24,
+        0.18,
+        0.18
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "18_hot_air_station",
+      "name": "热风枪与控制台",
+      "task_type": "text_to_model",
+      "task_id": "dc664096-8d52-4c65-b868-ac72f30536e8",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/18-hot-air-station-dc664096/model.glb",
+      "raw_sha256": "455bf30ffd25ccbe27d302967f86e5849a0c2dcd9c33d37f0fce9413addcef6d",
+      "preview": "assets/tripo/equipment-previews/18_hot_air_station.png",
+      "source_triangle_count": 3140,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/18_hot_air_station.glb",
+      "website_sha256": "b33177cc48b1d19dcf264f4f0c70f6fa435ff0a9636fbdde0d57cff2a28c798d",
+      "display_size_m_xyz": [
+        0.22,
+        0.22,
+        0.22
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "19_oscilloscope",
+      "name": "示波器",
+      "task_type": "text_to_model",
+      "task_id": "ea6b739a-3bdb-46f9-ba7e-330aa3201818",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/19-oscilloscope-ea6b739a/model.glb",
+      "raw_sha256": "90dabc6fe88a2dad2a2782a7bddbea98facd56a4176169b829bfe044d5fe2982",
+      "preview": "assets/tripo/equipment-previews/19_oscilloscope.png",
+      "source_triangle_count": 4565,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/19_oscilloscope.glb",
+      "website_sha256": "422967b613947c854e9ffc87f4a7c2585aea6970f25730ebde4640e24d1d6ad1",
+      "display_size_m_xyz": [
+        0.32,
+        0.16,
+        0.14
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "20_pc_tower",
+      "name": "电脑主机",
+      "task_type": "text_to_model",
+      "task_id": "137d1134-b46f-4dac-9803-3fe6d8c5fdd2",
+      "provider_status": "success",
+      "acceptance": "rejected_visual",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/20-pc-tower-137d1134/model.glb",
+      "raw_sha256": "0282c30bc4b5ed7b6f863fa3f295bbc348d4b11a221e837ccb38d9528c8d17ea",
+      "preview": "assets/tripo/equipment-previews/20_pc_tower.png",
+      "source_triangle_count": 5347,
+      "embedded_images_decoded": 3,
+      "website_glb": null,
+      "website_sha256": null,
+      "display_size_m_xyz": [
+        0.22,
+        0.44,
+        0.4
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 0,
+      "notes": [
+        "Provider completed and charged 20 credits, but the mesh is severely deformed. Excluded from scene. No automatic retry. Separate 30-credit image-to-model proposal remains unsubmitted pending confirmation."
+      ]
+    },
+    {
+      "id": "21_monitor",
+      "name": "显示器（复用两台）",
+      "task_type": "text_to_model",
+      "task_id": "ca03c270-717b-437b-8c1a-9bed3f606071",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/21-monitor-ca03c270/model.glb",
+      "raw_sha256": "54aeb475d105eded26c4f089d33549e7431746082b920458dc82426ae4c8db71",
+      "preview": "assets/tripo/equipment-previews/21_monitor.png",
+      "source_triangle_count": 2523,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/21_monitor.glb",
+      "website_sha256": "c74855cb1c7e6ea6735da94904ca38b941bab5dd4e21ca09aabe0ca7e90856b2",
+      "display_size_m_xyz": [
+        0.55,
+        0.4,
+        0.18
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 2,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "22_office_desk",
+      "name": "办公桌",
+      "task_type": "text_to_model",
+      "task_id": "6fd28df2-a825-42f7-af68-68531cc8cc72",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/22-office-desk-6fd28df2/model.glb",
+      "raw_sha256": "74d42e025fb1ddb2d9f8a0a4248a14bafd52b4821a924d390d25bed28a599414",
+      "preview": "assets/tripo/equipment-previews/22_office_desk.png",
+      "source_triangle_count": 4691,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/22_office_desk.glb",
+      "website_sha256": "68dc16658a9e1ba57ca353573faa4a7331dd57d0dee2a000949db2685b82d809",
+      "display_size_m_xyz": [
+        1.25,
+        0.72,
+        0.7
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Display transform only; approximate scene dimensions, not mechanical CAD.",
+        "Brand lettering and screen contents are local overlays."
+      ]
+    },
+    {
+      "id": "23_workbench",
+      "name": "工作台",
+      "task_type": "text_to_model",
+      "task_id": "039ec198-a648-4b4e-b8e8-306e1440b3ea",
+      "provider_status": "success",
+      "acceptance": "verified_with_notes",
+      "actual_credits": 20,
+      "raw_glb": "assets/tripo/raw/tripo-out/23-workbench-039ec198/model.glb",
+      "raw_sha256": "2eadc9a155cfec4b39a2390332dc4d1cae011d8fe3d5987c6655518e404804af",
+      "preview": "assets/tripo/equipment-previews/23_workbench.png",
+      "source_triangle_count": 5624,
+      "embedded_images_decoded": 3,
+      "website_glb": "static/maker-garage-preview/models/23_workbench.glb",
+      "website_sha256": "05737ab798880de76217c2cd331b3e9b1c0d2757f68474d45ebdadea298182cc",
+      "display_size_m_xyz": [
+        2.2,
+        0.75,
+        0.66
+      ],
+      "display_axis": "+Y up / +Z front",
+      "display_pivot": "bottom centre",
+      "instances": 1,
+      "notes": [
+        "Original Tripo frame retained. Generated clutter clipped from tabletop. Local steel top and lower-shelf inserts close the cut and source holes. Raw source unchanged."
+      ]
+    }
+  ],
+  "validation": {
+    "typecheck": "passed",
+    "en_and_zh_build": "passed on final scene sources; built asset hashes match source in both locales",
+    "real_mesh_contact": "passed on 10 instances",
+    "placement_idempotent": true,
+    "missing_workbench_hides_dependent_devices": true,
+    "workbench_recovery_restores_devices": true,
+    "browser_desktop": "passed: 21 ready / 22 slots; rejected PC omitted",
+    "browser_mobile": "passed: 390 x 640 and 390 x 844 CSS-pixel iframes; two-line toolbar",
+    "browser_failed_workbench": "passed: 17 ready / 22, three dependent machines hidden",
+    "browser_recovery": "passed: 21 ready / 22 restored after retry",
+    "browser_console": "normal preview: no warnings or errors; deliberate 404 recorded only in failure test",
+    "build_warnings": [
+      "Existing vscode-languageserver-types dynamic require warning",
+      "Webpack persistent cache could not snapshot dependencies; compilation succeeded",
+      "Docusaurus update check could not access its local config store"
+    ]
+  },
+  "limitations": [
+    "Visual display assets, not manufacturer CAD.",
+    "OpenPnP machine is a generic compatible concept.",
+    "PC tower remains undelivered unless separately approved retry passes review."
+  ],
+  "screenshots": {
+    "desktop": "assets/tripo/equipment-previews/interior-desktop.png",
+    "mobile": "assets/tripo/equipment-previews/interior-mobile.png",
+    "failure": "assets/tripo/equipment-previews/failure-fallback.png"
+  }
+}

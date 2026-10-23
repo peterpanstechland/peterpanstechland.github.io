@@ -23,7 +23,8 @@ export function settleGarageAssets(THREE, scene, entries) {
     entry.bounds = new THREE.Box3().setFromObject(entry.model, true);
   };
   // Re-running after a retry must not add the previous settlement a second time.
-  for (const entry of entries.values()) {
+  const allEntries = [...entries.values()].flatMap((entry) => [entry, ...(entry.instances || [])]);
+  for (const entry of allEntries) {
     if (entry.state !== 'ready' || !entry.mount || !entry.model) continue;
     const p = entry.config.position;
     entry.mount.position.fromArray(Array.isArray(p) && p.length === 3 && p.every(Number.isFinite) ? p : [0, 0, 0]);
@@ -160,6 +161,67 @@ export function settleGarageAssets(THREE, scene, entries) {
   for (const id of ['04_lucky_cat', '05_project_vending', '08_street_lamp', '09_trash_bin', '10_utility_cabinet', '11_tree', '12_plants_grass']) settle(ready(id), streetSurface, '13_street_base');
   const floor = shell ? upwardSurface(shell, shell.mount.position.y + 0.08, shell.mount.position.y + 0.40) : null;
   settle(ready('06_showcase_zone'), floor, '01_garage_shell/interior-floor');
+
+  // Equipment is supported by the real floor or real tabletop triangles. A
+  // failed parent never leaves its devices suspended at their nominal height.
+  const workshop = allEntries.filter((entry) => entry.state === 'ready' && entry.config.supportAsset);
+  const surfaces = new Map();
+  function placeWorkshop(entry, surface, supportId) {
+    settle(entry, surface, supportId);
+    const contact = report.assets[entry.config.id];
+    const supported = contact?.status === 'settled';
+    entry.placementStatus = supported ? 'supported' : 'support-unavailable';
+    entry.mount.visible = supported;
+    if (!supported) return;
+    const samples = footSamples(entry);
+    const gaps = samples.map(([x, y, z]) => {
+      const supportY = surface.ray(x, z);
+      return supportY === null ? null : y - supportY;
+    }).filter((gap) => gap !== null);
+    contact.actualFootGapRange = gaps.length ? [Math.min(...gaps), Math.max(...gaps)] : null;
+    // The native floor is uneven. Local adjustable pads connect each real
+    // furniture foot to that floor while keeping the tabletop level.
+    if (entry.config.levelFeet) {
+      const center = entry.bounds.getCenter(new THREE.Vector3());
+      const groups = new Map();
+      for (const point of samples) {
+        const key = `${point[0] < center.x ? -1 : 1},${point[2] < center.z ? -1 : 1}`;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(point);
+      }
+      contact.adjustableFeet = [];
+      for (const points of groups.values()) {
+        const x = points.reduce((sum, p) => sum + p[0], 0) / points.length;
+        const z = points.reduce((sum, p) => sum + p[2], 0) / points.length;
+        const top = Math.min(...points.map((p) => p[1])) + 0.004;
+        const bottom = surface.ray(x, z);
+        if (bottom === null || top - bottom > 0.10) {
+          entry.placementStatus = 'support-unavailable'; entry.mount.visible = false;
+          report.warnings.push(`${entry.config.id}: adjustable foot has no suitable real floor.`);
+          continue;
+        }
+        const height = Math.max(0.004, top - bottom + 0.002);
+        const pad = new THREE.Mesh(new THREE.CylinderGeometry(0.027, 0.032, height, 12),
+          new THREE.MeshStandardMaterial({color: '#20252b', roughness: 0.78, metalness: 0.25}));
+        pad.position.set(x, bottom + height / 2 - 0.001, z);
+        pad.castShadow = true; pad.receiveShadow = true;
+        pad.name = `${entry.config.id}_LOCAL_ADJUSTABLE_FOOT`;
+        pad.userData = {locallyAuthored: true, supportHardware: true, assetId: entry.config.id};
+        supports.add(pad);
+        contact.adjustableFeet.push({x, z, bottom, top, height, locallyAuthored: true});
+      }
+    }
+    entry.normalization.groundContact = contact;
+  }
+  for (const entry of workshop.filter((item) => item.config.supportAsset === '01_garage_shell')) {
+    placeWorkshop(entry, floor, '01_garage_shell/interior-floor');
+    if (entry.config.tabletop && entry.mount.visible) {
+      surfaces.set(entry.config.id, upwardSurface(entry, entry.bounds.max.y - 0.045, entry.bounds.max.y + 0.005));
+    }
+  }
+  for (const entry of workshop.filter((item) => item.config.supportAsset !== '01_garage_shell')) {
+    placeWorkshop(entry, surfaces.get(entry.config.supportAsset), entry.config.supportAsset);
+  }
   for (const [id, y, z] of [['02_roller_shutter', 0.20, 1.13], ['03_profile_sign', 2.55, 1.25]]) {
     const entry = ready(id);
     if (!entry) continue;

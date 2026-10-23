@@ -7,13 +7,15 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { createGarageGraphics } from './art-direction.js?v=grounded-v4.2';
-import { createNightEnvironment, addPracticalLights } from './night-environment.js?v=grounded-v4.2';
-import { settleGarageAssets } from './ground-contact.js?v=grounded-v4.2';
+import { createGarageGraphics } from './art-direction.js?v=interior-v1';
+import { createNightEnvironment, addPracticalLights } from './night-environment.js?v=interior-v2';
+import { settleGarageAssets } from './ground-contact.js?v=interior-v1';
+import { createWorkshopDetails } from './workshop-details.js?v=interior-v1';
 
 const zh = new URLSearchParams(location.search).get('lang') === 'zh-Hans' || location.pathname.startsWith('/zh-Hans/');
 const copy = {
   badge: ['LIVE ASSET PREVIEW', '真实资产预览'], overview: ['Overview', '整体视角'], front: ['Front view', '正面视角'],
+  interior: ['Workshop', '室内工具'], supportMissing: ['Its supporting surface is unavailable; this device is temporarily hidden.', '支撑面暂不可用，此设备暂时隐藏。'],
   wave: ['Beckon', '招财猫招手'], effects: ['Local effects', '局部特效'], shutter: ['Garage door', '卷帘门'], assets: ['Assets', '资产清单'],
   retryFailed: ['Retry failed loads', '重试加载失败项'], hint: ['Drag to orbit · Pinch to zoom\nClick an object to explore', '拖动旋转 · 双指缩放\n点选模型查看详情'],
   assetTitle: ['Independent assets', '独立资产'], unavailable: ['The garage could not open', '车库预览暂时无法打开'], reload: ['Reload preview', '重新加载预览'],
@@ -54,7 +56,7 @@ let selectedId = null;
 let cat = null;
 let effectsEnabled = false;
 let waveEnabled = false;
-let framing = 'overview';
+let framing = new URLSearchParams(location.search).get('view') === 'interior' ? 'interior' : 'overview';
 let configurationLoaded = false;
 let frameRequested = false;
 let lastFrame = 0;
@@ -64,13 +66,18 @@ let practicalLights = null;
 let plantInstances = null;
 let composer = null;
 let groundSupports = null;
+let workshopDetails = null;
 let shutter = null;
 const nominalBounds = new THREE.Box3(new THREE.Vector3(-3.1, -0.3, -1.8), new THREE.Vector3(3.1, 3.38, 2.95));
 const worldBounds = nominalBounds.clone();
 
+function displayState(entry) {
+  if (entry.state === 'ready' && entry.config.supportAsset && !entry.mount?.visible) return entry.placementStatus === 'support-unavailable' ? 'error' : 'pending';
+  return entry.state;
+}
 function statusCounts() {
   const all = [...entries.values()];
-  return { loaded: all.filter((entry) => entry.state === 'ready').length, total: all.length, failed: all.filter((entry) => entry.state === 'error').length };
+  return { loaded: all.filter((entry) => displayState(entry) === 'ready').length, total: all.length, failed: all.filter((entry) => displayState(entry) === 'error').length };
 }
 function notifyStatus() {
   const counts = statusCounts();
@@ -105,12 +112,12 @@ function fatal(message) {
 }
 function labelFor(config) { return config.label?.[zh ? 'zh' : 'en'] || config.label?.en || config.id; }
 function updateRow(entry) {
-  entry.button.dataset.state = entry.state;
+  entry.button.dataset.state = displayState(entry);
   if (entry.normalization) entry.button.dataset.normalization = JSON.stringify(entry.normalization);
   else delete entry.button.dataset.normalization;
   if (entry.model) entry.button.dataset.textures = JSON.stringify(textureSummary(entry.model));
   else delete entry.button.dataset.textures;
-  entry.stateLabel.textContent = t(entry.state);
+  entry.stateLabel.textContent = t(displayState(entry));
   if (selectedId === entry.config.id) showInfo(entry.config.id, false);
 }
 function showInfo(id, focus = false) {
@@ -118,8 +125,10 @@ function showInfo(id, focus = false) {
   if (!entry) return;
   selectedId = id;
   $('info-title').textContent = labelFor(entry.config);
-  $('info-state').textContent = t(entry.state);
+  $('info-state').textContent = t(displayState(entry));
   $('info-description').textContent = entry.state === 'ready' ? t('real') : entry.state === 'error' ? t(entry.config.file ? 'loadError' : 'notDelivered') : entry.state === 'loading' ? t('loading') : t('empty');
+  if ((entry.state === 'ready' || entry.config.status === 'rejected') && entry.config.description) $('info-description').textContent += ` ${entry.config.description[zh ? 'zh' : 'en']}`;
+  if (entry.state === 'ready' && entry.config.supportAsset && !entry.mount.visible) $('info-description').textContent = t('supportMissing');
   if (entry.state === 'ready' && entry.normalization?.strategy === 'per-axis-static') {
     const size = entry.normalization.targetSize.map((value) => Number(value.toFixed(3))).join(' × ');
     $('info-description').textContent += zh ? ` 展示时按轴适配为 ${size} m；这是场景适配尺寸，原始 GLB 保留。` : ` Fitted per axis to ${size} m for this scene; the original GLB is preserved.`;
@@ -159,6 +168,17 @@ document.addEventListener('keydown', (event) => {
 function fitCamera(view = framing) {
   if (!camera || !controls) return;
   framing = view;
+  if (view === 'interior') {
+    camera.fov = camera.aspect < 0.9 ? 90 : 80;
+    controls.target.set(0.55, 0.9, -0.4);
+    // Step just inside the opening so the exterior vending machine cannot
+    // obscure the near end of the equipment bench.
+    camera.position.set(-0.65, 1.2, camera.aspect < 0.9 ? 2.2 : 1.0);
+    camera.near = 0.02; camera.far = 150; camera.updateProjectionMatrix();
+    controls.minDistance = 0.55; controls.maxDistance = 9;
+    controls.update(); requestFrame(); return;
+  }
+  camera.fov = 36;
   const size = worldBounds.getSize(new THREE.Vector3());
   const center = worldBounds.getCenter(new THREE.Vector3());
   const vertical = THREE.MathUtils.degToRad(camera.fov);
@@ -270,11 +290,13 @@ function configureShutter(entry) {
   $('shutter').setAttribute('aria-pressed', 'true');
 }
 $('shutter').addEventListener('click', () => setShutterOpen(shutter?.target !== 1));
+$('interior').addEventListener('click', () => { closeInfo(); if (shutter) setShutterOpen(true); fitCamera('interior'); });
 
 function refreshArtDirection() {
   if (branding) { branding.removeFromParent(); disposeObject(branding); }
   if (practicalLights) { practicalLights.removeFromParent(); disposeObject(practicalLights); }
   if (groundSupports) { groundSupports.removeFromParent(); disposeObject(groundSupports); }
+  if (workshopDetails) { workshopDetails.removeFromParent(); disposeObject(workshopDetails); }
   const grounded = settleGarageAssets(THREE, scene, entries);
   groundSupports = grounded.supports;
   worldBounds.copy(nominalBounds);
@@ -310,9 +332,12 @@ function refreshArtDirection() {
     }
   }
   branding = createGarageGraphics(THREE, scene, entries);
+  workshopDetails = createWorkshopDetails(THREE, scene, entries);
   practicalLights = addPracticalLights(THREE, scene, entries);
   preparePreviewTextures(branding);
+  preparePreviewTextures(workshopDetails);
   $('asset-panel').dataset.groundContact = JSON.stringify(grounded.report);
+  $('asset-panel').dataset.workshopLabels = JSON.stringify(workshopDetails.userData.anchors);
   notifyStatus();
   fitCamera();
   requestFrame();
@@ -577,9 +602,10 @@ async function loadAsset(entry) {
       const placement = new THREE.Group();
       placement.name = `${entry.config.id}_PLACEMENT`;
       placement.rotation.y = Number.isFinite(entry.config.rotationY) ? entry.config.rotationY : 0;
+      if (entry.config.uniformScale > 0) placement.scale.setScalar(entry.config.uniformScale);
       placement.add(model);
       mount.add(placement);
-      entry.normalization = { strategy: 'preprocessed-placement-only', scaleXYZ: [1, 1, 1], rotationY: placement.rotation.y };
+      entry.normalization = { strategy: 'preprocessed-placement-only', scaleXYZ: placement.scale.toArray(), rotationY: placement.rotation.y };
     }
     else {
       const oriented = new THREE.Group();
@@ -644,6 +670,16 @@ async function loadAsset(entry) {
     entry.normalization.displaySize = entry.bounds.getSize(new THREE.Vector3()).toArray();
     if (entry.config.id !== '13_street_base') worldBounds.union(entry.bounds);
     entry.mount = mount; entry.model = model; entry.animations = gltf.animations; entry.state = 'ready';
+    if (entry.config.supportAsset) mount.visible = false;
+    entry.instances = [];
+    for (const [index, instanceConfig] of (entry.config.instances || []).entries()) {
+      const instanceMount = mount.clone(true);
+      const config = {...entry.config, ...instanceConfig, id: `${entry.config.id}_instance_${index + 1}`};
+      instanceMount.position.fromArray(config.position);
+      instanceMount.name = config.id;
+      scene.add(instanceMount);
+      entry.instances.push({config, mount: instanceMount, model: instanceMount, state: 'ready', normalization: {...entry.normalization}});
+    }
     if (/project_vending/i.test(entry.config.id)) createVendingBranding(entry);
     if (/roller_shutter/i.test(entry.config.id)) configureShutter(entry);
     if (/lucky_cat/i.test(entry.config.id)) {
@@ -666,6 +702,8 @@ async function loadAsset(entry) {
     clearTimeout(timeout);
     entry.state = 'error'; entry.error = error.message || String(error);
     loadedMount?.removeFromParent();
+    for (const instance of entry.instances || []) instance.mount.removeFromParent();
+    entry.instances = [];
     if (loadedModel) disposeObject(loadedModel);
     if (entry.postBranding) { entry.postBranding.removeFromParent(); disposeObject(entry.postBranding); entry.postBranding = null; entry.branding = null; }
     if (shutter?.entry === entry) {
@@ -753,7 +791,7 @@ function setupPicking() {
     const rect = renderer.domElement.getBoundingClientRect();
     pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
     raycaster.setFromCamera(pointer, camera);
-    const targets = [...entries.values()].filter((entry) => entry.state === 'ready').map((entry) => entry.mount);
+    const targets = [...entries.values()].filter((entry) => entry.state === 'ready' && entry.mount.visible).flatMap((entry) => [entry.mount, ...(entry.instances || []).filter((instance) => instance.mount.visible).map((instance) => instance.mount)]);
     if (branding) targets.push(branding);
     if (plantInstances) targets.push(plantInstances);
     const hit = raycaster.intersectObjects(targets, true).find((intersection) => intersection.object.userData.assetId);

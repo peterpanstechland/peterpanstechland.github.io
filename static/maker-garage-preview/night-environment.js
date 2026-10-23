@@ -24,8 +24,8 @@ export function createNightEnvironment(THREE, Reflector, scene, {mobile}) {
     group.add(light);
     return light;
   }
-  point('#ff9047', 24, [0, 2.1, 0.65], 5);
-  point('#ffbf78', 14, [0.7, 1.2, -0.35], 4);
+  point('#ff9047', 10, [0, 2.1, 0.65], 5);
+  point('#ffbf78', 2.4, [0, 1.6, -0.35], 4);
   point('#ff218a', 14, [-1.6, 2.8, 2.2]);
   point('#16d9ff', 10, [1.8, 2.4, 1.5]);
   point('#f53aaf', 4, [1.8, 0.6, 2.7], 4);
