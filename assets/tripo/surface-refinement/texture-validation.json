@@ -1,0 +1,12 @@
+[
+  {
+    "asset": "01_garage_shell",
+    "embedded_texture_bytes_unchanged": true,
+    "texture_count": 3
+  },
+  {
+    "asset": "05_project_vending",
+    "embedded_texture_bytes_unchanged": true,
+    "texture_count": 3
+  }
+]

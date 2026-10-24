@@ -1,0 +1,615 @@
+{
+  "schema_version": 1,
+  "asset_id": "06_showcase_zone",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\processed\\06_showcase_zone.glb",
+  "inspected_at_utc": "2026-10-20T08:01:45.578082+00:00",
+  "tool": "tools/inspect_tripo_glb.py",
+  "scope": "GLB structure, decoded accessor data, static scene bounds, material references, full image decoding",
+  "visual_review": "PASSED_FOR_SCENE_PREVIEW_WITH_RECORDED_LIMITATIONS",
+  "qa_approved": true,
+  "errors": [],
+  "warnings": [],
+  "unsupported": [],
+  "limitations": [
+    "This tool is not the Khronos glTF Validator and does not certify visual quality, topology, UV appearance, or animation behavior.",
+    "Y-up is the glTF convention; the intended front (+Z), upright appearance, and functional pivot require visual inspection.",
+    "Bounds describe stored static mesh positions with node transforms; skins, morph weights, animation, and GPU instancing are not evaluated."
+  ],
+  "accessors": [
+    {
+      "index": 0,
+      "type": "SCALAR",
+      "component_type": 5125,
+      "count": 28932,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        7796
+      ]
+    },
+    {
+      "index": 1,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 7797,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.14147886633872986,
+        -0.4442695081233978,
+        -0.5
+      ],
+      "decoded_max": [
+        0.14147886633872986,
+        0.4442695081233978,
+        0.5
+      ]
+    },
+    {
+      "index": 2,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 7797,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "index": 3,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 7797,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -0.9999999403953552,
+        -1.0
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9999998807907104
+      ]
+    },
+    {
+      "index": 4,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 7499,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.100000023841858,
+        0.0,
+        -0.30000001192092896
+      ],
+      "decoded_max": [
+        1.100000023841858,
+        2.3499999046325684,
+        0.30000001192092896
+      ]
+    },
+    {
+      "index": 5,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 7499,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9999998807907104,
+        -0.9999998807907104,
+        -1.0
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "index": 6,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 7499,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.9999886155128479,
+        0.9999774694442749
+      ]
+    },
+    {
+      "index": 7,
+      "type": "SCALAR",
+      "component_type": 5125,
+      "count": 27396,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        7498
+      ]
+    },
+    {
+      "index": 8,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 136,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.8442351818084717,
+        0.5720000267028809,
+        -0.00462624616920948
+      ],
+      "decoded_max": [
+        0.8372873663902283,
+        1.6699999570846558,
+        0.23617808520793915
+      ]
+    },
+    {
+      "index": 9,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 136,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "index": 10,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 136,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 11,
+      "type": "SCALAR",
+      "component_type": 5125,
+      "count": 336,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        135
+      ]
+    }
+  ],
+  "images": [
+    {
+      "index": 0,
+      "name": "Color_2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "bytes": 713708,
+      "sha256": "5cb056ed0f97790780cfca364264d4fdceecec5a185b6bfeda8e3e87c5247dc1",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        244,
+        242,
+        255
+      ]
+    },
+    {
+      "index": 1,
+      "name": "ORM_2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "bytes": 722854,
+      "sha256": "4323ff867f741abbe2273493b1571d2b43c37ab5579d8f0a2d3b45ba1a2fdea1",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        202,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        218,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 2,
+      "name": "NormalGL_2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "bytes": 1173747,
+      "sha256": "3f98f37d8ebac67d0ccdeeb94ab7e7a487866f4ad302d317b2812d59a035b158",
+      "declared_mime_type": "image/png",
+      "decoded": true,
+      "format": "PNG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        3,
+        3,
+        155,
+        255
+      ],
+      "rgba_channel_max": [
+        251,
+        251,
+        255,
+        255
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "index": 0,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 1
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 2
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "index": 0,
+      "name": "tripo_material_2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "texture_slots": [
+        {
+          "slot": "pbrMetallicRoughness.baseColorTexture",
+          "texture": 0,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+          "texture": 1,
+          "texcoord": 0
+        },
+        {
+          "slot": "normalTexture",
+          "texture": 2,
+          "texcoord": 0
+        }
+      ],
+      "has_base_color_texture": true,
+      "double_sided": false,
+      "alpha_mode": "OPAQUE"
+    },
+    {
+      "index": 1,
+      "name": "LOCAL_OBJECT_FOOTPRINT_CUT_CAP",
+      "texture_slots": [],
+      "has_base_color_texture": false,
+      "double_sided": false,
+      "alpha_mode": "OPAQUE"
+    }
+  ],
+  "meshes": [
+    {
+      "index": 0,
+      "name": "SHOWCASE_RETAINED_SOURCE",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 7499,
+          "index_count": 27396,
+          "mode": 4,
+          "triangles": 9132,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.9999886155128479,
+                0.9999774694442749
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.100000023841858,
+            0.0,
+            -0.30000001192092896
+          ],
+          "local_bounds_max": [
+            1.100000023841858,
+            2.3499999046325684,
+            0.30000001192092896
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 136,
+          "index_count": 336,
+          "mode": 4,
+          "triangles": 112,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.8442351818084717,
+            0.5720000267028809,
+            -0.00462624616920948
+          ],
+          "local_bounds_max": [
+            0.8372873663902283,
+            1.6699999570846558,
+            0.23617808520793915
+          ]
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "index": 0,
+      "name": "SHOWCASE_EMPTY_CABINET",
+      "mesh": 0,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "skins": [],
+  "skin_instances": [],
+  "manifest": {
+    "path": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\PeterPansTechland_Tripo_Generation_Pack\\manifest.json",
+    "title": "内部作品展示区",
+    "target_size_m_xyz": [
+      2.2,
+      2.35,
+      0.6
+    ],
+    "expected_nodes_after_blender": [
+      "SHOWCASE_FRAME",
+      "DISPLAY_PAN",
+      "DISPLAY_FLIPFATE",
+      "DISPLAY_BMO",
+      "DISPLAY_ROVER"
+    ],
+    "expected_nodes_found_exactly": {
+      "SHOWCASE_FRAME": false,
+      "DISPLAY_PAN": false,
+      "DISPLAY_FLIPFATE": false,
+      "DISPLAY_BMO": false,
+      "DISPLAY_ROVER": false
+    }
+  },
+  "file_bytes": 3334704,
+  "sha256": "7449f2f5f1cf70e9380efe52a1e2725302df54adef934ffe266e0e2cecb2f61d",
+  "extensions_used": [],
+  "extensions_required": [],
+  "bounds_scene_index": 0,
+  "world_bounds": {
+    "min": [
+      -1.100000023841858,
+      0.0,
+      -0.30000001192092896
+    ],
+    "max": [
+      1.100000023841858,
+      2.3499999046325684,
+      0.30000001192092896
+    ],
+    "size_xyz": [
+      2.200000047683716,
+      2.3499999046325684,
+      0.6000000238418579
+    ],
+    "center": [
+      0.0,
+      1.1749999523162842,
+      0.0
+    ],
+    "ground_center_y_up": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mesh_instances": 1,
+    "units": "glTF meters, without claiming generated scale is physically calibrated"
+  },
+  "pivot_and_scale": {
+    "scene_origin": [
+      0,
+      0,
+      0
+    ],
+    "origin_to_ground_center": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ground_centered_within_1mm": true,
+    "target_size_m_xyz": [
+      2.2,
+      2.35,
+      0.6
+    ],
+    "target_over_raw_scale_xyz": [
+      0.9999999783255843,
+      1.0000000405818874,
+      0.9999999602635717
+    ],
+    "uniform_scale_to_target_height": 1.0000000405818874,
+    "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+  },
+  "summary": {
+    "mesh_count": 1,
+    "primitive_count": 2,
+    "node_count": 1,
+    "skin_count": 0,
+    "animation_count": 0,
+    "vertex_count_sum_primitives": 7635,
+    "triangle_count_sum_primitives": 9244,
+    "degenerate_triangles": 0,
+    "material_count": 2,
+    "image_count": 3,
+    "images_fully_decoded": 3,
+    "accessors_decoded": 12
+  },
+  "skinning_data_validation": {
+    "status": "not_present",
+    "skins_validated": 0,
+    "instances_validated": 0,
+    "deformation_evaluated": false,
+    "animation_motion_verified": false
+  },
+  "status": "passed_implemented_checks",
+  "ready_for_visual_review": true,
+  "cleanup": {
+    "source_triangles": 9644,
+    "retained_clipped_triangles": 9132,
+    "removed_clipped_triangles": 1688,
+    "affected_source_triangles": 1411,
+    "detached_prop_source_triangles_removed": 38,
+    "local_footprint_cap_triangles": 112,
+    "maximum_source_triangle_area_accounting_error_m2": 3.382710778154774e-17,
+    "retained_source_area_m2": 21.95198880716754,
+    "removed_source_area_m2": 1.5212298680202487,
+    "source_texture_images_unchanged": true
+  },
+  "browser_review": {
+    "status": "passed_for_interactive_scene_with_recorded_limitations",
+    "views": [
+      "front +Z",
+      "three-quarter from +X/+Z"
+    ],
+    "glb_loaded": true,
+    "source_textures_rendered": true,
+    "observed": [
+      "Three recognizable generated robots are removed",
+      "Loose shelf products and the upper-middle red prop are removed",
+      "Original outer frame, interior dividers, back panels, shelves and bottom lockers remain",
+      "No replacement cabinet or project models were introduced"
+    ],
+    "limitations": [
+      "Small flat cut-footprint patches and original baked contact shadows remain on some shelves",
+      "Generated cabinet panels retain their original dents/irregularities",
+      "18 open or branched cut contours remain; this is not a watertight manufacturing asset"
+    ],
+    "screenshots": [
+      "assets/tripo/records/06_showcase_zone.processed.front.jpg",
+      "assets/tripo/records/06_showcase_zone.processed.oblique.jpg"
+    ]
+  },
+  "acceptance_scope": "Interactive scene preview, not manufacturing or clean topology"
+}

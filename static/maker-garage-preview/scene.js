@@ -16,8 +16,9 @@ import { createProjectVending } from './project-vending.js?v=projects-v1';
 import { addVendingNeon } from './neon-lettering.js?v=vending-integrated-v3';
 import {createCommunityWall} from './community-wall.js?v=community-v1';
 import {createCommunityInstallation} from './community-installation.js?v=community-v1';
-import {createSponsorBillboard} from './sponsor-billboard.js?v=sponsor-labels-v1';
+import {createSponsorBillboard} from './sponsor-billboard.js?v=sponsor-duration-v1';
 import {createAmbientMotion,installVendingMotion} from './ambient-motion.js?v=ambient-v1';
+import {createPlaudBooth,openPlaudExhibit} from './plaud-booth.js?v=notepin-s-v1';
 import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress,loadAssetManifests,essentialAssetsReady} from './loading-plan.js?v=shared-loading-v2';
 
 const zh = new URLSearchParams(location.search).get('lang') === 'zh-Hans' || location.pathname.startsWith('/zh-Hans/');
@@ -73,6 +74,7 @@ const releasedImages = new WeakSet();
 const entries = new Map();
 const vendingMotionData=fetch(new URL('./vending-motion.json',import.meta.url),{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null);
 let renderer;
+let plaudBooth=null;
 let scene;
 let camera;
 let controls;
@@ -379,6 +381,7 @@ $('shutter-pause').addEventListener('click', () => {
 $('interior').addEventListener('click', () => { closeInfo(); if (shutter) setShutterOpen(true); fitCamera('interior'); });
 
 function refreshArtDirection(reframe = false) {
+  if(plaudBooth){plaudBooth.removeFromParent();disposeObject(plaudBooth);plaudBooth=null;}
   if (branding) { branding.removeFromParent(); disposeObject(branding); }
   if (practicalLights) { practicalLights.removeFromParent(); disposeObject(practicalLights); }
   if (groundSupports) { groundSupports.removeFromParent(); disposeObject(groundSupports); }
@@ -419,6 +422,7 @@ function refreshArtDirection(reframe = false) {
   }
   branding = createGarageGraphics(THREE, scene, entries, profileImage);
   workshopDetails = createWorkshopDetails(THREE, scene, entries);
+  plaudBooth=createPlaudBooth(THREE,entries,zh);if(plaudBooth)scene.add(plaudBooth);
   refreshCommunityInstallation();
   practicalLights = addPracticalLights(THREE, scene, entries);
   ambientMotion?.rebuild(entries);
@@ -923,8 +927,10 @@ function setupPicking() {
     if (plantInstances) targets.push(plantInstances);
     if (communityInstallation) targets.push(communityInstallation);
     if (sponsorBillboard) targets.push(sponsorBillboard.group);
+    if (plaudBooth) targets.push(plaudBooth);
     const hit = raycaster.intersectObjects(targets, true).find((intersection) => intersection.object.userData.assetId);
-    if(hit?.object.userData.sponsorBoard)sponsorBillboard.activate(hit.object.userData);
+    if(hit?.object.userData.plaudExhibit)openPlaudExhibit(zh);
+    else if(hit?.object.userData.sponsorBoard)sponsorBillboard.activate(hit.object.userData);
     else if(hit?.object.userData.communityWall)openCommunityWall(hit.object.userData.wallKind);
     else if (hit?.object.userData.assetId === '02_roller_shutter') toggleShutterFromScene();
     else if (hit) showInfo(hit.object.userData.assetId); else closeInfo();

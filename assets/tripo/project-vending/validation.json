@@ -1,0 +1,18 @@
+{
+  "articleSlots": 6,
+  "existingBilingualRoutesVerified": 12,
+  "existingImagesVerified": 6,
+  "buildEn": "passed",
+  "buildZhHans": "passed",
+  "typecheck": "passed",
+  "browserChecks": [
+    "model click opens chooser",
+    "slot changes cover, description and localized link",
+    "article link opened real Apex Hand Chinese article",
+    "browser back returns to garage",
+    "Escape closes dialog",
+    "390px English embedded layout rendered"
+  ],
+  "consoleErrors": [],
+  "deployment": "local preview only"
+}

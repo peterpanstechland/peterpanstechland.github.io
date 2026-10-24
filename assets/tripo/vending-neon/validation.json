@@ -1,0 +1,25 @@
+{
+  "revision": "vending-neon-v1",
+  "bounds": [
+    [
+      -0.5268089461872596,
+      -0.08090458013515436,
+      0.0037786257946650485
+    ],
+    [
+      0.5268089461872596,
+      0.08090458013515436,
+      0.013418320594014217
+    ]
+  ],
+  "triangles": 29136,
+  "text": "PROJECTS",
+  "strokes": 18,
+  "design": "Condensed outline capitals, split rose marquee, amber selection chevrons",
+  "physicalTubes": true,
+  "clickThrough": "verified: header opens project/article chooser",
+  "browserErrors": [],
+  "published": false,
+  "build": "passed: en and zh-Hans",
+  "typecheck": "passed"
+}

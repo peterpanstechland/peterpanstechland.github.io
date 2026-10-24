@@ -27,6 +27,24 @@ types
 __pycache__/
 *.pyc
 
+# Private local narration samples, model weights and isolated runtime.
+/.local-media/
+
+# Large production assets are archived in the matching GitHub Release.
+/deliverables/
+/assets/tripo/**/*.blend
+/assets/tripo/**/*.glb
+/assets/tripo/**/*.zip
+/assets/tripo/**/*.webm
+/assets/tripo/**/*.mp4
+/assets/tripo/**/*.wav
+/assets/tripo/**/*.log
+/assets/tripo/**/*.flag
+/assets/tripo/**/deps/
+# Original task responses contain expired signed download URLs.
+/assets/tripo/records/04_cyber_lucky_cat_blue_v6.source-task.json
+/assets/tripo/records/20_pc_tower_v2.fresh-task.json
+
 # Checked-in Three.js runtime used by the standalone model previews.
 !static/maker-garage-preview/vendor/three/build/
 !static/maker-garage-preview/vendor/three/build/three.module.js

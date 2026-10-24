@@ -1,0 +1,15 @@
+{
+  "revision": "vending-clean-v2",
+  "removed": "VENDING_FRONT_BRAND flat overlay and its unused canvas helpers",
+  "preserved": [
+    "original cabinet material and artwork",
+    "PROJECTS neon marquee",
+    "article chooser"
+  ],
+  "visualReview": "confirmed original lower-front slanted spray lettering visible",
+  "browserErrors": [],
+  "rawGlbsModified": false,
+  "published": false,
+  "build": "passed: en and zh-Hans",
+  "typecheck": "passed"
+}

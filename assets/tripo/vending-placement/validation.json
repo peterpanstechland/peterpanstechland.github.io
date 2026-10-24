@@ -1,0 +1,57 @@
+{
+  "yawDegrees": 25,
+  "position": [
+    2.05,
+    0,
+    1.85
+  ],
+  "previousPosition": [
+    1.55,
+    0,
+    2.12
+  ],
+  "groundContact": {
+    "status": "settled",
+    "supportId": "13_street_base",
+    "deltaY": -0.002,
+    "sampleCount": 62,
+    "supportedSamples": 62,
+    "supportY": [
+      0,
+      0
+    ],
+    "supportHeightSpread": 0,
+    "seatingOverlap": 0.002,
+    "finalPosition": [
+      2.05,
+      -0.002,
+      1.85
+    ],
+    "finalScale": [
+      1,
+      1,
+      1
+    ],
+    "bounds": {
+      "min": [
+        1.153186829955742,
+        -0.0020000000000000018,
+        1.1268244621251893
+      ],
+      "max": [
+        2.9451647482404164,
+        1.7980000000000003,
+        2.5713931363591334
+      ]
+    }
+  },
+  "visualChecks": [
+    "front closed",
+    "front open",
+    "neon follows cabinet",
+    "cabinet click opens article picker"
+  ],
+  "build": "passed en and zh-Hans",
+  "typecheck": "passed",
+  "sourceGLB": "unchanged"
+}

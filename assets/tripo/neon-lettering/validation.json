@@ -1,0 +1,17 @@
+{
+  "revision": "neon-design-v2",
+  "lettering": "Original cubic Bezier script Peter Pan’s; rounded outlined TECHLAND capitals",
+  "tubeStrokes": 29,
+  "palette": [
+    "rose pink",
+    "aqua",
+    "champagne amber"
+  ],
+  "visualReview": "front view in actual garage scene",
+  "shutterPaintRegression": "11 painted slats, zero transform drift at closed/half/open poses",
+  "rawModelsModified": false,
+  "published": false,
+  "build": "passed: en and zh-Hans; built assets match source SHA256",
+  "typecheck": "passed",
+  "browserErrors": []
+}

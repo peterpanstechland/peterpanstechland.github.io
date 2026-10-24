@@ -1,0 +1,28 @@
+{
+  "samples": 101,
+  "slats": 26,
+  "collisions": [],
+  "minimumDepthClearanceMeters": 0.14570564260138896,
+  "planterBounds": {
+    "min": [
+      -1.3451287746429443,
+      -0.05943474292755127,
+      0.49111029505729675
+    ],
+    "max": [
+      -0.656888484954834,
+      0.5853398728370667,
+      0.9062280654907227
+    ]
+  },
+  "movedVertices": 279,
+  "originalTopologyAndUVsRetained": true,
+  "browserVerified": [
+    "closed-front",
+    "open-front",
+    "open-oblique"
+  ],
+  "localPreviewCopies": "4173 and 4174 synchronized; SHA-256 verified",
+  "placementRegression": "10 workshop instances supported; idempotent; missing support recovery passed",
+  "graffitiRegression": "closed/half/open decal creation and movement passed"
+}

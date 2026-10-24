@@ -1,0 +1,67 @@
+{
+  "asset_id": "16_openpnp_machine",
+  "source_task_id": "fa25ef33-b2e9-42a3-8538-c7e7b37ef34e",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/16_openpnp_machine.glb",
+  "input_sha256": "2960e300b1a75beb8d14c20f864676e9e918186cd8c0eb61f92339877a7db996",
+  "output": "assets/tripo/blender-repair/models/16_openpnp_machine.glb",
+  "output_sha256": "0087612ede91971a46882d8fcf3a24a4159e9b2cf8c5e6ddd0f1e43759263cd1",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e": {
+        "before": {
+          "vertices": 8101,
+          "faces": 9338,
+          "boundary_edges": 5792,
+          "nonmanifold_edges": 5792,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 4581,
+          "faces": 9336,
+          "boundary_edges": 10,
+          "nonmanifold_edges": 19,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [
+      {
+        "axis_xyz": 2,
+        "plane_m": 0.294,
+        "changed_vertices": 42,
+        "max_displacement_m": 0.0016345384120940998
+      },
+      {
+        "axis_xyz": 0,
+        "plane_m": -0.34,
+        "changed_vertices": 55,
+        "max_displacement_m": 0.008833352327346777
+      },
+      {
+        "axis_xyz": 0,
+        "plane_m": 0.34,
+        "changed_vertices": 32,
+        "max_displacement_m": 0.008722130060195898
+      }
+    ],
+    "local_parts": [],
+    "notes": [
+      "Regularized base front and outer gantry supports; nozzle, feeders and PCB kept.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ]
+  },
+  "mesh_stats": {
+    "tripo_node_fa25ef33-b2e9-42a3-8538-c7e7b37ef34e": {
+      "vertices": 4581,
+      "faces": 9336,
+      "boundary_edges": 10,
+      "nonmanifold_edges": 19,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

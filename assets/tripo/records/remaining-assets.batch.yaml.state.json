@@ -1,0 +1,64 @@
+{
+  "jobs": {
+    "03_profile_sign": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "a4544685-ffb3-46e6-a49e-c0dae342e326",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\03-profile-sign-a4544685"
+    },
+    "05_project_vending": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\05-project-vending-54b92a08"
+    },
+    "06_showcase_zone": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\06-showcase-zone-2c13d6cc"
+    },
+    "07_tools_zone": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "5cdd8463-4306-4ab8-b4a4-376985d5737f",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\07-tools-zone-5cdd8463"
+    },
+    "08_street_lamp": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\08-street-lamp-b369cdad"
+    },
+    "09_trash_bin": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\09-trash-bin-1ae8df17"
+    },
+    "10_utility_cabinet": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\10-utility-cabinet-79c20750"
+    },
+    "11_tree": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "f83af78c-7c37-48c0-8de7-e2706f983982",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\11-tree-f83af78c"
+    },
+    "12_plants_grass": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\12-plants-grass-14dc3618"
+    },
+    "13_street_base": {
+      "status": "success",
+      "attempts": 1,
+      "task_id": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+      "output_dir": "assets\\tripo\\raw\\tripo-out\\13-street-base-38eb318a"
+    }
+  }
+}

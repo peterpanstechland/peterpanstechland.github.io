@@ -1,0 +1,139 @@
+{
+  "tool": "Blender 5.2.3 LTS",
+  "repaired_models": 9,
+  "credits_spent": 0,
+  "items": [
+    {
+      "asset_id": "14_bambu_x1c",
+      "sha256": "61584d58f0727e104c1e61ceb0ee2e35b5102a7b5c3a5205e685b6b423ff2e10",
+      "triangles": 9442,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        0.3889999985694885,
+        0.4570000320672989,
+        0.3889999985694885
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "15_makeblock_laserbox",
+      "sha256": "c90c0f8070887979ed19b2a1823b3a9e5253f1948b44b94d798f2186a3aee1eb",
+      "triangles": 7306,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        0.9576806426048279,
+        0.2680000066757202,
+        0.5279999375343323
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "16_openpnp_machine",
+      "sha256": "0087612ede91971a46882d8fcf3a24a4159e9b2cf8c5e6ddd0f1e43759263cd1",
+      "triangles": 9336,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        0.699999988079071,
+        0.45000000298023224,
+        0.6000000238418579
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "17_soldering_station",
+      "sha256": "1034a715058ea8127902ed879e616bbbb871b836e3208599df61c2b246b784ae",
+      "triangles": 3100,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        0.24000000208616257,
+        0.17999999970197678,
+        0.17999999970197678
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "18_hot_air_station",
+      "sha256": "4a0e9063eb377b55205f5f77d9d777185a1121264f4c0b98ec046aa6a98c3864",
+      "triangles": 3140,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        0.2199999988079071,
+        0.2199999988079071,
+        0.2200000062584877
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "19_oscilloscope",
+      "sha256": "c4ed2d5ac4836043060564d1fdccf24f989b95a750703c2afce6e758a620e333",
+      "triangles": 4563,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        0.3199999928474426,
+        0.15999998897314072,
+        0.13999997824430466
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "21_monitor",
+      "sha256": "beaf0d3d0847d58ecac96cce9aa68639149a4d4adccbd3b5804acd3a61116013",
+      "triangles": 2523,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        0.550000011920929,
+        0.4000000059604645,
+        0.17999999225139618
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "22_office_desk",
+      "sha256": "f47443f0548747ed4fc92940e6d034913d66aa90853a4e1a55ae6efebb5c7fe6",
+      "triangles": 6501,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        1.2499999403953552,
+        0.7200000286102295,
+        0.6999999887786004
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    },
+    {
+      "asset_id": "23_workbench",
+      "sha256": "985ddfa2b1753faea567230f6ae88c432d28f678ee1410f91bc39e494f201069",
+      "triangles": 4687,
+      "embedded_images_decoded": 3,
+      "degenerate_triangles": 0,
+      "size_m_xyz": [
+        2.200000047683716,
+        0.75,
+        0.6600000262260437
+      ],
+      "bottom_centered_within_1mm": true,
+      "raw_preserved": true
+    }
+  ],
+  "scope": "Nine current interior tools/furniture. Outer garage and rejected PC generations are unchanged.",
+  "limitations": [
+    "Visual display meshes, not manufacturer CAD or certified watertight solids.",
+    "Fine generated lettering and some small cable/control details remain approximate."
+  ],
+  "validation": "Geometry/accessors/textures/envelopes passed. Visual and browser acceptance recorded separately."
+}

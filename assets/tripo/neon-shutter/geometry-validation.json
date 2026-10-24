@@ -1,0 +1,28 @@
+{
+  "closedHalfOpenAndOpenCreation": [
+    {
+      "initial": 0,
+      "paintedMeshes": 11,
+      "maxDrift": 0
+    },
+    {
+      "initial": 0.5,
+      "paintedMeshes": 11,
+      "maxDrift": 0
+    },
+    {
+      "initial": 1,
+      "paintedMeshes": 11,
+      "maxDrift": 0
+    }
+  ],
+  "neon": {
+    "method": "Original cursive Bezier signature and rounded outline capitals, physical glass tubes and sockets",
+    "strokes": 29,
+    "lines": [
+      "Peter Pan’s",
+      "TECHLAND"
+    ],
+    "design": "Signwriter signature / streamlined capitals / broken amber orbit"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "mountedTo": "SHUTTER_GUIDE_LEFT",
+  "worldSizeMeters": [
+    0.62,
+    0.25,
+    0.026
+  ],
+  "browserChecks": [
+    "click on plaque opens door",
+    "label changes to close",
+    "second plaque click closes door"
+  ],
+  "consoleErrors": [],
+  "sourceGLBsModified": false,
+  "additionalPaidCalls": 0
+}

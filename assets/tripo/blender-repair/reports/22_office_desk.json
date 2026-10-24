@@ -1,0 +1,180 @@
+{
+  "asset_id": "22_office_desk",
+  "source_task_id": "6fd28df2-a825-42f7-af68-68531cc8cc72",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/22_office_desk.glb",
+  "input_sha256": "68dc16658a9e1ba57ca353573faa4a7331dd57d0dee2a000949db2685b82d809",
+  "output": "assets/tripo/blender-repair/models/22_office_desk.glb",
+  "output_sha256": "f47443f0548747ed4fc92940e6d034913d66aa90853a4e1a55ae6efebb5c7fe6",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_6fd28df2-a825-42f7-af68-68531cc8cc72": {
+        "before": {
+          "vertices": 3766,
+          "faces": 4691,
+          "boundary_edges": 2487,
+          "nonmanifold_edges": 2487,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 2332,
+          "faces": 4691,
+          "boundary_edges": 2,
+          "nonmanifold_edges": 3,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [
+      {
+        "axis_xyz": 1,
+        "plane_m": 0.72,
+        "changed_vertices": 156,
+        "max_displacement_m": 0.005760402679443333
+      }
+    ],
+    "local_parts": [
+      "LOCAL_desk_square_tube_leg",
+      "LOCAL_desk_foot",
+      "LOCAL_desk_square_tube_leg.001",
+      "LOCAL_desk_foot.001",
+      "LOCAL_desk_side_lower_rail",
+      "LOCAL_desk_side_upper_rail",
+      "LOCAL_desk_square_tube_leg.002",
+      "LOCAL_desk_foot.002",
+      "LOCAL_desk_square_tube_leg.003",
+      "LOCAL_desk_foot.003",
+      "LOCAL_desk_side_lower_rail.001",
+      "LOCAL_desk_side_upper_rail.001",
+      "LOCAL_desk_rear_crossbar",
+      "LOCAL_desk_front_upper_rail"
+    ],
+    "notes": [
+      "Retained textured wooden top/drawers. Replaced malformed metal legs with four square tubes, support rails and level rubber feet.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ],
+    "display_envelope_fit": {
+      "scale_native_xyz": [
+        1.0,
+        1.0045908689498901,
+        1.0
+      ],
+      "translation_to_bottom_center": [
+        -2.9802322387695312e-08,
+        0.0015993714332580566,
+        -0.0
+      ]
+    }
+  },
+  "mesh_stats": {
+    "TRIPO_RETAINED_WOOD_TOP_DRAWERS": {
+      "vertices": 1927,
+      "faces": 3434,
+      "boundary_edges": 2,
+      "nonmanifold_edges": 3,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_square_tube_leg": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_foot": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_square_tube_leg.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_foot.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_side_lower_rail": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_side_upper_rail": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_square_tube_leg.002": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_foot.002": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_square_tube_leg.003": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_foot.003": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_side_lower_rail.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_side_upper_rail.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_rear_crossbar": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_desk_front_upper_rail": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

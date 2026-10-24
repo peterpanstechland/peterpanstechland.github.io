@@ -1,0 +1,26 @@
+[
+  {
+    "path": "build\\maker-garage-preview\\assets.json",
+    "matchesSource": true
+  },
+  {
+    "path": "build\\maker-garage-preview\\scene.js",
+    "matchesSource": true
+  },
+  {
+    "path": "build\\maker-garage-preview\\models\\08_street_lamp.glb",
+    "matchesSource": true
+  },
+  {
+    "path": "build\\zh-Hans\\maker-garage-preview\\assets.json",
+    "matchesSource": true
+  },
+  {
+    "path": "build\\zh-Hans\\maker-garage-preview\\scene.js",
+    "matchesSource": true
+  },
+  {
+    "path": "build\\zh-Hans\\maker-garage-preview\\models\\08_street_lamp.glb",
+    "matchesSource": true
+  }
+]

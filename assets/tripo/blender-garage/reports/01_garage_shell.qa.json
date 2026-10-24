@@ -1,0 +1,1231 @@
+{
+  "schema_version": 1,
+  "asset_id": "01_garage_shell",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\blender-garage\\models\\01_garage_shell.glb",
+  "inspected_at_utc": "2026-10-23T02:49:06.773209+00:00",
+  "tool": "tools/inspect_tripo_glb.py",
+  "scope": "GLB structure, decoded accessor data, static scene bounds, material references, full image decoding",
+  "visual_review": "NOT_PERFORMED",
+  "qa_approved": false,
+  "errors": [],
+  "warnings": [],
+  "unsupported": [],
+  "limitations": [
+    "This tool is not the Khronos glTF Validator and does not certify visual quality, topology, UV appearance, or animation behavior.",
+    "Y-up is the glTF convention; the intended front (+Z), upright appearance, and functional pivot require visual inspection.",
+    "Bounds describe stored static mesh positions with node transforms; skins, morph weights, animation, and GPU instancing are not evaluated."
+  ],
+  "accessors": [
+    {
+      "index": 0,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 14693,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -2.25,
+        0.0,
+        -1.7500001192092896
+      ],
+      "decoded_max": [
+        2.25,
+        3.200000047683716,
+        1.750000238418579
+      ]
+    },
+    {
+      "index": 1,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 14693,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -0.9999997615814209,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9999997615814209,
+        0.9999996423721313,
+        1.0
+      ]
+    },
+    {
+      "index": 2,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 14693,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.00024752921308390796,
+        1.8417835235595703e-05
+      ],
+      "decoded_max": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "index": 3,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 43398,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        14692
+      ]
+    },
+    {
+      "index": 4,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.9900000095367432,
+        -0.9950000047683716,
+        -0.017500000074505806
+      ],
+      "decoded_max": [
+        1.9900000095367432,
+        0.9950000047683716,
+        0.017500000074505806
+      ]
+    },
+    {
+      "index": 5,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9998288154602051,
+        -0.9998288154602051,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9998288154602051,
+        0.9998288154602051,
+        1.0
+      ]
+    },
+    {
+      "index": 6,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.125,
+        0.0
+      ],
+      "decoded_max": [
+        0.875,
+        1.0
+      ]
+    },
+    {
+      "index": 7,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 564,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        115
+      ]
+    },
+    {
+      "index": 8,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.017500000074505806,
+        -0.9950000047683716,
+        -1.2999999523162842
+      ],
+      "decoded_max": [
+        0.017500000074505806,
+        0.9950000047683716,
+        1.2999999523162842
+      ]
+    },
+    {
+      "index": 9,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -0.9998306632041931,
+        -0.9998288154602051
+      ],
+      "decoded_max": [
+        1.0,
+        0.9998306632041931,
+        0.9998288154602051
+      ]
+    },
+    {
+      "index": 10,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.125,
+        0.0
+      ],
+      "decoded_max": [
+        0.875,
+        1.0
+      ]
+    },
+    {
+      "index": 11,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 564,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        115
+      ]
+    },
+    {
+      "index": 12,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.017500000074505806,
+        -0.9950000047683716,
+        -1.2999999523162842
+      ],
+      "decoded_max": [
+        0.017500000074505806,
+        0.9950000047683716,
+        1.2999999523162842
+      ]
+    },
+    {
+      "index": 13,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -0.9998306632041931,
+        -0.9998288154602051
+      ],
+      "decoded_max": [
+        1.0,
+        0.9998306632041931,
+        0.9998288154602051
+      ]
+    },
+    {
+      "index": 14,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.125,
+        0.0
+      ],
+      "decoded_max": [
+        0.875,
+        1.0
+      ]
+    },
+    {
+      "index": 15,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -2.0250000953674316,
+        -0.02500000037252903,
+        -1.3600000143051147
+      ],
+      "decoded_max": [
+        2.0250000953674316,
+        0.02500000037252903,
+        1.3600000143051147
+      ]
+    },
+    {
+      "index": 16,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9998078346252441,
+        -1.0,
+        -0.9998078942298889
+      ],
+      "decoded_max": [
+        0.9998078346252441,
+        1.0,
+        0.9998078942298889
+      ]
+    },
+    {
+      "index": 17,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.125,
+        0.0
+      ],
+      "decoded_max": [
+        0.875,
+        1.0
+      ]
+    },
+    {
+      "index": 18,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 564,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        115
+      ]
+    },
+    {
+      "index": 19,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -2.0250000953674316,
+        -0.03500000014901161,
+        -1.3250000476837158
+      ],
+      "decoded_max": [
+        2.0250000953674316,
+        0.03500000014901161,
+        1.3250000476837158
+      ]
+    },
+    {
+      "index": 20,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9999128580093384,
+        -1.0,
+        -0.9999128580093384
+      ],
+      "decoded_max": [
+        0.9999128580093384,
+        1.0,
+        0.9999128580093384
+      ]
+    },
+    {
+      "index": 21,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 116,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.125,
+        0.0
+      ],
+      "decoded_max": [
+        0.875,
+        1.0
+      ]
+    },
+    {
+      "index": 22,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 1715,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.686899185180664,
+        2.7121965885162354,
+        -1.744567632675171
+      ],
+      "decoded_max": [
+        2.1602859497070312,
+        3.200000047683716,
+        1.3551312685012817
+      ]
+    },
+    {
+      "index": 23,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 1715,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9999281764030457,
+        -0.9993495345115662,
+        -0.9999997615814209
+      ],
+      "decoded_max": [
+        0.9998228549957275,
+        1.0,
+        0.9999847412109375
+      ]
+    },
+    {
+      "index": 24,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 1715,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.00015635023009963334,
+        0.0007684230804443359
+      ],
+      "decoded_max": [
+        0.9969686269760132,
+        0.9998335838317871
+      ]
+    },
+    {
+      "index": 25,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 4170,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        1714
+      ]
+    }
+  ],
+  "images": [
+    {
+      "index": 0,
+      "name": "NormalGL_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "bytes": 1176193,
+      "sha256": "26a1c93f10f7ee473db8d963de09f15c51dc2a1678294bb9c82fe4461797f5e0",
+      "declared_mime_type": "image/png",
+      "decoded": true,
+      "format": "PNG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        7,
+        5,
+        162,
+        255
+      ],
+      "rgba_channel_max": [
+        248,
+        247,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Color_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "bytes": 984812,
+      "sha256": "7f6e569063abd40c0262b9472900e796eddb9af99060ce8227f60fcf8fbb1e62",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        2,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 2,
+      "name": "ORM_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "bytes": 736075,
+      "sha256": "3202d5527390e680246b14bd7194ccf8d3a3f261b39428138bffd1901d2bd2e6",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        165,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        243,
+        255
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "index": 0,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 1
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 2
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "index": 0,
+      "name": "tripo_material_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "texture_slots": [
+        {
+          "slot": "normalTexture",
+          "texture": 0,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.baseColorTexture",
+          "texture": 1,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+          "texture": 2,
+          "texcoord": 0
+        }
+      ],
+      "has_base_color_texture": true,
+      "double_sided": false,
+      "alpha_mode": "OPAQUE"
+    },
+    {
+      "index": 1,
+      "name": "LOCAL_garage_inner_wall_steel",
+      "texture_slots": [],
+      "has_base_color_texture": false,
+      "double_sided": true,
+      "alpha_mode": "OPAQUE"
+    },
+    {
+      "index": 2,
+      "name": "LOCAL_garage_ceiling_steel",
+      "texture_slots": [],
+      "has_base_color_texture": false,
+      "double_sided": true,
+      "alpha_mode": "OPAQUE"
+    },
+    {
+      "index": 3,
+      "name": "LOCAL_garage_floor_concrete",
+      "texture_slots": [],
+      "has_base_color_texture": false,
+      "double_sided": true,
+      "alpha_mode": "OPAQUE"
+    }
+  ],
+  "meshes": [
+    {
+      "index": 0,
+      "name": "tripo_mesh_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 14693,
+          "index_count": 43398,
+          "mode": 4,
+          "triangles": 14466,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.00024752921308390796,
+                1.8417835235595703e-05
+              ],
+              "max": [
+                1.0,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -2.25,
+            0.0,
+            -1.7500001192092896
+          ],
+          "local_bounds_max": [
+            2.25,
+            3.200000047683716,
+            1.750000238418579
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Cube.001",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 116,
+          "index_count": 564,
+          "mode": 4,
+          "triangles": 188,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.125,
+                0.0
+              ],
+              "max": [
+                0.875,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.9900000095367432,
+            -0.9950000047683716,
+            -0.017500000074505806
+          ],
+          "local_bounds_max": [
+            1.9900000095367432,
+            0.9950000047683716,
+            0.017500000074505806
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "Cube.002",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 116,
+          "index_count": 564,
+          "mode": 4,
+          "triangles": 188,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.125,
+                0.0
+              ],
+              "max": [
+                0.875,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.017500000074505806,
+            -0.9950000047683716,
+            -1.2999999523162842
+          ],
+          "local_bounds_max": [
+            0.017500000074505806,
+            0.9950000047683716,
+            1.2999999523162842
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "Cube.003",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 116,
+          "index_count": 564,
+          "mode": 4,
+          "triangles": 188,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.125,
+                0.0
+              ],
+              "max": [
+                0.875,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.017500000074505806,
+            -0.9950000047683716,
+            -1.2999999523162842
+          ],
+          "local_bounds_max": [
+            0.017500000074505806,
+            0.9950000047683716,
+            1.2999999523162842
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "name": "Cube",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 116,
+          "index_count": 564,
+          "mode": 4,
+          "triangles": 188,
+          "degenerate_triangles": 0,
+          "material": 2,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.125,
+                0.0
+              ],
+              "max": [
+                0.875,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -2.0250000953674316,
+            -0.02500000037252903,
+            -1.3600000143051147
+          ],
+          "local_bounds_max": [
+            2.0250000953674316,
+            0.02500000037252903,
+            1.3600000143051147
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "name": "Cube.004",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 116,
+          "index_count": 564,
+          "mode": 4,
+          "triangles": 188,
+          "degenerate_triangles": 0,
+          "material": 3,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.125,
+                0.0
+              ],
+              "max": [
+                0.875,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -2.0250000953674316,
+            -0.03500000014901161,
+            -1.3250000476837158
+          ],
+          "local_bounds_max": [
+            2.0250000953674316,
+            0.03500000014901161,
+            1.3250000476837158
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "name": "tripo_mesh_de47b250-7bce-40ba-b2fe-4a11374a7a72.002",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 1715,
+          "index_count": 4170,
+          "mode": 4,
+          "triangles": 1390,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.00015635023009963334,
+                0.0007684230804443359
+              ],
+              "max": [
+                0.9969686269760132,
+                0.9998335838317871
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.686899185180664,
+            2.7121965885162354,
+            -1.744567632675171
+          ],
+          "local_bounds_max": [
+            2.1602859497070312,
+            3.200000047683716,
+            1.3551312685012817
+          ]
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "index": 0,
+      "name": "GARAGE_FRAME",
+      "mesh": 0,
+      "children": [],
+      "local_origin": [
+        0.0,
+        -4.0,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        -3.66343713826189e-07,
+        0.0,
+        -2.7266062756907754,
+        0.0,
+        0.0,
+        2.5,
+        0.0,
+        0.0,
+        3.833175527975647,
+        0.0,
+        -5.15021098273713e-07,
+        0.0,
+        0.0,
+        -4.0,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        -4.0,
+        0.0
+      ]
+    },
+    {
+      "index": 1,
+      "name": "LOCAL_garage_inner_back_wall",
+      "mesh": 1,
+      "children": [],
+      "local_origin": [
+        -5.481440544128418,
+        -0.9124999046325684,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        5.52999146755753e-07,
+        0.0,
+        -2.7266060372722043,
+        0.0,
+        0.0,
+        2.5,
+        0.0,
+        0.0,
+        3.833175051138505,
+        0.0,
+        7.774289734815157e-07,
+        0.0,
+        -5.481440544128418,
+        -0.9124999046325684,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        -5.481440544128418,
+        -0.9124999046325684,
+        0.0
+      ]
+    },
+    {
+      "index": 2,
+      "name": "LOCAL_garage_inner_side_wall",
+      "mesh": 2,
+      "children": [],
+      "local_origin": [
+        -0.5366442799568176,
+        -0.9124999046325684,
+        5.398680210113525
+      ],
+      "local_matrix_column_major": [
+        5.52999146755753e-07,
+        0.0,
+        -2.7266060372722043,
+        0.0,
+        0.0,
+        2.5,
+        0.0,
+        0.0,
+        3.833175051138505,
+        0.0,
+        7.774289734815157e-07,
+        0.0,
+        -0.5366442799568176,
+        -0.9124999046325684,
+        5.398680210113525,
+        1.0
+      ],
+      "world_origin": [
+        -0.5366442799568176,
+        -0.9124999046325684,
+        5.398680210113525
+      ]
+    },
+    {
+      "index": 3,
+      "name": "LOCAL_garage_inner_side_wall.001",
+      "mesh": 3,
+      "children": [],
+      "local_origin": [
+        -0.5366447567939758,
+        -0.9124999046325684,
+        -5.398680210113525
+      ],
+      "local_matrix_column_major": [
+        5.52999146755753e-07,
+        0.0,
+        -2.7266060372722043,
+        0.0,
+        0.0,
+        2.5,
+        0.0,
+        0.0,
+        3.833175051138505,
+        0.0,
+        7.774289734815157e-07,
+        0.0,
+        -0.5366447567939758,
+        -0.9124999046325684,
+        -5.398680210113525,
+        1.0
+      ],
+      "world_origin": [
+        -0.5366447567939758,
+        -0.9124999046325684,
+        -5.398680210113525
+      ]
+    },
+    {
+      "index": 4,
+      "name": "LOCAL_garage_interior_ceiling",
+      "mesh": 4,
+      "children": [],
+      "local_origin": [
+        -0.5366445183753967,
+        1.5500001907348633,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        5.52999146755753e-07,
+        0.0,
+        -2.7266060372722043,
+        0.0,
+        0.0,
+        2.5,
+        0.0,
+        0.0,
+        3.833175051138505,
+        0.0,
+        7.774289734815157e-07,
+        0.0,
+        -0.5366445183753967,
+        1.5500001907348633,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        -0.5366445183753967,
+        1.5500001907348633,
+        0.0
+      ]
+    },
+    {
+      "index": 5,
+      "name": "LOCAL_garage_interior_floor",
+      "mesh": 5,
+      "children": [],
+      "local_origin": [
+        -0.5749763250350952,
+        -3.4625000953674316,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        5.52999146755753e-07,
+        0.0,
+        -2.7266060372722043,
+        0.0,
+        0.0,
+        2.5,
+        0.0,
+        0.0,
+        3.833175051138505,
+        0.0,
+        7.774289734815157e-07,
+        0.0,
+        -0.5749763250350952,
+        -3.4625000953674316,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        -0.5749763250350952,
+        -3.4625000953674316,
+        0.0
+      ]
+    },
+    {
+      "index": 6,
+      "name": "ROOF_MAIN",
+      "mesh": 6,
+      "children": [],
+      "local_origin": [
+        0.0,
+        -4.0,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        -3.66343713826189e-07,
+        0.0,
+        -2.7266062756907754,
+        0.0,
+        0.0,
+        2.5,
+        0.0,
+        0.0,
+        3.833175527975647,
+        0.0,
+        -5.15021098273713e-07,
+        0.0,
+        0.0,
+        -4.0,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        -4.0,
+        0.0
+      ]
+    }
+  ],
+  "skins": [],
+  "skin_instances": [],
+  "manifest": {
+    "path": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\PeterPansTechland_Tripo_Generation_Pack\\manifest.json",
+    "title": "车库建筑外壳",
+    "target_size_m_xyz": [
+      4.5,
+      3.2,
+      3.5
+    ],
+    "expected_nodes_after_blender": [
+      "ROOF_MAIN",
+      "GARAGE_FRAME",
+      "SIGN_MOUNT"
+    ],
+    "expected_nodes_found_exactly": {
+      "ROOF_MAIN": true,
+      "GARAGE_FRAME": true,
+      "SIGN_MOUNT": false
+    }
+  },
+  "file_bytes": 3548892,
+  "sha256": "b3f2e827712ed4071a32a3fa758938a4704072abee048b06103b9202cf858152",
+  "extensions_used": [],
+  "extensions_required": [],
+  "bounds_scene_index": 0,
+  "world_bounds": {
+    "min": [
+      -6.708057580164366,
+      -4.0,
+      -6.134864280298814
+    ],
+    "max": [
+      6.708057726490264,
+      4.0000001192092896,
+      6.134864408574177
+    ],
+    "size_xyz": [
+      13.416115306654628,
+      8.00000011920929,
+      12.269728688872991
+    ],
+    "center": [
+      7.316294903247922e-08,
+      5.960464477539063e-08,
+      6.413768138813225e-08
+    ],
+    "ground_center_y_up": [
+      7.316294903247922e-08,
+      -4.0,
+      6.413768138813225e-08
+    ],
+    "mesh_instances": 7,
+    "units": "glTF meters, without claiming generated scale is physically calibrated"
+  },
+  "pivot_and_scale": {
+    "scene_origin": [
+      0,
+      0,
+      0
+    ],
+    "origin_to_ground_center": [
+      7.316294903247922e-08,
+      -4.0,
+      6.413768138813225e-08
+    ],
+    "ground_centered_within_1mm": false,
+    "target_size_m_xyz": [
+      4.5,
+      3.2,
+      3.5
+    ],
+    "target_over_raw_scale_xyz": [
+      0.3354175107430629,
+      0.3999999940395356,
+      0.2852548812406939
+    ],
+    "uniform_scale_to_target_height": 0.3999999940395356,
+    "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+  },
+  "summary": {
+    "mesh_count": 7,
+    "primitive_count": 7,
+    "node_count": 7,
+    "skin_count": 0,
+    "animation_count": 0,
+    "vertex_count_sum_primitives": 16988,
+    "triangle_count_sum_primitives": 16796,
+    "degenerate_triangles": 0,
+    "material_count": 4,
+    "image_count": 3,
+    "images_fully_decoded": 3,
+    "accessors_decoded": 26
+  },
+  "skinning_data_validation": {
+    "status": "not_present",
+    "skins_validated": 0,
+    "instances_validated": 0,
+    "deformation_evaluated": false,
+    "animation_motion_verified": false
+  },
+  "status": "passed_implemented_checks",
+  "ready_for_visual_review": true
+}

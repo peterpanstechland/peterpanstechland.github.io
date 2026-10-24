@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "asset_id": "05_project_vending",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\05-project-vending-54b92a08\\model.glb",
+  "inspected_at_utc": "2026-10-20T07:25:37.374376+00:00",
+  "tool": "tools/inspect_tripo_glb.py",
+  "scope": "GLB structure, decoded accessor data, static scene bounds, material references, full image decoding",
+  "visual_review": "NOT_PERFORMED",
+  "qa_approved": false,
+  "errors": [],
+  "warnings": [],
+  "unsupported": [],
+  "limitations": [
+    "This tool is not the Khronos glTF Validator and does not certify visual quality, topology, UV appearance, or animation behavior.",
+    "Y-up is the glTF convention; the intended front (+Z), upright appearance, and functional pivot require visual inspection.",
+    "Bounds describe stored static mesh positions with node transforms; skins, morph weights, animation, and GPU instancing are not evaluated."
+  ],
+  "accessors": [
+    {
+      "index": 0,
+      "type": "SCALAR",
+      "component_type": 5125,
+      "count": 29349,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        7553
+      ]
+    },
+    {
+      "index": 1,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 7554,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.2485554963350296,
+        -0.5,
+        -0.44979819655418396
+      ],
+      "decoded_max": [
+        0.2485554963350296,
+        0.5,
+        0.44979819655418396
+      ]
+    },
+    {
+      "index": 2,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 7554,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "index": 3,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 7554,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -0.9999982714653015,
+        -0.9999997615814209
+      ],
+      "decoded_max": [
+        1.0,
+        0.9999996423721313,
+        0.9999995827674866
+      ]
+    }
+  ],
+  "images": [
+    {
+      "index": 0,
+      "name": "Color_54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "bytes": 1109860,
+      "sha256": "d4e385f9010665e216dd95f611ec4286348297681ba6b513ef6ab870084db92b",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 1,
+      "name": "ORM_54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "bytes": 737577,
+      "sha256": "0bc32179b6af069e20311101216c5cfa4184ed467eb039996e2fc755978f38e9",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        192,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 2,
+      "name": "NormalGL_54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "bytes": 1487642,
+      "sha256": "7aa1a84ade9706108350c3b9941a2a1e487980e35c98f59c357d80ee4214efbd",
+      "declared_mime_type": "image/png",
+      "decoded": true,
+      "format": "PNG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        3,
+        3,
+        153,
+        255
+      ],
+      "rgba_channel_max": [
+        251,
+        250,
+        255,
+        255
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "index": 0,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 1
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 2
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "index": 0,
+      "name": "tripo_material_54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "texture_slots": [
+        {
+          "slot": "pbrMetallicRoughness.baseColorTexture",
+          "texture": 0,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+          "texture": 1,
+          "texcoord": 0
+        },
+        {
+          "slot": "normalTexture",
+          "texture": 2,
+          "texcoord": 0
+        }
+      ],
+      "has_base_color_texture": true,
+      "double_sided": false,
+      "alpha_mode": "OPAQUE"
+    }
+  ],
+  "meshes": [
+    {
+      "index": 0,
+      "name": "tripo_mesh_54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 7554,
+          "index_count": 29349,
+          "mode": 4,
+          "triangles": 9783,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                1.0,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.2485554963350296,
+            -0.5,
+            -0.44979819655418396
+          ],
+          "local_bounds_max": [
+            0.2485554963350296,
+            0.5,
+            0.44979819655418396
+          ]
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "index": 0,
+      "name": "tripo_node_54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "mesh": 0,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        2.0999999046325684,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.0999999046325684,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.0999999046325684,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "skins": [],
+  "skin_instances": [],
+  "manifest": {
+    "path": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\PeterPansTechland_Tripo_Generation_Pack\\manifest.json",
+    "title": "作品导航自动贩卖机",
+    "target_size_m_xyz": [
+      0.9,
+      1.8,
+      0.6
+    ],
+    "expected_nodes_after_blender": [
+      "VENDING_BODY",
+      "VENDING_GLASS",
+      "VENDING_DISPLAY",
+      "VENDING_BUTTONS"
+    ],
+    "expected_nodes_found_exactly": {
+      "VENDING_BODY": false,
+      "VENDING_GLASS": false,
+      "VENDING_DISPLAY": false,
+      "VENDING_BUTTONS": false
+    }
+  },
+  "file_bytes": 3696424,
+  "sha256": "05ef07a2940582ef4abeb55b49dc73b43509ab4f9d9ab15b004e810196ec6fa3",
+  "extensions_used": [],
+  "extensions_required": [],
+  "bounds_scene_index": 0,
+  "world_bounds": {
+    "min": [
+      -0.5219665185994629,
+      -1.0499999523162842,
+      -0.9445761698676876
+    ],
+    "max": [
+      0.5219665185994629,
+      1.0499999523162842,
+      0.9445761698676876
+    ],
+    "size_xyz": [
+      1.0439330371989257,
+      2.0999999046325684,
+      1.889152339735375
+    ],
+    "center": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ground_center_y_up": [
+      0.0,
+      -1.0499999523162842,
+      0.0
+    ],
+    "mesh_instances": 1,
+    "units": "glTF meters, without claiming generated scale is physically calibrated"
+  },
+  "pivot_and_scale": {
+    "scene_origin": [
+      0,
+      0,
+      0
+    ],
+    "origin_to_ground_center": [
+      0.0,
+      -1.0499999523162842,
+      0.0
+    ],
+    "ground_centered_within_1mm": false,
+    "target_size_m_xyz": [
+      0.9,
+      1.8,
+      0.6
+    ],
+    "target_over_raw_scale_xyz": [
+      0.8621242626968432,
+      0.8571428960683413,
+      0.31760276150310124
+    ],
+    "uniform_scale_to_target_height": 0.8571428960683413,
+    "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+  },
+  "summary": {
+    "mesh_count": 1,
+    "primitive_count": 1,
+    "node_count": 1,
+    "skin_count": 0,
+    "animation_count": 0,
+    "vertex_count_sum_primitives": 7554,
+    "triangle_count_sum_primitives": 9783,
+    "degenerate_triangles": 0,
+    "material_count": 1,
+    "image_count": 3,
+    "images_fully_decoded": 3,
+    "accessors_decoded": 4
+  },
+  "skinning_data_validation": {
+    "status": "not_present",
+    "skins_validated": 0,
+    "instances_validated": 0,
+    "deformation_evaluated": false,
+    "animation_motion_verified": false
+  },
+  "status": "passed_implemented_checks",
+  "ready_for_visual_review": true
+}

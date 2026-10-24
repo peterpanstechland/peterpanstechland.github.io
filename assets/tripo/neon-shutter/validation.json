@@ -1,0 +1,39 @@
+{
+  "closedHalfOpenAndOpenCreation": [
+    {
+      "initial": 0,
+      "paintedMeshes": 11,
+      "maxDrift": 0
+    },
+    {
+      "initial": 0.5,
+      "paintedMeshes": 11,
+      "maxDrift": 0
+    },
+    {
+      "initial": 1,
+      "paintedMeshes": 11,
+      "maxDrift": 0
+    }
+  ],
+  "neon": {
+    "method": "Bent three-dimensional tubes with luminous cores and mounting sockets",
+    "strokes": 28,
+    "lines": [
+      "PETER PAN\u9225\u6a72",
+      "TECHLAND"
+    ]
+  },
+  "build": [
+    "en passed",
+    "zh-Hans passed"
+  ],
+  "typecheck": "passed",
+  "visualChecks": [
+    "closed lettering conforms to corrugated door",
+    "open doorway has no floating lettering",
+    "pause and resume work"
+  ],
+  "sourceGLBsModified": false,
+  "deployment": "local preview only"
+}

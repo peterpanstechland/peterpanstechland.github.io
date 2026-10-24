@@ -18,10 +18,10 @@ function receipt(row){return {id:row.id,tier:row.tier,page:row.page,term:row.ter
 const active=(r,now)=>r.status==='approved'&&r.start_at<=now&&r.end_at>now&&(r.tier==='core'?r.payment_status==='manual_confirmed':r.payment_status==='in_kind_confirmed');
 export async function handleSponsors(request,env,{path,admin,hash,limitedBody,cleanJPEG}){
  const now=Date.now(),url=new URL(request.url);
- if(path==='/api/sponsors/plans'&&request.method==='GET')return json({prices:SPONSOR_PRICES,currency:'CNY',timezone:'Asia/Shanghai',rotationSeconds:8,paymentMode:'manual'});
+ if(path==='/api/sponsors/plans'&&request.method==='GET')return json({prices:SPONSOR_PRICES,currency:'CNY',timezone:'Asia/Shanghai',pageDurationsSeconds:[10,8,5],paymentMode:'manual'});
  if(path==='/api/sponsors'&&request.method==='GET'){
    const rows=await env.DB.prepare("SELECT * FROM sponsor_applications WHERE status='approved' AND start_at<=? AND end_at>? ORDER BY page,tier").bind(now,now).all();
-   return json({serverTime:now,rotationSeconds:8,sponsors:rows.results.filter(r=>active(r,now)).map(r=>({id:r.id,tier:r.tier,page:r.page,name:r.brand,url:r.website,tagline:r.tagline,startAt:r.start_at,endAt:r.end_at,logo:new URL('/api/sponsors/logos/'+r.id,url).href}))});
+   return json({serverTime:now,pageDurationsSeconds:[10,8,5],sponsors:rows.results.filter(r=>active(r,now)).map(r=>({id:r.id,tier:r.tier,page:r.page,name:r.brand,url:r.website,tagline:r.tagline,startAt:r.start_at,endAt:r.end_at,logo:new URL('/api/sponsors/logos/'+r.id,url).href}))});
  }
  const image=path.match(/^\/api\/(admin\/)?sponsors\/logos\/([a-f0-9-]{36})$/i);
  if(image&&request.method==='GET'){

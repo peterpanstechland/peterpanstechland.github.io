@@ -5,6 +5,7 @@ const definitions = [
   {id:'community', en:'COMMUNITY SPONSOR', zh:'社区赞助商', color:'#d3b8f3', description:['Connect makers through shared knowledge, events and collaboration.','用知识分享、活动与协作，连接更多创作者。']},
 ];
 const configURL = new URL('./sponsors/config.json',import.meta.url);
+const pageSeconds=[10,8,5];
 function website(value){try{const url=new URL(value);return url.protocol==='https:'?url.href:null;}catch{return null;}}
 function logoURL(value){try{const url=new URL(value,configURL);return ['https:','http:'].includes(url.protocol)&& (url.protocol==='https:'||url.origin===location.origin||(['127.0.0.1','localhost'].includes(location.hostname)&&['127.0.0.1','localhost'].includes(url.hostname)))?url.href:null;}catch{return null;}}
 
@@ -18,7 +19,7 @@ export async function createSponsorBillboard(THREE,zh,onLoad){
   const sections=new Map();
   dialog.querySelector('.sp-close').setAttribute('aria-label',zh?'关闭赞助商':'Close sponsors');dialog.querySelector('.sp-close').onclick=()=>dialog.close();
   dialog.querySelector('h2').textContent=zh?'一起，让想法发生。':'Build what comes next.';
-  dialog.querySelector('.sp-intro').textContent=zh?'三页循环播放 · 每页 8 秒 · 审核通过并进入档期后展示。':'Three pages · 8 seconds each · Approved, scheduled sponsors.';
+  dialog.querySelector('.sp-intro').textContent=zh?'三页循环播放 · 第 1 页 10 秒 / 第 2 页 8 秒 / 第 3 页 5 秒 · 审核通过并进入档期后展示。':'Three rotating pages · Page 1: 10s / Page 2: 8s / Page 3: 5s · Approved, scheduled sponsors.';
   function populate(){
     sections.clear();dialog.querySelector('.sp-tiers').replaceChildren();
     for(const [i,tier] of tiers.entries()){
@@ -94,7 +95,7 @@ export async function createSponsorBillboard(THREE,zh,onLoad){
     camera.updateMatrixWorld();viewProjection.multiplyMatrices(camera.projectionMatrix,camera.matrixWorldInverse);frustum.setFromProjectionMatrix(viewProjection);
     const visible=frustum.intersectsBox(marqueeBounds),delta=lastSeconds===null?0:Math.min(.1,seconds-lastSeconds);lastSeconds=seconds;
     if(feed.some(s=>s.endAt<=Date.now()+serverOffset)){feed=feed.filter(s=>s.endAt>Date.now()+serverOffset);repaintPages();if(dialog.open)populate();}
-    if(visible&&!reduced&&!paused&&!dialog.open&&!document.querySelector('#sponsor-application[open]')){pageElapsed+=delta;if(pageElapsed>=8)choose(page+1);}
+    if(visible&&!reduced&&!paused&&!dialog.open&&!document.querySelector('#sponsor-application[open]')){pageElapsed+=delta;if(pageElapsed>=pageSeconds[page])choose(page+1);}
     if(transition<1){transition=reduced?1:Math.min(1,transition+delta/.65);drawPanels();}
     return visible&&(!reduced||transition<1);
   }

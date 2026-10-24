@@ -1,0 +1,8 @@
+output/
+.env
+.env.*
+!.env.example
+.tripo/
+node_modules/
+__pycache__/
+*.pyc

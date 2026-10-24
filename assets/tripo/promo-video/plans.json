@@ -1,0 +1,1 @@
+{"prices": {"1": {"month": 10000, "year": 100000}, "2": {"month": 8000, "year": 80000}, "3": {"month": 5000, "year": 50000}}, "currency": "CNY", "timezone": "Asia/Shanghai", "paymentMode": "manual", "pageDurationsSeconds": [10, 8, 5]}

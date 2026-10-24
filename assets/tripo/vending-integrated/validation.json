@@ -1,0 +1,22 @@
+{
+  "revision": "vending-integrated-v3",
+  "design": "Integrated native header lightbox with full-width PROJECTS tubes",
+  "removed": [
+    "separate box backing",
+    "inner neon frame",
+    "selection arrows",
+    "index ticks"
+  ],
+  "surface": "Triangle-clipped finish on original housing mesh; original red rim preserved",
+  "visualReview": [
+    "front",
+    "oblique",
+    "close-up"
+  ],
+  "interaction": "Clicking the header opens article chooser",
+  "browserErrors": [],
+  "build": "passed: en and zh-Hans",
+  "typecheck": "passed",
+  "rawGlbsModified": false,
+  "published": false
+}

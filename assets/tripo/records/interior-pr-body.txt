@@ -1,0 +1,16 @@
+The garage now contains nine visually accepted Tripo equipment models, placed as ten objects including two instances of the monitor. This adds the X1 Carbon, Makeblock Laserbox, generic OpenPnP machine, soldering station, hot-air station, oscilloscope, dual monitors, office desk and workbench.
+
+The PC tower is deliberately absent: its initial text generation and one explicitly authorized image retry both returned severely deformed geometry. Both raw outputs and previews are preserved. Eleven tasks consumed 250 credits in total; final balance was 95. Task IDs, actual billing and acceptance results are in `assets/tripo/INTERIOR_EQUIPMENT.json`.
+
+Equipment rests on the actual GLB tabletops and floor. Adjustable furniture feet bridge the uneven floor, and devices hide when their supporting bench fails to load. The workbench retains the generated frame, with explicitly local steel tabletop and lower-shelf repairs. Exact brand labels and screen art are also local overlays. A new Workshop camera opens the shutter and shows the interior. The existing showcase remains separate.
+
+Validation:
+- TypeScript check and production builds for English and Simplified Chinese passed.
+- Actual-mesh placement test passed for all ten new instances, including repeat placement, missing-bench fallback and recovery.
+- Browser checks passed for desktop and 390px mobile viewports; a deliberate workbench 404 hid all three dependent machines, and Retry restored them.
+- GLB accessor checks and full embedded-image decoding passed. Visual QA separately rejected both PC outputs.
+- Build has existing dependency/cache warnings. A parent-page MutationObserver error without a source URL was observed, while the standalone garage was clean and the visible blog/scene loaded.
+
+This is a preview-only draft. Homepage, documentation, blog posts, English/Chinese content and Challenge remain intact. No merge or deployment is requested here. Original raw downloads and the full delivery ZIP remain local; only accepted display GLBs and curated records are committed.
+
+![Interior preview](https://raw.githubusercontent.com/peterpanstechland/peterpanstechland.github.io/codex/garage-interior-equipment/assets/tripo/equipment-previews/interior-desktop.png)

@@ -1,0 +1,428 @@
+{
+  "created_at_utc": "2026-10-20T08:01:46.772972+00:00",
+  "source_task_id": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\06-showcase-zone-2c13d6cc\\model.glb",
+  "source_sha256": "68779ddc414d295866e8c13a992a63ddd29ab93d7379019c2c93469eb3311405",
+  "processed_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\processed\\06_showcase_zone.glb",
+  "processed_sha256": "7449f2f5f1cf70e9380efe52a1e2725302df54adef934ffe266e0e2cecb2f61d",
+  "processor": "tools/clean_showcase_asset.py",
+  "additional_paid_calls": 0,
+  "operations": [
+    "Bake source node transform",
+    "Rotate Y -90 degrees to front +Z",
+    "Fit actual cabinet to 2.2 x 2.35 x 0.6 meters and bottom-center",
+    "Remove actual source geometry inside measured open cabinet cells",
+    "Remove disconnected loose prop component",
+    "Preserve source UVs, material definitions and all embedded texture bytes",
+    "Cap safe actual object footprint cuts only"
+  ],
+  "source_axis_scale_after_rotation": [
+    1.0859921311645195,
+    1.3055555557914391,
+    1.0467276131074665
+  ],
+  "source_components": [
+    {
+      "triangles": 9606,
+      "min": [
+        -1.1,
+        0.0,
+        -0.3
+      ],
+      "max": [
+        1.1,
+        2.35,
+        0.3
+      ]
+    },
+    {
+      "triangles": 38,
+      "min": [
+        -0.08552212864160538,
+        0.5783821542809048,
+        -0.002771362751364318
+      ],
+      "max": [
+        0.09522519931197168,
+        0.6943781645339293,
+        0.19814075769873166
+      ]
+    }
+  ],
+  "removal_volumes_m": [
+    {
+      "low": [
+        -0.96,
+        0.572,
+        -0.078
+      ],
+      "high": [
+        -0.43,
+        1.035,
+        0.34
+      ],
+      "column": 0,
+      "row": 0
+    },
+    {
+      "low": [
+        -0.25,
+        0.572,
+        -0.078
+      ],
+      "high": [
+        0.25,
+        1.035,
+        0.34
+      ],
+      "column": 1,
+      "row": 0
+    },
+    {
+      "low": [
+        0.435,
+        0.572,
+        -0.078
+      ],
+      "high": [
+        0.96,
+        1.035,
+        0.34
+      ],
+      "column": 2,
+      "row": 0
+    },
+    {
+      "low": [
+        -0.96,
+        1.146,
+        -0.078
+      ],
+      "high": [
+        -0.43,
+        1.56,
+        0.34
+      ],
+      "column": 0,
+      "row": 1
+    },
+    {
+      "low": [
+        -0.25,
+        1.146,
+        -0.078
+      ],
+      "high": [
+        0.25,
+        1.56,
+        0.34
+      ],
+      "column": 1,
+      "row": 1
+    },
+    {
+      "low": [
+        0.435,
+        1.146,
+        -0.078
+      ],
+      "high": [
+        0.96,
+        1.56,
+        0.34
+      ],
+      "column": 2,
+      "row": 1
+    },
+    {
+      "low": [
+        -0.96,
+        1.67,
+        -0.078
+      ],
+      "high": [
+        -0.43,
+        2.255,
+        0.34
+      ],
+      "column": 0,
+      "row": 2
+    },
+    {
+      "low": [
+        -0.25,
+        1.67,
+        -0.078
+      ],
+      "high": [
+        0.25,
+        2.255,
+        0.34
+      ],
+      "column": 1,
+      "row": 2
+    },
+    {
+      "low": [
+        0.435,
+        1.67,
+        -0.078
+      ],
+      "high": [
+        0.96,
+        2.255,
+        0.34
+      ],
+      "column": 2,
+      "row": 2
+    },
+    {
+      "low": [
+        0.25,
+        1.665,
+        0.0
+      ],
+      "high": [
+        0.307,
+        1.89,
+        0.34
+      ],
+      "column": 1,
+      "row": 2,
+      "purpose": "Remove narrow loose red prop beside upper middle divider"
+    }
+  ],
+  "geometry_accounting": {
+    "source_triangles": 9644,
+    "retained_clipped_triangles": 9132,
+    "removed_clipped_triangles": 1688,
+    "affected_source_triangles": 1411,
+    "detached_prop_source_triangles_removed": 38,
+    "local_footprint_cap_triangles": 112,
+    "maximum_source_triangle_area_accounting_error_m2": 3.382710778154774e-17,
+    "retained_source_area_m2": 21.95198880716754,
+    "removed_source_area_m2": 1.5212298680202487,
+    "source_texture_images_unchanged": true
+  },
+  "cut_caps": {
+    "source_surface_boundary_edges": 802,
+    "source_surface_nonmanifold_edges": 14,
+    "caps": [
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "boundary_vertices": 13,
+        "triangles": 11
+      },
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "boundary_vertices": 19,
+        "triangles": 17
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.146,
+        "boundary_vertices": 20,
+        "triangles": 18
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 9,
+        "triangles": 7
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 11,
+        "triangles": 9
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 8,
+        "triangles": 6
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 8,
+        "triangles": 6
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 8,
+        "triangles": 6
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 12,
+        "triangles": 10
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 8,
+        "triangles": 6
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 10,
+        "triangles": 8
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "boundary_vertices": 10,
+        "triangles": 8
+      }
+    ],
+    "uncapped_cut_contours": [
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 16
+      },
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 9
+      },
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 8
+      },
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 10
+      },
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 13
+      },
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 9
+      },
+      {
+        "axis": 1,
+        "coordinate": 0.572,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 6
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.146,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 21
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.146,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 12
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.146,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 6
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.146,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 18
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.146,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 7
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 20
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 10
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 4
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 5
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 8
+      },
+      {
+        "axis": 1,
+        "coordinate": 1.67,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 4
+      }
+    ]
+  },
+  "limitations": [
+    "This is a geometrically edited real Tripo cabinet, not a new generated asset.",
+    "Textures may retain baked object shadows after geometry removal.",
+    "Small foot remnants or cut boundaries require front and oblique browser acceptance.",
+    "No watertightness claim; open or branched cut contours are recorded."
+  ],
+  "browser_review": {
+    "status": "passed_for_interactive_scene_with_recorded_limitations",
+    "views": [
+      "front +Z",
+      "three-quarter from +X/+Z"
+    ],
+    "glb_loaded": true,
+    "source_textures_rendered": true,
+    "observed": [
+      "Three recognizable generated robots are removed",
+      "Loose shelf products and the upper-middle red prop are removed",
+      "Original outer frame, interior dividers, back panels, shelves and bottom lockers remain",
+      "No replacement cabinet or project models were introduced"
+    ],
+    "limitations": [
+      "Small flat cut-footprint patches and original baked contact shadows remain on some shelves",
+      "Generated cabinet panels retain their original dents/irregularities",
+      "18 open or branched cut contours remain; this is not a watertight manufacturing asset"
+    ],
+    "screenshots": [
+      "assets/tripo/records/06_showcase_zone.processed.front.jpg",
+      "assets/tripo/records/06_showcase_zone.processed.oblique.jpg"
+    ]
+  },
+  "qa_approved": true,
+  "visual_review": "PASSED_FOR_SCENE_PREVIEW_WITH_RECORDED_LIMITATIONS",
+  "acceptance_scope": "Interactive scene preview, not manufacturing or clean topology"
+}

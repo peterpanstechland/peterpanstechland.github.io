@@ -1,0 +1,109 @@
+{
+  "concurrency": 2,
+  "defaults": {
+    "for": "toy",
+    "model": "tripo-v3.1",
+    "out": "assets/tripo/raw"
+  },
+  "jobs": [
+    {
+      "name": "15_makeblock_laserbox",
+      "input": "assets/tripo/references/interior-equipment/laserbox-product-reference.jpg",
+      "params": {
+        "face_limit": 8000,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "16_openpnp_machine",
+      "input": "One standalone desktop open-frame pick-and-place machine compatible with OpenPnP, a complete tabletop machine only. Rectangular brushed aluminium extrusion chassis, dark flat metal base, clearly visible XY gantry bridge on parallel side rails, a compact dual-nozzle Z head with small downward camera, removable green PCB held flat at centre, orderly rows of narrow black component tape feeders along the front edge with small visible reels. Approximate overall width 0.70m, depth 0.60m, height 0.45m. Realistic recognizable engineering proportions, sturdy connected rails and feet, full back and sides. Subtle worn charcoal and aluminium finish with restrained cyan status accents suited to the existing Shenzhen cyber maker garage. No table, room, people, printer enclosure, lettering or logos. All machine parts stay within one compact footprint.",
+      "params": {
+        "face_limit": 12000,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "17_soldering_station",
+      "input": "A single compact electronics soldering station assembly for a maker workbench. A charcoal rectangular controller box with one small blank dark display, one silver rotary knob, front cable connector; a slender soldering iron rests securely in an attached metal spring cradle on the right, with a small brass cleaning sponge cup below. Short tidy black cable connecting iron to controller, compact unified footprint. About 0.24m wide, 0.18m deep, 0.18m tall. Realistic connected hardware, all sides and back, rubber feet, subtly weathered dark metal with a tiny warm amber status lamp. Matches a Shenzhen cyberpunk electronics workshop without fantasy shapes. No table, room, human hand, hovering parts, smoke, text or logos.",
+      "params": {
+        "face_limit": 3500,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "18_hot_air_station",
+      "input": "One compact hot-air rework station for an electronics maker workbench. Charcoal metal controller with a small blank dark display and two rotary knobs, a black cylindrical hot-air handpiece with a short silver nozzle lying securely in a connected side cradle, flexible dark hose looping close to the controller. Distinctly a hot-air tool, not a soldering iron or pistol weapon. About 0.22m wide, 0.22m deep, 0.22m high. Complete connected assembly with a flat base and feet, back ventilation slots. Realistic industrial proportions, lightly used dark finish, restrained orange and cyan accents matching a Shenzhen cyber maker garage. No table, environment, people, fire, floating components, lettering or logos.",
+      "params": {
+        "face_limit": 3500,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "19_oscilloscope",
+      "input": "One realistic benchtop digital oscilloscope, width 0.32m, height 0.16m, depth 0.14m. Squat rectangular pale grey instrument housing with dark charcoal side panels, a wide inset black LCD occupying the left front, orderly small rotary knobs and buttons on the right, four metal BNC input connectors along the lower front, sturdy rubber feet and top carry handle folded down. Screen is plain dark glass for an accurate waveform overlay later. Complete front, sides and back, subtle wear, tiny cyan status accents to fit a Shenzhen cyber maker garage. No probes sprawling outside the footprint, table, room, humans, text, fake readings or logos.",
+      "params": {
+        "face_limit": 5000,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "20_pc_tower",
+      "input": "One compact upright desktop PC tower, 0.22m wide, 0.44m high and 0.40m deep. Charcoal brushed-metal case, perforated front intake with two restrained cyan-lit fans, smoked side panel with visible motherboard and one graphics card, small power button, rear ventilation and ports, four stable short rubber feet. Complete believable computer hardware, lightly worn metal, minimal coral-magenta accents matching a Shenzhen cyber maker garage, no exaggerated neon. Clear rectangular practical shape. No monitor, keyboard, desk, room, people, cables outside the base, text or logo.",
+      "params": {
+        "face_limit": 6000,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "21_monitor",
+      "input": "Exactly one modern desktop monitor on a sturdy central pedestal stand and flat rectangular base. A thin 16:9 landscape panel with very narrow dark charcoal bezels, plain opaque black screen reserved for a locally authored interface, full plastic rear shell with vents and visible stand connection. Approximately 0.55m wide, 0.40m tall including stand and 0.18m deep at the base. Realistic office equipment, subtle wear, tiny muted cyan power LED, restrained dark industrial design that matches a Shenzhen cyber maker garage. One continuous physically connected object with stable flat base. No second monitor, computer tower, keyboard, table, room, people, text, image on the screen or logo.",
+      "params": {
+        "face_limit": 3500,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "22_office_desk",
+      "input": "One empty compact office desk for a Shenzhen cyber maker garage. Straight rectangular dark walnut worktop, approximately 1.25m wide, 0.70m deep and 0.72m tall, thick flat continuous top, four sturdy connected charcoal square steel legs, open knee clearance, one shallow drawer below the back edge and a tidy underside cable tray. All four feet on the same flat ground plane. Subtle used wood grain, worn dark metal, restrained magenta accent trim along the rear edge. Complete free-standing three-dimensional furniture with visible underside, front, back and sides. Desktop must be completely empty and flat so separate dual monitors can be added later. No monitors, computer, tools, chair, people, room, wall, floor slab, text or logos.",
+      "params": {
+        "face_limit": 6500,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    },
+    {
+      "name": "23_workbench",
+      "input": "One EMPTY heavy-duty electronics maker workbench, approximately 2.2m long, 0.66m deep and 0.75m tall. A completely flat uninterrupted thick dark worktop suitable for three separate desktop machines. Four sturdy connected charcoal square steel legs, a low rear cross brace, small levelling feet all on the same floor plane and a shallow underside cable tray. Open front with clear space below the top. Complete three-dimensional practical furniture with full underside, back and sides. Lightly worn dark wood and smoky charcoal metal, small coral-magenta edge accents matching a Shenzhen cyber maker garage. Absolutely no tools or machines on the worktop, no upper shelving, pegboard, cabinet, drawer pedestal, chair, humans, room enclosure, floor slab, text or logos. All parts physically connected; no floating fragments.",
+      "params": {
+        "face_limit": 8000,
+        "texture": true,
+        "pbr": true,
+        "texture_quality": "standard",
+        "auto_size": true
+      }
+    }
+  ]
+}

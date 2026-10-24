@@ -1,0 +1,12 @@
+{
+  "revision": "city-neon-v1",
+  "design": "Double-faced smoked lightbox, cyan 深圳 glass tubes, pink SHENZHEN and side diffusers",
+  "hanziStrokes": 17,
+  "rawGlbModified": false,
+  "mounting": "Original side plaque sleeve and clamps retained",
+  "build": "passed: en and zh-Hans",
+  "typecheck": "passed",
+  "finalStaticRefinement": "English changed to monoline tubes; synced both build locales and SHA256 verified",
+  "moduleSha256": "5b2e4e1030d2cf650771cac972404142c3e7044ea97fe9ab689f65b99a098eca",
+  "published": false
+}

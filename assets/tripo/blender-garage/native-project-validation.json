@@ -1,0 +1,74 @@
+[
+  {
+    "project": "01_garage_shell.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 7
+  },
+  {
+    "project": "02_roller_shutter.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 29
+  },
+  {
+    "project": "03_profile_sign.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1
+  },
+  {
+    "project": "04_lucky_cat.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1
+  },
+  {
+    "project": "05_project_vending.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1
+  },
+  {
+    "project": "06_showcase_zone.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 4
+  },
+  {
+    "project": "08_street_lamp.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 3
+  },
+  {
+    "project": "09_trash_bin.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 3
+  },
+  {
+    "project": "10_utility_cabinet.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1
+  },
+  {
+    "project": "11_tree.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1
+  },
+  {
+    "project": "12_plants_grass.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1
+  },
+  {
+    "project": "13_street_base.blend",
+    "opens": true,
+    "packed_images": 5,
+    "editable_meshes": 1
+  }
+]

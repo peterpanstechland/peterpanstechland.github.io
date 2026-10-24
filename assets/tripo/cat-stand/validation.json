@@ -1,0 +1,24 @@
+{
+  "style": "Chinese rosewood flower stand based on user reference",
+  "dimensionsMeters": [
+    0.62,
+    0.96,
+    0.54
+  ],
+  "sourceCatGeometryModified": false,
+  "rigModified": false,
+  "browser": {
+    "loadedAssets": 21,
+    "existingUnavailableAssets": 1,
+    "beckonToggleEnabled": true,
+    "consoleErrors": []
+  },
+  "placementCheck": "passed: workshop support, idempotency, missing support recovery",
+  "preview": "http://127.0.0.1:4173/zh-Hans/maker-garage-preview/scene/?lang=zh-Hans&v=rosewood-stand-v2",
+  "catPosition": [
+    -1.4,
+    0,
+    1.85
+  ],
+  "latestStaticFilesSyncedToBuiltPreview": true
+}

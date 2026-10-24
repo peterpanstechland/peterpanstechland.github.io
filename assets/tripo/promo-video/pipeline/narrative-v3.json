@@ -1,0 +1,36 @@
+{
+  "zh": [
+    "这是我的赛博永生工作室。一个把脑洞、作品和朋友，慢慢装进去的小世界。",
+    "这里的猫会招手，作品会悬浮。而造出这个世界，要从一张图开始。",
+    "我先准备造型参考，再交给 Tripo AI。图片或文字，就这样变成可以旋转查看的三维模型。",
+    "上传，生成，检查，再导出 GLB。这四步把灵感变成资产，接下来才是搭建空间。",
+    "如果你也想试试，免费版每月二百点，Pro 月付二十美元。API 另外计费，先探索再选方案。",
+    "拿到模型之后，我用 Blender 调整比例和摆放，再用 Three.js 加入灯光与交互。工作室就这样亮了起来。",
+    "空间搭好了，就装进真正做过的东西：机器人、灵巧手，还有黑客松项目。这里会持续更新。",
+    "但这里不只属于我。绕到背面，留下照片、留言或愿望。审核之后，你的脚印也会成为这里的记忆。",
+    "想让这个世界继续生长，也欢迎品牌加入。头顶的广告牌，留给核心、硬件和社区赞助商。",
+    "核心赞助按页轮播，十秒、八秒、五秒。五十元每月起，标志跳转官网，确认后按档期展示。",
+    "除了广告牌，硬件品牌还能走进车间。比如普劳德 NotePin S，用赛博展位连接真实使用和后续测评。",
+    "对我这种想法总在乱飞的人，记录只是起点。我计划用它收集会议和灵感，再借助 AI 整理需求与开发规格，交给编程工具。这会是接下来的实测。",
+    "硬件支持创作，社区把人聚在一起。活动、展位、周边都能来聊，Makers Challenge 也在寻找伙伴。",
+    "想一起参与，就从广告牌提交申请。我会确认合作内容和档期，现阶段先人工沟通，再安排上架。",
+    "所以，这里既是作品档案，也是一间邀请你参与的工作室。来逛逛，留下脚印，下一件我们一起造。"
+  ],
+  "en": [
+    "This is my Cyber Eternal Studio. A little world for my ideas, my projects, and the people I meet.",
+    "The cat waves. Projects float. But building this world began with a single image.",
+    "I give Tripo A I a reference image or a text prompt. An idea becomes a three-dimensional model.",
+    "Upload, generate, inspect, and export a GLB. Now the idea is an asset, ready to become part of a place.",
+    "Want to try? Start free with two hundred monthly credits. Pro is twenty US dollars monthly. The API is billed separately.",
+    "Next, I arrange scale and placement in Blender. Three.js adds light and interaction. The workshop comes alive.",
+    "With a place built, I fill it with real work: robots, dexterous hands, and build challenges. More projects will follow.",
+    "This place is yours too. Go around the back. Leave a photo, message, or wish. Approved visits become shared memories.",
+    "To help this world grow, brands can join us. The neon billboard welcomes core, hardware, and community sponsors.",
+    "Core sponsors rotate across three pages: ten, eight, and five seconds. From fifty Chinese yuan monthly. Clickable logos. Confirmed campaigns follow a schedule.",
+    "Beyond the billboard, products can enter the workshop. A NotePin S booth connects a digital showcase with real use and future reviews.",
+    "My ideas scatter easily. Recording is only the start. I plan to capture meetings and ideas, then use A I to turn them into requirements and a development plan. That is the next workflow to test.",
+    "Hardware supports making. Community brings people together. Share an event, booth, or swag. Our Makers Challenge proposal is seeking partners.",
+    "To join in, apply through the billboard. We agree on the collaboration and dates, then schedule your campaign. For now, we arrange payment manually.",
+    "This is an archive of my work, and an invitation to take part. Explore, leave a trace, and build the next thing with me."
+  ]
+}

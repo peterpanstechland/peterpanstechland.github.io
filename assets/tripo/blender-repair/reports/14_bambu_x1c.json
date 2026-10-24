@@ -1,0 +1,113 @@
+{
+  "asset_id": "14_bambu_x1c",
+  "source_task_id": "c3ccb749-d329-4ee6-a427-9944d5fffd8a",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/14_bambu_x1c.glb",
+  "input_sha256": "472b076a84ca0885f4eacecd6b039c064afcc210d22079bd55fb98ab40b218f0",
+  "output": "assets/tripo/blender-repair/models/14_bambu_x1c.glb",
+  "output_sha256": "61584d58f0727e104c1e61ceb0ee2e35b5102a7b5c3a5205e685b6b423ff2e10",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_c3ccb749-d329-4ee6-a427-9944d5fffd8a": {
+        "before": {
+          "vertices": 5572,
+          "faces": 6734,
+          "boundary_edges": 3870,
+          "nonmanifold_edges": 3870,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 3563,
+          "faces": 6732,
+          "boundary_edges": 526,
+          "nonmanifold_edges": 535,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [],
+    "local_parts": [
+      "LOCAL_X1C_flat_PEI_print_surface",
+      "LOCAL_X1C_heated_bed_substrate",
+      "LOCAL_X1C_bed_underframe",
+      "LOCAL_X1C_rear_bed_carriage",
+      "LOCAL_X1C_plate_front_tab"
+    ],
+    "notes": [
+      "Preserved thin double-wall spacing and repaired panel shading. Removed the warped build platform and rebuilt a flat PEI sheet, heated substrate, underframe and rear support; original chassis, toolhead and screen retained.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ],
+    "print_bed_contact_check": {
+      "layer_gaps_m": [
+        0.0,
+        0.0
+      ],
+      "carriage_overlap_m_xyz": [
+        0.09000000357627869,
+        0.013999998569488525,
+        0.018000006675720215
+      ],
+      "passed": true
+    },
+    "display_envelope_fit": {
+      "scale_native_xyz": [
+        1.0,
+        1.0,
+        0.9999998807907104
+      ],
+      "translation_to_bottom_center": [
+        -1.4901161193847656e-08,
+        -0.0,
+        1.4901161193847656e-08
+      ]
+    }
+  },
+  "mesh_stats": {
+    "tripo_node_c3ccb749-d329-4ee6-a427-9944d5fffd8a": {
+      "vertices": 4313,
+      "faces": 7137,
+      "boundary_edges": 344,
+      "nonmanifold_edges": 353,
+      "degenerate_faces": 0
+    },
+    "LOCAL_X1C_flat_PEI_print_surface": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_X1C_heated_bed_substrate": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_X1C_bed_underframe": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_X1C_rear_bed_carriage": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_X1C_plate_front_tab": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

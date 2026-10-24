@@ -1,0 +1,23 @@
+{
+  "revision": "sign-detail-v1",
+  "changes": [
+    "Removed duplicated world-space neon rings; retained original GLB cyan/pink segments",
+    "Main panel resized to 2.60 x 0.72 metres and offset to x=0.10, leaving clearance to portrait and right lamp",
+    "Continuous chamfered bezel replaces disconnected edge bars",
+    "Shortened rear rails and added rear portrait support to a ray-verified fascia point",
+    "Authored graphic textures: desktop 2048, mobile 1024; other models retain existing texture limits"
+  ],
+  "validation": {
+    "en_build": "passed",
+    "zh_Hans_build": "passed",
+    "typecheck": "passed",
+    "final_runtime_hashes_match_both_builds": true,
+    "browser_loaded_models": 21,
+    "browser_console_errors": 0,
+    "browser_console_warnings": 0,
+    "front_view_visual_review": "passed"
+  },
+  "new_Tripo_credits": 0,
+  "publication": "local only",
+  "model_glbs_changed": false
+}

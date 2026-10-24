@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-23",
+  "workerVersion": "b9c1cb90-83fc-4dad-bf88-b89550afd396",
+  "applicationUrl": "https://techland-community-wall.peter-7dc.workers.dev/sponsor/",
+  "backendTestsPassed": 8,
+  "siteBuildLocales": [
+    "en",
+    "zh-Hans"
+  ],
+  "production": {
+    "submissionAndReceipt": "passed",
+    "publicSponsorCount": 0,
+    "privateAdminPreview": "passed",
+    "temporaryApplicationDeleted": true,
+    "unconfirmedApprovalRejected": "passed"
+  },
+  "local": {
+    "approval": "passed",
+    "officialWebsiteLinks": "passed",
+    "threePageNavigation": "passed",
+    "overlapAndExpiry": "covered by SQLite integration tests",
+    "logoRendering": "passed",
+    "automaticRotation": "Verified visible scene changed from page 3 to page 2 while dialog closed"
+  },
+  "payment": "Manual cooperation confirmation only; WeChat not implemented",
+  "frontendPublication": "Local preview and built files updated; GitHub Pages not pushed",
+  "reviewNote": "Production fake payment confirmation was blocked by automatic approval review; approval checks performed in isolated local environment"
+}

@@ -1,0 +1,470 @@
+{
+  "schema_version": 1,
+  "asset_id": "13_street_base",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\blender-garage\\models\\13_street_base.glb",
+  "inspected_at_utc": "2026-10-23T02:49:14.893179+00:00",
+  "tool": "tools/inspect_tripo_glb.py",
+  "scope": "GLB structure, decoded accessor data, static scene bounds, material references, full image decoding",
+  "visual_review": "NOT_PERFORMED",
+  "qa_approved": false,
+  "errors": [],
+  "warnings": [],
+  "unsupported": [],
+  "limitations": [
+    "This tool is not the Khronos glTF Validator and does not certify visual quality, topology, UV appearance, or animation behavior.",
+    "Y-up is the glTF convention; the intended front (+Z), upright appearance, and functional pivot require visual inspection.",
+    "Bounds describe stored static mesh positions with node transforms; skins, morph weights, animation, and GPU instancing are not evaluated."
+  ],
+  "accessors": [
+    {
+      "index": 0,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 92,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -4.250000476837158,
+        -0.15000000596046448,
+        -3.3000006675720215
+      ],
+      "decoded_max": [
+        4.250000476837158,
+        0.14666010439395905,
+        3.3000006675720215
+      ]
+    },
+    {
+      "index": 1,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 92,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9999192357063293,
+        -0.9999998807907104,
+        -0.9999192357063293
+      ],
+      "decoded_max": [
+        0.9999192357063293,
+        0.8658640384674072,
+        0.9999192357063293
+      ]
+    },
+    {
+      "index": 2,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 92,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "index": 3,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 486,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        91
+      ]
+    },
+    {
+      "index": 4,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 24,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -4.2466607093811035,
+        0.1374835968017578,
+        -3.296660900115967
+      ],
+      "decoded_max": [
+        4.2466607093811035,
+        0.15000000596046448,
+        3.296660900115967
+      ]
+    },
+    {
+      "index": 5,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 24,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.8658640384674072,
+        0.5002792477607727,
+        -0.8658640384674072
+      ],
+      "decoded_max": [
+        0.8658640384674072,
+        0.9999998807907104,
+        0.8658640384674072
+      ]
+    },
+    {
+      "index": 6,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 24,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0003929137601517141,
+        0.0005060434341430664
+      ],
+      "decoded_max": [
+        0.9996070861816406,
+        0.9994939565658569
+      ]
+    },
+    {
+      "index": 7,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 78,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        23
+      ]
+    }
+  ],
+  "images": [
+    {
+      "index": 0,
+      "name": "ROAD_SOURCE_NORMAL_BAKE",
+      "bytes": 3001130,
+      "sha256": "24517da69d5b4953b195791d28cc0729a078b43d4d8cd94fba9140807d3b0de0",
+      "declared_mime_type": "image/png",
+      "decoded": true,
+      "format": "PNG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 1,
+      "name": "ROAD_SOURCE_COLOR_BAKE",
+      "bytes": 2329902,
+      "sha256": "ad6e80c1d59539d4790c7aa7edefe63f8005182ebffca2130899c8fa0a4e9d08",
+      "declared_mime_type": "image/png",
+      "decoded": true,
+      "format": "PNG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        170,
+        111,
+        64,
+        255
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "index": 0,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 1
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "index": 0,
+      "name": "LOCAL_road_edge_concrete",
+      "texture_slots": [],
+      "has_base_color_texture": false,
+      "double_sided": true,
+      "alpha_mode": "OPAQUE"
+    },
+    {
+      "index": 1,
+      "name": "TRIPO_road_color_rebaked_in_Blender",
+      "texture_slots": [
+        {
+          "slot": "normalTexture",
+          "texture": 0,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.baseColorTexture",
+          "texture": 1,
+          "texcoord": 0
+        }
+      ],
+      "has_base_color_texture": true,
+      "double_sided": true,
+      "alpha_mode": "OPAQUE"
+    }
+  ],
+  "meshes": [
+    {
+      "index": 0,
+      "name": "Cube.001",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 92,
+          "index_count": 486,
+          "mode": 4,
+          "triangles": 162,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                1.0,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -4.250000476837158,
+            -0.15000000596046448,
+            -3.3000006675720215
+          ],
+          "local_bounds_max": [
+            4.250000476837158,
+            0.14666010439395905,
+            3.3000006675720215
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 24,
+          "index_count": 78,
+          "mode": 4,
+          "triangles": 26,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0003929137601517141,
+                0.0005060434341430664
+              ],
+              "max": [
+                0.9996070861816406,
+                0.9994939565658569
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -4.2466607093811035,
+            0.1374835968017578,
+            -3.296660900115967
+          ],
+          "local_bounds_max": [
+            4.2466607093811035,
+            0.15000000596046448,
+            3.296660900115967
+          ]
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "index": 0,
+      "name": "LOCAL_STREET_SOLID_FOUNDATION",
+      "mesh": 0,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        7.222615275609032e-08,
+        0.0,
+        -0.3561167595086377,
+        0.0,
+        0.0,
+        3.3333330154418945,
+        0.0,
+        0.0,
+        0.6255773091766902,
+        0.0,
+        1.2687704548272922e-07,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "skins": [],
+  "skin_instances": [],
+  "manifest": {
+    "path": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\PeterPansTechland_Tripo_Generation_Pack\\manifest.json",
+    "title": "湿地面与路沿模块",
+    "target_size_m_xyz": [
+      6.2,
+      0.3,
+      4.7
+    ],
+    "expected_nodes_after_blender": [
+      "SIDEWALK",
+      "CURB",
+      "ROAD",
+      "WET_PATCH"
+    ],
+    "expected_nodes_found_exactly": {
+      "SIDEWALK": false,
+      "CURB": false,
+      "ROAD": false,
+      "WET_PATCH": false
+    }
+  },
+  "file_bytes": 5338800,
+  "sha256": "540b4ecf97cd88d909d36d71a1f708b6bdc5efda887ef8ac1a01ebdd98c9db50",
+  "extensions_used": [],
+  "extensions_required": [],
+  "bounds_scene_index": 0,
+  "world_bounds": {
+    "min": [
+      -2.0644058430565093,
+      -0.4999999721844972,
+      -1.5134968132438102
+    ],
+    "max": [
+      2.0644058430565093,
+      0.4999999721844972,
+      1.5134968132438102
+    ],
+    "size_xyz": [
+      4.128811686113019,
+      0.9999999443689944,
+      3.0269936264876205
+    ],
+    "center": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ground_center_y_up": [
+      0.0,
+      -0.4999999721844972,
+      0.0
+    ],
+    "mesh_instances": 1,
+    "units": "glTF meters, without claiming generated scale is physically calibrated"
+  },
+  "pivot_and_scale": {
+    "scene_origin": [
+      0,
+      0,
+      0
+    ],
+    "origin_to_ground_center": [
+      0.0,
+      -0.4999999721844972,
+      0.0
+    ],
+    "ground_centered_within_1mm": false,
+    "target_size_m_xyz": [
+      6.2,
+      0.3,
+      4.7
+    ],
+    "target_over_raw_scale_xyz": [
+      1.5016427174078404,
+      0.3000000166893026,
+      1.5526957040387483
+    ],
+    "uniform_scale_to_target_height": 0.3000000166893026,
+    "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+  },
+  "summary": {
+    "mesh_count": 1,
+    "primitive_count": 2,
+    "node_count": 1,
+    "skin_count": 0,
+    "animation_count": 0,
+    "vertex_count_sum_primitives": 116,
+    "triangle_count_sum_primitives": 188,
+    "degenerate_triangles": 0,
+    "material_count": 2,
+    "image_count": 2,
+    "images_fully_decoded": 2,
+    "accessors_decoded": 8
+  },
+  "skinning_data_validation": {
+    "status": "not_present",
+    "skins_validated": 0,
+    "instances_validated": 0,
+    "deformation_evaluated": false,
+    "animation_motion_verified": false
+  },
+  "status": "passed_implemented_checks",
+  "ready_for_visual_review": true
+}

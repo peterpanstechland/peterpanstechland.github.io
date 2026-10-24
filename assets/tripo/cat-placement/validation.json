@@ -1,0 +1,35 @@
+{
+  "revision": "cat-placement-v3",
+  "catPosition": [
+    -1.85,
+    0,
+    1.85
+  ],
+  "planterPosition": [
+    -2.35,
+    0,
+    2.1
+  ],
+  "tableSize": [
+    0.64,
+    0.96,
+    0.64
+  ],
+  "seatEdgeClearanceMeters": {
+    "left": 0.04486,
+    "right": 0.04486,
+    "front": 0.03458,
+    "back": 0.03458
+  },
+  "visualReview": [
+    "front",
+    "left-oblique",
+    "right-oblique"
+  ],
+  "placementCheck": "passed; all supported and idempotent",
+  "rawGlbModified": false,
+  "rigModified": false,
+  "published": false,
+  "build": "passed: en and zh-Hans",
+  "typecheck": "passed"
+}

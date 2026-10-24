@@ -1,0 +1,128 @@
+{
+  "asset_id": "09_trash_bin",
+  "display_size_m_xyz": [
+    0.7887747883796692,
+    0.949999988079071,
+    0.7649477124214172
+  ],
+  "working_bounds_native": [
+    [
+      -0.3943873941898346,
+      -0.3824738562107086,
+      0.0
+    ],
+    [
+      0.3943873941898346,
+      0.3824738562107086,
+      0.949999988079071
+    ]
+  ],
+  "original_sha256": "fecc8578fd6f8965e5ac9384b9919cf0653ed1c8528e8af447e4649096588a8e",
+  "rig": false,
+  "articulated": false,
+  "meshes": {
+    "tripo_node_1ae8df17-06d6-4fc6-a7f2-72f64265c855": {
+      "vertices": 3643,
+      "faces": 3761,
+      "boundary_edges": 2937,
+      "nonmanifold_edges": 2937,
+      "degenerate_faces": 0
+    }
+  },
+  "upward_surface_levels": [
+    [
+      0.875,
+      0.2128484785062028
+    ],
+    [
+      0.05,
+      0.2110070880407875
+    ],
+    [
+      0.025,
+      0.08665329697919333
+    ],
+    [
+      0.9,
+      0.06343244267691261
+    ],
+    [
+      0.925,
+      0.036015112789300474
+    ],
+    [
+      0.625,
+      0.02493026977754198
+    ],
+    [
+      0.6000000000000001,
+      0.019108519016299397
+    ],
+    [
+      0.15000000000000002,
+      0.017262232703956215
+    ],
+    [
+      0.225,
+      0.012592949589816271
+    ],
+    [
+      0.5750000000000001,
+      0.010000882582971826
+    ],
+    [
+      0.8500000000000001,
+      0.007803094227710972
+    ],
+    [
+      0.125,
+      0.006759894560673274
+    ],
+    [
+      0.0,
+      0.004668062363634817
+    ],
+    [
+      0.55,
+      0.004271538419288845
+    ],
+    [
+      0.75,
+      0.003396537504158914
+    ]
+  ],
+  "source_task_id": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
+  "changes": {
+    "cleanup": {
+      "tripo_node_1ae8df17-06d6-4fc6-a7f2-72f64265c855": {
+        "before": {
+          "vertices": 3643,
+          "faces": 3761,
+          "boundary_edges": 2937,
+          "nonmanifold_edges": 2937,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 1762,
+          "faces": 3759,
+          "boundary_edges": 11,
+          "nonmanifold_edges": 22,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "notes": [
+      "Removed torn ground scraps, bottom spikes and the broken rear flap; rebuilt a level bottom and solid rear panel. Rusty blue front, lid and handles retained.",
+      "Retained source UV/color detail on surviving geometry; used Blender for topology cleanup and shading correction. Original downloads remain untouched."
+    ],
+    "local_parts": [
+      "LOCAL_bin_closed_bottom",
+      "LOCAL_bin_rear_panel"
+    ]
+  },
+  "output_sha256": "3d7838db398492c0ebaa4118f373069e49168bb0a2fe76ae205f89ebfd7ec1ef",
+  "output_glb": "assets/tripo/blender-garage/models/09_trash_bin.glb",
+  "credits_spent": 0,
+  "visual_acceptance": "accepted_with_notes",
+  "visual_review": "Front and back neutral-light renders inspected. Generated fine details remain approximate; local replacement parts are named LOCAL_."
+}

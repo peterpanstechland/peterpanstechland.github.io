@@ -1,0 +1,11 @@
+{
+  "revision": "cyber-door-v2",
+  "design": "Clipped black metal access terminal, shutter pictogram, cyan edge light, magenta command chevron",
+  "geometry": "Local sign hardware only; original GLBs unchanged",
+  "mount": "Original SHUTTER_GUIDE_LEFT bracket retained",
+  "interaction": "Clicked panel to fully open, clicked again to fully close; action and arrow reverse correctly",
+  "browserErrors": [],
+  "published": false,
+  "build": "passed: en and zh-Hans",
+  "typecheck": "passed"
+}

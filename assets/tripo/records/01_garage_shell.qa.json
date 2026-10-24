@@ -1,0 +1,418 @@
+{
+  "schema_version": 1,
+  "asset_id": "01_garage_shell",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\01-garage-shell-de47b250\\model.glb",
+  "inspected_at_utc": "2026-10-20T07:19:07.851517+00:00",
+  "tool": "tools/inspect_tripo_glb.py",
+  "scope": "GLB structure, decoded accessor data, static scene bounds, material references, full image decoding",
+  "visual_review": "NOT_PERFORMED",
+  "qa_approved": false,
+  "errors": [],
+  "warnings": [],
+  "unsupported": [],
+  "limitations": [
+    "This tool is not the Khronos glTF Validator and does not certify visual quality, topology, UV appearance, or animation behavior.",
+    "Y-up is the glTF convention; the intended front (+Z), upright appearance, and functional pivot require visual inspection.",
+    "Bounds describe stored static mesh positions with node transforms; skins, morph weights, animation, and GPU instancing are not evaluated."
+  ],
+  "accessors": [
+    {
+      "index": 0,
+      "type": "SCALAR",
+      "component_type": 5125,
+      "count": 52440,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        14130
+      ]
+    },
+    {
+      "index": 1,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 14131,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.5,
+        -0.2981489300727844,
+        -0.45727577805519104
+      ],
+      "decoded_max": [
+        0.5,
+        0.2981489300727844,
+        0.45727577805519104
+      ]
+    },
+    {
+      "index": 2,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 14131,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        1.0,
+        1.0
+      ]
+    },
+    {
+      "index": 3,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 14131,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9999992251396179,
+        -0.9999996423721313,
+        -0.9999984502792358
+      ],
+      "decoded_max": [
+        0.9999998211860657,
+        0.9999997019767761,
+        0.9999998807907104
+      ]
+    }
+  ],
+  "images": [
+    {
+      "index": 0,
+      "name": "Color_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "bytes": 984812,
+      "sha256": "7f6e569063abd40c0262b9472900e796eddb9af99060ce8227f60fcf8fbb1e62",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        2,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 1,
+      "name": "ORM_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "bytes": 736075,
+      "sha256": "3202d5527390e680246b14bd7194ccf8d3a3f261b39428138bffd1901d2bd2e6",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        165,
+        0,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        243,
+        255
+      ]
+    },
+    {
+      "index": 2,
+      "name": "NormalGL_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "bytes": 1176193,
+      "sha256": "26a1c93f10f7ee473db8d963de09f15c51dc2a1678294bb9c82fe4461797f5e0",
+      "declared_mime_type": "image/png",
+      "decoded": true,
+      "format": "PNG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        7,
+        5,
+        162,
+        255
+      ],
+      "rgba_channel_max": [
+        248,
+        247,
+        255,
+        255
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "index": 0,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 1
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 2
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "index": 0,
+      "name": "tripo_material_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "texture_slots": [
+        {
+          "slot": "pbrMetallicRoughness.baseColorTexture",
+          "texture": 0,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+          "texture": 1,
+          "texcoord": 0
+        },
+        {
+          "slot": "normalTexture",
+          "texture": 2,
+          "texcoord": 0
+        }
+      ],
+      "has_base_color_texture": true,
+      "double_sided": false,
+      "alpha_mode": "OPAQUE"
+    }
+  ],
+  "meshes": [
+    {
+      "index": 0,
+      "name": "tripo_mesh_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 14131,
+          "index_count": 52440,
+          "mode": 4,
+          "triangles": 17480,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                1.0,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.5,
+            -0.2981489300727844,
+            -0.45727577805519104
+          ],
+          "local_bounds_max": [
+            0.5,
+            0.2981489300727844,
+            0.45727577805519104
+          ]
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "index": 0,
+      "name": "tripo_node_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "mesh": 0,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        13.41611385345459,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        13.41611385345459,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        13.41611385345459,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "skins": [],
+  "skin_instances": [],
+  "manifest": {
+    "path": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\PeterPansTechland_Tripo_Generation_Pack\\manifest.json",
+    "title": "车库建筑外壳",
+    "target_size_m_xyz": [
+      4.5,
+      3.2,
+      3.5
+    ],
+    "expected_nodes_after_blender": [
+      "ROOF_MAIN",
+      "GARAGE_FRAME",
+      "SIGN_MOUNT"
+    ],
+    "expected_nodes_found_exactly": {
+      "ROOF_MAIN": false,
+      "GARAGE_FRAME": false,
+      "SIGN_MOUNT": false
+    }
+  },
+  "file_bytes": 3561288,
+  "sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116",
+  "extensions_used": [],
+  "extensions_required": [],
+  "bounds_scene_index": 0,
+  "world_bounds": {
+    "min": [
+      -6.708056926727295,
+      -3.999999991142147,
+      -6.134863900815475
+    ],
+    "max": [
+      6.708056926727295,
+      3.999999991142147,
+      6.134863900815475
+    ],
+    "size_xyz": [
+      13.41611385345459,
+      7.999999982284294,
+      12.26972780163095
+    ],
+    "center": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "ground_center_y_up": [
+      0.0,
+      -3.999999991142147,
+      0.0
+    ],
+    "mesh_instances": 1,
+    "units": "glTF meters, without claiming generated scale is physically calibrated"
+  },
+  "pivot_and_scale": {
+    "scene_origin": [
+      0,
+      0,
+      0
+    ],
+    "origin_to_ground_center": [
+      0.0,
+      -3.999999991142147,
+      0.0
+    ],
+    "ground_centered_within_1mm": false,
+    "target_size_m_xyz": [
+      4.5,
+      3.2,
+      3.5
+    ],
+    "target_over_raw_scale_xyz": [
+      0.3354175470746523,
+      0.40000000088578536,
+      0.28525490186789343
+    ],
+    "uniform_scale_to_target_height": 0.40000000088578536,
+    "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+  },
+  "summary": {
+    "mesh_count": 1,
+    "primitive_count": 1,
+    "node_count": 1,
+    "skin_count": 0,
+    "animation_count": 0,
+    "vertex_count_sum_primitives": 14131,
+    "triangle_count_sum_primitives": 17480,
+    "degenerate_triangles": 0,
+    "material_count": 1,
+    "image_count": 3,
+    "images_fully_decoded": 3,
+    "accessors_decoded": 4
+  },
+  "skinning_data_validation": {
+    "status": "not_present",
+    "skins_validated": 0,
+    "instances_validated": 0,
+    "deformation_evaluated": false,
+    "animation_motion_verified": false
+  },
+  "status": "passed_implemented_checks",
+  "ready_for_visual_review": true,
+  "provider_preview_review": {
+    "basis": "Provider preview.png visually inspected; not a browser orbit/topology acceptance",
+    "preview_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\01-garage-shell-de47b250\\preview.png",
+    "preview_sha256": "9040ce886163451a4729d8272c66ed817bd35e27df3b495ae188c1461940c3da",
+    "observations": [
+      "Flat-roof garage shell and visibly open front entrance are present.",
+      "Left-front edge retains a planter/foliage, a pink traffic cone, and other source-crop street details. These have not been removed.",
+      "Front-upper corrugated strip remains part of the shell output; inspect whether it overlaps the separately generated animated shutter.",
+      "Generated floor/front edge is included in the shell, so later street-base assembly needs overlap review."
+    ],
+    "geometry_limitations": [
+      "The output contains one mesh and one node; roof, frame, and sign mount are not separately named or independently removable nodes.",
+      "No mesh cleanup, prop removal, axis normalization, or pivot correction was performed."
+    ],
+    "front_axis": "Possibly +X; not established by a preview without axes. Browser confirmation required.",
+    "visual_acceptance": "NOT_APPROVED"
+  }
+}

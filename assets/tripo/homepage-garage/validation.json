@@ -1,0 +1,22 @@
+{
+  "sourceCommit": "d7495a69",
+  "mergeCommit": "9100cdafce59cdfbf814044975bf55b91a1c4e13",
+  "pullRequest": "https://github.com/peterpanstechland/peterpanstechland.github.io/pull/41",
+  "deployment": "https://github.com/peterpanstechland/peterpanstechland.github.io/actions/runs/39989869021",
+  "status": "success",
+  "homepages": [
+    "https://peterpanstechland.github.io/",
+    "https://peterpanstechland.github.io/zh-Hans/"
+  ],
+  "optimizedScene": "loading-v2",
+  "sharedComponent": "src/components/GarageHero",
+  "builtLocales": [
+    "en",
+    "zh-Hans"
+  ],
+  "typecheck": "passed",
+  "desktopVisual": "passed",
+  "mobile390Visual": "passed",
+  "oldHomepageSceneRemoved": true,
+  "editorialLinksRetained": true
+}

@@ -1,0 +1,7 @@
+export async function setupFilm({THREE,scene,camera,controls,renderer,setShutterOpen,requestFrame}){
+ const b=document.createElement('button');b.textContent='录制全景 12 秒';b.style='position:fixed;top:15px;right:15px;z-index:99999;padding:20px;background:#ffe64b';document.body.append(b);
+ const canvas=document.createElement('canvas');canvas.width=1920;canvas.height=1080;const g=canvas.getContext('2d');let start=0,rec,done=false;
+ b.onclick=()=>{setShutterOpen(false);controls.enableDamping=false;controls.minDistance=.5;controls.maxDistance=40;start=performance.now();const chunks=[];rec=new MediaRecorder(canvas.captureStream(30),{mimeType:'video/webm;codecs=vp9',videoBitsPerSecond:15000000});rec.ondataavailable=e=>chunks.push(e.data);rec.onstop=async()=>{await fetch('/promo/orbit-upload',{method:'POST',body:new Blob(chunks)});b.textContent='全景录制完成';};rec.start(1000);b.disabled=true;requestFrame();};
+ window.filmBefore=()=>{if(!rec||done)return;const t=Math.min(1,(performance.now()-start)/12000);const angle=-.4+t*Math.PI*1.6;camera.position.set(Math.sin(angle)*13.5,5.6+Math.sin(t*Math.PI)*.7,Math.cos(angle)*13.5);controls.target.set(0,2.4,.1);camera.fov=42;camera.updateProjectionMatrix();controls.update();};
+ window.filmAfter=()=>{if(!rec||done)return;g.drawImage(renderer.domElement,0,0,1920,1080);const t=(performance.now()-start)/1000;b.textContent='录制全景 '+t.toFixed(1);if(t>=12){done=true;rec.stop();}else requestFrame();};
+}

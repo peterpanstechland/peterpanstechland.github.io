@@ -1,0 +1,26 @@
+{
+  "stage": "before_tripo_integration",
+  "branch": "codex/cyber-maker-garage-assets",
+  "typecheck": {
+    "exit_code": 0,
+    "command": "npm run typecheck"
+  },
+  "build": {
+    "preserved_outputs": [
+      "homepage",
+      "blog",
+      "challenge",
+      "docs/projects",
+      "docs/guides",
+      "docs/hackathons"
+    ],
+    "exit_code": 0,
+    "command": "npm run build",
+    "locales": [
+      "en",
+      "zh-Hans"
+    ]
+  },
+  "deployment_performed": false,
+  "generated_assets_validated": false
+}

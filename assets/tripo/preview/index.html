@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tripo 原始资产验收</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; color: #e9e9e9; background: #181a1d; }
+    body { margin: 0; }
+    main { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr) 340px; }
+    #stage { position: relative; min-height: 640px; height: 100vh; overflow: hidden; background: #272a2f; }
+    canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+    #status { position: absolute; left: 20px; top: 20px; right: 20px; padding: 12px 16px; border: 1px solid #5b6067; border-radius: 8px; background: #17191ee8; font-size: 14px; pointer-events: none; }
+    #stage[data-state="ready"] #status { border-color: #719f82; }
+    #stage[data-state="error"] #status, #stage[data-state="ready-with-errors"] #status { border-color: #de8b6d; color: #ffd0bf; }
+    aside { padding: 24px 22px; overflow-wrap: anywhere; overflow-y: auto; max-height: 100vh; }
+    h1 { font-size: 20px; margin: 0 0 8px; }
+    h2 { font-size: 14px; color: #c8cbd0; margin: 24px 0 10px; }
+    p { font-size: 13px; line-height: 1.65; color: #adb4be; }
+    code { font-size: 12px; color: #cbd9e5; }
+    .views { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+    button { border: 1px solid #525862; border-radius: 6px; padding: 10px 6px; background: #2a2f36; color: inherit; cursor: pointer; font: inherit; font-size: 13px; }
+    button:hover, button:focus-visible { background: #414951; outline-color: #a7cfef; }
+    button:disabled { opacity: .4; cursor: wait; }
+    [hidden] { display: none !important; }
+    label { display: flex; gap: 8px; align-items: center; margin-top: 16px; font-size: 13px; }
+    .field { display: block; margin-top: 12px; }
+    select { width: 100%; margin-top: 6px; padding: 8px; border: 1px solid #525862; border-radius: 6px; color: inherit; background: #2a2f36; font: inherit; font-size: 13px; }
+    input[type="range"] { width: 100%; margin: 12px 0; accent-color: #9bc6de; }
+    .actions { display: flex; gap: 8px; margin-top: 10px; }
+    .actions > button { flex: 1; }
+    output { font-variant-numeric: tabular-nums; }
+    dl { display: grid; grid-template-columns: 90px minmax(0,1fr); margin: 0; gap: 9px 12px; font-size: 13px; line-height: 1.5; }
+    dt { color: #929da9; } dd { margin: 0; font-variant-numeric: tabular-nums; white-space: pre-line; }
+    #issues { color: #ffd0bf; }
+    .hint { position: absolute; bottom: 18px; left: 20px; color: #bac0c9; font-size: 12px; pointer-events: none; }
+    @media (max-width: 760px) { main { display: block; } #stage { min-height: 380px; height: 64vh; height: 64svh; } aside { max-height: none; padding: 20px; } #status { top: 12px; left: 12px; right: 12px; } .views { grid-template-columns: repeat(6,1fr); } }
+    @media (max-width: 420px) { .views { grid-template-columns: repeat(3,1fr); } }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"./vendor/three/build/three.module.js","three/addons/":"./vendor/three/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <main>
+    <section id="stage" data-state="initializing" aria-label="真实 GLB 模型交互预览">
+      <div id="status" role="status" aria-live="polite">正在初始化本地 3D 查看器…</div>
+      <div class="hint">拖动旋转 · 滚轮 / 双指缩放 · 右键平移</div>
+    </section>
+    <aside>
+      <h1>Tripo 原始资产验收</h1>
+      <p>仅显示指定的真实 GLB。模型在查看器中等比缩放至最大边长 4，底部居中；原文件及其坐标、尺寸均保留。</p>
+      <h2>视角</h2>
+      <div class="views">
+        <button disabled data-view="front">正面 +Z</button><button disabled data-view="back">背面</button>
+        <button disabled data-view="left">左侧</button><button disabled data-view="right">右侧</button>
+        <button disabled data-view="top">顶部</button><button disabled data-view="three-quarter">3/4</button>
+      </div>
+      <label><input type="checkbox" id="axes">显示坐标轴（红 X / 绿 Y / 蓝 Z）</label>
+      <h2>来源</h2><code id="source">—</code>
+      <h2>解析结果</h2>
+      <dl>
+        <dt>Mesh</dt><dd id="meshes">—</dd><dt>三角形</dt><dd id="triangles">—</dd>
+        <dt>纹理</dt><dd id="textures">—</dd><dt>蒙皮 skins</dt><dd id="skins">—</dd>
+        <dt>骨骼</dt><dd id="bones">—</dd><dt>动画</dt><dd id="animations">—</dd>
+      </dl>
+      <h2>骨骼与动画验收</h2>
+      <p id="rig-summary">加载后按 GLB 实际内容显示。</p>
+      <section id="rig-panel" hidden aria-label="骨骼姿态测试">
+        <label><input type="checkbox" id="skeleton">显示骨架与选中关节局部坐标轴</label>
+        <label class="field" for="bone-select">测试骨骼<select id="bone-select"></select></label>
+        <label class="field" for="bone-axis">局部旋转轴
+          <select id="bone-axis"><option value="x">X（红色）</option><option value="y">Y（绿色）</option><option value="z">Z（蓝色）</option></select>
+        </label>
+        <label for="bone-angle">相对原姿态：<output id="bone-angle-value" for="bone-angle">0°</output></label>
+        <input id="bone-angle" type="range" min="-20" max="20" value="0" step="1" aria-label="选中骨骼旋转角度">
+        <div class="actions"><button id="pose-reset">复位原始姿态</button></div>
+        <p>小幅旋转仅用于检查蒙皮变形，不是 GLB 内置动画。每次仅测试一个关节；操作时停止动画播放。</p>
+      </section>
+      <section id="animation-panel" hidden aria-label="GLB 内置动画播放">
+        <label class="field" for="animation-select">GLB 内置动画<select id="animation-select"><option value="">请选择动画</option></select></label>
+        <div class="actions"><button id="animation-play" disabled>播放所选动画</button><button id="animation-stop" disabled>停止并复位</button></div>
+        <p id="animation-status" role="status" aria-live="polite">未播放。</p>
+      </section>
+      <h2>原始世界坐标边界</h2>
+      <dl>
+        <dt>尺寸 X/Y/Z</dt><dd id="size">—</dd><dt>最小点</dt><dd id="minimum">—</dd>
+        <dt>最大点</dt><dd id="maximum">—</dd><dt>显示缩放</dt><dd id="scale">—</dd>
+      </dl>
+      <p>尺寸为 GLB 内的原始坐标单位。蒙皮与动画数量来自 GLB；仅有 Mesh 不代表已有骨骼绑定。不会自动播放动画。</p>
+      <p id="issues" role="alert"></p>
+    </aside>
+  </main>
+  <script>
+    // Also make module/dependency failures visible when imports cannot initialize.
+    window.addEventListener('error', function (event) {
+      const stage = document.getElementById('stage');
+      if (stage.dataset.state !== 'ready') {
+        stage.dataset.state = 'error';
+        document.getElementById('status').textContent = '查看器错误：' + (event.message || '模块加载失败。请确认本地依赖和 HTTP 服务可用。');
+      }
+    }, true);
+    window.setTimeout(function () {
+      const stage = document.getElementById('stage');
+      if (stage.dataset.state === 'initializing') {
+        stage.dataset.state = 'error';
+        document.getElementById('status').textContent = '查看器模块未能加载。请确认 vendor/three 已复制完整并通过 HTTP 打开。';
+      }
+    }, 30000);
+  </script>
+  <script type="module" src="./review.js"></script>
+</body>
+</html>

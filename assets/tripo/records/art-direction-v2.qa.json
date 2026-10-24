@@ -1,0 +1,84 @@
+{
+  "revision": "art-direction-v2",
+  "date": "2026-10-20",
+  "status": "implemented_and_browser_reviewed_pending_user_acceptance",
+  "reference_images": [
+    "PeterPansTechland_Tripo_Generation_Pack/source_art/detailed_concept_reference.jpg",
+    "PeterPansTechland_Tripo_Generation_Pack/source_art/landing_reference_only.jpg"
+  ],
+  "changes": [
+    "Closer, lower three-quarter camera and tighter scene framing.",
+    "Dark night environment, warm interior lighting, pink/cyan practical lights and calibrated PBR roughness floors.",
+    "Exact two-line Peter Pan's / TECHLAND lettering and vertical Shenzhen sign; no invented portrait.",
+    "Real planar scene reflection with a locally authored asphalt/puddle shader and an abstract distant city backdrop.",
+    "Three additional placements of the existing real plants GLB, sharing original geometry and textures; rooftop placements require the garage shell to load.",
+    "Reference-aligned hero typography and responsive layout on the independent preview route.",
+    "Chinese model-detail links now retain the /zh-Hans locale."
+  ],
+  "provenance": {
+    "new_tripo_tasks": 0,
+    "new_credits": 0,
+    "project_billed_credits_unchanged": 385,
+    "last_account_balance_snapshot": 345,
+    "balance_was_not_queried_again": true,
+    "all_12_static_glb_hashes_match_sources_and_production_record": true,
+    "all_15_raw_stage_glb_hashes_match_production_record": true,
+    "locally_authored_elements_are_presentation_graphics_and_lighting": true,
+    "rejected_tools_zone_remains_unavailable": true
+  },
+  "verification": {
+    "typecheck": {"exit_code": 0, "log": "site-polish-typecheck.log"},
+    "production_build": {
+      "exit_code": 0,
+      "locales": ["en", "zh-Hans"],
+      "log": "site-polish-build.log",
+      "warnings": [
+        "Existing vscode-languageserver-types dynamic require warning.",
+        "Webpack cache snapshot warning.",
+        "Docusaurus update-check config access warning."
+      ]
+    },
+    "desktop": {
+      "url": "http://127.0.0.1:4173/zh-Hans/maker-garage-preview/",
+      "loaded": 12,
+      "total": 13,
+      "unavailable": ["07_tools_zone"],
+      "door_closed_progress": "0.0000",
+      "door_open_progress": "1.0000",
+      "cat_wave_toggle": "passed",
+      "local_effects_toggle": "passed",
+      "chinese_sign_detail_href": "http://127.0.0.1:4173/zh-Hans/docs/about",
+      "console_errors": [],
+      "screenshot": "garage-polish-v2.jpg",
+      "screenshot_scope": "Actual page header, hero and destination links; unrelated footer whitespace excluded."
+    },
+    "mobile_browser_viewport": {
+      "width": 390,
+      "height": 844,
+      "loaded": 12,
+      "total": 13,
+      "main_client_width": 382,
+      "main_scroll_width": 382,
+      "iframe_client_width": 382,
+      "document_scroll_width": 419,
+      "max_texture_edge": 512,
+      "estimated_rgba_texture_mib": 51.60,
+      "texture_estimate_excludes_render_targets": true,
+      "reflection_render_target": [256, 256],
+      "bloom_enabled": false,
+      "screenshot": "garage-polish-v2-mobile.jpg",
+      "console_observation": "Two unattributed MutationObserver.observe Node type errors appeared around viewport reset/reload. No MutationObserver call exists in preview source; source attribution is unavailable. All 12 assets rendered and layout checks passed. This is not claimed as an error-free mobile console.",
+      "viewport_override_reset": true,
+      "physical_phone_tested": false
+    },
+    "navigation": "All five destination links resolve to existing en and zh-Hans routes.",
+    "source_review": "Independent read-only review completed; Chinese detail-link locale issue fixed and verified in browser."
+  },
+  "remaining_limits": [
+    "Tools/workbench asset remains visually rejected and absent; interior density still differs from the reference.",
+    "Existing generated mesh distortions, small pseudo-text and merged details are not resolved by this presentation pass.",
+    "Existing global hidden skip-link causes document scrollWidth 419 at viewport 390; preview main and iframe have no horizontal overflow.",
+    "Reduced-motion system preference and real mobile hardware were not newly exercised.",
+    "No merge, deployment or paid retry."
+  ]
+}

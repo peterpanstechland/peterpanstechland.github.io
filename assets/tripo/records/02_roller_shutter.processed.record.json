@@ -1,0 +1,1724 @@
+{
+  "created_at_utc": "2026-10-20T07:39:44.973770+00:00",
+  "source_task_id": "60038920-5601-4de0-9202-b4620bd5b1c8",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\02-roller-shutter-60038920\\model.glb",
+  "source_sha256": "cac9f9a5f0ce228e1a2de80a87518389b56022c2c8fd682a631c77daad2e9a4e",
+  "processed_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\processed\\02_roller_shutter.glb",
+  "processed_sha256": "efa27b81062656c3a6a91e80be47e64cfbf010fb95a152e2d2048b6864fb5cf9",
+  "processor": "tools/prepare_roller_shutter.py",
+  "operations": [
+    "Bake original node transform",
+    "Rotate Y -90 degrees: source +X forward to +Z",
+    "Normalize full real mesh to 3.8 x 2.55 x 0.16 meters and bottom center",
+    "Partition every source triangle with linear UV/normal interpolation",
+    "Close safe simple cut contours using locally authored planar caps",
+    "Center each part pivot and publish runtime roll metadata"
+  ],
+  "source_to_target_axis_scale_after_rotation": [
+    1.8849906030499077,
+    1.4166666843264535,
+    0.29718973459148285
+  ],
+  "source_forward_evidence": "Raw X is the thin axis and provider preview shows a frontal shutter; final orientation awaits browser check",
+  "animation_source": "No animation baked; intended opening is runtime rigid transforms of real separated slat meshes",
+  "runtime_contract": {
+    "top": 2.58,
+    "openingTop": 2.2,
+    "bottom": 0.0,
+    "radius": 0.38,
+    "travel": 2.58,
+    "slatCount": 26,
+    "slatHeight": 0.08461538461538462,
+    "curtainWidth": 3.24,
+    "frontAxis": "+Z",
+    "rollAxis": "X",
+    "rollRotationSign": -1,
+    "topMeaning": "Front vertical tangent height of the rearward roll; coil minimum Y equals openingTop",
+    "runtimePath": "For c=closedY+travel*open: if c<=top use Y=c and Z=closedZ; otherwise theta=(c-top)/radius, Y=top+radius*sin(theta), Z=closedZ-radius*(1-cos(theta)), rotationX=-theta. Preserve closedX. No Y scaling.",
+    "closedBounds": {
+      "min": [
+        -1.9,
+        0.0,
+        -0.08
+      ],
+      "max": [
+        1.9,
+        2.55,
+        0.08
+      ]
+    }
+  },
+  "partition_validation": {
+    "source_triangles": 8754,
+    "clipped_source_surface_triangles": 15402,
+    "local_cap_triangles": 20188,
+    "source_surface_area_m2": 21.35678500514517,
+    "partition_surface_area_m2": 21.35678500514517,
+    "max_per_source_triangle_area_error_m2": 6.245004513516506e-17,
+    "all_source_triangle_areas_preserved": true,
+    "unallocated_source_triangles": 0,
+    "embedded_texture_bytes_unchanged": true,
+    "source_boundary_edges_after_position_weld": 24,
+    "source_nonmanifold_edges_after_position_weld": 20,
+    "position_weld_tolerance_m": 1e-06,
+    "uv_method": "Source UV values interpolated linearly at every plane intersection; original material and all source images preserved",
+    "central_side_caps": {
+      "source_surface_boundary_edges": 570,
+      "source_surface_nonmanifold_edges": 11,
+      "caps": [
+        {
+          "axis": 0,
+          "coordinate": -1.62,
+          "boundary_vertices": 21,
+          "triangles": 19
+        },
+        {
+          "axis": 0,
+          "coordinate": -1.62,
+          "boundary_vertices": 246,
+          "triangles": 244
+        },
+        {
+          "axis": 0,
+          "coordinate": 1.62,
+          "boundary_vertices": 19,
+          "triangles": 17
+        },
+        {
+          "axis": 0,
+          "coordinate": 1.62,
+          "boundary_vertices": 272,
+          "triangles": 270
+        }
+      ],
+      "uncapped_cut_contours": []
+    },
+    "uncapped_cut_contours": [
+      {
+        "part": "SHUTTER_SLAT_13",
+        "axis": 1,
+        "coordinate": 1.1846153846153846,
+        "reason": "Nested contours need hole-aware triangulation; left uncapped",
+        "contours": 2
+      },
+      {
+        "part": "SHUTTER_SLAT_14",
+        "axis": 1,
+        "coordinate": 1.1846153846153846,
+        "reason": "Nested contours need hole-aware triangulation; left uncapped",
+        "contours": 2
+      },
+      {
+        "part": "SHUTTER_SLAT_21",
+        "axis": 1,
+        "coordinate": 1.8615384615384616,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 246
+      },
+      {
+        "part": "SHUTTER_SLAT_22",
+        "axis": 1,
+        "coordinate": 1.8615384615384616,
+        "reason": "Open/branched contour left uncapped",
+        "boundary_vertices": 246
+      }
+    ]
+  },
+  "runtime_path_validation": {
+    "status": "passed_cpu_rigid_transform_checks",
+    "sample_count": 9,
+    "source_meshes_not_scaled_during_motion": true,
+    "fixed_parts_not_transformed": true,
+    "samples": [
+      {
+        "progress": 0.0,
+        "assembly_min": [
+          -1.9000000005960465,
+          -1.203555324846839e-09,
+          -0.08000000140768566
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          2.5499999708347016,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          -1.203555324846839e-09,
+          -0.07848894413470411
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          2.2000000012035557,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "progress": 0.125,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.08000000140768566
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          2.5499999708347016,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          0.3224999987964447,
+          -0.07848894413470411
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          2.5225000012035554,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "progress": 0.25,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.15347733289293028
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          2.864479029955291,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          0.6449999987964447,
+          -0.15347733289293028
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          2.864479029955291,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -0.5860323886639683,
+          -0.0
+        ]
+      },
+      {
+        "progress": 0.375,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.38779308582238425
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          3.0322132498129393,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          0.9674999987964448,
+          -0.38779308582238425
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          3.0322132498129393,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -1.4347165991902848,
+          -0.0
+        ]
+      },
+      {
+        "progress": 0.5,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.7144930884092751
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          3.0178968952789993,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          1.2899999987964448,
+          -0.7144930884092751
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          3.0178968952789993,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -2.2834008097166,
+          -0.0
+        ]
+      },
+      {
+        "progress": 0.625,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.8388708164547574
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          3.0109538825494697,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          1.6124999987964448,
+          -0.8388708164547574
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          3.0109538825494697,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -3.1320850202429154,
+          -0.0
+        ]
+      },
+      {
+        "progress": 0.75,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.8323646594440742
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          3.0121412747100385,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          1.9349999987964448,
+          -0.8323646594440742
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          3.0121412747100385,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -3.9807692307692326,
+          -0.0
+        ]
+      },
+      {
+        "progress": 0.875,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.832918377102081
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          3.0179405716415264,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          2.137385949854419,
+          -0.832918377102081
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          3.0179405716415264,
+          0.0630782460265795
+        ],
+        "rotation_x_range_radians": [
+          -4.829453441295548,
+          -0.0
+        ]
+      },
+      {
+        "progress": 1.0,
+        "assembly_min": [
+          -1.9000000005960465,
+          0.002477902811020005,
+          -0.832849392512245
+        ],
+        "assembly_max": [
+          1.9000000005960465,
+          3.012898048241222,
+          0.07999999684419204
+        ],
+        "moving_min": [
+          -1.6200000047683716,
+          2.141708962489479,
+          -0.832849392512245
+        ],
+        "moving_max": [
+          1.6200000047683716,
+          3.012898048241222,
+          0.0605594562617063
+        ],
+        "rotation_x_range_radians": [
+          -5.678137651821864,
+          -0.11133603238866357
+        ]
+      }
+    ],
+    "collision_validation": "Not performed; bounds alone do not establish collision-free motion",
+    "visual_review": "Pending browser opening and closing"
+  },
+  "clipping_math_fixtures": {
+    "status": "passed",
+    "cases": [
+      "Successive triangle cuts preserve total area",
+      "Intersection UVs match independent linear attribute function",
+      "Coplanar triangle has one owner",
+      "Planar cap preserves area and requested outward winding"
+    ]
+  },
+  "components": [
+    {
+      "name": "SHUTTER_GUIDE_LEFT",
+      "node": 1,
+      "source_surface_triangles": 1546,
+      "local_cap_triangles": 263,
+      "closed_bounds": {
+        "min": [
+          -1.9,
+          0.005600557882588175,
+          -0.0784352616006937
+        ],
+        "max": [
+          -1.62,
+          2.549761770743847,
+          0.08
+        ]
+      },
+      "pivot": [
+        -1.76,
+        1.2776811643132175,
+        0.0007823691996531532
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 273,
+        "source_surface_nonmanifold_edges": 6,
+        "caps": [
+          {
+            "axis": 0,
+            "coordinate": -1.62,
+            "boundary_vertices": 21,
+            "triangles": 19
+          },
+          {
+            "axis": 0,
+            "coordinate": -1.62,
+            "boundary_vertices": 246,
+            "triangles": 244
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 0
+      }
+    },
+    {
+      "name": "SHUTTER_GUIDE_RIGHT",
+      "node": 2,
+      "source_surface_triangles": 1708,
+      "local_cap_triangles": 287,
+      "closed_bounds": {
+        "min": [
+          1.62,
+          0.0024778736457218287,
+          -0.07859463791694486
+        ],
+        "max": [
+          1.9,
+          2.55,
+          0.07895807515745544
+        ]
+      },
+      "pivot": [
+        1.76,
+        1.2762389368228608,
+        0.00018171862025528895
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 297,
+        "source_surface_nonmanifold_edges": 3,
+        "caps": [
+          {
+            "axis": 0,
+            "coordinate": 1.62,
+            "boundary_vertices": 19,
+            "triangles": 17
+          },
+          {
+            "axis": 0,
+            "coordinate": 1.62,
+            "boundary_vertices": 272,
+            "triangles": 270
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 0
+      }
+    },
+    {
+      "name": "SHUTTER_HOUSING",
+      "node": 3,
+      "source_surface_triangles": 946,
+      "local_cap_triangles": 464,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          2.2,
+          -0.08
+        ],
+        "max": [
+          1.62,
+          2.5325064586927786,
+          0.07801715569292945
+        ]
+      },
+      "pivot": [
+        0.0,
+        2.3662532293463894,
+        -0.0009914221535352735
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 202,
+        "source_surface_nonmanifold_edges": 2,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 2.2,
+            "boundary_vertices": 198,
+            "triangles": 196
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 268
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_00",
+      "node": 4,
+      "source_surface_triangles": 680,
+      "local_cap_triangles": 486,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.0,
+          -0.07806629247926623
+        ],
+        "max": [
+          1.62,
+          0.08461538461538462,
+          0.06130859064629297
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.04230769230769231,
+        -0.008378850916486633
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 274,
+        "source_surface_nonmanifold_edges": 2,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.08461538461538462,
+            "boundary_vertices": 270,
+            "triangles": 268
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 218
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_01",
+      "node": 5,
+      "source_surface_triangles": 540,
+      "local_cap_triangles": 816,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.08461538461538462,
+          -0.07370875895412883
+        ],
+        "max": [
+          1.62,
+          0.16923076923076924,
+          0.06268190271639604
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.12692307692307692,
+        -0.005513428118866397
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 542,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.08461538461538462,
+            "boundary_vertices": 270,
+            "triangles": 268
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.16923076923076924,
+            "boundary_vertices": 272,
+            "triangles": 270
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 278
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_02",
+      "node": 6,
+      "source_surface_triangles": 516,
+      "local_cap_triangles": 764,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.16923076923076924,
+          -0.071031277720487
+        ],
+        "max": [
+          1.62,
+          0.25384615384615383,
+          0.06307824290101109
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.21153846153846154,
+        -0.003976517409737951
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 497,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.16923076923076924,
+            "boundary_vertices": 272,
+            "triangles": 270
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.25384615384615383,
+            "boundary_vertices": 225,
+            "triangles": 223
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 271
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_03",
+      "node": 7,
+      "source_surface_triangles": 352,
+      "local_cap_triangles": 668,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.25384615384615383,
+          -0.07118753073699488
+        ],
+        "max": [
+          1.62,
+          0.3384615384615385,
+          0.030840824226938818
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.29615384615384616,
+        -0.02017335325502803
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 428,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.25384615384615383,
+            "boundary_vertices": 225,
+            "triangles": 223
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.3384615384615385,
+            "boundary_vertices": 203,
+            "triangles": 201
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 244
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_04",
+      "node": 8,
+      "source_surface_triangles": 390,
+      "local_cap_triangles": 688,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.3384615384615385,
+          -0.07117801413957744
+        ],
+        "max": [
+          1.62,
+          0.42307692307692313,
+          0.033285474662896004
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.3807692307692308,
+        -0.01894626973834072
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 422,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.3384615384615385,
+            "boundary_vertices": 203,
+            "triangles": 201
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.42307692307692313,
+            "boundary_vertices": 219,
+            "triangles": 217
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 270
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_05",
+      "node": 9,
+      "source_surface_triangles": 367,
+      "local_cap_triangles": 685,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.42307692307692313,
+          -0.07109821777975649
+        ],
+        "max": [
+          1.62,
+          0.5076923076923077,
+          0.030902211077269807
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.4653846153846154,
+        -0.02009800335124334
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 424,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.42307692307692313,
+            "boundary_vertices": 219,
+            "triangles": 217
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.5076923076923077,
+            "boundary_vertices": 205,
+            "triangles": 203
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 265
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_06",
+      "node": 10,
+      "source_surface_triangles": 359,
+      "local_cap_triangles": 665,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.5076923076923077,
+          -0.07107332010112749
+        ],
+        "max": [
+          1.62,
+          0.5923076923076923,
+          0.03083743612510571
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.55,
+        -0.02011794198801089
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 409,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.5076923076923077,
+            "boundary_vertices": 205,
+            "triangles": 203
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.5923076923076923,
+            "boundary_vertices": 204,
+            "triangles": 202
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 260
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_07",
+      "node": 11,
+      "source_surface_triangles": 389,
+      "local_cap_triangles": 710,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.5923076923076923,
+          -0.07088013564844445
+        ],
+        "max": [
+          1.62,
+          0.676923076923077,
+          0.03077205253465244
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.6346153846153846,
+        -0.020054041556896003
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 454,
+        "source_surface_nonmanifold_edges": 1,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.5923076923076923,
+            "boundary_vertices": 204,
+            "triangles": 202
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.676923076923077,
+            "boundary_vertices": 248,
+            "triangles": 246
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 262
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_08",
+      "node": 12,
+      "source_surface_triangles": 507,
+      "local_cap_triangles": 753,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.676923076923077,
+          -0.07261362686552007
+        ],
+        "max": [
+          1.62,
+          0.7615384615384616,
+          0.03047530319960634
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.7192307692307693,
+        -0.021069161832956866
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 485,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.676923076923077,
+            "boundary_vertices": 248,
+            "triangles": 246
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.7615384615384616,
+            "boundary_vertices": 237,
+            "triangles": 235
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 272
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_09",
+      "node": 13,
+      "source_surface_triangles": 483,
+      "local_cap_triangles": 777,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.7615384615384616,
+          -0.07098347112694894
+        ],
+        "max": [
+          1.62,
+          0.8461538461538463,
+          0.04057200286196859
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.8038461538461539,
+        -0.015205734132490177
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 509,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.7615384615384616,
+            "boundary_vertices": 237,
+            "triangles": 235
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.8461538461538463,
+            "boundary_vertices": 14,
+            "triangles": 12
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.8461538461538463,
+            "boundary_vertices": 258,
+            "triangles": 256
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 274
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_10",
+      "node": 14,
+      "source_surface_triangles": 497,
+      "local_cap_triangles": 813,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.8461538461538463,
+          -0.0709382783557838
+        ],
+        "max": [
+          1.62,
+          0.9307692307692308,
+          0.040949406129123844
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.8884615384615385,
+        -0.014994436113329977
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 544,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.8461538461538463,
+            "boundary_vertices": 14,
+            "triangles": 12
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.8461538461538463,
+            "boundary_vertices": 258,
+            "triangles": 256
+          },
+          {
+            "axis": 1,
+            "coordinate": 0.9307692307692308,
+            "boundary_vertices": 272,
+            "triangles": 270
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 275
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_11",
+      "node": 15,
+      "source_surface_triangles": 465,
+      "local_cap_triangles": 801,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          0.9307692307692308,
+          -0.07087202516585614
+        ],
+        "max": [
+          1.62,
+          1.0153846153846153,
+          0.04102291254838915
+        ]
+      },
+      "pivot": [
+        0.0,
+        0.9730769230769231,
+        -0.014924556308733496
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 531,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 0.9307692307692308,
+            "boundary_vertices": 272,
+            "triangles": 270
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.0153846153846153,
+            "boundary_vertices": 259,
+            "triangles": 257
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 274
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_12",
+      "node": 16,
+      "source_surface_triangles": 470,
+      "local_cap_triangles": 802,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.0153846153846153,
+          -0.07085479291728056
+        ],
+        "max": [
+          1.62,
+          1.1,
+          0.035079393013078594
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.0576923076923077,
+        -0.01788769995210098
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 532,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.0153846153846153,
+            "boundary_vertices": 259,
+            "triangles": 257
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.1,
+            "boundary_vertices": 273,
+            "triangles": 271
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 274
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_13",
+      "node": 17,
+      "source_surface_triangles": 453,
+      "local_cap_triangles": 562,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.1,
+          -0.07085289439360282
+        ],
+        "max": [
+          1.62,
+          1.1846153846153846,
+          0.03701154779203061
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.1423076923076922,
+        -0.016920673300786105
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 516,
+        "source_surface_nonmanifold_edges": 3,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.1,
+            "boundary_vertices": 273,
+            "triangles": 271
+          }
+        ],
+        "uncapped_cut_contours": [
+          {
+            "axis": 1,
+            "coordinate": 1.1846153846153846,
+            "reason": "Nested contours need hole-aware triangulation; left uncapped",
+            "contours": 2
+          }
+        ],
+        "inherited_side_cap_triangles": 291
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_14",
+      "node": 18,
+      "source_surface_triangles": 411,
+      "local_cap_triangles": 502,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.1846153846153846,
+          -0.07081636338890028
+        ],
+        "max": [
+          1.62,
+          1.2692307692307694,
+          0.030800884877306676
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.226923076923077,
+        -0.020007739255796804
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 467,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.2692307692307694,
+            "boundary_vertices": 224,
+            "triangles": 222
+          }
+        ],
+        "uncapped_cut_contours": [
+          {
+            "axis": 1,
+            "coordinate": 1.1846153846153846,
+            "reason": "Nested contours need hole-aware triangulation; left uncapped",
+            "contours": 2
+          }
+        ],
+        "inherited_side_cap_triangles": 280
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_15",
+      "node": 19,
+      "source_surface_triangles": 353,
+      "local_cap_triangles": 723,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.2692307692307694,
+          -0.07085024714337067
+        ],
+        "max": [
+          1.62,
+          1.353846153846154,
+          0.030812588221522184
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.3115384615384618,
+        -0.02001882946092424
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 443,
+        "source_surface_nonmanifold_edges": 1,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.2692307692307694,
+            "boundary_vertices": 224,
+            "triangles": 222
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.353846153846154,
+            "boundary_vertices": 219,
+            "triangles": 217
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 284
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_16",
+      "node": 20,
+      "source_surface_triangles": 430,
+      "local_cap_triangles": 746,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.353846153846154,
+          -0.0708688245771421
+        ],
+        "max": [
+          1.62,
+          1.4384615384615385,
+          0.03080435217674147
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.396153846153846,
+        -0.020032236200200313
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 455,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.353846153846154,
+            "boundary_vertices": 219,
+            "triangles": 217
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.4384615384615385,
+            "boundary_vertices": 236,
+            "triangles": 234
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 295
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_17",
+      "node": 21,
+      "source_surface_triangles": 394,
+      "local_cap_triangles": 800,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.4384615384615385,
+          -0.07086634170267393
+        ],
+        "max": [
+          1.62,
+          1.5230769230769232,
+          0.03081739119954711
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.4807692307692308,
+        -0.02002447525156341
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 504,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.4384615384615385,
+            "boundary_vertices": 236,
+            "triangles": 234
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.5230769230769232,
+            "boundary_vertices": 268,
+            "triangles": 266
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 300
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_18",
+      "node": 22,
+      "source_surface_triangles": 435,
+      "local_cap_triangles": 847,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.5230769230769232,
+          -0.07089076922547287
+        ],
+        "max": [
+          1.62,
+          1.6076923076923078,
+          0.03080121046435074
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.5653846153846156,
+        -0.020044779380561064
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 537,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.5230769230769232,
+            "boundary_vertices": 268,
+            "triangles": 266
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.6076923076923078,
+            "boundary_vertices": 269,
+            "triangles": 267
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 314
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_19",
+      "node": 23,
+      "source_surface_triangles": 438,
+      "local_cap_triangles": 897,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.6076923076923078,
+          -0.07091050246359072
+        ],
+        "max": [
+          1.62,
+          1.6923076923076925,
+          0.04195533877678283
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.6500000000000001,
+        -0.014477581843403947
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 565,
+        "source_surface_nonmanifold_edges": 1,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.6076923076923078,
+            "boundary_vertices": 269,
+            "triangles": 267
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.6923076923076925,
+            "boundary_vertices": 262,
+            "triangles": 260
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.6923076923076925,
+            "boundary_vertices": 17,
+            "triangles": 15
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.6923076923076925,
+            "boundary_vertices": 17,
+            "triangles": 15
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 340
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_20",
+      "node": 24,
+      "source_surface_triangles": 429,
+      "local_cap_triangles": 912,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.6923076923076925,
+          -0.07090913200517536
+        ],
+        "max": [
+          1.62,
+          1.776923076923077,
+          0.04192904796760418
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.7346153846153847,
+        -0.01449004201878559
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 577,
+        "source_surface_nonmanifold_edges": 1,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.6923076923076925,
+            "boundary_vertices": 262,
+            "triangles": 260
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.6923076923076925,
+            "boundary_vertices": 17,
+            "triangles": 15
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.6923076923076925,
+            "boundary_vertices": 17,
+            "triangles": 15
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.776923076923077,
+            "boundary_vertices": 249,
+            "triangles": 247
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.776923076923077,
+            "boundary_vertices": 15,
+            "triangles": 13
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.776923076923077,
+            "boundary_vertices": 17,
+            "triangles": 15
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 347
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_21",
+      "node": 25,
+      "source_surface_triangles": 373,
+      "local_cap_triangles": 637,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.776923076923077,
+          -0.07083343986877719
+        ],
+        "max": [
+          1.62,
+          1.8615384615384616,
+          0.041860583984049
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.8192307692307694,
+        -0.014486427942364093
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 559,
+        "source_surface_nonmanifold_edges": 1,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.776923076923077,
+            "boundary_vertices": 249,
+            "triangles": 247
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.776923076923077,
+            "boundary_vertices": 15,
+            "triangles": 13
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.776923076923077,
+            "boundary_vertices": 17,
+            "triangles": 15
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.8615384615384616,
+            "boundary_vertices": 17,
+            "triangles": 15
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.8615384615384616,
+            "boundary_vertices": 14,
+            "triangles": 12
+          }
+        ],
+        "uncapped_cut_contours": [
+          {
+            "axis": 1,
+            "coordinate": 1.8615384615384616,
+            "reason": "Open/branched contour left uncapped",
+            "boundary_vertices": 246
+          }
+        ],
+        "inherited_side_cap_triangles": 335
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_22",
+      "node": 26,
+      "source_surface_triangles": 434,
+      "local_cap_triangles": 633,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.8615384615384616,
+          -0.07109762276389267
+        ],
+        "max": [
+          1.62,
+          1.9461538461538463,
+          0.04179212000049383
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.903846153846154,
+        -0.01465275138169942
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 543,
+        "source_surface_nonmanifold_edges": 2,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.8615384615384616,
+            "boundary_vertices": 17,
+            "triangles": 15
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.8615384615384616,
+            "boundary_vertices": 14,
+            "triangles": 12
+          },
+          {
+            "axis": 1,
+            "coordinate": 1.9461538461538463,
+            "boundary_vertices": 264,
+            "triangles": 262
+          }
+        ],
+        "uncapped_cut_contours": [
+          {
+            "axis": 1,
+            "coordinate": 1.8615384615384616,
+            "reason": "Open/branched contour left uncapped",
+            "boundary_vertices": 246
+          }
+        ],
+        "inherited_side_cap_triangles": 344
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_23",
+      "node": 27,
+      "source_surface_triangles": 449,
+      "local_cap_triangles": 859,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          1.9461538461538463,
+          -0.07777171121333928
+        ],
+        "max": [
+          1.62,
+          2.0307692307692307,
+          0.030723627487106896
+        ]
+      },
+      "pivot": [
+        0.0,
+        1.9884615384615385,
+        -0.023524041863116192
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 519,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 1.9461538461538463,
+            "boundary_vertices": 264,
+            "triangles": 262
+          },
+          {
+            "axis": 1,
+            "coordinate": 2.0307692307692307,
+            "boundary_vertices": 255,
+            "triangles": 253
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 344
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_24",
+      "node": 28,
+      "source_surface_triangles": 263,
+      "local_cap_triangles": 843,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          2.0307692307692307,
+          -0.07842816737308779
+        ],
+        "max": [
+          1.62,
+          2.1153846153846154,
+          0.0308973862537091
+        ]
+      },
+      "pivot": [
+        0.0,
+        2.073076923076923,
+        -0.023765390559689344
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 496,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 2.0307692307692307,
+            "boundary_vertices": 255,
+            "triangles": 253
+          },
+          {
+            "axis": 1,
+            "coordinate": 2.1153846153846154,
+            "boundary_vertices": 241,
+            "triangles": 239
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 351
+      }
+    },
+    {
+      "name": "SHUTTER_SLAT_25",
+      "node": 29,
+      "source_surface_triangles": 325,
+      "local_cap_triangles": 785,
+      "closed_bounds": {
+        "min": [
+          -1.62,
+          2.1153846153846154,
+          -0.07848894561799118
+        ],
+        "max": [
+          1.62,
+          2.2,
+          0.0627905610517003
+        ]
+      },
+      "pivot": [
+        0.0,
+        2.157692307692308,
+        -0.007849192283145436
+      ],
+      "cut_caps": {
+        "source_surface_boundary_edges": 439,
+        "source_surface_nonmanifold_edges": 0,
+        "caps": [
+          {
+            "axis": 1,
+            "coordinate": 2.1153846153846154,
+            "boundary_vertices": 241,
+            "triangles": 239
+          },
+          {
+            "axis": 1,
+            "coordinate": 2.2,
+            "boundary_vertices": 198,
+            "triangles": 196
+          }
+        ],
+        "uncapped_cut_contours": [],
+        "inherited_side_cap_triangles": 350
+      }
+    }
+  ],
+  "additional_paid_calls": 0,
+  "limitations": [
+    "Generated colored graffiti patches are retained; exact branding is not yet applied.",
+    "Cuts follow geometric planes rather than semantic fabrication joints.",
+    "Caps are local closure geometry, not Tripo-generated replacements.",
+    "Uncapped or branched cut contours, if listed, remain open and require browser review.",
+    "The rearward coil extends above and behind the original housing; runtime placement must allow clearance."
+  ],
+  "browser_review": "pending",
+  "qa_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\records\\02_roller_shutter.processed.qa.json"
+}
