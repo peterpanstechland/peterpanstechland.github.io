@@ -46,6 +46,9 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
   const [status, setStatus] = useState<PreviewStatus>('loading');
   const [counts, setCounts] = useState<AssetCounts | null>(null);
   const [showLoader, setShowLoader] = useState(true);
+  const requestStatus = () => frameRef.current?.contentWindow?.postMessage(
+    {type: 'techland-garage-status-request'}, window.location.origin,
+  );
 
   useEffect(() => {
     if (status === 'loading') { setShowLoader(true); return; }
@@ -81,6 +84,9 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
       }
     };
     window.addEventListener('message', onMessage);
+    // The static iframe can finish before React hydrates this page. Ask for a
+    // fresh snapshot after installing the listener so its ready event isn't lost.
+    requestStatus();
     return () => {
       window.clearTimeout(timeout);
       window.removeEventListener('message', onMessage);
@@ -148,12 +154,13 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=shared-loading-v2`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=shared-loading-v3`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"
                 allow="camera 'self'"
                 allowFullScreen
+                onLoad={requestStatus}
                 onError={() => setStatus('error')}
               />
               {showLoader && status !== 'error' && (
@@ -182,7 +189,7 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 <span>{statusText}</span>
               </div>
               <a className={styles.expandButton}
-                href={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&v=shared-loading-v2`}
+                href={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&v=shared-loading-v3`}
                 target="_blank" rel="noopener noreferrer"
                 aria-label={text('Open an immersive garage view', '打开沉浸车库视图')}>
                 <span aria-hidden="true">⤢</span>{text('Expand', '展开')}
