@@ -145,6 +145,12 @@ function fatal(message) {
   const total = Math.max(entries.size, 1);
   window.parent.postMessage({ type: 'techland-garage-status', loaded: 0, total, failed: total }, location.origin);
 }
+window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.source!==window.parent||
+     event.data?.type!=='techland-garage-status-request')return;
+  if(!$('fatal').hidden)fatal($('fatal-message').textContent);
+  else if(configurationLoaded)notifyStatus();
+});
 function labelFor(config) { return config.label?.[zh ? 'zh' : 'en'] || config.label?.en || config.id; }
 function updateRow(entry) {
   entry.button.dataset.state = displayState(entry);
