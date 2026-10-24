@@ -1,5 +1,23 @@
 // Present a grounded, branded exterior before downloading the workshop tools.
 const hero=['13_street_base','01_garage_shell','02_roller_shutter','03_profile_sign','04_lucky_cat','05_project_vending','08_street_lamp'];
+const essential=['13_street_base','01_garage_shell'];
+export function essentialAssetsReady(entries) {
+  const all=[...entries];
+  return essential.every(id=>all.some(entry=>entry.config.id===id&&entry.state==='ready'));
+}
+export async function loadAssetManifests(fetcher=fetch,timeoutMs=20000) {
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),timeoutMs);
+  try {
+    // Both small manifests are required. A slow connection must never silently
+    // switch the visitor from optimized previews to the much larger originals.
+    return await Promise.all(['./assets.json','./optimized-assets.json'].map(async url=>{
+      const response=await fetcher(url,{signal:controller.signal});
+      if(!response.ok)throw new Error(`Asset manifest unavailable: ${url} (${response.status})`);
+      return response.json();
+    }));
+  } finally {clearTimeout(timeout);controller.abort();}
+}
 export function initialLoadingProgress(entries) {
   const initial=[...entries].filter(entry=>entry.config.file&&hero.includes(entry.config.id));
   return {completed:initial.filter(entry=>entry.state==='ready').length,total:initial.length};

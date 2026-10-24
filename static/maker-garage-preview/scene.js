@@ -18,7 +18,7 @@ import {createCommunityWall} from './community-wall.js?v=community-v1';
 import {createCommunityInstallation} from './community-installation.js?v=community-v1';
 import {createSponsorBillboard} from './sponsor-billboard.js?v=sponsor-labels-v1';
 import {createAmbientMotion,installVendingMotion} from './ambient-motion.js?v=ambient-v1';
-import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress} from './loading-plan.js?v=neko-loader-v1';
+import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress,loadAssetManifests,essentialAssetsReady} from './loading-plan.js?v=shared-loading-v2';
 
 const zh = new URLSearchParams(location.search).get('lang') === 'zh-Hans' || location.pathname.startsWith('/zh-Hans/');
 const copy = {
@@ -269,7 +269,7 @@ function renderFrame(now) {
   else renderer.render(scene, camera);
   if(heroPending){
     heroPending=false;
-    heroReady=['13_street_base','01_garage_shell'].every(id=>entries.get(id)?.state==='ready');
+    heroReady=essentialAssetsReady(entries.values());
     loadingProfile.heroMs=Math.round(performance.now()-loadingProfile.started);notifyStatus();
   }
   if (waveEnabled || effectsEnabled || ambientMoving || shutter?.moving || cameraChanged || marqueeMoving) requestFrame();
@@ -835,22 +835,16 @@ async function loadAsset(entry) {
 }
 
 async function loadConfiguration() {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 20000);
   let config;
   try {
-    const [response,variants]=await Promise.all([
-      fetch('./assets.json', { cache: 'no-cache', signal: controller.signal }),
-      fetch('./optimized-assets.json',{signal:AbortSignal.timeout(5000)}).then(r=>r.ok?r.json():null).catch(()=>null),
-    ]);
-    optimizedAssets=variants;
-    if (!response.ok) throw new Error(zh ? '资产清单加载失败，请重新加载预览。' : 'The asset manifest could not load. Please reload the preview.');
-    config = await response.json();
+    [config,optimizedAssets]=await loadAssetManifests();
   } catch (error) {
     if (error.name === 'AbortError') throw new Error(zh ? '资产清单读取超时，请重新加载预览。' : 'The asset manifest timed out. Please reload the preview.');
-    throw error;
-  } finally { clearTimeout(timeout); }
+    throw new Error(zh ? '预览资源清单加载失败，请检查网络后重试。' : 'The preview manifests could not load. Check your connection and retry.');
+  }
   if (!Array.isArray(config.assets)) throw new Error(zh ? '资产清单格式无效。' : 'Invalid asset manifest.');
+  if(config.assets.some(asset=>asset.file&&optimizedModel(asset,optimizedAssets,loadingProfile.tier).file===asset.file))
+    throw new Error(zh ? '压缩预览资源清单不完整，请重新加载预览。' : 'The optimized preview manifest is incomplete. Please reload the preview.');
   for (const asset of config.assets) {
     if (!asset.id || entries.has(asset.id)) continue;
     const item = document.createElement('li');
@@ -872,6 +866,10 @@ async function loadConfiguration() {
     await runLoadingPhase(phase,loadAsset);
     refreshArtDirection(index===0);
     if(index===0){
+      if(!essentialAssetsReady(entries.values())){
+        fatal(zh ? '车库主体未能下载完成，请检查网络后重新加载。' : 'The garage exterior could not download. Check your connection and reload.');
+        return;
+      }
       // Background tabs suspend RAF. Keep downloading the next phase and only
       // reveal the iframe when renderFrame has actually painted the exterior.
       heroPending=true;requestFrame();
