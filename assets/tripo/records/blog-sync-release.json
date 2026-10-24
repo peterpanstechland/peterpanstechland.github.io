@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-21",
+  "revision": "grounded-v4.2",
+  "source_commit": "13f7e42512a6d49f0067665df279547e2a1fe633",
+  "published_commit": "41d19b8153764b552bbfc8f8d4a739d996d9106b",
+  "pull_request": "https://github.com/peterpanstechland/peterpanstechland.github.io/pull/37",
+  "workflow_run": "https://github.com/peterpanstechland/peterpanstechland.github.io/actions/runs/39575671494",
+  "workflow_status": "success",
+  "urls": [
+    "https://peterpanstechland.github.io/zh-Hans/maker-garage-preview/",
+    "https://peterpanstechland.github.io/maker-garage-preview/"
+  ],
+  "homepage_preserved": true,
+  "docs_blog_challenge_preserved": true,
+  "http_checks": "Homepage, both garage routes, Chinese blog and Challenge returned 200",
+  "typecheck": "passed",
+  "build": "en and zh-Hans passed locally and in GitHub Actions",
+  "browser_check": "passed: Chinese live page loaded 12/13 models; declared rejected tools-zone remains unavailable; shutter progress 0.0000 and 1.0000 verified; cat beckon/effects enabled; no console warnings/errors observed",
+  "new_tripo_credits": 0,
+  "private_raw_records_uploaded": false,
+  "screenshot": "assets/tripo/records/blog-sync-live.png"
+}

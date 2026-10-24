@@ -1,0 +1,125 @@
+{
+  "asset_id": "12_plants_grass",
+  "display_size_m_xyz": [
+    0.8813819289207458,
+    0.800000011920929,
+    0.7580625414848328
+  ],
+  "working_bounds_native": [
+    [
+      -0.4406909644603729,
+      -0.3790312707424164,
+      0.0
+    ],
+    [
+      0.4406909644603729,
+      0.3790312707424164,
+      0.800000011920929
+    ]
+  ],
+  "original_sha256": "a931aca508cd09cb0b2e33027b2f043b1302e95eb48691b0635ec92bdc0d0ca3",
+  "rig": false,
+  "articulated": false,
+  "meshes": {
+    "PLANTS_GRASS_ROOT": {
+      "vertices": 1552,
+      "faces": 1291,
+      "boundary_edges": 1429,
+      "nonmanifold_edges": 1429,
+      "degenerate_faces": 0
+    }
+  },
+  "upward_surface_levels": [
+    [
+      0.17500000000000002,
+      0.11187978484667838
+    ],
+    [
+      0.525,
+      0.07323958628694527
+    ],
+    [
+      0.025,
+      0.042399617572300485
+    ],
+    [
+      0.55,
+      0.04181886947480962
+    ],
+    [
+      0.65,
+      0.039707478041236755
+    ],
+    [
+      0.675,
+      0.033702687243930995
+    ],
+    [
+      0.15000000000000002,
+      0.03200107719749212
+    ],
+    [
+      0.5,
+      0.03088588662649272
+    ],
+    [
+      0.0,
+      0.028103579017624725
+    ],
+    [
+      0.45,
+      0.026641581614967436
+    ],
+    [
+      0.2,
+      0.023220771799969953
+    ],
+    [
+      0.625,
+      0.019534713122993708
+    ],
+    [
+      0.42500000000000004,
+      0.014233166381018236
+    ],
+    [
+      0.5750000000000001,
+      0.01259263715473935
+    ],
+    [
+      0.47500000000000003,
+      0.012555225584947038
+    ]
+  ],
+  "source_task_id": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
+  "changes": {
+    "cleanup": {
+      "PLANTS_GRASS_ROOT": {
+        "before": {
+          "vertices": 1552,
+          "faces": 1291,
+          "boundary_edges": 1429,
+          "nonmanifold_edges": 1429,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 570,
+          "faces": 1289,
+          "boundary_edges": 38,
+          "nonmanifold_edges": 41,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "notes": [
+      "Removed redundant coincident/degenerate geometry and stabilized base contact. Preserved leaf silhouettes, plant separation and source color; no blanket leaf decimation or smoothing.",
+      "Retained source UV/color detail on surviving geometry; used Blender for topology cleanup and shading correction. Original downloads remain untouched."
+    ],
+    "local_parts": []
+  },
+  "output_sha256": "23cedbdd1d10a54873786f93f50e2ec570278d1c6f399f4b7004d17bdc0b8da2",
+  "output_glb": "assets/tripo/blender-garage/models/12_plants_grass.glb",
+  "credits_spent": 0,
+  "visual_acceptance": "accepted_with_notes",
+  "visual_review": "Front and back neutral-light renders inspected. Generated fine details remain approximate; local replacement parts are named LOCAL_."
+}

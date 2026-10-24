@@ -1,0 +1,13 @@
+{
+  "verifiedAt": "2026-10-23T07:50:50.342Z",
+  "api": "https://techland-community-wall.peter-7dc.workers.dev/api/",
+  "checks": [
+    "Live HTTPS API and preview CORS passed",
+    "Unauthenticated moderation and unapproved origins blocked",
+    "R2 upload succeeds and pending photo remains private",
+    "Approval publishes the photo and entry",
+    "Private author receipt tracks approval",
+    "Author withdrawal removes public entry and R2 photo"
+  ],
+  "testEntryRemoved": true
+}

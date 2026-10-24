@@ -1,0 +1,82 @@
+{
+  "asset_id": "15_makeblock_laserbox",
+  "source_task_id": "02b354be-e446-4be5-92b0-fa6d86c707be",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/15_makeblock_laserbox.glb",
+  "input_sha256": "3d2d776b80bd14871b0a23ed809571bd9bb5a1f5ead93ffa64bc6efb4215cc2e",
+  "output": "assets/tripo/blender-repair/models/15_makeblock_laserbox.glb",
+  "output_sha256": "c90c0f8070887979ed19b2a1823b3a9e5253f1948b44b94d798f2186a3aee1eb",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_02b354be-e446-4be5-92b0-fa6d86c707be": {
+        "before": {
+          "vertices": 4464,
+          "faces": 6495,
+          "boundary_edges": 2233,
+          "nonmanifold_edges": 2233,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 3242,
+          "faces": 6493,
+          "boundary_edges": 7,
+          "nonmanifold_edges": 11,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [
+      {
+        "axis_xyz": 2,
+        "plane_m": 0.259,
+        "changed_vertices": 0,
+        "max_displacement_m": 0
+      },
+      {
+        "axis_xyz": 2,
+        "plane_m": -0.259,
+        "changed_vertices": 0,
+        "max_displacement_m": 0
+      },
+      {
+        "axis_xyz": 0,
+        "plane_m": -0.474,
+        "changed_vertices": 115,
+        "max_displacement_m": 0.005330674886703468
+      },
+      {
+        "axis_xyz": 0,
+        "plane_m": 0.474,
+        "changed_vertices": 103,
+        "max_displacement_m": 0.009322844982147194
+      }
+    ],
+    "local_parts": [
+      "LOCAL_laserbox_flat_inspection_window"
+    ],
+    "notes": [
+      "Straightened outer side walls. Cut away the crumpled window geometry and installed a flat, solid smoked inspection insert; enclosure and lid frame retained.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ]
+  },
+  "mesh_stats": {
+    "tripo_node_02b354be-e446-4be5-92b0-fa6d86c707be": {
+      "vertices": 3612,
+      "faces": 6223,
+      "boundary_edges": 117,
+      "nonmanifold_edges": 122,
+      "degenerate_faces": 0
+    },
+    "LOCAL_laserbox_flat_inspection_window": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

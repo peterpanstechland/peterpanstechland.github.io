@@ -1,0 +1,14 @@
+{
+  "sceneLoaded": "21 / 22 assets; pre-existing unavailable slot unchanged",
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "visualChecks": [
+    "Head points toward garage entrance",
+    "Pole and original shelf retained",
+    "Electronic planter rests on mounting plate",
+    "Original textured body renders correctly"
+  ],
+  "build": "passed, en and zh-Hans; latest static files synchronized and hashes checked",
+  "typecheck": "passed",
+  "deployment": "local preview only"
+}

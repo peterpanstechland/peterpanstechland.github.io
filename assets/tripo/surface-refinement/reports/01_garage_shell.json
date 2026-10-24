@@ -1,0 +1,41 @@
+{
+  "asset_id": "01_garage_shell",
+  "source_task_id": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
+  "source_sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116",
+  "method": "Original vertex positions only; no covering boards, no replacement faces, no UV or texture edits",
+  "meshes": [
+    {
+      "name": "tripo_node_de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "vertices": 14131,
+      "faces": 17480,
+      "UV_unchanged": true,
+      "face_indices_unchanged": true,
+      "moved_vertices": 1778,
+      "maximum_displacement_m": 0.05500006758349774,
+      "edits": [
+        {
+          "region": "original central roof",
+          "vertices": 489,
+          "maximumShiftMeters": 0.055
+        },
+        {
+          "region": "original interior floor",
+          "vertices": 499,
+          "maximumShiftMeters": 0.035
+        },
+        {
+          "region": "original side wall -1",
+          "vertices": 36,
+          "maximumShiftMeters": 0.015
+        },
+        {
+          "region": "original side wall 1",
+          "vertices": 754,
+          "maximumShiftMeters": 0.015
+        }
+      ]
+    }
+  ],
+  "credits_spent": 0,
+  "output_sha256": "533e7226171f136f8391657f2a9fabb48e62e9e19ae5956706be135567690d36"
+}

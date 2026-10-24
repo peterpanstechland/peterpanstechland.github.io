@@ -1,0 +1,49 @@
+{
+  "scope": "Actual processed cat CPU geometry; GLB geometry/skin unchanged, texture decode omitted in memory only.",
+  "threeRevision": "170",
+  "source": "static/maker-garage-preview/models/04_cyber_lucky_cat.glb",
+  "sourceSha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
+  "samples": [
+    {
+      "label": "Initial synchronized",
+      "mountY": 0,
+      "boundsMinY": 0,
+      "boundsMaxY": 0.8000000125961377,
+      "meshWorldY": 0.40000013275535157,
+      "bindInverseY": -0.20000005702224205
+    },
+    {
+      "label": "Only updateWorldMatrix, then skeleton.update",
+      "mountY": -0.1866,
+      "boundsMinY": -0.3732000027805566,
+      "boundsMaxY": 0.4268000096580888,
+      "meshWorldY": 0.21340013275535158,
+      "bindInverseY": -0.20000005702224205
+    },
+    {
+      "label": "After mount.updateMatrixWorld(true)",
+      "mountY": -0.1866,
+      "boundsMinY": -0.18660000278055666,
+      "boundsMaxY": 0.6134000096580887,
+      "meshWorldY": 0.21340013275535158,
+      "bindInverseY": -0.10670006138655044
+    },
+    {
+      "label": "Reset with only updateWorldMatrix",
+      "mountY": 0,
+      "boundsMinY": 0.18660000000000004,
+      "boundsMaxY": 0.9866000125961378,
+      "meshWorldY": 0.40000013275535157,
+      "bindInverseY": -0.10670006138655044
+    },
+    {
+      "label": "After scene.updateMatrixWorld(true)",
+      "mountY": 0,
+      "boundsMinY": 0,
+      "boundsMaxY": 0.8000000125961377,
+      "meshWorldY": 0.40000013275535157,
+      "bindInverseY": -0.20000005702224205
+    }
+  ],
+  "conclusion": "SkinnedMesh r170 overrides updateMatrixWorld but not updateWorldMatrix. updateWorldMatrix updates node/bone world transforms but leaves attached bindMatrixInverse stale. Skeleton.update does not repair it. Synchronize via scene.updateMatrixWorld(true), or update ancestors then mount.updateMatrixWorld(true), before Box3/getVertexPosition after every mount move."
+}

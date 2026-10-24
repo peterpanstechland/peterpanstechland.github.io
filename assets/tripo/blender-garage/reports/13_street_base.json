@@ -1,0 +1,120 @@
+{
+  "asset_id": "13_street_base",
+  "display_size_m_xyz": [
+    8.500000953674316,
+    0.30000001192092896,
+    6.600001335144043
+  ],
+  "working_bounds_native": [
+    [
+      -4.250000476837158,
+      -3.3000006675720215,
+      0.0
+    ],
+    [
+      4.250000476837158,
+      3.3000004291534424,
+      0.30000001192092896
+    ]
+  ],
+  "original_sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21",
+  "rig": false,
+  "articulated": false,
+  "meshes": {
+    "tripo_node_38eb318a-5bfd-492d-91e0-cdc0e25973f5": {
+      "vertices": 4998,
+      "faces": 7741,
+      "boundary_edges": 2095,
+      "nonmanifold_edges": 2095,
+      "degenerate_faces": 0
+    }
+  },
+  "upward_surface_levels": [
+    [
+      0.1,
+      0.28170013326587195
+    ],
+    [
+      0.125,
+      0.19087174612754154
+    ],
+    [
+      0.025,
+      0.059031456148225914
+    ],
+    [
+      0.0,
+      0.05267180260489113
+    ],
+    [
+      0.05,
+      0.022893892382171543
+    ],
+    [
+      0.07500000000000001,
+      0.015837050619857962
+    ],
+    [
+      0.30000000000000004,
+      0.0007717842545389431
+    ],
+    [
+      0.275,
+      0.0005371807674237061
+    ],
+    [
+      0.2,
+      0.000269709387794137
+    ],
+    [
+      0.15000000000000002,
+      0.0001844085552420438
+    ],
+    [
+      0.17500000000000002,
+      0.00012847613834310323
+    ]
+  ],
+  "source_task_id": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+  "changes": {
+    "cleanup": {
+      "tripo_node_38eb318a-5bfd-492d-91e0-cdc0e25973f5": {
+        "before": {
+          "vertices": 4998,
+          "faces": 7741,
+          "boundary_edges": 2095,
+          "nonmanifold_edges": 2095,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 3869,
+          "faces": 7733,
+          "boundary_edges": 10,
+          "nonmanifold_edges": 19,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "notes": [
+      "Rebuilt the torn paper-thin street as a closed beveled foundation. Original Tripo road color was baked in Blender onto the new top; new side walls use local concrete material.",
+      "Retained source UV/color detail on surviving geometry; used Blender for topology cleanup and shading correction. Original downloads remain untouched."
+    ],
+    "texture_bake": {
+      "source": "original Tripo base-color and surface normals",
+      "resolution": [
+        2048,
+        2048
+      ],
+      "method": "Cycles selected-to-active diffuse color and tangent normals, normal strength 0.35"
+    },
+    "solid_street": true,
+    "local_parts": [
+      "LOCAL_STREET_SOLID_FOUNDATION"
+    ]
+  },
+  "output_sha256": "540b4ecf97cd88d909d36d71a1f708b6bdc5efda887ef8ac1a01ebdd98c9db50",
+  "output_glb": "assets/tripo/blender-garage/models/13_street_base.glb",
+  "credits_spent": 0,
+  "visual_acceptance": "accepted_with_notes",
+  "visual_review": "Front and back neutral-light renders inspected. Generated fine details remain approximate; local replacement parts are named LOCAL_."
+}

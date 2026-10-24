@@ -1,0 +1,101 @@
+{
+  "scope": "Independent CPU linear-blend skinning at stored node transforms; no animation or visual quality claim",
+  "task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\04-cyber-lucky-cat-blue-v6-rig-9c588a0c\\model.glb",
+  "skinning_data_validation": "passed",
+  "bind_pose_world_bounds": {
+    "min": [
+      -0.15001093354885747,
+      -8.384433221593482e-08,
+      -0.1775916494469513
+    ],
+    "max": [
+      0.1500109048605601,
+      0.3999998974448066,
+      0.17759157161818423
+    ],
+    "size_xyz": [
+      0.30002183840941754,
+      0.3999999812891388,
+      0.35518322106513556
+    ],
+    "ground_center_y_up": [
+      -1.4344148688283376e-08,
+      -8.384433221593482e-08,
+      -3.8914383534982555e-08
+    ]
+  },
+  "primitives": [
+    {
+      "node": 45,
+      "skin": 0,
+      "joint_count": 45,
+      "palette_finite": true,
+      "vertices_deformed": 9728,
+      "deformed_min": [
+        -0.15001093354885747,
+        -8.384433221593482e-08,
+        -0.1775916494469513
+      ],
+      "deformed_max": [
+        0.1500109048605601,
+        0.3999998974448066,
+        0.17759157161818423
+      ],
+      "max_weight_normalization_correction": 1.3317912817001343e-07
+    }
+  ],
+  "front_axis": "NOT_VISUALLY_VERIFIED",
+  "animation_clips": 0,
+  "visual_review": "NOT_PERFORMED",
+  "texture_slots_comparison": [
+    {
+      "material_slot": "baseColorTexture",
+      "source_image_index": 0,
+      "rig_image_index": 1,
+      "source_format": "JPEG",
+      "rig_format": "JPEG",
+      "embedded_bytes_identical": true,
+      "decoded_pixels_identical": true,
+      "size_px": [
+        2048,
+        2048
+      ],
+      "mean_abs_channel_error": 0.0,
+      "max_abs_channel_error": 0,
+      "changed_pixel_fraction": 0.0
+    },
+    {
+      "material_slot": "metallicRoughnessTexture",
+      "source_image_index": 1,
+      "rig_image_index": 2,
+      "source_format": "JPEG",
+      "rig_format": "JPEG",
+      "embedded_bytes_identical": true,
+      "decoded_pixels_identical": true,
+      "size_px": [
+        2048,
+        2048
+      ],
+      "mean_abs_channel_error": 0.0,
+      "max_abs_channel_error": 0,
+      "changed_pixel_fraction": 0.0
+    },
+    {
+      "material_slot": "normalTexture",
+      "source_image_index": 2,
+      "rig_image_index": 0,
+      "source_format": "PNG",
+      "rig_format": "PNG",
+      "embedded_bytes_identical": true,
+      "decoded_pixels_identical": true,
+      "size_px": [
+        2048,
+        2048
+      ],
+      "mean_abs_channel_error": 0.0,
+      "max_abs_channel_error": 0,
+      "changed_pixel_fraction": 0.0
+    }
+  ]
+}

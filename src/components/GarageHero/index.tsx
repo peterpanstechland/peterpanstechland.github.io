@@ -154,7 +154,7 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=shared-loading-v3`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=studio-exhibit-v1`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"
@@ -189,7 +189,7 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 <span>{statusText}</span>
               </div>
               <a className={styles.expandButton}
-                href={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&v=shared-loading-v3`}
+                href={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&v=studio-exhibit-v1`}
                 target="_blank" rel="noopener noreferrer"
                 aria-label={text('Open an immersive garage view', '打开沉浸车库视图')}>
                 <span aria-hidden="true">⤢</span>{text('Expand', '展开')}

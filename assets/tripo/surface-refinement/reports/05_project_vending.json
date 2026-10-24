@@ -1,0 +1,36 @@
+{
+  "asset_id": "05_project_vending",
+  "source_task_id": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
+  "source_sha256": "05ef07a2940582ef4abeb55b49dc73b43509ab4f9d9ab15b004e810196ec6fa3",
+  "method": "Original vertex positions only; no covering boards, no replacement faces, no UV or texture edits",
+  "meshes": [
+    {
+      "name": "tripo_node_54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "vertices": 7554,
+      "faces": 9783,
+      "UV_unchanged": true,
+      "face_indices_unchanged": true,
+      "moved_vertices": 922,
+      "maximum_displacement_m": 0.018000006280579645,
+      "edits": [
+        {
+          "region": "original cabinet roof",
+          "vertices": 250,
+          "maximumShiftMeters": 0.018
+        },
+        {
+          "region": "original cabinet side -1",
+          "vertices": 293,
+          "maximumShiftMeters": 0.009703516960144043
+        },
+        {
+          "region": "original cabinet side 1",
+          "vertices": 379,
+          "maximumShiftMeters": 0.010145902633666992
+        }
+      ]
+    }
+  ],
+  "credits_spent": 0,
+  "output_sha256": "23255d23af7b83d0e68d57f9f3b45ee3c96b2e0bb3e48eaadd539d70b7b3d920"
+}

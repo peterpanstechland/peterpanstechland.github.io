@@ -1,0 +1,734 @@
+{
+  "schema_version": 1,
+  "scope": "Independent structure checks plus provider preview review for ten batch assets; not complete browser or production approval.",
+  "updated_at_utc": "2026-10-20T07:37:35.345Z",
+  "expected_assets": [
+    "03_profile_sign",
+    "05_project_vending",
+    "06_showcase_zone",
+    "07_tools_zone",
+    "08_street_lamp",
+    "09_trash_bin",
+    "10_utility_cabinet",
+    "11_tree",
+    "12_plants_grass",
+    "13_street_base"
+  ],
+  "reviewed_count": 10,
+  "all_done": true,
+  "limitations": [
+    "Provider preview is a single rendered view, not proof of every surface or viewing direction.",
+    "Inspector confirms the implemented structural and texture decoding checks, not watertightness, production topology, actual dimensions or front direction.",
+    "Named part requirements, functional pivots and material separation need postprocessing and browser verification."
+  ],
+  "assets": [
+    {
+      "id": "03_profile_sign",
+      "task_id": "a4544685-ffb3-46e6-a49e-c0dae342e326",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\03-profile-sign-a4544685\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\03-profile-sign-a4544685/preview.png",
+      "qa_report": "assets/tripo/records/03_profile_sign.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 4771,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        0.11012902855873108,
+        0.5,
+        0.4633884131908417
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.25,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          0.8,
+          0.8,
+          0.1
+        ],
+        "target_over_raw_scale_xyz": [
+          7.264206453735905,
+          1.6,
+          0.2158016841884565
+        ],
+        "uniform_scale_to_target_height": 1.6,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "PROFILE_FRAME": false,
+        "PROFILE_DISC": false,
+        "PROFILE_NEON": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and text-mode brief",
+        "status": "main_appearance_matches_postprocess_required",
+        "observations": [
+          "Black round frame with cyan and magenta concentric ring segments and a plain black center.",
+          "No invented portrait, cat brand symbol, or visible generated lettering.",
+          "Ring segments have hardware breaks and mounting details; overall silhouette matches the requested circular sign hardware."
+        ],
+        "issues": [
+          "Frame, disc and light tubes are merged into one mesh/material; the required independent frame/disc/neon nodes are absent."
+        ],
+        "unverified": [
+          "Back surface",
+          "Front +Z orientation",
+          "Independent emission control",
+          "Final scene scale/pivot"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "05_project_vending",
+      "task_id": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\05-project-vending-54b92a08\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\05-project-vending-54b92a08/preview.png",
+      "qa_report": "assets/tripo/records/05_project_vending.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 9783,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        1.0439330371989257,
+        2.0999999046325684,
+        1.889152339735375
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -1.0499999523162842,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          0.9,
+          1.8,
+          0.6
+        ],
+        "target_over_raw_scale_xyz": [
+          0.8621242626968432,
+          0.8571428960683413,
+          0.31760276150310124
+        ],
+        "uniform_scale_to_target_height": 0.8571428960683413,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "VENDING_BODY": false,
+        "VENDING_GLASS": false,
+        "VENDING_DISPLAY": false,
+        "VENDING_BUTTONS": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "reference_matched_content_cleanup_required",
+        "observations": [
+          "Red industrial vending machine, cyan PROJECTS header, bright display bays, control panel and lower pickup slot closely match the provided crop.",
+          "Embedded reference miniatures and accent colours are visible; no obvious missing large piece in the supplied front three-quarter preview."
+        ],
+        "issues": [
+          "Generated branding on the lower front reads incorrectly (PETER PAH'S / TECHLAND-like lettering); smaller screen/sticker text is illegible or garbled and must be replaced with accurate authored graphics.",
+          "The display contains concept-sheet miniature objects, not verified models of the user's projects; they must not be presented as actual PAN/FlipFate/BMO project models.",
+          "One opaque mesh/material merges cabinet, display contents, glass area and controls; no independently operable buttons, screen or true transparent glass is established."
+        ],
+        "unverified": [
+          "Rear and hidden surfaces",
+          "Front +Z orientation",
+          "Final scene scale/pivot",
+          "Editable screen and display bays"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "06_showcase_zone",
+      "task_id": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\06-showcase-zone-2c13d6cc\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\06-showcase-zone-2c13d6cc/preview.png",
+      "qa_report": "assets/tripo/records/06_showcase_zone.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 9644,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        0.5732150298574368,
+        1.7999999996747817,
+        2.0257973670959473
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.8999999998373909,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          2.2,
+          2.35,
+          0.6
+        ],
+        "target_over_raw_scale_xyz": [
+          3.8380012480607113,
+          1.3055555557914391,
+          0.296179672135778
+        ],
+        "uniform_scale_to_target_height": 1.3055555557914391,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "SHOWCASE_FRAME": false,
+        "DISPLAY_PAN": false,
+        "DISPLAY_FLIPFATE": false,
+        "DISPLAY_BMO": false,
+        "DISPLAY_ROVER": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "display_content_cleanup_required",
+        "observations": [
+          "Standalone dark metal display cabinet with three columns and three shelf rows, lavender/cyan/amber accents, and low base cupboards.",
+          "The role is clearly a display cabinet, distinct from the tools workbench asset."
+        ],
+        "issues": [
+          "The approved text brief asked for empty hero-project niches, but three invented robot figures occupy the upper row and small objects occupy several lower niches. They must be removed or held from final acceptance; they are not verified PAN/FlipFate/BMO models.",
+          "Cabinet, shelf contents and glass/front surfaces are merged into one opaque mesh/material; named showcase and individual display nodes are absent."
+        ],
+        "unverified": [
+          "Rear surfaces",
+          "Interior topology and true shelf cavities",
+          "Front +Z orientation",
+          "Final scene scale/pivot"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "07_tools_zone",
+      "task_id": "5cdd8463-4306-4ab8-b4a4-376985d5737f",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\07-tools-zone-5cdd8463\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\07-tools-zone-5cdd8463/preview.png",
+      "qa_report": "assets/tripo/records/07_tools_zone.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 16521,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        0.400178132817242,
+        0.4999999865705327,
+        0.9390916228294373
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.24999999328526634,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          2.4,
+          2.3,
+          0.8
+        ],
+        "target_over_raw_scale_xyz": [
+          5.997329197135466,
+          4.600000123551102,
+          0.8518870582506519
+        ],
+        "uniform_scale_to_target_height": 4.600000123551102,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "WORKBENCH_ROOT": false,
+        "TOOLS_PEGBOARD": false,
+        "TOOL_SCREEN": false,
+        "DRAWERS": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "generated_visual_rejected",
+        "observations": [
+          "Actual output contains a left equipment desk/tower, right red-drawer instrument section, stool and some warm tool lighting.",
+          "Generic instrument screens and hand tools resemble portions of the input reference."
+        ],
+        "issues": [
+          "A very large central section of the worktop/backboard is absent; the intended continuous workbench is broken into left/right sections.",
+          "Upper tool rows and a lamp/shelf section appear suspended without coherent support in the provider preview.",
+          "The broad missing region is not a minor pivot or scale issue; a complete modular tool-creation zone has not been visually delivered.",
+          "Tiny monitor graphics are invented/illegible and must not identify specific user-owned equipment."
+        ],
+        "unverified": [
+          "Back and occluded surfaces",
+          "Connectedness of the visible floating fragments",
+          "Front +Z orientation",
+          "Final scene scale/pivot"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "08_street_lamp",
+      "task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\08-street-lamp-b369cdad\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\08-street-lamp-b369cdad/preview.png",
+      "qa_report": "assets/tripo/records/08_street_lamp.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 4628,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        1.6413118243217468,
+        3,
+        1.3943846225738525
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -1.5,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          0.65,
+          2.8,
+          0.5
+        ],
+        "target_over_raw_scale_xyz": [
+          0.39602468608827884,
+          0.9333333333333332,
+          0.35858112023429023
+        ],
+        "uniform_scale_to_target_height": 0.9333333333333332,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "LAMP_POLE": false,
+        "LAMP_EMISSIVE": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "main_appearance_matches_postprocess_required",
+        "observations": [
+          "A tall warm rust/orange industrial single-arm streetlamp with support struts and low service fixtures matches the reference silhouette.",
+          "The main pole, lamp head and heavy base appear present in the single preview."
+        ],
+        "issues": [
+          "Pole, lamp head and low fixtures are merged into one material/mesh; independent lamp emission is not established.",
+          "Small white/red sticker-like marks on the pole are not readable accurate signage."
+        ],
+        "unverified": [
+          "Rear surfaces",
+          "Actual lamp underside geometry",
+          "Front +Z orientation",
+          "Final scene scale/pivot",
+          "Emission versus baked colour"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "09_trash_bin",
+      "task_id": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\09-trash-bin-1ae8df17\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\09-trash-bin-1ae8df17/preview.png",
+      "qa_report": "assets/tripo/records/09_trash_bin.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 3761,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        0.9662495997051224,
+        1.2000000476837158,
+        0.9963470616478531
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.6000000238418579,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          0.55,
+          0.95,
+          0.6
+        ],
+        "target_over_raw_scale_xyz": [
+          0.5692111025638176,
+          0.7916666352086609,
+          0.6021997987404741
+        ],
+        "uniform_scale_to_target_height": 0.7916666352086609,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "BIN_BODY": false,
+        "BIN_LID": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "main_appearance_matches_cleanup_required",
+        "observations": [
+          "Weathered teal recycling bin with orange rim/handles and recycling emblem matches the cropped reference.",
+          "The main upright bin silhouette and lid-like top are visible."
+        ],
+        "issues": [
+          "White lettering below the recycling mark is garbled and is not an accurate authored label.",
+          "A ground-like base sheet and jagged side/bottom fragments are fused into the asset; remove unintended street fragments before placing it on the separate street base.",
+          "Bin lid/body are merged into one mesh/material; no independent lid node."
+        ],
+        "unverified": [
+          "Back surfaces",
+          "Geometry of jagged fragments",
+          "Front +Z orientation",
+          "Final scene scale/pivot"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "10_utility_cabinet",
+      "task_id": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\10-utility-cabinet-79c20750\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\10-utility-cabinet-79c20750/preview.png",
+      "qa_report": "assets/tripo/records/10_utility_cabinet.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 4958,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        0.4345049262046814,
+        1,
+        0.41140857338905334
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.5,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          0.7,
+          1.65,
+          0.45
+        ],
+        "target_over_raw_scale_xyz": [
+          1.6110289154011854,
+          1.65,
+          1.0938031657751872
+        ],
+        "uniform_scale_to_target_height": 1.65,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "UTILITY_BODY": false,
+        "UTILITY_DOOR": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "main_appearance_matches_label_cleanup_required",
+        "observations": [
+          "Tall narrow weathered dark steel utility cabinet with front vents, handles, hinges and access panel.",
+          "No invented human portrait or clear cat-head brand symbol is visible; the basic industrial utility role matches the text brief."
+        ],
+        "issues": [
+          "The approved text asked for blank label/graffiti placeholders, but several front stickers contain invented, unreadable lettering and symbols; replace or clean these.",
+          "Door, hinges and cabinet are merged into one mesh/material; named independent utility door/body nodes are absent."
+        ],
+        "unverified": [
+          "Back surface",
+          "Front +Z orientation",
+          "Final scene scale/pivot"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "11_tree",
+      "task_id": "f83af78c-7c37-48c0-8de7-e2706f983982",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\11-tree-f83af78c\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\11-tree-f83af78c/preview.png",
+      "qa_report": "assets/tripo/records/11_tree.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 9311,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        0.9048060538294322,
+        1.2000000476837158,
+        1.0669436640319674
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.6000000238418579,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          1.35,
+          2.2,
+          1.25
+        ],
+        "target_over_raw_scale_xyz": [
+          1.4920324574381028,
+          1.8333332604832149,
+          1.1715707606119192
+        ],
+        "uniform_scale_to_target_height": 1.8333332604832149,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "TREE_TRUNK": false,
+        "TREE_CROWN": false,
+        "TREE_PLANTER": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "extraneous_sign_frame_cleanup_required",
+        "observations": [
+          "Visible branching brown trunk, volumetric dark green leaf clusters and a low square planter fit the text-mode tree requirements.",
+          "The foliage appears spatial rather than a single flat scene billboard in the provider view."
+        ],
+        "issues": [
+          "A large freestanding metal sign frame has been invented in front of the tree, obscuring the trunk and planter; it was not requested and should be removed.",
+          "The invented sign contains garbled lettering despite the no-lettering instruction.",
+          "Tree, leaves, planter and sign are one mesh/material; required named tree components are absent."
+        ],
+        "unverified": [
+          "Rear foliage and leaf thickness",
+          "Ground contact after sign removal",
+          "Front +Z orientation",
+          "Final scene scale/pivot"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "12_plants_grass",
+      "task_id": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\12-plants-grass-14dc3618\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\12-plants-grass-14dc3618/preview.png",
+      "qa_report": "assets/tripo/records/12_plants_grass.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 5168,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        0.4216497800268648,
+        0.3499999945391963,
+        0.44269829988479614
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.17499999726959814,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "target_over_raw_scale_xyz": [
+          2.8459637757276752,
+          2.285714321376678,
+          1.3553248344439963
+        ],
+        "uniform_scale_to_target_height": 2.285714321376678,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "PLANTER_LOW": false,
+        "PLANT_CLUSTER": false,
+        "GRASS_PATCH": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "generated_visual_rejected",
+        "observations": [
+          "Two planted clusters and a small grass patch are visible at the front/sides."
+        ],
+        "issues": [
+          "Most of the generated geometry is an unsolicited roofed kiosk/building with wall panels, canopy, platform and cabinet-like doors.",
+          "The approved prompt explicitly requested only compact planters/shrubs/grass and no building or road; this is the wrong dominant asset type.",
+          "The planted areas could potentially be extracted from the real mesh, but the current complete output does not satisfy an independent plants/grass module."
+        ],
+        "unverified": [
+          "Plant geometry after separation from the kiosk",
+          "Back surfaces",
+          "Front +Z orientation",
+          "Final scene scale/pivot"
+        ],
+        "final_production_approved": false
+      }
+    },
+    {
+      "id": "13_street_base",
+      "task_id": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+      "status": "success",
+      "raw_model": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\13-street-base-38eb318a\\model.glb",
+      "preview": "assets\\tripo\\raw\\tripo-out\\13-street-base-38eb318a/preview.png",
+      "qa_report": "assets/tripo/records/13_street_base.qa.json",
+      "qa_status": "passed_implemented_checks",
+      "qa_errors": [],
+      "qa_warnings": [],
+      "triangles": 7741,
+      "mesh_count": 1,
+      "material_count": 1,
+      "textures_decoded": 3,
+      "raw_size_xyz_m": [
+        4.128810405731201,
+        1.0000000421746762,
+        3.0269923353932597
+      ],
+      "pivot_and_scale": {
+        "scene_origin": [
+          0,
+          0,
+          0
+        ],
+        "origin_to_ground_center": [
+          0,
+          -0.5000000210873381,
+          0
+        ],
+        "ground_centered_within_1mm": false,
+        "target_size_m_xyz": [
+          6.2,
+          0.3,
+          4.7
+        ],
+        "target_over_raw_scale_xyz": [
+          1.5016431830809622,
+          0.29999998734759764,
+          1.5526963663055946
+        ],
+        "uniform_scale_to_target_height": 0.29999998734759764,
+        "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+      },
+      "expected_nodes_found": {
+        "SIDEWALK": false,
+        "CURB": false,
+        "ROAD": false,
+        "WET_PATCH": false
+      },
+      "visual_review": {
+        "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+        "status": "main_appearance_matches_shape_review_required",
+        "observations": [
+          "A raised paved curb/sidewalk strip, drain openings, lower road patch and short bollard match the main objects in the reference crop.",
+          "Paving seams, worn curb paint and small street details are visible."
+        ],
+        "issues": [
+          "The lower road portion ends in an irregular wedge-like thin sheet rather than a clean rectangular modular footprint; check or trim the boundary before assembling the scene.",
+          "Sidewalk, curb, road, bollard and wet areas are one mesh/material, with no separate named adjustment nodes.",
+          "Wetness/reflections are not established by the relatively matte provider preview; test the ORM texture under scene lighting instead of assuming baked colour is real reflection."
+        ],
+        "unverified": [
+          "Underside and back edge",
+          "Upper walking surface alignment",
+          "Front +Z orientation",
+          "Final scene size/pivot",
+          "Wet-area roughness response"
+        ],
+        "final_production_approved": false
+      }
+    }
+  ],
+  "generation_success_count": 10,
+  "structure_pass_count": 10,
+  "visual_rejected_assets": [
+    "07_tools_zone",
+    "12_plants_grass"
+  ],
+  "total_triangles": 76286,
+  "total_decoded_textures": 30,
+  "final_production_approved_count": 0
+}

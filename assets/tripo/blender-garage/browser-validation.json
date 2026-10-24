@@ -1,0 +1,31 @@
+{
+  "desktop": {
+    "loaded": 21,
+    "slots": 22,
+    "unavailable": "Previously rejected PC tower; no placeholder",
+    "console_warnings": 0,
+    "console_errors": 0,
+    "interior_visual_review": "passed",
+    "door_close_and_reopen": "passed",
+    "cat_beckon_toggle": "passed"
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      640
+    ],
+    "controls_visible": true,
+    "interior_visual_review": "passed"
+  },
+  "build": {
+    "npm_run_build": "passed for en and zh-Hans",
+    "npm_run_typecheck": "passed",
+    "final_static_GLBS": "copied after geometry refinement; both locale hashes checked by packaging tool",
+    "warnings": [
+      "Existing vscode-languageserver-types dynamic require warning",
+      "Webpack persistent-cache snapshot warning",
+      "Docusaurus update-check config permission warning"
+    ]
+  },
+  "publication": "local only"
+}

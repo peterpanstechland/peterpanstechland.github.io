@@ -1,0 +1,23 @@
+{
+  "revision": "rosewood-carved-v3",
+  "design": "Eight-legged dark rosewood stand with octagonal mouldings, pierced bat and foliage aprons",
+  "height": 0.96,
+  "topSize": [
+    0.64,
+    0.64
+  ],
+  "legCount": 8,
+  "batMotifs": 4,
+  "genuineMeshOpenings": true,
+  "rawGlbModified": false,
+  "catRigModified": false,
+  "placement": "passed; eight ground contacts, positive seat margins and idempotent placement",
+  "browserErrors": [],
+  "visualReview": [
+    "front close-up",
+    "oblique"
+  ],
+  "published": false,
+  "build": "passed: en and zh-Hans",
+  "typecheck": "passed"
+}

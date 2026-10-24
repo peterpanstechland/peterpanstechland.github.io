@@ -1,0 +1,107 @@
+{
+  "asset_id": "04_lucky_cat",
+  "display_size_m_xyz": [
+    0.7095348238945007,
+    0.7999997138977051,
+    0.6000436544418335
+  ],
+  "working_bounds_native": [
+    [
+      -0.35476741194725037,
+      -0.30002182722091675,
+      0.0
+    ],
+    [
+      0.35476741194725037,
+      0.30002179741859436,
+      0.7999997138977051
+    ]
+  ],
+  "original_sha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
+  "rig": true,
+  "articulated": false,
+  "meshes": {
+    "tripo_node_36e3dca6-efcb-428b-a335-ef2058d6786f": {
+      "vertices": 9728,
+      "faces": 14394,
+      "boundary_edges": 4596,
+      "nonmanifold_edges": 4596,
+      "degenerate_faces": 0
+    }
+  },
+  "upward_surface_levels": [
+    [
+      0.25,
+      0.005631994408986429
+    ],
+    [
+      0.75,
+      0.005457093339472863
+    ],
+    [
+      0.275,
+      0.005255692197920325
+    ],
+    [
+      0.7250000000000001,
+      0.00516028499737331
+    ],
+    [
+      0.07500000000000001,
+      0.004703220947021691
+    ],
+    [
+      0.47500000000000003,
+      0.004494617233035569
+    ],
+    [
+      0.45,
+      0.0039665664612584806
+    ],
+    [
+      0.225,
+      0.003777820354088135
+    ],
+    [
+      0.125,
+      0.0036582299301244348
+    ],
+    [
+      0.7000000000000001,
+      0.003389438364569841
+    ],
+    [
+      0.2,
+      0.0033381559986196407
+    ],
+    [
+      0.1,
+      0.003123414566204019
+    ],
+    [
+      0.35000000000000003,
+      0.002701682666895522
+    ],
+    [
+      0.375,
+      0.0026774558464239817
+    ],
+    [
+      0.65,
+      0.0025893340998663916
+    ]
+  ],
+  "source_task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+  "changes": {
+    "notes": [
+      "Smoothed skin shading and reduced excessive normal-map relief; no remeshing or weight changes."
+    ],
+    "cleanup": {}
+  },
+  "output_sha256": "730e14e7524bbcbc2f3087f165eca540d1e5e0a7a65bf820f81250c6a1bcb3d1",
+  "output_glb": "assets/tripo/blender-garage/models/04_cyber_lucky_cat.glb",
+  "credits_spent": 0,
+  "visual_acceptance": "accepted_with_notes",
+  "animation_compatibility": "passed; see animation-validation.json",
+  "visual_review": "Front and back neutral-light renders inspected. Generated fine details remain approximate; local replacement parts are named LOCAL_."
+}

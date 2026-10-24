@@ -1,0 +1,5 @@
+Publishes the latest Cyber Maker Garage design at /maker-garage-preview/ and /zh-Hans/maker-garage-preview/, with a localized Maker Garage navigation entry. The existing homepage, articles, docs and Challenge content are preserved.
+
+The scene uses 12 real Tripo GLBs, grounded placements, graffiti branding, a remade Shenzhen sign, an independently animated 26-slat shutter and a rigged blue lucky cat. The rejected tools-zone output remains clearly unavailable. Includes loading/failure states and mobile rendering settings, a self-hosted Three.js runtime and a public asset/task/hash manifest. Raw downloads, temporary authorization links and private production logs remain local.
+
+Validation: TypeScript and production builds for en and zh-Hans passed. Both language outputs contain all 12 models and runtime dependencies. Desktop front/side/back views, complete shutter open/close, cat motion, effects, and 390x844 loading were checked. Repeated grounding leaves the skinned cat position unchanged. Existing non-fatal build warnings and previously recorded source-mesh/mobile limitations remain.

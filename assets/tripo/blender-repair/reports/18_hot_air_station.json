@@ -1,0 +1,61 @@
+{
+  "asset_id": "18_hot_air_station",
+  "source_task_id": "dc664096-8d52-4c65-b868-ac72f30536e8",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/18_hot_air_station.glb",
+  "input_sha256": "b33177cc48b1d19dcf264f4f0c70f6fa435ff0a9636fbdde0d57cff2a28c798d",
+  "output": "assets/tripo/blender-repair/models/18_hot_air_station.glb",
+  "output_sha256": "4a0e9063eb377b55205f5f77d9d777185a1121264f4c0b98ec046aa6a98c3864",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_dc664096-8d52-4c65-b868-ac72f30536e8": {
+        "before": {
+          "vertices": 2947,
+          "faces": 3140,
+          "boundary_edges": 2260,
+          "nonmanifold_edges": 2260,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 1557,
+          "faces": 3140,
+          "boundary_edges": 3,
+          "nonmanifold_edges": 8,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [
+      {
+        "axis_xyz": 0,
+        "plane_m": -0.089,
+        "changed_vertices": 61,
+        "max_displacement_m": 0.005941978037357326
+      },
+      {
+        "axis_xyz": 1,
+        "plane_m": 0.066,
+        "changed_vertices": 28,
+        "max_displacement_m": 0.0049291547536849944
+      }
+    ],
+    "local_parts": [],
+    "notes": [
+      "Flattened base deck and controller side; gun, holder and hose retained.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ]
+  },
+  "mesh_stats": {
+    "tripo_node_dc664096-8d52-4c65-b868-ac72f30536e8": {
+      "vertices": 1557,
+      "faces": 3140,
+      "boundary_edges": 3,
+      "nonmanifold_edges": 8,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

@@ -1,0 +1,7234 @@
+{
+  "schema_version": 1,
+  "asset_id": "02_roller_shutter",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\blender-garage\\models\\02_roller_shutter.glb",
+  "inspected_at_utc": "2026-10-23T02:49:07.645624+00:00",
+  "tool": "tools/inspect_tripo_glb.py",
+  "scope": "GLB structure, decoded accessor data, static scene bounds, material references, full image decoding",
+  "visual_review": "NOT_PERFORMED",
+  "qa_approved": false,
+  "errors": [],
+  "warnings": [],
+  "unsupported": [],
+  "limitations": [
+    "This tool is not the Khronos glTF Validator and does not certify visual quality, topology, UV appearance, or animation behavior.",
+    "Y-up is the glTF convention; the intended front (+Z), upright appearance, and functional pivot require visual inspection.",
+    "Bounds describe stored static mesh positions with node transforms; skins, morph weights, animation, and GPU instancing are not evaluated."
+  ],
+  "accessors": [
+    {
+      "index": 0,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 1244,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.14000000059604645,
+        -1.272080659866333,
+        -0.07921762764453888
+      ],
+      "decoded_max": [
+        0.14000000059604645,
+        1.272080659866333,
+        0.07921762764453888
+      ]
+    },
+    {
+      "index": 1,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 1244,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9999974966049194,
+        -0.9999994039535522,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9982661008834839,
+        0.9999873638153076,
+        1.0
+      ]
+    },
+    {
+      "index": 2,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 1244,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.00012492337555158883,
+        0.005247354507446289
+      ],
+      "decoded_max": [
+        0.9976127743721008,
+        0.9857795238494873
+      ]
+    },
+    {
+      "index": 3,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 4632,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        1243
+      ]
+    },
+    {
+      "index": 4,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 310,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.14000000059604645,
+        -1.2717188596725464,
+        -0.07921762764453888
+      ],
+      "decoded_max": [
+        0.14000000059604645,
+        1.2548253536224365,
+        0.07686574757099152
+      ]
+    },
+    {
+      "index": 5,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 310,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.11989805847406387,
+        -0.3624974191188812,
+        -0.9999799728393555
+      ],
+      "decoded_max": [
+        1.0,
+        0.1707972288131714,
+        0.9994568228721619
+      ]
+    },
+    {
+      "index": 6,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 310,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 7,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 789,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        309
+      ]
+    },
+    {
+      "index": 8,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 1429,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.14000000059604645,
+        -1.2737610340118408,
+        -0.07877635955810547
+      ],
+      "decoded_max": [
+        0.14000000059604645,
+        1.2737610340118408,
+        0.07877635955810547
+      ]
+    },
+    {
+      "index": 9,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 1429,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9722710251808167,
+        -0.9999408721923828,
+        -1.0
+      ],
+      "decoded_max": [
+        0.999990701675415,
+        0.9999922513961792,
+        1.0
+      ]
+    },
+    {
+      "index": 10,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 1429,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.004944741725921631
+      ],
+      "decoded_max": [
+        0.9988534450531006,
+        0.9997090697288513
+      ]
+    },
+    {
+      "index": 11,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 5124,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        1428
+      ]
+    },
+    {
+      "index": 12,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 332,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.14000000059604645,
+        -1.2735341787338257,
+        -0.07862783223390579
+      ],
+      "decoded_max": [
+        -0.14000000059604645,
+        1.2562311887741089,
+        0.07705795764923096
+      ]
+    },
+    {
+      "index": 13,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 332,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -0.13379405438899994,
+        -0.9999734163284302
+      ],
+      "decoded_max": [
+        0.09810148179531097,
+        0.1369020640850067,
+        0.00019999999494757503
+      ]
+    },
+    {
+      "index": 14,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 332,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 15,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 861,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        331
+      ]
+    },
+    {
+      "index": 16,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 942,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.1662532240152359,
+        -0.07900857925415039
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.1662532240152359,
+        0.07900857925415039
+      ]
+    },
+    {
+      "index": 17,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 942,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.6984940767288208,
+        -0.9830053448677063,
+        -0.9999998807907104
+      ],
+      "decoded_max": [
+        0.8613998293876648,
+        0.9999998807907104,
+        0.9999997615814209
+      ]
+    },
+    {
+      "index": 18,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 942,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.00026116103981621563,
+        0.0
+      ],
+      "decoded_max": [
+        0.9988117218017578,
+        0.9887409210205078
+      ]
+    },
+    {
+      "index": 19,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2838,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        941
+      ]
+    },
+    {
+      "index": 20,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 602,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.1662532240152359,
+        -0.07746192067861557
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.1662532240152359,
+        0.07863953709602356
+      ]
+    },
+    {
+      "index": 21,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 602,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9999755620956421
+      ],
+      "decoded_max": [
+        1.0,
+        0.35331395268440247,
+        0.9999608993530273
+      ]
+    },
+    {
+      "index": 22,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 602,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 23,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1392,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        601
+      ]
+    },
+    {
+      "index": 24,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 716,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.06968744099140167
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.06968744099140167
+      ]
+    },
+    {
+      "index": 25,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 716,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9993892908096313,
+        -0.9999994039535522,
+        -0.9999991655349731
+      ],
+      "decoded_max": [
+        0.9990179538726807,
+        0.9889339804649353,
+        0.9999974966049194
+      ]
+    },
+    {
+      "index": 26,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 716,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.00991015788167715,
+        0.005310773849487305
+      ],
+      "decoded_max": [
+        0.9977714419364929,
+        0.9997941255569458
+      ]
+    },
+    {
+      "index": 27,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2040,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        715
+      ]
+    },
+    {
+      "index": 28,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 600,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.03960295766592026,
+        -0.06697247177362442
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.06968744099140167
+      ]
+    },
+    {
+      "index": 29,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 600,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -0.9980812072753906,
+        -0.8329257965087891
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9805693626403809
+      ]
+    },
+    {
+      "index": 30,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 600,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 31,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1458,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        599
+      ]
+    },
+    {
+      "index": 32,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 571,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.06819532811641693
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.06819532811641693
+      ]
+    },
+    {
+      "index": 33,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 571,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.8935909271240234,
+        -0.8656551241874695,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9990179538726807,
+        0.9924575090408325,
+        0.9999955892562866
+      ]
+    },
+    {
+      "index": 34,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 571,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.03231225535273552,
+        0.002234816551208496
+      ],
+      "decoded_max": [
+        0.9996007084846497,
+        0.9980562925338745
+      ]
+    },
+    {
+      "index": 35,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1620,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        570
+      ]
+    },
+    {
+      "index": 36,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 861,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.06819532811641693
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.06819532811641693
+      ]
+    },
+    {
+      "index": 37,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 861,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -9.999999747378752e-05
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.00019999999494757503
+      ]
+    },
+    {
+      "index": 38,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 861,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 39,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2448,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        860
+      ]
+    },
+    {
+      "index": 40,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 579,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.06705476343631744
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.06705476343631744
+      ]
+    },
+    {
+      "index": 41,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 579,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9187082052230835,
+        -0.9191304445266724,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9551118016242981,
+        0.9961789846420288,
+        0.9999985694885254
+      ]
+    },
+    {
+      "index": 42,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 579,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.03534894809126854,
+        0.004914522171020508
+      ],
+      "decoded_max": [
+        0.9938287138938904,
+        0.9940585494041443
+      ]
+    },
+    {
+      "index": 43,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1548,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        578
+      ]
+    },
+    {
+      "index": 44,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 811,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.06704065948724747
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.06705476343631744
+      ]
+    },
+    {
+      "index": 45,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 811,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9916965365409851
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.15250425040721893
+      ]
+    },
+    {
+      "index": 46,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 811,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 47,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2292,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        810
+      ]
+    },
+    {
+      "index": 48,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 455,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05101417750120163
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05101417750120163
+      ]
+    },
+    {
+      "index": 49,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 455,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.7385677695274353,
+        -0.9198675155639648,
+        -1.0
+      ],
+      "decoded_max": [
+        0.7442517280578613,
+        0.7266671657562256,
+        0.9999985694885254
+      ]
+    },
+    {
+      "index": 50,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 455,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.03288380056619644,
+        0.03283661603927612
+      ],
+      "decoded_max": [
+        0.987964391708374,
+        0.9889050722122192
+      ]
+    },
+    {
+      "index": 51,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1056,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        454
+      ]
+    },
+    {
+      "index": 52,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 707,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05100465938448906
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05101417750120163
+      ]
+    },
+    {
+      "index": 53,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 707,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.00019999999494757503
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9997427463531494
+      ]
+    },
+    {
+      "index": 54,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 707,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 55,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2004,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        706
+      ]
+    },
+    {
+      "index": 56,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 482,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.052231743931770325
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.052231743931770325
+      ]
+    },
+    {
+      "index": 57,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 482,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9968977570533752,
+        -0.8875638246536255,
+        -1.0
+      ],
+      "decoded_max": [
+        0.8377894163131714,
+        0.6677155494689941,
+        0.9999985694885254
+      ]
+    },
+    {
+      "index": 58,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 482,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0355258509516716,
+        0.03931921720504761
+      ],
+      "decoded_max": [
+        0.9867323040962219,
+        0.9860433340072632
+      ]
+    },
+    {
+      "index": 59,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1170,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        481
+      ]
+    },
+    {
+      "index": 60,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 745,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.052231743931770325
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05200115591287613
+      ]
+    },
+    {
+      "index": 61,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 745,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.996397852897644
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9968908429145813
+      ]
+    },
+    {
+      "index": 62,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 745,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 63,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2064,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        744
+      ]
+    },
+    {
+      "index": 64,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 434,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.051000215113162994
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.051000215113162994
+      ]
+    },
+    {
+      "index": 65,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 434,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.6406040191650391,
+        -0.8032754063606262,
+        -1.0
+      ],
+      "decoded_max": [
+        0.7424782514572144,
+        0.831892192363739,
+        0.9999947547912598
+      ]
+    },
+    {
+      "index": 66,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 434,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.004235726781189442,
+        0.03126025199890137
+      ],
+      "decoded_max": [
+        0.9843134880065918,
+        0.9372357130050659
+      ]
+    },
+    {
+      "index": 67,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1101,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        433
+      ]
+    },
+    {
+      "index": 68,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 722,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.051000215113162994
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05093543976545334
+      ]
+    },
+    {
+      "index": 69,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 722,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.00019999999494757503
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9996420741081238
+      ]
+    },
+    {
+      "index": 70,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 722,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 71,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2055,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        721
+      ]
+    },
+    {
+      "index": 72,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 459,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05095537751913071
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05095537751913071
+      ]
+    },
+    {
+      "index": 73,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 459,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9717608690261841,
+        -0.8809633255004883,
+        -1.0
+      ],
+      "decoded_max": [
+        0.8238822817802429,
+        0.963447093963623,
+        0.9999980926513672
+      ]
+    },
+    {
+      "index": 74,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 459,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.006417452357709408,
+        0.01092153787612915
+      ],
+      "decoded_max": [
+        0.9950492978096008,
+        0.9839840531349182
+      ]
+    },
+    {
+      "index": 75,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1077,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        458
+      ]
+    },
+    {
+      "index": 76,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 710,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05095537751913071
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05095537751913071
+      ]
+    },
+    {
+      "index": 77,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 710,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9998096823692322
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9998830556869507
+      ]
+    },
+    {
+      "index": 78,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 710,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 79,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1995,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        709
+      ]
+    },
+    {
+      "index": 80,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 437,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.050826095044612885
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.050826095044612885
+      ]
+    },
+    {
+      "index": 81,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 437,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.7572015523910522,
+        -0.6310058236122131,
+        -1.0
+      ],
+      "decoded_max": [
+        0.6971064209938049,
+        0.9086990356445312,
+        0.9999967813491821
+      ]
+    },
+    {
+      "index": 82,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 437,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.002105731051415205,
+        0.016209781169891357
+      ],
+      "decoded_max": [
+        0.9990392327308655,
+        0.9996576309204102
+      ]
+    },
+    {
+      "index": 83,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1167,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        436
+      ]
+    },
+    {
+      "index": 84,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 745,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.050826095044612885
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.050826095044612885
+      ]
+    },
+    {
+      "index": 85,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 745,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9988471865653992
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.00019999999494757503
+      ]
+    },
+    {
+      "index": 86,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 745,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 87,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2130,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        744
+      ]
+    },
+    {
+      "index": 88,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 508,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.051544465124607086
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.051544465124607086
+      ]
+    },
+    {
+      "index": 89,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 508,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9494273066520691,
+        -0.9678530097007751,
+        -1.0
+      ],
+      "decoded_max": [
+        0.7019875645637512,
+        0.8197268843650818,
+        0.9999992847442627
+      ]
+    },
+    {
+      "index": 90,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 508,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.004274220205843449,
+        0.0039498209953308105
+      ],
+      "decoded_max": [
+        0.9968740344047546,
+        1.0
+      ]
+    },
+    {
+      "index": 91,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1521,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        507
+      ]
+    },
+    {
+      "index": 92,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 805,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05135996267199516
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.051544465124607086
+      ]
+    },
+    {
+      "index": 93,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 805,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9970134496688843
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9998698234558105
+      ]
+    },
+    {
+      "index": 94,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 805,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 95,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2259,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        804
+      ]
+    },
+    {
+      "index": 96,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 546,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05577773600816727
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05577773600816727
+      ]
+    },
+    {
+      "index": 97,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 546,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9604268074035645,
+        -0.803485631942749,
+        -1.0
+      ],
+      "decoded_max": [
+        0.6990037560462952,
+        0.9001181125640869,
+        0.9999992847442627
+      ]
+    },
+    {
+      "index": 98,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 546,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.003927022218704224,
+        0.005944490432739258
+      ],
+      "decoded_max": [
+        0.9965007305145264,
+        0.9998571872711182
+      ]
+    },
+    {
+      "index": 99,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1449,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        545
+      ]
+    },
+    {
+      "index": 100,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 823,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.055736787617206573
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05577773600816727
+      ]
+    },
+    {
+      "index": 101,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 823,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.0003000000142492354
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9990290999412537
+      ]
+    },
+    {
+      "index": 102,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 823,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 103,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2331,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        822
+      ]
+    },
+    {
+      "index": 104,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 597,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.055943842977285385
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.055943842977285385
+      ]
+    },
+    {
+      "index": 105,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 597,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9773584008216858,
+        -0.994122326374054,
+        -1.0
+      ],
+      "decoded_max": [
+        0.6452085375785828,
+        0.8511791825294495,
+        0.9999974966049194
+      ]
+    },
+    {
+      "index": 106,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 597,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.002345407148823142,
+        0.014948368072509766
+      ],
+      "decoded_max": [
+        0.9968041777610779,
+        0.9823203682899475
+      ]
+    },
+    {
+      "index": 107,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1491,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        596
+      ]
+    },
+    {
+      "index": 108,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 834,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.055943842977285385
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.055943842977285385
+      ]
+    },
+    {
+      "index": 109,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 834,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -9.999999747378752e-05
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "index": 110,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 834,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 111,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2439,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        833
+      ]
+    },
+    {
+      "index": 112,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 601,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05594746768474579
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05594746768474579
+      ]
+    },
+    {
+      "index": 113,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 601,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9959439039230347,
+        -0.9094968438148499,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9957603812217712,
+        0.8382924199104309,
+        0.9999973773956299
+      ]
+    },
+    {
+      "index": 114,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 601,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.005164519418030977,
+        0.043162763118743896
+      ],
+      "decoded_max": [
+        0.998992919921875,
+        0.9998276829719543
+      ]
+    },
+    {
+      "index": 115,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1395,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        600
+      ]
+    },
+    {
+      "index": 116,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 850,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05594746768474579
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05594746768474579
+      ]
+    },
+    {
+      "index": 117,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 850,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.00019999999494757503
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "index": 118,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 850,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 119,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2403,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        849
+      ]
+    },
+    {
+      "index": 120,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 603,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.052967093884944916
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.052967093884944916
+      ]
+    },
+    {
+      "index": 121,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 603,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9963047504425049,
+        -0.8759967684745789,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9812918305397034,
+        0.9569574594497681,
+        0.9999972581863403
+      ]
+    },
+    {
+      "index": 122,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 603,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.012188347987830639,
+        0.006271243095397949
+      ],
+      "decoded_max": [
+        0.998645007610321,
+        0.9999914765357971
+      ]
+    },
+    {
+      "index": 123,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1410,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        602
+      ]
+    },
+    {
+      "index": 124,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 853,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.052967093884944916
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.052967093884944916
+      ]
+    },
+    {
+      "index": 125,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 853,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.0003000000142492354
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9994100332260132
+      ]
+    },
+    {
+      "index": 126,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 853,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 127,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2406,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        852
+      ]
+    },
+    {
+      "index": 128,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 524,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05393221974372864
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05393221974372864
+      ]
+    },
+    {
+      "index": 129,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 524,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9902106523513794,
+        -0.9765487313270569,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9711733460426331,
+        0.9516086578369141,
+        0.9999899864196777
+      ]
+    },
+    {
+      "index": 130,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 524,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.00037729708128608763,
+        0.0015787482261657715
+      ],
+      "decoded_max": [
+        0.9988824725151062,
+        0.9899663329124451
+      ]
+    },
+    {
+      "index": 131,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1353,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        523
+      ]
+    },
+    {
+      "index": 132,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 585,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05393221974372864
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05391241982579231
+      ]
+    },
+    {
+      "index": 133,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 585,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.43260663747787476
+      ],
+      "decoded_max": [
+        1.0,
+        0.5001106858253479,
+        0.9878647923469543
+      ]
+    },
+    {
+      "index": 134,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 585,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 135,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1686,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        584
+      ]
+    },
+    {
+      "index": 136,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 501,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.0508086234331131
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.0508086234331131
+      ]
+    },
+    {
+      "index": 137,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 501,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.6627971529960632,
+        -0.9366607666015625,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9727960824966431,
+        0.9917528629302979,
+        0.9999692440032959
+      ]
+    },
+    {
+      "index": 138,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 501,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0014529640320688486,
+        0.00019687414169311523
+      ],
+      "decoded_max": [
+        1.0,
+        0.999984622001648
+      ]
+    },
+    {
+      "index": 139,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1233,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        500
+      ]
+    },
+    {
+      "index": 140,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 517,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.050786565989255905
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.0508086234331131
+      ]
+    },
+    {
+      "index": 141,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 517,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        0.0,
+        -0.0003000000142492354
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.00019999999494757503
+      ]
+    },
+    {
+      "index": 142,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 517,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 143,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1506,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        516
+      ]
+    },
+    {
+      "index": 144,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 458,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05083141848444939
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05083141848444939
+      ]
+    },
+    {
+      "index": 145,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 458,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9805396199226379,
+        -0.9373015761375427,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9845480918884277,
+        0.9788519740104675,
+        0.9999984502792358
+      ]
+    },
+    {
+      "index": 146,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 458,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.002962991362437606,
+        0.0031551122665405273
+      ],
+      "decoded_max": [
+        0.9975377321243286,
+        0.9991111159324646
+      ]
+    },
+    {
+      "index": 147,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1059,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        457
+      ]
+    },
+    {
+      "index": 148,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 748,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05083141848444939
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05082318186759949
+      ]
+    },
+    {
+      "index": 149,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 748,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9999982118606567
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "index": 150,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 748,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 151,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2169,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        747
+      ]
+    },
+    {
+      "index": 152,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 465,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05083658918738365
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05083658918738365
+      ]
+    },
+    {
+      "index": 153,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 465,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.902837872505188,
+        -0.930812656879425,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9426230788230896,
+        0.8622391819953918,
+        0.9999990463256836
+      ]
+    },
+    {
+      "index": 154,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 465,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.008345409296452999,
+        0.012399017810821533
+      ],
+      "decoded_max": [
+        0.9891161918640137,
+        0.9878224730491638
+      ]
+    },
+    {
+      "index": 155,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1290,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        464
+      ]
+    },
+    {
+      "index": 156,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 776,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.050829265266656876
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05083658918738365
+      ]
+    },
+    {
+      "index": 157,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 776,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9999878406524658
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9999920129776001
+      ]
+    },
+    {
+      "index": 158,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 776,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 159,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2238,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        775
+      ]
+    },
+    {
+      "index": 160,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 481,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05084186792373657
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05084186792373657
+      ]
+    },
+    {
+      "index": 161,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 481,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9153938293457031,
+        -0.8761121034622192,
+        -1.0
+      ],
+      "decoded_max": [
+        0.6466639637947083,
+        0.9610989689826965,
+        1.0
+      ]
+    },
+    {
+      "index": 162,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 481,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.02955244667828083,
+        0.00808107852935791
+      ],
+      "decoded_max": [
+        0.9987909197807312,
+        0.98809415102005
+      ]
+    },
+    {
+      "index": 163,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1182,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        480
+      ]
+    },
+    {
+      "index": 164,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 820,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05084186792373657
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.0508260615170002
+      ]
+    },
+    {
+      "index": 165,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 820,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.00019999999494757503
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9988613128662109
+      ]
+    },
+    {
+      "index": 166,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 820,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 167,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2400,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        819
+      ]
+    },
+    {
+      "index": 168,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 558,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05084598809480667
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05084598809480667
+      ]
+    },
+    {
+      "index": 169,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 558,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9968422651290894,
+        -0.9462324976921082,
+        -1.0
+      ],
+      "decoded_max": [
+        0.943953812122345,
+        0.8349919319152832,
+        0.9999932050704956
+      ]
+    },
+    {
+      "index": 170,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 558,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.031894512474536896,
+        0.00908195972442627
+      ],
+      "decoded_max": [
+        0.9988068342208862,
+        0.9977150559425354
+      ]
+    },
+    {
+      "index": 171,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1305,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        557
+      ]
+    },
+    {
+      "index": 172,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 883,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05084598809480667
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05084598809480667
+      ]
+    },
+    {
+      "index": 173,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 883,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.00019999999494757503
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.00019999999494757503
+      ]
+    },
+    {
+      "index": 174,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 883,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 175,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2541,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        882
+      ]
+    },
+    {
+      "index": 176,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 562,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.056432921439409256
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.056432921439409256
+      ]
+    },
+    {
+      "index": 177,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 562,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9967666268348694,
+        -0.9127737879753113,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9218094348907471,
+        0.9823991656303406,
+        0.9999957084655762
+      ]
+    },
+    {
+      "index": 178,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 562,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.01647210866212845,
+        0.008295536041259766
+      ],
+      "decoded_max": [
+        0.9878950715065002,
+        0.992877721786499
+      ]
+    },
+    {
+      "index": 179,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1314,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        561
+      ]
+    },
+    {
+      "index": 180,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 968,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05643155053257942
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05641461908817291
+      ]
+    },
+    {
+      "index": 181,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 968,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.0014999983832240105
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "index": 182,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 968,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 183,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2688,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        967
+      ]
+    },
+    {
+      "index": 184,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 521,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05641908943653107
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05641908943653107
+      ]
+    },
+    {
+      "index": 185,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 521,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9967666268348694,
+        -0.8491137027740479,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9480615258216858,
+        0.8113958239555359,
+        0.9999957084655762
+      ]
+    },
+    {
+      "index": 186,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 521,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.014877070672810078,
+        0.007174849510192871
+      ],
+      "decoded_max": [
+        0.9898408055305481,
+        0.9920523166656494
+      ]
+    },
+    {
+      "index": 187,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1287,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        520
+      ]
+    },
+    {
+      "index": 188,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 952,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05641908943653107
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05641908943653107
+      ]
+    },
+    {
+      "index": 189,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 952,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.999993085861206
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "index": 190,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 952,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 191,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2733,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        951
+      ]
+    },
+    {
+      "index": 192,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 473,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.056347012519836426
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.056347012519836426
+      ]
+    },
+    {
+      "index": 193,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 473,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.8359453678131104,
+        -0.846010684967041,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9982661008834839,
+        0.9683746099472046,
+        0.9999896287918091
+      ]
+    },
+    {
+      "index": 194,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 473,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.005255762953311205,
+        0.017948687076568604
+      ],
+      "decoded_max": [
+        0.9999144673347473,
+        0.9827247858047485
+      ]
+    },
+    {
+      "index": 195,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1119,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        472
+      ]
+    },
+    {
+      "index": 196,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 661,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05634411424398422
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.056347012519836426
+      ]
+    },
+    {
+      "index": 197,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 661,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        0.0
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "index": 198,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 661,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 199,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1911,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        660
+      ]
+    },
+    {
+      "index": 200,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 546,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05644487217068672
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05644487217068672
+      ]
+    },
+    {
+      "index": 201,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 546,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.9571725130081177,
+        -0.9956784248352051,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9401160478591919,
+        0.968170702457428,
+        0.999998927116394
+      ]
+    },
+    {
+      "index": 202,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 546,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.002229498466476798,
+        0.006336808204650879
+      ],
+      "decoded_max": [
+        0.999809741973877,
+        0.9866241812705994
+      ]
+    },
+    {
+      "index": 203,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1302,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        545
+      ]
+    },
+    {
+      "index": 204,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 704,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05644487217068672
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05644487217068672
+      ]
+    },
+    {
+      "index": 205,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 704,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9999045133590698
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        9.999999747378752e-05
+      ]
+    },
+    {
+      "index": 206,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 704,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 207,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1899,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        703
+      ]
+    },
+    {
+      "index": 208,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 520,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.054247669875621796
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.054247669875621796
+      ]
+    },
+    {
+      "index": 209,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 520,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.7050294280052185,
+        -0.9210100769996643,
+        -1.0
+      ],
+      "decoded_max": [
+        0.9894493818283081,
+        0.9681676030158997,
+        0.999998927116394
+      ]
+    },
+    {
+      "index": 210,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 520,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.009904371574521065,
+        0.006225645542144775
+      ],
+      "decoded_max": [
+        0.9958815574645996,
+        0.9877715110778809
+      ]
+    },
+    {
+      "index": 211,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 1347,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        519
+      ]
+    },
+    {
+      "index": 212,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 941,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.054247669875621796
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.054247669875621796
+      ]
+    },
+    {
+      "index": 213,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 941,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9919931292533875
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.9908034801483154
+      ]
+    },
+    {
+      "index": 214,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 941,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 215,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2577,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        940
+      ]
+    },
+    {
+      "index": 216,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 304,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05466277524828911
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05466277524828911
+      ]
+    },
+    {
+      "index": 217,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 304,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.7080867886543274,
+        -0.7125763893127441,
+        -1.0
+      ],
+      "decoded_max": [
+        0.6061988472938538,
+        0.7383728623390198,
+        0.9999948740005493
+      ]
+    },
+    {
+      "index": 218,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 304,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.01621701754629612,
+        0.002229630947113037
+      ],
+      "decoded_max": [
+        0.99460369348526,
+        0.983078122138977
+      ]
+    },
+    {
+      "index": 219,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 789,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        303
+      ]
+    },
+    {
+      "index": 220,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 868,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.05466277524828911
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.05466277524828911
+      ]
+    },
+    {
+      "index": 221,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 868,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.9999362230300903
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "index": 222,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 868,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 223,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2523,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        867
+      ]
+    },
+    {
+      "index": 224,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 378,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.07063975185155869
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.07063975185155869
+      ]
+    },
+    {
+      "index": 225,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 378,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -0.7882887125015259,
+        -0.9952693581581116,
+        -1.0
+      ],
+      "decoded_max": [
+        0.7226346731185913,
+        0.8901914358139038,
+        1.0
+      ]
+    },
+    {
+      "index": 226,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 378,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.01636194810271263,
+        0.0023592114448547363
+      ],
+      "decoded_max": [
+        0.9945040941238403,
+        0.9781128168106079
+      ]
+    },
+    {
+      "index": 227,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 975,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        377
+      ]
+    },
+    {
+      "index": 228,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 860,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.6200000047683716,
+        -0.042307693511247635,
+        -0.07060414552688599
+      ],
+      "decoded_max": [
+        1.6200000047683716,
+        0.042307693511247635,
+        0.07063975185155869
+      ]
+    },
+    {
+      "index": 229,
+      "type": "VEC3",
+      "component_type": 5126,
+      "count": 860,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        -1.0,
+        -1.0,
+        -0.0003000000142492354
+      ],
+      "decoded_max": [
+        1.0,
+        1.0,
+        0.6930950880050659
+      ]
+    },
+    {
+      "index": 230,
+      "type": "VEC2",
+      "component_type": 5126,
+      "count": 860,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0.0,
+        0.0
+      ],
+      "decoded_max": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "index": 231,
+      "type": "SCALAR",
+      "component_type": 5123,
+      "count": 2349,
+      "normalized": false,
+      "finite": true,
+      "decoded_min": [
+        0
+      ],
+      "decoded_max": [
+        859
+      ]
+    }
+  ],
+  "images": [
+    {
+      "index": 0,
+      "name": "NormalGL_60038920-5601-4de0-9202-b4620bd5b1c8",
+      "bytes": 1581335,
+      "sha256": "78989792718c5d197ef27512f29faffd7ab45f78235fb71ebd53fc2c1d5796f3",
+      "declared_mime_type": "image/png",
+      "decoded": true,
+      "format": "PNG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        3,
+        4,
+        156,
+        255
+      ],
+      "rgba_channel_max": [
+        251,
+        250,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 1,
+      "name": "Color_60038920-5601-4de0-9202-b4620bd5b1c8",
+      "bytes": 733579,
+      "sha256": "a5fb301afcb77f8838b14ec9153be397f145576588464a551c6ce601ed23e320",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        0,
+        0,
+        9,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        255,
+        255
+      ]
+    },
+    {
+      "index": 2,
+      "name": "ORM_60038920-5601-4de0-9202-b4620bd5b1c8",
+      "bytes": 589142,
+      "sha256": "6d2f5d43d1a95bbadfbe8775dc543253a6b0606095bab6ac5975b12fbdeee0a2",
+      "declared_mime_type": "image/jpeg",
+      "decoded": true,
+      "format": "JPEG",
+      "mode": "RGB",
+      "size_px": [
+        2048,
+        2048
+      ],
+      "rgba_channel_min": [
+        209,
+        4,
+        0,
+        255
+      ],
+      "rgba_channel_max": [
+        255,
+        255,
+        233,
+        255
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "index": 0,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 1
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "sources": [
+        {
+          "kind": "core",
+          "image": 2
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "index": 0,
+      "name": "tripo_material_60038920-5601-4de0-9202-b4620bd5b1c8",
+      "texture_slots": [
+        {
+          "slot": "normalTexture",
+          "texture": 0,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.baseColorTexture",
+          "texture": 1,
+          "texcoord": 0
+        },
+        {
+          "slot": "pbrMetallicRoughness.metallicRoughnessTexture",
+          "texture": 2,
+          "texcoord": 0
+        }
+      ],
+      "has_base_color_texture": true,
+      "double_sided": false,
+      "alpha_mode": "OPAQUE"
+    },
+    {
+      "index": 1,
+      "name": "TECHLAND_LOCAL_CUT_CAP_METAL",
+      "texture_slots": [],
+      "has_base_color_texture": false,
+      "double_sided": false,
+      "alpha_mode": "OPAQUE"
+    }
+  ],
+  "meshes": [
+    {
+      "index": 0,
+      "name": "SHUTTER_GUIDE_LEFT",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 1244,
+          "index_count": 4632,
+          "mode": 4,
+          "triangles": 1544,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.00012492337555158883,
+                0.005247354507446289
+              ],
+              "max": [
+                0.9976127743721008,
+                0.9857795238494873
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.14000000059604645,
+            -1.272080659866333,
+            -0.07921762764453888
+          ],
+          "local_bounds_max": [
+            0.14000000059604645,
+            1.272080659866333,
+            0.07921762764453888
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 310,
+          "index_count": 789,
+          "mode": 4,
+          "triangles": 263,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            0.14000000059604645,
+            -1.2717188596725464,
+            -0.07921762764453888
+          ],
+          "local_bounds_max": [
+            0.14000000059604645,
+            1.2548253536224365,
+            0.07686574757099152
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "SHUTTER_GUIDE_RIGHT",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 1429,
+          "index_count": 5124,
+          "mode": 4,
+          "triangles": 1708,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.004944741725921631
+              ],
+              "max": [
+                0.9988534450531006,
+                0.9997090697288513
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.14000000059604645,
+            -1.2737610340118408,
+            -0.07877635955810547
+          ],
+          "local_bounds_max": [
+            0.14000000059604645,
+            1.2737610340118408,
+            0.07877635955810547
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 332,
+          "index_count": 861,
+          "mode": 4,
+          "triangles": 287,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -0.14000000059604645,
+            -1.2735341787338257,
+            -0.07862783223390579
+          ],
+          "local_bounds_max": [
+            -0.14000000059604645,
+            1.2562311887741089,
+            0.07705795764923096
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "SHUTTER_HOUSING",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 942,
+          "index_count": 2838,
+          "mode": 4,
+          "triangles": 946,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.00026116103981621563,
+                0.0
+              ],
+              "max": [
+                0.9988117218017578,
+                0.9887409210205078
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.1662532240152359,
+            -0.07900857925415039
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.1662532240152359,
+            0.07900857925415039
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 602,
+          "index_count": 1392,
+          "mode": 4,
+          "triangles": 464,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.1662532240152359,
+            -0.07746192067861557
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.1662532240152359,
+            0.07863953709602356
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "SHUTTER_SLAT_00",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 716,
+          "index_count": 2040,
+          "mode": 4,
+          "triangles": 680,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.00991015788167715,
+                0.005310773849487305
+              ],
+              "max": [
+                0.9977714419364929,
+                0.9997941255569458
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.06968744099140167
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.06968744099140167
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 600,
+          "index_count": 1458,
+          "mode": 4,
+          "triangles": 486,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.03960295766592026,
+            -0.06697247177362442
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.06968744099140167
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "name": "SHUTTER_SLAT_01",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 571,
+          "index_count": 1620,
+          "mode": 4,
+          "triangles": 540,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.03231225535273552,
+                0.002234816551208496
+              ],
+              "max": [
+                0.9996007084846497,
+                0.9980562925338745
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.06819532811641693
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.06819532811641693
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 861,
+          "index_count": 2448,
+          "mode": 4,
+          "triangles": 816,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.06819532811641693
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.06819532811641693
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "name": "SHUTTER_SLAT_02",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 579,
+          "index_count": 1548,
+          "mode": 4,
+          "triangles": 516,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.03534894809126854,
+                0.004914522171020508
+              ],
+              "max": [
+                0.9938287138938904,
+                0.9940585494041443
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.06705476343631744
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.06705476343631744
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 811,
+          "index_count": 2292,
+          "mode": 4,
+          "triangles": 764,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.06704065948724747
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.06705476343631744
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "name": "SHUTTER_SLAT_03",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 455,
+          "index_count": 1056,
+          "mode": 4,
+          "triangles": 352,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.03288380056619644,
+                0.03283661603927612
+              ],
+              "max": [
+                0.987964391708374,
+                0.9889050722122192
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05101417750120163
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05101417750120163
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 707,
+          "index_count": 2004,
+          "mode": 4,
+          "triangles": 668,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05100465938448906
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05101417750120163
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "name": "SHUTTER_SLAT_04",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 482,
+          "index_count": 1170,
+          "mode": 4,
+          "triangles": 390,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0355258509516716,
+                0.03931921720504761
+              ],
+              "max": [
+                0.9867323040962219,
+                0.9860433340072632
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.052231743931770325
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.052231743931770325
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 745,
+          "index_count": 2064,
+          "mode": 4,
+          "triangles": 688,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.052231743931770325
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05200115591287613
+          ]
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "name": "SHUTTER_SLAT_05",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 434,
+          "index_count": 1101,
+          "mode": 4,
+          "triangles": 367,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.004235726781189442,
+                0.03126025199890137
+              ],
+              "max": [
+                0.9843134880065918,
+                0.9372357130050659
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.051000215113162994
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.051000215113162994
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 722,
+          "index_count": 2055,
+          "mode": 4,
+          "triangles": 685,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.051000215113162994
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05093543976545334
+          ]
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "name": "SHUTTER_SLAT_06",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 459,
+          "index_count": 1077,
+          "mode": 4,
+          "triangles": 359,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.006417452357709408,
+                0.01092153787612915
+              ],
+              "max": [
+                0.9950492978096008,
+                0.9839840531349182
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05095537751913071
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05095537751913071
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 710,
+          "index_count": 1995,
+          "mode": 4,
+          "triangles": 665,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05095537751913071
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05095537751913071
+          ]
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "name": "SHUTTER_SLAT_07",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 437,
+          "index_count": 1167,
+          "mode": 4,
+          "triangles": 389,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.002105731051415205,
+                0.016209781169891357
+              ],
+              "max": [
+                0.9990392327308655,
+                0.9996576309204102
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.050826095044612885
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.050826095044612885
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 745,
+          "index_count": 2130,
+          "mode": 4,
+          "triangles": 710,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.050826095044612885
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.050826095044612885
+          ]
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "name": "SHUTTER_SLAT_08",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 508,
+          "index_count": 1521,
+          "mode": 4,
+          "triangles": 507,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.004274220205843449,
+                0.0039498209953308105
+              ],
+              "max": [
+                0.9968740344047546,
+                1.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.051544465124607086
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.051544465124607086
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 805,
+          "index_count": 2259,
+          "mode": 4,
+          "triangles": 753,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05135996267199516
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.051544465124607086
+          ]
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "name": "SHUTTER_SLAT_09",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 546,
+          "index_count": 1449,
+          "mode": 4,
+          "triangles": 483,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.003927022218704224,
+                0.005944490432739258
+              ],
+              "max": [
+                0.9965007305145264,
+                0.9998571872711182
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05577773600816727
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05577773600816727
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 823,
+          "index_count": 2331,
+          "mode": 4,
+          "triangles": 777,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.055736787617206573
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05577773600816727
+          ]
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "name": "SHUTTER_SLAT_10",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 597,
+          "index_count": 1491,
+          "mode": 4,
+          "triangles": 497,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.002345407148823142,
+                0.014948368072509766
+              ],
+              "max": [
+                0.9968041777610779,
+                0.9823203682899475
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.055943842977285385
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.055943842977285385
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 834,
+          "index_count": 2439,
+          "mode": 4,
+          "triangles": 813,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.055943842977285385
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.055943842977285385
+          ]
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "name": "SHUTTER_SLAT_11",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 601,
+          "index_count": 1395,
+          "mode": 4,
+          "triangles": 465,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.005164519418030977,
+                0.043162763118743896
+              ],
+              "max": [
+                0.998992919921875,
+                0.9998276829719543
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05594746768474579
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05594746768474579
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 850,
+          "index_count": 2403,
+          "mode": 4,
+          "triangles": 801,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05594746768474579
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05594746768474579
+          ]
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "name": "SHUTTER_SLAT_12",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 603,
+          "index_count": 1410,
+          "mode": 4,
+          "triangles": 470,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.012188347987830639,
+                0.006271243095397949
+              ],
+              "max": [
+                0.998645007610321,
+                0.9999914765357971
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.052967093884944916
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.052967093884944916
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 853,
+          "index_count": 2406,
+          "mode": 4,
+          "triangles": 802,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.052967093884944916
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.052967093884944916
+          ]
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "name": "SHUTTER_SLAT_13",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 524,
+          "index_count": 1353,
+          "mode": 4,
+          "triangles": 451,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.00037729708128608763,
+                0.0015787482261657715
+              ],
+              "max": [
+                0.9988824725151062,
+                0.9899663329124451
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05393221974372864
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05393221974372864
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 585,
+          "index_count": 1686,
+          "mode": 4,
+          "triangles": 562,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05393221974372864
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05391241982579231
+          ]
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "name": "SHUTTER_SLAT_14",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 501,
+          "index_count": 1233,
+          "mode": 4,
+          "triangles": 411,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0014529640320688486,
+                0.00019687414169311523
+              ],
+              "max": [
+                1.0,
+                0.999984622001648
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.0508086234331131
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.0508086234331131
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 517,
+          "index_count": 1506,
+          "mode": 4,
+          "triangles": 502,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.050786565989255905
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.0508086234331131
+          ]
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "name": "SHUTTER_SLAT_15",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 458,
+          "index_count": 1059,
+          "mode": 4,
+          "triangles": 353,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.002962991362437606,
+                0.0031551122665405273
+              ],
+              "max": [
+                0.9975377321243286,
+                0.9991111159324646
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05083141848444939
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05083141848444939
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 748,
+          "index_count": 2169,
+          "mode": 4,
+          "triangles": 723,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05083141848444939
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05082318186759949
+          ]
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "name": "SHUTTER_SLAT_16",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 465,
+          "index_count": 1290,
+          "mode": 4,
+          "triangles": 430,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.008345409296452999,
+                0.012399017810821533
+              ],
+              "max": [
+                0.9891161918640137,
+                0.9878224730491638
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05083658918738365
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05083658918738365
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 776,
+          "index_count": 2238,
+          "mode": 4,
+          "triangles": 746,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.050829265266656876
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05083658918738365
+          ]
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "name": "SHUTTER_SLAT_17",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 481,
+          "index_count": 1182,
+          "mode": 4,
+          "triangles": 394,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.02955244667828083,
+                0.00808107852935791
+              ],
+              "max": [
+                0.9987909197807312,
+                0.98809415102005
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05084186792373657
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05084186792373657
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 820,
+          "index_count": 2400,
+          "mode": 4,
+          "triangles": 800,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05084186792373657
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.0508260615170002
+          ]
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "name": "SHUTTER_SLAT_18",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 558,
+          "index_count": 1305,
+          "mode": 4,
+          "triangles": 435,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.031894512474536896,
+                0.00908195972442627
+              ],
+              "max": [
+                0.9988068342208862,
+                0.9977150559425354
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05084598809480667
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05084598809480667
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 883,
+          "index_count": 2541,
+          "mode": 4,
+          "triangles": 847,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05084598809480667
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05084598809480667
+          ]
+        }
+      ]
+    },
+    {
+      "index": 22,
+      "name": "SHUTTER_SLAT_19",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 562,
+          "index_count": 1314,
+          "mode": 4,
+          "triangles": 438,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.01647210866212845,
+                0.008295536041259766
+              ],
+              "max": [
+                0.9878950715065002,
+                0.992877721786499
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.056432921439409256
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.056432921439409256
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 968,
+          "index_count": 2688,
+          "mode": 4,
+          "triangles": 896,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05643155053257942
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05641461908817291
+          ]
+        }
+      ]
+    },
+    {
+      "index": 23,
+      "name": "SHUTTER_SLAT_20",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 521,
+          "index_count": 1287,
+          "mode": 4,
+          "triangles": 429,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.014877070672810078,
+                0.007174849510192871
+              ],
+              "max": [
+                0.9898408055305481,
+                0.9920523166656494
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05641908943653107
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05641908943653107
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 952,
+          "index_count": 2733,
+          "mode": 4,
+          "triangles": 911,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05641908943653107
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05641908943653107
+          ]
+        }
+      ]
+    },
+    {
+      "index": 24,
+      "name": "SHUTTER_SLAT_21",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 473,
+          "index_count": 1119,
+          "mode": 4,
+          "triangles": 373,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.005255762953311205,
+                0.017948687076568604
+              ],
+              "max": [
+                0.9999144673347473,
+                0.9827247858047485
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.056347012519836426
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.056347012519836426
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 661,
+          "index_count": 1911,
+          "mode": 4,
+          "triangles": 637,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05634411424398422
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.056347012519836426
+          ]
+        }
+      ]
+    },
+    {
+      "index": 25,
+      "name": "SHUTTER_SLAT_22",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 546,
+          "index_count": 1302,
+          "mode": 4,
+          "triangles": 434,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.002229498466476798,
+                0.006336808204650879
+              ],
+              "max": [
+                0.999809741973877,
+                0.9866241812705994
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05644487217068672
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05644487217068672
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 704,
+          "index_count": 1899,
+          "mode": 4,
+          "triangles": 633,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05644487217068672
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05644487217068672
+          ]
+        }
+      ]
+    },
+    {
+      "index": 26,
+      "name": "SHUTTER_SLAT_23",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 520,
+          "index_count": 1347,
+          "mode": 4,
+          "triangles": 449,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.009904371574521065,
+                0.006225645542144775
+              ],
+              "max": [
+                0.9958815574645996,
+                0.9877715110778809
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.054247669875621796
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.054247669875621796
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 941,
+          "index_count": 2577,
+          "mode": 4,
+          "triangles": 859,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.054247669875621796
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.054247669875621796
+          ]
+        }
+      ]
+    },
+    {
+      "index": 27,
+      "name": "SHUTTER_SLAT_24",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 304,
+          "index_count": 789,
+          "mode": 4,
+          "triangles": 263,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.01621701754629612,
+                0.002229630947113037
+              ],
+              "max": [
+                0.99460369348526,
+                0.983078122138977
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05466277524828911
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05466277524828911
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 868,
+          "index_count": 2523,
+          "mode": 4,
+          "triangles": 841,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.05466277524828911
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.05466277524828911
+          ]
+        }
+      ]
+    },
+    {
+      "index": 28,
+      "name": "SHUTTER_SLAT_25",
+      "primitives": [
+        {
+          "primitive": 0,
+          "vertices": 378,
+          "index_count": 975,
+          "mode": 4,
+          "triangles": 325,
+          "degenerate_triangles": 0,
+          "material": 0,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.01636194810271263,
+                0.0023592114448547363
+              ],
+              "max": [
+                0.9945040941238403,
+                0.9781128168106079
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.07063975185155869
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.07063975185155869
+          ]
+        },
+        {
+          "primitive": 1,
+          "vertices": 860,
+          "index_count": 2349,
+          "mode": 4,
+          "triangles": 783,
+          "degenerate_triangles": 0,
+          "material": 1,
+          "uv_sets": {
+            "TEXCOORD_0": {
+              "min": [
+                0.0,
+                0.0
+              ],
+              "max": [
+                0.0,
+                0.0
+              ],
+              "outside_unit_square": false
+            }
+          },
+          "skin_attributes": null,
+          "local_bounds_min": [
+            -1.6200000047683716,
+            -0.042307693511247635,
+            -0.07060414552688599
+          ],
+          "local_bounds_max": [
+            1.6200000047683716,
+            0.042307693511247635,
+            0.07063975185155869
+          ]
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "index": 0,
+      "name": "SHUTTER_GUIDE_LEFT",
+      "mesh": 0,
+      "children": [],
+      "local_origin": [
+        -1.7599999904632568,
+        1.2776811122894287,
+        0.0007823692285455763
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        -1.7599999904632568,
+        1.2776811122894287,
+        0.0007823692285455763,
+        1.0
+      ],
+      "world_origin": [
+        -1.7599999904632568,
+        1.2776811122894287,
+        0.0007823692285455763
+      ]
+    },
+    {
+      "index": 1,
+      "name": "SHUTTER_GUIDE_RIGHT",
+      "mesh": 1,
+      "children": [],
+      "local_origin": [
+        1.7599999904632568,
+        1.2762389183044434,
+        0.00018171861302107573
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.7599999904632568,
+        1.2762389183044434,
+        0.00018171861302107573,
+        1.0
+      ],
+      "world_origin": [
+        1.7599999904632568,
+        1.2762389183044434,
+        0.00018171861302107573
+      ]
+    },
+    {
+      "index": 2,
+      "name": "SHUTTER_HOUSING",
+      "mesh": 2,
+      "children": [],
+      "local_origin": [
+        0.0,
+        2.366253137588501,
+        -0.0009914221009239554
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        2.366253137588501,
+        -0.0009914221009239554,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        2.366253137588501,
+        -0.0009914221009239554
+      ]
+    },
+    {
+      "index": 3,
+      "name": "SHUTTER_SLAT_00",
+      "mesh": 3,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.042307693511247635,
+        -0.008378851227462292
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.042307693511247635,
+        -0.008378851227462292,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.042307693511247635,
+        -0.008378851227462292
+      ]
+    },
+    {
+      "index": 4,
+      "name": "SHUTTER_SLAT_01",
+      "mesh": 4,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.1269230842590332,
+        -0.005513428244739771
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.1269230842590332,
+        -0.005513428244739771,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.1269230842590332,
+        -0.005513428244739771
+      ]
+    },
+    {
+      "index": 5,
+      "name": "SHUTTER_SLAT_02",
+      "mesh": 5,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.21153846383094788,
+        -0.003976517356932163
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.21153846383094788,
+        -0.003976517356932163,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.21153846383094788,
+        -0.003976517356932163
+      ]
+    },
+    {
+      "index": 6,
+      "name": "SHUTTER_SLAT_03",
+      "mesh": 6,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.29615384340286255,
+        -0.02017335407435894
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.29615384340286255,
+        -0.02017335407435894,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.29615384340286255,
+        -0.02017335407435894
+      ]
+    },
+    {
+      "index": 7,
+      "name": "SHUTTER_SLAT_04",
+      "mesh": 7,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.3807692229747772,
+        -0.018946269527077675
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.3807692229747772,
+        -0.018946269527077675,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.3807692229747772,
+        -0.018946269527077675
+      ]
+    },
+    {
+      "index": 8,
+      "name": "SHUTTER_SLAT_05",
+      "mesh": 8,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.4653846025466919,
+        -0.02009800262749195
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.4653846025466919,
+        -0.02009800262749195,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.4653846025466919,
+        -0.02009800262749195
+      ]
+    },
+    {
+      "index": 9,
+      "name": "SHUTTER_SLAT_06",
+      "mesh": 9,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.550000011920929,
+        -0.02011794224381447
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.550000011920929,
+        -0.02011794224381447,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.550000011920929,
+        -0.02011794224381447
+      ]
+    },
+    {
+      "index": 10,
+      "name": "SHUTTER_SLAT_07",
+      "mesh": 10,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.6346153616905212,
+        -0.02005404233932495
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.6346153616905212,
+        -0.02005404233932495,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.6346153616905212,
+        -0.02005404233932495
+      ]
+    },
+    {
+      "index": 11,
+      "name": "SHUTTER_SLAT_08",
+      "mesh": 11,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.7192307710647583,
+        -0.021069161593914032
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.7192307710647583,
+        -0.021069161593914032,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.7192307710647583,
+        -0.021069161593914032
+      ]
+    },
+    {
+      "index": 12,
+      "name": "SHUTTER_SLAT_09",
+      "mesh": 12,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.8038461804389954,
+        -0.01520573440939188
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.8038461804389954,
+        -0.01520573440939188,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.8038461804389954,
+        -0.01520573440939188
+      ]
+    },
+    {
+      "index": 13,
+      "name": "SHUTTER_SLAT_10",
+      "mesh": 13,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.8884615302085876,
+        -0.01499443594366312
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.8884615302085876,
+        -0.01499443594366312,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.8884615302085876,
+        -0.01499443594366312
+      ]
+    },
+    {
+      "index": 14,
+      "name": "SHUTTER_SLAT_11",
+      "mesh": 14,
+      "children": [],
+      "local_origin": [
+        0.0,
+        0.9730769395828247,
+        -0.014924556016921997
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.9730769395828247,
+        -0.014924556016921997,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.9730769395828247,
+        -0.014924556016921997
+      ]
+    },
+    {
+      "index": 15,
+      "name": "SHUTTER_SLAT_12",
+      "mesh": 15,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.057692289352417,
+        -0.017887700349092484
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.057692289352417,
+        -0.017887700349092484,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.057692289352417,
+        -0.017887700349092484
+      ]
+    },
+    {
+      "index": 16,
+      "name": "SHUTTER_SLAT_13",
+      "mesh": 16,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.1423076391220093,
+        -0.016920672729611397
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.1423076391220093,
+        -0.016920672729611397,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.1423076391220093,
+        -0.016920672729611397
+      ]
+    },
+    {
+      "index": 17,
+      "name": "SHUTTER_SLAT_14",
+      "mesh": 17,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.2269231081008911,
+        -0.02000773884356022
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.2269231081008911,
+        -0.02000773884356022,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.2269231081008911,
+        -0.02000773884356022
+      ]
+    },
+    {
+      "index": 18,
+      "name": "SHUTTER_SLAT_15",
+      "mesh": 18,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.3115384578704834,
+        -0.02001882903277874
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.3115384578704834,
+        -0.02001882903277874,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.3115384578704834,
+        -0.02001882903277874
+      ]
+    },
+    {
+      "index": 19,
+      "name": "SHUTTER_SLAT_16",
+      "mesh": 19,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.3961538076400757,
+        -0.020032236352562904
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.3961538076400757,
+        -0.020032236352562904,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.3961538076400757,
+        -0.020032236352562904
+      ]
+    },
+    {
+      "index": 20,
+      "name": "SHUTTER_SLAT_17",
+      "mesh": 20,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.4807692766189575,
+        -0.02002447471022606
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.4807692766189575,
+        -0.02002447471022606,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.4807692766189575,
+        -0.02002447471022606
+      ]
+    },
+    {
+      "index": 21,
+      "name": "SHUTTER_SLAT_18",
+      "mesh": 21,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.5653846263885498,
+        -0.020044779404997826
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.5653846263885498,
+        -0.020044779404997826,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.5653846263885498,
+        -0.020044779404997826
+      ]
+    },
+    {
+      "index": 22,
+      "name": "SHUTTER_SLAT_19",
+      "mesh": 22,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.649999976158142,
+        -0.014477581717073917
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.649999976158142,
+        -0.014477581717073917,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.649999976158142,
+        -0.014477581717073917
+      ]
+    },
+    {
+      "index": 23,
+      "name": "SHUTTER_SLAT_20",
+      "mesh": 23,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.7346153259277344,
+        -0.014490041881799698
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.7346153259277344,
+        -0.014490041881799698,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.7346153259277344,
+        -0.014490041881799698
+      ]
+    },
+    {
+      "index": 24,
+      "name": "SHUTTER_SLAT_21",
+      "mesh": 24,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.8192307949066162,
+        -0.01448642835021019
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.8192307949066162,
+        -0.01448642835021019,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.8192307949066162,
+        -0.01448642835021019
+      ]
+    },
+    {
+      "index": 25,
+      "name": "SHUTTER_SLAT_22",
+      "mesh": 25,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.9038461446762085,
+        -0.014652751386165619
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.9038461446762085,
+        -0.014652751386165619,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.9038461446762085,
+        -0.014652751386165619
+      ]
+    },
+    {
+      "index": 26,
+      "name": "SHUTTER_SLAT_23",
+      "mesh": 26,
+      "children": [],
+      "local_origin": [
+        0.0,
+        1.9884614944458008,
+        -0.02352404221892357
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        1.9884614944458008,
+        -0.02352404221892357,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        1.9884614944458008,
+        -0.02352404221892357
+      ]
+    },
+    {
+      "index": 27,
+      "name": "SHUTTER_SLAT_24",
+      "mesh": 27,
+      "children": [],
+      "local_origin": [
+        0.0,
+        2.0730769634246826,
+        -0.02376539073884487
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        2.0730769634246826,
+        -0.02376539073884487,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        2.0730769634246826,
+        -0.02376539073884487
+      ]
+    },
+    {
+      "index": 28,
+      "name": "SHUTTER_SLAT_25",
+      "mesh": 28,
+      "children": [],
+      "local_origin": [
+        0.0,
+        2.1576921939849854,
+        -0.0078491922467947
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        2.1576921939849854,
+        -0.0078491922467947,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        2.1576921939849854,
+        -0.0078491922467947
+      ]
+    },
+    {
+      "index": 29,
+      "name": "ROLLER_SHUTTER_ROOT",
+      "mesh": null,
+      "children": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "local_origin": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "local_matrix_column_major": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "world_origin": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "skins": [],
+  "skin_instances": [],
+  "manifest": {
+    "path": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\PeterPansTechland_Tripo_Generation_Pack\\manifest.json",
+    "title": "卷帘门独立门片",
+    "target_size_m_xyz": [
+      3.8,
+      2.55,
+      0.16
+    ],
+    "expected_nodes_after_blender": [
+      "SHUTTER_DRUM",
+      "SHUTTER_SLAT_00...NN"
+    ],
+    "expected_nodes_found_exactly": {
+      "SHUTTER_DRUM": false,
+      "SHUTTER_SLAT_00...NN": false
+    }
+  },
+  "file_bytes": 4407264,
+  "sha256": "dc0403fc97df4d8500e423d49cfbc7eca0472cea598c1ccdb2f37f6cc52214cf",
+  "extensions_used": [],
+  "extensions_required": [],
+  "bounds_scene_index": 0,
+  "world_bounds": {
+    "min": [
+      -1.8999999910593033,
+      0.0,
+      -0.08000000135507435
+    ],
+    "max": [
+      1.8999999910593033,
+      2.549999952316284,
+      0.07999999687308446
+    ],
+    "size_xyz": [
+      3.7999999821186066,
+      2.549999952316284,
+      0.1599999982281588
+    ],
+    "center": [
+      0.0,
+      1.274999976158142,
+      -2.240994945168495e-09
+    ],
+    "ground_center_y_up": [
+      0.0,
+      0.0,
+      -2.240994945168495e-09
+    ],
+    "mesh_instances": 29,
+    "units": "glTF meters, without claiming generated scale is physically calibrated"
+  },
+  "pivot_and_scale": {
+    "scene_origin": [
+      0,
+      0,
+      0
+    ],
+    "origin_to_ground_center": [
+      0.0,
+      0.0,
+      -2.240994945168495e-09
+    ],
+    "ground_centered_within_1mm": true,
+    "target_size_m_xyz": [
+      3.8,
+      2.55,
+      0.16
+    ],
+    "target_over_raw_scale_xyz": [
+      1.0000000047056299,
+      1.0000000186994966,
+      1.0000000110740077
+    ],
+    "uniform_scale_to_target_height": 1.0000000186994966,
+    "raw_axis_convention": "glTF Y-up; intended object front +Z is NOT VERIFIED"
+  },
+  "summary": {
+    "mesh_count": 29,
+    "primitive_count": 58,
+    "node_count": 30,
+    "skin_count": 0,
+    "animation_count": 0,
+    "vertex_count_sum_primitives": 38487,
+    "triangle_count_sum_primitives": 35580,
+    "degenerate_triangles": 0,
+    "material_count": 2,
+    "image_count": 3,
+    "images_fully_decoded": 3,
+    "accessors_decoded": 232
+  },
+  "skinning_data_validation": {
+    "status": "not_present",
+    "skins_validated": 0,
+    "instances_validated": 0,
+    "deformation_evaluated": false,
+    "animation_motion_verified": false
+  },
+  "status": "passed_implemented_checks",
+  "ready_for_visual_review": true
+}

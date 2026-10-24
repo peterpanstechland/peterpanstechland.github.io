@@ -1,0 +1,61 @@
+{
+  "asset_id": "21_monitor",
+  "source_task_id": "ca03c270-717b-437b-8c1a-9bed3f606071",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/21_monitor.glb",
+  "input_sha256": "c74855cb1c7e6ea6735da94904ca38b941bab5dd4e21ca09aabe0ca7e90856b2",
+  "output": "assets/tripo/blender-repair/models/21_monitor.glb",
+  "output_sha256": "beaf0d3d0847d58ecac96cce9aa68639149a4d4adccbd3b5804acd3a61116013",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_ca03c270-717b-437b-8c1a-9bed3f606071": {
+        "before": {
+          "vertices": 2052,
+          "faces": 2523,
+          "boundary_edges": 1367,
+          "nonmanifold_edges": 1367,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 1262,
+          "faces": 2523,
+          "boundary_edges": 2,
+          "nonmanifold_edges": 3,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [
+      {
+        "axis_xyz": 2,
+        "plane_m": 0.016,
+        "changed_vertices": 134,
+        "max_displacement_m": 0.003137170508503914
+      },
+      {
+        "axis_xyz": 1,
+        "plane_m": 0,
+        "changed_vertices": 69,
+        "max_displacement_m": 0.0039000213146209717
+      }
+    ],
+    "local_parts": [],
+    "notes": [
+      "Flattened screen face and base contact plane; original stand and rear casing retained.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ]
+  },
+  "mesh_stats": {
+    "tripo_node_ca03c270-717b-437b-8c1a-9bed3f606071": {
+      "vertices": 1262,
+      "faces": 2523,
+      "boundary_edges": 2,
+      "nonmanifold_edges": 3,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

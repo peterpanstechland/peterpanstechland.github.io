@@ -1,0 +1,12 @@
+{
+  "releasedAt": "2026-10-23T15:31:15.902Z",
+  "sourceCommit": "48d0efc97343e5dc5064b82c18ef9b44ae2c3785",
+  "mergeCommit": "905a0b76a2c1e652656bdb51d41b1f76514773db",
+  "pullRequest": "https://github.com/peterpanstechland/peterpanstechland.github.io/pull/38",
+  "deployment": "https://github.com/peterpanstechland/peterpanstechland.github.io/actions/runs/39977430552",
+  "deploymentResult": "success",
+  "blog": "https://peterpanstechland.github.io/zh-Hans/",
+  "garage": "https://peterpanstechland.github.io/zh-Hans/maker-garage-preview/",
+  "onlineAssetsMatchCommit": true,
+  "backendOriginAllowed": true
+}

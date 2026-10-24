@@ -1,0 +1,20 @@
+{
+  "mainCommit": "c8f90279f65ea50eb60711caf77291c2a072439f",
+  "prs": [
+    39,
+    40
+  ],
+  "workflow": "https://github.com/peterpanstechland/peterpanstechland.github.io/actions/runs/39985904018",
+  "status": "success",
+  "url": "https://peterpanstechland.github.io/maker-garage-preview/?v=loading-v2",
+  "runtimeSourceMatched": true,
+  "optimizedModelUrlsVerified": 42,
+  "catHashVerifiedTiers": [
+    "desktop",
+    "mobile"
+  ],
+  "backgroundDownloadTest": {
+    "heroMs": 10184,
+    "completeMs": 23438
+  }
+}

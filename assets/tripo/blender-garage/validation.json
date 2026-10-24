@@ -1,0 +1,246 @@
+{
+  "models": 12,
+  "credits": 0,
+  "items": [
+    {
+      "asset_id": "01_garage_shell",
+      "sha256": "b3f2e827712ed4071a32a3fa758938a4704072abee048b06103b9202cf858152",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 7,
+        "primitive_count": 7,
+        "node_count": 7,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 16988,
+        "triangle_count_sum_primitives": 16796,
+        "degenerate_triangles": 0,
+        "material_count": 4,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 26
+      }
+    },
+    {
+      "asset_id": "02_roller_shutter",
+      "sha256": "dc0403fc97df4d8500e423d49cfbc7eca0472cea598c1ccdb2f37f6cc52214cf",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 29,
+        "primitive_count": 58,
+        "node_count": 30,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 38487,
+        "triangle_count_sum_primitives": 35580,
+        "degenerate_triangles": 0,
+        "material_count": 2,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 232
+      }
+    },
+    {
+      "asset_id": "03_profile_sign",
+      "sha256": "f547f382efcd4440a8f628008db098bf328fa9c5e45314526f96a061b53e3854",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 1,
+        "primitive_count": 1,
+        "node_count": 1,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 4949,
+        "triangle_count_sum_primitives": 4767,
+        "degenerate_triangles": 0,
+        "material_count": 1,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 4
+      }
+    },
+    {
+      "asset_id": "04_lucky_cat",
+      "sha256": "730e14e7524bbcbc2f3087f165eca540d1e5e0a7a65bf820f81250c6a1bcb3d1",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 1,
+        "primitive_count": 1,
+        "node_count": 48,
+        "skin_count": 1,
+        "animation_count": 1,
+        "vertex_count_sum_primitives": 9728,
+        "triangle_count_sum_primitives": 14394,
+        "degenerate_triangles": 0,
+        "material_count": 1,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 138
+      }
+    },
+    {
+      "asset_id": "05_project_vending",
+      "sha256": "cc5e1e72760e2573f0587fe9743601b1976c4bff0723e368d1625606f4f8f466",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 1,
+        "primitive_count": 1,
+        "node_count": 1,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 8731,
+        "triangle_count_sum_primitives": 9781,
+        "degenerate_triangles": 0,
+        "material_count": 1,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 4
+      }
+    },
+    {
+      "asset_id": "06_showcase_zone",
+      "sha256": "e74514f844172d3c1f1d1cd3ee22b1b8cc2efe5fafda98a8fca861de2cf721ff",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 4,
+        "primitive_count": 4,
+        "node_count": 4,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 8655,
+        "triangle_count_sum_primitives": 8867,
+        "degenerate_triangles": 0,
+        "material_count": 2,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 14
+      }
+    },
+    {
+      "asset_id": "08_street_lamp",
+      "sha256": "5ba0ae095cf5315a7fd7cc4d03a6a9b45fb541f4f823fddc865c5863ad361e33",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 3,
+        "primitive_count": 3,
+        "node_count": 3,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 4214,
+        "triangle_count_sum_primitives": 5002,
+        "degenerate_triangles": 0,
+        "material_count": 2,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 11
+      }
+    },
+    {
+      "asset_id": "09_trash_bin",
+      "sha256": "3d7838db398492c0ebaa4118f373069e49168bb0a2fe76ae205f89ebfd7ec1ef",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 3,
+        "primitive_count": 3,
+        "node_count": 3,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 5743,
+        "triangle_count_sum_primitives": 5216,
+        "degenerate_triangles": 0,
+        "material_count": 3,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 12
+      }
+    },
+    {
+      "asset_id": "10_utility_cabinet",
+      "sha256": "f9e28708d87c10fa87432f78d2eafce906bae3865e7a8a4e5223b5ecd24bbf70",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 1,
+        "primitive_count": 1,
+        "node_count": 1,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 4845,
+        "triangle_count_sum_primitives": 4958,
+        "degenerate_triangles": 0,
+        "material_count": 1,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 4
+      }
+    },
+    {
+      "asset_id": "11_tree",
+      "sha256": "9632cddca1946313a37734f8d12dc4bdcf12e3bdc76e5777ba0675585aeee5c1",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 1,
+        "primitive_count": 1,
+        "node_count": 1,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 10946,
+        "triangle_count_sum_primitives": 8717,
+        "degenerate_triangles": 0,
+        "material_count": 1,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 4
+      }
+    },
+    {
+      "asset_id": "12_plants_grass",
+      "sha256": "23cedbdd1d10a54873786f93f50e2ec570278d1c6f399f4b7004d17bdc0b8da2",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 1,
+        "primitive_count": 1,
+        "node_count": 1,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 1555,
+        "triangle_count_sum_primitives": 1289,
+        "degenerate_triangles": 0,
+        "material_count": 1,
+        "image_count": 3,
+        "images_fully_decoded": 3,
+        "accessors_decoded": 4
+      }
+    },
+    {
+      "asset_id": "13_street_base",
+      "sha256": "540b4ecf97cd88d909d36d71a1f708b6bdc5efda887ef8ac1a01ebdd98c9db50",
+      "geometry_textures_passed": true,
+      "original_preserved": true,
+      "summary": {
+        "mesh_count": 1,
+        "primitive_count": 2,
+        "node_count": 1,
+        "skin_count": 0,
+        "animation_count": 0,
+        "vertex_count_sum_primitives": 116,
+        "triangle_count_sum_primitives": 188,
+        "degenerate_triangles": 0,
+        "material_count": 2,
+        "image_count": 2,
+        "images_fully_decoded": 2,
+        "accessors_decoded": 8
+      }
+    }
+  ]
+}

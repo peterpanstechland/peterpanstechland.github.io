@@ -1,0 +1,22 @@
+{
+  "frontend": [
+    "3D camera button opens dialog",
+    "local message persists after reload",
+    "photo selection, re-encoding and Polaroid save",
+    "wish text saves independently",
+    "own contributions can be removed",
+    "local Cloudflare Worker submission pending",
+    "admin UI approval updates visitor receipt",
+    "owner withdrawal removes approved entry",
+    "live Worker browser submission shows pending and only visible to author",
+    "live browser author withdrawal succeeds and restores empty wall"
+  ],
+  "backendTests": "4 tests passed using real SQLite adapter",
+  "localCloudflare": "D1 migration and Wrangler local R2/Worker exercised",
+  "camera": "User hardware capture not automatically activated; upload flow verified. Camera permission denial and cleanup handled in code.",
+  "cloudDeployment": "Deployed https://techland-community-wall.peter-7dc.workers.dev with D1, private R2, production secrets and daily cleanup. Live photo moderation and withdrawal verified; see live-verification.json.",
+  "temporaryTestEntries": "removed",
+  "activeMode": "shared",
+  "build": "English and Chinese builds passed",
+  "typecheck": "passed"
+}

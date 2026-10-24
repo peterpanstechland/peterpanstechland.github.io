@@ -1,0 +1,428 @@
+{
+  "project": "Peter Pan's Techland / Shenzhen Maker Garage",
+  "version": "1.0",
+  "status": "PREPARED_NOT_SUBMITTED",
+  "provider": "Tripo",
+  "created": "2026-10-19",
+  "generation_jobs_submitted": 0,
+  "model_count_delivered": 0,
+  "note": "This is a local runner manifest, not a native Tripo batch manifest. References are concept crops, not production assets.",
+  "assets": [
+    {
+      "id": "01_garage_shell",
+      "title": "车库建筑外壳",
+      "mode": "image",
+      "reference": "references/01_garage_shell.png",
+      "prompt_file": "prompts/01_garage_shell.txt",
+      "source_file_id": "file_000000001c6881fd951fe1dc98bd95f0",
+      "source_pixel_box": [
+        17,
+        508,
+        257,
+        675
+      ],
+      "reference_size_px": [
+        240,
+        167
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "ROOF_MAIN",
+        "GARAGE_FRAME",
+        "SIGN_MOUNT"
+      ],
+      "target_size_m_xyz": [
+        4.5,
+        3.2,
+        3.5
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "02_roller_shutter",
+      "title": "卷帘门独立门片",
+      "mode": "text",
+      "reference": "references/02_roller_shutter.png",
+      "prompt_file": "prompts/02_roller_shutter.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        26,
+        591,
+        381,
+        765
+      ],
+      "reference_size_px": [
+        355,
+        174
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "SHUTTER_DRUM",
+        "SHUTTER_SLAT_00...NN"
+      ],
+      "target_size_m_xyz": [
+        3.8,
+        2.55,
+        0.16
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "03_profile_sign",
+      "title": "头像霓虹招牌框",
+      "mode": "text",
+      "reference": "references/03_profile_sign.png",
+      "prompt_file": "prompts/03_profile_sign.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        400,
+        594,
+        553,
+        765
+      ],
+      "reference_size_px": [
+        153,
+        171
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "PROFILE_FRAME",
+        "PROFILE_DISC",
+        "PROFILE_NEON"
+      ],
+      "target_size_m_xyz": [
+        0.8,
+        0.8,
+        0.1
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "04_lucky_cat",
+      "title": "门口可爱招财猫",
+      "mode": "image",
+      "reference": "references/04_lucky_cat.png",
+      "prompt_file": "prompts/04_lucky_cat.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        596,
+        598,
+        759,
+        771
+      ],
+      "reference_size_px": [
+        163,
+        173
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "NEKO_BODY",
+        "PAW_WAVE"
+      ],
+      "target_size_m_xyz": [
+        0.48,
+        0.8,
+        0.42
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "05_project_vending",
+      "title": "作品导航自动贩卖机",
+      "mode": "image",
+      "reference": "references/05_project_vending.png",
+      "prompt_file": "prompts/05_project_vending.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        797,
+        588,
+        1016,
+        809
+      ],
+      "reference_size_px": [
+        219,
+        221
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "VENDING_BODY",
+        "VENDING_GLASS",
+        "VENDING_DISPLAY",
+        "VENDING_BUTTONS"
+      ],
+      "target_size_m_xyz": [
+        0.9,
+        1.8,
+        0.6
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "06_showcase_zone",
+      "title": "内部作品展示区",
+      "mode": "text",
+      "reference": "references/06_showcase_zone.png",
+      "prompt_file": "prompts/06_showcase_zone.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        1036,
+        589,
+        1432,
+        811
+      ],
+      "reference_size_px": [
+        396,
+        222
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "SHOWCASE_FRAME",
+        "DISPLAY_PAN",
+        "DISPLAY_FLIPFATE",
+        "DISPLAY_BMO",
+        "DISPLAY_ROVER"
+      ],
+      "target_size_m_xyz": [
+        2.2,
+        2.35,
+        0.6
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "07_tools_zone",
+      "title": "内部工具创作区",
+      "mode": "image",
+      "reference": "references/07_tools_zone.png",
+      "prompt_file": "prompts/07_tools_zone.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        19,
+        823,
+        443,
+        1061
+      ],
+      "reference_size_px": [
+        424,
+        238
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "WORKBENCH_ROOT",
+        "TOOLS_PEGBOARD",
+        "TOOL_SCREEN",
+        "DRAWERS"
+      ],
+      "target_size_m_xyz": [
+        2.4,
+        2.3,
+        0.8
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "08_street_lamp",
+      "title": "门口路灯",
+      "mode": "image",
+      "reference": "references/08_street_lamp.png",
+      "prompt_file": "prompts/08_street_lamp.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        462,
+        820,
+        589,
+        1064
+      ],
+      "reference_size_px": [
+        127,
+        244
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "LAMP_POLE",
+        "LAMP_EMISSIVE"
+      ],
+      "target_size_m_xyz": [
+        0.65,
+        2.8,
+        0.5
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "09_trash_bin",
+      "title": "门口垃圾桶",
+      "mode": "image",
+      "reference": "references/09_trash_bin.png",
+      "prompt_file": "prompts/09_trash_bin.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        615,
+        912,
+        727,
+        1064
+      ],
+      "reference_size_px": [
+        112,
+        152
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "BIN_BODY",
+        "BIN_LID"
+      ],
+      "target_size_m_xyz": [
+        0.55,
+        0.95,
+        0.6
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "10_utility_cabinet",
+      "title": "街边电箱",
+      "mode": "text",
+      "reference": "references/10_utility_cabinet.png",
+      "prompt_file": "prompts/10_utility_cabinet.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        730,
+        849,
+        866,
+        1059
+      ],
+      "reference_size_px": [
+        136,
+        210
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "UTILITY_BODY",
+        "UTILITY_DOOR"
+      ],
+      "target_size_m_xyz": [
+        0.7,
+        1.65,
+        0.45
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "11_tree",
+      "title": "街边小树",
+      "mode": "text",
+      "reference": "references/11_tree.png",
+      "prompt_file": "prompts/11_tree.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        942,
+        861,
+        1102,
+        1054
+      ],
+      "reference_size_px": [
+        160,
+        193
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "TREE_TRUNK",
+        "TREE_CROWN",
+        "TREE_PLANTER"
+      ],
+      "target_size_m_xyz": [
+        1.35,
+        2.2,
+        1.25
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "12_plants_grass",
+      "title": "盆栽与草地模块",
+      "mode": "text",
+      "reference": "references/12_plants_grass.png",
+      "prompt_file": "prompts/12_plants_grass.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        1059,
+        906,
+        1196,
+        1064
+      ],
+      "reference_size_px": [
+        137,
+        158
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "PLANTER_LOW",
+        "PLANT_CLUSTER",
+        "GRASS_PATCH"
+      ],
+      "target_size_m_xyz": [
+        1.2,
+        0.8,
+        0.6
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    },
+    {
+      "id": "13_street_base",
+      "title": "湿地面与路沿模块",
+      "mode": "image",
+      "reference": "references/13_street_base.png",
+      "prompt_file": "prompts/13_street_base.txt",
+      "source_file_id": "file_00000000da8081f8a96406ab92dc2161",
+      "source_pixel_box": [
+        1204,
+        880,
+        1432,
+        1061
+      ],
+      "reference_size_px": [
+        228,
+        181
+      ],
+      "input_quality_note": "Cropped from an AI concept sheet. Some crops are low resolution. No upscaling, invented detail, multi-view guarantee or 3D geometry is implied. Text-mode assets use the crop for review only, not upload.",
+      "expected_nodes_after_blender": [
+        "SIDEWALK",
+        "CURB",
+        "ROAD",
+        "WET_PATCH"
+      ],
+      "target_size_m_xyz": [
+        6.2,
+        0.3,
+        4.7
+      ],
+      "output_format_target": "GLB",
+      "postprocess_required": true,
+      "qa_approved": false
+    }
+  ]
+}

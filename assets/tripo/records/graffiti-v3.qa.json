@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-21",
+  "request": "Make the Peter Pan’s Techland sign cooler and more graffiti-like.",
+  "status": "implemented_and_visually_checked_pending_user_acceptance",
+  "implementation": {
+    "brand_text": [
+      "PETER PAN’S",
+      "TECHLAND"
+    ],
+    "method": "Original per-letter Path2D silhouettes rendered into a transparent CanvasTexture; no font-rendered brand glyphs.",
+    "details": [
+      "Uneven interlocking letters",
+      "Cyan outer edge and heavy black outline",
+      "Short purple-black extrusion",
+      "Pink/cyan paint facets with acid-green accents",
+      "Overspray, paint runs and arrow underline"
+    ],
+    "dimensions_m": [
+      3.1,
+      0.8
+    ],
+    "bottom_edge_m": 2.56,
+    "texture_dimensions": {
+      "desktop": [
+        1024,
+        280
+      ],
+      "mobile": [
+        512,
+        140
+      ]
+    },
+    "source": "static/maker-garage-preview/art-direction.js",
+    "previous_source_backup": "assets/tripo/records/art-direction-v2.source.js",
+    "new_tripo_tasks": 0,
+    "new_credits": 0,
+    "raw_glb_modified": false
+  },
+  "entrypoint_fix": {
+    "canonical": "static/maker-garage-preview/scene/index.html",
+    "reason": "Docusaurus serve redirected the old .html entry to a clean URL, losing query parameters and retaining an old iframe document. A directory index preserves the locale and version query.",
+    "base_href": "../",
+    "model_url_base": "document.baseURI",
+    "legacy_entry": "scene.html redirects to scene/ while preserving search/hash",
+    "scene_module_version": "graffiti-v3.1"
+  },
+  "verification": {
+    "node_syntax": "passed",
+    "typecheck": "passed; graffiti-v3-typecheck.log",
+    "production_build": "en and zh-Hans passed; graffiti-v3-build.log",
+    "build_note": "Final HTML module-cache token v3.1 synchronized to both locale outputs after build; hashes for art-direction.js, scene.js, scene/index.html and scene.html verified identical to source.",
+    "warnings": "Existing webpack cache, vscode-languageserver-types dynamic require and Docusaurus update-check permission warnings remain non-fatal.",
+    "desktop_embedded_scene": "Actual user preview tab visibly shows new glyphs; canonical iframe URL retains lang=zh-Hans, embedded=1 and v=graffiti-v3; 12/13 real assets loaded.",
+    "mobile_scene": "390x844 browser viewport; 12/13 real assets loaded; maximum texture edge 512; console errors empty; viewport reset after check.",
+    "desktop_console_note": "Two old unattributed MutationObserver Node errors from before the final entry reload remain in tab history; fresh standalone scene has no console errors. No new shader or model-load errors observed.",
+    "screenshots": [
+      "graffiti-v3-page.jpg",
+      "graffiti-v3-scene.jpg",
+      "graffiti-v3-mobile.jpg"
+    ],
+    "independent_review": "Entry-point relative paths, module imports, locale routing and model URL containment reviewed read-only."
+  },
+  "not_changed": [
+    "Raw Tripo models",
+    "Existing homepage and content",
+    "Rejected tools-zone status",
+    "Project spending total 385"
+  ],
+  "deployed": false
+}

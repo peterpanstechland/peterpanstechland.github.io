@@ -13,6 +13,13 @@ function fixture(t){
  const review=(id,changes={})=>req('admin/sponsors/'+id,'PATCH',{version:1,status:'approved',paymentStatus:'manual_confirmed',start,end,note:'',...changes},true);
  return {db,objects,req,form,review,start,end};
 }
+test('plans and public feed advertise the 10/8/5-second page schedule',async t=>{
+ const {req}=fixture(t);
+ for(const path of ['sponsors/plans','sponsors']){
+  const response=await req(path);assert.equal(response.status,200);
+  assert.deepEqual((await response.json()).pageDurationsSeconds,[10,8,5]);
+ }
+});
 test('server quotes exact page price; no client payment or status can publish; receipts private',async t=>{
  const {req,form,review}=fixture(t),f=form({page:'2',term:'year',status:'approved',paymentStatus:'manual_confirmed'}),id=f.get('id');
  let r=await req('sponsors/applications','POST',f);assert.equal(r.status,201);assert.equal((await r.json()).amountCents,80000);

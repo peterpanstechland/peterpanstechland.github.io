@@ -1,0 +1,152 @@
+[
+  {
+    "index": 0,
+    "start": 0,
+    "end": 8,
+    "tag": "CYBER / ETERNAL STUDIO",
+    "title": "赛博永生工作室",
+    "voice": "欢迎来到我的赛博永生工作室。把脑洞存档，把想法变成能探索的小宇宙。",
+    "titleEn": "Cyber Eternal Studio",
+    "voiceEn": "Welcome to my Cyber Eternal Studio: a place to archive wild ideas and turn them into a little world you can explore."
+  },
+  {
+    "index": 1,
+    "start": 8,
+    "end": 16,
+    "tag": "MAKE / PLAY / BUILD",
+    "title": "一个会生长的小宇宙",
+    "voice": "招财猫会摇手，项目在贩卖机里悬浮。每一件作品，都能打开自己的故事。",
+    "titleEn": "A world that keeps growing",
+    "voiceEn": "The lucky cat waves. Projects levitate inside a vending machine. Every object opens a story of its own."
+  },
+  {
+    "index": 2,
+    "start": 16,
+    "end": 26,
+    "tag": "TRIPO AI / FROM IMAGE TO 3D",
+    "title": "从一张图，开始造物",
+    "voice": "用 Tripo AI，从清晰的主体参考图，或一段文字出发，开始生成三维资产。",
+    "titleEn": "From one image to a 3D world",
+    "voiceEn": "Start with Tripo AI. Upload a clear reference image, or describe your idea in text, and begin creating a 3D asset."
+  },
+  {
+    "index": 3,
+    "start": 26,
+    "end": 36,
+    "tag": "TRIPO AI / QUICK START",
+    "title": "上传。生成。检查。导出。",
+    "voice": "上传图片，选择精度或拓扑，生成后旋转检查，再导出适合网页的 GLB。",
+    "titleEn": "Upload. Generate. Inspect. Export.",
+    "voiceEn": "Upload an image, choose detail or topology, inspect the generated model from every angle, then export a GLB for the web."
+  },
+  {
+    "index": 4,
+    "start": 36,
+    "end": 48,
+    "tag": "TRIPO AI / PRICING",
+    "title": "先探索，再选择你的方案",
+    "voice": "免费版每月二百点。Pro 月付二十美元。API 另外计费，额外处理按用量计算。",
+    "titleEn": "Explore first. Choose your plan.",
+    "voiceEn": "The free plan includes two hundred credits a month. Pro costs twenty US dollars monthly. API credits are billed separately, with additional processing charged by usage."
+  },
+  {
+    "index": 5,
+    "start": 48,
+    "end": 58,
+    "tag": "GLB / BLENDER / THREE.JS",
+    "title": "让模型，成为空间的一部分",
+    "voice": "再用 Blender 整理比例和摆放，用 Three.js 接上灯光与交互。工具和设备，也成为工作室的一部分。",
+    "titleEn": "Turn assets into a place",
+    "voiceEn": "Arrange scale and placement in Blender. Add lighting and interaction with Three.js. The tools and machines become part of the studio."
+  },
+  {
+    "index": 6,
+    "start": 58,
+    "end": 68,
+    "tag": "PROJECT ARCHIVE / ALWAYS UPDATING",
+    "title": "每个项目，都有自己的入口",
+    "voice": "机器人、灵巧手、黑客松。项目与工具介绍会持续更新，这座车间也会和我一起成长。",
+    "titleEn": "Every project has its own doorway",
+    "voiceEn": "Robots, dexterous hands, and hackathons. I will keep adding projects and tool guides, so this workshop keeps growing with me."
+  },
+  {
+    "index": 7,
+    "start": 68,
+    "end": 78,
+    "tag": "LEAVE A TRACE / CO-CREATE",
+    "title": "背面，留一个到此一游",
+    "voice": "绕到背面，留下一张照片、一句话，或一个愿望。审核之后，你的到此一游，也会成为这里的记忆。",
+    "titleEn": "Leave a trace on the back wall",
+    "voiceEn": "Walk around the back. Leave a photo, a message, or a wish. After review, your visit becomes part of this studio's shared memory."
+  },
+  {
+    "index": 8,
+    "start": 78,
+    "end": 88,
+    "tag": "OPEN CALL / SPONSOR NETWORK",
+    "title": "让你的品牌，亮在这里",
+    "voice": "看见头顶的霓虹广告牌了吗？我正在招募核心、硬件和社区赞助商，让品牌走进这座赛博工作室。",
+    "titleEn": "Put your brand in the spotlight",
+    "voiceEn": "See that neon billboard? I am looking for core, hardware, and community sponsors to become part of this cyber workshop."
+  },
+  {
+    "index": 9,
+    "start": 88,
+    "end": 100,
+    "tag": "CORE SPONSOR / THREE ROTATING PAGES",
+    "title": "核心赞助 · 按页与档期投放",
+    "voice": "核心赞助按轮播页和时间计费，五十元每月起。标志可以跳转官网，合作确认后按档期展示。",
+    "titleEn": "Core sponsorship by page and period",
+    "voiceEn": "Core sponsorship is priced by rotating page and campaign period, from fifty renminbi a month. Logos link to your website, with approved campaigns shown on schedule."
+  },
+  {
+    "index": 10,
+    "start": 100,
+    "end": 112,
+    "tag": "HARDWARE SPONSOR / CYBER BOOTH",
+    "title": "产品，也可以有自己的赛博展位",
+    "voice": "硬件供应商，也可以拥有赛博展位。比如 PLAUD NotePin S，用三维展示连接真实场景与后续测评。",
+    "titleEn": "Give your product a cyber booth",
+    "voiceEn": "Hardware suppliers can have a cyber booth too. Imagine PLAUD NotePin S on the shelf, connecting a 3D showcase with real workflows and a future review."
+  },
+  {
+    "index": 11,
+    "start": 112,
+    "end": 126,
+    "tag": "PLAUD / WORKFLOW CONCEPT",
+    "title": "把天马行空，收拢成开发计划",
+    "voice": "我想用它记录黑客松会议和发散的灵感，由 AI 整理需求和开发规格，再交给 WorkBuddy、Cursor 或 Codex。这是接下来要实测的工作流。",
+    "titleEn": "Turn scattered ideas into a spec",
+    "voiceEn": "I want to capture hackathon meetings and scattered ideas, let AI distill requirements and a development spec, then bring them into WorkBuddy, Cursor, or Codex. This is a workflow I plan to test."
+  },
+  {
+    "index": 12,
+    "start": 126,
+    "end": 136,
+    "tag": "COMMUNITY SPONSOR / EVENT OPEN CALL",
+    "title": "最近，有活动要宣传吗？",
+    "voice": "展位、工作坊、发布会或周边合作，都欢迎来聊。Makers Challenge 独立企划，也在寻找合作伙伴。",
+    "titleEn": "Have an event to share?",
+    "voiceEn": "Planning a workshop, launch, booth, or swag collaboration? Let's talk. Our independent Makers Challenge proposal is also looking for partners."
+  },
+  {
+    "index": 13,
+    "start": 136,
+    "end": 146,
+    "tag": "APPLY / REVIEW / GO LIVE",
+    "title": "把合作，变成可执行的档期",
+    "voice": "从广告牌进入申请，提交标志、官网和档期。我会审核并确认合作，目前先人工沟通，不自动扣款。",
+    "titleEn": "Turn a partnership into a campaign",
+    "voiceEn": "Open the billboard application. Submit your logo, website, and preferred dates. I review and confirm each collaboration. Payment is currently handled manually."
+  },
+  {
+    "index": 14,
+    "start": 146,
+    "end": 156,
+    "tag": "PETER PAN'S TECHLAND / BUILD TOGETHER",
+    "title": "下一件，一起造。",
+    "voice": "从一张图，到一座工作室。从一个人的脑洞，到更多人的共创。来逛逛，也一起造点东西。",
+    "titleEn": "Let's build the next thing together",
+    "voiceEn": "From an image to a studio. From one person's imagination to a shared creation. Come explore Peter Pan's Techland, and let's build the next thing together."
+  }
+]

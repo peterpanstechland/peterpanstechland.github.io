@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "tool": "built-in image_gen",
+  "purpose": "Production image-to-3D reference. These PNGs are not Tripo GLB models.",
+  "selected_reference": "assets/tripo/references/04_cyber_lucky_cat_blue_v6.png",
+  "selected_sha256": "72138A88C8C79F0F7ED33FE59BB6621A5723E3E9247B27EC7297CF2F626F18CB",
+  "user_requirements": [
+    "Original cyberpunk and biohack lucky cat",
+    "British Shorthair blue-grey coat and rounded lucky-cat silhouette",
+    "Raised beckoning paw and separate skeletal rig",
+    "Prominent central plaque with exact simplified Chinese 发财",
+    "Separate runtime flame and electric-arc effects",
+    "Visible copper-gold necklace connecting the neck and large plaque"
+  ],
+  "revisions": [
+    {
+      "version": 2,
+      "path": "assets/tripo/references/04_cyber_lucky_cat_v2.png",
+      "status": "superseded",
+      "description": "Original yellow cyber-cat concept; superseded by user's British Shorthair blue lucky-cat request"
+    },
+    {
+      "version": 3,
+      "path": "assets/tripo/references/04_cyber_lucky_cat_blue_v3.png",
+      "prompt": "assets/tripo/references/04_cyber_lucky_cat_blue_v3.prompt.txt",
+      "status": "superseded",
+      "description": "Blue-grey seated lucky cat, no plaque"
+    },
+    {
+      "version": 4,
+      "path": "assets/tripo/references/04_cyber_lucky_cat_blue_v4.png",
+      "prompt": "assets/tripo/references/04_cyber_lucky_cat_blue_v4.prompt.txt",
+      "status": "superseded",
+      "description": "Added central 发财 plaque; user requested larger plaque"
+    },
+    {
+      "version": 5,
+      "path": "assets/tripo/references/04_cyber_lucky_cat_blue_v5.png",
+      "prompt": "assets/tripo/references/04_cyber_lucky_cat_blue_v5.prompt.txt",
+      "status": "superseded",
+      "description": "Large central plaque; user requested visible necklace suspension"
+    },
+    {
+      "version": 6,
+      "path": "assets/tripo/references/04_cyber_lucky_cat_blue_v6.png",
+      "prompt": "assets/tripo/references/04_cyber_lucky_cat_blue_v6.prompt.txt",
+      "status": "generated_and_rigged",
+      "description": "Large central plaque suspended from a visible copper-gold linked necklace around the neck"
+    }
+  ],
+  "tripo_submission": {
+    "status": "generation_and_rig_success",
+    "task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+    "actual_credits_consumed": 55,
+    "estimated_additional_credits": 55,
+    "estimated_project_total": 385,
+    "existing_project_spend": 30,
+    "generation": 30,
+    "rig_check": 0,
+    "rig": 25,
+    "other_12_assets": 300,
+    "confirmation": "confirmed_by_user: 可以了做3d模型吧 (in reply to the 55-credit / 385-total plan)",
+    "plan": "assets/tripo/records/04_cyber_lucky_cat_blue_v6.dry-run.json",
+    "result_record": "assets/tripo/records/04_cyber_lucky_cat_blue_v6.result.json"
+  },
+  "notes": [
+    "The prior original lucky cat GLB remains preserved and is rejected for art direction, not presented as the revised model.",
+    "Final text must be reviewed in the generated GLB and corrected with a deterministic texture if needed.",
+    "A successful free rig check is not actual skeletal binding. Bone weights and visible deformation must be validated after rigging.",
+    "No paid automatic retries or credit purchases."
+  ],
+  "spending_authorization": {
+    "status": "confirmed_by_user",
+    "user_response": "可以了做3d模型吧",
+    "estimated_additional_credits": 55,
+    "estimated_project_total": 385,
+    "no_automatic_paid_retries": true,
+    "no_topups": true,
+    "stop_if_free_rig_check_fails": true,
+    "reference_sha256": "72138A88C8C79F0F7ED33FE59BB6621A5723E3E9247B27EC7297CF2F626F18CB",
+    "recorded_at_utc": "2026-10-20T06:46:11.373319Z"
+  }
+}

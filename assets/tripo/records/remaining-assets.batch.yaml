@@ -1,0 +1,100 @@
+# Native tripo-cli 0.7.1 batch manifest; prepared offline only, not submitted.
+# Run from the repository root. Inputs and parameters reproduce the approved dry-run files.
+# IMPORTANT: retries is a CLI option, not a manifest field. The CLI default is 1.
+# Required execution flags: --concurrency 2 --retries 0. Do not use --fresh.
+# No scenario, post-processing chain, paid conversion, candidate reroll or automatic retry.
+# Estimate: 5 text-to-model jobs x 20 + 5 image-to-model jobs x 30 = 250 Tripo credits.
+concurrency: 2
+defaults:
+  out: assets/tripo/raw
+jobs:
+  - name: 03_profile_sign
+    input: Original Shenzhen cyberpunk maker garage diorama prop. Charcoal black and smoky purple metal, coral-magenta and restrained cyan accent lights, warm amber work lighting, believable handmade details and weathering. A complete three-dimensional object with real side and rear surfaces. No webpage, no UI, no watermark, no cat-head brand logo, no human portrait, no generated text. Keep luminous surfaces distinct from opaque metal. A freestanding round wall-mounted neon portrait-sign FRAME, circular shallow black metal disc, two concentric magenta and cyan light tubes, mounting bracket and tidy cable. The central circular surface is plain opaque black, absolutely no person or face and no cat symbol. Generate only the sign hardware; the user's existing profile photo will be applied later, not AI-generated.
+    model: tripo-v3.1
+    params:
+      face_limit: 5000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 05_project_vending
+    input: PeterPansTechland_Tripo_Generation_Pack/references/05_project_vending.png
+    model: tripo-v3.1
+    params:
+      face_limit: 12000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 06_showcase_zone
+    input: "Original Shenzhen cyberpunk maker garage diorama prop. Charcoal black and smoky purple metal, coral-magenta and restrained cyan accent lights, warm amber work lighting, believable handmade details and weathering. A complete three-dimensional object with real side and rear surfaces. No webpage, no UI, no watermark, no cat-head brand logo, no human portrait, no generated text. Keep luminous surfaces distinct from opaque metal. A self-contained modular maker-project DISPLAY WALL, distinctly not a tool workbench: metal shelving, three separate glass-front display bays, warm under-shelf light strips, small blank museum-style labels, backlit empty niches and short cabinet bases. Leave all hero project niches empty so actual PAN, FlipFate, BMO and camera-robot models can be placed later. No invented replacement projects. A 2.2m-wide display cabinet with depth; no surrounding room, portraits or cat logo."
+    model: tripo-v3.1
+    params:
+      face_limit: 12000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 07_tools_zone
+    input: PeterPansTechland_Tripo_Generation_Pack/references/07_tools_zone.png
+    model: tripo-v3.1
+    params:
+      face_limit: 18000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 08_street_lamp
+    input: PeterPansTechland_Tripo_Generation_Pack/references/08_street_lamp.png
+    model: tripo-v3.1
+    params:
+      face_limit: 5000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 09_trash_bin
+    input: PeterPansTechland_Tripo_Generation_Pack/references/09_trash_bin.png
+    model: tripo-v3.1
+    params:
+      face_limit: 4000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 10_utility_cabinet
+    input: Original Shenzhen cyberpunk maker garage diorama prop. Charcoal black and smoky purple metal, coral-magenta and restrained cyan accent lights, warm amber work lighting, believable handmade details and weathering. A complete three-dimensional object with real side and rear surfaces. No webpage, no UI, no watermark, no cat-head brand logo, no human portrait, no generated text. Keep luminous surfaces distinct from opaque metal. One freestanding tall narrow grey-violet steel utility cabinet for a Shenzhen maker alley, access door, vent slots, hinge, handle, warning-label placeholders and blank graffiti sticker patches. Weathered grounded industrial object. No people, no skull or cat logo, no letters, no tree, no bin fused to the mesh.
+    model: tripo-v3.1
+    params:
+      face_limit: 6000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 11_tree
+    input: Original Shenzhen cyberpunk maker garage diorama prop. Charcoal black and smoky purple metal, coral-magenta and restrained cyan accent lights, warm amber work lighting, believable handmade details and weathering. A complete three-dimensional object with real side and rear surfaces. No webpage, no UI, no watermark, no cat-head brand logo, no human portrait, no generated text. Keep luminous surfaces distinct from opaque metal. One compact full ornamental street tree in a low square concrete planter, visible branching brown trunk, compact spreading crown of small dark green leaves with magenta accent lighting from below. Leaves must be real shaped clusters rather than a flat scene billboard. No street or buildings. Tree canopy should not block the garage sign.
+    model: tripo-v3.1
+    params:
+      face_limit: 10000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 12_plants_grass
+    input: Original Shenzhen cyberpunk maker garage diorama prop. Charcoal black and smoky purple metal, coral-magenta and restrained cyan accent lights, warm amber work lighting, believable handmade details and weathering. A complete three-dimensional object with real side and rear surfaces. No webpage, no UI, no watermark, no cat-head brand logo, no human portrait, no generated text. Keep luminous surfaces distinct from opaque metal. A small modular cluster of low concrete planters, leafy green shrubs and one narrow grass patch for a Chinese cyberpunk maker workshop sidewalk. Keep a compact visible base, natural leaf shapes, separate clumps and understated magenta edge light. No trees, building, road or lettering.
+    model: tripo-v3.1
+    params:
+      face_limit: 6000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true
+  - name: 13_street_base
+    input: PeterPansTechland_Tripo_Generation_Pack/references/13_street_base.png
+    model: tripo-v3.1
+    params:
+      face_limit: 8000
+      texture: true
+      pbr: true
+      texture_quality: standard
+      auto_size: true

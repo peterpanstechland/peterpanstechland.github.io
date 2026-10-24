@@ -1,0 +1,279 @@
+{
+  "revision": "interior-equipment-references-v1",
+  "recorded_at": "2026-10-22",
+  "status": "two_image_inputs_visually_reviewed_and_user_approved_2026_10_23",
+  "scope": "Read-only research of official manufacturer and project sources. No image has been downloaded, uploaded or submitted to Tripo by this research task.",
+  "paid_calls": 0,
+  "credits_spent": 0,
+  "proposed_batch": {
+    "unique_assets": 10,
+    "image_to_model_candidates": 2,
+    "text_to_model_candidates": 8,
+    "estimated_credits": 220,
+    "estimate_expression": "2 * 30 + 8 * 20",
+    "status": "proposal_only_pending_current_CLI_quote_and_user_confirmation",
+    "note": "This is the parent task's proposed batch estimate, not a price independently verified by this source research. The two candidate reference images require visual acceptance and exact input disclosure before submission."
+  },
+  "image_policy": {
+    "selected_inputs": [
+      "assets/tripo/references/interior-equipment/x1c-product-reference.jpg",
+      "assets/tripo/references/interior-equipment/laserbox-product-reference.jpg"
+    ],
+    "candidate_urls_are_not_accepted_inputs": true,
+    "downloaded": true,
+    "uploaded": false,
+    "further_search_paused": true,
+    "reason": "User approved exact batch inputs. Prior candidates rejected after inspection (screws, person occlusion, diagram, montage)."
+  },
+  "assets": [
+    {
+      "id": "14_bambu_x1c",
+      "name": "Bambu Lab X1 Carbon",
+      "reference_scope": "Printer body alone, without AMS or a table.",
+      "verified_facts": {
+        "external_dimensions_mm": {
+          "width": 389,
+          "depth": 389,
+          "height": 457
+        },
+        "build_volume_mm": [
+          256,
+          256,
+          256
+        ],
+        "enclosure_material": "Aluminum and glass",
+        "chassis_material": "Steel",
+        "touchscreen": "5-inch 1280 x 720"
+      },
+      "scene_size_m_xyz": [
+        0.389,
+        0.457,
+        0.389
+      ],
+      "recognition_notes": [
+        "Compact enclosed cube-like printer with aluminum panels and glass enclosure; preserve the recognizable appliance proportions.",
+        "Use the glass front, top, screen, door seam and internal print bed as recognition features after a source image has been visually accepted.",
+        "Do not add AMS, spool towers, a workbench or an invented cyberpunk machine silhouette. Apply the surrounding garage lighting at runtime."
+      ],
+      "sources": [
+        {
+          "url": "https://public-cdn.bambulab.com/store/bambulab-X1-carbon-tech-specs.pdf?v=20250906051611",
+          "type": "official_manufacturer_specification_pdf",
+          "supports": [
+            "external_dimensions",
+            "build_volume",
+            "materials",
+            "touchscreen"
+          ],
+          "access_note": "Official document text was available in web search indexing; direct PDF open returned HTTP 402 in this research environment."
+        },
+        {
+          "url": "https://us.store.bambulab.com/products/x1-carbon?variant=42698346037384",
+          "type": "official_manufacturer_product_page",
+          "access_note": "Search-indexed content was available; direct page open was restricted."
+        },
+        {
+          "url": "https://cdn1.bambulab.com/documentation/quick-start-2024-01-17/Quick-Start-X1%26X1C_en.pdf",
+          "type": "official_manufacturer_quick_start",
+          "access_note": "Located as a source candidate; direct PDF open returned HTTP 402."
+        }
+      ],
+      "image_candidates": [
+        {
+          "url": "https://store.bblcdn.eu/s8/default/59f6296e8a3f4d75828033526f828af1/6.png",
+          "discovered_on": "https://eu.store.bambulab.com/nl?gad_source=1",
+          "host_status": "official_store_CDN_candidate",
+          "content_status": "unverified_product_and_composition",
+          "visually_inspected": false,
+          "accepted_for_generation": false,
+          "access_note": "URL appeared in official store search-indexed image content; image could not be opened by the web tool. It has not been confirmed to show a single X1C or a white background."
+        }
+      ],
+      "english_prompt_points": "One standalone Bambu Lab X1 Carbon desktop 3D printer body, without AMS. Recognizable compact enclosed proportions, brushed silver aluminum panels, dark glass enclosure, front glass door with a clear door seam, small front touch screen, visible internal print bed and toolhead where the accepted reference permits. Preserve the source appliance silhouette and normal industrial materials. Approximately 0.389 m wide, 0.389 m deep and 0.457 m high. Complete back and sides, stable feet and flat bottom. No table, room, extra printer, person, accessories or invented lettering; exact brand labels are applied locally afterward.",
+      "prompt_status": "Candidate points only; exact visual details must follow the accepted official image.",
+      "approved_image": {
+        "url": "https://cdn1.botland.com.pl/121870-pdt_540/bambu-lab-x1-carbon-drukarka-3d.jpg",
+        "source": "Botland public product photo; dimensions checked against manufacturer specification",
+        "local_file": "assets/tripo/references/interior-equipment/x1c-product-reference.jpg",
+        "visual_review": "single X1C, no AMS, white background",
+        "sha256": "1a8b040eaec9e5da367bfe7f91b5c64ad5dea8decc2011d322f72083a5eea498"
+      }
+    },
+    {
+      "id": "15_makeblock_laserbox",
+      "name": "Makeblock Laserbox",
+      "name_correction": "Makeblock, not Makerblock",
+      "reference_scope": "Original enclosed desktop Laserbox body, not LaserBot, an open-frame diode laser, xTool P2 or xTool P3. Omit the separate smoke purifier for this standalone asset.",
+      "verified_facts": {
+        "published_external_dimensions_mm": [
+          958,
+          528,
+          268
+        ],
+        "working_area_mm": [
+          500,
+          300
+        ],
+        "laser_type": "40 W CO2",
+        "external_features": [
+          "button with annular indicator",
+          "lid",
+          "rear smoke outlet",
+          "power and communication interfaces"
+        ],
+        "internal_features": [
+          "camera",
+          "laser head",
+          "tray",
+          "honeycomb panel",
+          "laser tube"
+        ]
+      },
+      "dimension_axis_caveat": "The manufacturer's Japanese press release labels the tuple width x height x depth, although the low wide product form suggests width x depth x height. Preserve the exact published tuple as evidence; the proposed scene assignment below is an explicitly stated modeling interpretation until the accepted official image/manual resolves the axes.",
+      "proposed_scene_size_m_xyz": [
+        0.958,
+        0.268,
+        0.528
+      ],
+      "scene_size_status": "axis_interpretation_pending_visual_reference_check",
+      "recognition_notes": [
+        "Use the broad, low enclosed desktop form with its large top lid, round ring-lit button and internal honeycomb work area.",
+        "Manufacturer support images identify the original Laserbox components; avoid substituting another laser cutter generation.",
+        "Body colors and the lid's tint must be copied from a visually accepted official picture, not inferred from a reseller's image."
+      ],
+      "sources": [
+        {
+          "url": "https://support.makeblock.com/hc/en-us/articles/25408331608727-Preparation",
+          "type": "official_manufacturer_support_article",
+          "supports": [
+            "product_identity",
+            "exterior_components",
+            "interior_components"
+          ],
+          "access_note": "Article text opened successfully. Its linked laserbox1.jpeg and laserbox2.jpeg image URLs were resolved, but image fetches returned cache miss."
+        },
+        {
+          "url": "https://www.value-press.com/pressrelease/234607",
+          "type": "manufacturer_authored_press_release_on_distribution_service",
+          "publisher": "Makeblock Japan Co., Ltd.",
+          "published_at": "2020-01-17",
+          "supports": [
+            "published_external_dimensions",
+            "working_area",
+            "laser_type"
+          ],
+          "access_note": "This is a primary manufacturer statement hosted by its press-release distributor, not an independent reseller specification."
+        },
+        {
+          "url": "https://www.makeblock.com.cn/jp/news-center-jp/273700.html",
+          "type": "legacy_official_manufacturer_news",
+          "access_note": "Search indexing retains the same specification; direct open now redirects to xtool.cn."
+        },
+        {
+          "url": "https://cdnlab.makeblock.com/Laserbox_User%20Manual_20200521.pdf",
+          "type": "official_manufacturer_manual_candidate",
+          "access_note": "Located in search but direct fetch failed; not used to assert dimensions independently."
+        }
+      ],
+      "image_candidates": [
+        {
+          "url": "https://support.makeblock.com/hc/article_attachments/25408331606935",
+          "source_label": "laserbox1.jpeg",
+          "discovered_on": "https://support.makeblock.com/hc/en-us/articles/25408331608727-Preparation",
+          "host_status": "official_manufacturer_support_attachment",
+          "content_status": "exterior_component_diagram_not_confirmed_clean_single_view",
+          "visually_inspected": false,
+          "accepted_for_generation": false,
+          "access_note": "Official page associates it with exterior components 1-8. Web image fetch returned cache miss. Diagram labels or multiple views may make it unsuitable as direct generation input."
+        },
+        {
+          "url": "https://support.makeblock.com/hc/article_attachments/25408324955927",
+          "source_label": "laserbox2.jpeg",
+          "discovered_on": "https://support.makeblock.com/hc/en-us/articles/25408331608727-Preparation",
+          "host_status": "official_manufacturer_support_attachment",
+          "content_status": "interior_component_diagram_not_confirmed_clean_single_view",
+          "visually_inspected": false,
+          "accepted_for_generation": false,
+          "access_note": "Official page associates it with camera, laser head, tray, honeycomb panel and tube. Web image fetch returned cache miss."
+        },
+        {
+          "url": "https://files.value-press.com/czMjZXllY2F0Y2gjNjE3MjQjNjE3MjRfc1ZYQVZaUUxGUi5qcGc.jpg",
+          "discovered_on": "https://www.value-press.com/pressrelease/234607",
+          "host_status": "manufacturer_press_release_attachment_on_distribution_CDN",
+          "content_status": "unverified_composition",
+          "visually_inspected": false,
+          "accepted_for_generation": false,
+          "access_note": "Resolved from the manufacturer's press-release hero image link. Image fetch returned cache miss; no single-machine or white-background claim is made."
+        }
+      ],
+      "english_prompt_points": "One standalone original Makeblock Laserbox enclosed desktop CO2 laser cutter, retaining the accepted reference's exact low, broad rectangular silhouette and material colors. Large hinged top viewing lid, rounded rectangular casing, round control button with an annular status light, visible honeycomb cutting bed and compact XY laser head where visible through the reference lid, a discrete rear exhaust connection. Approximately 0.958 m wide, 0.528 m deep and 0.268 m high, subject to the final reference axis check. Complete back and sides, flat supported base. No separate smoke purifier, workbench, room, people, flames or laser beam. Do not substitute an open-frame diode laser or another xTool model; no invented lettering.",
+      "prompt_status": "Candidate points only; material colors, lid tint and dimension axes require accepted image verification.",
+      "approved_image": {
+        "url": "https://cdn.shopify.com/s/files/1/0070/5901/3716/files/xTool_Laserbox_3317fc17-3ad4-48bb-8fff-f1021410946a_1000x.jpg?v=1713258915",
+        "source": "Makeblock official about-us product image",
+        "local_file": "assets/tripo/references/interior-equipment/laserbox-product-reference.jpg",
+        "visual_review": "single enclosed Laserbox, front and top visible, no purifier or people",
+        "sha256": "7d9fef307c2aa8a4c205daa51a796c7512e102738615aaa5920e7c020004f98e"
+      }
+    },
+    {
+      "id": "16_openpnp_machine",
+      "name": "Generic OpenPnP-compatible desktop pick-and-place machine",
+      "reference_scope": "An open-frame desktop hardware design compatible with OpenPnP software, without an invented commercial brand or model.",
+      "verified_facts": {
+        "single_official_machine_model": false,
+        "universal_official_dimensions": null,
+        "official_reference_project": "OpenPnP OpenBuilds, based on OpenBuilds linear motion components",
+        "recognizable_components": [
+          "Cartesian motion structure",
+          "nozzle head",
+          "down-looking camera",
+          "fixed up-looking camera",
+          "vacuum system",
+          "PCB support",
+          "feeders"
+        ]
+      },
+      "scene_layout_target_m_xyz": [
+        0.7,
+        0.45,
+        0.6
+      ],
+      "size_status": "Locally chosen scene layout envelope matching the draft plan; not an official OpenPnP product specification.",
+      "sources": [
+        {
+          "url": "https://openpnp.org/hardware/",
+          "type": "official_project_hardware_directory",
+          "supports": [
+            "multiple_hardware_designs",
+            "OpenBuilds_reference",
+            "feeders"
+          ]
+        },
+        {
+          "url": "https://github.com/openpnp/openpnp-openbuilds",
+          "type": "official_project_reference_hardware_repository",
+          "supports": [
+            "OpenBuilds_linear_motion_hardware_reference"
+          ]
+        },
+        {
+          "url": "https://github.com/openpnp/openpnp/wiki/Setup-and-Calibration",
+          "type": "official_project_documentation",
+          "supports": [
+            "top_camera",
+            "bottom_camera",
+            "nozzle",
+            "vacuum",
+            "feeders",
+            "hardware_variation"
+          ]
+        }
+      ],
+      "image_candidates": [],
+      "generation_mode_proposal": "text_to_model",
+      "english_prompt_points": "One standalone generic desktop open-frame SMT pick-and-place machine compatible with OpenPnP. Rectangular aluminum extrusion chassis and a flat metal base, exposed Cartesian XY gantry on parallel side rails, compact Z vacuum-nozzle head with a downward-looking camera, a small fixed upward-looking camera in the bed, one green PCB held flat in a central fixture, organized narrow component tape feeders along the front, tidy cable chains and vacuum tubing. Believable sturdy connected mechanics, complete rear and sides, stable feet. Locally chosen scene footprint about 0.70 m wide, 0.60 m deep and 0.45 m tall. No enclosure, table, room, person, invented model name, logo or text. Restrained charcoal and aluminum materials consistent with the existing maker garage.",
+      "prompt_status": "Suitable generic hardware description; do not present its dimensions or configuration as an official standardized OpenPnP product."
+    }
+  ]
+}

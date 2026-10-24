@@ -1,0 +1,4812 @@
+{
+  "scope": "Read-only rig joint/skin influence analysis plus CPU +10-degree local rotation trials; no mesh mutation or animation export",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\04-cyber-lucky-cat-blue-v6-rig-9c588a0c\\model.glb",
+  "source_sha256": "a5f1b2cd4b780ff34fc79451f5dd888b7a0976bdd2cbdf92e062a1e78a6bfca1",
+  "rig_task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+  "coordinates": "glTF world meters at stored bind pose; forward +X is a working hypothesis, not visual verification",
+  "direct_influence_bounds_threshold": 0.05,
+  "joint_count": 45,
+  "vertex_count": 9728,
+  "bones": [
+    {
+      "joint_slot": 0,
+      "node_index": 44,
+      "name": "tripo::Root",
+      "parent_node": 46,
+      "parent_chain": [
+        46
+      ],
+      "world_joint": [
+        0.0,
+        0.0164062,
+        0.0
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 0.0003,
+        "vertices_nonzero": 1,
+        "vertices_weight_ge_005": 0,
+        "weighted_center": [
+          0.1369475,
+          0.0058319,
+          0.0499583
+        ],
+        "bounds_weight_ge_005": null
+      },
+      "subtree_joint_nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 9728.0,
+        "vertices_nonzero": 9728,
+        "vertices_weight_ge_005": 9728,
+        "weighted_center": [
+          0.0190582,
+          0.1629355,
+          0.0208472
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            -1e-07,
+            -0.1775916
+          ],
+          "max": [
+            0.1500109,
+            0.3999999,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "Y": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "Z": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      }
+    },
+    {
+      "joint_slot": 1,
+      "node_index": 43,
+      "name": "tripo::0_Left_Limb_0",
+      "parent_node": 44,
+      "parent_chain": [
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0075378,
+        0.1025535,
+        0.0387931
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 286.93703,
+        "vertices_nonzero": 2214,
+        "vertices_weight_ge_005": 1464,
+        "weighted_center": [
+          0.0251257,
+          0.1233566,
+          0.0296674
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.086843,
+            0.0366032,
+            -0.0543333
+          ],
+          "max": [
+            0.0891834,
+            0.1759121,
+            0.1405699
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 9727.9997,
+        "vertices_nonzero": 9728,
+        "vertices_weight_ge_005": 9728,
+        "weighted_center": [
+          0.0190582,
+          0.1629355,
+          0.0208472
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            -1e-07,
+            -0.1775916
+          ],
+          "max": [
+            0.1500109,
+            0.3999999,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.0,
+          0.0170985,
+          0.9998538
+        ],
+        "Y": [
+          -0.2798685,
+          0.959898,
+          -0.0164152
+        ],
+        "Z": [
+          -0.9600383,
+          -0.2798276,
+          0.0047854
+        ]
+      }
+    },
+    {
+      "joint_slot": 2,
+      "node_index": 25,
+      "name": "tripo::Spine_0",
+      "parent_node": 43,
+      "parent_chain": [
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0023437,
+        0.1367187,
+        0.0382812
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 656.14065,
+        "vertices_nonzero": 3134,
+        "vertices_weight_ge_005": 1815,
+        "weighted_center": [
+          0.0210884,
+          0.1501667,
+          0.0435714
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.086843,
+            0.0742399,
+            -0.05982
+          ],
+          "max": [
+            0.0890802,
+            0.2018174,
+            0.145873
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 5734.22378,
+        "vertices_nonzero": 7248,
+        "vertices_weight_ge_005": 6585,
+        "weighted_center": [
+          0.0313107,
+          0.2287342,
+          0.0318856
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.086843,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1300674,
+            0.3999999,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -0.0,
+          -0.0,
+          1.0
+        ],
+        "Y": [
+          -0.1579907,
+          0.9874406,
+          -0.0
+        ],
+        "Z": [
+          -0.9874406,
+          -0.1579907,
+          -0.0
+        ]
+      }
+    },
+    {
+      "joint_slot": 3,
+      "node_index": 24,
+      "name": "tripo::Head_0",
+      "parent_node": 25,
+      "parent_chain": [
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0085937,
+        0.1757812,
+        0.0382812
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 602.07854,
+        "vertices_nonzero": 2639,
+        "vertices_weight_ge_005": 1587,
+        "weighted_center": [
+          0.0221193,
+          0.2025118,
+          0.0326139
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0836486,
+            0.1357591,
+            -0.0381453
+          ],
+          "max": [
+            0.0880123,
+            0.2573951,
+            0.1239833
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 5078.08313,
+        "vertices_nonzero": 5813,
+        "vertices_weight_ge_005": 5514,
+        "weighted_center": [
+          0.0326315,
+          0.2388859,
+          0.0303757
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0836486,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1300674,
+            0.3999999,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -1e-07,
+          0.0074718,
+          0.9999721
+        ],
+        "Y": [
+          0.0792354,
+          0.9968281,
+          -0.0074483
+        ],
+        "Z": [
+          -0.9968559,
+          0.0792331,
+          -0.0005921
+        ]
+      }
+    },
+    {
+      "joint_slot": 4,
+      "node_index": 5,
+      "name": "tripo::Head_1",
+      "parent_node": 24,
+      "parent_chain": [
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0054687,
+        0.2335937,
+        0.0382812
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 172.54193,
+        "vertices_nonzero": 2517,
+        "vertices_weight_ge_005": 727,
+        "weighted_center": [
+          0.0042445,
+          0.2369618,
+          0.035605
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0771846,
+            0.205964,
+            -0.0520383
+          ],
+          "max": [
+            0.0828667,
+            0.2851913,
+            0.1152254
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 2017.07503,
+        "vertices_nonzero": 2619,
+        "vertices_weight_ge_005": 2280,
+        "weighted_center": [
+          0.0184256,
+          0.3029305,
+          0.0234007
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0779373,
+            0.205964,
+            -0.0724297
+          ],
+          "max": [
+            0.1025065,
+            0.3999999,
+            0.1184479
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.0,
+          -0.0,
+          1.0
+        ],
+        "Y": [
+          0.071247,
+          0.9974587,
+          -0.0
+        ],
+        "Z": [
+          -0.9974587,
+          0.0712469,
+          0.0
+        ]
+      }
+    },
+    {
+      "joint_slot": 5,
+      "node_index": 4,
+      "name": "tripo::Head_2",
+      "parent_node": 5,
+      "parent_chain": [
+        5,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0039062,
+        0.2554686,
+        0.0382813
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 1654.74305,
+        "vertices_nonzero": 2220,
+        "vertices_weight_ge_005": 2026,
+        "weighted_center": [
+          0.0120884,
+          0.3120863,
+          0.0217598
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0779373,
+            0.2242525,
+            -0.0724297
+          ],
+          "max": [
+            0.1025065,
+            0.3999999,
+            0.1184479
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 1844.53309,
+        "vertices_nonzero": 2239,
+        "vertices_weight_ge_005": 2026,
+        "weighted_center": [
+          0.0197522,
+          0.3091013,
+          0.0222591
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0779373,
+            0.2242525,
+            -0.0724297
+          ],
+          "max": [
+            0.1025065,
+            0.3999999,
+            0.1184479
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.0,
+          -0.0354391,
+          0.9993718
+        ],
+        "Y": [
+          0.5807606,
+          0.813563,
+          0.02885
+        ],
+        "Z": [
+          -0.8140745,
+          0.5803956,
+          0.0205816
+        ]
+      }
+    },
+    {
+      "joint_slot": 6,
+      "node_index": 0,
+      "name": "bone_6",
+      "parent_node": 4,
+      "parent_chain": [
+        4,
+        5,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0117188,
+        0.2929687,
+        0.0226563
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 162.16528,
+        "vertices_nonzero": 495,
+        "vertices_weight_ge_005": 328,
+        "weighted_center": [
+          0.0870356,
+          0.2806898,
+          0.0235
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0535095,
+            0.2382253,
+            -0.0706023
+          ],
+          "max": [
+            0.1025065,
+            0.3004064,
+            0.0821934
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        0
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 162.16528,
+        "vertices_nonzero": 495,
+        "vertices_weight_ge_005": 328,
+        "weighted_center": [
+          0.0870356,
+          0.2806898,
+          0.0235
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0535095,
+            0.2382253,
+            -0.0706023
+          ],
+          "max": [
+            0.1025065,
+            0.3004064,
+            0.0821934
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9051745,
+          -0.2275812,
+          0.358979
+        ],
+        "Y": [
+          0.358979,
+          0.8615497,
+          -0.3589792
+        ],
+        "Z": [
+          -0.2275814,
+          0.4538048,
+          0.8615497
+        ]
+      }
+    },
+    {
+      "joint_slot": 7,
+      "node_index": 1,
+      "name": "bone_7",
+      "parent_node": 4,
+      "parent_chain": [
+        4,
+        5,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0523437,
+        0.3273436,
+        0.0632813
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 19.07448,
+        "vertices_nonzero": 213,
+        "vertices_weight_ge_005": 59,
+        "weighted_center": [
+          0.0865115,
+          0.293557,
+          0.0442018
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0615496,
+            0.2806092,
+            0.0316119
+          ],
+          "max": [
+            0.0938771,
+            0.3382142,
+            0.0668679
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        1
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 19.07448,
+        "vertices_nonzero": 213,
+        "vertices_weight_ge_005": 59,
+        "weighted_center": [
+          0.0865115,
+          0.293557,
+          0.0442018
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0615496,
+            0.2806092,
+            0.0316119
+          ],
+          "max": [
+            0.0938771,
+            0.3382142,
+            0.0668679
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.5198179,
+          -0.6135662,
+          0.5944122
+        ],
+        "Y": [
+          0.5944125,
+          0.7595268,
+          0.2641834
+        ],
+        "Z": [
+          -0.6135661,
+          0.2159988,
+          0.7595269
+        ]
+      }
+    },
+    {
+      "joint_slot": 8,
+      "node_index": 2,
+      "name": "tripo::Head_3",
+      "parent_node": 4,
+      "parent_chain": [
+        4,
+        5,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0554688,
+        0.3273436,
+        0.0429687
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 4.1583,
+        "vertices_nonzero": 166,
+        "vertices_weight_ge_005": 12,
+        "weighted_center": [
+          0.0692038,
+          0.3359304,
+          0.0405866
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0653595,
+            0.3060159,
+            0.0277254
+          ],
+          "max": [
+            0.0733214,
+            0.3587846,
+            0.054981
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        2
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 4.1583,
+        "vertices_nonzero": 166,
+        "vertices_weight_ge_005": 12,
+        "weighted_center": [
+          0.0692038,
+          0.3359304,
+          0.0405866
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0653595,
+            0.3060159,
+            0.0277254
+          ],
+          "max": [
+            0.0733214,
+            0.3587846,
+            0.054981
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -1e-07,
+          -0.0650792,
+          0.9978801
+        ],
+        "Y": [
+          0.6360783,
+          0.7699888,
+          0.0502167
+        ],
+        "Z": [
+          -0.7716247,
+          0.6347297,
+          0.0413953
+        ]
+      }
+    },
+    {
+      "joint_slot": 9,
+      "node_index": 3,
+      "name": "bone_9",
+      "parent_node": 4,
+      "parent_chain": [
+        4,
+        5,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0554688,
+        0.2882811,
+        0.0679687
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 4.39199,
+        "vertices_nonzero": 207,
+        "vertices_weight_ge_005": 19,
+        "weighted_center": [
+          0.0861119,
+          0.2756052,
+          0.0518832
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0789033,
+            0.2636312,
+            0.033536
+          ],
+          "max": [
+            0.0967181,
+            0.2856195,
+            0.0796829
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        3
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 4.39199,
+        "vertices_nonzero": 207,
+        "vertices_weight_ge_005": 19,
+        "weighted_center": [
+          0.0861119,
+          0.2756052,
+          0.0518832
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0789033,
+            0.2636312,
+            0.033536
+          ],
+          "max": [
+            0.0967181,
+            0.2856195,
+            0.0796829
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -0.0731658,
+          -0.5930654,
+          0.8018231
+        ],
+        "Y": [
+          0.8018236,
+          0.4431123,
+          0.4009121
+        ],
+        "Z": [
+          -0.5930648,
+          0.6722536,
+          0.4431131
+        ]
+      }
+    },
+    {
+      "joint_slot": 10,
+      "node_index": 13,
+      "name": "bone_10",
+      "parent_node": 24,
+      "parent_chain": [
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0023437,
+        0.2242187,
+        0.0195313
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 289.74611,
+        "vertices_nonzero": 1180,
+        "vertices_weight_ge_005": 753,
+        "weighted_center": [
+          0.0117132,
+          0.2042688,
+          -0.019937
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0806931,
+            0.1580732,
+            -0.051812
+          ],
+          "max": [
+            0.0804262,
+            0.2332833,
+            0.0350882
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 1247.8154,
+        "vertices_nonzero": 2057,
+        "vertices_weight_ge_005": 1691,
+        "weighted_center": [
+          0.0296707,
+          0.1483304,
+          -0.0519043
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0806931,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1215423,
+            0.2332833,
+            0.0350882
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9988562,
+          0.0080065,
+          0.0471404
+        ],
+        "Y": [
+          0.0471404,
+          -0.3299832,
+          -0.942809
+        ],
+        "Z": [
+          0.008007,
+          0.9439529,
+          -0.3299831
+        ]
+      }
+    },
+    {
+      "joint_slot": 11,
+      "node_index": 12,
+      "name": "bone_11",
+      "parent_node": 13,
+      "parent_chain": [
+        13,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0007812,
+        0.2132812,
+        -0.0117187
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 180.28562,
+        "vertices_nonzero": 633,
+        "vertices_weight_ge_005": 397,
+        "weighted_center": [
+          -0.0080035,
+          0.1876926,
+          -0.0364472
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0524212,
+            0.144046,
+            -0.070009
+          ],
+          "max": [
+            0.04344,
+            0.2209942,
+            -0.0079671
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 958.06929,
+        "vertices_nonzero": 1374,
+        "vertices_weight_ge_005": 1147,
+        "weighted_center": [
+          0.0351015,
+          0.1314131,
+          -0.0615721
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0524212,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1215423,
+            0.2209942,
+            -0.0079671
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9840835,
+          -0.0875407,
+          -0.154649
+        ],
+        "Y": [
+          -0.1546489,
+          -0.8505691,
+          -0.5026091
+        ],
+        "Z": [
+          -0.0875409,
+          0.5185256,
+          -0.8505691
+        ]
+      }
+    },
+    {
+      "joint_slot": 12,
+      "node_index": 11,
+      "name": "bone_12",
+      "parent_node": 12,
+      "parent_chain": [
+        12,
+        13,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0070312,
+        0.1789062,
+        -0.0320312
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 325.30403,
+        "vertices_nonzero": 678,
+        "vertices_weight_ge_005": 538,
+        "weighted_center": [
+          0.0056435,
+          0.1516663,
+          -0.0564673
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0399117,
+            0.1061444,
+            -0.0902129
+          ],
+          "max": [
+            0.0525097,
+            0.2172219,
+            -0.020191
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 777.78367,
+        "vertices_nonzero": 1133,
+        "vertices_weight_ge_005": 994,
+        "weighted_center": [
+          0.045093,
+          0.1183678,
+          -0.0673959
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0399117,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1215423,
+            0.2172219,
+            -0.020191
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.8462464,
+          0.2306306,
+          0.480288
+        ],
+        "Y": [
+          0.480288,
+          -0.7204327,
+          -0.5003001
+        ],
+        "Z": [
+          0.2306308,
+          0.6540537,
+          -0.7204327
+        ]
+      }
+    },
+    {
+      "joint_slot": 13,
+      "node_index": 10,
+      "name": "bone_13",
+      "parent_node": 11,
+      "parent_chain": [
+        11,
+        12,
+        13,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0304687,
+        0.1226562,
+        -0.0710937
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 95.54561,
+        "vertices_nonzero": 408,
+        "vertices_weight_ge_005": 273,
+        "weighted_center": [
+          0.0374192,
+          0.1162637,
+          -0.0755518
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0028405,
+            0.0850301,
+            -0.1003315
+          ],
+          "max": [
+            0.0796354,
+            0.1512486,
+            -0.0297806
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 452.47964,
+        "vertices_nonzero": 713,
+        "vertices_weight_ge_005": 576,
+        "weighted_center": [
+          0.0734547,
+          0.0944284,
+          -0.0752529
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0028405,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1215423,
+            0.1512486,
+            -0.0297806
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.4071156,
+          0.3631856,
+          0.8380651
+        ],
+        "Y": [
+          0.8380651,
+          -0.5133771,
+          -0.1846373
+        ],
+        "Z": [
+          0.363186,
+          0.7775218,
+          -0.5133769
+        ]
+      }
+    },
+    {
+      "joint_slot": 14,
+      "node_index": 6,
+      "name": "bone_14",
+      "parent_node": 10,
+      "parent_chain": [
+        10,
+        11,
+        12,
+        13,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0695312,
+        0.0992186,
+        -0.0789062
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 208.47115,
+        "vertices_nonzero": 263,
+        "vertices_weight_ge_005": 263,
+        "weighted_center": [
+          0.0966474,
+          0.0811912,
+          -0.0733749
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0565429,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1215423,
+            0.1123792,
+            -0.0448907
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        6
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 208.47115,
+        "vertices_nonzero": 263,
+        "vertices_weight_ge_005": 263,
+        "weighted_center": [
+          0.0966474,
+          0.0811912,
+          -0.0733749
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0565429,
+            0.0600656,
+            -0.1008071
+          ],
+          "max": [
+            0.1215423,
+            0.1123792,
+            -0.0448907
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.3889938,
+          0.3666041,
+          0.845154
+        ],
+        "Y": [
+          0.8451539,
+          -0.5070931,
+          -0.1690309
+        ],
+        "Z": [
+          0.3666046,
+          0.7800371,
+          -0.5070929
+        ]
+      }
+    },
+    {
+      "joint_slot": 15,
+      "node_index": 7,
+      "name": "bone_15",
+      "parent_node": 10,
+      "parent_chain": [
+        10,
+        11,
+        12,
+        13,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0507812,
+        0.1101562,
+        -0.0742188
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 43.15575,
+        "vertices_nonzero": 444,
+        "vertices_weight_ge_005": 183,
+        "weighted_center": [
+          0.05365,
+          0.1015694,
+          -0.0734291
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0257871,
+            0.0710971,
+            -0.1008071
+          ],
+          "max": [
+            0.0796354,
+            0.1378215,
+            -0.0316735
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        7
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 43.15575,
+        "vertices_nonzero": 444,
+        "vertices_weight_ge_005": 183,
+        "weighted_center": [
+          0.05365,
+          0.1015694,
+          -0.0734291
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0257871,
+            0.0710971,
+            -0.1008071
+          ],
+          "max": [
+            0.0796354,
+            0.1378215,
+            -0.0316735
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.3689079,
+          0.3883645,
+          0.8444406
+        ],
+        "Y": [
+          0.8444406,
+          -0.519656,
+          -0.1299142
+        ],
+        "Z": [
+          0.3883648,
+          0.7610063,
+          -0.5196559
+        ]
+      }
+    },
+    {
+      "joint_slot": 16,
+      "node_index": 8,
+      "name": "bone_16",
+      "parent_node": 10,
+      "parent_chain": [
+        10,
+        11,
+        12,
+        13,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0617187,
+        0.1039062,
+        -0.0773437
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 59.03239,
+        "vertices_nonzero": 386,
+        "vertices_weight_ge_005": 199,
+        "weighted_center": [
+          0.0674546,
+          0.0985439,
+          -0.0789856
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0403154,
+            0.0681347,
+            -0.1008071
+          ],
+          "max": [
+            0.0933216,
+            0.125341,
+            -0.0501752
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        8
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 59.03239,
+        "vertices_nonzero": 386,
+        "vertices_weight_ge_005": 199,
+        "weighted_center": [
+          0.0674546,
+          0.0985439,
+          -0.0789856
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0403154,
+            0.0681347,
+            -0.1008071
+          ],
+          "max": [
+            0.0933216,
+            0.125341,
+            -0.0501752
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.3889938,
+          0.3666041,
+          0.845154
+        ],
+        "Y": [
+          0.8451539,
+          -0.5070931,
+          -0.1690309
+        ],
+        "Z": [
+          0.3666045,
+          0.7800371,
+          -0.5070929
+        ]
+      }
+    },
+    {
+      "joint_slot": 17,
+      "node_index": 9,
+      "name": "bone_17",
+      "parent_node": 10,
+      "parent_chain": [
+        10,
+        11,
+        12,
+        13,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0757812,
+        0.0945312,
+        -0.0820312
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 46.27473,
+        "vertices_nonzero": 258,
+        "vertices_weight_ge_005": 156,
+        "weighted_center": [
+          0.0694981,
+          0.0970684,
+          -0.0800356
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0483446,
+            0.0681347,
+            -0.1008071
+          ],
+          "max": [
+            0.089728,
+            0.1212569,
+            -0.0505353
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        9
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 46.27473,
+        "vertices_nonzero": 258,
+        "vertices_weight_ge_005": 156,
+        "weighted_center": [
+          0.0694981,
+          0.0970684,
+          -0.0800356
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0483446,
+            0.0681347,
+            -0.1008071
+          ],
+          "max": [
+            0.089728,
+            0.1212569,
+            -0.0505353
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.4231424,
+          0.3580498,
+          0.8323166
+        ],
+        "Y": [
+          0.8323165,
+          -0.5166108,
+          -0.2009042
+        ],
+        "Z": [
+          0.3580502,
+          0.7777619,
+          -0.5166106
+        ]
+      }
+    },
+    {
+      "joint_slot": 18,
+      "node_index": 23,
+      "name": "bone_18",
+      "parent_node": 24,
+      "parent_chain": [
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0007813,
+        0.2242187,
+        0.0539062
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 187.2137,
+        "vertices_nonzero": 1027,
+        "vertices_weight_ge_005": 525,
+        "weighted_center": [
+          0.0333867,
+          0.2218222,
+          0.0851481
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0506868,
+            0.1719142,
+            0.0390815
+          ],
+          "max": [
+            0.0793302,
+            0.2531663,
+            0.1374153
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 1211.11417,
+        "vertices_nonzero": 1969,
+        "vertices_weight_ge_005": 1442,
+        "weighted_center": [
+          0.0645674,
+          0.2436037,
+          0.1256531
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0506868,
+            0.1698981,
+            0.0390815
+          ],
+          "max": [
+            0.1300674,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -0.5676143,
+          -0.6967175,
+          0.4386328
+        ],
+        "Y": [
+          0.4386331,
+          0.1949478,
+          0.8772664
+        ],
+        "Z": [
+          -0.6967174,
+          0.6903478,
+          0.1949482
+        ]
+      }
+    },
+    {
+      "joint_slot": 19,
+      "node_index": 22,
+      "name": "bone_19",
+      "parent_node": 23,
+      "parent_chain": [
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0148438,
+        0.2304686,
+        0.0820313
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 142.05959,
+        "vertices_nonzero": 657,
+        "vertices_weight_ge_005": 308,
+        "weighted_center": [
+          0.0247911,
+          0.2127596,
+          0.102781
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0250219,
+            0.1698981,
+            0.0797466
+          ],
+          "max": [
+            0.0624286,
+            0.251557,
+            0.1398785
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 1023.90046,
+        "vertices_nonzero": 1405,
+        "vertices_weight_ge_005": 1122,
+        "weighted_center": [
+          0.0702686,
+          0.2475863,
+          0.1330592
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0250219,
+            0.1698981,
+            0.0734826
+          ],
+          "max": [
+            0.1300674,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.3523848,
+          0.8408696,
+          0.4108082
+        ],
+        "Y": [
+          0.410808,
+          -0.5333971,
+          0.7394081
+        ],
+        "Z": [
+          0.8408697,
+          -0.0917929,
+          -0.5333968
+        ]
+      }
+    },
+    {
+      "joint_slot": 20,
+      "node_index": 20,
+      "name": "bone_20",
+      "parent_node": 22,
+      "parent_chain": [
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0304688,
+        0.2101561,
+        0.1101562
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 302.77325,
+        "vertices_nonzero": 504,
+        "vertices_weight_ge_005": 452,
+        "weighted_center": [
+          0.0652057,
+          0.2162614,
+          0.1382053
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0174661,
+            0.1837001,
+            0.0875026
+          ],
+          "max": [
+            0.1048701,
+            0.2570888,
+            0.1752379
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 870.81822,
+        "vertices_nonzero": 1016,
+        "vertices_weight_ge_005": 942,
+        "weighted_center": [
+          0.0785041,
+          0.2535028,
+          0.1382287
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0065681,
+            0.1837001,
+            0.0734826
+          ],
+          "max": [
+            0.1300674,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -0.03987,
+          -0.7316762,
+          0.6804854
+        ],
+        "Y": [
+          0.6804857,
+          0.4788048,
+          0.5546937
+        ],
+        "Z": [
+          -0.7316759,
+          0.4851761,
+          0.4788052
+        ]
+      }
+    },
+    {
+      "joint_slot": 21,
+      "node_index": 18,
+      "name": "bone_21",
+      "parent_node": 20,
+      "parent_chain": [
+        20,
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0726563,
+        0.2398436,
+        0.1445313
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 105.05864,
+        "vertices_nonzero": 563,
+        "vertices_weight_ge_005": 303,
+        "weighted_center": [
+          0.0805355,
+          0.2536784,
+          0.1485746
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0453807,
+            0.2049785,
+            0.1149449
+          ],
+          "max": [
+            0.1062011,
+            0.2907746,
+            0.1752379
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 471.90893,
+        "vertices_nonzero": 787,
+        "vertices_weight_ge_005": 577,
+        "weighted_center": [
+          0.0942029,
+          0.2858005,
+          0.1432148
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.044503,
+            0.2049785,
+            0.0734826
+          ],
+          "max": [
+            0.1300674,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.8854792,
+          -0.3164709,
+          0.340254
+        ],
+        "Y": [
+          0.3402545,
+          0.9402698,
+          -0.010933
+        ],
+        "Z": [
+          -0.3164708,
+          0.1254542,
+          0.9402699
+        ]
+      }
+    },
+    {
+      "joint_slot": 22,
+      "node_index": 15,
+      "name": "bone_22",
+      "parent_node": 18,
+      "parent_chain": [
+        18,
+        20,
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0882813,
+        0.2804686,
+        0.1429687
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 173.56183,
+        "vertices_nonzero": 418,
+        "vertices_weight_ge_005": 288,
+        "weighted_center": [
+          0.0988305,
+          0.3011099,
+          0.1360735
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0627219,
+            0.2603374,
+            0.0734826
+          ],
+          "max": [
+            0.1294318,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        14,
+        15
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 259.81915,
+        "vertices_nonzero": 418,
+        "vertices_weight_ge_005": 337,
+        "weighted_center": [
+          0.1046889,
+          0.3053649,
+          0.1411266
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0627219,
+            0.2603374,
+            0.0734826
+          ],
+          "max": [
+            0.1300674,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.6874611,
+          -0.5966652,
+          0.4139901
+        ],
+        "Y": [
+          0.413991,
+          0.790345,
+          0.4516261
+        ],
+        "Z": [
+          -0.5966649,
+          -0.139087,
+          0.7903454
+        ]
+      }
+    },
+    {
+      "joint_slot": 23,
+      "node_index": 14,
+      "name": "bone_23",
+      "parent_node": 15,
+      "parent_chain": [
+        15,
+        18,
+        20,
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.1054687,
+        0.313281,
+        0.1617187
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 86.25732,
+        "vertices_nonzero": 187,
+        "vertices_weight_ge_005": 114,
+        "weighted_center": [
+          0.1164769,
+          0.3139265,
+          0.1512941
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0863255,
+            0.2876383,
+            0.1277885
+          ],
+          "max": [
+            0.1300674,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        14
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 86.25732,
+        "vertices_nonzero": 187,
+        "vertices_weight_ge_005": 114,
+        "weighted_center": [
+          0.1164769,
+          0.3139265,
+          0.1512941
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0863255,
+            0.2876383,
+            0.1277885
+          ],
+          "max": [
+            0.1300674,
+            0.3332223,
+            0.1775916
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.6874612,
+          -0.5966651,
+          0.4139901
+        ],
+        "Y": [
+          0.4139909,
+          0.7903451,
+          0.4516261
+        ],
+        "Z": [
+          -0.5966648,
+          -0.1390871,
+          0.7903454
+        ]
+      }
+    },
+    {
+      "joint_slot": 24,
+      "node_index": 16,
+      "name": "bone_24",
+      "parent_node": 18,
+      "parent_chain": [
+        18,
+        20,
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0804688,
+        0.2617186,
+        0.1445312
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 60.9477,
+        "vertices_nonzero": 488,
+        "vertices_weight_ge_005": 211,
+        "weighted_center": [
+          0.0781896,
+          0.2594922,
+          0.1449698
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0473485,
+            0.2218307,
+            0.1149449
+          ],
+          "max": [
+            0.1048779,
+            0.2886758,
+            0.1752379
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        16
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 60.9477,
+        "vertices_nonzero": 488,
+        "vertices_weight_ge_005": 211,
+        "weighted_center": [
+          0.0781896,
+          0.2594922,
+          0.1449698
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0473485,
+            0.2218307,
+            0.1149449
+          ],
+          "max": [
+            0.1048779,
+            0.2886758,
+            0.1752379
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.8868779,
+          -0.3167422,
+          0.336336
+        ],
+        "Y": [
+          0.3363367,
+          0.9417418,
+          1e-07
+        ],
+        "Z": [
+          -0.316742,
+          0.1131223,
+          0.9417419
+        ]
+      }
+    },
+    {
+      "joint_slot": 25,
+      "node_index": 17,
+      "name": "bone_25",
+      "parent_node": 18,
+      "parent_chain": [
+        18,
+        20,
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0851563,
+        0.2757811,
+        0.1445312
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 46.08345,
+        "vertices_nonzero": 461,
+        "vertices_weight_ge_005": 201,
+        "weighted_center": [
+          0.0874194,
+          0.2835203,
+          0.1404476
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0591093,
+            0.2558511,
+            0.1123216
+          ],
+          "max": [
+            0.115248,
+            0.3188967,
+            0.1750923
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        17
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 46.08345,
+        "vertices_nonzero": 461,
+        "vertices_weight_ge_005": 201,
+        "weighted_center": [
+          0.0874194,
+          0.2835203,
+          0.1404476
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0591093,
+            0.2558511,
+            0.1123216
+          ],
+          "max": [
+            0.115248,
+            0.3188967,
+            0.1750923
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.8920743,
+          -0.3102868,
+          0.3285203
+        ],
+        "Y": [
+          0.3285209,
+          0.9444967,
+          1e-07
+        ],
+        "Z": [
+          -0.3102866,
+          0.1079259,
+          0.9444968
+        ]
+      }
+    },
+    {
+      "joint_slot": 26,
+      "node_index": 19,
+      "name": "bone_26",
+      "parent_node": 20,
+      "parent_chain": [
+        20,
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0301488,
+        0.2099071,
+        0.1099925
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 96.13604,
+        "vertices_nonzero": 688,
+        "vertices_weight_ge_005": 276,
+        "weighted_center": [
+          0.043325,
+          0.2122504,
+          0.1138268
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0065681,
+            0.1837001,
+            0.0857287
+          ],
+          "max": [
+            0.0750837,
+            0.2405236,
+            0.1501289
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        19
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 96.13604,
+        "vertices_nonzero": 688,
+        "vertices_weight_ge_005": 276,
+        "weighted_center": [
+          0.043325,
+          0.2122504,
+          0.1138268
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0065681,
+            0.1837001,
+            0.0857287
+          ],
+          "max": [
+            0.0750837,
+            0.2405236,
+            0.1501289
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.6104536,
+          -0.3031611,
+          -0.7317375
+        ],
+        "Y": [
+          -0.731735,
+          -0.5694747,
+          -0.3745163
+        ],
+        "Z": [
+          -0.3031674,
+          0.7640627,
+          -0.5694714
+        ]
+      }
+    },
+    {
+      "joint_slot": 27,
+      "node_index": 21,
+      "name": "bone_27",
+      "parent_node": 22,
+      "parent_chain": [
+        22,
+        23,
+        24,
+        25,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0148303,
+        0.2306602,
+        0.0819949
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 11.02266,
+        "vertices_nonzero": 155,
+        "vertices_weight_ge_005": 81,
+        "weighted_center": [
+          0.0057565,
+          0.2290088,
+          0.1148828
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0215198,
+            0.1905098,
+            0.0897722
+          ],
+          "max": [
+            0.0346543,
+            0.2513306,
+            0.1374153
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        21
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 11.02266,
+        "vertices_nonzero": 155,
+        "vertices_weight_ge_005": 81,
+        "weighted_center": [
+          0.0057565,
+          0.2290088,
+          0.1148828
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0215198,
+            0.1905098,
+            0.0897722
+          ],
+          "max": [
+            0.0346543,
+            0.2513306,
+            0.1374153
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9959816,
+          0.0570477,
+          -0.0690377
+        ],
+        "Y": [
+          -0.0690369,
+          0.9801058,
+          -0.1860818
+        ],
+        "Z": [
+          0.0570487,
+          0.1901004,
+          0.9801058
+        ]
+      }
+    },
+    {
+      "joint_slot": 28,
+      "node_index": 42,
+      "name": "tripo::0_Left_Limb_1",
+      "parent_node": 43,
+      "parent_chain": [
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0070313,
+        0.1023437,
+        0.0382812
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 1378.88403,
+        "vertices_nonzero": 3771,
+        "vertices_weight_ge_005": 3014,
+        "weighted_center": [
+          0.0020888,
+          0.0781103,
+          0.0365217
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.086843,
+            0.0003258,
+            -0.083661
+          ],
+          "max": [
+            0.1029412,
+            0.169162,
+            0.1582191
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 3706.83888,
+        "vertices_nonzero": 5351,
+        "vertices_weight_ge_005": 4614,
+        "weighted_center": [
+          -0.0003653,
+          0.0642132,
+          0.0030889
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            -1e-07,
+            -0.1775916
+          ],
+          "max": [
+            0.1500109,
+            0.1928813,
+            0.1582191
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.0,
+          0.6129834,
+          -0.7900958
+        ],
+        "Y": [
+          -0.4970123,
+          -0.6856005,
+          -0.5319123
+        ],
+        "Z": [
+          -0.8677435,
+          0.3926873,
+          0.3046602
+        ]
+      }
+    },
+    {
+      "joint_slot": 29,
+      "node_index": 29,
+      "name": "bone_29",
+      "parent_node": 42,
+      "parent_chain": [
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0085938,
+        0.0820312,
+        -0.0320312
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 337.92003,
+        "vertices_nonzero": 1590,
+        "vertices_weight_ge_005": 1153,
+        "weighted_center": [
+          0.0226695,
+          0.0570804,
+          -0.0451191
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0733208,
+            -1e-07,
+            -0.0915592
+          ],
+          "max": [
+            0.0805397,
+            0.1316271,
+            0.0497489
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        26,
+        27,
+        28,
+        29
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 756.9537,
+        "vertices_nonzero": 1736,
+        "vertices_weight_ge_005": 1365,
+        "weighted_center": [
+          0.0472367,
+          0.0361765,
+          -0.0451812
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0733208,
+            -1e-07,
+            -0.0915592
+          ],
+          "max": [
+            0.1187362,
+            0.1316271,
+            0.0497489
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.8485281,
+          0.3462211,
+          0.4001637
+        ],
+        "Y": [
+          0.4001638,
+          -0.9146589,
+          -0.0571667
+        ],
+        "Z": [
+          0.3462211,
+          0.2086387,
+          -0.9146589
+        ]
+      }
+    },
+    {
+      "joint_slot": 30,
+      "node_index": 28,
+      "name": "bone_30",
+      "parent_node": 29,
+      "parent_chain": [
+        29,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0304688,
+        0.0320312,
+        -0.0351563
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 159.60251,
+        "vertices_nonzero": 860,
+        "vertices_weight_ge_005": 585,
+        "weighted_center": [
+          0.0420074,
+          0.0231414,
+          -0.0381967
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0380535,
+            -1e-07,
+            -0.0835268
+          ],
+          "max": [
+            0.1038305,
+            0.0723853,
+            0.0290454
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        26,
+        27,
+        28
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 419.03367,
+        "vertices_nonzero": 948,
+        "vertices_weight_ge_005": 707,
+        "weighted_center": [
+          0.0670484,
+          0.019319,
+          -0.0452314
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0380535,
+            -1e-07,
+            -0.0838998
+          ],
+          "max": [
+            0.1187362,
+            0.0723853,
+            0.0290454
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.3195247,
+          0.2573356,
+          0.9119662
+        ],
+        "Y": [
+          0.9119661,
+          -0.344879,
+          -0.2222079
+        ],
+        "Z": [
+          0.2573361,
+          0.9026831,
+          -0.3448788
+        ]
+      }
+    },
+    {
+      "joint_slot": 31,
+      "node_index": 26,
+      "name": "bone_31",
+      "parent_node": 28,
+      "parent_chain": [
+        28,
+        29,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0695313,
+        0.0179687,
+        -0.0460938
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 165.22199,
+        "vertices_nonzero": 409,
+        "vertices_weight_ge_005": 284,
+        "weighted_center": [
+          0.0934629,
+          0.0162532,
+          -0.0521095
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0368957,
+            -1e-07,
+            -0.0838998
+          ],
+          "max": [
+            0.1187362,
+            0.045971,
+            -0.0097862
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        26
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 165.22199,
+        "vertices_nonzero": 409,
+        "vertices_weight_ge_005": 284,
+        "weighted_center": [
+          0.0934629,
+          0.0162532,
+          -0.0521095
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0368957,
+            -1e-07,
+            -0.0838998
+          ],
+          "max": [
+            0.1187362,
+            0.045971,
+            -0.0097862
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.3402587,
+          0.2375065,
+          0.9098432
+        ],
+        "Y": [
+          0.9098431,
+          -0.3275437,
+          -0.2547562
+        ],
+        "Z": [
+          0.2375074,
+          0.9144975,
+          -0.3275433
+        ]
+      }
+    },
+    {
+      "joint_slot": 32,
+      "node_index": 27,
+      "name": "bone_32",
+      "parent_node": 28,
+      "parent_chain": [
+        28,
+        29,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0710938,
+        0.0164063,
+        -0.0445313
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 94.20917,
+        "vertices_nonzero": 623,
+        "vertices_weight_ge_005": 351,
+        "weighted_center": [
+          0.063146,
+          0.0182203,
+          -0.0450863
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.003305,
+            -1e-07,
+            -0.0838998
+          ],
+          "max": [
+            0.1104551,
+            0.0444922,
+            0.0042454
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        27
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 94.20917,
+        "vertices_nonzero": 623,
+        "vertices_weight_ge_005": 351,
+        "weighted_center": [
+          0.063146,
+          0.0182203,
+          -0.0450863
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.003305,
+            -1e-07,
+            -0.0838998
+          ],
+          "max": [
+            0.1104551,
+            0.0444922,
+            0.0042454
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.312291,
+          0.2645031,
+          0.9124212
+        ],
+        "Y": [
+          0.9124211,
+          -0.3509311,
+          -0.210559
+        ],
+        "Z": [
+          0.2645037,
+          0.8982679,
+          -0.3509309
+        ]
+      }
+    },
+    {
+      "joint_slot": 33,
+      "node_index": 34,
+      "name": "tripo::0_Left_Limb_2",
+      "parent_node": 42,
+      "parent_chain": [
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0398438,
+        0.0929687,
+        0.1023437
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 216.29612,
+        "vertices_nonzero": 1219,
+        "vertices_weight_ge_005": 844,
+        "weighted_center": [
+          0.0577209,
+          0.0638169,
+          0.1107243
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0492528,
+            0.0017133,
+            0.0210117
+          ],
+          "max": [
+            0.1039288,
+            0.1384265,
+            0.1582191
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 678.12576,
+        "vertices_nonzero": 1396,
+        "vertices_weight_ge_005": 1132,
+        "weighted_center": [
+          0.0835157,
+          0.0363384,
+          0.0949512
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0492528,
+            0.0006994,
+            0.0210117
+          ],
+          "max": [
+            0.1500109,
+            0.1384265,
+            0.1582191
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -3e-07,
+          0.0059096,
+          -0.9999825
+        ],
+        "Y": [
+          0.3514266,
+          -0.9361991,
+          -0.0055327
+        ],
+        "Z": [
+          -0.9362154,
+          -0.3514204,
+          -0.0020765
+        ]
+      }
+    },
+    {
+      "joint_slot": 34,
+      "node_index": 32,
+      "name": "tripo::0_Left_Limb_3",
+      "parent_node": 34,
+      "parent_chain": [
+        34,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0601563,
+        0.0382812,
+        0.0976562
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 152.38295,
+        "vertices_nonzero": 710,
+        "vertices_weight_ge_005": 481,
+        "weighted_center": [
+          0.0690368,
+          0.0223549,
+          0.0966966
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0258179,
+            0.0011251,
+            0.0455737
+          ],
+          "max": [
+            0.1270153,
+            0.0775253,
+            0.1487599
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        30,
+        31,
+        32
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 430.97775,
+        "vertices_nonzero": 710,
+        "vertices_weight_ge_005": 606,
+        "weighted_center": [
+          0.0977557,
+          0.0206722,
+          0.0859602
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.0258179,
+            0.0006994,
+            0.0408455
+          ],
+          "max": [
+            0.1500109,
+            0.0775253,
+            0.1487599
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -2e-07,
+          0.4190582,
+          -0.9079594
+        ],
+        "Y": [
+          0.8489455,
+          -0.4798387,
+          -0.2214643
+        ],
+        "Z": [
+          -0.5284806,
+          -0.770808,
+          -0.3557575
+        ]
+      }
+    },
+    {
+      "joint_slot": 35,
+      "node_index": 30,
+      "name": "bone_35",
+      "parent_node": 32,
+      "parent_chain": [
+        32,
+        34,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0960938,
+        0.0179687,
+        0.0882812
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 175.14483,
+        "vertices_nonzero": 354,
+        "vertices_weight_ge_005": 322,
+        "weighted_center": [
+          0.1230991,
+          0.0180516,
+          0.0783586
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0645555,
+            0.0006994,
+            0.0408455
+          ],
+          "max": [
+            0.1500109,
+            0.0479059,
+            0.1300102
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        30
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 175.14483,
+        "vertices_nonzero": 354,
+        "vertices_weight_ge_005": 322,
+        "weighted_center": [
+          0.1230991,
+          0.0180516,
+          0.0783586
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0645555,
+            0.0006994,
+            0.0408455
+          ],
+          "max": [
+            0.1500109,
+            0.0479059,
+            0.1300102
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.4099636,
+          0.3334981,
+          0.8489457
+        ],
+        "Y": [
+          0.8489453,
+          -0.479839,
+          -0.2214643
+        ],
+        "Z": [
+          0.3334995,
+          0.8115008,
+          -0.479838
+        ]
+      }
+    },
+    {
+      "joint_slot": 36,
+      "node_index": 31,
+      "name": "tripo::0_Left_Limb_4",
+      "parent_node": 32,
+      "parent_chain": [
+        32,
+        34,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.0960938,
+        0.0179687,
+        0.0882812
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 103.44997,
+        "vertices_nonzero": 420,
+        "vertices_weight_ge_005": 361,
+        "weighted_center": [
+          0.0971515,
+          0.0226301,
+          0.0830151
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0412417,
+            0.0006994,
+            0.0408455
+          ],
+          "max": [
+            0.143713,
+            0.0514909,
+            0.1339578
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        31
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 103.44997,
+        "vertices_nonzero": 420,
+        "vertices_weight_ge_005": 361,
+        "weighted_center": [
+          0.0971515,
+          0.0226301,
+          0.0830151
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0412417,
+            0.0006994,
+            0.0408455
+          ],
+          "max": [
+            0.143713,
+            0.0514909,
+            0.1339578
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          -1e-07,
+          0.4190582,
+          -0.9079594
+        ],
+        "Y": [
+          0.8489453,
+          -0.4798389,
+          -0.2214643
+        ],
+        "Z": [
+          -0.5284808,
+          -0.7708078,
+          -0.3557574
+        ]
+      }
+    },
+    {
+      "joint_slot": 37,
+      "node_index": 33,
+      "name": "bone_37",
+      "parent_node": 34,
+      "parent_chain": [
+        34,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        0.039927,
+        0.0928291,
+        0.1029657
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 30.8519,
+        "vertices_nonzero": 496,
+        "vertices_weight_ge_005": 297,
+        "weighted_center": [
+          0.0654346,
+          0.0625386,
+          0.1099676
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0078611,
+            0.0039991,
+            0.0410264
+          ],
+          "max": [
+            0.1029412,
+            0.1180437,
+            0.1553376
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        33
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 30.8519,
+        "vertices_nonzero": 496,
+        "vertices_weight_ge_005": 297,
+        "weighted_center": [
+          0.0654346,
+          0.0625386,
+          0.1099676
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            0.0078611,
+            0.0039991,
+            0.0410264
+          ],
+          "max": [
+            0.1029412,
+            0.1180437,
+            0.1553376
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.4842492,
+          0.8652993,
+          0.1294601
+        ],
+        "Y": [
+          0.1294606,
+          -0.2172014,
+          0.9675037
+        ],
+        "Z": [
+          0.8652993,
+          -0.4517527,
+          -0.2172018
+        ]
+      }
+    },
+    {
+      "joint_slot": 38,
+      "node_index": 41,
+      "name": "bone_38",
+      "parent_node": 42,
+      "parent_chain": [
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0585937,
+        0.0492188,
+        0.0585937
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 83.90215,
+        "vertices_nonzero": 337,
+        "vertices_weight_ge_005": 210,
+        "weighted_center": [
+          -0.0834714,
+          0.035421,
+          0.05284
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1214062,
+            0.0204862,
+            0.0170165
+          ],
+          "max": [
+            -0.0450298,
+            0.0658367,
+            0.0874729
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 892.87539,
+        "vertices_nonzero": 1449,
+        "vertices_weight_ge_005": 943,
+        "weighted_center": [
+          -0.1082171,
+          0.087691,
+          -0.0773883
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0204862,
+            -0.1775916
+          ],
+          "max": [
+            -0.0450298,
+            0.1928813,
+            0.0874729
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.4752468,
+          -0.1049502,
+          -0.8735708
+        ],
+        "Y": [
+          -0.8735708,
+          -0.1747141,
+          -0.4542566
+        ],
+        "Z": [
+          -0.1049508,
+          0.9790099,
+          -0.1747138
+        ]
+      }
+    },
+    {
+      "joint_slot": 39,
+      "node_index": 40,
+      "name": "bone_39",
+      "parent_node": 41,
+      "parent_chain": [
+        41,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.0976562,
+        0.0414063,
+        0.0382813
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 100.16949,
+        "vertices_nonzero": 321,
+        "vertices_weight_ge_005": 248,
+        "weighted_center": [
+          -0.0996021,
+          0.039224,
+          0.0255943
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1244279,
+            0.0204862,
+            -0.0306374
+          ],
+          "max": [
+            -0.0683049,
+            0.0622013,
+            0.0762717
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 808.97323,
+        "vertices_nonzero": 1316,
+        "vertices_weight_ge_005": 882,
+        "weighted_center": [
+          -0.1107836,
+          0.0931122,
+          -0.0908948
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0204862,
+            -0.1775916
+          ],
+          "max": [
+            -0.0612098,
+            0.1928813,
+            0.0762717
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9790066,
+          0.0041991,
+          -0.2037851
+        ],
+        "Y": [
+          -0.203785,
+          0.0407566,
+          -0.9781669
+        ],
+        "Z": [
+          0.0041982,
+          0.9991603,
+          0.0407567
+        ]
+      }
+    },
+    {
+      "joint_slot": 40,
+      "node_index": 39,
+      "name": "bone_40",
+      "parent_node": 40,
+      "parent_chain": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.1054687,
+        0.0429687,
+        0.0007813
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 86.34822,
+        "vertices_nonzero": 317,
+        "vertices_weight_ge_005": 218,
+        "weighted_center": [
+          -0.1048892,
+          0.0457249,
+          -0.0188992
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1244279,
+            0.0225149,
+            -0.0680649
+          ],
+          "max": [
+            -0.0869606,
+            0.0629134,
+            0.0411851
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 708.80375,
+        "vertices_nonzero": 1240,
+        "vertices_weight_ge_005": 774,
+        "weighted_center": [
+          -0.1123638,
+          0.1007278,
+          -0.1073573
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0225149,
+            -0.1775916
+          ],
+          "max": [
+            -0.0612098,
+            0.1928813,
+            0.0411851
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          1.0,
+          5e-07,
+          -5e-07
+        ],
+        "Y": [
+          -5e-07,
+          0.106533,
+          -0.9943092
+        ],
+        "Z": [
+          -4e-07,
+          0.9943092,
+          0.1065331
+        ]
+      }
+    },
+    {
+      "joint_slot": 41,
+      "node_index": 38,
+      "name": "bone_41",
+      "parent_node": 39,
+      "parent_chain": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.1054687,
+        0.0476562,
+        -0.0429687
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 69.31352,
+        "vertices_nonzero": 336,
+        "vertices_weight_ge_005": 209,
+        "weighted_center": [
+          -0.1055314,
+          0.047118,
+          -0.0558511
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1295497,
+            0.0271027,
+            -0.1022552
+          ],
+          "max": [
+            -0.0869606,
+            0.0629134,
+            -0.0052352
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 622.45553,
+        "vertices_nonzero": 1126,
+        "vertices_weight_ge_005": 696,
+        "weighted_center": [
+          -0.1134007,
+          0.1083579,
+          -0.1196283
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0271027,
+            -0.1775916
+          ],
+          "max": [
+            -0.0612098,
+            0.1928813,
+            0.016209
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9970577,
+          -0.0014707,
+          -0.0766403
+        ],
+        "Y": [
+          -0.0766402,
+          -0.03832,
+          -0.9963222
+        ],
+        "Z": [
+          -0.0014716,
+          0.9992644,
+          -0.0383199
+        ]
+      }
+    },
+    {
+      "joint_slot": 42,
+      "node_index": 37,
+      "name": "bone_42",
+      "parent_node": 38,
+      "parent_chain": [
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.1085937,
+        0.0460937,
+        -0.0835937
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 85.19776,
+        "vertices_nonzero": 460,
+        "vertices_weight_ge_005": 255,
+        "weighted_center": [
+          -0.1136281,
+          0.0472068,
+          -0.0927144
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1475545,
+            0.0271027,
+            -0.1414758
+          ],
+          "max": [
+            -0.0869606,
+            0.0826097,
+            -0.0397432
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        35,
+        36,
+        37
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 553.142,
+        "vertices_nonzero": 1101,
+        "vertices_weight_ge_005": 634,
+        "weighted_center": [
+          -0.1143868,
+          0.1160318,
+          -0.1276202
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0271027,
+            -0.1775916
+          ],
+          "max": [
+            -0.0612098,
+            0.1928813,
+            0.016209
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9183042,
+          0.0445618,
+          -0.3933594
+        ],
+        "Y": [
+          -0.3933596,
+          0.2145598,
+          -0.8939979
+        ],
+        "Z": [
+          0.044561,
+          0.9756938,
+          0.21456
+        ]
+      }
+    },
+    {
+      "joint_slot": 43,
+      "node_index": 36,
+      "name": "bone_43",
+      "parent_node": 37,
+      "parent_chain": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.1257813,
+        0.0554687,
+        -0.1226562
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 144.16186,
+        "vertices_nonzero": 396,
+        "vertices_weight_ge_005": 265,
+        "weighted_center": [
+          -0.1270082,
+          0.0670332,
+          -0.1235131
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0271027,
+            -0.1508223
+          ],
+          "max": [
+            -0.095878,
+            0.1230447,
+            -0.0744332
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        35,
+        36
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 467.94425,
+        "vertices_nonzero": 995,
+        "vertices_weight_ge_005": 549,
+        "weighted_center": [
+          -0.1145249,
+          0.1285626,
+          -0.1339754
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0271027,
+            -0.1775916
+          ],
+          "max": [
+            -0.0612098,
+            0.1928813,
+            0.016209
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9770655,
+          0.1146725,
+          -0.1794246
+        ],
+        "Y": [
+          -0.1794249,
+          0.8971227,
+          -0.4037048
+        ],
+        "Z": [
+          0.114672,
+          0.4266394,
+          0.8971227
+        ]
+      }
+    },
+    {
+      "joint_slot": 44,
+      "node_index": 35,
+      "name": "bone_44",
+      "parent_node": 36,
+      "parent_chain": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46
+      ],
+      "world_joint": [
+        -0.1320313,
+        0.0867187,
+        -0.1367187
+      ],
+      "direct_influence": {
+        "weighted_vertex_mass": 323.78239,
+        "vertices_nonzero": 925,
+        "vertices_weight_ge_005": 371,
+        "weighted_center": [
+          -0.1089668,
+          0.1559582,
+          -0.1386336
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0714464,
+            -0.1775916
+          ],
+          "max": [
+            -0.0612098,
+            0.1928813,
+            0.016209
+          ]
+        }
+      },
+      "subtree_joint_nodes": [
+        35
+      ],
+      "subtree_influence": {
+        "weighted_vertex_mass": 323.78239,
+        "vertices_nonzero": 925,
+        "vertices_weight_ge_005": 371,
+        "weighted_center": [
+          -0.1089668,
+          0.1559582,
+          -0.1386336
+        ],
+        "bounds_weight_ge_005": {
+          "min": [
+            -0.1500109,
+            0.0714464,
+            -0.1775916
+          ],
+          "max": [
+            -0.0612098,
+            0.1928813,
+            0.016209
+          ]
+        }
+      },
+      "local_axes_in_world": {
+        "X": [
+          0.9770655,
+          0.1146725,
+          -0.1794246
+        ],
+        "Y": [
+          -0.1794249,
+          0.8971225,
+          -0.4037053
+        ],
+        "Z": [
+          0.114672,
+          0.4266398,
+          0.8971225
+        ]
+      }
+    }
+  ],
+  "elevated_positive_z_candidate_nodes": [
+    23,
+    22,
+    20,
+    18,
+    15,
+    14,
+    16,
+    17,
+    19,
+    21
+  ],
+  "rotation_trials": [
+    {
+      "node_index": 23,
+      "name": "bone_18",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 1724,
+      "max_displacement_m": 0.0301146,
+      "mean_displacement_m": 0.0021774,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0656508,
+          0.1512869,
+          0.0247998
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.07498,
+        0.2524771,
+        0.1342735
+      ]
+    },
+    {
+      "node_index": 23,
+      "name": "bone_18",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 1699,
+      "max_displacement_m": 0.0185304,
+      "mean_displacement_m": 0.0010383,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0681737,
+          0.1477575,
+          0.0247998
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0737826,
+        0.2529518,
+        0.1263232
+      ]
+    },
+    {
+      "node_index": 23,
+      "name": "bone_18",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 1717,
+      "max_displacement_m": 0.0331187,
+      "mean_displacement_m": 0.0022446,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0681737,
+          0.1477575,
+          0.0247998
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0755981,
+        0.2560268,
+        0.135106
+      ]
+    },
+    {
+      "node_index": 22,
+      "name": "bone_19",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 1237,
+      "max_displacement_m": 0.0180045,
+      "mean_displacement_m": 0.0011038,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0397311,
+          0.1615355,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0748401,
+        0.2448248,
+        0.1380993
+      ]
+    },
+    {
+      "node_index": 22,
+      "name": "bone_19",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 1249,
+      "max_displacement_m": 0.0268348,
+      "mean_displacement_m": 0.0012253,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0401262,
+          0.1615355,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0858167,
+        0.271948,
+        0.1387221
+      ]
+    },
+    {
+      "node_index": 22,
+      "name": "bone_19",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 1220,
+      "max_displacement_m": 0.0275856,
+      "mean_displacement_m": 0.0015581,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0352094,
+          0.1615355,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.081822,
+        0.2603551,
+        0.1403864
+      ]
+    },
+    {
+      "node_index": 20,
+      "name": "bone_20",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 971,
+      "max_displacement_m": 0.0253726,
+      "mean_displacement_m": 0.0011428,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0065681,
+          0.1837001,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0894516,
+        0.2711816,
+        0.1427789
+      ]
+    },
+    {
+      "node_index": 20,
+      "name": "bone_20",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 978,
+      "max_displacement_m": 0.0146415,
+      "mean_displacement_m": 0.0005636,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0065681,
+          0.1837001,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0844696,
+        0.2659362,
+        0.1364123
+      ]
+    },
+    {
+      "node_index": 20,
+      "name": "bone_20",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 972,
+      "max_displacement_m": 0.0268252,
+      "mean_displacement_m": 0.0012027,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0065681,
+          0.1837001,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0900747,
+        0.2731906,
+        0.1426848
+      ]
+    },
+    {
+      "node_index": 18,
+      "name": "bone_21",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 707,
+      "max_displacement_m": 0.0174382,
+      "mean_displacement_m": 0.0004723,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0399393,
+          0.1923537,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.1001689,
+        0.2978043,
+        0.1415152
+      ]
+    },
+    {
+      "node_index": 18,
+      "name": "bone_21",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 698,
+      "max_displacement_m": 0.0062466,
+      "mean_displacement_m": 0.0001991,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0301142,
+          0.1954763,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0946474,
+        0.2842511,
+        0.143193
+      ]
+    },
+    {
+      "node_index": 18,
+      "name": "bone_21",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 712,
+      "max_displacement_m": 0.0175988,
+      "mean_displacement_m": 0.0004715,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0301142,
+          0.1923537,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.1003374,
+        0.2976633,
+        0.1419652
+      ]
+    },
+    {
+      "node_index": 15,
+      "name": "bone_22",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 391,
+      "max_displacement_m": 0.0101309,
+      "mean_displacement_m": 0.0001644,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0591093,
+          0.2558511,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.1085792,
+        0.3100715,
+        0.1411433
+      ]
+    },
+    {
+      "node_index": 15,
+      "name": "bone_22",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 393,
+      "max_displacement_m": 0.0083994,
+      "mean_displacement_m": 0.0001189,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0617824,
+          0.2558511,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.1045942,
+        0.3074984,
+        0.1350452
+      ]
+    },
+    {
+      "node_index": 15,
+      "name": "bone_22",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 391,
+      "max_displacement_m": 0.0099174,
+      "mean_displacement_m": 0.0001503,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0591093,
+          0.2558511,
+          0.064918
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.1071086,
+        0.3101465,
+        0.1431698
+      ]
+    },
+    {
+      "node_index": 14,
+      "name": "bone_23",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 129,
+      "max_displacement_m": 0.0062834,
+      "mean_displacement_m": 2.92e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.082288,
+          0.2864926,
+          0.1275508
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.1178939,
+        0.3154401,
+        0.145758
+      ]
+    },
+    {
+      "node_index": 14,
+      "name": "bone_23",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 130,
+      "max_displacement_m": 0.0062943,
+      "mean_displacement_m": 3.24e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.082288,
+          0.2864926,
+          0.1256788
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.1174681,
+        0.3147658,
+        0.1467146
+      ]
+    },
+    {
+      "node_index": 14,
+      "name": "bone_23",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 126,
+      "max_displacement_m": 0.0034299,
+      "mean_displacement_m": 2.06e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.082288,
+          0.2864926,
+          0.1277885
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.115637,
+        0.3139549,
+        0.1521763
+      ]
+    },
+    {
+      "node_index": 16,
+      "name": "bone_24",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 325,
+      "max_displacement_m": 0.0020137,
+      "mean_displacement_m": 2.12e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0412467,
+          0.2050277,
+          0.1149449
+        ],
+        "max": [
+          0.1062011,
+          0.2907746,
+          0.1752379
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0781709,
+        0.2556119,
+        0.1445662
+      ]
+    },
+    {
+      "node_index": 16,
+      "name": "bone_24",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 291,
+      "max_displacement_m": 0.0023219,
+      "mean_displacement_m": 2.6e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0301142,
+          0.2106142,
+          0.1149449
+        ],
+        "max": [
+          0.1062011,
+          0.2907746,
+          0.1752379
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0785103,
+        0.2580361,
+        0.1451475
+      ]
+    },
+    {
+      "node_index": 16,
+      "name": "bone_24",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 327,
+      "max_displacement_m": 0.0023897,
+      "mean_displacement_m": 2.13e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0301142,
+          0.2049785,
+          0.1149449
+        ],
+        "max": [
+          0.1062011,
+          0.2909204,
+          0.1752379
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0777281,
+        0.256347,
+        0.145135
+      ]
+    },
+    {
+      "node_index": 17,
+      "name": "bone_25",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 314,
+      "max_displacement_m": 0.0019058,
+      "mean_displacement_m": 1.58e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0521337,
+          0.247318,
+          0.1093682
+        ],
+        "max": [
+          0.1221063,
+          0.3235751,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0891386,
+        0.2861695,
+        0.1385166
+      ]
+    },
+    {
+      "node_index": 17,
+      "name": "bone_25",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 277,
+      "max_displacement_m": 0.0018058,
+      "mean_displacement_m": 1.79e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0521337,
+          0.247318,
+          0.1093682
+        ],
+        "max": [
+          0.1197847,
+          0.3235751,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0877802,
+        0.2839057,
+        0.1399534
+      ]
+    },
+    {
+      "node_index": 17,
+      "name": "bone_25",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 311,
+      "max_displacement_m": 0.0017223,
+      "mean_displacement_m": 1.58e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          0.0521337,
+          0.247318,
+          0.1093682
+        ],
+        "max": [
+          0.1223084,
+          0.3235751,
+          0.1775916
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0883699,
+        0.2860125,
+        0.1397582
+      ]
+    },
+    {
+      "node_index": 19,
+      "name": "bone_26",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 576,
+      "max_displacement_m": 0.0030374,
+      "mean_displacement_m": 4.19e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0065681,
+          0.1837001,
+          0.0679989
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1719041
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0466363,
+        0.2137526,
+        0.1148537
+      ]
+    },
+    {
+      "node_index": 19,
+      "name": "bone_26",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 419,
+      "max_displacement_m": 0.0049625,
+      "mean_displacement_m": 4.66e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0065681,
+          0.1837001,
+          0.0679989
+        ],
+        "max": [
+          0.125803,
+          0.3332223,
+          0.1647986
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0436995,
+        0.210792,
+        0.1136587
+      ]
+    },
+    {
+      "node_index": 19,
+      "name": "bone_26",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 555,
+      "max_displacement_m": 0.0048765,
+      "mean_displacement_m": 4.65e-05,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0065681,
+          0.1837001,
+          0.0679989
+        ],
+        "max": [
+          0.1300674,
+          0.3332223,
+          0.1719041
+        ]
+      },
+      "displacement_weighted_center": [
+        0.046273,
+        0.2151204,
+        0.1128856
+      ]
+    },
+    {
+      "node_index": 21,
+      "name": "bone_27",
+      "local_axis": "X",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 140,
+      "max_displacement_m": 0.0015536,
+      "mean_displacement_m": 6.9e-06,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0224115,
+          0.1822482,
+          0.0831688
+        ],
+        "max": [
+          0.044365,
+          0.2563977,
+          0.1374153
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0035248,
+        0.2263232,
+        0.117515
+      ]
+    },
+    {
+      "node_index": 21,
+      "name": "bone_27",
+      "local_axis": "Y",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 145,
+      "max_displacement_m": 0.0016715,
+      "mean_displacement_m": 7.2e-06,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0273162,
+          0.1858151,
+          0.0797466
+        ],
+        "max": [
+          0.0465907,
+          0.2513306,
+          0.1374153
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0035844,
+        0.2279601,
+        0.1167711
+      ]
+    },
+    {
+      "node_index": 21,
+      "name": "bone_27",
+      "local_axis": "Z",
+      "angle_degrees": 10,
+      "vertices_moved_gt_10um": 148,
+      "max_displacement_m": 0.0010079,
+      "mean_displacement_m": 4.3e-06,
+      "affected_bounds_at_rest": {
+        "min": [
+          -0.0273162,
+          0.1822482,
+          0.0797466
+        ],
+        "max": [
+          0.0465907,
+          0.2513306,
+          0.1374153
+        ]
+      },
+      "displacement_weighted_center": [
+        0.0016918,
+        0.2215657,
+        0.1163385
+      ]
+    }
+  ],
+  "visual_review": "Pending browser verification of selected joint",
+  "browser_test_candidates": [
+    {
+      "node_index": 18,
+      "name": "bone_21",
+      "selection_reason": "Higher forelimb branch with 577 vertices at subtree weight >0.05; excludes torso from main influence bounds. Try a small local Z or X rotation and confirm visually.",
+      "classification": "Raised forearm/paw root candidate; anatomical label provisional"
+    },
+    {
+      "node_index": 15,
+      "name": "bone_22",
+      "selection_reason": "More localized high paw region: 337 vertices at subtree weight >0.05, Y=0.260..0.333m. Use if node18 bends too much forearm.",
+      "classification": "Raised paw/wrist candidate; anatomical label provisional"
+    },
+    {
+      "node_index": 20,
+      "name": "bone_20",
+      "selection_reason": "Wider arm chain including 942 strongly influenced vertices, Y=0.184..0.333m. Useful only if the complete forearm should move.",
+      "classification": "Upstream arm/elbow candidate; anatomical label provisional"
+    }
+  ]
+}

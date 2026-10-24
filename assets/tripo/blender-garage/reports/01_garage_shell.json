@@ -1,0 +1,138 @@
+{
+  "asset_id": "01_garage_shell",
+  "display_size_m_xyz": [
+    4.500000476837158,
+    3.200000047683716,
+    3.500000476837158
+  ],
+  "working_bounds_native": [
+    [
+      -2.250000238418579,
+      -1.7500003576278687,
+      0.0
+    ],
+    [
+      2.250000238418579,
+      1.750000238418579,
+      3.200000047683716
+    ]
+  ],
+  "original_sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116",
+  "rig": false,
+  "articulated": false,
+  "meshes": {
+    "tripo_node_de47b250-7bce-40ba-b2fe-4a11374a7a72": {
+      "vertices": 14131,
+      "faces": 17480,
+      "boundary_edges": 9332,
+      "nonmanifold_edges": 9332,
+      "degenerate_faces": 0
+    }
+  },
+  "upward_surface_levels": [
+    [
+      0.225,
+      0.29211253067752807
+    ],
+    [
+      2.85,
+      0.19421934218098613
+    ],
+    [
+      0.2,
+      0.15611492329320242
+    ],
+    [
+      2.825,
+      0.09917564697025227
+    ],
+    [
+      2.875,
+      0.09700739213440102
+    ],
+    [
+      0.25,
+      0.06605395066981146
+    ],
+    [
+      0.025,
+      0.04424470921367174
+    ],
+    [
+      2.9000000000000004,
+      0.04398351586314675
+    ],
+    [
+      0.325,
+      0.030212310007300403
+    ],
+    [
+      2.6,
+      0.025751502123057435
+    ],
+    [
+      2.5250000000000004,
+      0.024145422299625352
+    ],
+    [
+      2.9250000000000003,
+      0.020770942503077094
+    ],
+    [
+      2.8000000000000003,
+      0.018901323091085942
+    ],
+    [
+      2.5500000000000003,
+      0.016509318295106823
+    ],
+    [
+      2.575,
+      0.014159744499920635
+    ]
+  ],
+  "source_task_id": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
+  "changes": {
+    "cleanup": {
+      "tripo_node_de47b250-7bce-40ba-b2fe-4a11374a7a72": {
+        "before": {
+          "vertices": 14131,
+          "faces": 17480,
+          "boundary_edges": 9332,
+          "nonmanifold_edges": 9332,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 8545,
+          "faces": 17472,
+          "boundary_edges": 38,
+          "nonmanifold_edges": 80,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "notes": [
+      "Flattened the rippled central roof while preserving perimeter rails and exterior fittings. Separated real roof faces as ROOF_MAIN. Removed hanging interior shards and patched the broken ceiling/floor with solid steel and concrete inserts.",
+      "Retained source UV/color detail on surviving geometry; used Blender for topology cleanup and shading correction. Original downloads remain untouched.",
+      "Added solid interior wall liners to cover the remaining torn inward-facing wall sheets; exterior texture and fittings retained."
+    ],
+    "flattened_panels": [
+      {
+        "height": 2.85,
+        "vertices": 259
+      }
+    ],
+    "local_parts": [
+      "LOCAL_garage_interior_ceiling",
+      "LOCAL_garage_inner_back_wall",
+      "LOCAL_garage_inner_side_wall",
+      "LOCAL_garage_inner_side_wall.001",
+      "LOCAL_garage_interior_floor"
+    ]
+  },
+  "output_sha256": "b3f2e827712ed4071a32a3fa758938a4704072abee048b06103b9202cf858152",
+  "output_glb": "assets/tripo/blender-garage/models/01_garage_shell.glb",
+  "credits_spent": 0,
+  "visual_acceptance": "accepted_with_notes",
+  "visual_review": "Front and back neutral-light renders inspected. Generated fine details remain approximate; local replacement parts are named LOCAL_."
+}

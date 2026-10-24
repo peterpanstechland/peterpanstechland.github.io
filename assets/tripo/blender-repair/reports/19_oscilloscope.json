@@ -1,0 +1,55 @@
+{
+  "asset_id": "19_oscilloscope",
+  "source_task_id": "ea6b739a-3bdb-46f9-ba7e-330aa3201818",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/19_oscilloscope.glb",
+  "input_sha256": "422967b613947c854e9ffc87f4a7c2585aea6970f25730ebde4640e24d1d6ad1",
+  "output": "assets/tripo/blender-repair/models/19_oscilloscope.glb",
+  "output_sha256": "c4ed2d5ac4836043060564d1fdccf24f989b95a750703c2afce6e758a620e333",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_ea6b739a-3bdb-46f9-ba7e-330aa3201818": {
+        "before": {
+          "vertices": 3535,
+          "faces": 4565,
+          "boundary_edges": 2185,
+          "nonmanifold_edges": 2185,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 2266,
+          "faces": 4563,
+          "boundary_edges": 4,
+          "nonmanifold_edges": 7,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [
+      {
+        "axis_xyz": 1,
+        "plane_m": 0.133,
+        "changed_vertices": 148,
+        "max_displacement_m": 0.004968030929565437
+      }
+    ],
+    "local_parts": [],
+    "notes": [
+      "Flattened top housing and repaired shading; screen recess, rounded side walls, handle and front controls retained.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ]
+  },
+  "mesh_stats": {
+    "tripo_node_ea6b739a-3bdb-46f9-ba7e-330aa3201818": {
+      "vertices": 2266,
+      "faces": 4563,
+      "boundary_edges": 4,
+      "nonmanifold_edges": 7,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

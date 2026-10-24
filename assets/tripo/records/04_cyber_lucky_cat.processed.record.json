@@ -1,0 +1,121 @@
+{
+  "created_at_utc": "2026-10-20T15:12:15.754992+08:00",
+  "asset_id": "04_lucky_cat",
+  "source_generation_task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+  "source_rig_task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+  "source_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\04-cyber-lucky-cat-blue-v6-rig-9c588a0c\\model.glb",
+  "source_sha256": "a5f1b2cd4b780ff34fc79451f5dd888b7a0976bdd2cbdf92e062a1e78a6bfca1",
+  "processed_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\processed\\04_cyber_lucky_cat.glb",
+  "processed_sha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
+  "processor": "tools/prepare_cyber_cat.py",
+  "provider_processing": "Tripo generated and rigged the source GLB",
+  "local_processing": "Common parent normalization and locally authored quaternion beckoning clip",
+  "additional_tripo_tasks": 0,
+  "additional_credits": 0,
+  "source_bind_pose_bounds": {
+    "min": [
+      -0.15001093354885747,
+      -8.384433221593482E-08,
+      -0.1775916494469513
+    ],
+    "max": [
+      0.1500109048605601,
+      0.3999998974448066,
+      0.17759157161818423
+    ],
+    "size_xyz": [
+      0.30002183840941754,
+      0.3999999812891388,
+      0.35518322106513556
+    ],
+    "ground_center_y_up": [
+      -1.4344148688283376E-08,
+      -8.384433221593482E-08,
+      -3.8914383534982555E-08
+    ]
+  },
+  "wrapper_node_index": 47,
+  "wrapper_node": {
+    "name": "TECHLAND_CYBER_CAT_ROOT",
+    "children": [
+      46
+    ],
+    "translation": [
+      -7.782877071057345E-08,
+      1.6768867227586832E-07,
+      2.8688298718523684E-08
+    ],
+    "rotation": [
+      0.0,
+      -0.7071067811865476,
+      0.0,
+      0.7071067811865476
+    ],
+    "scale": [
+      2.0000000935543105,
+      2.0000000935543105,
+      2.0000000935543105
+    ]
+  },
+  "target_height_m": 0.8,
+  "processed_bind_pose_bounds": {
+    "min": [
+      -0.3551832376795964,
+      2.3613693649717515E-17,
+      -0.30002185244358576
+    ],
+    "max": [
+      0.35518323767959636,
+      0.8,
+      0.30002185244358576
+    ],
+    "size_xyz": [
+      0.7103664753591927,
+      0.8,
+      0.6000437048871715
+    ],
+    "ground_center_y_up": [
+      -2.7755575615628914E-17,
+      2.3613693649717515E-17,
+      0.0
+    ]
+  },
+  "animation": {
+    "name": "Techland_Beckon",
+    "authoring_method": "Local bone18 rest quaternion multiplied by local-Z delta quaternion; LINEAR rotation keys",
+    "times_seconds": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ],
+    "local_z_degrees": [
+      0.0,
+      12.0,
+      0.0,
+      12.0,
+      0.0
+    ],
+    "source_rest_quaternion_xyzw": [
+      -0.04868608573721822,
+      0.35540952260712544,
+      0.39973731684318076,
+      0.8435187098214111
+    ],
+    "duration_seconds": 2,
+    "repeat_behavior": "Clip endpoints match; set the viewer AnimationAction to LoopRepeat",
+    "source": "Locally authored, not a Tripo retarget result"
+  },
+  "preserved": [
+    "raw source GLB",
+    "all original nodes and skin references",
+    "original binary prefix",
+    "materials and embedded texture bytes",
+    "UV accessors"
+  ],
+  "qa_report": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\records\\04_cyber_lucky_cat.processed.qa.json",
+  "cpu_validation": "passed",
+  "browser_playback_review": "passed_actual_browser_Techland_Beckon_loop",
+  "browser_evidence": "assets/tripo/records/04_cyber_lucky_cat.browser.jpg"
+}

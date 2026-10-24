@@ -1,0 +1,65 @@
+[
+  {
+    "project": "14_bambu_x1c.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 6,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "15_makeblock_laserbox.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 2,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "16_openpnp_machine.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "17_soldering_station.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "18_hot_air_station.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "19_oscilloscope.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "21_monitor.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 1,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "22_office_desk.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 15,
+    "original_comparison_hidden": true
+  },
+  {
+    "project": "23_workbench.blend",
+    "opens": true,
+    "packed_images": 3,
+    "editable_meshes": 19,
+    "original_comparison_hidden": true
+  }
+]

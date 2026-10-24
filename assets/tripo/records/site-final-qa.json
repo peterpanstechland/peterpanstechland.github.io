@@ -1,0 +1,71 @@
+{
+  "status": "passed_preview_checks_with_documented_limitations",
+  "verified_at": "2026-10-20T08:40:12.5342833Z",
+  "typecheck": {
+    "exit_code": 0,
+    "command": "npm run typecheck",
+    "log": "assets/tripo/records/site-typecheck.log"
+  },
+  "build": {
+    "warnings": [
+      "Existing vscode-languageserver-types dynamic require warning",
+      "Webpack dependency snapshot cache warning",
+      "Docusaurus update-check config access warning"
+    ],
+    "command": "npm run build",
+    "static_data_adjustment": "Showcase placement adjusted after build; assets.json copied to both locale outputs and SHA256 equality verified.",
+    "log": "assets/tripo/records/site-build.log",
+    "exit_code": 0,
+    "locales": [
+      "en",
+      "zh-Hans"
+    ]
+  },
+  "browser_full_scene": {
+    "chinese_page_and_scene": true,
+    "beckoning_and_effect_controls": "enabled and toggled in real browser",
+    "shutter_open_progress": 1,
+    "configured_assets": 13,
+    "status": "passed",
+    "english_scene": true,
+    "actual_loaded_models": 12,
+    "excluded": "07_tools_zone: successful generation but rejected geometry",
+    "screenshot": "assets/tripo/records/garage-final-front.jpg",
+    "shutter_closed_progress": 0
+  },
+  "mobile": {
+    "screenshot": "assets/tripo/records/garage-mobile-page.jpg",
+    "status": "passed_viewport_simulation",
+    "scene_loaded_models": 12,
+    "main_overflow_elements": 0,
+    "viewport": [
+      390,
+      844
+    ],
+    "estimated_material_texture_memory_mib": 50.5,
+    "real_phone_test": false,
+    "max_texture_edge": 512,
+    "main_scroll_width": 382,
+    "main_width": 382
+  },
+  "fallback_and_reduced_motion": {
+    "fatal_parent_notification": "code reviewed; initialization timeout and context loss notify parent",
+    "all_model_failure_outer_page": "not exercised",
+    "reduced_motion": "implemented and source reviewed; OS preference runtime not exercised",
+    "report": "assets/tripo/records/garage-load-recovery.qa.json",
+    "missing_model_and_retry": "passed actual missing-file/HTTP404 recovery without reload"
+  },
+  "preservation": {
+    "deployment_performed": false,
+    "real_routes": [
+      "/",
+      "/blog/",
+      "/challenge/",
+      "/docs/projects/",
+      "/docs/guides/",
+      "/docs/about/"
+    ],
+    "existing_homepage_and_content_diff": "no changes"
+  },
+  "local_preview_url": "http://127.0.0.1:4173/zh-Hans/maker-garage-preview/"
+}

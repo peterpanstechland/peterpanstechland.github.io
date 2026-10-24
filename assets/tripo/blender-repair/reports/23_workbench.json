@@ -1,0 +1,209 @@
+{
+  "asset_id": "23_workbench",
+  "source_task_id": "039ec198-a648-4b4e-b8e8-306e1440b3ea",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/23_workbench.glb",
+  "input_sha256": "05737ab798880de76217c2cd331b3e9b1c0d2757f68474d45ebdadea298182cc",
+  "output": "assets/tripo/blender-repair/models/23_workbench.glb",
+  "output_sha256": "985ddfa2b1753faea567230f6ae88c432d28f678ee1410f91bc39e494f201069",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "TRIPO_WORKBENCH_RETAINED_FRAME": {
+        "before": {
+          "vertices": 15429,
+          "faces": 5143,
+          "boundary_edges": 15429,
+          "nonmanifold_edges": 15429,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 3889,
+          "faces": 5143,
+          "boundary_edges": 2690,
+          "nonmanifold_edges": 2695,
+          "degenerate_faces": 0
+        }
+      },
+      "LOCAL_STEEL_WORK_SURFACE": {
+        "before": {
+          "vertices": 72,
+          "faces": 24,
+          "boundary_edges": 72,
+          "nonmanifold_edges": 72,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 16,
+          "faces": 24,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [],
+    "local_parts": [
+      "LOCAL_bench_solid_top",
+      "LOCAL_bench_solid_lower_shelf",
+      "LOCAL_bench_square_leg",
+      "LOCAL_bench_level_foot",
+      "LOCAL_bench_square_leg.001",
+      "LOCAL_bench_level_foot.001",
+      "LOCAL_bench_end_rail",
+      "LOCAL_bench_end_rail.001",
+      "LOCAL_bench_square_leg.002",
+      "LOCAL_bench_level_foot.002",
+      "LOCAL_bench_square_leg.003",
+      "LOCAL_bench_level_foot.003",
+      "LOCAL_bench_end_rail.002",
+      "LOCAL_bench_end_rail.003",
+      "LOCAL_bench_long_rail",
+      "LOCAL_bench_long_rail.001",
+      "LOCAL_bench_long_rail.002",
+      "LOCAL_bench_long_rail.003"
+    ],
+    "notes": [
+      "Retained textured Tripo upper apron. Rebuilt torn lower shelf, irregular legs and both work surfaces as solid beveled steel parts.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ]
+  },
+  "mesh_stats": {
+    "TRIPO_RETAINED_WORKBENCH_UPPER_APRON": {
+      "vertices": 688,
+      "faces": 1200,
+      "boundary_edges": 97,
+      "nonmanifold_edges": 98,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_solid_top": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_solid_lower_shelf": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_square_leg": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_level_foot": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_square_leg.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_level_foot.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_end_rail": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_end_rail.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_square_leg.002": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_level_foot.002": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_square_leg.003": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_level_foot.003": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_end_rail.002": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_end_rail.003": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_long_rail": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_long_rail.001": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_long_rail.002": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    },
+    "LOCAL_bench_long_rail.003": {
+      "vertices": 96,
+      "faces": 98,
+      "boundary_edges": 0,
+      "nonmanifold_edges": 0,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

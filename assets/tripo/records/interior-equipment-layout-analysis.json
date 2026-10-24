@@ -1,0 +1,655 @@
+{
+  "scope": "Read-only placement feasibility on existing actual shell mesh. New equipment not generated; envelopes and table feet are proposed, not delivered GLB validation. Metres, world +Z faces street. No website changes or paid requests.",
+  "shellSha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116",
+  "shellWorldY": -0.22,
+  "door": {
+    "facadeZ": 1.05,
+    "doorAnchorXYZ": [
+      0.3,
+      -0.02,
+      1.13
+    ],
+    "currentMountScaleXYZ": [
+      1,
+      0.71,
+      1
+    ],
+    "measuredClearHeightApprox": 1.57,
+    "openingApproxX": [
+      -1.325,
+      1.95
+    ]
+  },
+  "interior": {
+    "usableDepthApprox": 2.3,
+    "rearZApprox": -1.25,
+    "frontZApprox": 1.05,
+    "upperSurfaceNote": "Actual inner roof is approximately 1.67-2.08m here; external 3.2m bounds is misleading. Existing 2.35m showcase requires shrink/reposition.",
+    "centralAisleXZ": [
+      -0.806,
+      0.97,
+      -0.53,
+      1.0
+    ]
+  },
+  "newIndependentModelCount": 10,
+  "newInstances": 11,
+  "furniture": [
+    {
+      "id": "06_showcase_zone",
+      "new_model": false,
+      "localSizeXYZ": [
+        1.716,
+        1.833,
+        0.468
+      ],
+      "uniformScale": 0.78,
+      "rotationY": 1.5707963267948966,
+      "centerXZ": [
+        -1.04,
+        -0.3
+      ],
+      "aabbXZ": [
+        -1.274,
+        -0.806,
+        -1.1580000000000001,
+        0.558
+      ],
+      "floorDeltaY": 0.008443995685218421,
+      "footSupported": 34,
+      "footSamples": 34,
+      "floorRange": {
+        "n": 34,
+        "min": -0.009625174582620105,
+        "p10": -0.006916038899414512,
+        "median": 0.008974818717809252,
+        "p90": 0.010116983543099103,
+        "max": 0.010443995685218421
+      },
+      "topWorldY": 1.8414439212986218,
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 1.9995303,
+          "p10": 2.0085183,
+          "median": 2.0638496,
+          "p90": 2.0803217,
+          "max": 2.0862777
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "maker_workbench",
+      "new_model": true,
+      "localSizeXYZ": [
+        2.2,
+        0.75,
+        0.66
+      ],
+      "rotationY": -1.5707963267948966,
+      "centerXZ": [
+        1.3,
+        -0.07
+      ],
+      "aabbXZ": [
+        0.97,
+        1.6300000000000001,
+        -1.1700000000000002,
+        1.03
+      ],
+      "nominalFootProbes": [
+        {
+          "xz": [
+            1.59,
+            -1.1300000000000001
+          ],
+          "floorY": 0.05257398549822653
+        },
+        {
+          "xz": [
+            1.01,
+            -1.1300000000000001
+          ],
+          "floorY": 0.03176294963119
+        },
+        {
+          "xz": [
+            1.59,
+            0.99
+          ],
+          "floorY": 0.00926353964837684
+        },
+        {
+          "xz": [
+            1.01,
+            0.99
+          ],
+          "floorY": -0.00703899092643373
+        }
+      ],
+      "nominalFloorY": 0.05057398549822653,
+      "nominalTopY": 0.8005739854982266,
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 1.5074840103014822,
+          "p10": 1.5251072857019163,
+          "median": 1.8265913292290052,
+          "p90": 1.9362573549296223,
+          "max": 1.9651254580459108
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      },
+      "facadeGapApprox": 0.020000000000000018,
+      "floorFootHeightSpread": 0.05961297642466026,
+      "seatingNote": "Four proposed feet project onto real floor, but rigid maximum-constraint placement only makes highest support touch. Level feet/extensions must be authored after real table feet exist; do not claim all feet contact from support ray count alone.",
+      "suggestedAdjustableFootExtensionMax": 0.05961297642466026
+    },
+    {
+      "id": "office_desk",
+      "new_model": true,
+      "localSizeXYZ": [
+        1.25,
+        0.72,
+        0.7
+      ],
+      "rotationY": 0,
+      "centerXZ": [
+        0,
+        -0.88
+      ],
+      "aabbXZ": [
+        -0.625,
+        0.625,
+        -1.23,
+        -0.53
+      ],
+      "nominalFootProbes": [
+        {
+          "xz": [
+            -0.585,
+            -1.19
+          ],
+          "floorY": 0.014123080381761438
+        },
+        {
+          "xz": [
+            -0.585,
+            -0.5700000000000001
+          ],
+          "floorY": 0.008864117849244901
+        },
+        {
+          "xz": [
+            0.585,
+            -1.19
+          ],
+          "floorY": 0.03149623508232516
+        },
+        {
+          "xz": [
+            0.585,
+            -0.5700000000000001
+          ],
+          "floorY": 0.007250033650822968
+        }
+      ],
+      "nominalFloorY": 0.029496235082325156,
+      "nominalTopY": 0.7494962350823251,
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 1.6699758,
+          "p10": 1.776382,
+          "median": 2.0406316,
+          "p90": 2.0647702,
+          "max": 2.0784662
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      },
+      "floorFootHeightSpread": 0.02424620143150219,
+      "seatingNote": "Four proposed feet project onto real floor, but rigid maximum-constraint placement only makes highest support touch. Level feet/extensions must be authored after real table feet exist; do not claim all feet contact from support ray count alone.",
+      "suggestedAdjustableFootExtensionMax": 0.02424620143150219
+    }
+  ],
+  "equipment": [
+    {
+      "id": "bambu_x1c",
+      "sizeXYZ": [
+        0.389,
+        0.457,
+        0.389
+      ],
+      "centerXZ": [
+        1.3,
+        -0.9405
+      ],
+      "rotationY": -1.5707963267948966,
+      "support": "maker_workbench",
+      "dimensionBasis": "Official X1C body without AMS",
+      "aabbXZ": [
+        1.1055000000000001,
+        1.4945,
+        -1.135,
+        -0.746
+      ],
+      "nominalBaseY": 0.8005739854982266,
+      "nominalTopY": 1.2575739854982266,
+      "tableEdgeClearanceXZ": [
+        0.13550000000000018,
+        0.13550000000000018,
+        0.03500000000000014,
+        1.776
+      ],
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 1.6703292093063085,
+          "p10": 1.6729177568923845,
+          "median": 1.8341650909059866,
+          "p90": 1.9014268463282302,
+          "max": 1.9269012273699782
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "makeblock_laserbox",
+      "sizeXYZ": [
+        0.958,
+        0.268,
+        0.528
+      ],
+      "centerXZ": [
+        1.3,
+        0.513
+      ],
+      "rotationY": -1.5707963267948966,
+      "support": "maker_workbench",
+      "dimensionBasis": "Makeblock Japan release lists 958x528x268mm; interpret x/z/y from product shape, verify chosen variant reference",
+      "aabbXZ": [
+        1.036,
+        1.564,
+        0.03400000000000006,
+        0.992
+      ],
+      "nominalBaseY": 0.8005739854982266,
+      "nominalTopY": 1.0685739854982266,
+      "tableEdgeClearanceXZ": [
+        0.06600000000000006,
+        0.06600000000000006,
+        1.2040000000000002,
+        0.038000000000000034
+      ],
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 1.5091345004073067,
+          "p10": 1.528597246466291,
+          "median": 1.8434311956874583,
+          "p90": 1.9140092456023245,
+          "max": 1.9369356636661406
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "openpnp_machine",
+      "sizeXYZ": [
+        0.7,
+        0.45,
+        0.6
+      ],
+      "centerXZ": [
+        1.3,
+        -0.356
+      ],
+      "rotationY": -1.5707963267948966,
+      "support": "maker_workbench",
+      "dimensionBasis": "Compact OpenPnP-compatible design assumption, not a fixed OpenPnP hardware product",
+      "aabbXZ": [
+        1.0,
+        1.6,
+        -0.706,
+        -0.006000000000000033
+      ],
+      "nominalBaseY": 0.8005739854982266,
+      "nominalTopY": 1.2505739854982265,
+      "tableEdgeClearanceXZ": [
+        0.030000000000000027,
+        0.030000000000000027,
+        0.4640000000000002,
+        1.036
+      ],
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 80,
+          "min": 1.6781423658017218,
+          "p10": 1.6833396015497974,
+          "median": 1.841672129588891,
+          "p90": 1.951441131901404,
+          "max": 1.9609523259433403
+        },
+        "missing_rays": 1,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "soldering_station",
+      "sizeXYZ": [
+        0.24,
+        0.16,
+        0.18
+      ],
+      "centerXZ": [
+        -0.09,
+        -0.7
+      ],
+      "rotationY": 0,
+      "support": "office_desk",
+      "dimensionBasis": "Approximate compact equipment envelope incl holder",
+      "aabbXZ": [
+        -0.21,
+        0.03,
+        -0.7899999999999999,
+        -0.61
+      ],
+      "nominalBaseY": 0.7494962350823251,
+      "nominalTopY": 0.9094962350823251,
+      "tableEdgeClearanceXZ": [
+        0.41500000000000004,
+        0.595,
+        0.44000000000000006,
+        0.07999999999999996
+      ],
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 2.0474155,
+          "p10": 2.048011,
+          "median": 2.0515787,
+          "p90": 2.0566196,
+          "max": 2.0591661
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "hot_air_tool",
+      "sizeXYZ": [
+        0.22,
+        0.2,
+        0.22
+      ],
+      "centerXZ": [
+        0.25,
+        -0.7
+      ],
+      "rotationY": 0,
+      "support": "office_desk",
+      "dimensionBasis": "Approximate docked handpiece/compact base envelope",
+      "aabbXZ": [
+        0.14,
+        0.36,
+        -0.8099999999999999,
+        -0.59
+      ],
+      "nominalBaseY": 0.7494962350823251,
+      "nominalTopY": 0.9494962350823251,
+      "tableEdgeClearanceXZ": [
+        0.765,
+        0.265,
+        0.42000000000000004,
+        0.05999999999999994
+      ],
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 1.9447273,
+          "p10": 1.9612362,
+          "median": 2.0401013,
+          "p90": 2.0429303,
+          "max": 2.0438221
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "oscilloscope",
+      "sizeXYZ": [
+        0.32,
+        0.18,
+        0.14
+      ],
+      "centerXZ": [
+        -0.42,
+        -0.7
+      ],
+      "rotationY": 0,
+      "support": "office_desk",
+      "dimensionBasis": "Approximate compact bench instrument envelope",
+      "aabbXZ": [
+        -0.58,
+        -0.26,
+        -0.77,
+        -0.6299999999999999
+      ],
+      "nominalBaseY": 0.7494962350823251,
+      "nominalTopY": 0.929496235082325,
+      "tableEdgeClearanceXZ": [
+        0.04500000000000004,
+        0.885,
+        0.45999999999999996,
+        0.09999999999999987
+      ],
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 2.0566878,
+          "p10": 2.0600043,
+          "median": 2.0673781,
+          "p90": 2.0733266,
+          "max": 2.0752011
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "pc_tower",
+      "sizeXYZ": [
+        0.22,
+        0.44,
+        0.4
+      ],
+      "centerXZ": [
+        0.34,
+        -0.88
+      ],
+      "rotationY": 0,
+      "support": "01_garage_shell/interior-floor",
+      "dimensionBasis": "Approximate small tower; confirm generated table legs/cross braces",
+      "aabbXZ": [
+        0.23000000000000004,
+        0.45,
+        -1.08,
+        -0.6799999999999999
+      ],
+      "nominalFootProbes": [
+        {
+          "xz": [
+            0.27,
+            -1.04
+          ],
+          "floorY": 0.006977586117764389
+        },
+        {
+          "xz": [
+            0.27,
+            -0.72
+          ],
+          "floorY": 0.006779688509456122
+        },
+        {
+          "xz": [
+            0.41000000000000003,
+            -1.04
+          ],
+          "floorY": 0.008445702524382814
+        },
+        {
+          "xz": [
+            0.41000000000000003,
+            -0.72
+          ],
+          "floorY": 0.0075420179362628015
+        }
+      ],
+      "nominalBaseY": 0.006445702524382814,
+      "nominalTopY": 0.4464457025243828,
+      "ceilingSample": {
+        "first_surface_over_1p4m": {
+          "n": 81,
+          "min": 1.6530617,
+          "p10": 1.6543982,
+          "median": 2.0344728,
+          "p90": 2.0391778,
+          "max": 2.0411492
+        },
+        "missing_rays": 0,
+        "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+      }
+    },
+    {
+      "id": "monitor",
+      "sizeXYZ": [
+        0.55,
+        0.41,
+        0.16
+      ],
+      "instances": [
+        {
+          "id": "monitor_left",
+          "centerXZ": [
+            -0.29,
+            -1.07
+          ],
+          "rotationY": 0,
+          "aabbXZ": [
+            -0.565,
+            -0.014999999999999958,
+            -1.1500000000000001,
+            -0.9900000000000001
+          ],
+          "nominalBaseY": 0.7494962350823251,
+          "nominalTopY": 1.159496235082325,
+          "tableEdgeClearanceXZ": [
+            0.06000000000000005,
+            0.6399999999999999,
+            0.07999999999999985,
+            0.4600000000000001
+          ],
+          "ceilingSample": {
+            "first_surface_over_1p4m": {
+              "n": 81,
+              "min": 2.037019,
+              "p10": 2.040436,
+              "median": 2.0471816,
+              "p90": 2.0534655,
+              "max": 2.0569307
+            },
+            "missing_rays": 0,
+            "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+          }
+        },
+        {
+          "id": "monitor_right",
+          "centerXZ": [
+            0.29,
+            -1.07
+          ],
+          "rotationY": 0,
+          "aabbXZ": [
+            0.014999999999999958,
+            0.565,
+            -1.1500000000000001,
+            -0.9900000000000001
+          ],
+          "nominalBaseY": 0.7494962350823251,
+          "nominalTopY": 1.159496235082325,
+          "tableEdgeClearanceXZ": [
+            0.6399999999999999,
+            0.06000000000000005,
+            0.07999999999999985,
+            0.4600000000000001
+          ],
+          "ceilingSample": {
+            "first_surface_over_1p4m": {
+              "n": 81,
+              "min": 1.6393872,
+              "p10": 1.6490048,
+              "median": 1.6933151,
+              "p90": 2.0357295,
+              "max": 2.0424218
+            },
+            "missing_rays": 0,
+            "scope": "All winding intersections; conservative upper obstruction, not guaranteed architectural ceiling topology."
+          }
+        }
+      ],
+      "support": "office_desk",
+      "dimensionBasis": "Approximate 24 inch monitor including compact stand; one mesh reused twice"
+    }
+  ],
+  "furnitureSeparations": [
+    {
+      "a": "06_showcase_zone",
+      "b": "maker_workbench",
+      "xGap": 1.776,
+      "zGap": -1.7280000000000002,
+      "xzOverlap": false
+    },
+    {
+      "a": "06_showcase_zone",
+      "b": "office_desk",
+      "xGap": 0.18100000000000005,
+      "zGap": -0.6280000000000001,
+      "xzOverlap": false
+    },
+    {
+      "a": "maker_workbench",
+      "b": "office_desk",
+      "xGap": 0.345,
+      "zGap": -0.6400000000000001,
+      "xzOverlap": false
+    }
+  ],
+  "sources": {
+    "bambu": "https://us.store.bambulab.com/products/x1-carbon",
+    "laserbox": "https://www.value-press.com/pressrelease/234607",
+    "openpnp": "https://openpnp.org/hardware/"
+  },
+  "integration": {
+    "loadOrder": "shell/floor -> existing showcase/new office desk/new workbench/PC -> tabletop equipment -> reused second monitor",
+    "supportConfigSuggested": {
+      "supportAsset": "maker_workbench or office_desk or 01_garage_shell",
+      "supportSurface": "top or interior-floor",
+      "surfaceYLocal": "numeric tabletop top after verified mesh, not whole mesh maxY if backsplash exists"
+    },
+    "algorithm": "Preserve config reset for idempotence; update parent world matrices -> mount.updateMatrixWorld(true) -> skeleton.update(); construct only actual horizontal support triangles in table top Y band, settle actual low-foot samples on support. Require all samples supported; track max floor variation, actual tabletop overhang and ceiling collision. Do not fall back to street for desk objects.",
+    "missingSupport": "Keep dependent device hidden/unavailable with explicit support-unavailable state until its real desk/bench is ready; retry parent and refresh dependency order. Never show it floating at floor.",
+    "clones": "One monitor load, two instances sharing GPU resources. Track both instances and do not dispose shared resources when only one instance/group is removed.",
+    "normalizedScaling": "Current normalized=true branch ignores targetHeight/targetSize; introduce explicit uniformScale or placement.scale.setScalar(.78) for retained showcase. Do not pretend changing targetHeight alone resizes it.",
+    "statedLimit": "Compact game display; not a real workshop ergonomic/layout certification. No chair, extraction equipment, open lids/doors swept volume designed in this proposed 10-model set.",
+    "levelFeet": "Native floor varies about 55-60mm beneath workbench and 24mm beneath office desk. Keep tops horizontal; extend each actual foot down to its sampled floor (locallyAuthored support hardware) or tune leg endpoints locally. If no supported triangle at a real foot, move table; do not bridge empty air with a fake floor.",
+    "finalValidation": "After real equipment GLBs: whole-mesh ceiling/wall overlap, all actual feet/support contacts, table surface vs devices, PC vs leg/braces, door swept volume, load-failure parent/child states, mobile memory. This envelope report is not final visual acceptance."
+  }
+}

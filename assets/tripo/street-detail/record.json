@@ -1,0 +1,24 @@
+{
+  "source_task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
+  "source_sha256": "5ba0ae095cf5315a7fd7cc4d03a6a9b45fb541f4f823fddc865c5863ad361e33",
+  "output_sha256": "d7dae169a919478eee129a593124a0073b83ff283b41b148678f5095cc9d11ff",
+  "head_rotation_degrees": 90,
+  "head_pivot_local_xyz": [
+    0.36,
+    2.23,
+    0.015
+  ],
+  "fixture_local_xyz": [
+    0.7149999737739563,
+    2.569999933242798,
+    0.7350000143051147
+  ],
+  "planter_support_local_xyz": [
+    -0.31,
+    1.3,
+    -0.52
+  ],
+  "coordinate_frame": "Scene-ready meters, Y up; normalized placement",
+  "local_additions": "Swivel collar, mechanically mounted electronic planter, copper branches, circuit leaves and cyan LEDs",
+  "credits_spent": 0
+}

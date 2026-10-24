@@ -1,0 +1,44 @@
+{
+  "cat": {
+    "clip": "Techland_Beckon",
+    "samples": [
+      {
+        "time": 0,
+        "maxExportDeviationM": 4.0394167943633e-7,
+        "vertices": 9728
+      },
+      {
+        "time": 0.25,
+        "maxExportDeviationM": 4.0394167943633e-7,
+        "vertices": 9728
+      },
+      {
+        "time": 0.5,
+        "maxExportDeviationM": 4.0394167943633e-7,
+        "vertices": 9728
+      },
+      {
+        "time": 1,
+        "maxExportDeviationM": 4.0394167943633e-7,
+        "vertices": 9728
+      },
+      {
+        "time": 1.5,
+        "maxExportDeviationM": 4.0394167943633e-7,
+        "vertices": 9728
+      },
+      {
+        "time": 1.99,
+        "maxExportDeviationM": 0.0000011298356225461626,
+        "vertices": 9728
+      }
+    ],
+    "maxBeckonMovementM": 0.042213535797013556,
+    "skinMotionPreserved": true
+  },
+  "shutter": {
+    "slats": 26,
+    "pivotsAndMetadataPreserved": true,
+    "closedHalfOpenFullyOpenFinite": true
+  }
+}

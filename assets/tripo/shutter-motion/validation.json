@@ -1,0 +1,20 @@
+{
+  "feature": "Interactive articulated roller shutter",
+  "asset": "02_roller_shutter",
+  "slatCount": 26,
+  "fullTravelSeconds": 3.2,
+  "browserChecks": {
+    "buttonOpenAndClose": "passed",
+    "keyboardEnter": "passed",
+    "clickActualDoorMesh": "passed",
+    "pauseHeldProgress": 0.0616,
+    "resumeToClosed": "passed",
+    "reverseDuringMotion": {"before": 0.1562, "after": 0.1390, "direction": "closing"},
+    "closingFrameProgress": [0.9827,0.9604,0.9344,0.9029,0.8610,0.8197,0.7337,0.6615,0.5856,0.5156,0.4377,0.3686],
+    "narrowViewportLayout": "390x640: controls visible, wrapping within viewport; visual inspection only"
+  },
+  "build": "npm run build: passed for en and zh-Hans",
+  "typecheck": "npm run typecheck: passed",
+  "productionDeployed": false,
+  "tripoCreditsSpent": 0
+}

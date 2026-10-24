@@ -1,0 +1,198 @@
+{
+  "date": "2026-10-21",
+  "revision": "grounded-v4.2",
+  "request": "Fix floating garage/props and remake the Shenzhen sign",
+  "status": "implemented_and_technically_checked_pending_user_acceptance",
+  "source_paths": [
+    "static/maker-garage-preview/ground-contact.js",
+    "static/maker-garage-preview/art-direction.js",
+    "static/maker-garage-preview/night-environment.js",
+    "static/maker-garage-preview/scene.js",
+    "static/maker-garage-preview/assets.json"
+  ],
+  "implementation": {
+    "grounding": "Low evaluated mesh vertices ray-tested against actual upward street/garage/roof triangles, with 2 mm seating overlap; no source GLB edits.",
+    "street_runtime_size_m": [
+      8.5,
+      0.3,
+      6.6
+    ],
+    "street_position": [
+      0,
+      -0.3,
+      0.6
+    ],
+    "garage_y": -0.22,
+    "door": {
+      "position": [
+        0.3,
+        -0.02,
+        1.13
+      ],
+      "scale": [
+        1,
+        0.71,
+        1
+      ],
+      "real_slats": 26,
+      "processed_glb_unchanged": true
+    },
+    "cat_position": [
+      -1.4,
+      -0.2791545120949427,
+      2.25
+    ],
+    "lamp_position": [
+      -2.95,
+      -0.28214808738807756,
+      1.8
+    ],
+    "skinning_fix": "updateMatrixWorld(true) refreshes attached SkinnedMesh bindMatrixInverse before skeleton update, bounds and foot evaluation.",
+    "signs": "Main graffiti tray anchored to ray-sampled fascia, portrait stem attached with two jamb braces; old native Shenzhen plaque enclosed by a 0.64 x 1.00 x 0.16 m metal sleeve with independent legible prints on both sides.",
+    "support": "Locally authored street underside follows original upward triangle boundaries and descends to y=-0.36 beneath wet ground y=-0.34; original top surface is retained.",
+    "lighting": "Reduced normal shadow bias; visible matte asphalt pool and stronger contact shadow; removed unattached interior luminous bars.",
+    "new_tripo_tasks": 0,
+    "new_credits": 0,
+    "total_project_credits": 385,
+    "original_glbs_unchanged": true
+  },
+  "actual_desktop_contact_samples": [
+    {
+      "id": "04_lucky_cat",
+      "supported": 40,
+      "total": 40,
+      "support_height_spread_m": 0.0070071
+    },
+    {
+      "id": "05_project_vending",
+      "supported": 70,
+      "total": 70,
+      "support_height_spread_m": 0.0106082
+    },
+    {
+      "id": "08_street_lamp",
+      "supported": 83,
+      "total": 83,
+      "support_height_spread_m": 0.0115997
+    },
+    {
+      "id": "09_trash_bin",
+      "supported": 52,
+      "total": 52,
+      "support_height_spread_m": 0.0128895
+    },
+    {
+      "id": "10_utility_cabinet",
+      "supported": 82,
+      "total": 82,
+      "support_height_spread_m": 0.0048138
+    },
+    {
+      "id": "11_tree",
+      "supported": 30,
+      "total": 30,
+      "support_height_spread_m": 0.0066766
+    },
+    {
+      "id": "12_plants_grass",
+      "supported": 31,
+      "total": 31,
+      "support_height_spread_m": 0.0067875
+    },
+    {
+      "id": "06_showcase_zone",
+      "supported": 38,
+      "total": 38,
+      "support_height_spread_m": 0.0261703
+    },
+    {
+      "id": "plant-instance-0",
+      "supported": 18,
+      "total": 18,
+      "support_height_spread_m": 0.0172836
+    },
+    {
+      "id": "plant-instance-1",
+      "supported": 14,
+      "total": 14,
+      "support_height_spread_m": 0.0096954
+    },
+    {
+      "id": "plant-instance-2",
+      "supported": 13,
+      "total": 13,
+      "support_height_spread_m": 0.0080194
+    }
+  ],
+  "verification": {
+    "typecheck": {
+      "status": "passed",
+      "log": "grounded-v4-typecheck.log"
+    },
+    "production_build": {
+      "status": "en and zh-Hans passed",
+      "log": "grounded-v4-build.log",
+      "nonfatal_warnings": [
+        "Existing webpack cache snapshot warnings",
+        "vscode-languageserver-types dynamic require",
+        "Docusaurus update-check permissions"
+      ]
+    },
+    "javascript_syntax": "scene.js, ground-contact.js, art-direction.js, night-environment.js passed node --check",
+    "source_build_hashes": "scene.js, ground-contact.js, art-direction.js, night-environment.js, assets.json and scene/index.html match both language build copies",
+    "glb_integrity": "32 unique raw, processed and site-copy GLB hashes matched existing production ledger",
+    "idempotence": "grounded-v4-idempotence.json: real cat/street, consecutive settlements have zero position/bounds delta; cat bounds minY agrees with mountY within 4.16e-9 m",
+    "desktop": {
+      "loaded": 12,
+      "total": 13,
+      "views": [
+        "front",
+        "left oblique / Shenzhen",
+        "back",
+        "overview"
+      ],
+      "door_closed_progress": "0.0000",
+      "door_open_progress": "1.0000",
+      "cat_wave_and_effect_controls": "enabled and disabled successfully; actual rendered pose checked",
+      "fresh_standalone_console_warnings_and_errors": [],
+      "embedded_iframe_version": "grounded-v4.2"
+    },
+    "mobile": {
+      "viewport": [
+        390,
+        844
+      ],
+      "loaded": 12,
+      "total": 13,
+      "main_client_width": 382,
+      "main_scroll_width": 382,
+      "document_scroll_width": 419,
+      "document_overflow_cause": "Existing footer AWS Builder Community link",
+      "texture_count": 44,
+      "maximum_texture_px": 512,
+      "estimated_texture_mib": 53.2,
+      "console": "Two unattributed MutationObserver observe(Node) errors; no model/shader error observed",
+      "physical_device_tested": false,
+      "temporary_viewport_reset": true
+    },
+    "screenshots": [
+      "grounded-v4-overview.png",
+      "grounded-v4-shenzhen.png",
+      "grounded-v4-back.png",
+      "grounded-v4-door-closed.png",
+      "grounded-v4-page.png",
+      "grounded-v4-mobile.png"
+    ]
+  },
+  "limitations": [
+    "07_tools_zone remains visually rejected and excluded; preview loads 12/13 assets.",
+    "Original street has 9 ambiguous upward-surface edges and an irregular fragment outline. Local underside support is not a watertight repair.",
+    "Foot samples verify support coverage, not every point of each uneven generated foot; physical contact still requires visual acceptance.",
+    "Original source geometry/texture imperfections outside corrected signs remain.",
+    "Mobile whole-page footer overflow and two unattributed console errors remain as recorded above."
+  ],
+  "preview_url": "http://127.0.0.1:4173/zh-Hans/maker-garage-preview/",
+  "deployed": false,
+  "merged": false,
+  "user_acceptance": false
+}

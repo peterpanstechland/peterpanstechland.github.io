@@ -1,0 +1,17 @@
+{
+  "source": "static/img/logo.jpg",
+  "sourceSha256": "4b52da82672ee575e55c8da22eeb5b7a81f874f096823eaaa5aecefe3075b947",
+  "sourceUsage": "Existing blog introduction avatar",
+  "cropNormalized": [
+    0.175,
+    0.0625,
+    0.65,
+    0.65
+  ],
+  "display": "Circular photo insert inside original neon ring",
+  "rawGLBModified": false,
+  "browserConsoleErrors": [],
+  "browserConsoleWarnings": [],
+  "tripoCreditsSpent": 0,
+  "published": false
+}

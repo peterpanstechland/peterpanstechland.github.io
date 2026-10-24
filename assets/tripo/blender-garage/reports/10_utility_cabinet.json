@@ -1,0 +1,131 @@
+{
+  "asset_id": "10_utility_cabinet",
+  "display_size_m_xyz": [
+    0.6788243055343628,
+    1.649999976158142,
+    0.7169332504272461
+  ],
+  "working_bounds_native": [
+    [
+      -0.3394121527671814,
+      -0.35846659541130066,
+      0.0
+    ],
+    [
+      0.3394121527671814,
+      0.35846662521362305,
+      1.649999976158142
+    ]
+  ],
+  "original_sha256": "29534a8675f8efea6545b4b183964bda853c565e3c70e40bdb57fac6c293ae11",
+  "rig": false,
+  "articulated": false,
+  "meshes": {
+    "tripo_node_79c20750-5f2b-4e8f-bf11-b39338c883f4": {
+      "vertices": 4078,
+      "faces": 4958,
+      "boundary_edges": 2642,
+      "nonmanifold_edges": 2642,
+      "degenerate_faces": 0
+    }
+  },
+  "upward_surface_levels": [
+    [
+      1.625,
+      0.14944040060709085
+    ],
+    [
+      0.325,
+      0.008180157297829282
+    ],
+    [
+      0.225,
+      0.007351716570155986
+    ],
+    [
+      1.475,
+      0.0072998865614408714
+    ],
+    [
+      1.425,
+      0.00569963272005225
+    ],
+    [
+      1.4500000000000002,
+      0.005554566834689467
+    ],
+    [
+      0.35000000000000003,
+      0.0054363808121706825
+    ],
+    [
+      0.30000000000000004,
+      0.00492395265223422
+    ],
+    [
+      1.35,
+      0.004846537005505525
+    ],
+    [
+      0.25,
+      0.004545379724731902
+    ],
+    [
+      0.275,
+      0.004535427928203717
+    ],
+    [
+      1.4000000000000001,
+      0.0039092427086870885
+    ],
+    [
+      1.3250000000000002,
+      0.0036450640782277333
+    ],
+    [
+      1.375,
+      0.0033695782512950245
+    ],
+    [
+      0.375,
+      0.0029184862978581805
+    ]
+  ],
+  "source_task_id": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
+  "changes": {
+    "cleanup": {
+      "tripo_node_79c20750-5f2b-4e8f-bf11-b39338c883f4": {
+        "before": {
+          "vertices": 4078,
+          "faces": 4958,
+          "boundary_edges": 2642,
+          "nonmanifold_edges": 2642,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 2465,
+          "faces": 4958,
+          "boundary_edges": 17,
+          "nonmanifold_edges": 32,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "notes": [
+      "Flattened the broad cabinet top and repaired side-panel shading; hinges, vents, handles and weathered marks retained.",
+      "Retained source UV/color detail on surviving geometry; used Blender for topology cleanup and shading correction. Original downloads remain untouched."
+    ],
+    "flattened_panels": [
+      {
+        "height": 1.641999976158142,
+        "vertices": 78
+      }
+    ],
+    "local_parts": []
+  },
+  "output_sha256": "f9e28708d87c10fa87432f78d2eafce906bae3865e7a8a4e5223b5ecd24bbf70",
+  "output_glb": "assets/tripo/blender-garage/models/10_utility_cabinet.glb",
+  "credits_spent": 0,
+  "visual_acceptance": "accepted_with_notes",
+  "visual_review": "Front and back neutral-light renders inspected. Generated fine details remain approximate; local replacement parts are named LOCAL_."
+}

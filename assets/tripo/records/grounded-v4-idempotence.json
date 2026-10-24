@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-21T03:35:47.920Z",
+  "status": "passed",
+  "scope": "Two consecutive real cat+street settlement calls with scene.js normalization, real GLTFLoader/SkinnedMesh CPU evaluation and current ground-contact module. Texture image decoding skipped in memory only; not visual acceptance.",
+  "threeRevision": "170",
+  "module": {
+    "path": "static/maker-garage-preview/ground-contact.js",
+    "sha256": "405664255ef407a4eebd97281dabae66145e61dbcac22aa6f9b32d140a8bf836"
+  },
+  "sceneJsSha256": "86dedeaa53b3a9ce3be78e847bec30d77eb583500efcb9ff63ffb86cc44159d6",
+  "config": {
+    "path": "static/maker-garage-preview/assets.json",
+    "sha256": "1675f4bea724bb37d2911268516b7e6f5d75219626725613daff59d35c244352"
+  },
+  "sources": [
+    {
+      "id": "04_lucky_cat",
+      "path": "static/maker-garage-preview/models/04_cyber_lucky_cat.glb",
+      "sha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
+      "originalSkinCount": 1,
+      "originalAnimationCount": 1,
+      "config": {
+        "id": "04_lucky_cat",
+        "label": {
+          "en": "Cyber lucky cat",
+          "zh": "英短赛博招财猫"
+        },
+        "file": "models/04_cyber_lucky_cat.glb",
+        "status": "verified",
+        "normalized": true,
+        "position": [
+          -1.4,
+          0,
+          2.25
+        ],
+        "taskId": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+        "rigTaskId": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+        "href": "/docs/about"
+      }
+    },
+    {
+      "id": "13_street_base",
+      "path": "static/maker-garage-preview/models/13_street_base.glb",
+      "sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21",
+      "originalSkinCount": 0,
+      "originalAnimationCount": 0,
+      "config": {
+        "id": "13_street_base",
+        "label": {
+          "en": "Street and curb",
+          "zh": "街道路沿"
+        },
+        "status": "verified_with_notes",
+        "targetSize": [
+          8.5,
+          0.3,
+          6.6
+        ],
+        "rotationY": -1.5707963267948966,
+        "position": [
+          0,
+          -0.3,
+          0.6
+        ],
+        "file": "models/13_street_base.glb",
+        "taskId": "38eb318a-5bfd-492d-91e0-cdc0e25973f5"
+      }
+    }
+  ],
+  "tolerance": 0.000001,
+  "checks": {
+    "catBoundsMatchesMountFirst": true,
+    "catBoundsMatchesMountSecond": true,
+    "noAccumulatedTranslation": true,
+    "stableBounds": true,
+    "allFootSamplesSupported": true,
+    "sourceGeometryAttributesAndIndicesUnchanged": true,
+    "sourceGLBFilesUnchanged": true
+  },
+  "first": {
+    "mountPosition": [
+      -1.4,
+      -0.2791545120949427,
+      2.25
+    ],
+    "boundsMin": [
+      -1.755183216786831,
+      -0.27915451625466897,
+      1.9499782055284114
+    ],
+    "boundsMax": [
+      -1.0448167623204039,
+      0.5208454961058593,
+      2.5500218822039633
+    ],
+    "boundsMinYMinusMountY": -4.159726285646315e-9,
+    "bindMode": "attached",
+    "meshWorldY": 0.12084562066040888,
+    "bindInverseY": -0.06042280750379738,
+    "boneCount": 45,
+    "groundContact": {
+      "status": "settled",
+      "supportId": "13_street_base",
+      "deltaY": -0.2791545120949427,
+      "sampleCount": 40,
+      "supportedSamples": 40,
+      "supportY": [
+        -0.283812770715334,
+        -0.2768056738144011
+      ],
+      "supportHeightSpread": 0.00700709690093293,
+      "seatingOverlap": 0.002,
+      "finalPosition": [
+        -1.4,
+        -0.2791545120949427,
+        2.25
+      ],
+      "finalScale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -1.755183216786831,
+          -0.27915451625466897,
+          1.9499782055284114
+        ],
+        "max": [
+          -1.0448167623204039,
+          0.5208454961058593,
+          2.5500218822039633
+        ]
+      }
+    }
+  },
+  "second": {
+    "mountPosition": [
+      -1.4,
+      -0.2791545120949427,
+      2.25
+    ],
+    "boundsMin": [
+      -1.755183216786831,
+      -0.27915451625466897,
+      1.9499782055284114
+    ],
+    "boundsMax": [
+      -1.0448167623204039,
+      0.5208454961058593,
+      2.5500218822039633
+    ],
+    "boundsMinYMinusMountY": -4.159726285646315e-9,
+    "bindMode": "attached",
+    "meshWorldY": 0.12084562066040888,
+    "bindInverseY": -0.06042280750379738,
+    "boneCount": 45,
+    "groundContact": {
+      "status": "settled",
+      "supportId": "13_street_base",
+      "deltaY": -0.2791545120949427,
+      "sampleCount": 40,
+      "supportedSamples": 40,
+      "supportY": [
+        -0.283812770715334,
+        -0.2768056738144011
+      ],
+      "supportHeightSpread": 0.00700709690093293,
+      "seatingOverlap": 0.002,
+      "finalPosition": [
+        -1.4,
+        -0.2791545120949427,
+        2.25
+      ],
+      "finalScale": [
+        1,
+        1,
+        1
+      ],
+      "bounds": {
+        "min": [
+          -1.755183216786831,
+          -0.27915451625466897,
+          1.9499782055284114
+        ],
+        "max": [
+          -1.0448167623204039,
+          0.5208454961058593,
+          2.5500218822039633
+        ]
+      }
+    }
+  },
+  "secondMinusFirst": {
+    "position": [
+      0,
+      0,
+      0
+    ],
+    "boundsMin": [
+      0,
+      0,
+      0
+    ]
+  },
+  "geometryFingerprintBefore": "ea8b642ca77e1ee3750c5cb1ca9989c47ebf8a98e85a62ee0a0a4d1ed8692246",
+  "geometryFingerprintAfter": "ea8b642ca77e1ee3750c5cb1ca9989c47ebf8a98e85a62ee0a0a4d1ed8692246",
+  "warnings": [
+    "Street source has 9 ambiguous upward-surface edges; underside closure is a preview support, not a watertight repair."
+  ],
+  "streetSupport": {
+    "sourceTaskId": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+    "floorY": -0.36,
+    "sourceUpwardTriangles": 4889,
+    "bottomTriangles": 4889,
+    "skirtTriangles": 1972,
+    "ambiguousEdges": 9,
+    "topSurfaceAdded": false,
+    "provenance": "Local underside closure from real street triangle boundaries; original GLB and textures unchanged",
+    "limitation": "Retains source irregular outline and holes; not a watertight manufacturing certification."
+  }
+}

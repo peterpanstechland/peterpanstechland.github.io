@@ -1,0 +1,768 @@
+{
+  "asset_id": "02_roller_shutter",
+  "display_size_m_xyz": [
+    3.799999952316284,
+    2.549999952316284,
+    0.1599999964237213
+  ],
+  "working_bounds_native": [
+    [
+      -1.899999976158142,
+      -0.07999999821186066,
+      0.0
+    ],
+    [
+      1.899999976158142,
+      0.07999999821186066,
+      2.549999952316284
+    ]
+  ],
+  "original_sha256": "efa27b81062656c3a6a91e80be47e64cfbf010fb95a152e2d2048b6864fb5cf9",
+  "rig": false,
+  "articulated": true,
+  "meshes": {
+    "SHUTTER_GUIDE_LEFT": {
+      "vertices": 1486,
+      "faces": 1809,
+      "boundary_edges": 1063,
+      "nonmanifold_edges": 1063,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_GUIDE_RIGHT": {
+      "vertices": 1715,
+      "faces": 1995,
+      "boundary_edges": 1289,
+      "nonmanifold_edges": 1289,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_HOUSING": {
+      "vertices": 1412,
+      "faces": 1410,
+      "boundary_edges": 1236,
+      "nonmanifold_edges": 1236,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_00": {
+      "vertices": 1208,
+      "faces": 1166,
+      "boundary_edges": 1110,
+      "nonmanifold_edges": 1110,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_01": {
+      "vertices": 1391,
+      "faces": 1356,
+      "boundary_edges": 1328,
+      "nonmanifold_edges": 1328,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_02": {
+      "vertices": 1326,
+      "faces": 1280,
+      "boundary_edges": 1270,
+      "nonmanifold_edges": 1270,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_03": {
+      "vertices": 1070,
+      "faces": 1020,
+      "boundary_edges": 1040,
+      "nonmanifold_edges": 1040,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_04": {
+      "vertices": 1117,
+      "faces": 1078,
+      "boundary_edges": 1068,
+      "nonmanifold_edges": 1068,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_05": {
+      "vertices": 1090,
+      "faces": 1052,
+      "boundary_edges": 1042,
+      "nonmanifold_edges": 1042,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_06": {
+      "vertices": 1091,
+      "faces": 1024,
+      "boundary_edges": 1050,
+      "nonmanifold_edges": 1050,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_07": {
+      "vertices": 1140,
+      "faces": 1099,
+      "boundary_edges": 1095,
+      "nonmanifold_edges": 1095,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_08": {
+      "vertices": 1261,
+      "faces": 1260,
+      "boundary_edges": 1184,
+      "nonmanifold_edges": 1184,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_09": {
+      "vertices": 1300,
+      "faces": 1260,
+      "boundary_edges": 1254,
+      "nonmanifold_edges": 1254,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_10": {
+      "vertices": 1336,
+      "faces": 1310,
+      "boundary_edges": 1274,
+      "nonmanifold_edges": 1274,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_11": {
+      "vertices": 1309,
+      "faces": 1266,
+      "boundary_edges": 1258,
+      "nonmanifold_edges": 1258,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_12": {
+      "vertices": 1333,
+      "faces": 1272,
+      "boundary_edges": 1294,
+      "nonmanifold_edges": 1294,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_13": {
+      "vertices": 1044,
+      "faces": 1015,
+      "boundary_edges": 995,
+      "nonmanifold_edges": 995,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_14": {
+      "vertices": 978,
+      "faces": 913,
+      "boundary_edges": 935,
+      "nonmanifold_edges": 935,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_15": {
+      "vertices": 1160,
+      "faces": 1076,
+      "boundary_edges": 1130,
+      "nonmanifold_edges": 1130,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_16": {
+      "vertices": 1189,
+      "faces": 1176,
+      "boundary_edges": 1120,
+      "nonmanifold_edges": 1120,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_17": {
+      "vertices": 1211,
+      "faces": 1194,
+      "boundary_edges": 1160,
+      "nonmanifold_edges": 1160,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_18": {
+      "vertices": 1318,
+      "faces": 1282,
+      "boundary_edges": 1272,
+      "nonmanifold_edges": 1272,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_19": {
+      "vertices": 1389,
+      "faces": 1335,
+      "boundary_edges": 1345,
+      "nonmanifold_edges": 1345,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_20": {
+      "vertices": 1400,
+      "faces": 1341,
+      "boundary_edges": 1357,
+      "nonmanifold_edges": 1357,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_21": {
+      "vertices": 1091,
+      "faces": 1010,
+      "boundary_edges": 1060,
+      "nonmanifold_edges": 1060,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_22": {
+      "vertices": 1183,
+      "faces": 1067,
+      "boundary_edges": 1159,
+      "nonmanifold_edges": 1159,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_23": {
+      "vertices": 1382,
+      "faces": 1308,
+      "boundary_edges": 1332,
+      "nonmanifold_edges": 1332,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_24": {
+      "vertices": 1155,
+      "faces": 1106,
+      "boundary_edges": 1136,
+      "nonmanifold_edges": 1136,
+      "degenerate_faces": 0
+    },
+    "SHUTTER_SLAT_25": {
+      "vertices": 1171,
+      "faces": 1110,
+      "boundary_edges": 1140,
+      "nonmanifold_edges": 1140,
+      "degenerate_faces": 0
+    }
+  },
+  "upward_surface_levels": [
+    [
+      2.2,
+      0.45522082452583756
+    ],
+    [
+      2.5250000000000004,
+      0.4239679700292527
+    ],
+    [
+      0.07500000000000001,
+      0.33955986756194534
+    ],
+    [
+      2.125,
+      0.3372955187164166
+    ],
+    [
+      2.025,
+      0.32651188923756536
+    ],
+    [
+      0.42500000000000004,
+      0.3258662594271655
+    ],
+    [
+      1.2750000000000001,
+      0.32413194615033447
+    ],
+    [
+      0.35000000000000003,
+      0.3241185834321243
+    ],
+    [
+      1.4500000000000002,
+      0.3126848638796673
+    ],
+    [
+      0.6000000000000001,
+      0.31150443562682995
+    ],
+    [
+      0.5,
+      0.31149167231430397
+    ],
+    [
+      1.35,
+      0.3113580664625033
+    ],
+    [
+      0.25,
+      0.3080876862223363
+    ],
+    [
+      1.1,
+      0.30753468739169987
+    ],
+    [
+      0.8500000000000001,
+      0.29707748654694655
+    ]
+  ],
+  "source_task_id": "60038920-5601-4de0-9202-b4620bd5b1c8",
+  "changes": {
+    "notes": [
+      "Cleaned each of the 26 door slats independently; preserved names, individual pivots, roll metadata and continuous graffiti UVs."
+    ],
+    "cleanup": {
+      "SHUTTER_GUIDE_LEFT": {
+        "before": {
+          "vertices": 1486,
+          "faces": 1809,
+          "boundary_edges": 1063,
+          "nonmanifold_edges": 1063,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 901,
+          "faces": 1806,
+          "boundary_edges": 8,
+          "nonmanifold_edges": 13,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_GUIDE_RIGHT": {
+        "before": {
+          "vertices": 1715,
+          "faces": 1995,
+          "boundary_edges": 1289,
+          "nonmanifold_edges": 1289,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 995,
+          "faces": 1995,
+          "boundary_edges": 6,
+          "nonmanifold_edges": 9,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_HOUSING": {
+        "before": {
+          "vertices": 1412,
+          "faces": 1410,
+          "boundary_edges": 1236,
+          "nonmanifold_edges": 1236,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 708,
+          "faces": 1410,
+          "boundary_edges": 4,
+          "nonmanifold_edges": 6,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_00": {
+        "before": {
+          "vertices": 1208,
+          "faces": 1166,
+          "boundary_edges": 1110,
+          "nonmanifold_edges": 1110,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 586,
+          "faces": 1166,
+          "boundary_edges": 4,
+          "nonmanifold_edges": 6,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_01": {
+        "before": {
+          "vertices": 1391,
+          "faces": 1356,
+          "boundary_edges": 1328,
+          "nonmanifold_edges": 1328,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 680,
+          "faces": 1356,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_02": {
+        "before": {
+          "vertices": 1326,
+          "faces": 1280,
+          "boundary_edges": 1270,
+          "nonmanifold_edges": 1270,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 642,
+          "faces": 1280,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_03": {
+        "before": {
+          "vertices": 1070,
+          "faces": 1020,
+          "boundary_edges": 1040,
+          "nonmanifold_edges": 1040,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 512,
+          "faces": 1020,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_04": {
+        "before": {
+          "vertices": 1117,
+          "faces": 1078,
+          "boundary_edges": 1068,
+          "nonmanifold_edges": 1068,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 541,
+          "faces": 1078,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_05": {
+        "before": {
+          "vertices": 1090,
+          "faces": 1052,
+          "boundary_edges": 1042,
+          "nonmanifold_edges": 1042,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 528,
+          "faces": 1052,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_06": {
+        "before": {
+          "vertices": 1091,
+          "faces": 1024,
+          "boundary_edges": 1050,
+          "nonmanifold_edges": 1050,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 514,
+          "faces": 1024,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_07": {
+        "before": {
+          "vertices": 1140,
+          "faces": 1099,
+          "boundary_edges": 1095,
+          "nonmanifold_edges": 1095,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 552,
+          "faces": 1099,
+          "boundary_edges": 2,
+          "nonmanifold_edges": 3,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_08": {
+        "before": {
+          "vertices": 1261,
+          "faces": 1260,
+          "boundary_edges": 1184,
+          "nonmanifold_edges": 1184,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 632,
+          "faces": 1260,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_09": {
+        "before": {
+          "vertices": 1300,
+          "faces": 1260,
+          "boundary_edges": 1254,
+          "nonmanifold_edges": 1254,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 634,
+          "faces": 1260,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_10": {
+        "before": {
+          "vertices": 1336,
+          "faces": 1310,
+          "boundary_edges": 1274,
+          "nonmanifold_edges": 1274,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 657,
+          "faces": 1310,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_11": {
+        "before": {
+          "vertices": 1309,
+          "faces": 1266,
+          "boundary_edges": 1258,
+          "nonmanifold_edges": 1258,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 635,
+          "faces": 1266,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_12": {
+        "before": {
+          "vertices": 1333,
+          "faces": 1272,
+          "boundary_edges": 1294,
+          "nonmanifold_edges": 1294,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 638,
+          "faces": 1272,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_13": {
+        "before": {
+          "vertices": 1044,
+          "faces": 1015,
+          "boundary_edges": 995,
+          "nonmanifold_edges": 995,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 630,
+          "faces": 1013,
+          "boundary_edges": 245,
+          "nonmanifold_edges": 247,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_14": {
+        "before": {
+          "vertices": 978,
+          "faces": 913,
+          "boundary_edges": 935,
+          "nonmanifold_edges": 935,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 578,
+          "faces": 913,
+          "boundary_edges": 243,
+          "nonmanifold_edges": 243,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_15": {
+        "before": {
+          "vertices": 1160,
+          "faces": 1076,
+          "boundary_edges": 1130,
+          "nonmanifold_edges": 1130,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 540,
+          "faces": 1076,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 1,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_16": {
+        "before": {
+          "vertices": 1189,
+          "faces": 1176,
+          "boundary_edges": 1120,
+          "nonmanifold_edges": 1120,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 590,
+          "faces": 1176,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_17": {
+        "before": {
+          "vertices": 1211,
+          "faces": 1194,
+          "boundary_edges": 1160,
+          "nonmanifold_edges": 1160,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 599,
+          "faces": 1194,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_18": {
+        "before": {
+          "vertices": 1318,
+          "faces": 1282,
+          "boundary_edges": 1272,
+          "nonmanifold_edges": 1272,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 643,
+          "faces": 1282,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_19": {
+        "before": {
+          "vertices": 1389,
+          "faces": 1335,
+          "boundary_edges": 1345,
+          "nonmanifold_edges": 1345,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 673,
+          "faces": 1333,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_20": {
+        "before": {
+          "vertices": 1400,
+          "faces": 1341,
+          "boundary_edges": 1357,
+          "nonmanifold_edges": 1357,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 676,
+          "faces": 1340,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_21": {
+        "before": {
+          "vertices": 1091,
+          "faces": 1010,
+          "boundary_edges": 1060,
+          "nonmanifold_edges": 1060,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 633,
+          "faces": 1010,
+          "boundary_edges": 247,
+          "nonmanifold_edges": 248,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_22": {
+        "before": {
+          "vertices": 1183,
+          "faces": 1067,
+          "boundary_edges": 1159,
+          "nonmanifold_edges": 1159,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 660,
+          "faces": 1067,
+          "boundary_edges": 248,
+          "nonmanifold_edges": 250,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_23": {
+        "before": {
+          "vertices": 1382,
+          "faces": 1308,
+          "boundary_edges": 1332,
+          "nonmanifold_edges": 1332,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 656,
+          "faces": 1308,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_24": {
+        "before": {
+          "vertices": 1155,
+          "faces": 1106,
+          "boundary_edges": 1136,
+          "nonmanifold_edges": 1136,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 554,
+          "faces": 1104,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      },
+      "SHUTTER_SLAT_25": {
+        "before": {
+          "vertices": 1171,
+          "faces": 1110,
+          "boundary_edges": 1140,
+          "nonmanifold_edges": 1140,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 556,
+          "faces": 1108,
+          "boundary_edges": 0,
+          "nonmanifold_edges": 0,
+          "degenerate_faces": 0
+        }
+      }
+    }
+  },
+  "output_sha256": "dc0403fc97df4d8500e423d49cfbc7eca0472cea598c1ccdb2f37f6cc52214cf",
+  "output_glb": "assets/tripo/blender-garage/models/02_roller_shutter.glb",
+  "credits_spent": 0,
+  "visual_acceptance": "accepted_with_notes",
+  "animation_compatibility": "passed; see animation-validation.json",
+  "visual_review": "Front and back neutral-light renders inspected. Generated fine details remain approximate; local replacement parts are named LOCAL_."
+}

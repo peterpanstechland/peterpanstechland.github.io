@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "tested_at_utc": "2026-10-20T08:14:30Z",
+  "method": "Real CUA browser interactions with temporary local two-asset manifest, current production scene.js and real generated GLBs.",
+  "result": "passed_partial_asset_failure_and_retry_recovery",
+  "assets": [
+    {
+      "id": "03_profile_sign",
+      "task_id": "a4544685-ffb3-46e6-a49e-c0dae342e326",
+      "role": "Real GLB remains loaded while the other asset fails."
+    },
+    {
+      "id": "08_street_lamp",
+      "task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
+      "role": "Initially missing test copy; restored with the actual generated GLB.",
+      "restored_file_sha256": "edeae357d10ce8917eb2b482e77bbd636616feac1657f48ce95322c5e8edb13f"
+    }
+  ],
+  "cases": [
+    {
+      "environment": "Docusaurus development server on 127.0.0.1:3000",
+      "failure": "Missing GLB route returned HTML fallback, causing GLTFLoader JSON parse failure. This case is not claimed as HTTP 404.",
+      "observed_failed_state": "1 / 2 real assets loaded; failed lamp detail says other assets remain available; retry button visible.",
+      "retry_while_missing": "Still 1 / 2; the already-loaded portrait frame remains usable.",
+      "recovery": "Copied the real lamp GLB into the test path, clicked Retry failed loads without reloading the page, then observed 2 / 2 loaded, ready lamp detail and hidden retry button.",
+      "screenshots": [
+        "assets/tripo/records/garage-partial-load-failure.jpg",
+        "assets/tripo/records/garage-partial-load-recovered.jpg"
+      ]
+    },
+    {
+      "environment": "Temporary Python static server bound only to 127.0.0.1:8766",
+      "failure": "Browser console and HTTP server both confirmed lamp GLB request returned 404 File not found.",
+      "observed_failed_state": "1 / 2 real assets loaded; failed lamp detail says other assets remain available; retry button visible.",
+      "recovery": "Restored actual lamp GLB and clicked Retry failed loads without reload; 2 / 2 loaded; stage data-state=ready; retry button hidden.",
+      "observed_max_texture_edge_px": 1024,
+      "screenshots": [
+        "assets/tripo/records/garage-http404-failure.jpg",
+        "assets/tripo/records/garage-http404-recovered.jpg"
+      ]
+    }
+  ],
+  "limits": [
+    "Full-model failure in the actual React outer preview was not exercised.",
+    "WebGL context loss and manifest fatal-error propagation were not exercised.",
+    "Source inspection: fatal() does not post an error to the React parent, so an initial manifest/WebGL fatal error leaves the outer loading overlay until its 45-second timeout. After first model success, context loss is handled by the inner fatal panel and reload button."
+  ],
+  "cleanup": {
+    "temporary_test_directory_removed": true,
+    "temporary_directory_copied_into_build": false,
+    "test_tabs_closed": true,
+    "temporary_static_server_stopped": true,
+    "production_scene_files_modified_for_test": false,
+    "original_model_files_modified": false
+  }
+}

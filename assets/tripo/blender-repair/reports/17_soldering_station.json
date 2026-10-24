@@ -1,0 +1,67 @@
+{
+  "asset_id": "17_soldering_station",
+  "source_task_id": "86e23643-ce8d-418b-bbec-64e1c813e73c",
+  "blender_version": "5.2.3 LTS",
+  "input": "assets/tripo/blender-repair/before/17_soldering_station.glb",
+  "input_sha256": "831fc5749f16315c13f961ad5f27ccb6c25c4e9f18efba3bdf4839b6e9f38646",
+  "output": "assets/tripo/blender-repair/models/17_soldering_station.glb",
+  "output_sha256": "1034a715058ea8127902ed879e616bbbb871b836e3208599df61c2b246b784ae",
+  "raw_glb_unchanged": true,
+  "changes": {
+    "cleanup": {
+      "tripo_node_86e23643-ce8d-418b-bbec-64e1c813e73c": {
+        "before": {
+          "vertices": 2319,
+          "faces": 3104,
+          "boundary_edges": 1332,
+          "nonmanifold_edges": 1332,
+          "degenerate_faces": 0
+        },
+        "after": {
+          "vertices": 1550,
+          "faces": 3100,
+          "boundary_edges": 6,
+          "nonmanifold_edges": 12,
+          "degenerate_faces": 0
+        }
+      }
+    },
+    "planar_patches": [
+      {
+        "axis_xyz": 1,
+        "plane_m": 0.128,
+        "changed_vertices": 42,
+        "max_displacement_m": 0.003625950336456296
+      },
+      {
+        "axis_xyz": 0,
+        "plane_m": -0.036,
+        "changed_vertices": 22,
+        "max_displacement_m": 5.850413441658292e-05
+      },
+      {
+        "axis_xyz": 0,
+        "plane_m": 0.06,
+        "changed_vertices": 34,
+        "max_displacement_m": 0.0028501054644584634
+      }
+    ],
+    "local_parts": [],
+    "notes": [
+      "Flattened controller top and sides; iron, connector, knob and cable untouched.",
+      "Merged coincident vertices at 1 micrometre, removed degenerate edges, recalculated winding and panel normals; generated normal-map strength reduced to 0.35."
+    ]
+  },
+  "mesh_stats": {
+    "tripo_node_86e23643-ce8d-418b-bbec-64e1c813e73c": {
+      "vertices": 1550,
+      "faces": 3100,
+      "boundary_edges": 6,
+      "nonmanifold_edges": 12,
+      "degenerate_faces": 0
+    }
+  },
+  "visual_acceptance": "accepted_with_notes",
+  "credits_spent": 0,
+  "visual_review": "Front and rear neutral-light Blender renders inspected; source textures retained, local replacement parts explicitly named."
+}

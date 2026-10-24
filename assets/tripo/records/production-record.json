@@ -1,0 +1,3604 @@
+{
+  "project": "Peter Pan's Techland Cyber Maker Garage",
+  "branch": "codex/cyber-maker-garage-assets",
+  "cli_version": "0.7.1",
+  "source_manifest": "PeterPansTechland_Tripo_Generation_Pack/manifest.json",
+  "generation_order": [
+    "04_lucky_cat",
+    "01_garage_shell",
+    "02_roller_shutter",
+    "03_profile_sign",
+    "05_project_vending",
+    "06_showcase_zone",
+    "07_tools_zone",
+    "08_street_lamp",
+    "09_trash_bin",
+    "10_utility_cabinet",
+    "11_tree",
+    "12_plants_grass",
+    "13_street_base"
+  ],
+  "spending_authorization": {
+    "status": "confirmed_by_user",
+    "estimated_total_credits": 330,
+    "scope": "13 assets, first lucky cat gate, no automatic paid retries, no topups, stop if quote exceeds estimate",
+    "user_response": "确认整批预计 330 积分"
+  },
+  "redesign_spending_authorization": {
+    "status": "confirmed_by_user",
+    "user_response": "可以了做3d模型吧",
+    "estimated_additional_credits": 55,
+    "estimated_project_total": 385,
+    "no_automatic_paid_retries": true,
+    "no_topups": true,
+    "stop_if_free_rig_check_fails": true,
+    "reference_sha256": "72138A88C8C79F0F7ED33FE59BB6621A5723E3E9247B27EC7297CF2F626F18CB",
+    "recorded_at_utc": "2026-10-20T06:46:11.373319Z"
+  },
+  "schema_version": 2,
+  "updated_at_utc": "2026-10-21T03:40:44.776Z",
+  "status": "technical_preview_delivery_pending_final_user_acceptance",
+  "artifacts_root": "assets/tripo/raw",
+  "first_asset_gate": {
+    "status": "completed",
+    "description": "An independent actual Tripo GLB was generated, decoded and visually opened before remaining production; redesigned cyber-cat rig and forepaw motion were reviewed before integration."
+  },
+  "estimated_credits_total": 385,
+  "billed_credits_total": 385,
+  "account_balance": 345,
+  "account_frozen_credits": 0,
+  "account_balance_record": "assets/tripo/records/balance-after-batch.json",
+  "submitted_task_count": 17,
+  "delivered_model_count": 13,
+  "delivered_model_count_definition": "Current asset slots with a downloaded real GLB, including visually rejected tools-zone output; excludes historical cat and duplicate rig-stage files.",
+  "accepted_asset_count": 0,
+  "accepted_asset_count_definition": "Final user acceptance of the complete garage; not implied by technical preview eligibility.",
+  "scene_preview_eligible_asset_count": 12,
+  "counts": {
+    "requested_asset_slots": 13,
+    "current_generated_asset_slots": 13,
+    "historical_generation_outputs": 1,
+    "generation_tasks": 14,
+    "rig_tasks": 1,
+    "free_rig_check_tasks": 2,
+    "unique_tasks": 17,
+    "billable_tasks": 15,
+    "successful_tasks": 17,
+    "failed_generation_tasks": 0,
+    "downloaded_raw_glb_stage_files": 15,
+    "locally_processed_current_assets": 5,
+    "visual_rejected_current_assets": 1,
+    "scene_preview_eligible_assets": 12
+  },
+  "credit_accounting": {
+    "historical_white_cat_generation": 30,
+    "current_blue_cat_generation": 30,
+    "current_blue_cat_rig": 25,
+    "two_rig_checks": 0,
+    "other_twelve_assets": 300,
+    "ten_asset_native_batch": 250,
+    "shell_and_shutter_outside_native_batch": 50,
+    "total": 385,
+    "initial_balance_inferred_from_recorded_balance_and_debits": 730,
+    "after_first": 700,
+    "after_blue_cat": 645,
+    "after_remaining_assets": 345,
+    "frozen_after_batch": 0,
+    "basis": "Sum each unique task.json credits_consumed exactly once; the blue-cat result 55 is chain aggregate and is not an extra rig charge.",
+    "balance_is_historical_snapshot": true
+  },
+  "task_ledger": [
+    {
+      "task_id": "240c22e7-eac0-42ec-9486-7969d68caf64",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T06:12:42.6905Z",
+      "completed_at": "2026-10-20T06:14:38.091498Z",
+      "credits_consumed": 30,
+      "asset_id": "04_lucky_cat",
+      "source_record": "assets/tripo/raw/tripo-out/04-lucky-cat-240c22e7/task.json",
+      "billable": true,
+      "role": "historical_rejected_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/04-lucky-cat-240c22e7/model.glb",
+        "sha256": "bbc634ac3f1bba2328064f4a82a551d80bc90616ce0ae01cc9f99e446594dacf",
+        "bytes": 2680244
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/04-lucky-cat-240c22e7/preview.png",
+        "sha256": "0c1b79bf075aad6ea939f783a2b3ae1ba4bbf119d0d6af4d909996a8327695e1",
+        "bytes": 256989
+      }
+    },
+    {
+      "task_id": "3060e44b-f43c-4422-9069-e676a54a4dec",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "created_at": "2026-10-20T06:16:15.786663Z",
+      "completed_at": "2026-10-20T06:16:16.395445Z",
+      "credits_consumed": 0,
+      "asset_id": "04_lucky_cat",
+      "source_record": "assets/tripo/records/04_lucky_cat.rig-check-task.json",
+      "billable": false,
+      "role": "free_rig_check",
+      "parent_task_id": "240c22e7-eac0-42ec-9486-7969d68caf64"
+    },
+    {
+      "task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T06:46:29.352423Z",
+      "completed_at": "2026-10-20T06:48:21.921954Z",
+      "credits_consumed": 30,
+      "asset_id": "04_lucky_cat",
+      "source_record": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-source-36e3dca6/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-source-36e3dca6/model.glb",
+        "sha256": "0fe8279effe331e610eda79c493da1cf4de393c3fe78b87a816098f32117bc49",
+        "bytes": 5534608
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-source-36e3dca6/preview.png",
+        "sha256": "ffe67ebee873a40ad719d2fa7e77ac7876e04b629e5a022ba5b268b05707117a",
+        "bytes": 296602
+      }
+    },
+    {
+      "task_id": "82ad6d65-9981-4c60-8a5a-c367b1503ff8",
+      "type": "animate_prerigcheck",
+      "status": "success",
+      "created_at": "2026-10-20T06:48:48.259786Z",
+      "completed_at": "2026-10-20T06:48:48.783386Z",
+      "credits_consumed": 0,
+      "asset_id": "04_lucky_cat",
+      "source_record": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-rig-c-82ad6d65/task.json",
+      "billable": false,
+      "role": "free_rig_check",
+      "parent_task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f"
+    },
+    {
+      "task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+      "type": "animate_rig",
+      "status": "success",
+      "created_at": "2026-10-20T06:48:51.773596Z",
+      "completed_at": "2026-10-20T06:49:06.879198Z",
+      "credits_consumed": 25,
+      "asset_id": "04_lucky_cat",
+      "source_record": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-rig-9c588a0c/task.json",
+      "billable": true,
+      "role": "rigging",
+      "parent_task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-rig-9c588a0c/model.glb",
+        "sha256": "a5f1b2cd4b780ff34fc79451f5dd888b7a0976bdd2cbdf92e062a1e78a6bfca1",
+        "bytes": 5657024
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-rig-9c588a0c/preview.png",
+        "sha256": "d074b8307f528098b2dc00eae22ebbd89d5540b3d247678c0dc2a3924f689f21",
+        "bytes": 296281
+      }
+    },
+    {
+      "task_id": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:08:44.227365Z",
+      "completed_at": "2026-10-20T07:11:10.122722Z",
+      "credits_consumed": 30,
+      "asset_id": "01_garage_shell",
+      "source_record": "assets/tripo/raw/tripo-out/01-garage-shell-de47b250/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/01-garage-shell-de47b250/model.glb",
+        "sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116",
+        "bytes": 3561288
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/01-garage-shell-de47b250/preview.png",
+        "sha256": "9040ce886163451a4729d8272c66ed817bd35e27df3b495ae188c1461940c3da",
+        "bytes": 361031
+      }
+    },
+    {
+      "task_id": "60038920-5601-4de0-9202-b4620bd5b1c8",
+      "type": "text_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:17:39.694273Z",
+      "completed_at": "2026-10-20T07:19:51.356029Z",
+      "credits_consumed": 20,
+      "asset_id": "02_roller_shutter",
+      "source_record": "assets/tripo/raw/tripo-out/02-roller-shutter-60038920/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/02-roller-shutter-60038920/model.glb",
+        "sha256": "cac9f9a5f0ce228e1a2de80a87518389b56022c2c8fd682a631c77daad2e9a4e",
+        "bytes": 3254776
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/02-roller-shutter-60038920/preview.png",
+        "sha256": "ab809dc76332c01f7bcfb596c69ae9303320b0a6a2e408f09702ee2b86f5b339",
+        "bytes": 451502
+      }
+    },
+    {
+      "task_id": "a4544685-ffb3-46e6-a49e-c0dae342e326",
+      "type": "text_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:20:06.764209Z",
+      "completed_at": "2026-10-20T07:22:57.372685Z",
+      "credits_consumed": 20,
+      "asset_id": "03_profile_sign",
+      "source_record": "assets/tripo/raw/tripo-out/03-profile-sign-a4544685/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/03-profile-sign-a4544685/model.glb",
+        "sha256": "3488a33dbb7c2e857e8e7be00d22af627cf320dad4d7b47ade74c45febf9f83c",
+        "bytes": 2562588
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/03-profile-sign-a4544685/preview.png",
+        "sha256": "bc2ffd3ecc045b889d987d91d0c6964b5ad63aaf5f4896e330670aa68ef83457",
+        "bytes": 256922
+      }
+    },
+    {
+      "task_id": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:20:06.880759Z",
+      "completed_at": "2026-10-20T07:24:15.957974Z",
+      "credits_consumed": 30,
+      "asset_id": "05_project_vending",
+      "source_record": "assets/tripo/raw/tripo-out/05-project-vending-54b92a08/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/05-project-vending-54b92a08/model.glb",
+        "sha256": "05ef07a2940582ef4abeb55b49dc73b43509ab4f9d9ab15b004e810196ec6fa3",
+        "bytes": 3696424
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/05-project-vending-54b92a08/preview.png",
+        "sha256": "8d3258d6f56da1ac1ae9188ce907bb54c5fa23ae96d16ac4bce71e15738287f6",
+        "bytes": 417185
+      }
+    },
+    {
+      "task_id": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "type": "text_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:23:19.651898Z",
+      "completed_at": "2026-10-20T07:25:55.627406Z",
+      "credits_consumed": 20,
+      "asset_id": "06_showcase_zone",
+      "source_record": "assets/tripo/raw/tripo-out/06-showcase-zone-2c13d6cc/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/06-showcase-zone-2c13d6cc/model.glb",
+        "sha256": "68779ddc414d295866e8c13a992a63ddd29ab93d7379019c2c93469eb3311405",
+        "bytes": 2977732
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/06-showcase-zone-2c13d6cc/preview.png",
+        "sha256": "b36641123c4b6c022e9f89da5272e346a808385d5baf4d20d3c774d263cc8412",
+        "bytes": 349534
+      }
+    },
+    {
+      "task_id": "5cdd8463-4306-4ab8-b4a4-376985d5737f",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:24:59.786393Z",
+      "completed_at": "2026-10-20T07:27:01.61577Z",
+      "credits_consumed": 30,
+      "asset_id": "07_tools_zone",
+      "source_record": "assets/tripo/raw/tripo-out/07-tools-zone-5cdd8463/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/07-tools-zone-5cdd8463/model.glb",
+        "sha256": "18546d3a6e48f924801c1b5b7e1553a0b55b95e7db3a03524966e0d64dfbb161",
+        "bytes": 3825480
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/07-tools-zone-5cdd8463/preview.png",
+        "sha256": "62b48915b053fe5626a6f8a53126b5ed0a6361f6041fbe10c45f3097182f4cc7",
+        "bytes": 184702
+      }
+    },
+    {
+      "task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:26:26.279364Z",
+      "completed_at": "2026-10-20T07:28:44.001435Z",
+      "credits_consumed": 30,
+      "asset_id": "08_street_lamp",
+      "source_record": "assets/tripo/raw/tripo-out/08-street-lamp-b369cdad/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/08-street-lamp-b369cdad/model.glb",
+        "sha256": "edeae357d10ce8917eb2b482e77bbd636616feac1657f48ce95322c5e8edb13f",
+        "bytes": 2412956
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/08-street-lamp-b369cdad/preview.png",
+        "sha256": "6b80f0ca4dc6bf02233804207d5ee7ff5d6d50f2eb0bccffe9c03a9354d0382e",
+        "bytes": 100789
+      }
+    },
+    {
+      "task_id": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:27:29.393244Z",
+      "completed_at": "2026-10-20T07:30:02.660173Z",
+      "credits_consumed": 30,
+      "asset_id": "09_trash_bin",
+      "source_record": "assets/tripo/raw/tripo-out/09-trash-bin-1ae8df17/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/09-trash-bin-1ae8df17/model.glb",
+        "sha256": "fecc8578fd6f8965e5ac9384b9919cf0653ed1c8528e8af447e4649096588a8e",
+        "bytes": 2827064
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/09-trash-bin-1ae8df17/preview.png",
+        "sha256": "50502cf0e139696075aec857e8a1a62015aa641b766f15aca2946d0bf9ffa79c",
+        "bytes": 247383
+      }
+    },
+    {
+      "task_id": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
+      "type": "text_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:28:57.76386Z",
+      "completed_at": "2026-10-20T07:31:01.317047Z",
+      "credits_consumed": 20,
+      "asset_id": "10_utility_cabinet",
+      "source_record": "assets/tripo/raw/tripo-out/10-utility-cabinet-79c20750/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/10-utility-cabinet-79c20750/model.glb",
+        "sha256": "29534a8675f8efea6545b4b183964bda853c565e3c70e40bdb57fac6c293ae11",
+        "bytes": 3197780
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/10-utility-cabinet-79c20750/preview.png",
+        "sha256": "2491a4589ebe4d3a795811a2594d77177bc33cc8fd2d236cd1d3e3cd65c29049",
+        "bytes": 180895
+      }
+    },
+    {
+      "task_id": "f83af78c-7c37-48c0-8de7-e2706f983982",
+      "type": "text_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:30:32.095943Z",
+      "completed_at": "2026-10-20T07:32:48.762705Z",
+      "credits_consumed": 20,
+      "asset_id": "11_tree",
+      "source_record": "assets/tripo/raw/tripo-out/11-tree-f83af78c/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/11-tree-f83af78c/model.glb",
+        "sha256": "2b96429f4aca028b01c8375d124734a64d78ca80b612a09da46d3717399f56b1",
+        "bytes": 3468976
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/11-tree-f83af78c/preview.png",
+        "sha256": "6092d4a027e520fba7fa702b8246d26b8190e44171fbd04e19781fa4a19305b6",
+        "bytes": 245062
+      }
+    },
+    {
+      "task_id": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
+      "type": "text_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:31:31.960219Z",
+      "completed_at": "2026-10-20T07:34:09.98541Z",
+      "credits_consumed": 20,
+      "asset_id": "12_plants_grass",
+      "source_record": "assets/tripo/raw/tripo-out/12-plants-grass-14dc3618/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/12-plants-grass-14dc3618/model.glb",
+        "sha256": "8ff32a33e446cd5718242f28df4957a804233a03ebe001e53f325493f68fdf18",
+        "bytes": 3142236
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/12-plants-grass-14dc3618/preview.png",
+        "sha256": "6e9d90efce662114ff0a706e86139dae8a59733fc7651063413ce2a7484a4bf7",
+        "bytes": 345444
+      }
+    },
+    {
+      "task_id": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+      "type": "image_to_model",
+      "status": "success",
+      "created_at": "2026-10-20T07:33:34.506648Z",
+      "completed_at": "2026-10-20T07:35:02.806473Z",
+      "credits_consumed": 30,
+      "asset_id": "13_street_base",
+      "source_record": "assets/tripo/raw/tripo-out/13-street-base-38eb318a/task.json",
+      "billable": true,
+      "role": "current_asset_generation",
+      "raw_glb": {
+        "path": "assets/tripo/raw/tripo-out/13-street-base-38eb318a/model.glb",
+        "sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21",
+        "bytes": 3420260
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/13-street-base-38eb318a/preview.png",
+        "sha256": "66bdd18c104269cdef3203f1227596d0ce52081e2a8d318f4d7ad6da09896757",
+        "bytes": 157872
+      }
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "01_garage_shell",
+      "title": "车库建筑外壳",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "de47b250-7bce-40ba-b2fe-4a11374a7a72",
+      "completed": true,
+      "credits_consumed": 30,
+      "estimated_credits": 30,
+      "generation_credits": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/01-garage-shell-de47b250/model.glb",
+        "sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116",
+        "bytes": 3561288
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/01-garage-shell-de47b250/preview.png",
+        "sha256": "9040ce886163451a4729d8272c66ed817bd35e27df3b495ae188c1461940c3da",
+        "bytes": 361031
+      },
+      "task_record": "assets/tripo/raw/tripo-out/01-garage-shell-de47b250/task.json",
+      "plan_record": "assets/tripo/records/01_garage_shell.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/01-garage-shell-de47b250/model.glb",
+      "review_notes": [
+        "Source-derived planter, foliage, traffic cone, floor edge and upper corrugated strip remain fused into the real shell.",
+        "Roof/frame/sign mount are not independently named submeshes; the separate animated door remains its own asset."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/01_garage_shell.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 14131,
+          "triangle_count_sum_primitives": 17480,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -6.708056926727295,
+            -3.999999991142147,
+            -6.134863900815475
+          ],
+          "max": [
+            6.708056926727295,
+            3.999999991142147,
+            6.134863900815475
+          ],
+          "size_xyz": [
+            13.41611385345459,
+            7.999999982284294,
+            12.26972780163095
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -3.999999991142147,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "7f6e569063abd40c0262b9472900e796eddb9af99060ce8227f60fcf8fbb1e62",
+          "3202d5527390e680246b14bd7194ccf8d3a3f261b39428138bffd1901d2bd2e6",
+          "26a1c93f10f7ee473db8d963de09f15c51dc2a1678294bb9c82fe4461797f5e0"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "basis": "Provider preview.png visually inspected; not a browser orbit/topology acceptance",
+          "preview_file": "C:\\Users\\peter\\Documents\\robomon\\peterpanstechland.github.io\\assets\\tripo\\raw\\tripo-out\\01-garage-shell-de47b250\\preview.png",
+          "preview_sha256": "9040ce886163451a4729d8272c66ed817bd35e27df3b495ae188c1461940c3da",
+          "observations": [
+            "Flat-roof garage shell and visibly open front entrance are present.",
+            "Left-front edge retains a planter/foliage, a pink traffic cone, and other source-crop street details. These have not been removed.",
+            "Front-upper corrugated strip remains part of the shell output; inspect whether it overlaps the separately generated animated shutter.",
+            "Generated floor/front edge is included in the shell, so later street-base assembly needs overlap review."
+          ],
+          "geometry_limitations": [
+            "The output contains one mesh and one node; roof, frame, and sign mount are not separately named or independently removable nodes.",
+            "No mesh cleanup, prop removal, axis normalization, or pivot correction was performed."
+          ],
+          "front_axis": "Possibly +X; not established by a preview without axes. Browser confirmation required.",
+          "visual_acceptance": "NOT_APPROVED"
+        }
+      },
+      "normalization": {
+        "applied_in": "website runtime only; raw GLB is unchanged",
+        "method": "per-axis-static",
+        "target_size_xyz_m": [
+          4.5,
+          3.2,
+          3.5
+        ],
+        "scale_xyz_after_rotation": [
+          0.36675630240157725,
+          0.40000000088578536,
+          0.26088031439139625
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "pivot": "runtime bottom center",
+        "position": [
+          0,
+          -0.22,
+          0
+        ],
+        "runtime_placement": {
+          "position": [
+            0,
+            -0.22,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "runtime_native_plinth_offset",
+          "rotationY": -1.5707963267948966,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations"
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/01_garage_shell.glb",
+          "sha256": "790e1580f58bb7754ac20dd37564264db90b73a5f4de790d822a7bf407fab116",
+          "bytes": 3561288
+        },
+        "configuration_status_snapshot": "verified",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "website runtime only; raw GLB is unchanged",
+            "method": "per-axis-static",
+            "target_size_xyz_m": [
+              4.5,
+              3.2,
+              3.5
+            ],
+            "scale_xyz_after_rotation": [
+              0.36675630240157725,
+              0.40000000088578536,
+              0.26088031439139625
+            ],
+            "rotation_y_radians": -1.5707963267948966,
+            "pivot": "runtime bottom center",
+            "position": [
+              0,
+              0,
+              0
+            ]
+          },
+          "configuration_status_snapshot": "verified"
+        }
+      ]
+    },
+    {
+      "asset_id": "02_roller_shutter",
+      "title": "卷帘门独立门片",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "60038920-5601-4de0-9202-b4620bd5b1c8",
+      "completed": true,
+      "credits_consumed": 20,
+      "estimated_credits": 20,
+      "generation_credits": 20,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/02-roller-shutter-60038920/model.glb",
+        "sha256": "cac9f9a5f0ce228e1a2de80a87518389b56022c2c8fd682a631c77daad2e9a4e",
+        "bytes": 3254776
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/02-roller-shutter-60038920/preview.png",
+        "sha256": "ab809dc76332c01f7bcfb596c69ae9303320b0a6a2e408f09702ee2b86f5b339",
+        "bytes": 451502
+      },
+      "task_record": "assets/tripo/raw/tripo-out/02-roller-shutter-60038920/task.json",
+      "plan_record": "assets/tripo/records/02_roller_shutter.dry-run.json",
+      "processed_output": {
+        "path": "assets/tripo/processed/02_roller_shutter.glb",
+        "sha256": "efa27b81062656c3a6a91e80be47e64cfbf010fb95a152e2d2048b6864fb5cf9",
+        "bytes": 4900388
+      },
+      "output_path": "assets/tripo/processed/02_roller_shutter.glb",
+      "review_notes": [
+        "26 real clipped slats and 3 fixed hardware parts; original triangles/UVs/textures retained.",
+        "Four uncapped contours remain at slat 13/14 and 21/22 joints; not watertight.",
+        "Full-open surface bounds reach Y=3.012898m, with sampled intermediate maximum around 3.018m; actual thick surfaces dip to Y=2.141709m."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/02_roller_shutter.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 7608,
+          "triangle_count_sum_primitives": 8754,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.26918830191079124,
+            -0.8999999887808414,
+            -1.0079625844955444
+          ],
+          "max": [
+            0.26918830191079124,
+            0.8999999887808414,
+            1.0079625844955444
+          ],
+          "size_xyz": [
+            0.5383766038215825,
+            1.7999999775616828,
+            2.015925168991089
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.8999999887808414,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "a5fb301afcb77f8838b14ec9153be397f145576588464a551c6ce601ed23e320",
+          "6d2f5d43d1a95bbadfbe8775dc543253a6b0606095bab6ac5975b12fbdeee0a2",
+          "78989792718c5d197ef27512f29faffd7ab45f78235fb71ebd53fc2c1d5796f3"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "processed_report": "assets/tripo/records/02_roller_shutter.processed.qa.json",
+        "processing_record": "assets/tripo/records/02_roller_shutter.processed.record.json",
+        "processed_structure_status": "passed_implemented_checks",
+        "processed_summary": {
+          "mesh_count": 29,
+          "primitive_count": 58,
+          "node_count": 30,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 36256,
+          "triangle_count_sum_primitives": 35590,
+          "degenerate_triangles": 0,
+          "material_count": 2,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 236
+        },
+        "uncapped_contour_count": 4
+      },
+      "normalization": {
+        "applied_in": "processed GLB",
+        "axis": "Y-up, source +X rotated to +Z",
+        "pivot": "bottom center",
+        "processed_size_xyz_m": [
+          3.800000001192093,
+          2.549999972038257,
+          0.15999999825187772
+        ],
+        "manifest_target_size_xyz_m": [
+          3.8,
+          2.55,
+          0.16
+        ],
+        "runtime_placement": {
+          "position": [
+            0.3,
+            -0.02,
+            1.13
+          ],
+          "scale": [
+            1,
+            0.71,
+            1
+          ],
+          "position_stage": "runtime_facade_anchor",
+          "rotationY": 0,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "01_garage_shell",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "processed_glb_scale_unchanged": true,
+          "animation_note": "26 real slats retain their local track/roll motion; whole-root Y scale 0.71 fits the native facade opening, and is not the opening animation."
+        },
+        "source_glb_unchanged": true,
+        "method": "Baked rotation and per-axis fit before real triangle slicing"
+      },
+      "local_processing": {
+        "tool": "tools/prepare_roller_shutter.py",
+        "record": "assets/tripo/records/02_roller_shutter.processed.record.json",
+        "additional_paid_tasks": 0
+      },
+      "shutter": {
+        "top": 2.58,
+        "openingTop": 2.2,
+        "bottom": 0,
+        "radius": 0.38,
+        "travel": 2.58,
+        "slatCount": 26,
+        "slatHeight": 0.08461538461538462,
+        "curtainWidth": 3.24,
+        "frontAxis": "+Z",
+        "rollAxis": "X",
+        "rollRotationSign": -1,
+        "topMeaning": "Front vertical tangent height of the rearward roll; coil minimum Y equals openingTop",
+        "runtimePath": "For c=closedY+travel*open: if c<=top use Y=c and Z=closedZ; otherwise theta=(c-top)/radius, Y=top+radius*sin(theta), Z=closedZ-radius*(1-cos(theta)), rotationX=-theta. Preserve closedX. No Y scaling.",
+        "closedBounds": {
+          "min": [
+            -1.9,
+            0,
+            -0.08
+          ],
+          "max": [
+            1.9,
+            2.55,
+            0.08
+          ]
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/02_roller_shutter.glb",
+          "sha256": "efa27b81062656c3a6a91e80be47e64cfbf010fb95a152e2d2048b6864fb5cf9",
+          "bytes": 4900388
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "processed GLB",
+            "axis": "Y-up, source +X rotated to +Z",
+            "pivot": "bottom center",
+            "processed_size_xyz_m": [
+              3.800000001192093,
+              2.549999972038257,
+              0.15999999825187772
+            ],
+            "manifest_target_size_xyz_m": [
+              3.8,
+              2.55,
+              0.16
+            ],
+            "runtime_placement": {
+              "position": [
+                0,
+                0,
+                1.78
+              ]
+            },
+            "source_glb_unchanged": true,
+            "method": "Baked rotation and per-axis fit before real triangle slicing"
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "03_profile_sign",
+      "title": "头像霓虹招牌框",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "a4544685-ffb3-46e6-a49e-c0dae342e326",
+      "completed": true,
+      "credits_consumed": 20,
+      "estimated_credits": 20,
+      "generation_credits": 20,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/03-profile-sign-a4544685/model.glb",
+        "sha256": "3488a33dbb7c2e857e8e7be00d22af627cf320dad4d7b47ade74c45febf9f83c",
+        "bytes": 2562588
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/03-profile-sign-a4544685/preview.png",
+        "sha256": "bc2ffd3ecc045b889d987d91d0c6964b5ad63aaf5f4896e330670aa68ef83457",
+        "bytes": 256922
+      },
+      "task_record": "assets/tripo/raw/tripo-out/03-profile-sign-a4544685/task.json",
+      "plan_record": "assets/tripo/records/03_profile_sign.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/03-profile-sign-a4544685/model.glb",
+      "review_notes": [
+        "Blank black center and circular neon hardware; no generated person/portrait.",
+        "Frame/disc/light tubes remain one source mesh/material; independent emission parts are not established.",
+        "Only the generated blank sign frame is used; no portrait or profile-image overlay is applied."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/03_profile_sign.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 3893,
+          "triangle_count_sum_primitives": 4771,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.05506451427936554,
+            -0.25,
+            -0.23169420659542084
+          ],
+          "max": [
+            0.05506451427936554,
+            0.25,
+            0.23169420659542084
+          ],
+          "size_xyz": [
+            0.11012902855873108,
+            0.5,
+            0.4633884131908417
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.25,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "6127d9ae8ba5512df40d91a652603d18f9971f414d02a45eea49cfa3e257bc10",
+          "7ab732a20b7fa0ca77936b012ae80be7289643baded35a8f4da4bd4c682371a9",
+          "eed46ad13bb2f3766ff87baeac552587965109bd31f46e1e5dd2b1d3231388db"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and text-mode brief",
+          "status": "main_appearance_matches_postprocess_required",
+          "observations": [
+            "Black round frame with cyan and magenta concentric ring segments and a plain black center.",
+            "No invented portrait, cat brand symbol, or visible generated lettering.",
+            "Ring segments have hardware breaks and mounting details; overall silhouette matches the requested circular sign hardware."
+          ],
+          "issues": [
+            "Frame, disc and light tubes are merged into one mesh/material; the required independent frame/disc/neon nodes are absent."
+          ],
+          "unverified": [
+            "Back surface",
+            "Front +Z orientation",
+            "Independent emission control",
+            "Final scene scale/pivot"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "website runtime only; raw GLB is unchanged",
+        "method": "uniform-height",
+        "target_height_m": 0.8,
+        "uniform_scale": 1.6,
+        "size_xyz_m_after_runtime_normalization": [
+          0.7414214611053467,
+          0.8,
+          0.17620644569396973
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "pivot": "runtime bottom center",
+        "position": [
+          -1.65,
+          2.33,
+          1.25
+        ],
+        "runtime_placement": {
+          "position": [
+            -1.65,
+            2.33,
+            1.25
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "runtime_facade_anchor",
+          "rotationY": -1.5707963267948966,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "01_garage_shell",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations"
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/03_profile_sign.glb",
+          "sha256": "3488a33dbb7c2e857e8e7be00d22af627cf320dad4d7b47ade74c45febf9f83c",
+          "bytes": 2562588
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "website runtime only; raw GLB is unchanged",
+            "method": "uniform-height",
+            "target_height_m": 0.8,
+            "uniform_scale": 1.6,
+            "size_xyz_m_after_runtime_normalization": [
+              0.7414214611053467,
+              0.8,
+              0.17620644569396973
+            ],
+            "rotation_y_radians": -1.5707963267948966,
+            "pivot": "runtime bottom center",
+            "position": [
+              -1.65,
+              2.55,
+              1.87
+            ]
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "04_lucky_cat",
+      "title": "门口可爱招财猫",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+      "completed": true,
+      "credits_consumed": 55,
+      "estimated_credits": 55,
+      "generation_credits": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-source-36e3dca6/model.glb",
+        "sha256": "0fe8279effe331e610eda79c493da1cf4de393c3fe78b87a816098f32117bc49",
+        "bytes": 5534608
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-source-36e3dca6/preview.png",
+        "sha256": "ffe67ebee873a40ad719d2fa7e77ac7876e04b629e5a022ba5b268b05707117a",
+        "bytes": 296602
+      },
+      "task_record": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-source-36e3dca6/task.json",
+      "plan_record": "assets/tripo/records/04_cyber_lucky_cat_blue_v6.dry-run.json",
+      "processed_output": {
+        "path": "assets/tripo/processed/04_cyber_lucky_cat.glb",
+        "sha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
+        "bytes": 5658088
+      },
+      "output_path": "assets/tripo/processed/04_cyber_lucky_cat.glb",
+      "review_notes": [
+        "Current asset is the approved blue cyber-cat reference generation, with an actual Tripo skeletal rig: 45 bones, 1 skin.",
+        "Techland_Beckon is a locally authored 2-second quaternion clip on node18/bone_21, not a paid Tripo retarget animation.",
+        "Browser GLB/texture review, controlled forepaw rotation and independent clip playback passed; original white cat remains historical only."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/04_cyber_lucky_cat_blue_v6_source.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 9728,
+          "triangle_count_sum_primitives": 14394,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.15001089796440148,
+            -0.20000000298023224,
+            -0.1775915768383678
+          ],
+          "max": [
+            0.15001089796440148,
+            0.20000000298023224,
+            0.1775915768383678
+          ],
+          "size_xyz": [
+            0.30002179592880296,
+            0.4000000059604645,
+            0.3551831536767356
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.20000000298023224,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "d7a6a1caa0040af18f0d91553d51159c1d840a278caf80ac5055d2d1342f1f1a",
+          "df9ef5d2fa4ee6f8e9322d31b1c54ee5d39bab6e025c3619dff4119bf2324c38",
+          "62d5d48516cd9184a4e9d4559844ad18ebcf1e3fa4db4e8f37593b5ef9dc27d9"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "processed_report": "assets/tripo/records/04_cyber_lucky_cat.processed.qa.json",
+        "processing_record": "assets/tripo/records/04_cyber_lucky_cat.processed.record.json",
+        "processed_structure_status": "blocked_unsupported",
+        "processed_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 48,
+          "skin_count": 1,
+          "animation_count": 1,
+          "vertex_count_sum_primitives": 9728,
+          "triangle_count_sum_primitives": 14394,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 9
+        },
+        "processed_data_note": "Generic inspector flags deformed bounds unsupported; dedicated CPU bind-pose/animation verification and actual browser playback passed. This is not a failed rig.",
+        "dedicated_reports": [
+          "assets/tripo/records/04_cyber_lucky_cat_blue_v6_bind_pose.qa.json",
+          "assets/tripo/records/04_cyber_lucky_cat_blue_v6_rig.qa.json",
+          "assets/tripo/records/04_cyber_lucky_cat.processed.qa.json"
+        ]
+      },
+      "normalization": {
+        "applied_in": "processed GLB",
+        "axis": "Y-up, source +X rotated to +Z",
+        "pivot": "bottom center",
+        "processed_size_xyz_m": [
+          0.7103664753591927,
+          0.8,
+          0.6000437048871715
+        ],
+        "manifest_target_size_xyz_m": [
+          0.48,
+          0.8,
+          0.42
+        ],
+        "runtime_placement": {
+          "position": [
+            -1.4,
+            0,
+            2.25
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": 0,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        },
+        "source_glb_unchanged": true,
+        "method": "Common wrapper, uniform height 0.8m; skin references preserved",
+        "wrapper": {
+          "name": "TECHLAND_CYBER_CAT_ROOT",
+          "children": [
+            46
+          ],
+          "translation": [
+            -7.782877071057345E-08,
+            1.6768867227586832E-07,
+            2.8688298718523684E-08
+          ],
+          "rotation": [
+            0,
+            -0.7071067811865476,
+            0,
+            0.7071067811865476
+          ],
+          "scale": [
+            2.0000000935543105,
+            2.0000000935543105,
+            2.0000000935543105
+          ]
+        }
+      },
+      "local_processing": {
+        "tool": "tools/prepare_cyber_cat.py",
+        "record": "assets/tripo/records/04_cyber_lucky_cat.processed.record.json",
+        "additional_paid_tasks": 0
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/04_cyber_lucky_cat.glb",
+          "sha256": "b0a7adef8afc3f363d117ecd15289fd9b1b8876b7e9b0c4e9bddf4f6e0ebacf5",
+          "bytes": 5658088
+        },
+        "configuration_status_snapshot": "verified",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "rig_task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+      "rig_check_task_id": "82ad6d65-9981-4c60-8a5a-c367b1503ff8",
+      "rig_credits": 25,
+      "rigged_raw_output": {
+        "path": "assets/tripo/raw/tripo-out/04-cyber-lucky-cat-blue-v6-rig-9c588a0c/model.glb",
+        "sha256": "a5f1b2cd4b780ff34fc79451f5dd888b7a0976bdd2cbdf92e062a1e78a6bfca1",
+        "bytes": 5657024
+      },
+      "current_review": {
+        "glb_load": "passed",
+        "textures": "passed",
+        "skin_joints_weights": "passed",
+        "bones": 45,
+        "skins": 1,
+        "embedded_animation_count": 1,
+        "clip": "Techland_Beckon",
+        "clip_source": "local_authoring_after_Tripo_rig",
+        "clip_playback_review": "passed_independent_browser_review",
+        "manual_forepaw_node18_local_z_rotation": "passed",
+        "raw_front": "+X",
+        "processed_front": "+Z",
+        "height_m": 0.8,
+        "evidence": "Root agent browser acceptance reported in this production session; current animated GLB hash recorded in processed_output."
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "processed GLB",
+            "axis": "Y-up, source +X rotated to +Z",
+            "pivot": "bottom center",
+            "processed_size_xyz_m": [
+              0.7103664753591927,
+              0.8,
+              0.6000437048871715
+            ],
+            "manifest_target_size_xyz_m": [
+              0.48,
+              0.8,
+              0.42
+            ],
+            "runtime_placement": {
+              "position": [
+                -1.25,
+                0,
+                2.1
+              ]
+            },
+            "source_glb_unchanged": true,
+            "method": "Common wrapper, uniform height 0.8m; skin references preserved",
+            "wrapper": {
+              "name": "TECHLAND_CYBER_CAT_ROOT",
+              "children": [
+                46
+              ],
+              "translation": [
+                -7.782877071057345E-08,
+                1.6768867227586832E-07,
+                2.8688298718523684E-08
+              ],
+              "rotation": [
+                0,
+                -0.7071067811865476,
+                0,
+                0.7071067811865476
+              ],
+              "scale": [
+                2.0000000935543105,
+                2.0000000935543105,
+                2.0000000935543105
+              ]
+            }
+          },
+          "configuration_status_snapshot": "verified"
+        }
+      ]
+    },
+    {
+      "asset_id": "05_project_vending",
+      "title": "作品导航自动贩卖机",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "54b92a08-ba80-4d36-ae83-1352ae38cac7",
+      "completed": true,
+      "credits_consumed": 30,
+      "estimated_credits": 30,
+      "generation_credits": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/05-project-vending-54b92a08/model.glb",
+        "sha256": "05ef07a2940582ef4abeb55b49dc73b43509ab4f9d9ab15b004e810196ec6fa3",
+        "bytes": 3696424
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/05-project-vending-54b92a08/preview.png",
+        "sha256": "8d3258d6f56da1ac1ae9188ce907bb54c5fa23ae96d16ac4bce71e15738287f6",
+        "bytes": 417185
+      },
+      "task_record": "assets/tripo/raw/tripo-out/05-project-vending-54b92a08/task.json",
+      "plan_record": "assets/tripo/records/05_project_vending.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/05-project-vending-54b92a08/model.glb",
+      "review_notes": [
+        "Reference miniature objects remain concept-sheet objects and are not verified models of PAN/FlipFate/BMO projects.",
+        "Generated tiny text and fused displays/buttons remain; local authored branding overlays do not rewrite the preserved raw textures."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/05_project_vending.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 7554,
+          "triangle_count_sum_primitives": 9783,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.5219665185994629,
+            -1.0499999523162842,
+            -0.9445761698676876
+          ],
+          "max": [
+            0.5219665185994629,
+            1.0499999523162842,
+            0.9445761698676876
+          ],
+          "size_xyz": [
+            1.0439330371989257,
+            2.0999999046325684,
+            1.889152339735375
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -1.0499999523162842,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "d4e385f9010665e216dd95f611ec4286348297681ba6b513ef6ab870084db92b",
+          "0bc32179b6af069e20311101216c5cfa4184ed467eb039996e2fc755978f38e9",
+          "7aa1a84ade9706108350c3b9941a2a1e487980e35c98f59c357d80ee4214efbd"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "reference_matched_content_cleanup_required",
+          "observations": [
+            "Red industrial vending machine, cyan PROJECTS header, bright display bays, control panel and lower pickup slot closely match the provided crop.",
+            "Embedded reference miniatures and accent colours are visible; no obvious missing large piece in the supplied front three-quarter preview."
+          ],
+          "issues": [
+            "Generated branding on the lower front reads incorrectly (PETER PAH'S / TECHLAND-like lettering); smaller screen/sticker text is illegible or garbled and must be replaced with accurate authored graphics.",
+            "The display contains concept-sheet miniature objects, not verified models of the user's projects; they must not be presented as actual PAN/FlipFate/BMO project models.",
+            "One opaque mesh/material merges cabinet, display contents, glass area and controls; no independently operable buttons, screen or true transparent glass is established."
+          ],
+          "unverified": [
+            "Rear and hidden surfaces",
+            "Front +Z orientation",
+            "Final scene scale/pivot",
+            "Editable screen and display bays"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "website runtime only; raw GLB is unchanged",
+        "method": "uniform-height",
+        "target_height_m": 1.8,
+        "uniform_scale": 0.8571428960683413,
+        "size_xyz_m_after_runtime_normalization": [
+          1.6192735075950624,
+          1.8,
+          0.8947997868061066
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "pivot": "runtime bottom center",
+        "position": [
+          1.55,
+          0,
+          2.12
+        ],
+        "runtime_placement": {
+          "position": [
+            1.55,
+            0,
+            2.12
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": -1.5707963267948966,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/05_project_vending.glb",
+          "sha256": "05ef07a2940582ef4abeb55b49dc73b43509ab4f9d9ab15b004e810196ec6fa3",
+          "bytes": 3696424
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "website runtime only; raw GLB is unchanged",
+            "method": "uniform-height",
+            "target_height_m": 1.8,
+            "uniform_scale": 0.8571428960683413,
+            "size_xyz_m_after_runtime_normalization": [
+              1.6192735075950624,
+              1.8,
+              0.8947997868061066
+            ],
+            "rotation_y_radians": -1.5707963267948966,
+            "pivot": "runtime bottom center",
+            "position": [
+              1.55,
+              0,
+              2.12
+            ]
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "06_showcase_zone",
+      "title": "内部作品展示区",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "2c13d6cc-55af-4635-817f-a4bba1cb7b7c",
+      "completed": true,
+      "credits_consumed": 20,
+      "estimated_credits": 20,
+      "generation_credits": 20,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/06-showcase-zone-2c13d6cc/model.glb",
+        "sha256": "68779ddc414d295866e8c13a992a63ddd29ab93d7379019c2c93469eb3311405",
+        "bytes": 2977732
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/06-showcase-zone-2c13d6cc/preview.png",
+        "sha256": "b36641123c4b6c022e9f89da5272e346a808385d5baf4d20d3c774d263cc8412",
+        "bytes": 349534
+      },
+      "task_record": "assets/tripo/raw/tripo-out/06-showcase-zone-2c13d6cc/task.json",
+      "plan_record": "assets/tripo/records/06_showcase_zone.dry-run.json",
+      "processed_output": {
+        "path": "assets/tripo/processed/06_showcase_zone.glb",
+        "sha256": "7449f2f5f1cf70e9380efe52a1e2725302df54adef934ffe266e0e2cecb2f61d",
+        "bytes": 3334704
+      },
+      "output_path": "assets/tripo/processed/06_showcase_zone.glb",
+      "review_notes": [
+        "Recognizable generated robots, loose shelf objects and upper-middle red prop removed from real source geometry.",
+        "9132 clipped retained source triangles plus 112 locally authored footprint-cap triangles; no replacement project models.",
+        "18 open/branched cut contours, some flat cut-footprint patches and source baked shadows remain."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/06_showcase_zone.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 7797,
+          "triangle_count_sum_primitives": 9644,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.2866075149287184,
+            -0.8999999998373909,
+            -1.0128986835479736
+          ],
+          "max": [
+            0.2866075149287184,
+            0.8999999998373909,
+            1.0128986835479736
+          ],
+          "size_xyz": [
+            0.5732150298574368,
+            1.7999999996747817,
+            2.0257973670959473
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.8999999998373909,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "5cb056ed0f97790780cfca364264d4fdceecec5a185b6bfeda8e3e87c5247dc1",
+          "4323ff867f741abbe2273493b1571d2b43c37ab5579d8f0a2d3b45ba1a2fdea1",
+          "3f98f37d8ebac67d0ccdeeb94ab7e7a487866f4ad302d317b2812d59a035b158"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "processed_report": "assets/tripo/records/06_showcase_zone.processed.qa.json",
+        "processing_record": "assets/tripo/records/06_showcase_zone.processed.record.json",
+        "processed_structure_status": "passed_implemented_checks",
+        "processed_summary": {
+          "mesh_count": 1,
+          "primitive_count": 2,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 7635,
+          "triangle_count_sum_primitives": 9244,
+          "degenerate_triangles": 0,
+          "material_count": 2,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 12
+        },
+        "browser_review": {
+          "status": "passed_for_interactive_scene_with_recorded_limitations",
+          "views": [
+            "front +Z",
+            "three-quarter from +X/+Z"
+          ],
+          "glb_loaded": true,
+          "source_textures_rendered": true,
+          "observed": [
+            "Three recognizable generated robots are removed",
+            "Loose shelf products and the upper-middle red prop are removed",
+            "Original outer frame, interior dividers, back panels, shelves and bottom lockers remain",
+            "No replacement cabinet or project models were introduced"
+          ],
+          "limitations": [
+            "Small flat cut-footprint patches and original baked contact shadows remain on some shelves",
+            "Generated cabinet panels retain their original dents/irregularities",
+            "18 open or branched cut contours remain; this is not a watertight manufacturing asset"
+          ],
+          "screenshots": [
+            "assets/tripo/records/06_showcase_zone.processed.front.jpg",
+            "assets/tripo/records/06_showcase_zone.processed.oblique.jpg"
+          ]
+        },
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "display_content_cleanup_required",
+          "observations": [
+            "Standalone dark metal display cabinet with three columns and three shelf rows, lavender/cyan/amber accents, and low base cupboards.",
+            "The role is clearly a display cabinet, distinct from the tools workbench asset."
+          ],
+          "issues": [
+            "The approved text brief asked for empty hero-project niches, but three invented robot figures occupy the upper row and small objects occupy several lower niches. They must be removed or held from final acceptance; they are not verified PAN/FlipFate/BMO models.",
+            "Cabinet, shelf contents and glass/front surfaces are merged into one opaque mesh/material; named showcase and individual display nodes are absent."
+          ],
+          "unverified": [
+            "Rear surfaces",
+            "Interior topology and true shelf cavities",
+            "Front +Z orientation",
+            "Final scene scale/pivot"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "processed GLB",
+        "axis": "Y-up, source +X rotated to +Z",
+        "pivot": "bottom center",
+        "processed_size_xyz_m": [
+          2.200000047683716,
+          2.3499999046325684,
+          0.6000000238418579
+        ],
+        "manifest_target_size_xyz_m": [
+          2.2,
+          2.35,
+          0.6
+        ],
+        "runtime_placement": {
+          "position": [
+            0.25,
+            0,
+            -0.75
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": 0,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "01_garage_shell/interior-floor",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        },
+        "source_glb_unchanged": true,
+        "method": "Baked rotation and per-axis fit to 2.2 x 2.35 x 0.6m"
+      },
+      "local_processing": {
+        "tool": "tools/clean_showcase_asset.py",
+        "record": "assets/tripo/records/06_showcase_zone.processed.record.json",
+        "additional_paid_tasks": 0
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/06_showcase_zone.glb",
+          "sha256": "7449f2f5f1cf70e9380efe52a1e2725302df54adef934ffe266e0e2cecb2f61d",
+          "bytes": 3334704
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "processed GLB",
+            "axis": "Y-up, source +X rotated to +Z",
+            "pivot": "bottom center",
+            "processed_size_xyz_m": [
+              2.200000047683716,
+              2.3499999046325684,
+              0.6000000238418579
+            ],
+            "manifest_target_size_xyz_m": [
+              2.2,
+              2.35,
+              0.6
+            ],
+            "runtime_placement": {
+              "position": [
+                1.8,
+                0,
+                -0.4
+              ],
+              "rotationY": -1.5707963267948966
+            },
+            "source_glb_unchanged": true,
+            "method": "Baked rotation and per-axis fit to 2.2 x 2.35 x 0.6m"
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "07_tools_zone",
+      "title": "内部工具创作区",
+      "state": "generated_success_visual_rejected",
+      "generation_status": "success",
+      "task_id": "5cdd8463-4306-4ab8-b4a4-376985d5737f",
+      "completed": true,
+      "credits_consumed": 30,
+      "estimated_credits": 30,
+      "generation_credits": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/07-tools-zone-5cdd8463/model.glb",
+        "sha256": "18546d3a6e48f924801c1b5b7e1553a0b55b95e7db3a03524966e0d64dfbb161",
+        "bytes": 3825480
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/07-tools-zone-5cdd8463/preview.png",
+        "sha256": "62b48915b053fe5626a6f8a53126b5ed0a6361f6041fbe10c45f3097182f4cc7",
+        "bytes": 184702
+      },
+      "task_record": "assets/tripo/raw/tripo-out/07-tools-zone-5cdd8463/task.json",
+      "plan_record": "assets/tripo/records/07_tools_zone.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/07-tools-zone-5cdd8463/model.glb",
+      "review_notes": [
+        "Tripo generation completed successfully and consumed 30 credits; structural parsing and texture decoding passed.",
+        "Large central worktop/backboard region is missing, with unsupported upper fragments in the provider preview; visually rejected.",
+        "Excluded from website integration, no placeholder substitute and no automatic paid retry."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/07_tools_zone.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 14412,
+          "triangle_count_sum_primitives": 16521,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.200089066408621,
+            -0.24999999328526634,
+            -0.46954581141471863
+          ],
+          "max": [
+            0.200089066408621,
+            0.24999999328526634,
+            0.46954581141471863
+          ],
+          "size_xyz": [
+            0.400178132817242,
+            0.4999999865705327,
+            0.9390916228294373
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.24999999328526634,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "c55fee9c8c6ffa38b7088abfbcea5bb2723e38c05760e6a6e8bd7c8bb215ecf8",
+          "c5e57aa3d717814cc5a745a122705e5a8fed52d1cafc1dbde59f7d469821592b",
+          "51169eab6c080a6400db652de548363dc9b1bbc6162d09d954527bbdece3beff"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "generated_visual_rejected",
+          "observations": [
+            "Actual output contains a left equipment desk/tower, right red-drawer instrument section, stool and some warm tool lighting.",
+            "Generic instrument screens and hand tools resemble portions of the input reference."
+          ],
+          "issues": [
+            "A very large central section of the worktop/backboard is absent; the intended continuous workbench is broken into left/right sections.",
+            "Upper tool rows and a lamp/shelf section appear suspended without coherent support in the provider preview.",
+            "The broad missing region is not a minor pivot or scale issue; a complete modular tool-creation zone has not been visually delivered.",
+            "Tiny monitor graphics are invented/illegible and must not identify specific user-owned equipment."
+          ],
+          "unverified": [
+            "Back and occluded surfaces",
+            "Connectedness of the visible floating fragments",
+            "Front +Z orientation",
+            "Final scene scale/pivot"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "not applied: visually rejected raw asset is not integrated",
+        "manifest_target_size_xyz_m": [
+          2.4,
+          2.3,
+          0.8
+        ]
+      },
+      "visual_status": "rejected",
+      "site_integration": {
+        "eligible": false,
+        "status": "excluded_visual_rejection",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": null,
+        "configuration_status_snapshot": "rejected"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "not applied: visually rejected raw asset is not integrated",
+            "manifest_target_size_xyz_m": [
+              2.4,
+              2.3,
+              0.8
+            ]
+          },
+          "configuration_status_snapshot": "failed"
+        }
+      ]
+    },
+    {
+      "asset_id": "08_street_lamp",
+      "title": "门口路灯",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "b369cdad-33bf-4cea-916a-42822d021d60",
+      "completed": true,
+      "credits_consumed": 30,
+      "estimated_credits": 30,
+      "generation_credits": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/08-street-lamp-b369cdad/model.glb",
+        "sha256": "edeae357d10ce8917eb2b482e77bbd636616feac1657f48ce95322c5e8edb13f",
+        "bytes": 2412956
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/08-street-lamp-b369cdad/preview.png",
+        "sha256": "6b80f0ca4dc6bf02233804207d5ee7ff5d6d50f2eb0bccffe9c03a9354d0382e",
+        "bytes": 100789
+      },
+      "task_record": "assets/tripo/raw/tripo-out/08-street-lamp-b369cdad/task.json",
+      "plan_record": "assets/tripo/records/08_street_lamp.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/08-street-lamp-b369cdad/model.glb",
+      "review_notes": [
+        "Single source mesh/material; independent lamp emission is not established.",
+        "Small generated sticker marks remain; technical preview does not certify rear/underside details."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/08_street_lamp.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 3521,
+          "triangle_count_sum_primitives": 4628,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.8206559121608734,
+            -1.5,
+            -0.6971923112869263
+          ],
+          "max": [
+            0.8206559121608734,
+            1.5,
+            0.6971923112869263
+          ],
+          "size_xyz": [
+            1.6413118243217468,
+            3,
+            1.3943846225738525
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -1.5,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "7c317f9b2952c3ab3f74bf6f5f2e4545ea5cb3a21fb6a87e07e4a87020c73fbe",
+          "379d9989387747c91a23d84594041ed08a7cb7e42a4ed48b96ca3cac016e942d",
+          "177730ee1235013f0198db784848341fcea0fac718adc404c8794131cef502ee"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "main_appearance_matches_postprocess_required",
+          "observations": [
+            "A tall warm rust/orange industrial single-arm streetlamp with support struts and low service fixtures matches the reference silhouette.",
+            "The main pole, lamp head and heavy base appear present in the single preview."
+          ],
+          "issues": [
+            "Pole, lamp head and low fixtures are merged into one material/mesh; independent lamp emission is not established.",
+            "Small white/red sticker-like marks on the pole are not readable accurate signage."
+          ],
+          "unverified": [
+            "Rear surfaces",
+            "Actual lamp underside geometry",
+            "Front +Z orientation",
+            "Final scene scale/pivot",
+            "Emission versus baked colour"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "website runtime only; raw GLB is unchanged",
+        "method": "uniform-height",
+        "target_height_m": 2.8,
+        "uniform_scale": 0.9333333333333332,
+        "size_xyz_m_after_runtime_normalization": [
+          1.3014256477355957,
+          2.8,
+          1.5318910360336302
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "pivot": "runtime bottom center",
+        "position": [
+          -2.95,
+          0,
+          1.8
+        ],
+        "runtime_placement": {
+          "position": [
+            -2.95,
+            0,
+            1.8
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": -1.5707963267948966,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/08_street_lamp.glb",
+          "sha256": "edeae357d10ce8917eb2b482e77bbd636616feac1657f48ce95322c5e8edb13f",
+          "bytes": 2412956
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "website runtime only; raw GLB is unchanged",
+            "method": "uniform-height",
+            "target_height_m": 2.8,
+            "uniform_scale": 0.9333333333333332,
+            "size_xyz_m_after_runtime_normalization": [
+              1.3014256477355957,
+              2.8,
+              1.5318910360336302
+            ],
+            "rotation_y_radians": -1.5707963267948966,
+            "pivot": "runtime bottom center",
+            "position": [
+              -2.75,
+              0,
+              1.5
+            ]
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "09_trash_bin",
+      "title": "门口垃圾桶",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "1ae8df17-06d6-4fc6-a7f2-72f64265c855",
+      "completed": true,
+      "credits_consumed": 30,
+      "estimated_credits": 30,
+      "generation_credits": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/09-trash-bin-1ae8df17/model.glb",
+        "sha256": "fecc8578fd6f8965e5ac9384b9919cf0653ed1c8528e8af447e4649096588a8e",
+        "bytes": 2827064
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/09-trash-bin-1ae8df17/preview.png",
+        "sha256": "50502cf0e139696075aec857e8a1a62015aa641b766f15aca2946d0bf9ffa79c",
+        "bytes": 247383
+      },
+      "task_record": "assets/tripo/raw/tripo-out/09-trash-bin-1ae8df17/task.json",
+      "plan_record": "assets/tripo/records/09_trash_bin.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/09-trash-bin-1ae8df17/model.glb",
+      "review_notes": [
+        "Source includes fused ground-like base/jagged fragments and garbled small lettering.",
+        "Body/lid remain merged; technical preview does not imply an operable lid."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/09_trash_bin.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 3643,
+          "triangle_count_sum_primitives": 3761,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.4831247998525612,
+            -0.6000000238418579,
+            -0.49817353082392657
+          ],
+          "max": [
+            0.4831247998525612,
+            0.6000000238418579,
+            0.49817353082392657
+          ],
+          "size_xyz": [
+            0.9662495997051224,
+            1.2000000476837158,
+            0.9963470616478531
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.6000000238418579,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "ca7dcb60a5393f2dc404216087d06b890ecdfe940e613a784644f315a039a239",
+          "a0c063801d92765c33f6f61b875e714595ac8b5210dbb9f8bc96abc044a952e9",
+          "3a32ba7f62c1e0a5cf8448b6fda0f996e3a17c8418455ae5046007651f0791b8"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "main_appearance_matches_cleanup_required",
+          "observations": [
+            "Weathered teal recycling bin with orange rim/handles and recycling emblem matches the cropped reference.",
+            "The main upright bin silhouette and lid-like top are visible."
+          ],
+          "issues": [
+            "White lettering below the recycling mark is garbled and is not an accurate authored label.",
+            "A ground-like base sheet and jagged side/bottom fragments are fused into the asset; remove unintended street fragments before placing it on the separate street base.",
+            "Bin lid/body are merged into one mesh/material; no independent lid node."
+          ],
+          "unverified": [
+            "Back surfaces",
+            "Geometry of jagged fragments",
+            "Front +Z orientation",
+            "Final scene scale/pivot"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "website runtime only; raw GLB is unchanged",
+        "method": "uniform-height",
+        "target_height_m": 0.95,
+        "uniform_scale": 0.7916666352086609,
+        "size_xyz_m_after_runtime_normalization": [
+          0.7887747257947921,
+          0.95,
+          0.7649475693702698
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "pivot": "runtime bottom center",
+        "position": [
+          -2.45,
+          0,
+          0.25
+        ],
+        "runtime_placement": {
+          "position": [
+            -2.45,
+            0,
+            0.25
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": -1.5707963267948966,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/09_trash_bin.glb",
+          "sha256": "fecc8578fd6f8965e5ac9384b9919cf0653ed1c8528e8af447e4649096588a8e",
+          "bytes": 2827064
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "website runtime only; raw GLB is unchanged",
+            "method": "uniform-height",
+            "target_height_m": 0.95,
+            "uniform_scale": 0.7916666352086609,
+            "size_xyz_m_after_runtime_normalization": [
+              0.7887747257947921,
+              0.95,
+              0.7649475693702698
+            ],
+            "rotation_y_radians": -1.5707963267948966,
+            "pivot": "runtime bottom center",
+            "position": [
+              -2.6,
+              0,
+              0.5
+            ]
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "10_utility_cabinet",
+      "title": "街边电箱",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "79c20750-5f2b-4e8f-bf11-b39338c883f4",
+      "completed": true,
+      "credits_consumed": 20,
+      "estimated_credits": 20,
+      "generation_credits": 20,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/10-utility-cabinet-79c20750/model.glb",
+        "sha256": "29534a8675f8efea6545b4b183964bda853c565e3c70e40bdb57fac6c293ae11",
+        "bytes": 3197780
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/10-utility-cabinet-79c20750/preview.png",
+        "sha256": "2491a4589ebe4d3a795811a2594d77177bc33cc8fd2d236cd1d3e3cd65c29049",
+        "bytes": 180895
+      },
+      "task_record": "assets/tripo/raw/tripo-out/10-utility-cabinet-79c20750/task.json",
+      "plan_record": "assets/tripo/records/10_utility_cabinet.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/10-utility-cabinet-79c20750/model.glb",
+      "review_notes": [
+        "Small generated unreadable labels remain in source textures.",
+        "Door/hinges/body remain one source mesh; no independent opening door is claimed."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/10_utility_cabinet.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 4078,
+          "triangle_count_sum_primitives": 4958,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.2172524631023407,
+            -0.5,
+            -0.20570428669452667
+          ],
+          "max": [
+            0.2172524631023407,
+            0.5,
+            0.20570428669452667
+          ],
+          "size_xyz": [
+            0.4345049262046814,
+            1,
+            0.41140857338905334
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.5,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "1419f373e6f8b123b64488ffc0a73d980a071b91d93aa1c95cdde0253fbe34a4",
+          "b1157b2b780b565d994385152b5521645d98c6e336360f325210e6ef4a5ec021",
+          "a72e5f00ddcf844779d90a0f720393dfd284d6c1d41b6ce799d70aa991e1eebe"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "main_appearance_matches_label_cleanup_required",
+          "observations": [
+            "Tall narrow weathered dark steel utility cabinet with front vents, handles, hinges and access panel.",
+            "No invented human portrait or clear cat-head brand symbol is visible; the basic industrial utility role matches the text brief."
+          ],
+          "issues": [
+            "The approved text asked for blank label/graffiti placeholders, but several front stickers contain invented, unreadable lettering and symbols; replace or clean these.",
+            "Door, hinges and cabinet are merged into one mesh/material; named independent utility door/body nodes are absent."
+          ],
+          "unverified": [
+            "Back surface",
+            "Front +Z orientation",
+            "Final scene scale/pivot"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "website runtime only; raw GLB is unchanged",
+        "method": "uniform-height",
+        "target_height_m": 1.65,
+        "uniform_scale": 1.65,
+        "size_xyz_m_after_runtime_normalization": [
+          0.678824146091938,
+          1.65,
+          0.7169331282377243
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "pivot": "runtime bottom center",
+        "position": [
+          2.35,
+          0,
+          0.3
+        ],
+        "runtime_placement": {
+          "position": [
+            2.35,
+            0,
+            0.3
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": -1.5707963267948966,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/10_utility_cabinet.glb",
+          "sha256": "29534a8675f8efea6545b4b183964bda853c565e3c70e40bdb57fac6c293ae11",
+          "bytes": 3197780
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "website runtime only; raw GLB is unchanged",
+            "method": "uniform-height",
+            "target_height_m": 1.65,
+            "uniform_scale": 1.65,
+            "size_xyz_m_after_runtime_normalization": [
+              0.678824146091938,
+              1.65,
+              0.7169331282377243
+            ],
+            "rotation_y_radians": -1.5707963267948966,
+            "pivot": "runtime bottom center",
+            "position": [
+              2.65,
+              0,
+              0
+            ]
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "11_tree",
+      "title": "街边小树",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "f83af78c-7c37-48c0-8de7-e2706f983982",
+      "completed": true,
+      "credits_consumed": 20,
+      "estimated_credits": 20,
+      "generation_credits": 20,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/11-tree-f83af78c/model.glb",
+        "sha256": "2b96429f4aca028b01c8375d124734a64d78ca80b612a09da46d3717399f56b1",
+        "bytes": 3468976
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/11-tree-f83af78c/preview.png",
+        "sha256": "6092d4a027e520fba7fa702b8246d26b8190e44171fbd04e19781fa4a19305b6",
+        "bytes": 245062
+      },
+      "task_record": "assets/tripo/raw/tripo-out/11-tree-f83af78c/task.json",
+      "plan_record": "assets/tripo/records/11_tree.dry-run.json",
+      "processed_output": {
+        "path": "assets/tripo/processed/11_tree.glb",
+        "sha256": "327f4b49457796446156c363efc260622a197ed28810fc06cd757ca14865c5c7",
+        "bytes": 3440736
+      },
+      "output_path": "assets/tripo/processed/11_tree.glb",
+      "review_notes": [
+        "Removed 582 unwanted sign faces while preserving the 243-face attached leaf cluster and all other real tree components.",
+        "8729 original triangles remain; nine cut edges at the sign/leaf contact are not capped.",
+        "Uniform height 2.2m preserves source proportions; width/depth are about 1.9561/1.6588m."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/11_tree.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 11590,
+          "triangle_count_sum_primitives": 9311,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.4524030269147161,
+            -0.6000000238418579,
+            -0.5334718320159837
+          ],
+          "max": [
+            0.4524030269147161,
+            0.6000000238418579,
+            0.5334718320159837
+          ],
+          "size_xyz": [
+            0.9048060538294322,
+            1.2000000476837158,
+            1.0669436640319674
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.6000000238418579,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "a69099762a977e7a114e232902eea35229b8ed6daa85269e88a4a7c99bf882ae",
+          "c6e606704951fed6f5f880082ea1d73159f4e81e6af34f7f55f4c03092f17635",
+          "2c280a394e5d023a0bf008dc0f44f6c2626e1e4cf8a136ee93890db5e8b5120e"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "processed_report": "assets/tripo/records/11_tree.processed.qa.json",
+        "processing_record": "assets/tripo/records/11_tree.processed.record.json",
+        "processed_structure_status": "passed_implemented_checks",
+        "processed_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 10927,
+          "triangle_count_sum_primitives": 8729,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "browser_review": {
+          "status": "passed_local_sign_removal_review",
+          "method": "Real Three.js GLB viewer on localhost:8765, with sign-only and leaf-preserving tree exported separately",
+          "views_checked": [
+            "three-quarter",
+            "front +Z",
+            "back",
+            "right"
+          ],
+          "observations": [
+            "Removed-only model visibly contains the complete two-post metal sign and no leaves.",
+            "Cleaned tree retains the original trunk, branches, canopy and concrete planter; the front sign and its lettering are absent.",
+            "The attached 243-face leaf cluster is retained rather than discarding its whole 825-face source component.",
+            "Three embedded textures load correctly; bottom center is zero and final height is 2.2 metres."
+          ],
+          "screenshot": "assets/tripo/records/11_tree.processed-preview.jpg",
+          "final_scene_placement_not_reviewed": true
+        },
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "extraneous_sign_frame_cleanup_required",
+          "observations": [
+            "Visible branching brown trunk, volumetric dark green leaf clusters and a low square planter fit the text-mode tree requirements.",
+            "The foliage appears spatial rather than a single flat scene billboard in the provider view."
+          ],
+          "issues": [
+            "A large freestanding metal sign frame has been invented in front of the tree, obscuring the trunk and planter; it was not requested and should be removed.",
+            "The invented sign contains garbled lettering despite the no-lettering instruction.",
+            "Tree, leaves, planter and sign are one mesh/material; required named tree components are absent."
+          ],
+          "unverified": [
+            "Rear foliage and leaf thickness",
+            "Ground contact after sign removal",
+            "Front +Z orientation",
+            "Final scene scale/pivot"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "processed GLB",
+        "axis": "Y-up, source +X rotated to +Z",
+        "pivot": "bottom center",
+        "processed_size_xyz_m": [
+          1.9560632705688477,
+          2.200000047683716,
+          1.658811092376709
+        ],
+        "manifest_target_size_xyz_m": [
+          1.35,
+          2.2,
+          1.25
+        ],
+        "runtime_placement": {
+          "position": [
+            -2.35,
+            0,
+            -0.9
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": 0,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        },
+        "source_glb_unchanged": true,
+        "method": "Uniform height 2.2m after source geometry sign removal"
+      },
+      "local_processing": {
+        "tool": "tools/clean_tree_asset.py",
+        "record": "assets/tripo/records/11_tree.processed.record.json",
+        "additional_paid_tasks": 0
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/11_tree.glb",
+          "sha256": "327f4b49457796446156c363efc260622a197ed28810fc06cd757ca14865c5c7",
+          "bytes": 3440736
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "processed GLB",
+            "axis": "Y-up, source +X rotated to +Z",
+            "pivot": "bottom center",
+            "processed_size_xyz_m": [
+              1.9560632705688477,
+              2.200000047683716,
+              1.658811092376709
+            ],
+            "manifest_target_size_xyz_m": [
+              1.35,
+              2.2,
+              1.25
+            ],
+            "runtime_placement": {
+              "position": [
+                -2.6,
+                0,
+                -1.15
+              ],
+              "rotationY": 0
+            },
+            "source_glb_unchanged": true,
+            "method": "Uniform height 2.2m after source geometry sign removal"
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "12_plants_grass",
+      "title": "盆栽与草地模块",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "14dc3618-4de8-4bee-959b-3a807a17bdbb",
+      "completed": true,
+      "credits_consumed": 20,
+      "estimated_credits": 20,
+      "generation_credits": 20,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/12-plants-grass-14dc3618/model.glb",
+        "sha256": "8ff32a33e446cd5718242f28df4957a804233a03ebe001e53f325493f68fdf18",
+        "bytes": 3142236
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/12-plants-grass-14dc3618/preview.png",
+        "sha256": "6e9d90efce662114ff0a706e86139dae8a59733fc7651063413ce2a7484a4bf7",
+        "bytes": 345444
+      },
+      "task_record": "assets/tripo/raw/tripo-out/12-plants-grass-14dc3618/task.json",
+      "plan_record": "assets/tripo/records/12_plants_grass.dry-run.json",
+      "processed_output": {
+        "path": "assets/tripo/processed/12_plants_grass.glb",
+        "sha256": "a931aca508cd09cb0b2e33027b2f043b1302e95eb48691b0635ec92bdc0d0ca3",
+        "bytes": 3208088
+      },
+      "output_path": "assets/tripo/processed/12_plants_grass.glb",
+      "review_notes": [
+        "Original whole kiosk was semantically rejected; only actual botanical source triangles are retained.",
+        "1291 original triangles: 1157 planter/cluster, 122 grass, three 4-triangle leaf pieces; no new geometry.",
+        "34 new open lower edges lie within about 5.1mm of ground, with 2 pre-existing open edges; intended for grounded rendering.",
+        "Small dark/magenta grass fringe remains; uniform 0.8m height gives width/depth about 0.8814/0.7581m."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/12_plants_grass.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 5588,
+          "triangle_count_sum_primitives": 5168,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -0.2108248900134324,
+            -0.17499999726959814,
+            -0.22134914994239807
+          ],
+          "max": [
+            0.2108248900134324,
+            0.17499999726959814,
+            0.22134914994239807
+          ],
+          "size_xyz": [
+            0.4216497800268648,
+            0.3499999945391963,
+            0.44269829988479614
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.17499999726959814,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "6abc3ead9b88611e09bb1159125400f968cbe5ec46ded759dacb05768f6f6f48",
+          "519a7d276e9878784c9646732fcd2cafa927200c8e0fbc763e517262631dbd0e",
+          "fa7dcd5279019a5b290453b73271533d7fd0ed2fb4d20462b2f3ea0171a8fba6"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "processed_report": "assets/tripo/records/12_plants_grass.processed.qa.json",
+        "processing_record": "assets/tripo/records/12_plants_grass.processed.record.json",
+        "processed_structure_status": "passed_implemented_checks",
+        "processed_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 1552,
+          "triangle_count_sum_primitives": 1291,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 8
+        },
+        "browser_review": {
+          "reviewed_at_utc": "2026-10-20T15:53:26.397944+08:00",
+          "review_method": "Actual Three.js browser rendering in the existing local 8765 inspector, with loaded success state and 3 decoded texture objects",
+          "reviewed_glb_sha256": "a931aca508cd09cb0b2e33027b2f043b1302e95eb48691b0635ec92bdc0d0ca3",
+          "reviewed_browser_url": "http://127.0.0.1:8765/?model=models/12-plants-cleaned-candidate.glb",
+          "views": [
+            "three-quarter",
+            "front +Z",
+            "back -Z",
+            "left -X",
+            "right +X"
+          ],
+          "result": "ACCEPTED_FOR_GROUNDED_SCENE_PREVIEW_WITH_LIMITATIONS",
+          "findings": [
+            "Building roof, walls, furniture and platform have been removed.",
+            "The retained rectangular planter has visible complete side walls in four cardinal views.",
+            "The original leafy cluster, trunk, smaller planted clumps and three detached leaves remain textured.",
+            "The original grass patch is retained beside the planter.",
+            "No replacement geometry, plant image or substitute model was created."
+          ],
+          "limitations": [
+            "The extracted base is open underneath: all 34 new boundary edges lie within about 5.1 mm of the ground. This asset is intended to sit on ground, not be viewed from below or 3D printed.",
+            "Two open edges above the base and four nonmanifold edges are inherited source topology; this is not a watertight mesh.",
+            "Small dark/magenta fringe pixels remain along the original grass boundary.",
+            "At uniform height 0.8 m, width/depth are 0.88138/0.75806 m rather than manifest 1.2/0.6 m."
+          ],
+          "user_final_acceptance": false
+        },
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "generated_visual_rejected",
+          "observations": [
+            "Two planted clusters and a small grass patch are visible at the front/sides."
+          ],
+          "issues": [
+            "Most of the generated geometry is an unsolicited roofed kiosk/building with wall panels, canopy, platform and cabinet-like doors.",
+            "The approved prompt explicitly requested only compact planters/shrubs/grass and no building or road; this is the wrong dominant asset type.",
+            "The planted areas could potentially be extracted from the real mesh, but the current complete output does not satisfy an independent plants/grass module."
+          ],
+          "unverified": [
+            "Plant geometry after separation from the kiosk",
+            "Back surfaces",
+            "Front +Z orientation",
+            "Final scene scale/pivot"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "processed GLB",
+        "axis": "Y-up, source +X rotated to +Z",
+        "pivot": "bottom center",
+        "processed_size_xyz_m": [
+          0.8813819289207458,
+          0.800000011920929,
+          0.7580625414848328
+        ],
+        "manifest_target_size_xyz_m": [
+          1.2,
+          0.8,
+          0.6
+        ],
+        "runtime_placement": {
+          "position": [
+            2.35,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_before_triangle_ground_contact",
+          "rotationY": 0,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": "13_street_base",
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations",
+          "final_y": "Computed at runtime from evaluated foot vertices and downward rays against real supporting triangles; not recorded as a fixed zero height."
+        },
+        "source_glb_unchanged": true,
+        "method": "Original botanical triangle subset, uniform height 0.8m"
+      },
+      "local_processing": {
+        "tool": "tools/clean_plants_asset.py",
+        "record": "assets/tripo/records/12_plants_grass.processed.record.json",
+        "additional_paid_tasks": 0
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/12_plants_grass.glb",
+          "sha256": "a931aca508cd09cb0b2e33027b2f043b1302e95eb48691b0635ec92bdc0d0ca3",
+          "bytes": 3208088
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "processed GLB",
+            "axis": "Y-up, source +X rotated to +Z",
+            "pivot": "bottom center",
+            "processed_size_xyz_m": [
+              0.8813819289207458,
+              0.800000011920929,
+              0.7580625414848328
+            ],
+            "manifest_target_size_xyz_m": [
+              1.2,
+              0.8,
+              0.6
+            ],
+            "runtime_placement": {
+              "position": [
+                2.6,
+                0,
+                0.95
+              ],
+              "rotationY": 0
+            },
+            "source_glb_unchanged": true,
+            "method": "Original botanical triangle subset, uniform height 0.8m"
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    },
+    {
+      "asset_id": "13_street_base",
+      "title": "湿地面与路沿模块",
+      "state": "generated_success_scene_preview_with_notes",
+      "generation_status": "success",
+      "task_id": "38eb318a-5bfd-492d-91e0-cdc0e25973f5",
+      "completed": true,
+      "credits_consumed": 30,
+      "estimated_credits": 30,
+      "generation_credits": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/13-street-base-38eb318a/model.glb",
+        "sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21",
+        "bytes": 3420260
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/13-street-base-38eb318a/preview.png",
+        "sha256": "66bdd18c104269cdef3203f1227596d0ce52081e2a8d318f4d7ad6da09896757",
+        "bytes": 157872
+      },
+      "task_record": "assets/tripo/raw/tripo-out/13-street-base-38eb318a/task.json",
+      "plan_record": "assets/tripo/records/13_street_base.dry-run.json",
+      "processed_output": null,
+      "output_path": "assets/tripo/raw/tripo-out/13-street-base-38eb318a/model.glb",
+      "review_notes": [
+        "Generated sidewalk/road/paver regions form one static mesh; named separate road/curb/wet-patch nodes are absent.",
+        "Wet appearance depends on the real ORM material and lighting; no physically measured wetness is claimed."
+      ],
+      "final_user_accepted": false,
+      "qa": {
+        "raw_report": "assets/tripo/records/13_street_base.qa.json",
+        "raw_structure_status": "passed_implemented_checks",
+        "raw_summary": {
+          "mesh_count": 1,
+          "primitive_count": 1,
+          "node_count": 1,
+          "skin_count": 0,
+          "animation_count": 0,
+          "vertex_count_sum_primitives": 4998,
+          "triangle_count_sum_primitives": 7741,
+          "degenerate_triangles": 0,
+          "material_count": 1,
+          "image_count": 3,
+          "images_fully_decoded": 3,
+          "accessors_decoded": 4
+        },
+        "raw_world_bounds": {
+          "min": [
+            -2.0644052028656006,
+            -0.5000000210873381,
+            -1.5134961676966299
+          ],
+          "max": [
+            2.0644052028656006,
+            0.5000000210873381,
+            1.5134961676966299
+          ],
+          "size_xyz": [
+            4.128810405731201,
+            1.0000000421746762,
+            3.0269923353932597
+          ],
+          "center": [
+            0,
+            0,
+            0
+          ],
+          "ground_center_y_up": [
+            0,
+            -0.5000000210873381,
+            0
+          ],
+          "mesh_instances": 1,
+          "units": "glTF meters, without claiming generated scale is physically calibrated"
+        },
+        "raw_texture_image_hashes": [
+          "7e592c7583c53f39c25f16834a1465c3d296fb77165c919c7f233b8a206e0bc2",
+          "2a8b827a90a44476ab84f87a455cd2163396b2d99e72f615a474004d8e07f82d",
+          "4fc4412e898f817df6e0fdbf585a788affa7768a175ca95e305add0e81b210a0"
+        ],
+        "scope": "Implemented data validation and recorded visual checks, not watertight/manufacturing certification",
+        "provider_preview_review": {
+          "source": "Actual Tripo preview.png compared against pack reference and approved mode-specific brief",
+          "status": "main_appearance_matches_shape_review_required",
+          "observations": [
+            "A raised paved curb/sidewalk strip, drain openings, lower road patch and short bollard match the main objects in the reference crop.",
+            "Paving seams, worn curb paint and small street details are visible."
+          ],
+          "issues": [
+            "The lower road portion ends in an irregular wedge-like thin sheet rather than a clean rectangular modular footprint; check or trim the boundary before assembling the scene.",
+            "Sidewalk, curb, road, bollard and wet areas are one mesh/material, with no separate named adjustment nodes.",
+            "Wetness/reflections are not established by the relatively matte provider preview; test the ORM texture under scene lighting instead of assuming baked colour is real reflection."
+          ],
+          "unverified": [
+            "Underside and back edge",
+            "Upper walking surface alignment",
+            "Front +Z orientation",
+            "Final scene size/pivot",
+            "Wet-area roughness response"
+          ],
+          "final_production_approved": false
+        }
+      },
+      "normalization": {
+        "applied_in": "website runtime only; raw GLB is unchanged",
+        "method": "per-axis-static",
+        "target_size_xyz_m": [
+          8.5,
+          0.3,
+          6.6
+        ],
+        "scale_xyz_after_rotation": [
+          2.808067896510118,
+          0.29999998734759764,
+          1.5985233884410242
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "pivot": "runtime bottom center",
+        "position": [
+          0,
+          -0.3,
+          0.6
+        ],
+        "runtime_placement": {
+          "position": [
+            0,
+            -0.3,
+            0.6
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "position_stage": "configured_source_placement_preserved",
+          "rotationY": -1.5707963267948966,
+          "revision": "grounded-v4.2",
+          "applied_in": "website runtime only; raw and processed GLBs unchanged",
+          "ground_contact_source": "static/maker-garage-preview/ground-contact.js",
+          "support_id": null,
+          "qa_status": "passed_scene_preview_checks_with_recorded_limitations"
+        }
+      },
+      "visual_status": "eligible_for_technical_preview_with_recorded_limitations",
+      "site_integration": {
+        "eligible": true,
+        "status": "configured",
+        "configuration_file": "static/maker-garage-preview/assets.json",
+        "file": {
+          "path": "static/maker-garage-preview/models/13_street_base.glb",
+          "sha256": "5a49e4d53a42ab10bf424c580441c19253b814741a6fef5d92f4052842abaa21",
+          "bytes": 3420260
+        },
+        "configuration_status_snapshot": "verified_with_notes",
+        "runtime_revision": "grounded-v4.2"
+      },
+      "normalization_history": [
+        {
+          "scope": "Previously recorded placement before grounded-v4.2; preserved as history",
+          "superseded_by": "grounded-v4.2",
+          "normalization": {
+            "applied_in": "website runtime only; raw GLB is unchanged",
+            "method": "per-axis-static",
+            "target_size_xyz_m": [
+              6.2,
+              0.3,
+              4.7
+            ],
+            "scale_xyz_after_rotation": [
+              2.04823775980738,
+              0.29999998734759764,
+              1.1383424129807294
+            ],
+            "rotation_y_radians": -1.5707963267948966,
+            "pivot": "runtime bottom center",
+            "position": [
+              0,
+              -0.3,
+              0.6
+            ]
+          },
+          "configuration_status_snapshot": "verified_with_notes"
+        }
+      ]
+    }
+  ],
+  "historical_attempts": [
+    {
+      "asset_id": "04_lucky_cat",
+      "state": "generated_success_rejected_art_direction",
+      "generation_status": "success",
+      "task_id": "240c22e7-eac0-42ec-9486-7969d68caf64",
+      "credits_consumed": 30,
+      "raw_output": {
+        "path": "assets/tripo/raw/tripo-out/04-lucky-cat-240c22e7/model.glb",
+        "sha256": "bbc634ac3f1bba2328064f4a82a551d80bc90616ce0ae01cc9f99e446594dacf",
+        "bytes": 2680244
+      },
+      "provider_preview": {
+        "path": "assets/tripo/raw/tripo-out/04-lucky-cat-240c22e7/preview.png",
+        "sha256": "0c1b79bf075aad6ea939f783a2b3ae1ba4bbf119d0d6af4d909996a8327695e1",
+        "bytes": 256989
+      },
+      "qa_report": "assets/tripo/records/04_lucky_cat.qa.json",
+      "rig_check_task_id": "3060e44b-f43c-4422-9069-e676a54a4dec",
+      "actual_rig_applied": false,
+      "site_integrated": false,
+      "reason": "Original white lucky cat was superseded by the user-approved blue cyber-cat redesign; preserved as a real historical output, not a current site asset."
+    }
+  ],
+  "active_redesign": {
+    "asset_id": "04_lucky_cat",
+    "reference": "assets/tripo/references/04_cyber_lucky_cat_blue_v6.png",
+    "record": "assets/tripo/records/04_cyber_lucky_cat_redesign.json",
+    "state": "generated_rigged_animated_browser_verified",
+    "generation_task_id": "36e3dca6-efcb-428b-a335-ef2058d6786f",
+    "rig_task_id": "9c588a0c-d933-4d60-908a-b8ad5a5c1b72",
+    "rig_check_task_id": "82ad6d65-9981-4c60-8a5a-c367b1503ff8",
+    "actual_credits": 55,
+    "embedded_clip": "Techland_Beckon",
+    "clip_source": "local_authoring",
+    "clip_playback_review": "passed"
+  },
+  "batch": {
+    "state_record": "assets/tripo/records/remaining-assets.batch.yaml.state.json",
+    "result_record": "assets/tripo/records/remaining-assets.batch.result.json",
+    "offline_verification_record": "assets/tripo/records/remaining-assets.batch.verification.json",
+    "jobs": 10,
+    "success": 10,
+    "failed": 0,
+    "attempts_per_job": 1,
+    "paid_retries": 0,
+    "credit_topups": 0,
+    "total_credits": 250
+  },
+  "site_preview": {
+    "framework": "Docusaurus 3 + React 18; local Three.js 0.170.0 viewer",
+    "branch": "codex/cyber-maker-garage-assets",
+    "route": "/maker-garage-preview/",
+    "zh_route": "/zh-Hans/maker-garage-preview/",
+    "scene_file": "static/maker-garage-preview/scene/index.html",
+    "asset_config": "static/maker-garage-preview/assets.json",
+    "existing_homepage_replaced": false,
+    "merge_performed": false,
+    "deployment_performed": false,
+    "final_user_acceptance": false,
+    "branding_note": "Exact main graffiti and two independently readable Shenzhen faces are mounted on locally authored metal casings, fasteners and supports; the Shenzhen sleeve covers the original generated side plaque. Original GLBs/textures unchanged; remaining tiny generated labels and concept miniatures persist.",
+    "build_status": "passed_en_and_zh_Hans_for_grounded_v4_2",
+    "local_preview_url": "http://127.0.0.1:4173/zh-Hans/maker-garage-preview/",
+    "current_revision": "grounded-v4.2",
+    "scene_route": "/maker-garage-preview/scene/",
+    "legacy_scene_redirect": "static/maker-garage-preview/scene.html",
+    "previous_completed_build": {
+      "revision": "graffiti-v3",
+      "status": "passed_en_and_zh_Hans",
+      "qa_record": "assets/tripo/records/graffiti-v3.qa.json",
+      "historical_only": true
+    },
+    "qa_status": "passed_technical_preview_checks_with_documented_limitations",
+    "qa_record": "assets/tripo/records/grounded-v4.qa.json"
+  },
+  "tests": {
+    "pre_integration_baseline": {
+      "stage": "before_tripo_integration",
+      "branch": "codex/cyber-maker-garage-assets",
+      "typecheck": {
+        "exit_code": 0,
+        "command": "npm run typecheck"
+      },
+      "build": {
+        "preserved_outputs": [
+          "homepage",
+          "blog",
+          "challenge",
+          "docs/projects",
+          "docs/guides",
+          "docs/hackathons"
+        ],
+        "exit_code": 0,
+        "command": "npm run build",
+        "locales": [
+          "en",
+          "zh-Hans"
+        ]
+      },
+      "deployment_performed": false,
+      "generated_assets_validated": false
+    },
+    "post_integration": {
+      "status": "passed_preview_checks_with_documented_limitations",
+      "verified_at": "2026-10-20T08:40:12.5342833Z",
+      "typecheck": {
+        "exit_code": 0,
+        "command": "npm run typecheck",
+        "log": "assets/tripo/records/site-typecheck.log"
+      },
+      "build": {
+        "warnings": [
+          "Existing vscode-languageserver-types dynamic require warning",
+          "Webpack dependency snapshot cache warning",
+          "Docusaurus update-check config access warning"
+        ],
+        "command": "npm run build",
+        "static_data_adjustment": "Showcase placement adjusted after build; assets.json copied to both locale outputs and SHA256 equality verified.",
+        "log": "assets/tripo/records/site-build.log",
+        "exit_code": 0,
+        "locales": [
+          "en",
+          "zh-Hans"
+        ]
+      },
+      "browser_full_scene": {
+        "chinese_page_and_scene": true,
+        "beckoning_and_effect_controls": "enabled and toggled in real browser",
+        "shutter_open_progress": 1,
+        "configured_assets": 13,
+        "status": "passed",
+        "english_scene": true,
+        "actual_loaded_models": 12,
+        "excluded": "07_tools_zone: successful generation but rejected geometry",
+        "screenshot": "assets/tripo/records/garage-final-front.jpg",
+        "shutter_closed_progress": 0
+      },
+      "mobile": {
+        "screenshot": "assets/tripo/records/garage-mobile-page.jpg",
+        "status": "passed_viewport_simulation",
+        "scene_loaded_models": 12,
+        "main_overflow_elements": 0,
+        "viewport": [
+          390,
+          844
+        ],
+        "estimated_material_texture_memory_mib": 50.5,
+        "real_phone_test": false,
+        "max_texture_edge": 512,
+        "main_scroll_width": 382,
+        "main_width": 382
+      },
+      "fallback_and_reduced_motion": {
+        "fatal_parent_notification": "code reviewed; initialization timeout and context loss notify parent",
+        "all_model_failure_outer_page": "not exercised",
+        "reduced_motion": "implemented and source reviewed; OS preference runtime not exercised",
+        "report": "assets/tripo/records/garage-load-recovery.qa.json",
+        "missing_model_and_retry": "passed actual missing-file/HTTP404 recovery without reload"
+      },
+      "preservation": {
+        "deployment_performed": false,
+        "real_routes": [
+          "/",
+          "/blog/",
+          "/challenge/",
+          "/docs/projects/",
+          "/docs/guides/",
+          "/docs/about/"
+        ],
+        "existing_homepage_and_content_diff": "no changes"
+      },
+      "local_preview_url": "http://127.0.0.1:4173/zh-Hans/maker-garage-preview/"
+    },
+    "grounded_v4_2": {
+      "revision": "grounded-v4.2",
+      "status": "passed_technical_preview_checks_with_documented_limitations",
+      "verified_at_utc": "2026-10-21T03:40:44.776Z",
+      "qa_record": "assets/tripo/records/grounded-v4.qa.json",
+      "typecheck": {
+        "status": "passed",
+        "exit_code": 0,
+        "command": "npm run typecheck",
+        "log": "assets/tripo/records/grounded-v4-typecheck.log"
+      },
+      "build": {
+        "status": "passed",
+        "exit_code": 0,
+        "command": "npm run build",
+        "locales": [
+          "en",
+          "zh-Hans"
+        ],
+        "log": "assets/tripo/records/grounded-v4-build.log",
+        "warnings": [
+          "Existing vscode-languageserver-types dynamic require warning",
+          "Webpack dependency snapshot cache warning",
+          "Docusaurus update-check config access warning"
+        ]
+      },
+      "javascript_syntax": {
+        "status": "passed",
+        "command": "node --check (ES module mode)",
+        "files": [
+          "scene.js",
+          "ground-contact.js",
+          "art-direction.js",
+          "night-environment.js"
+        ]
+      },
+      "source_build_parity": {
+        "status": "passed",
+        "source_files": 6,
+        "locale_outputs_per_file": 2,
+        "sha256": [
+          {
+            "file": "scene.js",
+            "source_sha256": "86dedeaa53b3a9ce3be78e847bec30d77eb583500efcb9ff63ffb86cc44159d6",
+            "en_sha256": "86dedeaa53b3a9ce3be78e847bec30d77eb583500efcb9ff63ffb86cc44159d6",
+            "zh_hans_sha256": "86dedeaa53b3a9ce3be78e847bec30d77eb583500efcb9ff63ffb86cc44159d6",
+            "matches": true
+          },
+          {
+            "file": "ground-contact.js",
+            "source_sha256": "405664255ef407a4eebd97281dabae66145e61dbcac22aa6f9b32d140a8bf836",
+            "en_sha256": "405664255ef407a4eebd97281dabae66145e61dbcac22aa6f9b32d140a8bf836",
+            "zh_hans_sha256": "405664255ef407a4eebd97281dabae66145e61dbcac22aa6f9b32d140a8bf836",
+            "matches": true
+          },
+          {
+            "file": "art-direction.js",
+            "source_sha256": "841fceaf76c69bc250c66c1149bd882d9fc7a3bb575e032fdac4ab49464b37c5",
+            "en_sha256": "841fceaf76c69bc250c66c1149bd882d9fc7a3bb575e032fdac4ab49464b37c5",
+            "zh_hans_sha256": "841fceaf76c69bc250c66c1149bd882d9fc7a3bb575e032fdac4ab49464b37c5",
+            "matches": true
+          },
+          {
+            "file": "night-environment.js",
+            "source_sha256": "7ece9116e591bdb892ccc0d8e825c7b66d0e077737b33aff013bcff7e91a55ef",
+            "en_sha256": "7ece9116e591bdb892ccc0d8e825c7b66d0e077737b33aff013bcff7e91a55ef",
+            "zh_hans_sha256": "7ece9116e591bdb892ccc0d8e825c7b66d0e077737b33aff013bcff7e91a55ef",
+            "matches": true
+          },
+          {
+            "file": "assets.json",
+            "source_sha256": "1675f4bea724bb37d2911268516b7e6f5d75219626725613daff59d35c244352",
+            "en_sha256": "1675f4bea724bb37d2911268516b7e6f5d75219626725613daff59d35c244352",
+            "zh_hans_sha256": "1675f4bea724bb37d2911268516b7e6f5d75219626725613daff59d35c244352",
+            "matches": true
+          },
+          {
+            "file": "scene/index.html",
+            "source_sha256": "7a1bcdb3ed76760d3ce7256926556deeb0a2732617f60c508a9199f684e07387",
+            "en_sha256": "7a1bcdb3ed76760d3ce7256926556deeb0a2732617f60c508a9199f684e07387",
+            "zh_hans_sha256": "7a1bcdb3ed76760d3ce7256926556deeb0a2732617f60c508a9199f684e07387",
+            "matches": true
+          }
+        ]
+      },
+      "browser_full_scene": {
+        "status": "passed",
+        "configured_assets": 13,
+        "actual_loaded_models": 12,
+        "expected_excluded_asset": "07_tools_zone: generation succeeded; visual rejection retained",
+        "views": [
+          "front/overview",
+          "left/Shenzhen plaque",
+          "back"
+        ],
+        "shutter": {
+          "real_slat_count": 26,
+          "closed_progress": 0,
+          "open_progress": 1,
+          "fully_closed_and_open_verified": true
+        },
+        "cat_beckoning_toggle_verified": true,
+        "local_effects_toggle_verified": true,
+        "new_independent_scene_console": {
+          "warnings": [],
+          "errors": [],
+          "scope": "Fresh independent desktop scene; not a claim about every embedded page or mobile console"
+        },
+        "screenshots": [
+          "assets/tripo/records/grounded-v4-overview.png",
+          "assets/tripo/records/grounded-v4-shenzhen.png",
+          "assets/tripo/records/grounded-v4-back.png",
+          "assets/tripo/records/grounded-v4-door-closed.png",
+          "assets/tripo/records/grounded-v4-page.png"
+        ]
+      },
+      "mobile": {
+        "status": "passed_scene_and_main_content_viewport_checks_with_documented_issues",
+        "viewport": [
+          390,
+          844
+        ],
+        "actual_loaded_models": 12,
+        "material_texture_count": 44,
+        "max_texture_edge_px": 512,
+        "estimated_material_texture_memory_mib": 53.2,
+        "texture_memory_excludes": "Render targets, geometry and CPU memory",
+        "main_client_width": 382,
+        "main_scroll_width": 382,
+        "main_horizontal_overflow": false,
+        "document_scroll_width": 419,
+        "whole_page_horizontal_overflow": true,
+        "overflow_source": "Existing footer AWS Builder Community long link",
+        "console": {
+          "mutation_observer_errors": 2,
+          "mutation_observer_error_source": "undetermined",
+          "model_errors": 0,
+          "shader_errors": 0,
+          "zero_error_claim": false
+        },
+        "real_phone_test": false,
+        "screenshot": "assets/tripo/records/grounded-v4-mobile.png"
+      },
+      "idempotence": {
+        "status": "passed",
+        "record": "assets/tripo/records/grounded-v4-idempotence.json",
+        "scope": "Two consecutive real cat+street settlement calls with scene.js normalization, real GLTFLoader/SkinnedMesh CPU evaluation and current ground-contact module. Texture image decoding skipped in memory only; not visual acceptance.",
+        "cat_supported_foot_samples": 40,
+        "cat_total_foot_samples": 40,
+        "translation_accumulated": false,
+        "source_geometry_unchanged": true
+      },
+      "preserved_limitations": {
+        "street_ambiguous_upward_surface_edges": 9,
+        "watertight_certification": false,
+        "tools_zone_visual_rejected": true
+      },
+      "prior_passes_are_historical_only": true,
+      "final_user_acceptance": false,
+      "merge_performed": false,
+      "deployment_performed": false
+    }
+  },
+  "quality_holds": [
+    {
+      "asset_id": "07_tools_zone",
+      "generation_status": "success",
+      "visual_status": "rejected",
+      "site_integration": "excluded",
+      "requires": "A complete coherent tool workbench asset or reliable genuine mesh repair, followed by review; no new paid retry authorized automatically."
+    }
+  ],
+  "limitations": [
+    "This is a real-asset technical preview, not final user acceptance of all thirteen requested assets.",
+    "Only the 12 eligible slots can be shown; the tools-zone slot remains unfilled, and it is not merged with the showcase.",
+    "Processed mesh cleanup is local and identified; it is not misreported as a second Tripo generation.",
+    "Generic structural QA does not prove watertightness, manufacturing topology, all hidden surfaces, or complete production art polish."
+  ],
+  "art_direction_v2": {
+    "date": "2026-10-20",
+    "qa_record": "assets/tripo/records/art-direction-v2.qa.json",
+    "new_tasks": 0,
+    "new_credits": 0,
+    "raw_and_static_glb_hashes_unchanged": true,
+    "status": "implemented_pending_user_acceptance",
+    "screenshots": [
+      "assets/tripo/records/garage-polish-v2.jpg",
+      "assets/tripo/records/garage-polish-v2-mobile.jpg"
+    ]
+  },
+  "graffiti_v3": {
+    "date": "2026-10-21",
+    "qa_record": "assets/tripo/records/graffiti-v3.qa.json",
+    "new_tasks": 0,
+    "new_credits": 0,
+    "status": "implemented_pending_user_acceptance",
+    "screenshot": "assets/tripo/records/graffiti-v3-page.jpg"
+  },
+  "grounded_v4_2": {
+    "revision": "grounded-v4.2",
+    "date": "2026-10-21",
+    "recorded_at_utc": "2026-10-21T03:27:06.505Z",
+    "status": "implemented_technical_qa_passed_pending_user_acceptance",
+    "qa_status": "passed_technical_preview_checks_with_documented_limitations",
+    "new_tripo_tasks": 0,
+    "new_credits": 0,
+    "project_total_credits": 385,
+    "raw_glbs_changed": false,
+    "processed_glbs_changed": false,
+    "site_glb_copies_changed": false,
+    "integrity": {
+      "checked_files": 32,
+      "matching_recorded_sha256": 32,
+      "missing": [],
+      "mismatched": [],
+      "scope": "Existing raw, processed and site-copy GLBs; file integrity only, not visual or scene QA"
+    },
+    "implementation_sources": {
+      "ground_contact": "static/maker-garage-preview/ground-contact.js",
+      "asset_configuration": "static/maker-garage-preview/assets.json",
+      "mounted_graphics": "static/maker-garage-preview/art-direction.js"
+    },
+    "grounding": {
+      "method": "Evaluated low-foot vertices, including skin deformation, intersect downward rays with real upward support triangles; maximum contact constraint with 0.002m seating overlap",
+      "foot_sampling_max": 256,
+      "source_triangle_up_normal_threshold": 0.2,
+      "street_assets": [
+        "04_lucky_cat",
+        "05_project_vending",
+        "08_street_lamp",
+        "09_trash_bin",
+        "10_utility_cabinet",
+        "11_tree",
+        "12_plants_grass"
+      ],
+      "showcase_support": "01_garage_shell/interior-floor",
+      "partial_support_and_large_height_variation": "Reported as warnings, not silently accepted",
+      "repeat_call": "Resets configured placement before recomputing; not cumulative"
+    },
+    "current_runtime_parameters": {
+      "street": {
+        "target_size_xyz_m": [
+          8.5,
+          0.3,
+          6.6
+        ],
+        "root_position": [
+          0,
+          -0.3,
+          0.6
+        ],
+        "normalization": "per-axis-static",
+        "previous_size_xyz_m": [
+          6.2,
+          0.3,
+          4.7
+        ]
+      },
+      "shell": {
+        "target_size_xyz_m": [
+          4.5,
+          3.2,
+          3.5
+        ],
+        "root_position": [
+          0,
+          -0.22,
+          0
+        ],
+        "basis": "Reviewed original plinth/interior-floor offset; not claimed to be automatic complete triangle contact"
+      },
+      "shutter": {
+        "root_position": [
+          0.3,
+          -0.02,
+          1.13
+        ],
+        "root_scale": [
+          1,
+          0.71,
+          1
+        ],
+        "processed_glb": "assets/tripo/processed/02_roller_shutter.glb",
+        "processed_glb_unchanged": true,
+        "slat_count": 26,
+        "local_animation_metadata_unchanged": true
+      },
+      "portrait_frame": {
+        "root_position": [
+          -1.65,
+          2.33,
+          1.25
+        ],
+        "height_m": 0.8,
+        "source_glb_unchanged": true,
+        "avatar_added": false
+      }
+    },
+    "local_supports": {
+      "street_underside": {
+        "method": "Bottom and boundary skirt from actual upward street triangles; no replacement top surface",
+        "floor_y": -0.36,
+        "top_surface_added": false,
+        "locally_authored": true,
+        "limitation": "Retains irregular source outline and holes; not watertight certification",
+        "ambiguous_source_edges": 9
+      },
+      "main_sign": {
+        "size_xyz_m": [
+          3.1,
+          0.8,
+          0.055
+        ],
+        "mounting": "Four ray-sampled fascia contacts, short standoffs and rear rails; no bounds-front floating plane",
+        "content": [
+          "PETER PAN’S",
+          "TECHLAND"
+        ]
+      },
+      "shenzhen_sign": {
+        "size_xyz_m": [
+          0.64,
+          1,
+          0.16
+        ],
+        "center_relative_to_shell_ground": [
+          -1.625,
+          1.88,
+          0.505
+        ],
+        "rotation_y_radians": -1.5707963267948966,
+        "face_count": 2,
+        "content": [
+          "深圳",
+          "SHENZHEN"
+        ],
+        "original_side_plaque": "Covered by metal sleeve at inspected native location; original geometry and texture retained",
+        "source_plaque_bounds_relative_to_shell_ground": {
+          "min": [
+            -1.66,
+            1.44,
+            0.23
+          ],
+          "max": [
+            -1.586,
+            2.3,
+            0.78
+          ]
+        },
+        "mounting": "Substrate clamps, rear tabs, borders and fasteners; independent front/back prints avoid mirrored lettering"
+      },
+      "portrait_frame_bracket": {
+        "method": "Measured original bottom-stem clamp and two ray-sampled adjacent jamb braces",
+        "portrait_geometry_modified": false,
+        "avatar_added": false
+      },
+      "provenance": "All new sign casings, brackets, clamps and street underside are explicitly locallyAuthored/supportHardware, never additional Tripo outputs"
+    },
+    "limitations": [
+      "Technical preview checks completed; final user acceptance remains false and no merge or deployment was performed.",
+      "07_tools_zone remains successful generation but visually rejected and excluded; no substitute model.",
+      "Street source retains 9 ambiguous upward-surface edges; local underside support is not a watertight repair.",
+      "Mobile main content fits at 382px, but whole document scrollWidth is 419px due to the existing footer AWS Builder Community link; no whole-page zero-overflow claim.",
+      "Two mobile MutationObserver errors have an undetermined source. No model/shader errors were observed, but zero-console-error or real-phone acceptance is not claimed.",
+      "Original scene geometry imperfections and tiny generated labels outside the corrected signs remain."
+    ],
+    "merge_performed": false,
+    "deployment_performed": false,
+    "final_user_acceptance": false,
+    "verified_at_utc": "2026-10-21T03:40:44.776Z",
+    "qa_record": "assets/tripo/records/grounded-v4.qa.json",
+    "tests_reference": "tests.grounded_v4_2",
+    "screenshots": [
+      "assets/tripo/records/grounded-v4-overview.png",
+      "assets/tripo/records/grounded-v4-shenzhen.png",
+      "assets/tripo/records/grounded-v4-back.png",
+      "assets/tripo/records/grounded-v4-door-closed.png",
+      "assets/tripo/records/grounded-v4-page.png",
+      "assets/tripo/records/grounded-v4-mobile.png"
+    ]
+  },
+  "publication": {
+    "user_request": "把最新的设计同步到我的个人博客吧",
+    "date": "2026-10-21",
+    "status": "published_and_live_verified",
+    "commit": "41d19b8153764b552bbfc8f8d4a739d996d9106b",
+    "pull_request": "https://github.com/peterpanstechland/peterpanstechland.github.io/pull/37",
+    "workflow_run": "https://github.com/peterpanstechland/peterpanstechland.github.io/actions/runs/39575671494",
+    "urls": [
+      "https://peterpanstechland.github.io/zh-Hans/maker-garage-preview/",
+      "https://peterpanstechland.github.io/maker-garage-preview/"
+    ],
+    "homepage_preserved": true,
+    "report": "assets/tripo/records/blog-sync-release.json",
+    "note": "Publication authorization does not change rejected tools-zone or final full-asset acceptance status."
+  }
+}
