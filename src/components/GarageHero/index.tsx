@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Link from '@docusaurus/Link';
-import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import GarageLoader from '../GarageLoader';
 import styles from './styles.module.css';
@@ -39,7 +38,9 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
   const {i18n} = useDocusaurusContext();
   const zh = i18n.currentLocale === 'zh-Hans';
   const text = (en: string, cn: string) => zh ? cn : en;
-  const sceneUrl = useBaseUrl('/maker-garage-preview/scene/');
+  // The scene is a shared static app; only its UI language changes. Keeping one
+  // asset URL lets a visit in either language reuse the same cached models.
+  const sceneUrl = `${i18n.localeConfigs[i18n.defaultLocale].baseUrl}maker-garage-preview/scene/`;
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [attempt, setAttempt] = useState(0);
   const [status, setStatus] = useState<PreviewStatus>('loading');
@@ -147,7 +148,7 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 key={attempt}
                 ref={frameRef}
                 className={styles.frame}
-                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=mobile-garage-v1`}
+                src={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&embedded=1&v=shared-loading-v2`}
                 title={text('Cyber Maker Garage 3D scene', '赛博创客车库 3D 场景')}
                 aria-describedby="garage-controls"
                 loading="eager"
@@ -181,7 +182,7 @@ export default function GarageHero({home = false}: {home?: boolean}): React.JSX.
                 <span>{statusText}</span>
               </div>
               <a className={styles.expandButton}
-                href={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&v=mobile-garage-v1`}
+                href={`${sceneUrl}?lang=${encodeURIComponent(i18n.currentLocale)}&v=shared-loading-v2`}
                 target="_blank" rel="noopener noreferrer"
                 aria-label={text('Open an immersive garage view', '打开沉浸车库视图')}>
                 <span aria-hidden="true">⤢</span>{text('Expand', '展开')}

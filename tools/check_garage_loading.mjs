@@ -1,9 +1,29 @@
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress} from '../static/maker-garage-preview/loading-plan.js';
+import {loadingPhases,runLoadingPhase,optimizedModel,initialLoadingProgress,loadAssetManifests,essentialAssetsReady} from '../static/maker-garage-preview/loading-plan.js';
 const config=JSON.parse(await fs.readFile('static/maker-garage-preview/assets.json','utf8'));
 const manifest=JSON.parse(await fs.readFile('static/maker-garage-preview/optimized-assets.json','utf8'));
 const entries=config.assets.map(config=>({config}));
+assert.equal(essentialAssetsReady([]),false);
+assert.equal(essentialAssetsReady(entries.map(entry=>({...entry,state:'ready'}))),true);
+assert.equal(essentialAssetsReady(entries.map(entry=>({...entry,state:entry.config.id==='01_garage_shell'?'error':'ready'}))),false,'A missing exterior must produce an explicit failure, not wait for readiness forever');
+const requested=[];
+const manifests=await loadAssetManifests(async(url,options)=>{
+  requested.push(url);
+  assert.ok(options.signal instanceof AbortSignal);
+  return {ok:true,json:async()=>url==='./assets.json'?config:manifest};
+});
+assert.deepEqual(manifests,[config,manifest]);
+assert.deepEqual(requested,['./assets.json','./optimized-assets.json']);
+const slowManifests=await loadAssetManifests(async url=>{
+  if(url==='./optimized-assets.json')await new Promise(resolve=>setTimeout(resolve,5500));
+  return {ok:true,json:async()=>url==='./assets.json'?config:manifest};
+});
+assert.equal(slowManifests[1],manifest,'A manifest taking over five seconds must still select optimized previews');
+await assert.rejects(loadAssetManifests(async url=>({ok:url!=='./optimized-assets.json',status:503,json:async()=>config})),/optimized-assets.json.*503/,'An unavailable optimization manifest must not silently fall back to raw models');
+await assert.rejects(loadAssetManifests((_url,{signal})=>new Promise((_,reject)=>{
+  signal.addEventListener('abort',()=>reject(signal.reason),{once:true});
+}),10),{name:'AbortError'},'Unresponsive manifests must stop at the deadline');
 const phases=loadingPhases(entries);
 assert.equal(phases[0].length,7);
 assert.deepEqual(initialLoadingProgress([]),{completed:0,total:0});
