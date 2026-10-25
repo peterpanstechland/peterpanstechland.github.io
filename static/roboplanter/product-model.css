@@ -1,0 +1,21 @@
+.product-section{display:grid;grid-template-columns:minmax(240px,.7fr) minmax(0,1.3fr);gap:64px;align-items:center;scroll-margin-top:24px}
+.product-copy h2{margin-top:22px}
+.product-intro{font-size:15px;line-height:1.95;color:var(--muted)}
+.product-details{list-style:none;padding:0;margin:27px 0 32px;display:grid;gap:14px;font-size:12px}
+.product-details span{color:#859477;font-size:10px;letter-spacing:1px;margin-right:15px}
+.product-boundary{font-size:10px;line-height:1.9;color:var(--muted);margin:24px 0 0}
+.product-display{min-width:0}
+.product-stage{position:relative;isolation:isolate;height:620px;border-radius:20px;background:#e9edde;overflow:hidden;border:1px solid #dbe1d1}
+.product-poster{width:100%;height:100%;object-fit:contain;padding:22px 22px 83px;display:block}
+.product-poster[hidden],.product-stage iframe[hidden],.product-load[hidden],.product-caption button[hidden]{display:none}
+.product-badge{position:absolute;left:20px;top:20px;border:1px solid #b6c3a8;border-radius:20px;background:#f7f8edf0;color:#52613e;font-size:10px;padding:7px 10px;z-index:2;pointer-events:none}
+.product-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#e9edde}
+.product-display.is-active .product-badge{display:none}
+.product-load{position:absolute;bottom:18px;left:20px;right:20px;text-align:center}
+.product-load .button{gap:22px}
+.product-load .button[hidden]{display:none}
+.product-load p{font-size:10px;margin:9px 0 0;color:#617051}
+.product-caption{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:44px;padding:12px 2px 0;font-size:10px;line-height:1.7;color:var(--muted)}
+.product-caption button{border:0;background:transparent;padding:7px 0;text-decoration:underline;text-underline-offset:4px;white-space:nowrap;font-size:11px}
+@media(max-width:1050px){.product-section{gap:30px;grid-template-columns:minmax(220px,.7fr) minmax(0,1.3fr)}.product-stage{height:560px}}
+@media(max-width:760px){.product-section{grid-template-columns:1fr;gap:26px}.product-copy h2{margin-top:17px}.product-intro br{display:none}.product-details{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0;font-size:10px;line-height:1.7}.product-details span{display:block;margin:0 0 4px}.product-boundary{margin-top:16px}.product-stage{height:510px}.product-poster{padding:20px 8px 100px}.product-badge{left:14px;top:14px;font-size:9px}.product-caption{align-items:flex-start}}

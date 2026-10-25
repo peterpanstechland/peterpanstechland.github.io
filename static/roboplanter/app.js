@@ -17,6 +17,7 @@ let lightMode = 0;
 const lightBeads = [];
 let elapsed = 0, frozen = false, waterAt = -100, yaw = 0, targetYaw = 0, drag = null;
 let lastFrame = 0, frameHandle = 0, pausedForVisibility = false;
+let sceneInView = true;
 let glAvailable = false;
 const worldTarget = new THREE.Vector3(0, 1.32, 0);
 const size = { width: 1, height: 1 };
@@ -188,7 +189,15 @@ $('freeze').addEventListener('click',()=>{
   if(frozen){if(particles.material.uniforms.uWater.value<.1)particles.material.uniforms.uWater.value=.7;report('粒子定格 · 视角继续环绕');}
   else report('拖动可旋转 · 网页模拟');
 });
-document.addEventListener('visibilitychange',()=>{pausedForVisibility=document.hidden;if(pausedForVisibility)cancelAnimationFrame(frameHandle);else if(glAvailable){lastFrame=performance.now();frameHandle=requestAnimationFrame(animate);}});
+function syncSceneVisibility(){
+  pausedForVisibility=document.hidden||!sceneInView;
+  cancelAnimationFrame(frameHandle);
+  if(!pausedForVisibility&&glAvailable){lastFrame=performance.now();frameHandle=requestAnimationFrame(animate);}
+}
+document.addEventListener('visibilitychange',syncSceneVisibility);
+if('IntersectionObserver' in window){
+  new IntersectionObserver(([entry])=>{sceneInView=entry.isIntersecting;syncSceneVisibility();},{rootMargin:'160px'}).observe($('experience'));
+}
 
 const dialog=$('poster-dialog');
 function rounded(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();}
