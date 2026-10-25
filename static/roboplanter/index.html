@@ -14,12 +14,13 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c3ed64'/%3E%3Cpath d='M32 42V22M32 30C10 32 10 12 29 20M32 25C51 27 53 8 36 17' fill='none' stroke='%232b392c' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="./style.css?v=20261025-model">
   <link rel="stylesheet" href="./product-model.css?v=20261025-model">
+  <link rel="stylesheet" href="./wiring-lab.css?v=20261025-wiring">
 </head>
 <body>
   <a class="skip" href="#main">跳到内容</a>
   <header class="nav">
     <a class="brand" href="./" aria-label="工位搭子首页"><span class="brandmark" aria-hidden="true">⌁</span><span>工位搭子<small>ROBOPLANTER</small></span></a>
-    <nav aria-label="主导航"><a href="#all-in-one">看看一体机</a><a href="#build">自己动手</a><a class="nav-doc" href="/docs/projects/2026/roboplanter/">打开项目手册 <span aria-hidden="true">↗</span></a></nav>
+    <nav aria-label="主导航"><a href="#all-in-one">看看一体机</a><a href="#wiring-lab">接线实验室</a><a href="#build">自己动手</a><a class="nav-doc" href="/docs/projects/2026/roboplanter/">打开项目手册 <span aria-hidden="true">↗</span></a></nav>
   </header>
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
@@ -63,6 +64,37 @@
         </div>
         <div class="product-caption"><span id="product-hint">先看一眼，再决定要不要转一圈。</span><button id="close-product-model" type="button" hidden>返回预览图</button></div>
       </div>
+    </section>
+    <section class="wiring-section section" id="wiring-lab" aria-labelledby="wiring-title">
+      <div class="wiring-heading"><div><div class="section-kicker">A LITTLE WORKSHOP. A NEW LITTLE FRIEND.</div><h2 id="wiring-title">亲手接一根线，<br>认领一位绿同事。</h2></div><div class="wiring-lead"><p>把插头送回它的小窝，听搭子说声“收到”。<br>认板、接线、验证，一起慢慢来。</p><span>交互教学练习 · 不连接或控制真实硬件</span></div></div>
+      <div class="wiring-lab" id="wiring-app">
+        <div class="wiring-toolbar"><div class="wiring-boards" role="group" aria-label="选择教学板卡"><button type="button" data-wiring-board="xiao" aria-pressed="true">XIAO 控制板</button><button type="button" data-wiring-board="indicator" aria-pressed="false">Indicator 屏幕</button></div><span class="wiring-version" id="wiring-version">V1.0 · 4 Grove + 4 Servo</span><span class="wiring-progress" id="wiring-progress">练习 0 / 9</span></div>
+        <div class="wiring-workspace">
+          <div class="wiring-visual">
+            <div class="wiring-view" id="wiring-view" role="group" aria-label="三维接口教学视图；也可使用下方接口按钮操作">
+              <div class="wiring-buddy" id="wiring-buddy"><span class="wiring-buddy-face" aria-hidden="true">•ᴗ•</span><p id="wiring-buddy-line" aria-live="polite">嗨，先帮我看看水箱还有多少水～</p></div>
+              <div class="wiring-mode" role="group" aria-label="选择探索或接线练习"><button type="button" data-wiring-mode="explore" aria-pressed="true">自由看看</button><button type="button" data-wiring-mode="practice" aria-pressed="false">动手接线</button></div>
+              <div class="wiring-fallback" id="wiring-fallback"><svg viewBox="0 0 600 400" role="img" aria-label="板卡与外设的接线示意"><path d="M85 105 265 65 345 245 165 285Z" fill="#263d30" stroke="#849274"/><path d="M85 105v20l80 180 180-40v-20" fill="#14271e" stroke="#849274"/><path d="m171 109 55-12 25 53-55 12Z" fill="#acb8ac"/><g fill="#e5e3d4"><path d="m110 125 24-5 12 27-24 5Z"/><path d="m135 182 24-5 12 27-24 5Z"/><path d="m160 239 24-5 12 27-24 5Z"/><path d="m267 113 24-5 12 27-24 5Z"/><path d="m291 168 24-5 12 27-24 5Z"/></g><path d="M302 178C370 130 385 270 438 209" stroke="#c4eb72" stroke-width="4" fill="none"/><path d="m421 137 71-15 35 80-71 16Z" fill="#92b287" stroke="#e5e3d4"/><circle cx="470" cy="173" r="16" fill="#273c2d"/></svg><p id="wiring-render-status" role="status">三维教学准备中 · 接口和文字教程始终可用</p></div>
+              <div id="wiring-hotspots" class="wiring-hotspots"></div>
+              <button type="button" class="wiring-plug" id="wiring-plug" aria-label="拿起教学插头，再选择目标接口" hidden><span class="wiring-plug-body" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="wiring-plug-label">抓住我，拖到接口</span></button>
+              <div class="wiring-practice-note" id="wiring-practice-note" hidden><span id="wiring-practice-hint">把插头送到 IIC2</span><button type="button" id="wiring-connect">帮我接好</button><button type="button" id="wiring-retry" hidden>重来</button><button type="button" id="wiring-next-device" hidden>下一件 ↗</button></div>
+              <div class="wiring-scene-caption"><span id="wiring-scene-label">XIAO ROBOT BOARD</span><span>布局简化，实际位置认丝印</span></div>
+            </div>
+            <div class="wiring-view-controls"><span id="wiring-gesture">拖动转一圈 · 点接口认识外设</span><div><button type="button" id="wiring-top" aria-pressed="false">俯视</button><button type="button" id="wiring-explode" aria-pressed="false">拆开看看</button><button type="button" id="wiring-reset">复位视角</button></div></div>
+            <div class="wiring-port-picker" id="wiring-port-picker" role="group" aria-label="选择接口与外设"></div>
+          </div>
+          <aside class="wiring-detail" aria-label="当前接口的接线教程">
+            <div class="wiring-route-meta"><span id="wiring-protocol"></span><span id="wiring-status"></span></div>
+            <h3 id="wiring-device-title"></h3><p id="wiring-device-line" class="wiring-device-line"></p>
+            <p class="wiring-port-address" id="wiring-port-address"></p>
+            <ul class="wiring-pin-list" id="wiring-pin-list" aria-label="信号与供电分配"></ul>
+            <div class="wiring-tutorial"><div class="wiring-step-tabs" role="group" aria-label="接线教学步骤"><button type="button" data-wiring-step="0" aria-pressed="true"><span>01</span>先看供电</button><button type="button" data-wiring-step="1" aria-pressed="false"><span>02</span>再接信号</button><button type="button" data-wiring-step="2" aria-pressed="false"><span>03</span>最后验证</button></div><div class="wiring-step-copy" aria-live="polite"><strong id="wiring-step-title"></strong><p id="wiring-step-text"></p></div><div class="wiring-playback"><button type="button" id="wiring-play" aria-pressed="false">播放三步接线</button><div><button type="button" id="wiring-prev" aria-label="上一步">←</button><span id="wiring-step-count">1 / 3</span><button type="button" id="wiring-next" aria-label="下一步">→</button></div></div></div>
+            <p class="wiring-caution" id="wiring-caution"></p><a class="wiring-doc-link" id="wiring-doc-link" href="/docs/projects/2026/roboplanter/hardware-quickstart">打开完整接线教程 ↗</a>
+          </aside>
+        </div>
+        <div class="wiring-footnote"><p><span class="wiring-pulse-dot" aria-hidden="true"></span>移动光点表示教学路径，不是实时电流或设备回包。</p><a href="/roboplanter/source/docs/wiring.md.txt" target="_blank" rel="noopener">接口依据与完整分配 ↗</a></div>
+      </div>
+      <noscript><p>互动教学需要 JavaScript。请阅读<a href="/docs/projects/2026/roboplanter/hardware-quickstart">硬件接线教程</a>查看完整分配。</p></noscript>
     </section>
     <section class="story section" id="why" aria-labelledby="why-title">
       <div class="section-kicker">01 / A SMALL ACT OF CARE</div>
@@ -108,5 +140,6 @@
   <noscript><p class="noscript">打开 JavaScript 可以体验互动植物。接线、烧录与 YOYO 教程仍可通过上方项目手册阅读。</p></noscript>
   <script type="module" src="./app.js?v=20261025-model"></script>
   <script src="./product-model.js?v=20261025-model" defer></script>
+  <script type="module" src="./wiring-lab.js?v=20261025-wiring"></script>
 </body>
 </html>
