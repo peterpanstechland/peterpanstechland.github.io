@@ -59,7 +59,7 @@ def package(destination: Path) -> dict:
     if not files or not (ROOT / "firmware/xiao/src/main.cpp") in files:
         raise ValueError("Source allowlist is incomplete")
     destination.parent.mkdir(parents=True, exist_ok=True)
-    manifest = {"schema_version": 1, "purpose": "public-reproduction-kit", "credential_policy": "placeholders-only; local config excluded", "files": {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}}
+    manifest = {"schema_version": 1, "purpose": "public-reproduction-kit", "credential_policy": "placeholders-only; local config excluded", "files": {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}}
     with zipfile.ZipFile(destination, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as bundle:
         for path in files:
             write_member(bundle, path.relative_to(ROOT).as_posix(), path.read_bytes())

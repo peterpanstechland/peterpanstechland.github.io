@@ -27,3 +27,7 @@ python3 -m unittest discover -s tests -p test_device_kit.py -v
 `profile.schema.json` 是封闭字段的 JSON Schema；CLI 还检查跨字段约束。`credential_ref` 只允许 `env:变量名` 或 `provisioning:引用名`，不接受秘密值。示例中的 `<credential-ref>` 是文档符号，永远不会被该工具替换或执行。
 
 `supported` 表示仓库中存在对应本地协议实现；`experimental` 表示模板或链路仍待验证；`planned` 表示没有设备驱动实现。三者都不会打开 YOYO 的硬件调用。登记状态只能是 `registered_offline`、`offline_checked`、`retired`，没有声称设备在线或激活的状态。
+
+### XIAO 灯效能力
+
+`xiao-roboplanter-v1` 的 `light.effects` 声明 solid、breath、chase、rainbow，映射至开灯命令的可选参数；关灯不带 effect。HTTP 读取 `light.effect`，BLE 查询保持 `L:enabled:on`。这个 profile 描述软件契约，不代表某台设备已升级或已通过灯带验收；Device Kit 不发送命令。

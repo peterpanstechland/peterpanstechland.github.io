@@ -152,6 +152,9 @@ def validate_profile(profile: Any) -> dict:
                 not profile["adapter"]["runtime_available"]):
             raise ContractError("supported BLE requires UUIDs and an existing runtime adapter")
     for capability in capabilities.values():
+        if "effects" in capability and (capability["id"] != "light" or capability["kind"] != "actuator" or
+                                        not capability["writable"] or "solid" not in capability["effects"]):
+            raise ContractError("light effects require a writable light actuator and the solid default")
         mapping_ids = [item["transport_id"] for item in capability["mappings"]]
         if len(mapping_ids) != len(set(mapping_ids)) or any(item not in transports for item in mapping_ids):
             raise ContractError("capability mappings require unique, declared transport ids")

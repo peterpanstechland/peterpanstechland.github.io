@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 import site
 import sys
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 # Only workspace-local packages are installed. addsitedir also honours pywin32
 # path setup needed by the official SDK's Windows stdio transport.
@@ -27,6 +27,7 @@ RequestId = Annotated[str, Field(min_length=1, max_length=32, pattern=r"^[A-Za-z
     description="Required unique action ID. Keep the same ID when querying; never invent a new ID to retry an unknown outcome.")]
 Duration = Annotated[StrictInt, Field(ge=1, le=30000, description="Pump duration in milliseconds, not millilitres. Bridge default maximum is 3000 ms.")]
 PrintText = Annotated[str, Field(min_length=1, max_length=160, description="Printable ASCII or newline only, at most 160 bytes; no printer control codes.")]
+LightEffect = Literal["solid", "breath", "chase", "rainbow"]
 
 
 def create_server(config: Config | None = None, *, port: int = 8765,
@@ -68,9 +69,14 @@ def create_server(config: Config | None = None, *, port: int = 8765,
         return await bridge.act(request_id, "stop_water")
 
     @server.tool(annotations=action)
-    async def set_light(request_id: RequestId, on: StrictBool) -> dict[str, Any]:
-        """Set the planter light on/off only when requested. Requires a fresh enabled capability. Completion confirms software state, not measured illumination."""
-        return await bridge.act(request_id, "light", on=on)
+    async def set_light(request_id: RequestId, on: StrictBool, effect: LightEffect = None) -> dict[str, Any]:  # type: ignore[assignment]
+        """Set light only when requested. Optional on-only effects: solid (default), breath, chase, rainbow. Requires a fresh enabled capability. Completion confirms software state, not measured illumination."""
+        # None is the Python omission default; the Literal annotation rejects
+        # an explicitly supplied JSON null before reaching this function.
+        values: dict[str, Any] = {"on": on}
+        if effect is not None:
+            values["effect"] = effect
+        return await bridge.act(request_id, "light", **values)
 
     @server.tool(annotations=action)
     async def print_note(request_id: RequestId, text: PrintText) -> dict[str, Any]:

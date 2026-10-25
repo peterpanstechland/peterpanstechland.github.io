@@ -43,6 +43,7 @@
 | --- | --- | --- |
 | 明确浇两秒 | `C\|token\|id\|water\|2000` | 先A:id，再查询原ID；本地计时停泵 |
 | 停泵 | `C\|token\|id\|stop_water` | 最高优先，不等状态查询；D:id或错误 |
+| 指定灯效 | `C\|token\|id\|light\|1\|breath` | 可选第六字段：solid/breath/chase/rainbow；仅开灯可带，查询仍为 L:enabled:on；Skill 当前门禁仍关闭 |
 | 开/关灯 | `C\|token\|id\|light\|1` / `...\|0` | D:id是软件结果，可查询灯状态 |
 | ASCII打印 | `C\|token\|id\|print\|text` | 文本≤160字节，整包≤240；D仅串口发送完 |
 

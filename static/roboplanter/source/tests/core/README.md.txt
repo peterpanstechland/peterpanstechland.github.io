@@ -21,3 +21,12 @@ Coverage includes pump timeout and millis rollover, stable retry results, confli
 ## Indicator presentation model
 
 Run `tools/test-indicator-ui.ps1` on Windows, or compile `tests/core/indicator_ui_test.cpp` with a C++17 compiler. Its 99 assertions cover release-only taps, swipe/tap separation, invalid-touch cancellation, page boundaries, theme overlays, pause/resume/completion, timer wraparound, and theme/navigation independence. It shares `firmware/indicator/include/ui_model.h` with the actual firmware; LCD/touch hardware and networking remain separate bench checks.
+
+## WS2812 frame model
+
+```sh
+g++ -std=c++11 -Wall -Wextra -Werror -pedantic tests/core/light_effects_test.cpp -o /tmp/roboplanter-light-test
+/tmp/roboplanter-light-test
+```
+
+The pure frame model covers effect parsing, green/capped colour output, a one-pixel chase fallback, off, unchanged snapshots, and unsigned timer rollover. Controller tests also check optional light effects, invalid/off fields, and omitted-versus-explicit solid idempotency. These do not validate physical LEDs, electrical current or scheduler timing.

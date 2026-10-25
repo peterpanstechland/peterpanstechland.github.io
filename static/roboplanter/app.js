@@ -12,6 +12,9 @@ const moods = {
 };
 let mood = 'chill';
 let renderer, scene, camera, plant, leafMaterial, pupils = [], eyes = [], particles, halo;
+const lightModes = ['关', '柔绿', '呼吸', '流动', '彩虹'];
+let lightMode = 0;
+const lightBeads = [];
 let elapsed = 0, frozen = false, waterAt = -100, yaw = 0, targetYaw = 0, drag = null;
 let lastFrame = 0, frameHandle = 0, pausedForVisibility = false;
 let glAvailable = false;
@@ -53,6 +56,14 @@ function initScene() {
   const plinthMat = new THREE.MeshStandardMaterial({ color: 0xdbe2ca, roughness: .9 });
   const plinth = mesh(new THREE.CylinderGeometry(1.56, 1.61, .1, 80), plinthMat, scene);
   plinth.position.y = -.015;
+  // Stylised WS2812 ring: visual prototype only, not the real strip layout/count.
+  const beadGeometry = new THREE.SphereGeometry(.044, 12, 8);
+  for (let i = 0; i < 24; i++) {
+    const a = i / 24 * Math.PI * 2;
+    const bead = mesh(beadGeometry, new THREE.MeshBasicMaterial({color:0xaab79b}), scene);
+    bead.position.set(Math.sin(a)*1.43, .053, Math.cos(a)*1.43);
+    bead.scale.y=.48; bead.castShadow=false; lightBeads.push(bead);
+  }
   plant = new THREE.Group(); scene.add(plant);
   const ceramic = new THREE.MeshStandardMaterial({ color: 0xf2d6ae, roughness: .42, metalness: .03 });
   const lipMat = new THREE.MeshStandardMaterial({ color: 0xffebcc, roughness: .4 });
@@ -114,7 +125,18 @@ function initScene() {
   render(0);frameHandle=requestAnimationFrame(animate);
 }
 function resize(){if(!renderer)return;const host=$('scene');size.width=host.clientWidth;size.height=host.clientHeight;renderer.setSize(size.width,size.height);camera.aspect=size.width/size.height;camera.updateProjectionMatrix();render(performance.now());}
-function render(){if(!glAvailable)return;renderer.render(scene,camera);}
+function updateLightPreview(){
+  lightBeads.forEach((bead,i)=>{
+    if(lightMode===0){bead.material.color.setHex(0xaab79b);return;}
+    let level=.65;
+    if(lightMode===2)level=.2+.6*(.5-.5*Math.cos(elapsed*Math.PI/2));
+    if(lightMode===3){const phase=(elapsed*.3)%1;const distance=Math.min(Math.abs(i/24-phase),1-Math.abs(i/24-phase));level=.12+.8*Math.exp(-distance*distance/0.015);}
+    if(lightMode===4)bead.material.color.setHSL((i/24+elapsed*.08)%1,.65,.45);
+    else bead.material.color.setRGB(.28*level,.85*level,.12*level);
+  });
+  if(halo){halo.material.opacity=lightMode===0?.4:.72;halo.material.color.setHex(lightMode===0?0xa0b96d:0x7eac42);}
+}
+function render(){if(!glAvailable)return;updateLightPreview();renderer.render(scene,camera);}
 function animate(now){
   if(!glAvailable||pausedForVisibility)return;
   frameHandle=requestAnimationFrame(animate);
@@ -144,6 +166,13 @@ document.querySelectorAll('[data-mood]').forEach(button=>button.addEventListener
   if(leafMaterial)leafMaterial.color.setHex(moods[mood].color);
 }));
 let waterCooldown = false;
+$('lighting').addEventListener('click',()=>{
+  lightMode=(lightMode+1)%lightModes.length;
+  $('lighting-label').textContent='灯效：'+lightModes[lightMode];
+  $('lighting').setAttribute('aria-label','切换网页灯效预览，当前'+lightModes[lightMode]);
+  report('WS2812 灯效预览 · 不连接真实灯带');
+  render();
+});
 $('water').addEventListener('click',()=>{
   if(waterCooldown)return;
   if(frozen){frozen=false;$('freeze').setAttribute('aria-pressed','false');$('freeze').innerHTML='<span aria-hidden="true">◎</span>定格这一秒';}
@@ -167,7 +196,7 @@ function makePoster(){
   const canvas=$('poster-canvas'),ctx=canvas.getContext('2d');
   ctx.fillStyle='#f6f5ef';ctx.fillRect(0,0,1200,1600);
   ctx.fillStyle='#222a23';ctx.font='700 29px system-ui, sans-serif';ctx.fillText('工位搭子',80,105);
-  ctx.font='500 17px system-ui, sans-serif';ctx.fillText('ROBOPLANTER / '+moods[mood].label,80,143);
+  ctx.font='500 17px system-ui, sans-serif';ctx.fillText('ROBOPLANTER / '+moods[mood].label+' / 灯效预览：'+lightModes[lightMode],80,143);
   ctx.fillStyle='#6d746b';ctx.textAlign='right';ctx.fillText('GROW AT YOUR OWN PACE.',1120,105);ctx.textAlign='left';
   ctx.font='750 74px system-ui, sans-serif';ctx.fillStyle='#222a23';moods[mood].quote.forEach((line,i)=>ctx.fillText(line,80,280+i*100));
   ctx.fillStyle='#e9edde';rounded(ctx,65,440,1070,855,34);

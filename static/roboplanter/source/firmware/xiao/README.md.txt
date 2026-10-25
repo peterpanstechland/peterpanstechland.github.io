@@ -28,7 +28,7 @@ These assignments follow the supplied `XIAO Robot Board_V1.0.pdf`, especially pa
 | Air sensor | GPIO8 / D9 / Servo2 J5 signal | Optional raw ADC only, with the servo disconnected and voltage conditioning if required. Requires `ROBO_AUX_PINS_CONFIRMED`. No AQI or pollutant concentration is calculated. |
 | UV sensor (experimental spare) | GPIO9 / D10 / M2 encoder B | Encoder must be disconnected. Board has a **4.7 kΩ pull-up to 3.3 V**, which loads an analog sensor and changes its transfer curve. Disabled by default; not a validated UV measurement or recommended final wiring. |
 | SHT31 | SDA GPIO5 / D4, SCL GPIO6 / D5 | Optional SHT31 at address 0x44 (configurable). Genuine temperature/humidity and CRC checks; this is not an autodriver for unspecified Grove DHT/AHT sensors. |
-| WS2812 strip | GPIO40 / D13 / Grove RGB | Optional GRB 800 kHz strip, configurable count and limited brightness; fixed green accent light. Not a photosynthetically calibrated grow light. |
+| WS2812 strip | GPIO40 / D13 / Grove RGB | Optional GRB 800 kHz strip, configurable count and limited brightness; solid green, four-second breathing, green chase and twelve-second rainbow modes. Not a photosynthetically calibrated grow light. |
 | Thermal printer | GPIO43 / D6 TX, GPIO44 / D7 RX / UART J10 | Optional hardware UART 8N1, configurable baud. Requires `ROBO_ENABLE_PRINTER` and `ROBO_PRINTER_HARDWARE_CONFIRMED`. Only verified ASCII line text, at most 160 bytes; no Chinese encoding, cutter, paper status or ESC/POS commands. |
 
 On the supplied V1.0 schematic, J13/J14/J5 pin 1 is the signal, pin 2 is NC, pin 3 is Motor5V, and pin 4 is GND. The firmware does not use Motor5V as a sensor supply. I²C J11/J12 pin 1 is SCL GPIO6, pin 2 SDA GPIO5, pin 3 3.3 V, pin 4 GND. UART J10 pin 1 is TX43, pin 2 RX44, pin 3 3.3 V, pin 4 GND. Verify the exact board revision before using these references.
@@ -64,7 +64,7 @@ At boot the board creates `RoboPlanter-XXXX` (MAC-derived suffix), default Wi-Fi
   "uv": {"raw": null, "valid": false},
   "environment": {"temperature_c": null, "humidity_pct": null, "valid": false},
   "pump": {"enabled": false, "on": false, "remaining_ms": 0},
-  "light": {"enabled": false, "on": false},
+  "light": {"enabled": false, "on": false, "effect": "solid"},
   "printer": {"enabled": false, "status": "disabled"},
   "last_command": {"request_id": "", "status": "none", "error": ""}
 }
@@ -78,8 +78,13 @@ Values above show schema/defaults, not a captured device reading. Sensors are sa
 {"request_id":"dose001","action":"water","duration_ms":1000}
 {"request_id":"stop001","action":"stop_water"}
 {"request_id":"light001","action":"light","on":true}
+{"request_id":"light002","action":"light","on":true,"effect":"breath"}
 {"request_id":"print001","action":"print","text":"Plant check: soil 48%"}
 ```
+
+`effect` is optional only for `light` with `on:true`: `solid`, `breath`, `chase` or `rainbow`. Omission means `solid`; `on:false` forbids `effect` and resets mode to `solid`. Omitted/explicit `solid` are the same idempotent request. A different effect under the same ID conflicts. HTTP state adds `light.effect`; old clients may ignore it.
+
+A priority-1 task renders every 40 ms without holding the controller mutex during NeoPixel output. OFF clears the strip synchronously before the command returns; it does not wait for an animation cycle. All modes keep the configured brightness cap. A one-LED chase falls back to breathing. Lights start OFF after reboot, are not persisted, and retain their mode on a network disconnection. Timing and power must still be checked on real hardware. See the [lighting tutorial](../../docs/handbook/ws2812-lighting.md).
 
 Responses are `{ "ok": true|false, "request_id": "...", "status": "accepted"|"completed"|"rejected", "error": "..." }`. Water and queued print return 202/accepted. Stop/light return 200/completed. Invalid or rejected commands return a 4xx response. Printing accepts printable ASCII and LF; raw control codes and unverified multibyte encodings are rejected.
 
@@ -117,6 +122,7 @@ The plain HTTP service is local and has no TLS. The network/token model is inten
 | `C\|token\|id\|water\|1000` | `A:id` or error | Duration in whole milliseconds. |
 | `C\|token\|id\|stop_water` | `D:id` or error | Authenticated stop; available even with actions disabled. |
 | `C\|token\|id\|light\|1` | `D:id` or error | Use `1` for on, `0` for off. |
+| `C\|token\|id\|light\|1\|breath` | `D:id` or error | Optional sixth field: `solid`, `breath`, `chase`, `rainbow`; only with `1`. |
 | `C\|token\|id\|print\|Hello plant` | `A:id` or error | ASCII only; at most 160 text bytes and 240 total request bytes. |
 
 `A` means accepted/pending, `D` means completed. Command errors are `E:id:code`; malformed or unauthenticated messages can return `E:FORMAT`, `E:AUTH`, `E:SIZE`, `E:FIELD`, or `E:BUSY` without an ID. `E:STALE` means the sensor sampling cycle is older than 3 seconds; do not interpret that response as a current measurement. Business codes: `LOCK` actions/token not configured; `OFF` peripheral disabled; `BUSY` pump/printer busy; `ID` reused ID with conflicting payload; `FULL` dedupe cache full; `TIME` invalid duration; `IO` UART transmit failed; `ACT` unknown action; `ARG` invalid fields; `MISS` lookup not found. The characteristic is not readable, so a different client cannot read a previous notification from an unauthenticated read operation.

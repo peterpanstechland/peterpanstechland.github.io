@@ -28,7 +28,8 @@
   },
   "light": {
     "enabled": false,
-    "on": false
+    "on": false,
+    "effect": "solid"
   },
   "printer": {
     "enabled": false,

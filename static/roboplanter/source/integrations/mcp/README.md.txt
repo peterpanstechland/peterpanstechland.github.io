@@ -56,7 +56,7 @@ MCP 地址是 `http://127.0.0.1:8765/mcp`。没有公网监听选项；此 HTTP 
 | `get_planter_state` | 无 | 只读状态，保留 schema 1、`null`、`valid`、`calibrated`、能力开关等设备原始字段 |
 | `water` | `request_id`, `duration_ms` | 明确请求后执行一次定时浇水；单位毫秒，默认上限 3000 ms |
 | `stop_water` | `request_id` | 停泵；不依赖传感器新鲜度或有效性 |
-| `set_light` | `request_id`, `on` | 设置灯开关，`on` 必须是布尔值 |
+| `set_light` | `request_id`, `on`，可选 `effect` | `on` 为布尔值；开灯支持 solid/breath/chase/rainbow，省略为 solid；关灯不传 effect |
 | `print_note` | `request_id`, `text` | 一次打印；当前只接受可打印 ASCII 和换行，最多 160 字节，无 ESC 等控制码 |
 | `get_action_result` | `request_id` | 只读查询原动作结果，不重新执行 |
 

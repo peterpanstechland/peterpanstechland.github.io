@@ -63,6 +63,10 @@
         "unit": {"type": ["string", "null"], "maxLength": 30},
         "readable": {"type": "boolean"},
         "writable": {"type": "boolean"},
+        "effects": {
+          "type": "array", "minItems": 1, "maxItems": 4, "uniqueItems": true,
+          "items": {"type": "string", "enum": ["solid", "breath", "chase", "rainbow"]}
+        },
         "sample": {
           "type": ["object", "null"], "additionalProperties": false,
           "required": ["value_path", "valid_path", "calibrated_path"],

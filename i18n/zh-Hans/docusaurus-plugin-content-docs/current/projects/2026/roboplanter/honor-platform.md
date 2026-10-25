@@ -1,7 +1,7 @@
 ---
 title: "荣耀 YOYO 平台操作"
 description: "从已经上传的独立 Skill 草稿继续，核对配置、检测、手机测试与发布边界。"
-sidebar_position: 4
+sidebar_position: 5
 hide_title: true
 ---
 

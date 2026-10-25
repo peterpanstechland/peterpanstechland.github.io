@@ -269,6 +269,10 @@ class OfficialSdkStdioTests(unittest.IsolatedAsyncioTestCase):
                         await session.initialize()
                         tools = (await session.list_tools()).tools
                         self.assertEqual({t.name for t in tools}, {"get_planter_state", "water", "stop_water", "set_light", "print_note", "get_action_result"})
+                        light = next(tool for tool in tools if tool.name == "set_light")
+                        self.assertNotIn("effect", light.inputSchema["required"])
+                        effect_schema = light.inputSchema["properties"]["effect"]
+                        self.assertEqual(set(effect_schema["enum"]), {"solid", "breath", "chase", "rainbow"})
                         for tool in tools:
                             if tool.name != "get_planter_state":
                                 self.assertIn("request_id", tool.inputSchema["required"])
@@ -277,6 +281,7 @@ class OfficialSdkStdioTests(unittest.IsolatedAsyncioTestCase):
                         samples = [
                             ("get_planter_state", {}), ("water", {"request_id": "sdk-water", "duration_ms": 1000}),
                             ("stop_water", {"request_id": "sdk-stop"}), ("set_light", {"request_id": "sdk-light", "on": True}),
+                            ("set_light", {"request_id": "sdk-effect", "on": True, "effect": "breath"}),
                             ("print_note", {"request_id": "sdk-print", "text": "Hello planter\n"}),
                             ("get_action_result", {"request_id": "sdk-water"}),
                         ]
@@ -287,7 +292,15 @@ class OfficialSdkStdioTests(unittest.IsolatedAsyncioTestCase):
                             self.assertNotIn(TOKEN, json.dumps(result.structuredContent))
                         invalid = await session.call_tool("water", {"request_id": "boolean-duration", "duration_ms": True})
                         self.assertTrue(invalid.isError)
-            self.assertEqual(sum(method == "POST" for method, *_ in calls), 4)
+                        invalid_effect = await session.call_tool("set_light", {"request_id": "invalid-effect", "on": True, "effect": "blink"})
+                        self.assertTrue(invalid_effect.isError)
+                        null_effect = await session.call_tool("set_light", {"request_id": "null-effect", "on": True, "effect": None})
+                        self.assertTrue(null_effect.isError)
+                        invalid_off = await session.call_tool("set_light", {"request_id": "off-effect", "on": False, "effect": "solid"})
+                        self.assertEqual(invalid_off.structuredContent["status"], "rejected")
+            self.assertEqual(sum(method == "POST" for method, *_ in calls), 5)
+            effect_payload = next(payload for method, _, _, payload in calls if method == "POST" and payload["request_id"] == "sdk-effect")
+            self.assertEqual(effect_payload, {"request_id": "sdk-effect", "action": "light", "on": True, "effect": "breath"})
             self.assertTrue(all(token == TOKEN for _, _, token, _ in calls))
         finally:
             mock.shutdown()

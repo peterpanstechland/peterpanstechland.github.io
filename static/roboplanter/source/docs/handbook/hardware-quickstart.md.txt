@@ -319,7 +319,7 @@ export ROBOPLANTER_TOKEN
 "$rp_python" tools/device_cli.py light off
 ```
 
-通过条件是回复 `completed`、`light.on` 与实物一致。当前是固定绿色装饰灯，不是标定过的植物生长灯，也没有调色 API。
+通过条件是回复 `completed`、`light.on` 与实物一致。然后逐项尝试 `light on --effect breath`、`chase`、`rainbow`，每次观察后可用 `light off` 关闭。HTTP 状态的 `light.effect` 应对应所选模式；旧开灯命令仍使用 `solid`。完整模式、BLE 格式和验收见 [WS2812 教程](ws2812-lighting.md)。这是装饰灯，不是标定过的植物生长灯；没有远程任意调色、亮度或速度接口。
 
 ### 8.5 UART 打印机
 

@@ -1,7 +1,7 @@
 ---
 title: "分阶段验收与记录"
 description: "从离线测试到真实设备控制的检查项、失败场景和记录模板。"
-sidebar_position: 10
+sidebar_position: 11
 hide_title: true
 ---
 
@@ -120,6 +120,8 @@ python -m unittest discover -s tests -p test_mcp_bridge.py -v
 | 编号 | 测试条件 | 通过条件 |
 | --- | --- | --- |
 | D07 | 明确开灯，再明确关灯 | 只有灯动作；匹配请求结果；实物亮灭分别确认 |
+| D07a | 逐项选择 solid/breath/chase/rainbow，再在动态效果中关灯 | HTTP effect 匹配；单灯 chase 按约定呼吸；关灯无需等完整周期，实测延迟记录 |
+| D07b | 同 ID 重试默认/solid，随后换模式；关灯带 effect | 默认/solid 不重启；换模式冲突；off+effect 拒绝；复位后默认关灯 |
 | D08 | ASCII 打印一次 | 受理与 UART 发送完成分开记录；实物出纸人工确认；超时不补打 |
 | D09 | 同 ID、同参数的重复包 | 设备只执行一次；重复响应可指向原结果 |
 | D10 | 同 ID、不同参数 | 冲突明确拒绝，不执行替换后的动作 |
