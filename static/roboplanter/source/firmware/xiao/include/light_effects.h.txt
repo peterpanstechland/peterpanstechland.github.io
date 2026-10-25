@@ -39,7 +39,7 @@ inline LightRgb greenLevel(uint8_t level) {
 
 // Pure, allocation-free frame calculation. All channels stay <= 100, and the
 // hardware's existing ROBO_LED_BRIGHTNESS is applied separately by NeoPixel.
-inline LightRgb lightColor(LightEffect effect, uint32_t elapsedMs, size_t index,
+inline LightRgb lightColor(LightEffect effect, uint64_t elapsedMs, size_t index,
                            size_t count) {
   if (count == 0 || index >= count) return {};
   if (effect == LightEffect::Breath) {
@@ -77,14 +77,21 @@ class LightAnimation {
   // OFF canonicalises to solid and never leaves an animation running.
   bool configure(bool on, LightEffect effect, uint32_t now) {
     if (!on) effect = LightEffect::Solid;
-    if (on_ == on && effect_ == effect) return false;
+    if (on_ == on && effect_ == effect) {
+      // Frame updates accumulate short unsigned deltas: an effect that stays on
+      // for more than one millis() wrap also keeps a continuous phase.
+      if (on_) elapsedMs_ += static_cast<uint32_t>(now - updatedMs_);
+      updatedMs_ = now;
+      return false;
+    }
     on_ = on;
     effect_ = effect;
-    startedMs_ = now;
+    elapsedMs_ = 0;
+    updatedMs_ = now;
     return true;
   }
   LightRgb pixel(uint32_t now, size_t index, size_t count) const {
-    return on_ ? lightColor(effect_, static_cast<uint32_t>(now - startedMs_), index, count)
+    return on_ ? lightColor(effect_, elapsedMs_ + static_cast<uint32_t>(now - updatedMs_), index, count)
                : LightRgb{};
   }
   bool on() const { return on_; }
@@ -93,7 +100,8 @@ class LightAnimation {
  private:
   bool on_ = false;
   LightEffect effect_ = LightEffect::Solid;
-  uint32_t startedMs_ = 0;
+  uint32_t updatedMs_ = 0;
+  uint64_t elapsedMs_ = 0;
 };
 
 }  // namespace robo

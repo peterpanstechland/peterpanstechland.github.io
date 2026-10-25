@@ -93,6 +93,13 @@ void stateAndRollover() {
       for (size_t i = 0; i < 5; ++i)
         CHECK(equal(normal.pixel(elapsed, i, 5), wrapped.pixel(now, i, 5)));
     }
+    robo::LightAnimation longRunning;
+    longRunning.configure(true, effect, 0);
+    CHECK(!longRunning.configure(true, effect, std::numeric_limits<uint32_t>::max() - 99));
+    CHECK(!longRunning.configure(true, effect, 100));
+    for (size_t i = 0; i < 5; ++i)
+      CHECK(equal(longRunning.pixel(100, i, 5),
+                  robo::lightColor(effect, (uint64_t{1} << 32) + 100, i, 5)));
   }
 }
 }  // namespace
