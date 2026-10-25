@@ -4,6 +4,8 @@
 
 建议按 **空载只读 → 单个传感器 → 灯 → 打印 → 最后水泵 → 手机 BLE** 的顺序走完，每一步通过后再增加下一件外设。任何未知型号都先保持禁用。手机接入见 [BLE 教程](ble-integration.md)，异常见 [排障手册](troubleshooting.md)。
 
+先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。水位采集/低水位停泵、Indicator Grove 采集属于待实现方案，界面已逐项标注。完整分配见 [接线文档](../wiring.md)。
+
 ## 1. 先确认你拿到的是哪块板
 
 本教程的直接支持对象是：

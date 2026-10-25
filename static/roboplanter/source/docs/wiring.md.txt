@@ -2,6 +2,39 @@
 
 本版面向附件中的 XIAO ESP32-S3 Plus + XIAO Robot Board，以及原款 480×480 SenseCAP Indicator。引脚按附件 V1.0 原理图核对；实物 PCB 修订号、外设型号和电流仍需确认。新的固件不运行原小车电机、舵机或加热器业务。
 
+## 两块板的接口怎么分配
+
+2026-10-25 重新对照套件照片、V1.0 原理图及 Seeed 官方 Indicator Grove 文档。下面区分现有固件的候选接线与新增硬件规划，不代表已经完成实物联调。
+
+### Robot Board：核心采集与执行
+
+附件 V1.0 板明确标为 Grove 扩展的接口是 **4 个：IIC1、IIC2、UART、RGB**。此外有 4 路 Servo 接口和电机/编码器接口；不能将外形相似的插座视作可互换的 Grove 传感器口。若实物有不同数量或丝印，须按该修订版重新核对，不能由这份 V1.0 资料推断。
+
+- **IIC1 / IIC2（J11 / J12）**：共用 GPIO5 SDA、GPIO6 SCL 和 3.3V，是同一条总线的两个插座。候选分配为一路接已确认型号的 I²C 温湿度传感器，另一路接 I²C 水位传感器。现有固件只有可选 SHT31 驱动；DHT 类不能按 I²C 接。水位型号仍待水箱尺寸确定，尚无水位驱动。若采用 Grove Water Level Sensor 10cm，需同时处理 `0x77`、`0x78` 两个地址，不能只检查其中一个；10cm 是检测范围，整板长 133mm，不保证适合当前水箱。
+- **RGB（J7）**：接已确认供电和协议的 WS2812 灯带 DIN；该口有 GPIO40 的板载缓冲输出。灯带电流按灯数与亮度核算。
+- **UART（J10）**：接热敏打印机的 TTL 信号，XIAO TX → 打印机 RX，公共地；打印机另外接 12V，不使用 J10 的 3.3V 给打印机供电。
+- **Servo3（J13）的信号脚**：复用为土壤湿度模拟输入 GPIO1。使用转接线并按传感器规格另取 3.3V，不能把 Servo 电源脚当成 3.3V。
+- **Servo4（J14）的信号脚**：GPIO7 接外置水泵驱动 IN；12V 水泵由独立支路供电，不能直接插到 Servo 或板载 5V 电机输出。
+- **Servo2（J5）的信号脚**：断开原舵机后，可复用 GPIO8 为已核实的 Air Quality v1.3 模拟输入。
+- **UV**：现有 GPIO9 / M2 ENC B 仅为待验证候选，存在上拉负载，默认不接。不要为凑齐接口而直接插入。
+
+核心土壤、水位采集与泵控制集中在 XIAO，方便在屏幕或 Wi-Fi 不可用时仍由本机判断是否允许泵运行。**水位参与禁止启动/运行中停泵的逻辑目前尚未实现**；现有单次限时停泵不能代替低水位保护。新增水位时还需实现标定、读数有效期，以及低水位/传感器故障的处理。
+
+上述 IIC2 水位分配只适用于真正的 I²C 型号。若改用普通 Grove Ultrasonic Ranger，它使用单根 SIG 的触发/回波信号，需要另行核对可用数字 GPIO 并编写测距驱动，不能直接插到 I²C 口套用该分配。
+
+### Indicator：显示与可选环境扩展
+
+原款 Indicator 的两个 Grove 口分别为 **I²C** 与 **可配置数字/模拟口**，都由内部 **RP2040** 管理，并非直接接到用于屏幕的 ESP32-S3：
+
+- **Grove I²C**：RP2040 GPIO20 SDA、GPIO21 SCL。可留作后续照度或温湿度等经过电气和地址核对的 I²C 环境模块；不要把它与 XIAO 的 I²C 总线直接互连。当前首版温湿度仍放在 XIAO，不在两端重复安排同一只传感器。
+- **Grove ADC**：引出 RP2040 GPIO26 / GPIO27；普通单输出 Grove 模块通常只使用其中一根信号线，接线应按具体模块及插座方向确认。可作为后续 UV 模拟输入的候选，避开 Robot Board GPIO9 的既有上拉；仍须核对模块供电及输出电压，模拟输入不得超过 3.3V。若引出两路独立 ADC，必须分别接各自信号，不能用并联 Hub 合并两个模拟输出。
+
+**当前项目 Indicator 固件只实现 Wi-Fi 显示/操作端，没有实现这两个 Grove 口的采集。**使用它们需要补充 RP2040 外设采集、内部 UART/COBS 数据传输及 ESP32-S3 接收展示；若还需让 YOYO 读取这些环境数据，也要补充向设备服务汇总数据的路径。不能仅插上线就宣称已接入。首轮联调可保留这两个口，先完成 XIAO 侧核心功能。
+
+新增器材优先级：匹配实际水箱的水位传感器、必要的 Grove 转接线、合适的外置泵驱动及供电。I²C Hub 只在同一总线的插座不足且地址、电平及负载允许时使用；它不能增加模拟输入通道。若扩展植物光照判断，应另选适合该用途的光照传感器，不用 UV 原始值代替照度或 PAR。
+
+官方依据：[Indicator Grove ADC](https://wiki.seeedstudio.com/SenseCAP_Indicator_RP2040_Grove_ADC/)、[Indicator Grove I²C](https://wiki.seeedstudio.com/SenseCAP_Indicator_RP2040_Grove_IIC/)、[Indicator 双 MCU 与内部通信](https://wiki.seeedstudio.com/SenseCAP_Indicator_Dive_into_the_Hardware/)、[Grove Water Level Sensor](https://wiki.seeedstudio.com/Grove-Water-Level-Sensor/)。Robot Board 依据用户附件 V1.0 原理图第5–6页和套件照片，不用其他通用 XIAO Grove 扩展板的规格替代。
+
 ## XIAO 与 Indicator 的连接
 
 首版不接两块板的 UART 或 I²C。XIAO 建立 2.4 GHz Wi-Fi 热点，Indicator 作为客户端连接，查询 `http://192.168.4.1/api/v1/state` 并发送操作请求。两端使用相同的设备令牌。
