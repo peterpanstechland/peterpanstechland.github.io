@@ -64,6 +64,8 @@ def main(argv: list[str] | None = None) -> int:
     commands.add_parser("stop_water")
     light = commands.add_parser("light")
     light.add_argument("value", choices=("on", "off"))
+    light.add_argument("--effect", choices=("solid", "breath", "chase", "rainbow"),
+                       help="optional effect for light on; omitted means solid")
     printing = commands.add_parser("print")
     printing.add_argument("text")
     args = parser.parse_args(argv)
@@ -82,6 +84,10 @@ def main(argv: list[str] | None = None) -> int:
             payload["duration_ms"] = args.duration_ms
         elif args.action == "light":
             payload["on"] = args.value == "on"
+            if args.effect is not None:
+                if not payload["on"]:
+                    parser.error("--effect is only valid with light on")
+                payload["effect"] = args.effect
         elif args.action == "print":
             payload["text"] = args.text
         print(f"request_id={request_id}", file=sys.stderr)

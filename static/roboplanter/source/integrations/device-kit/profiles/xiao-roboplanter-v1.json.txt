@@ -304,16 +304,22 @@
       "mappings": [
         {
           "transport_id": "local-http",
-          "read": "GET /api/v1/state -> light",
-          "write": "POST /api/v1/command action=light",
+          "read": "GET /api/v1/state -> light.on, light.effect",
+          "write": "POST /api/v1/command action=light; on=true optional effect=solid|breath|chase|rainbow (default solid); on=false forbids effect",
           "result": "GET /api/v1/result?request_id=<id>"
         },
         {
           "transport_id": "honor-ble",
-          "read": "S|<credential-ref>|light",
-          "write": "C|<credential-ref>|<id>|light|<0-or-1>",
+          "read": "S|<credential-ref>|light -> L:enabled:on",
+          "write": "C|<credential-ref>|<id>|light|1[|<effect>] (solid/breath/chase/rainbow); off: C|<credential-ref>|<id>|light|0",
           "result": "R|<credential-ref>|<id>"
         }
+      ],
+      "effects": [
+        "solid",
+        "breath",
+        "chase",
+        "rainbow"
       ]
     },
     {

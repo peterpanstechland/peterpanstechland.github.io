@@ -22,6 +22,7 @@ PAGES = [
     ("index", "工位搭子 · RoboPlanter", "从工位绿植开始，了解产品、硬件、YOYO Skill 与开放设备接入。"),
     ("product-story", "产品故事与设计思考", "用户假设、利他原则、产品任务、体验旅程与比赛叙事。"),
     ("hardware-quickstart", "硬件从零到首次读取", "XIAO 与 Indicator 的认板、供电、备份、接线、构建和分阶段联调。"),
+    ("ws2812-lighting", "WS2812 灯带与氛围交互", "灯带接线、四种模式、HTTP/BLE/CLI 控制与分阶段实机验收。"),
     ("honor-platform", "荣耀 YOYO 平台操作", "从已经上传的独立 Skill 草稿继续，核对配置、检测、手机测试与发布边界。"),
     ("ble-integration", "BLE 完整接入教程", "官方工具参数、设备协议、MTU、凭证注入、回包语义和逐步验收。"),
     ("device-platform", "自带硬件与 Device Kit", "统一能力描述、离线登记和验证，以及未来在线平台的边界。"),

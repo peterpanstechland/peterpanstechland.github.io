@@ -16,6 +16,7 @@ import httpx
 DEFAULT_TOKEN = "change-me-before-use"
 ID_PATTERN = re.compile(r"[A-Za-z0-9_-]{1,32}\Z")
 FINAL_STATUSES = {"completed", "rejected", "failed", "cancelled", "stopped"}
+LIGHT_EFFECTS = ("solid", "breath", "chase", "rainbow")
 
 
 @dataclass(frozen=True)
@@ -129,7 +130,8 @@ class PlanterBridge:
         if not valid_id(request_id):
             return "invalid_request_id"
         expected = {"water": {"duration_ms"}, "light": {"on"}, "print": {"text"}, "stop_water": set()}
-        if action not in expected or set(values) != expected[action]:
+        if action not in expected or (set(values) != expected[action] and
+                                      not (action == "light" and set(values) == {"on", "effect"})):
             return "invalid_action_fields"
         if action == "water":
             duration = values.get("duration_ms")
@@ -138,6 +140,10 @@ class PlanterBridge:
         elif action == "light":
             if type(values.get("on")) is not bool:
                 return "invalid_light_value"
+            if "effect" in values and (values["on"] is not True or
+                                       not isinstance(values["effect"], str) or
+                                       values["effect"] not in LIGHT_EFFECTS):
+                return "invalid_light_effect"
         elif action == "print":
             text = values.get("text")
             if (not isinstance(text, str) or not 1 <= len(text) <= 160 or
@@ -170,7 +176,10 @@ class PlanterBridge:
         if not self.config.writes_configured:
             return outcome(request_id, "rejected", "nondefault_token_required", source="bridge", sent=False)
         payload = {"request_id": request_id, "action": action, **values}
-        fingerprint = json.dumps(payload, sort_keys=True, separators=(",", ":"))
+        # Omitted effect and explicit solid have the same device semantics.
+        # Keep legacy wire payloads unchanged; normalise only the fingerprint.
+        canonical = {**payload, "effect": values.get("effect", "solid")} if action == "light" and values["on"] else payload
+        fingerprint = json.dumps(canonical, sort_keys=True, separators=(",", ":"))
         # Serialise writes and retain one POST per ID. Read-only tools remain free
         # to run concurrently. A network stop is not a physical emergency stop.
         async with self._write_lock:

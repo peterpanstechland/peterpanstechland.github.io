@@ -89,6 +89,20 @@ class DeviceKitTests(unittest.TestCase):
         with self.assertRaises(kit.ContractError):
             kit.validate_profile(profile)
 
+    def test_light_effects_are_constrained_and_do_not_enable_execution(self):
+        light = next(item for item in self.profile["capabilities"] if item["id"] == "light")
+        self.assertEqual(set(light["effects"]), {"solid", "breath", "chase", "rainbow"})
+        self.assertFalse(self.profile["assistant"]["execution_enabled"])
+        for effects in (["blink"], ["solid", "solid"], ["breath"]):
+            with self.subTest(effects=effects):
+                profile = copy.deepcopy(self.profile)
+                next(item for item in profile["capabilities"] if item["id"] == "light")["effects"] = effects
+                with self.assertRaises(kit.ContractError):
+                    kit.validate_profile(profile)
+        self.profile["capabilities"][0]["effects"] = ["solid"]
+        with self.assertRaises(kit.ContractError):
+            kit.validate_profile(self.profile)
+
     def test_unknown_uncalibrated_and_stale_are_preserved(self):
         result = kit.mock_check(self.profile, self.fixture)
         soil = next(item for item in result["observations"] if item["capability_id"] == "soil-moisture")

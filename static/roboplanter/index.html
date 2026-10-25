@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://peterpanstechland.github.io/roboplanter/">
   <title>工位搭子 RoboPlanter — 你先下班，我负责发芽。</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c3ed64'/%3E%3Cpath d='M32 42V22M32 30C10 32 10 12 29 20M32 25C51 27 53 8 36 17' fill='none' stroke='%232b392c' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=20261025-lights">
 </head>
 <body>
   <a class="skip" href="#main">跳到内容</a>
@@ -36,10 +36,11 @@
         <div class="orbit-note">拖动转一圈 <span aria-hidden="true">⤺</span><span id="render-state">3D 准备中</span></div>
         <div class="scene-controls" aria-label="模拟植物互动">
           <button id="water" class="control"><span aria-hidden="true">◉</span>给搭子一口水</button>
+          <button id="lighting" class="control" aria-label="切换网页灯效预览，当前关灯" title="点按循环切换 5 种预览；不控制真实 WS2812 灯带"><span aria-hidden="true">◌</span><span id="lighting-label">灯效：关</span></button>
           <button id="freeze" class="control" aria-pressed="false"><span aria-hidden="true">◎</span>定格这一秒</button>
           <button id="poster" class="control accent"><span aria-hidden="true">↗</span>领走工位嘴替</button>
         </div>
-        <p class="simulation-note">这里的浇水与心情均为网页模拟，不代表真实植物状态。</p>
+        <p class="simulation-note">浇水、灯效与心情均为网页模拟，不控制真实设备。</p>
       </div>
     </section>
     <div class="ticker" aria-label="产品理念"><span>硬件你来选</span><i>✳</i><span>对话交给 YOYO</span><i>✳</i><span>照顾植物，也留意自己</span><i>✳</i><span>嘴硬，叶子软</span></div>
@@ -69,7 +70,7 @@
         <div class="arch-node"><span>能力契约</span><strong>RoboPlanter</strong><small>身份 · 能力 · 状态 · 动作边界</small></div><span class="arch-arrow" aria-hidden="true">→</span>
         <div class="arch-node"><span>本地执行</span><strong>你的硬件</strong><small>设备限时 · 真实回包</small></div>
       </div>
-      <p class="arch-caption">目标主线：YOYO Skill → 官方 BLE → XIAO。网页只做展示；在线设备管理、通用绑定和农业控制是后续阶段。</p>
+      <p class="arch-caption">目标主线：YOYO Skill → 官方 BLE → XIAO。WS2812 灯带把陪伴延伸到桌面环境；<a href="/docs/projects/2026/roboplanter/ws2812-lighting">查看灯效与接线教程 ↗</a>。网页只做展示，在线设备管理和农业控制是后续阶段。</p>
       <div class="build-routes">
         <a href="/docs/projects/2026/roboplanter/hardware-quickstart"><span class="route-num">A</span><h3>我有 XIAO 套件</h3><p>从认板、供电、接线和烧录开始。先拿到一次可信的只读回包。</p><span class="route-link">硬件快速入门 ↗</span></a>
         <a href="/docs/projects/2026/roboplanter/device-platform"><span class="route-num">B</span><h3>我有别的硬件</h3><p>用设备描述文件声明能力。先跑离线契约检查，再写传输适配。</p><span class="route-link">开放设备接入 ↗</span></a>
@@ -85,6 +86,6 @@
   <footer><a class="brand" href="./">工位搭子 <small>ROBOPLANTER</small></a><p>一盆绿，一个小小的喘息。<br><a href="/docs/projects/">Peter Pan’s Techland</a> / <a href="./downloads/roboplanter-device-kit.zip" download>Device Kit</a> / <a href="/docs/projects/2026/roboplanter/social-playbook">创作手册</a></p><span>MADE TO BE CARED FOR.</span></footer>
   <dialog id="poster-dialog" aria-labelledby="poster-title"><button class="dialog-close" id="close-poster" aria-label="关闭海报">×</button><div><span class="eyebrow">A LITTLE DESK ENERGY, TO GO.</span><h2 id="poster-title">你的嘴替，已就位。</h2><p>3:4 原创工位卡。保存后分享给也需要一口气的人。</p><p class="dialog-notice">标注保留：概念演示，非实机拍摄。不会代你发布到社交平台。</p><button class="button dark" id="download-poster">保存我的工位卡 ↗</button><button class="button" id="download-cover">也来一张横版封面 ↗</button><p id="download-status" role="status"></p></div><canvas id="poster-canvas" width="1200" height="1600" aria-label="工位搭子原创海报预览"></canvas></dialog>
   <noscript><p class="noscript">打开 JavaScript 可以体验互动植物。接线、烧录与 YOYO 教程仍可通过上方项目手册阅读。</p></noscript>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./app.js?v=20261025-lights"></script>
 </body>
 </html>

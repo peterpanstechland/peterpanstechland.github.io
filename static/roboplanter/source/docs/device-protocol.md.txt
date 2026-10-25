@@ -27,7 +27,7 @@ Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/m
 | `uv.raw`、`uv.valid` | UV 模块原始值；不是可见光照度或 PAR |
 | `environment.temperature_c`、`humidity_pct`、`valid` | 可选 SHT31 的温湿度和有效性 |
 | `pump.enabled`、`on`、`remaining_ms` | 泵功能是否启用、当前状态和剩余时间 |
-| `light.enabled`、`on` | 灯带功能和状态 |
+| `light.enabled`、`on`、`effect` | 灯带功能、目标开关及模式；关灯时模式为 `solid` |
 | `printer.enabled`、`status` | 打印功能与软件发送状态 |
 | `last_command.request_id`、`status`、`error` | 最近命令的关联标识、结果及错误 |
 
@@ -43,8 +43,10 @@ Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/m
 | --- | --- | --- |
 | `water` | `duration_ms` 正整数 | 启动一次有本地时间上限的浇水；不是毫升数 |
 | `stop_water` | 无 | 停止泵 |
-| `light` | `on` 布尔值 | 灯带开关 |
+| `light` | `on` 布尔值；开灯可选 `effect` | `solid` / `breath` / `chase` / `rainbow`，省略为 `solid`；关灯禁止传 `effect` |
 | `print` | `text` 字符串 | 将支持的文本加入打印任务；首版编码见固件说明 |
+
+灯效命令示例：`{"request_id":"lamp-01","action":"light","on":true,"effect":"breath"}`。同 ID 的省略模式与显式 `solid` 视为相同请求；换成其他模式则冲突。动画在后台持续运行，`completed` 只确认软件完成设置，不证明实物发光或后续每一帧正常。详见 [WS2812 教程](handbook/ws2812-lighting.md)。
 
 响应结构为 `{"ok":true,"request_id":"...","status":"accepted","error":""}`。`accepted` 表示开始处理；`completed` 表示软件任务完成；`rejected` 表示拒绝或软件执行失败，细节见 `error`。`last_command` 会被其他入口覆盖，客户端可用 `/api/v1/result` 按 ID 查询：命中返回 HTTP 200 与上述结果结构，未命中返回 HTTP 404 和 `request_not_found`。未命中可能因设备重启，不能推断操作没发生。
 
@@ -61,6 +63,8 @@ python tools/device_cli.py water 1000
 python tools/device_cli.py result '<刚才输出的 request_id>'
 python tools/device_cli.py stop_water
 python tools/device_cli.py light on
+python tools/device_cli.py light on --effect breath
+python tools/device_cli.py light off
 python tools/device_cli.py print 'Hello planter'
 ```
 

@@ -133,6 +133,92 @@ void disabledAndInterlock() {
   CHECK(c.submit(water("new", 100), 70).ok);
 }
 
+void lightEffectCommands() {
+  robo::Controller c(enabled());
+  CHECK(c.lightEffect() == "solid");
+  CHECK(!c.lightOn());
+  auto plain = light("plain", true);
+  CHECK(c.submit(plain, 0).ok);
+  CHECK(c.lightOn());
+  CHECK(c.lightEffect() == "solid");
+  auto explicitSolid = plain;
+  explicitSolid.hasEffect = true;
+  explicitSolid.effect = "solid";
+  CHECK(c.submit(explicitSolid, 1).duplicate);
+  auto differentEffect = explicitSolid;
+  differentEffect.effect = "breath";
+  CHECK(c.submit(differentEffect, 2).error == "request_id_conflict");
+  CHECK(c.lightEffect() == "solid");
+  differentEffect.requestId = "breath";
+  CHECK(c.submit(differentEffect, 3).ok);
+  CHECK(c.lightEffect() == "breath");
+  for (const char* effect : {"chase", "rainbow", "solid"}) {
+    auto next = light(effect, true);
+    next.hasEffect = true; next.effect = effect;
+    CHECK(c.submit(next, 4).ok);
+    CHECK(c.lightEffect() == effect);
+  }
+  auto offWithEffect = light("bad_off", false);
+  offWithEffect.hasEffect = true; offWithEffect.effect = "solid";
+  CHECK(c.submit(offWithEffect, 5).error == "invalid_light_fields");
+  CHECK(c.lightOn());
+  int invalidIndex = 0;
+  for (const char* invalid : {"", "Breath", "pulse", "solid ", "rainbow|x"}) {
+    auto bad = light(std::string("invalid") + std::to_string(invalidIndex++), true);
+    bad.hasEffect = true; bad.effect = invalid;
+    CHECK(c.submit(bad, 6).error == "invalid_light_fields");
+    CHECK(c.lightEffect() == "solid");
+  }
+  auto waterWithEffect = water("badwater", 500);
+  waterWithEffect.hasEffect = true; waterWithEffect.effect = "solid";
+  CHECK(c.submit(waterWithEffect, 7).error == "invalid_water_fields");
+  auto printWithEffect = print("badprint", "Hello");
+  printWithEffect.hasEffect = true; printWithEffect.effect = "breath";
+  CHECK(c.submit(printWithEffect, 7).error == "invalid_print_text");
+  auto stopWithEffect = stop("badstopfx");
+  stopWithEffect.hasEffect = true; stopWithEffect.effect = "solid";
+  CHECK(c.submit(stopWithEffect, 7).error == "unexpected_fields");
+  CHECK(!c.pumpOn());
+  CHECK(!c.printerBusy());
+  auto breatheAgain = light("breath2", true);
+  breatheAgain.hasEffect = true; breatheAgain.effect = "breath";
+  CHECK(c.submit(breatheAgain, 8).ok);
+  CHECK(c.submit(light("off", false), 9).ok);
+  CHECK(!c.lightOn());
+  CHECK(c.lightEffect() == "solid");
+  CHECK(c.submit(light("again", true), 10).ok);
+  CHECK(c.lightEffect() == "solid");
+
+  // Explicit solid first is also equivalent to a later legacy payload.
+  robo::Controller reversed(enabled());
+  explicitSolid.requestId = "reverse";
+  plain.requestId = "reverse";
+  CHECK(reversed.submit(explicitSolid, 0).ok);
+  CHECK(reversed.submit(plain, 1).duplicate);
+
+  // Lamp updates neither restart nor extend an outstanding pump deadline.
+  CHECK(c.submit(water("pumpfx", 500), 100).ok);
+  auto flowing = light("flowing", true);
+  flowing.hasEffect = true; flowing.effect = "chase";
+  CHECK(c.submit(flowing, 599).ok);
+  CHECK(c.remainingMs(599) == 1);
+  c.tick(600);
+  CHECK(!c.pumpOn());
+  CHECK(c.lightOn());
+  CHECK(c.lightEffect() == "chase");
+
+  auto disabled = enabled(); disabled.actionsEnabled = false;
+  robo::Controller noActions(disabled);
+  CHECK(noActions.submit(flowing, 0).error == "actions_disabled");
+  CHECK(!noActions.lightOn());
+  disabled = enabled(); disabled.credentialsConfigured = false;
+  robo::Controller noCredentials(disabled);
+  CHECK(noCredentials.submit(flowing, 0).error == "actions_disabled");
+  disabled = enabled(); disabled.lightEnabled = false;
+  robo::Controller noLight(disabled);
+  CHECK(noLight.submit(flowing, 0).error == "light_disabled");
+}
+
 void printerAndCalibration() {
   robo::Controller c(enabled());
   CHECK(c.submit(print("escape", std::string("x\x1b") + "@"), 0).error == "invalid_print_text");
@@ -259,6 +345,7 @@ void blePreparedWriteBoundary() {
 int main() {
   deadlineAndReplay(); wrapAndStop(); validationAndOverflow();
   disabledAndInterlock(); printerAndCalibration(); cacheCapacity();
+  lightEffectCommands();
   bleConnectionBoundary(); blePreparedWriteBoundary();
   std::cout << "PASS " << checks << " controller checks\n";
   return 0;

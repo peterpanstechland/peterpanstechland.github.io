@@ -3,6 +3,7 @@
 #include <array>
 #include <cstdint>
 #include <string>
+#include "light_effects.h"
 
 namespace robo {
 
@@ -19,12 +20,17 @@ struct Command {
   bool on = false;
   bool hasText = false;
   std::string text;
+  bool hasEffect = false;
+  std::string effect;
 };
 
 inline bool samePayload(const Command& a, const Command& b) {
+  bool sameEffect = a.hasEffect == b.hasEffect && a.effect == b.effect;
+  if (a.action == "light" && b.action == "light" && a.hasOn && b.hasOn && a.on && b.on)
+    sameEffect = (a.hasEffect ? a.effect : "solid") == (b.hasEffect ? b.effect : "solid");
   return a.action == b.action && a.hasDuration == b.hasDuration &&
          a.durationMs == b.durationMs && a.hasOn == b.hasOn && a.on == b.on &&
-         a.hasText == b.hasText && a.text == b.text;
+         a.hasText == b.hasText && a.text == b.text && sameEffect;
 }
 
 struct Result {
@@ -119,6 +125,7 @@ class Controller {
       completePump();
     } else if (command.action == "light") {
       lightOn_ = command.on;
+      lightEffect_ = command.on && command.hasEffect ? command.effect : "solid";
     } else if (command.action == "print") {
       if (pumpOn_) return reject(command, "pump_busy");
       if (printerBusy_) return reject(command, "printer_busy");
@@ -150,6 +157,7 @@ class Controller {
   }
   bool pumpOn() const { return pumpOn_; }
   bool lightOn() const { return lightOn_; }
+  const std::string& lightEffect() const { return lightEffect_; }
   bool printerBusy() const { return printerBusy_; }
   const char* printerStatus() const {
     return config_.printerEnabled ? printerStatus_.c_str() : "disabled";
@@ -172,6 +180,7 @@ class Controller {
   size_t used_ = 0;
   bool pumpOn_ = false;
   bool lightOn_ = false;
+  std::string lightEffect_ = "solid";
   bool printerBusy_ = false;
   uint32_t pumpStartedMs_ = 0;
   uint32_t pumpDurationMs_ = 0;
@@ -192,23 +201,27 @@ class Controller {
     if (c.action != "water" && c.action != "stop_water" &&
         c.action != "light" && c.action != "print") return "unknown_action";
     if (c.action == "stop_water") {
-      if (c.hasDuration || c.hasOn || c.hasText) return "unexpected_fields";
+      if (c.hasDuration || c.hasOn || c.hasText || c.hasEffect) return "unexpected_fields";
       return "";
     }
     if (!config_.actionsEnabled || !config_.credentialsConfigured)
       return "actions_disabled";
     if (c.action == "water") {
       if (!config_.pumpEnabled) return "pump_disabled";
-      if (!c.hasDuration || c.hasOn || c.hasText) return "invalid_water_fields";
+      if (!c.hasDuration || c.hasOn || c.hasText || c.hasEffect) return "invalid_water_fields";
       if (config_.maxWaterMs == 0 || config_.maxWaterMs > 30000 ||
           c.durationMs <= 0 || c.durationMs > config_.maxWaterMs)
         return "invalid_duration";
     } else if (c.action == "light") {
       if (!config_.lightEnabled) return "light_disabled";
       if (!c.hasOn || c.hasDuration || c.hasText) return "invalid_light_fields";
+      if (c.hasEffect) {
+        LightEffect effect;
+        if (!c.on || !parseLightEffect(c.effect, effect)) return "invalid_light_fields";
+      }
     } else if (c.action == "print") {
       if (!config_.printerEnabled) return "printer_disabled";
-      if (!c.hasText || c.hasDuration || c.hasOn || !printableText(c.text))
+      if (!c.hasText || c.hasDuration || c.hasOn || c.hasEffect || !printableText(c.text))
         return "invalid_print_text";
     }
     return "";

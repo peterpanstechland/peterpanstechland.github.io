@@ -54,6 +54,7 @@ QueueHandle_t bleQueue;
 WebServer http(80);
 HardwareSerial printerSerial(1);
 Adafruit_NeoPixel pixels(ROBO_LED_COUNT, pins::Rgb, NEO_GRB + NEO_KHZ800);
+robo::LightAnimation lightAnimation;
 BLECharacteristic* bleCharacteristic;
 BLE2902* bleNotifications;
 esp_gatt_if_t bleGattsIf = ESP_GATT_IF_NONE;
@@ -183,16 +184,34 @@ Sample copySample() {
   return current;
 }
 
-void applyLight() {
+void applyLight(bool force = false) {
   if (!ROBO_ENABLE_LIGHT) return;
   Lock outputGuard(lightMutex);
   bool on;
+  robo::LightEffect effect = robo::LightEffect::Solid;
   {
     Lock coreGuard(coreMutex);
     on = controller.lightOn();
+    robo::parseLightEffect(controller.lightEffect(), effect);
   }
-  pixels.fill(on ? pixels.Color(0, 100, 20) : 0);
+  const uint32_t now = millis();
+  const bool changed = lightAnimation.configure(on, effect, now);
+  if (!force && !changed && (!on || effect == robo::LightEffect::Solid)) return;
+  // Pixel transmission is outside coreMutex, so it cannot hold the pump deadline
+  // behind a strip update. lightMutex also serializes immediate OFF with frames.
+  for (size_t i = 0; i < ROBO_LED_COUNT; ++i) {
+    const robo::LightRgb color = lightAnimation.pixel(now, i, ROBO_LED_COUNT);
+    pixels.setPixelColor(i, color.red, color.green, color.blue);
+  }
   pixels.show();
+}
+
+void lightTask(void*) {
+  TickType_t wake = xTaskGetTickCount();
+  for (;;) {
+    applyLight();
+    vTaskDelayUntil(&wake, pdMS_TO_TICKS(40));
+  }
 }
 
 void printerTask(void*) {
@@ -227,7 +246,7 @@ robo::Result processCommand(const robo::Command& command) {
     result = controller.submit(command, millis());
     writePump();
   }
-  if (result.ok && !result.duplicate && command.action == "light") applyLight();
+  if (result.ok && !result.duplicate && command.action == "light") applyLight(true);
   if (result.ok && !result.duplicate && command.action == "print") {
     PrintJob job{};
     memcpy(job.id, command.requestId.data(), command.requestId.size());
@@ -286,6 +305,7 @@ void stateJson(JsonDocument& document) {
   JsonObject light = document.createNestedObject("light");
   light["enabled"] = ROBO_ENABLE_LIGHT && ActionsReady;
   light["on"] = controller.lightOn();
+  light["effect"] = controller.lightEffect();
   JsonObject printer = document.createNestedObject("printer");
   printer["enabled"] = ROBO_ENABLE_PRINTER && ActionsReady;
   printer["status"] = std::string(controller.printerStatus());
@@ -344,7 +364,8 @@ void httpCommand() {
   for (JsonPairConst pair : object) {
     const char* key = pair.key().c_str();
     if (strcmp(key, "request_id") && strcmp(key, "action") &&
-        strcmp(key, "duration_ms") && strcmp(key, "on") && strcmp(key, "text")) {
+        strcmp(key, "duration_ms") && strcmp(key, "on") && strcmp(key, "text") &&
+        strcmp(key, "effect")) {
       sendError(400, "unexpected_fields"); return;
     }
   }
@@ -359,6 +380,7 @@ void httpCommand() {
   command.hasDuration = object.containsKey("duration_ms");
   command.hasOn = object.containsKey("on");
   command.hasText = object.containsKey("text");
+  command.hasEffect = object.containsKey("effect");
   if (command.hasDuration) {
     if (object["duration_ms"].is<bool>() || !object["duration_ms"].is<int64_t>()) {
       sendError(400, "invalid_duration"); return;
@@ -371,6 +393,9 @@ void httpCommand() {
   }
   if (command.hasText && !jsonString(object["text"], command.text)) {
     sendError(400, "invalid_print_text"); return;
+  }
+  if (command.hasEffect && !jsonString(object["effect"], command.effect)) {
+    sendError(400, "invalid_light_fields"); return;
   }
   const robo::Result result = processCommand(command);
   StaticJsonDocument<384> output;
@@ -492,9 +517,12 @@ std::string handleBle(const std::string& text) {
     if (!robo::parseUnsigned(fields[4], duration)) return "E:" + command.requestId + ":TIME";
     command.hasDuration = true;
     command.durationMs = duration;
-  } else if (command.action == "light" && fields.size() == 5 && (fields[4] == "0" || fields[4] == "1")) {
+  } else if (command.action == "light" && (fields.size() == 5 || fields.size() == 6) &&
+             (fields[4] == "0" || fields[4] == "1")) {
     command.hasOn = true;
     command.on = fields[4] == "1";
+    command.hasEffect = fields.size() == 6;
+    if (command.hasEffect) command.effect = fields[5];
   } else if (command.action == "print" && fields.size() == 5) {
     command.hasText = true;
     command.text = fields[4];
@@ -650,6 +678,7 @@ void setup() {
     printerSerial.begin(ROBO_PRINTER_BAUD, SERIAL_8N1, pins::PrinterRx, pins::PrinterTx);
   if (xTaskCreate(sensorTask, "sensors", 4096, nullptr, 1, nullptr) != pdPASS ||
       xTaskCreate(printerTask, "printer", 4096, nullptr, 1, nullptr) != pdPASS ||
+      (ROBO_ENABLE_LIGHT && xTaskCreate(lightTask, "light-frames", 3072, nullptr, 1, nullptr) != pdPASS) ||
       xTaskCreate(bleTask, "ble-commands", 6144, nullptr, 2, nullptr) != pdPASS)
     failClosed("Startup failed: worker task unavailable");
 

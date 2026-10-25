@@ -1,7 +1,7 @@
 ---
 title: "排障与恢复"
 description: "从电源、串口、构建、显示、HTTP 到 BLE 的故障诊断。"
-sidebar_position: 11
+sidebar_position: 12
 hide_title: true
 ---
 
@@ -177,7 +177,7 @@ Indicator D1 上的界面不是另一个自动启用的温湿度来源。当前�
 
 先看 `light.enabled`；如果 false，检查总开关、非默认令牌和灯外设开关。若 `on:true` 但实物没亮，断电后核对 DIN/DOUT、GND、额定供电、灯数、协议和驱动缓冲；软件状态表示命令，不是光学反馈。
 
-当前配置 GRB/800 kHz，绿色固定效果，不适用于所有 RGB 模块。过大灯带造成电压降/复位时停止测试，重新做电流预算；别单纯提高亮度。
+当前配置 GRB/800 kHz，提供 `solid`、`breath`、`chase`、`rainbow`，不适用于所有 RGB 模块。先用 `solid` 检查颜色和灯数；仅一颗灯时 `chase` 会转为呼吸。动态模式不生效时核对固件版本及 HTTP `light.effect`，旧固件不支持新参数；关灯不能带 `effect`。过大灯带造成电压降/复位时停止测试，重新做电流预算；别单纯提高亮度。
 
 ## 打印机 `completed` 但没出纸 / 乱码
 

@@ -145,12 +145,15 @@ R|token|id        -> A:id / D:id / E:id:code
 完整动作格式：
 
 ```text
-C|token|id|light|1       开灯
+C|token|id|light|1       柔绿常亮
+C|token|id|light|1|breath 慢呼吸（也可 solid / chase / rainbow）
 C|token|id|light|0       关灯
 C|token|id|print|text    ASCII 打印
 C|token|id|water|500     单次 500 ms 泵脉冲
 C|token|id|stop_water    立即请求停泵
 ```
+
+灯效为开灯时可选的第六字段；关灯不能带该字段，省略模式默认 `solid`。灯查询仍只返回 `L:enabled:on`，不增加字段；模式读回使用 HTTP `light.effect`。省略与显式 `solid` 是同一幂等内容。详见 [WS2812 教程](ws2812-lighting.md)。
 
 每次**新的用户动作意图**分配新 ID。轮询结果使用原 ID；不能把新的 ID 当作处理超时的方法。同 ID 同内容返回保存结果而不再次执行；同 ID 不同内容返回 `ID`。水泵和打印机互斥，忙时也会记住拒绝结果，解决忙碌后若用户明确发起新意图才分配新 ID。
 
