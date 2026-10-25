@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#f5f3eb" />
+    <title>RoboPlanter · 一体机外观概念</title>
+    <link rel="stylesheet" href="./styles.css?v=20261025-public" />
+    <script type="importmap">
+      { "imports": { "three": "./vendor/three/build/three.module.js" } }
+    </script>
+    <script type="module" src="./viewer.js?v=20261025-public"></script>
+  </head>
+  <body>
+    <main class="viewer">
+      <header class="masthead">
+        <div class="identity">
+          <p class="wordmark">RoboPlanter<span aria-hidden="true"> / </span><span class="edition">一体机</span></p>
+          <h1>把一株绿意，放在手边。</h1>
+          <p class="model-label">Tripo生成 · 外观概念模型</p>
+        </div>
+        <div class="controls" aria-label="预览控制">
+          <button id="reset-view" type="button" disabled>重置视角</button>
+          <label class="toggle">
+            <input id="auto-rotate" type="checkbox" disabled />
+            <span class="toggle-track" aria-hidden="true"></span>
+            <span>自动转台</span>
+          </label>
+        </div>
+      </header>
+
+      <section id="stage" class="stage" aria-label="RoboPlanter 三维外观预览">
+        <img class="model-poster" src="../assets/all-in-one/preview.png" width="512" height="512" alt="工位搭子一体机外观概念预览" />
+        <canvas id="model-canvas" aria-label="可拖动旋转和缩放的三维模型"></canvas>
+        <div id="status-panel" class="status-panel" role="status" aria-live="polite">
+          <span id="loading-mark" class="loading-mark" aria-hidden="true"></span>
+          <p id="status-title">正在载入外观模型</p>
+          <p id="status-detail">请稍候</p>
+          <button id="retry-model" type="button" hidden>重新加载</button>
+        </div>
+        <noscript><p class="no-script">此三维预览需要启用 JavaScript。</p></noscript>
+      </section>
+
+      <footer class="footnote">
+        <p id="interaction-hint">拖动旋转 · 滚轮 / 双指缩放</p>
+        <p>仅作外观参考，非工程 CAD 或制造尺寸依据。</p>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "RoboPlanter all-in-one exterior concept",
+  "generated_with": "Tripo v3.1",
+  "scope": "Static AI-generated exterior model; not manufacturing CAD or validated hardware.",
+  "files": {
+    "model.glb": {
+      "bytes": 44940768,
+      "sha256": "3080403faa426b65489624fec1ef4b1d21d20ca450cc6a10ec5f422baa025cf4"
+    },
+    "preview.png": {
+      "bytes": 319246,
+      "sha256": "ecbf0cb76f5678c07146cc6beb4210a614e9dfb6d9478189696e1de322df7500"
+    }
+  }
+}

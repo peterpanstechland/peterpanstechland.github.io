@@ -12,13 +12,14 @@
   <meta property="og:url" content="https://peterpanstechland.github.io/roboplanter/">
   <title>工位搭子 RoboPlanter — 你先下班，我负责发芽。</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c3ed64'/%3E%3Cpath d='M32 42V22M32 30C10 32 10 12 29 20M32 25C51 27 53 8 36 17' fill='none' stroke='%232b392c' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="./style.css?v=20261025-lights">
+  <link rel="stylesheet" href="./style.css?v=20261025-model">
+  <link rel="stylesheet" href="./product-model.css?v=20261025-model">
 </head>
 <body>
   <a class="skip" href="#main">跳到内容</a>
   <header class="nav">
     <a class="brand" href="./" aria-label="工位搭子首页"><span class="brandmark" aria-hidden="true">⌁</span><span>工位搭子<small>ROBOPLANTER</small></span></a>
-    <nav aria-label="主导航"><a href="#why">为什么是一盆绿</a><a href="#build">自己动手</a><a class="nav-doc" href="/docs/projects/2026/roboplanter/">打开项目手册 <span aria-hidden="true">↗</span></a></nav>
+    <nav aria-label="主导航"><a href="#all-in-one">看看一体机</a><a href="#build">自己动手</a><a class="nav-doc" href="/docs/projects/2026/roboplanter/">打开项目手册 <span aria-hidden="true">↗</span></a></nav>
   </header>
   <main id="main">
     <section class="hero" aria-labelledby="hero-title">
@@ -26,7 +27,7 @@
         <p class="eyebrow"><span class="live-dot"></span> A LITTLE GREEN. A LITTLE LESS GRIND.</p>
         <h1 id="hero-title">你先下班，<br>我负责<span class="sprout-word">发芽<svg viewBox="0 0 330 19" aria-hidden="true"><path d="M5 12Q150 -3 323 10"/></svg></span>。</h1>
         <p class="intro">工位上，终于有个不催进度的搭子。<br>一盆有点嘴硬的绿，陪你把日子慢慢养回来。</p>
-        <div class="hero-actions"><a class="button dark" href="#experience">先认识一下 <span aria-hidden="true">↓</span></a><a class="text-link" href="/docs/projects/2026/roboplanter/hardware-quickstart">我想做一个 <span aria-hidden="true">↗</span></a></div>
+        <div class="hero-actions"><a class="button dark" href="#all-in-one">看看一体机 <span aria-hidden="true">↓</span></a><a class="text-link" href="/docs/projects/2026/roboplanter/hardware-quickstart">我想做一个 <span aria-hidden="true">↗</span></a></div>
         <div class="aside-note"><span class="mini-leaf" aria-hidden="true">✳</span><p>不要求你状态满格。<br><strong>今天有好好喝水，就已经很不错。</strong></p></div>
       </div>
       <div class="experience" id="experience">
@@ -44,6 +45,25 @@
       </div>
     </section>
     <div class="ticker" aria-label="产品理念"><span>硬件你来选</span><i>✳</i><span>对话交给 YOYO</span><i>✳</i><span>照顾植物，也留意自己</span><i>✳</i><span>嘴硬，叶子软</span></div>
+    <section class="product-section section" id="all-in-one" aria-labelledby="product-title">
+      <div class="product-copy">
+        <div class="section-kicker">THE DESK FRIEND, IN ONE BODY.</div>
+        <h2 id="product-title">这位绿同事，<br>先转一圈。</h2>
+        <p class="product-intro">手机仓、像素脸和小票口，<br>住进同一个机身。<br>看看正面，再绕到背后。</p>
+        <ul class="product-details"><li><span>01</span>内嵌手机仓</li><li><span>02</span>屏幕 × 小票便签</li><li><span>03</span>WS2812 环绕灯带</li></ul>
+        <a class="text-link" href="./model-viewer/" target="_blank" rel="noopener">在独立视窗中打开 <span aria-hidden="true">↗</span></a>
+        <p class="product-boundary">Tripo AI 外观概念，非实机拍摄。<br>尺寸、内部结构和硬件效果待实测。</p>
+      </div>
+      <div class="product-display">
+        <div class="product-stage" id="product-stage">
+          <img id="product-poster" class="product-poster" src="./assets/all-in-one/preview.png" width="512" height="512" loading="lazy" decoding="async" alt="奶油白一体机概念：绿植、像素表情屏、小票打印口与右侧内嵌手机仓共用一个机身。">
+          <span class="product-badge">一体机 · 3D 外观概念</span>
+          <iframe id="product-frame" title="工位搭子一体机三维外观预览" hidden></iframe>
+          <div class="product-load" id="product-load"><button class="button dark" id="load-product-model" aria-controls="product-frame" aria-expanded="false" hidden>360° 看看搭子 <span aria-hidden="true">↗</span></button><p>点击后加载 3D · 约 45 MB</p></div>
+        </div>
+        <div class="product-caption"><span id="product-hint">先看一眼，再决定要不要转一圈。</span><button id="close-product-model" type="button" hidden>返回预览图</button></div>
+      </div>
+    </section>
     <section class="story section" id="why" aria-labelledby="why-title">
       <div class="section-kicker">01 / A SMALL ACT OF CARE</div>
       <div class="story-heading"><h2 id="why-title">不是每一件事，<br>都要长成 KPI。</h2><p>它不是另一个待办清单。<br>只是在很忙的一天里，给你一个很小的理由：<br>看看叶子，喝一口水，再决定下一步。</p></div>
@@ -86,6 +106,7 @@
   <footer><a class="brand" href="./">工位搭子 <small>ROBOPLANTER</small></a><p>一盆绿，一个小小的喘息。<br><a href="/docs/projects/">Peter Pan’s Techland</a> / <a href="./downloads/roboplanter-device-kit.zip" download>Device Kit</a> / <a href="/docs/projects/2026/roboplanter/social-playbook">创作手册</a></p><span>MADE TO BE CARED FOR.</span></footer>
   <dialog id="poster-dialog" aria-labelledby="poster-title"><button class="dialog-close" id="close-poster" aria-label="关闭海报">×</button><div><span class="eyebrow">A LITTLE DESK ENERGY, TO GO.</span><h2 id="poster-title">你的嘴替，已就位。</h2><p>3:4 原创工位卡。保存后分享给也需要一口气的人。</p><p class="dialog-notice">标注保留：概念演示，非实机拍摄。不会代你发布到社交平台。</p><button class="button dark" id="download-poster">保存我的工位卡 ↗</button><button class="button" id="download-cover">也来一张横版封面 ↗</button><p id="download-status" role="status"></p></div><canvas id="poster-canvas" width="1200" height="1600" aria-label="工位搭子原创海报预览"></canvas></dialog>
   <noscript><p class="noscript">打开 JavaScript 可以体验互动植物。接线、烧录与 YOYO 教程仍可通过上方项目手册阅读。</p></noscript>
-  <script type="module" src="./app.js?v=20261025-lights"></script>
+  <script type="module" src="./app.js?v=20261025-model"></script>
+  <script src="./product-model.js?v=20261025-model" defer></script>
 </body>
 </html>
