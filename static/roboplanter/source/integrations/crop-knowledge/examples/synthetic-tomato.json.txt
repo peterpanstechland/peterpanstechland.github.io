@@ -1,0 +1,15 @@
+{
+  "synthetic": true,
+  "plant_id": "synthetic-tomato-01",
+  "taxon": "Solanum lycopersicum",
+  "cultivar": null,
+  "region": {"country": "CN", "admin1": "CN-SH", "city": "SYNTHETIC"},
+  "environment": "balcony",
+  "goal": "Observe crop development; synthetic example only",
+  "cycle_anchor": {"kind": "transplanting", "date": "2026-09-15"},
+  "growth_habit": "indeterminate",
+  "observations": [
+    {"id": "synthetic-observed-1", "plant_id": "synthetic-tomato-01", "observed_at": "2026-10-20T09:00:00+08:00", "stage": "flowering", "confirmed_by": "grower", "kind": "observed"},
+    {"id": "synthetic-predicted-1", "plant_id": "synthetic-tomato-01", "observed_at": "2026-10-24T09:00:00+08:00", "stage": "fruit_development", "confirmed_by": null, "kind": "predicted"}
+  ]
+}

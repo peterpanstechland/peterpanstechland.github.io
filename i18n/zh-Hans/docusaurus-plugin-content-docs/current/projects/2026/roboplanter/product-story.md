@@ -13,6 +13,8 @@ hide_title: true
 
 本文是 2026-10-25 的产品叙事与体验方案。文中的人物、语句和研究任务是**设计假设与待验证方案**，不是已经完成的访谈或调研结论。当前实现范围以 [证据与路线图](/docs/projects/2026/roboplanter/roadmap-evidence)、[固件说明](/roboplanter/source/firmware/xiao/README.md.txt) 和 [已核对的平台界面](/docs/projects/2026/roboplanter/honor-platform) 为准。控制台当前为 0.2.0 草稿；上传、安装、发布与真机闭环必须分别记录。
 
+真实养成的产品方向是：**植物按自己的周期生长，搭子陪你看见变化。** 现有屏幕采用加速游戏周期；后续按地区、作物和真实观察关联角色阶段，专注奖励只改变陪伴反馈。关机后真实植物仍会生长。实施依据与当前边界见 [植物生长与陪伴养成](/docs/projects/2026/roboplanter/plant-companion) 和 [作物知识库](/docs/projects/2026/roboplanter/crop-knowledge)。
+
 ## 1. 十秒钟讲清楚
 
 **给使用者：**「这是你的工位搭子。你可以跟 YOYO 聊两句、看看盆栽状态，也能在屏幕上养一株不催你打卡的小精灵。」
