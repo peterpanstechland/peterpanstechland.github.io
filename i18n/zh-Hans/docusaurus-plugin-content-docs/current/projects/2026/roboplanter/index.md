@@ -26,7 +26,7 @@ slug: /projects/2026/roboplanter
 | --- | --- | --- |
 | 了解参赛作品与利他价值 | [产品故事与设计思考](/docs/projects/2026/roboplanter/product-story) | 说清楚用户、真实需求、能力边界与研究假设 |
 | 用现有 XIAO / Indicator 套件复现 | [硬件从零到首次读取](/docs/projects/2026/roboplanter/hardware-quickstart) | 认板、供电、保留备份、默认只读、按步骤验收 |
-| 做工位氛围灯与灯效 | [WS2812 灯带交互](/docs/projects/2026/roboplanter/ws2812-lighting) | 分清已有绿灯开关、网页灯效预览与待接入的实机动画 |
+| 做工位氛围灯与灯效 | [WS2812 灯带交互](/docs/projects/2026/roboplanter/ws2812-lighting) | 配置四种固件灯效，完成接线/烧录验收，并区分网页预览 |
 | 继续已上传的荣耀 Skill | [荣耀平台操作教程](/docs/projects/2026/roboplanter/honor-platform) | 找到并核对 Skill、区分保存/检测/发布/真机测试 |
 | 打通手机到设备 | [BLE 完整链路](/docs/projects/2026/roboplanter/ble-integration) | 区分 GATT 写成功、业务受理、软件完成与物理效果 |
 | 使用自己的控制板 | [通用设备接入平台](/docs/projects/2026/roboplanter/device-platform) | 跑通离线 profile / 登记 / 样例校验，知道哪些驱动还需自己实现 |
