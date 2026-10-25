@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 710" role="img" aria-labelledby="title desc">
+<title id="title">RoboPlanter 硬件与通信总览</title><desc id="desc">YOYO手机通过蓝牙直接连接XIAO，Indicator通过Wi-Fi和HTTP连接同一XIAO。XIAO接传感器、灯和外置驱动；12伏水泵和打印机独立供电，不接入GPIO供电。</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="none" stroke="#71845a" stroke-width="1.3"/></marker></defs>
+<rect width="1160" height="710" rx="24" fill="#f6f5ef"/>
+<g font-family="system-ui,'Microsoft Yahei',sans-serif" fill="#253126">
+<text x="45" y="55" font-size="12" letter-spacing="3" fill="#7c876f">ROBOPLANTER / HARDWARE MAP</text>
+<text x="45" y="103" font-size="30" font-weight="700">两条入口，同一个本地控制器。</text>
+<text x="45" y="136" font-size="14" fill="#707965">接线前断电。图示为连接逻辑，实际接针、供电和驱动要求见下文。</text>
+<g fill="#e9eede" stroke="#cdd5c1"><rect x="45" y="200" width="230" height="128" rx="14"/><rect x="45" y="395" width="230" height="128" rx="14"/><rect x="465" y="265" width="248" height="210" rx="18" fill="#d5e9aa"/><rect x="900" y="195" width="215" height="80" rx="12"/><rect x="900" y="325" width="215" height="80" rx="12"/><rect x="900" y="455" width="215" height="80" rx="12"/></g>
+<text x="68" y="238" font-size="19" font-weight="650">荣耀手机 / YOYO</text><text x="68" y="269" font-size="13">独立 Skill · 官方蓝牙工具</text><text x="68" y="297" font-size="12" fill="#707965">链路待真机验收</text>
+<text x="68" y="434" font-size="19" font-weight="650">SenseCAP Indicator</text><text x="68" y="465" font-size="13">本地屏幕 · 设置 · 像素养成</text><text x="68" y="494" font-size="12" fill="#707965">独立 USB / 5 V 供电</text>
+<text x="489" y="306" font-size="20" font-weight="700">XIAO ESP32-S3 Plus</text><text x="489" y="335" font-size="15">+ Robot Board V1.0</text><text x="489" y="376" font-size="13">鉴权 · 请求编号 · 本地限时</text><text x="489" y="405" font-size="13">真实状态与动作结果</text><text x="489" y="443" font-size="12" fill="#637449">只用一个已确认的 USB 供电入口</text>
+<text x="922" y="226" font-size="16" font-weight="650">传感器 / 3.3 V 逻辑</text><text x="922" y="252" font-size="12">土壤 GPIO1 · I²C GPIO5/6</text>
+<text x="922" y="357" font-size="16" font-weight="650">外置水泵驱动</text><text x="922" y="382" font-size="12">GPIO7 仅为 IN · 公共 GND</text>
+<text x="922" y="487" font-size="16" font-weight="650">UART 打印机</text><text x="922" y="513" font-size="12">TX GPIO43 · TTL 电平需核对</text>
+<g fill="none" stroke="#71845a" stroke-width="2" marker-end="url(#arrow)"><path d="M275 265H370V307H465"/><path d="M275 456H372V424H465"/><path d="M713 310H813V234H900"/><path d="M713 366H900"/><path d="M713 424H813V496H900"/></g>
+<text x="311" y="240" font-size="12">BLE / WRITE + NOTIFY</text><text x="305" y="485" font-size="12">Wi-Fi / HTTP</text><text x="738" y="347" font-size="11" fill="#707965">全部外设默认关闭</text>
+<rect x="45" y="576" width="1070" height="91" rx="12" fill="#f1e4d6"/>
+<text x="65" y="610" font-size="15" font-weight="650" fill="#765135">12 V 负载单独供电；水泵不可直连 GPIO，不借用载板 5 V 电机口供电。</text>
+<text x="65" y="640" font-size="13" fill="#765135">泵驱动需要 3.3 V 可识别输入、掉电关闭、瞬态保护和物理停止；Indicator 与 XIAO 不互接 UART/I²C。</text>
+</g></svg>

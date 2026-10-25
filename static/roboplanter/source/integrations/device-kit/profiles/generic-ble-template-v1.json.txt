@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "profile_id": "generic-ble-template-v1",
+  "name": "Generic BLE sensor adaptation template",
+  "status": "experimental",
+  "description": "Template for user-owned hardware. Fill the real GATT contract and implement/test an adapter before promotion. No BLE runtime is provided.",
+  "assistant": {
+    "entrypoint": "yoyo",
+    "binding_status": "not_verified",
+    "execution_enabled": false
+  },
+  "adapter": {
+    "id": "generic-ble-template",
+    "protocol_version": "vendor-defined",
+    "runtime_available": false,
+    "fixture_format": "canonical-v1",
+    "source_paths": []
+  },
+  "transports": [
+    {
+      "id": "vendor-ble",
+      "kind": "ble",
+      "status": "experimental",
+      "origin": null,
+      "credential_ref": "provisioning:device-credential",
+      "service_uuid": null,
+      "characteristic_uuid": null,
+      "notes": "UUIDs and vendor decoding intentionally unset; no automatic scanning or pairing."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "air-temperature",
+      "kind": "measurement",
+      "status": "experimental",
+      "risk": "none",
+      "unit": "degC",
+      "readable": true,
+      "writable": false,
+      "sample": {
+        "value_path": "readings.air_temperature.value",
+        "valid_path": "readings.air_temperature.valid",
+        "calibrated_path": null
+      },
+      "limits": {
+        "minimum": -40,
+        "maximum": 125,
+        "max_duration_ms": null
+      },
+      "interlocks": [],
+      "mappings": [
+        {
+          "transport_id": "vendor-ble",
+          "read": "Vendor GATT characteristic -> canonical readings.air_temperature",
+          "write": null,
+          "result": null
+        }
+      ]
+    }
+  ],
+  "max_sample_age_ms": 5000
+}

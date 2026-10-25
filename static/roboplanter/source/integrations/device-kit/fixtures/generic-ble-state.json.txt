@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "device_id": "ble-sensor-01",
+  "sample_age_ms": 20,
+  "readings": {
+    "air_temperature": {
+      "value": 22.1,
+      "valid": true
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "device_kit": {
+    "filename": "roboplanter-device-kit.zip",
+    "sha256": "034ef4588a63bb10dce491438dad95ff139c9044902a63463685543741e7188f",
+    "files": 11
+  },
+  "starter": {
+    "filename": "roboplanter-starter.zip",
+    "sha256": "09e3902cc396855a4b9e12c8f7b567c4cfea36116f4f971ead1345a110cd147a",
+    "files": 126,
+    "bytes": 580783
+  }
+}

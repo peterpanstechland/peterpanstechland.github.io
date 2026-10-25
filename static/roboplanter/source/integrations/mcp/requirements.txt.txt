@@ -1,0 +1,4 @@
+# Official Model Context Protocol Python SDK, not the separate fastmcp package.
+mcp==1.30.0
+httpx==0.28.1
+pydantic==2.14.1

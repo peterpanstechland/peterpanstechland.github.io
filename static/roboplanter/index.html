@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description" content="RoboPlanter 工位搭子：一盆有点嘴硬的绿，和一套让自带硬件接入 YOYO 的开放实践。体验互动植物、制作你的工位海报、从教程开始复现。">
+  <meta property="og:title" content="你先下班，我负责发芽。｜工位搭子 RoboPlanter">
+  <meta property="og:description" content="给工位加一点绿，也给自己留一点余地。互动体验、硬件教程与 YOYO Skill 接入实践。">
+  <meta property="og:image" content="https://peterpanstechland.github.io/roboplanter/assets/social-cover.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://peterpanstechland.github.io/roboplanter/">
+  <title>工位搭子 RoboPlanter — 你先下班，我负责发芽。</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23c3ed64'/%3E%3Cpath d='M32 42V22M32 30C10 32 10 12 29 20M32 25C51 27 53 8 36 17' fill='none' stroke='%232b392c' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到内容</a>
+  <header class="nav">
+    <a class="brand" href="./" aria-label="工位搭子首页"><span class="brandmark" aria-hidden="true">⌁</span><span>工位搭子<small>ROBOPLANTER</small></span></a>
+    <nav aria-label="主导航"><a href="#why">为什么是一盆绿</a><a href="#build">自己动手</a><a class="nav-doc" href="/docs/projects/2026/roboplanter/">打开项目手册 <span aria-hidden="true">↗</span></a></nav>
+  </header>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> A LITTLE GREEN. A LITTLE LESS GRIND.</p>
+        <h1 id="hero-title">你先下班，<br>我负责<span class="sprout-word">发芽<svg viewBox="0 0 330 19" aria-hidden="true"><path d="M5 12Q150 -3 323 10"/></svg></span>。</h1>
+        <p class="intro">工位上，终于有个不催进度的搭子。<br>一盆有点嘴硬的绿，陪你把日子慢慢养回来。</p>
+        <div class="hero-actions"><a class="button dark" href="#experience">先认识一下 <span aria-hidden="true">↓</span></a><a class="text-link" href="/docs/projects/2026/roboplanter/hardware-quickstart">我想做一个 <span aria-hidden="true">↗</span></a></div>
+        <div class="aside-note"><span class="mini-leaf" aria-hidden="true">✳</span><p>不要求你状态满格。<br><strong>今天有好好喝水，就已经很不错。</strong></p></div>
+      </div>
+      <div class="experience" id="experience">
+        <div class="stage-top"><span class="tag">交互概念 · 不连接硬件</span><span class="specimen">DESK FRIEND / 001</span></div>
+        <div id="scene" role="img" aria-label="一个有大眼睛的奶油色花盆，顶着嫩绿幼苗。拖动可旋转，使用下方按钮互动。"><div class="fallback-plant" id="fallback" aria-hidden="true"><span class="fallback-leaves">♧</span><span class="fallback-pot">•ᴗ•</span></div></div>
+        <div class="speech" id="speech" aria-live="polite"><span class="speech-name">薄荷 · 今日嘴替</span><p id="plant-line">老板的饼我不吃。<br>我光合作用。</p></div>
+        <div class="orbit-note">拖动转一圈 <span aria-hidden="true">⤺</span><span id="render-state">3D 准备中</span></div>
+        <div class="scene-controls" aria-label="模拟植物互动">
+          <button id="water" class="control"><span aria-hidden="true">◉</span>给搭子一口水</button>
+          <button id="freeze" class="control" aria-pressed="false"><span aria-hidden="true">◎</span>定格这一秒</button>
+          <button id="poster" class="control accent"><span aria-hidden="true">↗</span>领走工位嘴替</button>
+        </div>
+        <p class="simulation-note">这里的浇水与心情均为网页模拟，不代表真实植物状态。</p>
+      </div>
+    </section>
+    <div class="ticker" aria-label="产品理念"><span>硬件你来选</span><i>✳</i><span>对话交给 YOYO</span><i>✳</i><span>照顾植物，也留意自己</span><i>✳</i><span>嘴硬，叶子软</span></div>
+    <section class="story section" id="why" aria-labelledby="why-title">
+      <div class="section-kicker">01 / A SMALL ACT OF CARE</div>
+      <div class="story-heading"><h2 id="why-title">不是每一件事，<br>都要长成 KPI。</h2><p>它不是另一个待办清单。<br>只是在很忙的一天里，给你一个很小的理由：<br>看看叶子，喝一口水，再决定下一步。</p></div>
+      <div class="moments">
+        <article class="moment"><span class="moment-time">09:41 · 刚坐下</span><h3>“今天有点蔫。”</h3><p>不急着给建议。让 YOYO 先听你说完，再一起找一个做得到的小步骤。</p><span class="status-pill">Skill 陪伴对话</span></article>
+        <article class="moment green"><span class="moment-time">14:26 · 卡住了</span><h3>“先一起长五分钟。”</h3><p>屏幕里的小精灵有自己的节奏。专注、照料、发芽，小小的反馈也值得被看见。</p><span class="status-pill">已实现 · 屏幕养成</span></article>
+        <article class="moment"><span class="moment-time">18:03 · 收工前</span><h3>“今天，就到这里。”</h3><p>有些关心留给自己，有些留给一盆绿。真实浇水要有明确授权和设备回报。</p><span class="status-pill outline">硬件链路 · 待真机验收</span></article>
+      </div>
+    </section>
+    <section class="mood-section section" aria-labelledby="mood-title">
+      <div><div class="section-kicker">02 / PICK YOUR DESK ENERGY</div><h2 id="mood-title">今天，你是哪一盆？</h2><p>选一个状态。它替你说一句。<br><small>角色文案是模拟表达，不是传感器判断。</small></p></div>
+      <div class="mood-picker" role="group" aria-label="选择工位心情">
+        <button class="mood selected" data-mood="chill" aria-pressed="true"><span class="mood-face">−ᴗ−</span><strong>佛系发芽</strong><small>我在长，别催。</small></button>
+        <button class="mood" data-mood="busy" aria-pressed="false"><span class="mood-face">◉_◉</span><strong>假装很忙</strong><small>正在后台光合。</small></button>
+        <button class="mood" data-mood="tired" aria-pressed="false"><span class="mood-face">ᵕ_ᵕ</span><strong>电量见底</strong><small>先给自己浇点水。</small></button>
+        <button class="mood" data-mood="happy" aria-pressed="false"><span class="mood-face">⌒ᴗ⌒</span><strong>准点下班</strong><small>我和叶子都同意。</small></button>
+      </div>
+    </section>
+    <section class="build-section section" id="build" aria-labelledby="build-title">
+      <div class="section-kicker">03 / YOUR HARDWARE. ONE CONVERSATION.</div>
+      <div class="build-heading"><h2 id="build-title">盆可以不一样。<br>关心，用同一种语言。</h2><p>从工位上的一株薄荷开始，<br>把设备能力说清楚，把每一次动作确认清楚。<br>再去想一座温室，而不是反过来。</p></div>
+      <div class="architecture" aria-label="系统连接关系">
+        <div class="arch-node"><span>说一句话</span><strong>你 + YOYO</strong><small>理解意图 · 解释结果</small></div><span class="arch-arrow" aria-hidden="true">→</span>
+        <div class="arch-node"><span>能力契约</span><strong>RoboPlanter</strong><small>身份 · 能力 · 状态 · 动作边界</small></div><span class="arch-arrow" aria-hidden="true">→</span>
+        <div class="arch-node"><span>本地执行</span><strong>你的硬件</strong><small>设备限时 · 真实回包</small></div>
+      </div>
+      <p class="arch-caption">目标主线：YOYO Skill → 官方 BLE → XIAO。网页只做展示；在线设备管理、通用绑定和农业控制是后续阶段。</p>
+      <div class="build-routes">
+        <a href="/docs/projects/2026/roboplanter/hardware-quickstart"><span class="route-num">A</span><h3>我有 XIAO 套件</h3><p>从认板、供电、接线和烧录开始。先拿到一次可信的只读回包。</p><span class="route-link">硬件快速入门 ↗</span></a>
+        <a href="/docs/projects/2026/roboplanter/device-platform"><span class="route-num">B</span><h3>我有别的硬件</h3><p>用设备描述文件声明能力。先跑离线契约检查，再写传输适配。</p><span class="route-link">开放设备接入 ↗</span></a>
+        <a href="/docs/projects/2026/roboplanter/honor-platform"><span class="route-num">C</span><h3>我来接 YOYO</h3><p>Skill 上传只是第一步。了解平台配置、手机测试与启用条件。</p><span class="route-link">荣耀平台教程 ↗</span></a>
+      </div>
+    </section>
+    <section class="truth-section section" aria-labelledby="truth-title">
+      <div><div class="section-kicker">04 / SMALL STEPS. REAL PROGRESS.</div><h2 id="truth-title">可爱归可爱。<br>进度，认真交代。</h2><a class="text-link" href="/docs/projects/2026/roboplanter/roadmap-evidence">查看证据与验收路线 ↗</a></div>
+      <div class="progress-list"><div><span class="progress-code">01 / 已实现</span><p>屏幕植物养成、专注计时、中英文与设置<br><small>已有构建和实屏记录，长期稳定性仍需持续观察。</small></p></div><div><span class="progress-code">02 / 正在接通</span><p>YOYO Skill 与 XIAO 的 BLE 闭环<br><small>Skill 已上传；鉴权注入、手机长写和真机回包待验收。</small></p></div><div><span class="progress-code">03 / 未来生长</span><p>自带硬件、温室与智能灌溉<br><small>先提供离线设备契约；在线注册、多租户与农业策略尚未实现。</small></p></div></div>
+    </section>
+    <section class="closing"><span class="closing-label">GROW AT YOUR OWN PACE.</span><h2>今天没有开花，<br>也没关系。</h2><p>先从工位上的第一盆开始。</p><a href="/docs/projects/2026/roboplanter/" class="button lime">把搭子带上桌 <span aria-hidden="true">↗</span></a><p class="closing-note">公开复现项目 · 当前没有商品售卖或到货承诺</p></section>
+  </main>
+  <footer><a class="brand" href="./">工位搭子 <small>ROBOPLANTER</small></a><p>一盆绿，一个小小的喘息。<br><a href="/docs/projects/">Peter Pan’s Techland</a> / <a href="./downloads/roboplanter-device-kit.zip" download>Device Kit</a> / <a href="/docs/projects/2026/roboplanter/social-playbook">创作手册</a></p><span>MADE TO BE CARED FOR.</span></footer>
+  <dialog id="poster-dialog" aria-labelledby="poster-title"><button class="dialog-close" id="close-poster" aria-label="关闭海报">×</button><div><span class="eyebrow">A LITTLE DESK ENERGY, TO GO.</span><h2 id="poster-title">你的嘴替，已就位。</h2><p>3:4 原创工位卡。保存后分享给也需要一口气的人。</p><p class="dialog-notice">标注保留：概念演示，非实机拍摄。不会代你发布到社交平台。</p><button class="button dark" id="download-poster">保存我的工位卡 ↗</button><button class="button" id="download-cover">也来一张横版封面 ↗</button><p id="download-status" role="status"></p></div><canvas id="poster-canvas" width="1200" height="1600" aria-label="工位搭子原创海报预览"></canvas></dialog>
+  <noscript><p class="noscript">打开 JavaScript 可以体验互动植物。接线、烧录与 YOYO 教程仍可通过上方项目手册阅读。</p></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -5,6 +5,16 @@ description: End-to-end projects showcasing AI × Edge × AWS
 slug: /projects
 ---
 
+<!-- ROBOPLANTER:START -->
+### [工位搭子 · RoboPlanter](/docs/projects/2026/roboplanter/)
+
+你先下班，我负责发芽。YOYO Skill、XIAO 设备控制、Indicator 像素养成，以及可供自带硬件使用的离线 Device Kit。
+
+[互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)
+
+**进度：** 屏幕端已有实物记录；手机 BLE / 传感器执行器闭环仍待验收。展示交互是模拟，设施农业与在线多设备平台为未来方向。
+<!-- ROBOPLANTER:END -->
+
 # Projects
 
 Welcome to my project portfolio. Each project here represents a complete journey from concept to deployment, demonstrating the integration of AI, edge computing, and cloud services.
