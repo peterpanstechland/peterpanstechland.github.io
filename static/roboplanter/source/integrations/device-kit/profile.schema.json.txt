@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RoboPlanter offline device profile v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "profile_id", "name", "status", "description", "assistant", "adapter", "transports", "capabilities", "max_sample_age_ms"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "profile_id": {"$ref": "#/$defs/id"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 100},
+    "status": {"$ref": "#/$defs/status"},
+    "description": {"type": "string", "minLength": 1, "maxLength": 1000},
+    "max_sample_age_ms": {"type": "integer", "minimum": 1, "maximum": 60000},
+    "assistant": {
+      "type": "object", "additionalProperties": false,
+      "required": ["entrypoint", "binding_status", "execution_enabled"],
+      "properties": {
+        "entrypoint": {"type": "string", "const": "yoyo"},
+        "binding_status": {"type": "string", "const": "not_verified"},
+        "execution_enabled": {"type": "boolean", "const": false}
+      }
+    },
+    "adapter": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "protocol_version", "runtime_available", "fixture_format", "source_paths"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "protocol_version": {"type": "string", "minLength": 1, "maxLength": 40},
+        "runtime_available": {"type": "boolean"},
+        "fixture_format": {"type": "string", "enum": ["xiao-http-v1", "canonical-v1"]},
+        "source_paths": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "^[a-zA-Z0-9_./-]+$"}}
+      }
+    },
+    "transports": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"$ref": "#/$defs/transport"}},
+    "capabilities": {"type": "array", "minItems": 1, "maxItems": 64, "items": {"$ref": "#/$defs/capability"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9-]{0,63}$"},
+    "status": {"type": "string", "enum": ["supported", "experimental", "planned"]},
+    "mappingText": {"type": ["string", "null"], "minLength": 1, "maxLength": 300},
+    "transport": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "status", "origin", "credential_ref", "service_uuid", "characteristic_uuid", "notes"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "kind": {"type": "string", "enum": ["http", "ble", "mqtt", "modbus"]},
+        "status": {"$ref": "#/$defs/status"},
+        "origin": {"type": ["string", "null"], "maxLength": 200},
+        "credential_ref": {"type": "string", "pattern": "^(env|provisioning):[A-Za-z][A-Za-z0-9_.-]{0,80}$"},
+        "service_uuid": {"type": ["string", "null"], "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+        "characteristic_uuid": {"type": ["string", "null"], "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+        "notes": {"type": "string", "minLength": 1, "maxLength": 1000}
+      }
+    },
+    "capability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "status", "risk", "unit", "readable", "writable", "sample", "limits", "interlocks", "mappings"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "kind": {"type": "string", "enum": ["measurement", "actuator", "status"]},
+        "status": {"$ref": "#/$defs/status"},
+        "risk": {"type": "string", "enum": ["none", "low", "medium", "high"]},
+        "unit": {"type": ["string", "null"], "maxLength": 30},
+        "readable": {"type": "boolean"},
+        "writable": {"type": "boolean"},
+        "sample": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "required": ["value_path", "valid_path", "calibrated_path"],
+          "properties": {
+            "value_path": {"type": "string", "pattern": "^[a-z][a-z0-9_.]{0,99}$"},
+            "valid_path": {"type": "string", "pattern": "^[a-z][a-z0-9_.]{0,99}$"},
+            "calibrated_path": {"type": ["string", "null"], "pattern": "^[a-z][a-z0-9_.]{0,99}$"}
+          }
+        },
+        "limits": {
+          "type": "object", "additionalProperties": false,
+          "required": ["minimum", "maximum", "max_duration_ms"],
+          "properties": {
+            "minimum": {"type": ["number", "null"]},
+            "maximum": {"type": ["number", "null"]},
+            "max_duration_ms": {"type": ["integer", "null"], "minimum": 1, "maximum": 3600000}
+          }
+        },
+        "interlocks": {"type": "array", "maxItems": 16, "uniqueItems": true, "items": {"type": "string", "enum": ["explicit_user_request", "local_timeout", "local_stop", "no_replay", "fresh_state", "dry_run_protection", "flow_feedback", "pressure_limit"]}},
+        "mappings": {
+          "type": "array", "minItems": 1, "maxItems": 8,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["transport_id", "read", "write", "result"],
+            "properties": {
+              "transport_id": {"$ref": "#/$defs/id"},
+              "read": {"$ref": "#/$defs/mappingText"},
+              "write": {"$ref": "#/$defs/mappingText"},
+              "result": {"$ref": "#/$defs/mappingText"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

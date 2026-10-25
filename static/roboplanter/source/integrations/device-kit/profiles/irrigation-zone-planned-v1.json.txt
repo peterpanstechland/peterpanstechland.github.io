@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "profile_id": "irrigation-zone-planned-v1",
+  "name": "Irrigation zone future contract",
+  "status": "planned",
+  "description": "Design only: no field driver, automation, schedule, YOYO binding, flow calibration or field acceptance exists.",
+  "assistant": {
+    "entrypoint": "yoyo",
+    "binding_status": "not_verified",
+    "execution_enabled": false
+  },
+  "adapter": {
+    "id": "irrigation-zone-planned",
+    "protocol_version": "proposed-1",
+    "runtime_available": false,
+    "fixture_format": "canonical-v1",
+    "source_paths": []
+  },
+  "transports": [
+    {
+      "id": "field-gateway",
+      "kind": "modbus",
+      "status": "planned",
+      "origin": null,
+      "credential_ref": "provisioning:device-credential",
+      "service_uuid": null,
+      "characteristic_uuid": null,
+      "notes": "Proposed isolated field gateway; bus registers, electrical isolation and actuator fail-safe design still required."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "soil-moisture",
+      "kind": "measurement",
+      "status": "planned",
+      "risk": "none",
+      "unit": "percent",
+      "readable": true,
+      "writable": false,
+      "sample": {
+        "value_path": "readings.soil_moisture.value",
+        "valid_path": "readings.soil_moisture.valid",
+        "calibrated_path": "readings.soil_moisture.calibrated"
+      },
+      "limits": {
+        "minimum": 0,
+        "maximum": 100,
+        "max_duration_ms": null
+      },
+      "interlocks": [],
+      "mappings": [
+        {
+          "transport_id": "field-gateway",
+          "read": "Proposed gateway -> readings.soil_moisture",
+          "write": null,
+          "result": null
+        }
+      ]
+    },
+    {
+      "id": "irrigation-zone",
+      "kind": "actuator",
+      "status": "planned",
+      "risk": "high",
+      "unit": null,
+      "readable": true,
+      "writable": true,
+      "sample": null,
+      "limits": {
+        "minimum": null,
+        "maximum": null,
+        "max_duration_ms": 30000
+      },
+      "interlocks": [
+        "explicit_user_request",
+        "local_timeout",
+        "local_stop",
+        "no_replay",
+        "dry_run_protection",
+        "flow_feedback",
+        "pressure_limit"
+      ],
+      "mappings": [
+        {
+          "transport_id": "field-gateway",
+          "read": "Proposed zone/flow/fault state",
+          "write": "Proposed bounded zone pulse (no implementation)",
+          "result": "Proposed durable action result"
+        }
+      ]
+    }
+  ],
+  "max_sample_age_ms": 5000
+}

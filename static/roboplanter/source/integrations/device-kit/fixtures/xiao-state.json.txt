@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "device_id": "desk-planter-01",
+  "sample_age_ms": 120,
+  "soil": {
+    "raw": null,
+    "percent": null,
+    "valid": false,
+    "calibrated": false
+  },
+  "air": {
+    "raw": null,
+    "valid": false
+  },
+  "uv": {
+    "raw": null,
+    "valid": false
+  },
+  "environment": {
+    "temperature_c": 24.5,
+    "humidity_pct": 56,
+    "valid": true
+  },
+  "pump": {
+    "enabled": false,
+    "on": false,
+    "remaining_ms": 0
+  },
+  "light": {
+    "enabled": false,
+    "on": false
+  },
+  "printer": {
+    "enabled": false,
+    "status": "off"
+  }
+}

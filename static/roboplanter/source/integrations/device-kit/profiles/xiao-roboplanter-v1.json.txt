@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "profile_id": "xiao-roboplanter-v1",
+  "name": "XIAO RoboPlanter v1",
+  "status": "supported",
+  "description": "Contract for existing local v1 HTTP/BLE firmware. Physical commissioning and YOYO binding are not verified.",
+  "assistant": {
+    "entrypoint": "yoyo",
+    "binding_status": "not_verified",
+    "execution_enabled": false
+  },
+  "adapter": {
+    "id": "xiao-v1",
+    "protocol_version": "1",
+    "runtime_available": true,
+    "fixture_format": "xiao-http-v1",
+    "source_paths": [
+      "integrations/mcp/bridge.py",
+      "firmware/xiao",
+      "docs/device-protocol.md"
+    ]
+  },
+  "transports": [
+    {
+      "id": "local-http",
+      "kind": "http",
+      "status": "supported",
+      "origin": "http://192.168.4.1",
+      "credential_ref": "env:ROBOPLANTER_TOKEN",
+      "service_uuid": null,
+      "characteristic_uuid": null,
+      "notes": "Existing v1 HTTP implementation; device-kit does not connect. Supported means code contract, not physical acceptance."
+    },
+    {
+      "id": "honor-ble",
+      "kind": "ble",
+      "status": "experimental",
+      "origin": null,
+      "credential_ref": "provisioning:device-credential",
+      "service_uuid": "a2f39c10-7e4b-4d21-8a61-0f3bc9d15001",
+      "characteristic_uuid": "a2f39c11-7e4b-4d21-8a61-0f3bc9d15001",
+      "notes": "Existing firmware framing; YOYO credential injection, long write and NOTIFY remain unverified."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "soil-moisture",
+      "kind": "measurement",
+      "status": "supported",
+      "risk": "none",
+      "unit": "percent",
+      "readable": true,
+      "writable": false,
+      "sample": {
+        "value_path": "soil.percent",
+        "valid_path": "soil.valid",
+        "calibrated_path": "soil.calibrated"
+      },
+      "limits": {
+        "minimum": 0,
+        "maximum": 100,
+        "max_duration_ms": null
+      },
+      "interlocks": [],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> soil.percent",
+          "write": null,
+          "result": null
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|soil",
+          "write": null,
+          "result": null
+        }
+      ]
+    },
+    {
+      "id": "air-temperature",
+      "kind": "measurement",
+      "status": "supported",
+      "risk": "none",
+      "unit": "degC",
+      "readable": true,
+      "writable": false,
+      "sample": {
+        "value_path": "environment.temperature_c",
+        "valid_path": "environment.valid",
+        "calibrated_path": null
+      },
+      "limits": {
+        "minimum": -40,
+        "maximum": 125,
+        "max_duration_ms": null
+      },
+      "interlocks": [],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> environment.temperature_c",
+          "write": null,
+          "result": null
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|env",
+          "write": null,
+          "result": null
+        }
+      ]
+    },
+    {
+      "id": "air-humidity",
+      "kind": "measurement",
+      "status": "supported",
+      "risk": "none",
+      "unit": "percent",
+      "readable": true,
+      "writable": false,
+      "sample": {
+        "value_path": "environment.humidity_pct",
+        "valid_path": "environment.valid",
+        "calibrated_path": null
+      },
+      "limits": {
+        "minimum": 0,
+        "maximum": 100,
+        "max_duration_ms": null
+      },
+      "interlocks": [],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> environment.humidity_pct",
+          "write": null,
+          "result": null
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|env",
+          "write": null,
+          "result": null
+        }
+      ]
+    },
+    {
+      "id": "air-raw",
+      "kind": "measurement",
+      "status": "supported",
+      "risk": "none",
+      "unit": "adc",
+      "readable": true,
+      "writable": false,
+      "sample": {
+        "value_path": "air.raw",
+        "valid_path": "air.valid",
+        "calibrated_path": null
+      },
+      "limits": {
+        "minimum": 0,
+        "maximum": 4095,
+        "max_duration_ms": null
+      },
+      "interlocks": [],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> air.raw",
+          "write": null,
+          "result": null
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|air",
+          "write": null,
+          "result": null
+        }
+      ]
+    },
+    {
+      "id": "uv-raw",
+      "kind": "measurement",
+      "status": "supported",
+      "risk": "none",
+      "unit": "adc",
+      "readable": true,
+      "writable": false,
+      "sample": {
+        "value_path": "uv.raw",
+        "valid_path": "uv.valid",
+        "calibrated_path": null
+      },
+      "limits": {
+        "minimum": 0,
+        "maximum": 4095,
+        "max_duration_ms": null
+      },
+      "interlocks": [],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> uv.raw",
+          "write": null,
+          "result": null
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|uv",
+          "write": null,
+          "result": null
+        }
+      ]
+    },
+    {
+      "id": "water",
+      "kind": "actuator",
+      "status": "supported",
+      "risk": "high",
+      "unit": null,
+      "readable": true,
+      "writable": true,
+      "sample": null,
+      "limits": {
+        "minimum": null,
+        "maximum": null,
+        "max_duration_ms": 3000
+      },
+      "interlocks": [
+        "explicit_user_request",
+        "local_timeout",
+        "local_stop",
+        "no_replay",
+        "fresh_state"
+      ],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> pump",
+          "write": "POST /api/v1/command action=water",
+          "result": "GET /api/v1/result?request_id=<id>"
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|pump",
+          "write": "C|<credential-ref>|<id>|water|<duration_ms>",
+          "result": "R|<credential-ref>|<id>"
+        }
+      ]
+    },
+    {
+      "id": "stop-water",
+      "kind": "actuator",
+      "status": "supported",
+      "risk": "medium",
+      "unit": null,
+      "readable": true,
+      "writable": true,
+      "sample": null,
+      "limits": {
+        "minimum": null,
+        "maximum": null,
+        "max_duration_ms": null
+      },
+      "interlocks": [
+        "explicit_user_request",
+        "no_replay"
+      ],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> pump",
+          "write": "POST /api/v1/command action=stop_water",
+          "result": "GET /api/v1/result?request_id=<id>"
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|pump",
+          "write": "C|<credential-ref>|<id>|stop_water",
+          "result": "R|<credential-ref>|<id>"
+        }
+      ]
+    },
+    {
+      "id": "light",
+      "kind": "actuator",
+      "status": "supported",
+      "risk": "low",
+      "unit": null,
+      "readable": true,
+      "writable": true,
+      "sample": null,
+      "limits": {
+        "minimum": null,
+        "maximum": null,
+        "max_duration_ms": null
+      },
+      "interlocks": [
+        "explicit_user_request",
+        "no_replay",
+        "fresh_state"
+      ],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> light",
+          "write": "POST /api/v1/command action=light",
+          "result": "GET /api/v1/result?request_id=<id>"
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|light",
+          "write": "C|<credential-ref>|<id>|light|<0-or-1>",
+          "result": "R|<credential-ref>|<id>"
+        }
+      ]
+    },
+    {
+      "id": "print-note",
+      "kind": "actuator",
+      "status": "supported",
+      "risk": "low",
+      "unit": null,
+      "readable": true,
+      "writable": true,
+      "sample": null,
+      "limits": {
+        "minimum": null,
+        "maximum": null,
+        "max_duration_ms": null
+      },
+      "interlocks": [
+        "explicit_user_request",
+        "no_replay",
+        "fresh_state"
+      ],
+      "mappings": [
+        {
+          "transport_id": "local-http",
+          "read": "GET /api/v1/state -> printer",
+          "write": "POST /api/v1/command action=print",
+          "result": "GET /api/v1/result?request_id=<id>"
+        },
+        {
+          "transport_id": "honor-ble",
+          "read": "S|<credential-ref>|printer",
+          "write": "C|<credential-ref>|<id>|print|<ASCII-text>",
+          "result": "R|<credential-ref>|<id>"
+        }
+      ]
+    }
+  ],
+  "max_sample_age_ms": 5000
+}

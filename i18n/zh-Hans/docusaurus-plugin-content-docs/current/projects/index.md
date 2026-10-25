@@ -5,6 +5,16 @@ description: 展示 AI × 边缘计算 × AWS 的端到端项目
 slug: /projects
 ---
 
+<!-- ROBOPLANTER:START -->
+### [工位搭子 · RoboPlanter](/docs/projects/2026/roboplanter/)
+
+你先下班，我负责发芽。YOYO Skill、XIAO 设备控制、Indicator 像素养成，以及可供自带硬件使用的离线 Device Kit。
+
+[互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)
+
+**进度：** 屏幕端已有实物记录；手机 BLE / 传感器执行器闭环仍待验收。展示交互是模拟，设施农业与在线多设备平台为未来方向。
+<!-- ROBOPLANTER:END -->
+
 # 项目
 
 欢迎来到我的项目作品集。这里的每个项目都代表着从概念到部署的完整过程，展示了 AI、边缘计算和云服务的整合。

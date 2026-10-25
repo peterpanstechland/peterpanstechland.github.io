@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "device_id": "irrigation-zone-01",
+  "sample_age_ms": 100,
+  "readings": {
+    "soil_moisture": {
+      "value": 38,
+      "valid": true,
+      "calibrated": true
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "roboplanter": {
+      "command": "C:/path/to/python.exe",
+      "args": ["C:/path/to/RoboPlanter/integrations/mcp/server.py"],
+      "env": {
+        "ROBOPLANTER_URL": "http://192.168.4.1",
+        "ROBOPLANTER_TOKEN": "REPLACE_LOCALLY_WITH_THE_DEVICE_TOKEN"
+      }
+    }
+  }
+}
