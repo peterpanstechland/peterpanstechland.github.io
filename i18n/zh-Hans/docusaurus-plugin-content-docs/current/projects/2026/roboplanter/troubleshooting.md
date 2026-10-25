@@ -1,7 +1,7 @@
 ---
 title: "排障与恢复"
 description: "从电源、串口、构建、显示、HTTP 到 BLE 的故障诊断。"
-sidebar_position: 12
+sidebar_position: 14
 hide_title: true
 ---
 

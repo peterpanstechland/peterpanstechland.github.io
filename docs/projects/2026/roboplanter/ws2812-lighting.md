@@ -1,7 +1,7 @@
 ---
 title: "WS2812 灯带与氛围交互"
 description: "灯带接线、四种模式、HTTP/BLE/CLI 控制与分阶段实机验收。"
-sidebar_position: 4
+sidebar_position: 6
 hide_title: true
 ---
 

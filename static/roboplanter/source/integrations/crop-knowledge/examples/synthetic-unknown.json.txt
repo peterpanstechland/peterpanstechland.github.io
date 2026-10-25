@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "plant_id": "synthetic-unknown-01",
+  "taxon": null,
+  "cultivar": null,
+  "region": {"country": null, "admin1": null, "city": null},
+  "environment": null,
+  "goal": null,
+  "cycle_anchor": null,
+  "growth_habit": null,
+  "observations": []
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "cards": [
+    {
+      "id": "us-garden-tomato-pruning",
+      "source_ids": [
+        "cornell-tomato-2020"
+      ],
+      "operation": "pruning",
+      "taxa": [
+        "Solanum lycopersicum"
+      ],
+      "countries": [
+        "US"
+      ],
+      "environments": [
+        "open_field"
+      ],
+      "stages": [
+        "vegetative",
+        "flowering"
+      ],
+      "required_fields": [
+        "growth_habit",
+        "goal"
+      ],
+      "summary": "先区分有限与无限生长型，再评估整枝；不能把重整枝统一用于所有番茄。本条是美国园艺参考，不是本地处方。",
+      "admin1": [
+        "US-NY"
+      ]
+    },
+    {
+      "id": "us-tomato-pollination-check",
+      "source_ids": [
+        "maryland-pollination-2024"
+      ],
+      "operation": "pollination",
+      "taxa": [
+        "Solanum lycopersicum"
+      ],
+      "countries": [
+        "US"
+      ],
+      "environments": [
+        "greenhouse"
+      ],
+      "stages": [
+        "flowering"
+      ],
+      "required_fields": [
+        "goal"
+      ],
+      "summary": "观察到花与观察到幼果应分别记录；温室番茄坐果问题需检查授粉和环境条件，不能仅按天数宣布已结果。",
+      "admin1": [
+        "US-MD"
+      ]
+    },
+    {
+      "id": "us-wisconsin-tomato-grafting-context",
+      "source_ids": [
+        "wisconsin-tomato-2017"
+      ],
+      "operation": "grafting",
+      "taxa": [
+        "Solanum lycopersicum"
+      ],
+      "countries": [
+        "US"
+      ],
+      "environments": [
+        "open_field"
+      ],
+      "stages": [
+        "vegetative"
+      ],
+      "required_fields": [
+        "goal"
+      ],
+      "summary": "嫁接是有特定砧木、接穗与栽培目的的技术，不能作为所有植物成长的必做任务；具体操作需按原指南和现场条件复核。",
+      "admin1": [
+        "US-WI"
+      ]
+    },
+    {
+      "id": "us-basil-leaf-goal",
+      "source_ids": [
+        "ncsu-basil"
+      ],
+      "operation": "harvest",
+      "taxa": [
+        "Ocimum basilicum"
+      ],
+      "countries": [
+        "US"
+      ],
+      "environments": [
+        "open_field"
+      ],
+      "stages": [
+        "vegetative"
+      ],
+      "required_fields": [
+        "goal"
+      ],
+      "summary": "先区分采叶与留种目标；叶用罗勒的采收价值不必等待结果成熟。本条不提供采收周期或数量。",
+      "admin1": [
+        "US-NC"
+      ]
+    }
+  ]
+}

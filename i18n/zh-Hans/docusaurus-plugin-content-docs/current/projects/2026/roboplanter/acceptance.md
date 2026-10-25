@@ -1,7 +1,7 @@
 ---
 title: "分阶段验收与记录"
 description: "从离线测试到真实设备控制的检查项、失败场景和记录模板。"
-sidebar_position: 11
+sidebar_position: 13
 hide_title: true
 ---
 

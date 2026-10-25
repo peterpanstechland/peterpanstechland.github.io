@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-25",
+  "sources": [
+    {
+      "id": "fao56",
+      "title": "Crop evapotranspiration — FAO Irrigation and Drainage Paper 56 (1998)",
+      "publisher": "FAO; Allen, Pereira, Raes, Smith",
+      "url": "https://www.fao.org/4/x0490e/x0490e00.htm",
+      "kind": "reference",
+      "topics": [
+        "irrigation",
+        "phenology"
+      ],
+      "scope": "作物需水方法；阶段长度按地区、季节、品种和管理条件变化，不是盆栽统一剂量。",
+      "access": "官方HTML正文及目录已读",
+      "license": "原书声明 All rights reserved；未取得整本镜像授权",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "第6章 https://www.fao.org/4/x0490e/x0490e0b.htm 明确要求当地观察和模型验证。ETo/Kc不能直接变为每盆毫升或泵秒数。"
+    },
+    {
+      "id": "bbch-2018",
+      "title": "Growth stages of mono- and dicotyledonous plants: BBCH Monograph (2018)",
+      "publisher": "Julius Kühn-Institut; Uwe Meier (ed.)",
+      "url": "https://doi.org/10.5073/20180906-074619",
+      "kind": "reference",
+      "topics": [
+        "phenology"
+      ],
+      "scope": "阶段描述及作物专用分表，不是统一天数表。",
+      "access": "出版元数据与官方索引片段已核对；未全文审读",
+      "license": "逐制品核验；本项目仅保留书目链接",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "ISBN 978-3-95547-071-5。没有核对相应作物分表前不输出精确BBCH代码。"
+    },
+    {
+      "id": "uf-gdd",
+      "title": "Degree-Days: Growing, Heating, and Cooling (AE428)",
+      "publisher": "University of Florida IFAS; Clyde W. Fraisse and Silvana V. Paula-Moraes",
+      "url": "https://ask.ifas.ufl.edu/publication/AE428",
+      "kind": "official_guidance",
+      "topics": [
+        "phenology",
+        "pest_management"
+      ],
+      "scope": "GDD原理；基温与阈值依物种及品种。示范工具主要覆盖美国东南部。",
+      "access": "官方正文已读",
+      "license": "网页内容权利未逐项确认；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "摄氏/华氏积温不同。缺少合适模型或现场温度，不能凭默认基温编造成熟倒计时。"
+    },
+    {
+      "id": "bonhomme-2000",
+      "title": "Bases and limits to using degree.day units (2000)",
+      "publisher": "Raymond Bonhomme; European Journal of Agronomy 13(1), 1–10",
+      "url": "https://doi.org/10.1016/S1161-0301(00)00058-7",
+      "kind": "research",
+      "topics": [
+        "phenology"
+      ],
+      "scope": "热时间的基温、非线性温度响应及适用限制。",
+      "access": "元数据及摘要已核对；未取得全文",
+      "license": "出版社内容许可未核验；仅书目链接和摘要性说明",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "综述支持方法边界，不提供本项目薄荷、罗勒、蔷薇或多肉的专用参数。"
+    },
+    {
+      "id": "mcmaster-1997",
+      "title": "Growing degree-days: one equation, two interpretations (1997)",
+      "publisher": "Gregory S. McMaster and W. W. Wilhelm; Agricultural and Forest Meteorology 87(4), 291–300",
+      "url": "https://digitalcommons.unl.edu/usdaarsfacpub/83/",
+      "kind": "research",
+      "topics": [
+        "phenology"
+      ],
+      "scope": "积温计算顺序的差异；不能混用算法与阈值。",
+      "access": "作者大学存档及摘要/元数据已核对",
+      "license": "逐制品核验；未镜像论文",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "DOI 10.1016/S0168-1923(97)00027-0。方法ID、截断方式、温度单位及缺测策略应随参数一起保存。"
+    },
+    {
+      "id": "nikolaou-2019",
+      "title": "Irrigation of Greenhouse Crops (2019)",
+      "publisher": "Nikolaou, Neocleous, Katsoulas, Kittas; Horticulturae 5(1), 7",
+      "url": "https://doi.org/10.3390/horticulturae5010007",
+      "kind": "research",
+      "topics": [
+        "irrigation"
+      ],
+      "scope": "温室土培与基质栽培水分管理综述；不等于空调工位的本地阈值。",
+      "access": "元数据和摘要已核对；未全文审读",
+      "license": "本轮未核验全文许可；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "盆器体积、基质、根区、排水和微气候需现场记录；没有通用每N天浇水公式。"
+    },
+    {
+      "id": "cornell-tomato-2020",
+      "title": "Training Tomatoes (2020-06-12)",
+      "publisher": "Cornell University CALS; Steve Reiners",
+      "url": "https://cals.cornell.edu/school-integrative-plant-science/school-sections/horticulture-section/outreach-and-extension/pandemic-vegetable-gardening/pandemic-vegetable-gardening-2020-archive/training-tomatoes",
+      "kind": "official_guidance",
+      "topics": [
+        "pruning",
+        "grooming"
+      ],
+      "scope": "美国园艺番茄；有限与无限生长型整枝区别。",
+      "access": "官方正文已读",
+      "license": "网页内容权利未逐项确认；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "生长型和支撑方式影响整枝选择；不将一套整枝步骤套给所有番茄和所有作物。"
+    },
+    {
+      "id": "wisconsin-tomato-2017",
+      "title": "Homegrown Tomatoes for Wisconsin, A1691 (rev. April 2017)",
+      "publisher": "University of Wisconsin–Extension; Kristin Krokowski",
+      "url": "https://hort.extension.wisc.edu/files/2020/11/A1691.pdf",
+      "kind": "official_guidance",
+      "topics": [
+        "pruning",
+        "grafting",
+        "grooming",
+        "harvest"
+      ],
+      "scope": "美国Wisconsin家庭番茄指南；日期与气候不能直接移植中国。",
+      "access": "官方8页PDF已核对",
+      "license": "逐制品核验；不镜像PDF",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "网页版署名包括H. C. Harrison与Kristin Krokowski；本条对应PDF修订版。嫁接是按目的选择的技术，不是成熟必经阶段。"
+    },
+    {
+      "id": "maryland-pollination-2024",
+      "title": "Problems with Pollination in High Tunnel Tomatoes (updated 2024-10-22)",
+      "publisher": "University of Maryland Extension; Gerald (Jerry) Brust",
+      "url": "https://extension.umd.edu/resource/problems-pollination-high-tunnel-tomatoes",
+      "kind": "official_guidance",
+      "topics": [
+        "pollination",
+        "phenology"
+      ],
+      "scope": "美国高隧道番茄授粉问题；环境和花状态影响坐果。",
+      "access": "官方正文已读",
+      "license": "网页内容权利未逐项确认；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "看见花不能认定已坐果；不能把番茄辅助授粉方法推广给所有花卉或香草。"
+    },
+    {
+      "id": "ncsu-spearmint",
+      "title": "Mentha spicata — Extension Gardener Plant Toolbox",
+      "publisher": "North Carolina State University / NC Extension",
+      "url": "https://plants.ces.ncsu.edu/plants/mentha-spicata/",
+      "kind": "reference",
+      "topics": [
+        "identity",
+        "grooming"
+      ],
+      "scope": "物种/属身份与栽培背景；非本地试验处方。",
+      "access": "官方条目正文已读；无统一出版年",
+      "license": "逐条核验文字/图片权利；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "留兰香只是薄荷的一种，不是用户实物的鉴定结果。"
+    },
+    {
+      "id": "ncsu-basil",
+      "title": "Ocimum basilicum — Extension Gardener Plant Toolbox",
+      "publisher": "North Carolina State University / NC Extension",
+      "url": "https://plants.ces.ncsu.edu/plants/ocimum-basilicum/",
+      "kind": "reference",
+      "topics": [
+        "identity",
+        "pruning",
+        "harvest"
+      ],
+      "scope": "物种/属身份与栽培背景；非本地试验处方。",
+      "access": "官方条目正文已读；无统一出版年",
+      "license": "逐条核验文字/图片权利；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "需要品种及采叶/留种目标；九层塔昵称不自动确定品种。"
+    },
+    {
+      "id": "ncsu-rose",
+      "title": "Rosa — Extension Gardener Plant Toolbox",
+      "publisher": "North Carolina State University / NC Extension",
+      "url": "https://plants.ces.ncsu.edu/plants/rosa/",
+      "kind": "reference",
+      "topics": [
+        "identity",
+        "pruning"
+      ],
+      "scope": "物种/属身份与栽培背景；非本地试验处方。",
+      "access": "官方条目正文已读；无统一出版年",
+      "license": "逐条核验文字/图片权利；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "属级条目，不是所有蔷薇/月季的统一日历。"
+    },
+    {
+      "id": "ncsu-jade",
+      "title": "Crassula ovata — Extension Gardener Plant Toolbox",
+      "publisher": "North Carolina State University / NC Extension",
+      "url": "https://plants.ces.ncsu.edu/plants/crassula-ovata/",
+      "kind": "reference",
+      "topics": [
+        "identity",
+        "grooming"
+      ],
+      "scope": "物种/属身份与栽培背景；非本地试验处方。",
+      "access": "官方条目正文已读；无统一出版年",
+      "license": "逐条核验文字/图片权利；不镜像",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "玉树只是多肉的一种；不能推广到所有多肉。"
+    },
+    {
+      "id": "agrovoc",
+      "title": "AGROVOC multilingual thesaurus",
+      "publisher": "FAO",
+      "url": "https://www.fao.org/agrovoc/",
+      "kind": "ontology",
+      "topics": [
+        "identity",
+        "terminology"
+      ],
+      "scope": "多语言农业术语与关系；不提供水肥处方。",
+      "access": "官网、格式、服务和发布页已核对",
+      "license": "旧AIMS页为CC BY IGO 3.0；当前导入包应另核验release许可，不统一推定",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "https://www.fao.org/agrovoc/releases ；按词表版本、语言、许可证URI及文件摘要登记。"
+    },
+    {
+      "id": "plant-ontology",
+      "title": "Plant Ontology v2026-01-09",
+      "publisher": "Planteome",
+      "url": "https://github.com/Planteome/plant-ontology/releases/tag/v2026-01-09",
+      "kind": "ontology",
+      "topics": [
+        "phenology",
+        "terminology"
+      ],
+      "scope": "植物器官与发育阶段词汇；不是农事操作处方。",
+      "access": "官方release与LICENSE已核对",
+      "license": "该release内容CC BY 4.0；按其署名要求",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "发布于2026-01-12；使用release而非可能变动的编辑版术语ID。"
+    },
+    {
+      "id": "farmos",
+      "title": "farmOS 4.0.8 (2026-10-14 changelog)",
+      "publisher": "farmOS community",
+      "url": "https://farmos.org/development/api/",
+      "kind": "record_system",
+      "topics": [
+        "records",
+        "grooming",
+        "harvest"
+      ],
+      "scope": "资产、种植批次与农事日志的JSON:API；没有内置全地区农艺事实库。",
+      "access": "官方API、仓库与changelog已核对",
+      "license": "代码GPL v2文本；网站文档另标CC BY-NC-SA 4.0",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "https://github.com/farmOS/farmOS/blob/4.x/CHANGELOG.md 。借鉴数据结构不等于已经接入服务；用户日志仍按自身权限管理。"
+    },
+    {
+      "id": "pcse-wofost",
+      "title": "PCSE 6.0.13 and WOFOST crop parameters",
+      "publisher": "Wageningen model community; A. J. W. de Wit",
+      "url": "https://github.com/ajwdewit/pcse",
+      "kind": "model",
+      "topics": [
+        "phenology",
+        "irrigation",
+        "simulation"
+      ],
+      "scope": "作物生长预测和情景对照；依赖作物/品种、天气、土壤及管理输入。",
+      "access": "官方仓库、PyPI版本和参数分支已核对",
+      "license": "PCSE EUPL-1.2；参数文件另查Rights",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "6.0.13发布于2026-06-10；旧GitHub Latest Release不代表当前包。参数分支与模型版本需配套，不能将预测当实测阶段。"
+    },
+    {
+      "id": "aquacrop-fao-python",
+      "title": "FAO AquaCrop Python 7.3 (July 2026)",
+      "publisher": "FAO with University of Cordoba",
+      "url": "https://github.com/un-fao/fao-AquaCrop",
+      "kind": "model",
+      "topics": [
+        "irrigation",
+        "phenology",
+        "simulation"
+      ],
+      "scope": "作物水分生产力模型；为方法与对照来源。",
+      "access": "官方主页、v7.3 release及当前LICENSE已读",
+      "license": "当前LICENSE: All rights reserved；复制/传播应先取得相应授权",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "不要按README的open-source字样推定MIT/BSD。https://github.com/un-fao/fao-AquaCrop/blob/main/LICENSE 。本项目未捆绑其代码。"
+    },
+    {
+      "id": "aquacrop-kul",
+      "title": "AquaCrop Fortran 7.3 / v7.3_typofix",
+      "publisher": "KU Leuven KUL-RSDA",
+      "url": "https://github.com/KUL-RSDA/AquaCrop",
+      "kind": "model",
+      "topics": [
+        "irrigation",
+        "phenology",
+        "simulation"
+      ],
+      "scope": "FAO体系Fortran实现，可用于独立离线模型候选。",
+      "access": "官方仓库、release和LICENSE已核对",
+      "license": "Fortran v7.3为BSD-3；附带数据/GUI权利另核验",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "v7.3_typofix发布于2026-02-13。必须本地校准，不能从模拟水深直接发泵命令。"
+    },
+    {
+      "id": "aquacrop-ospy",
+      "title": "AquaCrop-OSPy 3.1.0 (2026-06-22)",
+      "publisher": "aquacropos community",
+      "url": "https://github.com/aquacropos/aquacrop",
+      "kind": "model",
+      "topics": [
+        "irrigation",
+        "simulation"
+      ],
+      "scope": "第三方实现，非FAO新官方Python；过程覆盖不完全相同。",
+      "access": "官方README、PyPI及master/LICENSE已核对",
+      "license": "master/LICENSE Apache-2.0，PyPI标签MIT冲突；锁定制品前核验",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "https://github.com/aquacropos/aquacrop/blob/master/LICENSE 。不把不同实现、版本及校准结果混成同一个模型。"
+    },
+    {
+      "id": "dssat",
+      "title": "DSSAT-CSM v4.8.6.0",
+      "publisher": "DSSAT development team",
+      "url": "https://github.com/DSSAT/dssat-csm-os/releases/tag/v4.8.6.0",
+      "kind": "model",
+      "topics": [
+        "phenology",
+        "fertilization",
+        "irrigation",
+        "simulation"
+      ],
+      "scope": "多作物管理情景试验；需要品种、土壤、气象和管理参数。",
+      "access": "官方仓库、release和license已核对",
+      "license": "代码BSD-3-Clause；天气/品种参数及第三方封装另核验",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "release发布2026-08-12，内部版本日期2026-07-01；不把两日期混写。首版工位不必引入此复杂度。"
+    },
+    {
+      "id": "open-meteo",
+      "title": "Open-Meteo 1.7.0 and weather API",
+      "publisher": "Open-Meteo",
+      "url": "https://open-meteo.com/en/docs",
+      "kind": "weather",
+      "topics": [
+        "weather",
+        "irrigation"
+      ],
+      "scope": "室外格点气象背景，不等于盆土或室内微气候。",
+      "access": "官方API、条款和release已核对",
+      "license": "代码AGPLv3；天气数据CC BY4.0；免费托管API非商业条款另行适用",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "https://open-meteo.com/en/terms 。未在本项目调用API，不把数据许可误解为免费商用服务额度。"
+    },
+    {
+      "id": "openfarm-archived",
+      "title": "OpenFarm (service closed April 2025)",
+      "publisher": "OpenFarm community",
+      "url": "https://github.com/openfarmcc/OpenFarm",
+      "kind": "software",
+      "topics": [
+        "records",
+        "historical_reference"
+      ],
+      "scope": "众包指南结构历史参考；不可作为新在线依赖。",
+      "access": "官方关闭通知、归档状态已核对",
+      "license": "代码MIT、数据库CC0分开；未验证可下载的完整数据库制品",
+      "reuse_policy": "仅收录链接、书目信息与原创简要说明；不镜像第三方原文、图片、模型代码或数据集。导入任何原始制品前逐项核验许可。",
+      "notes": "仓库2025-04-22归档；公开源代码不保证在线服务或指南准确性。"
+    },
+    {
+      "id": "cn-south-vegetables-2025",
+      "title": "2025年南方春季蔬菜生产管理技术指导意见",
+      "publisher": "农业农村部相关司局与农技机构；福建省农业农村厅转载",
+      "url": "https://nynct.fujian.gov.cn/ztzl/fzjz/kzjs/202503/t20250317_6780040.htm",
+      "kind": "official_guidance",
+      "topics": [
+        "irrigation",
+        "fertilization",
+        "pruning",
+        "grooming",
+        "pest_management"
+      ],
+      "scope": "长江流域以南、华南西南热区；原文分大棚/露地、作物类群和春季。",
+      "access": "官方HTML正文已读；页面2025-03-17",
+      "license": "未发现开放内容许可或公共API；不等于可批量复制",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "是2025季节性参考，不是2026实时天气处方；不能套用北方或未知室内盆栽。"
+    },
+    {
+      "id": "cn-hubei-orchard-2026",
+      "title": "春季果园管理技术 (2026-03-02)",
+      "publisher": "湖北省农业农村厅；省果茶办",
+      "url": "https://nyt.hubei.gov.cn/bmdt/yw/ywtz/sgcbgs_9007/202603/t20260302_5883302.shtml",
+      "kind": "official_guidance",
+      "topics": [
+        "irrigation",
+        "fertilization",
+        "pruning",
+        "pollination",
+        "grooming"
+      ],
+      "scope": "湖北春季柑橘、桃、梨、葡萄，需匹配树龄、物候及生产方式。",
+      "access": "官方HTML正文已读",
+      "license": "未发现开放内容许可或公共API",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "可索引授粉/疏果等条件，不用于室内香草或自动生成用药量；盛花期等前提须保留。"
+    },
+    {
+      "id": "cn-hunan-fertilizer-historical",
+      "title": "湖南省2023—2025年主要农作物科学施肥指导意见",
+      "publisher": "湖南省农业农村厅办公室",
+      "url": "https://agri.hunan.gov.cn/agri/xxgk/tzgg/202304/t20230427_29325373.html",
+      "kind": "official_guidance",
+      "topics": [
+        "fertilization"
+      ],
+      "scope": "湖南各分区、作物及树龄；指导期2023—2025，已结束。",
+      "access": "官方HTML正文已读",
+      "license": "未发现开放内容许可或公共API",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "通知2023-04-17，网页2023-04-27，湘农办发〔2023〕35号。2026仅作为历史字段设计参考，不能作当前默认处方。"
+    },
+    {
+      "id": "cn-natesc-biocontrol-candidate",
+      "title": "2025年设施蔬菜重要害虫生物防治技术方案（待全文核验）",
+      "publisher": "全国农业技术推广服务中心",
+      "url": "https://www.natesc.org.cn/admin/UeditorUploadFiles/file/20250319/6387800075611914063129687.pdf",
+      "kind": "reference",
+      "topics": [
+        "pest_management"
+      ],
+      "scope": "设施蔬菜相关虫种；仅官方PDF索引可核实，原文仍待下载核对。",
+      "access": "全文下载超时；只核对官方索引，不能支持已审核操作卡",
+      "license": "未核验内容许可",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "不导出药剂、释放密度或处方，不进入本轮可匹配操作卡；资料存在不等于本次完成全文核验。"
+    },
+    {
+      "id": "cn-nanjing-eggplant-grafting",
+      "title": "DB3201/T 1246—2025 茄子嫁接育苗技术规程",
+      "publisher": "南京市市场监督管理局；南京市农业农村局；南京市蔬菜科学研究所",
+      "url": "https://amr.nanjing.gov.cn/ztzl/bzhzl/tzgg/202503/P020250314425471809716.pdf",
+      "kind": "official_guidance",
+      "topics": [
+        "grafting",
+        "grooming"
+      ],
+      "scope": "南京茄子嫁接育苗，不是通用果树嫁接；适用状态需再查标准系统。",
+      "access": "官方10页PDF正文已核对",
+      "license": "未发现开放内容许可；前言含潜在专利提示",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "2025-03-14发布、2025-03-17实施；按砧木接穗状态判断时机，不用固定日历替代苗体检查。"
+    },
+    {
+      "id": "cn-apple-pollen-dataset",
+      "title": "辽宁绥中富士苹果花药开裂散粉状态表型数据图集ABP51",
+      "publisher": "国家农业科学数据中心；Science Data Bank",
+      "url": "https://www.agridata.cn/data.html#/datadetail?id=292606",
+      "kind": "dataset",
+      "topics": [
+        "pollination",
+        "phenology",
+        "computer_vision"
+      ],
+      "scope": "辽宁绥中富士苹果基地；仅散粉/原态花识别，不是全国花期预测或授粉成功率数据。",
+      "access": "浏览器元数据/许可声明已读；未下载38.68GB数据",
+      "license": "该数据集页面声明CC BY4.0，同时标协议共享；获取流程另核验",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "DOI 10.57760/sciencedb.j00001.01013；建议引用V2、2024[2025-04-01]；2460基础+8490增强图像，不把增强图当独立植株。"
+    },
+    {
+      "id": "cn-tomato-ripeness-dataset",
+      "title": "不同成熟度番茄果实多模态图像数据集",
+      "publisher": "国家农业科学数据中心；Science Data Bank",
+      "url": "https://www.agridata.cn/data.html#/datadetail?id=292604",
+      "kind": "dataset",
+      "topics": [
+        "harvest",
+        "phenology",
+        "computer_vision"
+      ],
+      "scope": "安徽六安；未熟/半熟/成熟果实，RGB/深度/近红外与特定照明。",
+      "access": "浏览器元数据/许可声明已读；未下载10.08GB数据",
+      "license": "该数据集页面声明CC BY4.0，同时标协议共享；获取流程另核验",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "DOI 10.57760/sciencedb.j00001.00946；建议引用V1、2023[2025-04-01]。4000组不等于4000株；不含完整生命周期或水肥因果效果。"
+    },
+    {
+      "id": "cn-pesticide-registration",
+      "title": "农药数字监督管理平台",
+      "publisher": "农业农村部种植业管理司等",
+      "url": "https://www.icama.cn/portal/homepage/index.do?id=h",
+      "kind": "reference",
+      "topics": [
+        "pest_management"
+      ],
+      "scope": "具体产品、作物、防治对象、标签及当前登记核验入口。",
+      "access": "官方首页可读；未查验具体产品，部分功能需要账号/验证码",
+      "license": "未核实匿名公共API或批量数据授权",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "本轮不提供用药剂量，不以通用知识卡代替产品标签、当地要求和病虫鉴定。"
+    },
+    {
+      "id": "cn-grain-storage-standards",
+      "title": "粮油和物资储备标准",
+      "publisher": "国家粮食和物资储备局",
+      "url": "https://www.lswz.gov.cn/html/ywpd/bzzl/lybz.shtml",
+      "kind": "reference",
+      "topics": [
+        "harvest",
+        "storage",
+        "standards"
+      ],
+      "scope": "收获后储藏、检验与加工；不是生长期水肥指导库。",
+      "access": "官方页面与2026标准事项已核对",
+      "license": "标准与条目逐份核权；未核实开放API",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "2026-08-03征集通知涉及储粮、扦样、检验和粮情测控；征求意见稿不能充当现行标准。"
+    },
+    {
+      "id": "cn-standard-status",
+      "title": "国家标准全文公开系统",
+      "publisher": "国家市场监督管理总局；国家标准化管理委员会",
+      "url": "https://openstd.samr.gov.cn/bzgk/std/index",
+      "kind": "reference",
+      "topics": [
+        "standards"
+      ],
+      "scope": "标准号、状态与实施日期核验；不完整覆盖全部农业/食品标准。",
+      "access": "官方入口及范围说明已读",
+      "license": "部分采标标准受国际版权限制；未核实批量复制授权",
+      "reuse_policy": "仅收录来源链接、书目信息和原创简要说明；本轮不抓取原文语料、不下载数据集、不镜像制品。",
+      "notes": "地方、行业和食品安全标准须在相应发布系统核对；不默认下载即有再分发权。"
+    }
+  ]
+}
