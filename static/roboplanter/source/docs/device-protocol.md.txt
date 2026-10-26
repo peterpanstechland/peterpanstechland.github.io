@@ -6,11 +6,13 @@
 
 默认热点密码 `planter-demo` 和设备令牌 `change-me-before-use` 仅用于初始只读联调。启用执行器前须在两端本地配置中设置同一个非默认设备令牌。项目不保存真实 Wi-Fi 密码和令牌到 Git。
 
+另有显式开启的同局域网模式：XIAO 设置 `ROBO_WIFI_STA=1`，两板接入同一实际 2.4GHz 路由器，Indicator 配置 XIAO 的实际 DHCP 地址。两板仍经 HTTP 通信；没有额外接线，也没有在本轮加入 ESP-NOW 或原生 MQTT。电脑可以保留上网连接，后续使用既有 MQTT 网关时无需另接 XIAO 热点。
+
 ## YOYO 调用入口
 
-主交互路径为 **YOYO 独立 Skill → 官方 `ble_send_command` → XIAO BLE**；Skill 草稿位于 [integrations/yoyo/skill-draft](../integrations/yoyo/skill-draft/README.md)，0.2.0已导入并保存平台草稿。设备令牌的安全注入方式及手机工具的长写能力未验证，当前 Skill 不发送硬件命令。不能将令牌写入 Skill 正文或假定平台会替换未经文档确认的变量。
+主交互路径为 **YOYO 独立 Skill → 官方 `ble_send_command` → XIAO BLE**；公开0.2.1草稿位于 [integrations/yoyo/skill-draft](../integrations/yoyo/skill-draft/README.md)，只允许固定无效凭据联通诊断，正式查询与控制未开放。另有用户授权的私有0.2.2单次土壤读取台架包，见下文。正式设备令牌的安全注入方式及手机工具的长写能力未验证，不能将正式令牌写入 Skill 正文或假定平台会替换未经文档确认的变量。
 
-Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/mcp/README.md) 和 [云 MCP/MQTT 网关](../integrations/cloud/README.md) 保留为辅助接入，均不是独立 Skill 主线的前置条件；A2A 不需要。MCP 的六个工具将请求映射到同一 HTTP 接口，服务端从环境读取固定地址与令牌。荣耀云不能直接访问 XIAO 热点地址；目前云网关未接通，云端所有写操作（包括停泵）均禁用。详情见 [YOYO 接入说明](../integrations/yoyo/README.md)。
+Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/mcp/README.md) 和 [云 MCP/MQTT 网关](../integrations/cloud/README.md) 保留为辅助接入，均不是独立 Skill 主线的前置条件；A2A 不需要。MCP 的六个工具将请求映射到同一 HTTP 接口，服务端从环境读取固定地址与令牌。2026-10-26 已经通过电脑上的只读网关，实测公网 MCP → MQTT → XIAO → Indicator 土壤查询；电脑或网关停止时链路不可用，尚非持续遥测入库。云端所有写操作（包括停泵）仍禁用。详情见 [YOYO 接入说明](../integrations/yoyo/README.md)。
 
 ## HTTP
 
@@ -32,6 +34,18 @@ Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/m
 | `last_command.request_id`、`status`、`error` | 最近命令的关联标识、结果及错误 |
 
 未启用的数值返回 `null`，不能用零值替代。采样失效时可保留原始 ADC 供诊断，但客户端必须依据 `valid` 和采样年龄判断；未标定的湿度百分比为 `null`。打印机串口发送完成只代表字节交给串口，不代表纸张实际打印完成；实际纸尽、过热和完成反馈需按打印机型号增加。
+
+### 可选的 Indicator 土壤上传
+
+仅当 XIAO 设置 `ROBO_ENABLE_REMOTE_SOIL=1` 时，开放 `POST /api/v1/sensors/soil`。使用相同 `X-Device-Token` 鉴权，Content-Type 为 `application/json`，请求体至多 512 字节，且必须恰有五个字段。例如下例是协议格式示意，不是真实读数：
+
+```json
+{"v":1,"source_boot":"0123abcd","seq":1,"raw":2500,"age_ms":100}
+```
+
+`source_boot` 为 Indicator ESP32 每次启动生成的 8 位小写十六进制标识，`seq` 是本次启动的新采样序号，`raw` 为 0–4095 的 ADC12 原始值。上传时采样年龄必须不超过 1500ms；XIAO 再计入保守的 1500ms HTTP 传输预算，合计超过 3000ms 即标记失效。同一来源不递增的序号返回 HTTP 409，不续期；合法新样本返回 HTTP 200 和 `accepted:true`。该接口只更新读数，不触发执行器。
+
+启用后状态额外包含 `soil.source="indicator_rp2040_grove_adc"` 和 `soil.sample_age_ms`。客户端必须同时检查 `soil.valid`，不能只用顶层采样循环年龄判断此远端读数。未校准仍为 `calibrated:false`、`percent:null`。RP2040 使用独立的挑战应答与 CRC16 串口程序，参见 [Indicator 固件说明](../firmware/indicator/README.md)。
 
 操作示例：
 
@@ -74,4 +88,14 @@ python tools/device_cli.py print 'Hello planter'
 
 保留附件的服务 UUID `a2f39c10-7e4b-4d21-8a61-0f3bc9d15001`，特征 UUID `a2f39c11-7e4b-4d21-8a61-0f3bc9d15001`。具体短文本格式、长度和回包规则见 [XIAO 固件说明](../firmware/xiao/README.md#ble-protocol-version-1)。BLE 写确认与设备业务回包分开处理；YOYO 查询需启用等待响应。
 
-带最短 16 字符令牌的 UV 查询已为 21 字节，超过默认 ATT MTU 23 下的 20 字节载荷。固件的长写处理与连接归属校验已编译和通过核心测试；荣耀工具是否协商足够 MTU、支持完整长写并返回完整业务响应，仍须手机真机验证。查询成功也不构成浇水授权。独立 Skill 当前只准备草稿，不因固件编译通过而启用硬件调用。
+带最短 16 字符令牌的 UV 查询已为 21 字节，超过默认 ATT MTU 23 下的 20 字节载荷。固件的长写处理与连接归属校验已编译和通过核心测试；荣耀工具是否协商足够 MTU、支持完整长写并返回完整业务响应，仍须手机真机验证。短请求的单次查询成功也不能证明长写兼容或构成浇水授权。
+
+### 可选的单次土壤读取会话
+
+`ROBO_ENABLE_DIAGNOSTIC_READ=1` 才编译此功能，默认关闭。它为私有真机联调提供一个独立、RAM 内保存、最多使用一次的临时凭据，避免把正式设备令牌放入 Skill。并不解决正式产品的凭据下发问题。
+
+管理端以正式 `X-Device-Token` 调用 `POST /api/v1/diagnostic-session`，JSON 为 `{"token":"<16位小写十六进制临时值>","ttl_ms":600000}`；时限范围 1000–600000ms。`{"disable":true}` 立即撤销。临时值不能授权 HTTP 状态查询、会话管理、普通 BLE 查询或执行器命令。
+
+手机仅发送 UTF-8 `Q|<临时值>`（共18字节，适配默认20字节 ATT 载荷），等待业务回包。首次正确请求先消耗凭据，再返回现有 `S:<raw>:<percent或x>:<valid>:<calibrated>` 土壤格式。错误、已使用、过期或撤销的凭据返回 `E:AUTH`；重启同样清除会话。客户端不能自动重试或把 `x` 当成湿度百分比。
+
+2026-10-26 已在 XIAO 真机验证单次返回 `S:2522:x:1:0`、重复拒绝、到期拒绝、撤销拒绝及执行器权限隔离。私有0.2.2经用户明确授权提交荣耀私有测试后，用户现场确认 Robot Phone 读到2529；未额外采集手机 NOTIFY 原始日志。随后主动撤销会话，设备确认 `disabled:true`。公开源码和公开0.2.1包不含该临时值；该次测试不等于正式长期凭据机制已完成。

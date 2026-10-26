@@ -1,4 +1,5 @@
 #pragma once
+#define PLANTER_ENABLE_LOCAL_SOIL 0 // Requires opt-in RP2040 soil_uart.py responder.
 // Copy to local_config.h and match the XIAO's serial startup information.
 #define PLANTER_WIFI_SSID "RoboPlanter-XXXX"
 #define PLANTER_WIFI_PASSWORD "planter-demo"

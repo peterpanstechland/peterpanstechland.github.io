@@ -6,6 +6,14 @@ The supplied configuration disables **all sensors and actuators**. Disabled meas
 
 ## Build
 
+Optional bench configuration: `ROBO_WIFI_STA=1` connects to the private `ROBO_STA_SSID` / `ROBO_STA_PASSWORD` instead of creating the standalone hotspot. Both boards must use the same 2.4GHz LAN; observe the actual DHCP address in the XIAO serial log and set Indicator's private base URL accordingly. The serial log never prints the password or device token. This mode itself does not implement MQTT.
+
+`ROBO_ENABLE_DIAGNOSTIC_READ=1` enables a separate one-use soil-read session for private phone acceptance. It is disabled by default and inactive after boot. An authenticated administrator may provision a distinct 16-hex-character key for at most ten minutes via `/api/v1/diagnostic-session`; BLE `Q|<key>` consumes it once. It grants no HTTP or actuator access. See [the protocol](../../docs/device-protocol.md#可选的单次土壤读取会话). Do not include a live key in public source or distribution packages.
+
+`ROBO_WS2813_RMT=1` selects GPIO40/D13 and the direct RMT timing used in the successful four-wire strip diagnostic. It is disabled by default. Sensor and actuator flags remain independent; for a light-only bench configuration keep pump and printer flags at zero. A successful command is software confirmation; visible motion requires observation.
+
+`ROBO_ENABLE_REMOTE_SOIL=1` accepts the original Indicator's authenticated soil relay; it is mutually exclusive with local XIAO soil ADC. The relay checks source boot ID, increasing sequence, ADC range and sample age. Duplicate/stale uploads cannot renew the stored sample. No calibration percentage is supplied by a wet-tissue test, and no irrigation is triggered by this route. See [the wire protocol](../../docs/device-protocol.md).
+
 Dependencies are pinned in `platformio.ini`: Espressif32 6.12.0 (Arduino ESP32 2.0.17), ArduinoJson 6.21.5, Adafruit NeoPixel 1.12.3. Wi-Fi, WebServer, BLE, Wire, HardwareSerial and FreeRTOS come from the Arduino core. SHT31 reads use Wire and verify the sensor's CRC directly.
 
 ```sh
@@ -34,6 +42,16 @@ These assignments follow the supplied `XIAO Robot Board_V1.0.pdf`, especially pa
 On the supplied V1.0 schematic, J13/J14/J5 pin 1 is the signal, pin 2 is NC, pin 3 is Motor5V, and pin 4 is GND. The firmware does not use Motor5V as a sensor supply. I²C J11/J12 pin 1 is SCL GPIO6, pin 2 SDA GPIO5, pin 3 3.3 V, pin 4 GND. UART J10 pin 1 is TX43, pin 2 RX44, pin 3 3.3 V, pin 4 GND. Verify the exact board revision before using these references.
 
 The original robot firmware and tutorial disagree about some motor/heater assignments. This firmware drives GPIO2/3/39/11/12 low at startup to disable the documented motor/heater nets and never issues movement commands. Battery sensing on GPIO4 is not sampled. There is no camera driver: the Plus board's expansion connector is not compatible with the standard XIAO ESP32-S3 Sense plug-in camera board. There is no Wio Terminal / SenseCAP Indicator driver in this firmware; those devices can consume the HTTP API through their own software.
+
+The camera compatibility restriction was rechecked against [Seeed's official
+pin-multiplexing documentation](https://wiki.seeedstudio.com/xiao_esp32s3_pin_multiplexing/)
+on 2026-10-26 after the user reported physically attaching a Sense camera
+extension to this Plus. No camera initialization or camera firmware upload was
+performed. Use a compatible standard S3/Sense host for that extension, or a
+separately verified Plus camera adapter. The standard Sense camera's SCCB SDA
+also uses GPIO40, which is already assigned to this carrier's RGB output;
+neither stacking nor swapping in the Sense host is a validated way to retain
+the current carrier wiring. See [wiring notes](../../docs/wiring.md).
 
 ### 12 V pump and printer
 

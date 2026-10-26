@@ -5,6 +5,9 @@
 #ifndef PLANTER_WIFI_SSID
 #define PLANTER_WIFI_SSID "RoboPlanter-XXXX"
 #endif
+#ifndef PLANTER_ENABLE_LOCAL_SOIL
+#define PLANTER_ENABLE_LOCAL_SOIL 0
+#endif
 #ifndef PLANTER_WIFI_PASSWORD
 #define PLANTER_WIFI_PASSWORD "planter-demo"
 #endif

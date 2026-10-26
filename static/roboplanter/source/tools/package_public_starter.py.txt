@@ -72,8 +72,10 @@ Public tutorial: https://peterpanstechland.github.io/docs/projects/2026/roboplan
 This archive contains allowlisted source, example configuration, host tests and
 documentation. It contains NO compiled firmware, device backup, credentials,
 original vendor attachment, personal photos or platform account screenshots.
-All actuators remain disabled by default. Reading this kit is not evidence that
-YOYO BLE, your board or an attached pump has passed hardware validation.
+The main application keeps actuators disabled by default. Separate bench
+diagnostics start with lights off and require explicit USB test commands; they
+are not production firmware. Reading this kit is not evidence that YOYO BLE,
+your board or an attached pump has passed hardware validation.
 
 Extract into an empty directory. Verify SOURCE-MANIFEST.json file hashes before
 use. Copy only example configuration and create your own private credentials.

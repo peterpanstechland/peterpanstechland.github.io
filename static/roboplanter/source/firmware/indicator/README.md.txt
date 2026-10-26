@@ -1,6 +1,14 @@
 # RoboPlanter — original SenseCAP Indicator client
 
-This project runs on the **original 4-inch, 480×480 SenseCAP Indicator D1's ESP32-S3** with OPI PSRAM. It provides an offline plant companion, local focus timer and settings, plus a Wi-Fi HTTP client for XIAO readings and manual commands. The network client preserves missing and stale data rather than inventing readings; the real XIAO connection and peripherals still require hardware acceptance. D1 has no built-in CO₂/VOC sensor and requires an external sensor for temperature/humidity. This firmware does not acquire local environmental measurements, initialise the internal ESP32–RP2040 UART, reset the RP2040, or replace RP2040 firmware. Do not connect an additional UART/GPIO cable between Indicator and XIAO.
+This project runs on the **original 4-inch, 480×480 SenseCAP Indicator D1's ESP32-S3** with OPI PSRAM. It provides an offline plant companion, local focus timer and settings, plus a Wi-Fi HTTP client for XIAO readings and manual commands. The network client preserves missing and stale data rather than inventing readings. D1 has no built-in CO₂/VOC sensor and requires an external sensor for temperature/humidity. The optional `PLANTER_ENABLE_LOCAL_SOIL` path reads the internal RP2040 soil responder; it is disabled by default and does not replace or reset RP2040 firmware. Do not connect an additional UART/GPIO cable between Indicator and XIAO.
+
+## Optional local soil relay
+
+The original Indicator's left Grove yellow wire is RP2040 GPIO27. With `PLANTER_ENABLE_LOCAL_SOIL=1`, a separate task uses ESP32 RX20/TX19 and RP2040 TX16/RX17 at 115200 baud. Install the opt-in [MicroPython responder](../indicator-rp2040-diagnostics/soil_uart.py) on the already backed-up RP2040 and explicitly run `import soil_uart; soil_uart.serve()` from its `main.py`. Preserve any existing `main.py` before replacing it. The stock COBS firmware is not compatible with this diagnostic protocol.
+
+Requests carry a random challenge; responses must echo it, pass CRC16-CCITT and contain ADC12 values in 0–4095. A response timeout is 250 ms. Accepted samples expire after 1500 ms locally. The HTTP worker forwards fresh samples to XIAO's authenticated `/api/v1/sensors/soil`; no HTTP work runs in the display/touch task. Uncalibrated readings appear with an `ADC` unit and calibration hint, never as a moisture percentage. The relay does not perform automatic watering.
+
+For shared-LAN testing, configure both boards for the same actual 2.4GHz network and set `PLANTER_BASE_URL` to the XIAO's observed LAN address. Saved Indicator Wi-Fi settings take priority over compiled defaults; use its Wi-Fi settings if it selects an old network. Broker credentials are not part of this local relay, and this firmware does not yet implement native MQTT.
 
 ## Build and configuration
 

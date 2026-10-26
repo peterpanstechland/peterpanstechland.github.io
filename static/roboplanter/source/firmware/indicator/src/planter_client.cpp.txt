@@ -1,6 +1,7 @@
 #include "planter_client.h"
 #include "config.h"
 #include "device_settings.h"
+#include "local_soil.h"
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
 #include <WiFi.h>
@@ -66,6 +67,22 @@ bool configureHttp(HTTPClient &http, WiFiClient &client, const char *path) {
   if (!http.begin(client, String(PLANTER_BASE_URL) + path)) return false;
   http.addHeader("X-Device-Token", PLANTER_DEVICE_TOKEN);
   return true;
+}
+
+void uploadSoil() {
+  if(!PLANTER_ENABLE_LOCAL_SOIL)return;
+  const auto sample=local_soil::snapshot();
+  if(!sample.valid)return;
+  WiFiClient client;HTTPClient http;
+  if(!configureHttp(http,client,"/api/v1/sensors/soil"))return;
+  http.addHeader("Content-Type","application/json");
+  StaticJsonDocument<256> doc;
+  doc["v"]=1;doc["source_boot"]=sample.boot;doc["seq"]=sample.sequence;
+  doc["raw"]=sample.raw;doc["age_ms"]=static_cast<uint32_t>(millis()-sample.receivedMs);
+  String body;serializeJson(doc,body);
+  const int code=http.POST(body);http.end();
+  static unsigned accepted=0;
+  if(code==200 && ++accepted%10==1)Serial.printf("Indicator soil relay: HTTP 200 raw=%d\n",sample.raw);
 }
 
 void pollState() {
@@ -312,6 +329,7 @@ void networkTask(void *) {
     const uint32_t now = millis();
     if (planterNetwork && WiFi.status() == WL_CONNECTED) {
       if (!nextPoll || static_cast<int32_t>(now - nextPoll) >= 0) {
+        uploadSoil();
         pollState();
         pollCommandResult();
         nextPoll = millis() + kPollIntervalMs;

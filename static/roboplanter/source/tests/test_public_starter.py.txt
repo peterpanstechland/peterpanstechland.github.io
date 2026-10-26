@@ -92,6 +92,13 @@ class PublicStarterTests(unittest.TestCase):
             sync(site, "main")
             self.assertFalse(old.exists())
             self.assertTrue((site / "static/roboplanter/source/firmware/xiao/src/main.cpp.txt").exists())
+            download = site / "static/roboplanter/downloads/roboplanter-honor-skill.zip"
+            with zipfile.ZipFile(download) as skill:
+                self.assertEqual(skill.namelist(), ["SKILL.md", "references/ble-contract.md", "references/acceptance.md"])
+                self.assertIn(b"S|probe|soil", skill.read("SKILL.md"))
+                self.assertNotIn(b"Q|", skill.read("SKILL.md"))
+            published = json.loads((download.parent / "manifest.json").read_text())
+            self.assertEqual(published["honor_skill"]["sha256"], hashlib.sha256(download.read_bytes()).hexdigest())
 
 
 if __name__ == "__main__":

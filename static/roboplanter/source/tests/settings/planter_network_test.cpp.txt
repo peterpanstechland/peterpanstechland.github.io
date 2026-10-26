@@ -4,6 +4,8 @@
 #include <stdexcept>
 #include <Preferences.h>
 #include "../../firmware/indicator/src/planter_client.cpp"
+// This network harness does not run the RP2040 sampler or invent soil data.
+namespace local_soil { Sample snapshot() { return Sample(); } }
 unsigned checks = 0;
 #define CHECK(condition) do { ++checks; if (!(condition)) throw std::runtime_error("check failed at line " + std::to_string(__LINE__)); } while (0)
 void workerOnce() {

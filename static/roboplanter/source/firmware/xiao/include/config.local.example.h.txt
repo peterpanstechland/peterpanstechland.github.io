@@ -4,6 +4,15 @@
 #define ROBO_DEVICE_TOKEN "change-me-before-use"
 #define ROBO_AP_PASSWORD "planter-demo"
 #define ROBO_ENABLE_ACTIONS 0
+// Optional shared 2.4GHz LAN mode. Defaults remain the standalone SoftAP.
+#define ROBO_WIFI_STA 0
+#define ROBO_STA_SSID ""
+#define ROBO_STA_PASSWORD ""
+// Original Indicator UART -> authenticated HTTP soil relay; no automatic care.
+#define ROBO_ENABLE_REMOTE_SOIL 0
+// One-use soil-read session, started only by the main authenticated HTTP API.
+// No active token at boot; disabled by default. Never accepts actuator commands.
+#define ROBO_ENABLE_DIAGNOSTIC_READ 0
 
 #define ROBO_ENABLE_SOIL 0
 // Measure dry/wet values yourself; -1 means no calibration (percent is null).
@@ -20,6 +29,7 @@
 #define ROBO_PUMP_HARDWARE_CONFIRMED 0
 #define ROBO_MAX_WATER_MS 3000
 #define ROBO_ENABLE_LIGHT 0 // Confirm WS2812/WS2813 GRB 800kHz before enabling.
+#define ROBO_WS2813_RMT 0 // Opt-in timing verified with the four-wire bench strip.
 #define ROBO_LED_COUNT 1
 #define ROBO_LED_BRIGHTNESS 24
 #define ROBO_ENABLE_PRINTER 0 // Confirm TTL voltage and ASCII/LF print protocol.

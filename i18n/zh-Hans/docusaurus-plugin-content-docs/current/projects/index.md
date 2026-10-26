@@ -12,7 +12,7 @@ slug: /projects
 
 [互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)
 
-**进度：** 屏幕端已有实物记录；手机 BLE / 传感器执行器闭环仍待验收。展示交互是模拟，设施农业与在线多设备平台为未来方向。
+**进度：** 已完成一次私有手机土壤读取和独立云端只读查询；公开 Skill 包仍仅开放联通诊断。打印与灌溉未完成实物验收，网页交互为模拟。
 <!-- ROBOPLANTER:END -->
 
 # 项目

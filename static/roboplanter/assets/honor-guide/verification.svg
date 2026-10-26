@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">从文件到实物的五层验收</title><desc id="desc">依次检查包结构、平台保存、手机进入、业务回包、实物观察；前一步成功不能代替后一步。</desc>
+<rect width="1000" height="590" rx="26" fill="#f5f7f3"/>
+<g font-family="system-ui,'Noto Sans CJK SC',sans-serif" fill="#22372f"><text x="42" y="56" font-size="30" font-weight="700">不要把“上传成功”当作“设备已工作”</text>
+<g fill="#fff" stroke="#d4dfd7"><rect x="42" y="91" width="916" height="76" rx="14"/><rect x="42" y="181" width="916" height="76" rx="14"/><rect x="42" y="271" width="916" height="76" rx="14"/><rect x="42" y="361" width="916" height="76" rx="14"/><rect x="42" y="451" width="916" height="76" rx="14"/></g>
+<g font-size="26" font-weight="650"><text x="68" y="139">01  包结构</text><text x="68" y="229">02  平台保存</text><text x="68" y="319">03  手机进入</text><text x="68" y="409">04  业务回包</text><text x="68" y="499">05  实物观察</text></g>
+<g font-size="22" fill="#52655a"><text x="320" y="139">ZIP 可解压，根目录 SKILL.md 正确</text><text x="320" y="229">重新打开后，版本与正文仍一致</text><text x="320" y="319">正确账号安装并进入正确版本</text><text x="320" y="409">核对有效性、时效、校准状态与请求关联</text><text x="320" y="499">灯亮、出水或出纸，需要现场独立确认</text></g>
+<text x="42" y="566" font-size="20" fill="#64756b">每层保留对应证据；超时或结果未知时不自动重发动作。</text></g></svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 670" role="img" aria-labelledby="title desc">
+<title id="title">荣耀独立Skill搭建流程</title><desc id="desc">准备SKILL.md并打包，在我的技能导入并配置，保存并完成安全检测，发布真机测试并在手机安装，最后逐层验证业务回包。</desc>
+<rect width="1000" height="670" rx="26" fill="#f3f7f0"/>
+<g font-family="system-ui,'Noto Sans CJK SC',sans-serif" fill="#233a2c"><text x="44" y="57" font-size="31" font-weight="700">从一份 SKILL.md，到手机上的盆栽伙伴</text><text x="44" y="94" font-size="20" fill="#637468">独立 Skill · 我的技能 · 官方工具 · 实际回包</text>
+<g fill="#fff" stroke="#d1dfd2"><rect x="44" y="124" width="912" height="86" rx="17"/><rect x="44" y="226" width="912" height="86" rx="17"/><rect x="44" y="328" width="912" height="86" rx="17"/><rect x="44" y="430" width="912" height="86" rx="17"/><rect x="44" y="532" width="912" height="86" rx="17"/></g>
+<g font-size="26" font-weight="650"><text x="68" y="178">01  编写与打包</text><text x="68" y="280">02  导入并配置</text><text x="68" y="382">03  保存与检测</text><text x="68" y="484">04  手机安装</text><text x="68" y="586">05  分层验收</text></g>
+<g font-size="22" fill="#52675a"><text x="325" y="178">ZIP 根目录放 SKILL.md，使用合法 YAML</text><text x="325" y="280">核对名称、版本、头像、引导语与工具</text><text x="325" y="382">保存最终内容，再查看安全检测结果</text><text x="325" y="484">测试名单 → 发布真机测试 → 立即体验</text><text x="325" y="586">先验证对话，再验证 BLE 与有效业务回包</text></g><text x="44" y="649" font-size="19" fill="#68796d">正式发布和比赛提交，分别记录状态；上传成功不代表硬件已接通。</text></g></svg>

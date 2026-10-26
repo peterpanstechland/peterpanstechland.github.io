@@ -10,3 +10,7 @@ inline size_t strlcpy(char *target, const char *source, size_t capacity) {
   return size;
 }
 using String = std::string;
+struct SettingsTestSerial {
+  template <typename... Args> void printf(const char *, Args...) {}
+};
+inline SettingsTestSerial Serial;
