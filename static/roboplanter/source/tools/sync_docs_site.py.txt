@@ -21,18 +21,19 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_BASE = "/docs/projects/2026/roboplanter"
 PAGES = [
     ("index", "工位搭子 · RoboPlanter", "从工位绿植开始，了解产品、硬件、YOYO Skill 与开放设备接入。"),
-    ("product-story", "产品故事与设计思考", "用户假设、利他原则、产品任务、体验旅程与比赛叙事。"),
+    ("product-story", "项目介绍", "了解工位搭子的设备分工、日常使用与产品设计。"),
     ("hardware-quickstart", "硬件从零到首次读取", "XIAO 与 Indicator 的认板、供电、备份、接线、构建和分阶段联调。"),
     ("plant-companion", "植物生长与陪伴养成", "真实物候、预测与陪伴反馈分开，逐步替换加速演示周期。"),
     ("crop-knowledge", "作物知识库与地区化方案", "官方农业资源、学术依据、开源工具及带适用条件的离线原型。"),
     ("ws2812-lighting", "WS2812 灯带与氛围交互", "灯带接线、四种模式、HTTP/BLE/CLI 控制与分阶段实机验收。"),
+    ("uart-printer", "UART 小票打印机", "D8 接线、串口配置、英文小票和冷启动检查。"),
     ("honor-platform", "从零搭建荣耀 YOYO Skill", "图文讲解技能文件、导入配置、安全检测、手机安装和 BLE 逐层验收。"),
     ("ble-integration", "BLE 完整接入教程", "官方工具参数、设备协议、MTU、凭证注入、回包语义和逐步验收。"),
     ("device-platform", "自带硬件与 Device Kit", "统一能力描述、离线登记和验证，以及未来在线平台的边界。"),
     ("design-system", "产品视觉与交互设计", "工位搭子的视觉语言、角色、状态、动效和可访问性规则。"),
-    ("social-playbook", "社媒创作与路演", "小红书图文、竖屏视频、原创文案、拍摄方法和真实效果评测。"),
-    ("roadmap-evidence", "证据与扩展路线图", "区分已实现、未验收与未来设计，逐步走向设施农业与灌溉。"),
-    ("acceptance", "分阶段验收与记录", "从离线测试到真实设备控制的检查项、失败场景和记录模板。"),
+    ("social-playbook", "拍摄与分享", "项目图片、短视频、角色文案和接入经验的分享方法。"),
+    ("roadmap-evidence", "功能进度与开发计划", "查看模块支持情况和接下来的开发方向。"),
+    ("acceptance", "安装与功能检查", "软件、采样、外设与手机接入的检查表。"),
     ("troubleshooting", "排障与恢复", "从电源、串口、构建、显示、HTTP 到 BLE 的故障诊断。"),
 ]
 

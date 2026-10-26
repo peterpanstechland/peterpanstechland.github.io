@@ -83,17 +83,22 @@
 #ifndef ROBO_PRINTER_BAUD
 #define ROBO_PRINTER_BAUD 9600
 #endif
+#ifndef ROBO_PRINTER_D8_WIRING_CONFIRMED
+#define ROBO_PRINTER_D8_WIRING_CONFIRMED 0
+#endif
 
 namespace pins {
 constexpr int Soil = 1;       // D0, SERVO3 signal; supply sensor separately at 3.3V.
-constexpr int Pump = 7;       // D8, SERVO4 signal; active-high EXTERNAL 12V driver.
+constexpr int Pump = 7;       // D8/SERVO4: pump OR printer TX, never both.
 constexpr int Air = 8;        // D9, SERVO2 signal: servo must be disconnected.
 constexpr int Uv = 9;         // D10, M2 ENC B: unplug encoder; 4.7k pull-up loads ADC.
 constexpr int Sda = 5;
 constexpr int Scl = 6;
 constexpr int Rgb = 40;       // D13, Grove RGB.
-constexpr int PrinterTx = 43;
-constexpr int PrinterRx = 44;
+// Avoid ROM UART0 TX/GPIO43. SERVO4 must have no pump/servo attached.
+// Return data uses the original UART RX; confirm printer TX <= 3.3V first.
+constexpr int PrinterTx = 7;  // D8, SERVO4/J14 pin 1.
+constexpr int PrinterRx = 44; // D7, UART/J10 pin 2.
 }
 
 static_assert(ROBO_MAX_WATER_MS > 0 && ROBO_MAX_WATER_MS <= 30000,
@@ -113,4 +118,8 @@ static_assert(!ROBO_ENABLE_PUMP || ROBO_PUMP_HARDWARE_CONFIRMED,
               "Confirm external pump driver, polarity, supply and current first");
 static_assert(!ROBO_ENABLE_PRINTER || ROBO_PRINTER_HARDWARE_CONFIRMED,
               "Confirm printer supply, TTL voltage, baud and protocol first");
+static_assert(!ROBO_ENABLE_PRINTER || ROBO_PRINTER_D8_WIRING_CONFIRMED,
+              "Printer RX must connect to SERVO4 D8/GPIO7; remove pump/servo");
+static_assert(!(ROBO_ENABLE_PRINTER && ROBO_ENABLE_PUMP),
+              "SERVO4 D8/GPIO7 is shared: printer and pump cannot both be enabled");
 static_assert(!(ROBO_ENABLE_SOIL && ROBO_ENABLE_REMOTE_SOIL), "Choose one soil source");

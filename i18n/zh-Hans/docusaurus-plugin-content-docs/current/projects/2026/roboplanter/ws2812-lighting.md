@@ -7,7 +7,7 @@ hide_title: true
 
 # WS2812 灯带：把陪伴延伸到工位环境
 
-屏幕负责细节，灯带负责余光就能感受到的轻量反馈。XIAO 固件现在提供柔绿常亮、慢呼吸、流动和彩虹四种模式；命令行、HTTP、本地 MCP 和 BLE 使用同一套模式名称。本文是接线与验收教程，**本轮没有给实体板烧录，也没有验证实物颜色、供电和手机端控制**。
+屏幕负责细节，灯带负责余光就能感受到的轻量反馈。XIAO 固件现在提供柔绿常亮、慢呼吸、流动和彩虹四种模式；命令行、HTTP、本地 MCP 和 BLE 使用同一套模式名称。四线 WS2813 类灯带可使用项目的可选 RMT 驱动；接线与配置见下文。
 
 灯光是桌面氛围，不是植物健康读数，也不是经过光合标定的生长灯。网页灯珠环和粒子是可交互预览，不连接真实灯带；网页展示的灯珠数量不能当作实际配置。
 
@@ -38,7 +38,7 @@ hide_title: true
 
 ## 3. 配置、构建和手动烧录
 
-复制 `firmware/xiao/include/config.local.example.h` 为同目录的 `config.local.h`，只在这份私有文件中修改配置。替换默认令牌，并让客户端使用同一个令牌；不要把真实令牌写进公开文件、Skill 或截图。
+复制 `firmware/xiao/include/config.local.example.h` 为同目录的 `config.local.h`，只在这份本地配置文件中修改配置。替换默认令牌，并让客户端使用同一个令牌；不要把真实令牌写进公开文件、Skill 或截图。
 
 下面是本地配置项说明，灯数必须改为你实际连接的数量：
 
@@ -51,7 +51,7 @@ hide_title: true
 #define ROBO_ENABLE_PRINTER 0
 ```
 
-这段不能替代完整示例配置，也没有提供有效令牌。项目默认文件仍关闭所有外设。按 [构建和烧录步骤](/docs/projects/2026/roboplanter/hardware-quickstart) 编译 XIAO 工程，确认目标和配置后由你手动烧录；更新灯数或亮度后须重新构建并烧录。
+完整配置请从示例文件复制。项目默认文件仍关闭所有外设。按 [构建和烧录步骤](/docs/projects/2026/roboplanter/hardware-quickstart) 编译 XIAO 工程，确认目标和配置后由你手动烧录；更新灯数或亮度后须重新构建并烧录。
 
 ## 4. 先验证常亮与关灯，再逐项试效果
 
@@ -94,7 +94,7 @@ C|token|id|light|0          关灯
 S|token|light              回包仍为 L:enabled:on
 ```
 
-`token` / `id` 是字段说明，不是真实凭据；BLE 的 ID 最多 8 字符，请求总长最多 240 字节。查询格式维持兼容，**BLE 查询不回报模式**；需要模式读回时使用 HTTP `light.effect`。荣耀的长写、通知和凭据注入条件见 [BLE 教程](/docs/projects/2026/roboplanter/ble-integration)。当前已上传 Skill 的硬件门禁仍关闭，不能因为新增固件就宣称 YOYO 已能切换效果。
+`token` / `id` 是字段说明，不是真实凭据；BLE 的 ID 最多 8 字符，请求总长最多 240 字节。查询格式维持兼容，**BLE 查询不回报模式**；需要模式读回时使用 HTTP `light.effect`。荣耀的长写、通知和凭据注入条件见 [BLE 教程](/docs/projects/2026/roboplanter/ble-integration)。下载的 Skill 包仅开放联通诊断，手机灯效控制需要单独接入。
 
 本地 MCP 的六工具数量不变，`set_light(request_id, on, effect)` 增加可省略的枚举参数。云端 MCP 的所有写操作仍禁用，不能通过本地灯效参数绕过。
 

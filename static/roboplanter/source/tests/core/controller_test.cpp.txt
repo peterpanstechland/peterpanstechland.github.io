@@ -4,6 +4,7 @@
 #include <string>
 #include "../../firmware/xiao/include/controller.h"
 #include "../../firmware/xiao/include/ble_session.h"
+#include "../../firmware/xiao/include/printer_receipt.h"
 
 namespace {
 int checks = 0;
@@ -340,12 +341,40 @@ void blePreparedWriteBoundary() {
   CHECK(!buffer.append({}, 0, bytes(last), last.size()));
   CHECK(!buffer.finish(owner, output));
 }
+void receiptTransport() {
+  std::string output;
+  const auto append = [&](uint8_t b) { output.push_back(static_cast<char>(b)); return true; };
+  CHECK(robo::writeReceipt("RoboPlanter\nCheck-in", append));
+  const char prefix[] = {0x1b,'@',0x1b,'!',0,0x1b,'a',0,0x1b,'2'};
+  const std::string expected = std::string(prefix, sizeof(prefix)) + "RoboPlanter\nCheck-in\n\n\n\n";
+  CHECK(output == expected);
+  output.clear();
+  CHECK(robo::writeReceipt("Ready\n", append));
+  CHECK(output == std::string(prefix, sizeof(prefix)) + "Ready\n\n\n\n");
+  for (const auto& invalid : {std::string(), std::string(161, 'x'),
+       std::string("cut\x1dV"), std::string("x\0y", 3), std::string("\xE4\xB8\xAD")}) {
+    output.clear();
+    CHECK(!robo::writeReceipt(invalid, append));
+    CHECK(output.empty()); // Reject before resetting/feeding the physical printer.
+  }
+  // Every failed byte, including setup and final feed, must stop without retry.
+  for (size_t failed = 0; failed < expected.size(); ++failed) {
+    output.clear(); size_t calls = 0;
+    CHECK(!robo::writeReceipt("RoboPlanter\nCheck-in", [&](uint8_t byte) {
+      if (calls++ == failed) return false;
+      output.push_back(static_cast<char>(byte)); return true;
+    }));
+    CHECK(calls == failed + 1);
+    CHECK(output == expected.substr(0, failed));
+  }
+}
 }  // namespace
 
 int main() {
   deadlineAndReplay(); wrapAndStop(); validationAndOverflow();
   disabledAndInterlock(); printerAndCalibration(); cacheCapacity();
   lightEffectCommands();
+  receiptTransport();
   bleConnectionBoundary(); blePreparedWriteBoundary();
   std::cout << "PASS " << checks << " controller checks\n";
   return 0;
