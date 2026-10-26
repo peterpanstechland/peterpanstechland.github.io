@@ -24,6 +24,24 @@ Run `tools/test-indicator-ui.ps1` on Windows, or compile `tests/core/indicator_u
 
 ## WS2812 frame model
 
+The optional soil relay has a separate portable check:
+
+```sh
+g++ -std=c++11 -Wall -Wextra -Werror -pedantic tests/core/soil_relay_test.cpp -o /tmp/roboplanter-soil-relay-test
+/tmp/roboplanter-soil-relay-test
+```
+
+It checks UART challenge/CRC corruption, invalid ranges, duplicate uploads not renewing freshness, boot changes and timer rollover. Real UART wiring, HTTP transmission and sensor response remain hardware acceptance steps.
+
+The opt-in one-use read session has its own portable check:
+
+```sh
+g++ -std=c++11 -Wall -Wextra -Werror -pedantic tests/core/diagnostic_read_session_test.cpp -o /tmp/roboplanter-one-read-test
+/tmp/roboplanter-one-read-test
+```
+
+It covers key format, lifetime limits, wrong-key isolation, one-use consumption, explicit clearing, expiry and timer rollover. Real BLE response delivery and platform handling require a phone test.
+
 ```sh
 g++ -std=c++11 -Wall -Wextra -Werror -pedantic tests/core/light_effects_test.cpp -o /tmp/roboplanter-light-test
 /tmp/roboplanter-light-test

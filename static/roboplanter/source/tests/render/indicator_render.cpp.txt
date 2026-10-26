@@ -41,6 +41,12 @@ void service(uint32_t now) { host_fixture::gardenModel.tick(now); }
 bool available() { return true; }
 }
 
+// Native render fixtures never initialise the physical internal UART.
+namespace local_soil {
+bool begin() { return true; }
+Sample snapshot() { return Sample(); }
+}
+
 namespace {
 Arduino_Canvas hostCanvas(480, 480, nullptr);
 planter::State hostState; // Deliberately unknown: no sensor or actuator fixtures.

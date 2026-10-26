@@ -14,6 +14,24 @@
 #ifndef ROBO_ENABLE_ACTIONS
 #define ROBO_ENABLE_ACTIONS 0
 #endif
+#ifndef ROBO_WIFI_STA
+#define ROBO_WIFI_STA 0
+#endif
+#ifndef ROBO_STA_SSID
+#define ROBO_STA_SSID ""
+#endif
+#ifndef ROBO_STA_PASSWORD
+#define ROBO_STA_PASSWORD ""
+#endif
+#ifndef ROBO_ENABLE_REMOTE_SOIL
+#define ROBO_ENABLE_REMOTE_SOIL 0
+#endif
+#ifndef ROBO_WS2813_RMT
+#define ROBO_WS2813_RMT 0
+#endif
+#ifndef ROBO_ENABLE_DIAGNOSTIC_READ
+#define ROBO_ENABLE_DIAGNOSTIC_READ 0
+#endif
 #ifndef ROBO_ENABLE_SOIL
 #define ROBO_ENABLE_SOIL 0
 #endif
@@ -95,3 +113,4 @@ static_assert(!ROBO_ENABLE_PUMP || ROBO_PUMP_HARDWARE_CONFIRMED,
               "Confirm external pump driver, polarity, supply and current first");
 static_assert(!ROBO_ENABLE_PRINTER || ROBO_PRINTER_HARDWARE_CONFIRMED,
               "Confirm printer supply, TTL voltage, baud and protocol first");
+static_assert(!(ROBO_ENABLE_SOIL && ROBO_ENABLE_REMOTE_SOIL), "Choose one soil source");

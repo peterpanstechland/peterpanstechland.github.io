@@ -15,6 +15,7 @@ import re
 import shutil
 import zipfile
 from package_public_starter import package as package_starter, source_files, write_member
+from package_honor_skill import package as package_honor_skill
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_BASE = "/docs/projects/2026/roboplanter"
@@ -25,7 +26,7 @@ PAGES = [
     ("plant-companion", "植物生长与陪伴养成", "真实物候、预测与陪伴反馈分开，逐步替换加速演示周期。"),
     ("crop-knowledge", "作物知识库与地区化方案", "官方农业资源、学术依据、开源工具及带适用条件的离线原型。"),
     ("ws2812-lighting", "WS2812 灯带与氛围交互", "灯带接线、四种模式、HTTP/BLE/CLI 控制与分阶段实机验收。"),
-    ("honor-platform", "荣耀 YOYO 平台操作", "从已经上传的独立 Skill 草稿继续，核对配置、检测、手机测试与发布边界。"),
+    ("honor-platform", "从零搭建荣耀 YOYO Skill", "图文讲解技能文件、导入配置、安全检测、手机安装和 BLE 逐层验收。"),
     ("ble-integration", "BLE 完整接入教程", "官方工具参数、设备协议、MTU、凭证注入、回包语义和逐步验收。"),
     ("device-platform", "自带硬件与 Device Kit", "统一能力描述、离线登记和验证，以及未来在线平台的边界。"),
     ("design-system", "产品视觉与交互设计", "工位搭子的视觉语言、角色、状态、动效和可访问性规则。"),
@@ -120,12 +121,13 @@ def sync(site: Path, source_ref: str) -> dict:
     downloads.mkdir(exist_ok=True)
     kit = build_device_kit_bundle(downloads / "roboplanter-device-kit.zip")
     starter = package_starter(downloads / "roboplanter-starter.zip")
+    honor_skill = package_honor_skill(downloads / "roboplanter-honor-skill.zip")
     for path in source_files():
         copy = static / "source" / (path.relative_to(ROOT).as_posix() + ".txt")
         copy.parent.mkdir(parents=True, exist_ok=True)
         copy.write_bytes(path.read_bytes())
-    (downloads / "manifest.json").write_text(json.dumps({"device_kit": kit, "starter": starter}, indent=2) + "\n", encoding="utf-8")
-    block = "\n<!-- ROBOPLANTER:START -->\n### [工位搭子 · RoboPlanter](/docs/projects/2026/roboplanter/)\n\n你先下班，我负责发芽。YOYO Skill、XIAO 设备控制、Indicator 像素养成，以及可供自带硬件使用的离线 Device Kit。\n\n[互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)\n\n**进度：** 屏幕端已有实物记录；手机 BLE / 传感器执行器闭环仍待验收。展示交互是模拟，设施农业与在线多设备平台为未来方向。\n<!-- ROBOPLANTER:END -->\n"
+    (downloads / "manifest.json").write_text(json.dumps({"device_kit": kit, "starter": starter, "honor_skill": honor_skill}, indent=2) + "\n", encoding="utf-8")
+    block = "\n<!-- ROBOPLANTER:START -->\n### [工位搭子 · RoboPlanter](/docs/projects/2026/roboplanter/)\n\n你先下班，我负责发芽。YOYO Skill、XIAO 设备控制、Indicator 像素养成，以及可供自带硬件使用的离线 Device Kit。\n\n[互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)\n\n**进度：** 已完成一次私有手机土壤读取和独立云端只读查询；公开 Skill 包仍仅开放联通诊断。打印与灌溉未完成实物验收，网页交互为模拟。\n<!-- ROBOPLANTER:END -->\n"
     indexes = [site / "docs/projects/index.md", site / "i18n/zh-Hans/docusaurus-plugin-content-docs/current/projects/index.md"]
     for path in indexes:
         original = path.read_text(encoding="utf-8")
@@ -137,7 +139,7 @@ def sync(site: Path, source_ref: str) -> dict:
             boundary = original.find("\n", boundary + 1) + 1 if boundary >= 0 else 0
             updated = original[:boundary] + block + original[boundary:]
         path.write_text(updated, encoding="utf-8")
-    return {"site": str(site), "pages_per_locale": len(PAGES), "locales": ["en", "zh-Hans"], "device_kit": kit, "starter": starter}
+    return {"site": str(site), "pages_per_locale": len(PAGES), "locales": ["en", "zh-Hans"], "device_kit": kit, "starter": starter, "honor_skill": honor_skill}
 
 
 if __name__ == "__main__":

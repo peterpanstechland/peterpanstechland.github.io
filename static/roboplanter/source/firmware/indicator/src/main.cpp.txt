@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "local_soil.h"
 #include <Preferences.h>
 #include <math.h>
 #include "config.h"
@@ -119,12 +120,12 @@ void facePage(const State &s,uint32_t now) {
   garden_ui::drawHome(now,model.theme());
   statusStrip(s,now);
 }
-void readingCard(const Rect &r,Icon kind,const char *name,const planter::Reading &reading,const char *unit,bool fresh,const char *invalid=nullptr,bool percent=false) {
+void readingCard(const Rect &r,Icon kind,const char *name,const planter::Reading &reading,const char *unit,bool fresh,const char *invalid=nullptr,bool percent=false,const char *validHint=nullptr) {
   auto &g=indicator::display();
   g.fillRoundRect(r.x,r.y,r.w,r.h,12,theme().card);
   ui_theme::accentIcon(g,kind,r.x+14,r.y+33,32,theme().cardInk,kind==Icon::Temp?0xFBAE:kAqua);
   label(r.x+54,r.y+12,name,theme().cardMuted);
-  char value[28];if(reading.valid)snprintf(value,sizeof(value),"%.1f%s",reading.value,unit);else strlcpy(value,"--",sizeof(value));
+  char value[28];if(reading.valid)snprintf(value,sizeof(value),!strcmp(unit," ADC")?"%.0f%s":"%.1f%s",reading.value,unit);else strlcpy(value,"--",sizeof(value));
   label(r.x+54,r.y+35,value,reading.valid&&fresh?theme().cardInk:theme().cardMuted,2);
   if(percent) {
     g.fillRoundRect(r.x+54,r.y+73,r.w-70,5,2,0xD6B9);
@@ -134,13 +135,14 @@ void readingCard(const Rect &r,Icon kind,const char *name,const planter::Reading
       if(amount>0)g.fillRoundRect(r.x+54,r.y+73,amount,5,2,fresh?theme().accent:theme().cardMuted);
     }
   }
-  const char *hint=!reading.valid?(invalid?invalid:tr("等待传感器","No sensor data")):!fresh?tr("上次读数 · 已过期","Old / expired"):tr("有效读数","Current reading");
+  const char *hint=!reading.valid?(invalid?invalid:tr("等待传感器","No sensor data")):!fresh?tr("上次读数 · 已过期","Old / expired"):(validHint?validHint:tr("有效读数","Current reading"));
   label(r.x+14,r.y+r.h-22,hint,theme().cardMuted);
 }
 void todayPage(const State &s,uint32_t now) {
   title(tr("今日状态","Plant status"),tr("今日状态 · 慢慢照顾，也照顾自己","A little care, at your pace."));
   const bool fresh=planter::fresh(s,now);
-  readingCard({24,145,210,106},Icon::Water,tr("土壤湿度","Soil moisture"),soilReading(s),"%",fresh,!s.soilCalibrationKnown?tr("等待土壤数据","No soil data"):!s.soilCalibrated?tr("传感器待校准","Calibrate sensor"):tr("传感器暂不可用","Sensor unavailable"),true);
+  const bool soilRaw=s.soilCalibrationKnown && !s.soilCalibrated && s.soilRaw.valid;
+  readingCard({24,145,210,106},Icon::Water,tr("土壤湿度","Soil moisture"),soilRaw?s.soilRaw:soilReading(s),soilRaw?" ADC":"%",fresh,!s.soilCalibrationKnown?tr("等待土壤数据","No soil data"):!s.soilCalibrated?tr("传感器待校准","Calibrate sensor"):tr("传感器暂不可用","Sensor unavailable"),!soilRaw,soilRaw?tr("传感器待校准","Calibrate sensor"):nullptr);
   readingCard({246,145,210,106},Icon::Temp,tr("空气温度","Temperature"),s.temperature,"C",fresh);
   readingCard({24,261,210,106},Icon::Humidity,tr("空气湿度","Humidity"),s.humidity,"%",fresh,nullptr,true);
   auto &g=indicator::display();g.fillRoundRect(246,261,210,106,12,theme().card);
@@ -414,6 +416,7 @@ void setup() {
   prefsReady=preferences.begin("rp-ui",false);
   if(prefsReady)model.selectTheme(preferences.getUChar("theme",0)%ui_theme::kCount);
   const bool gardenReady=garden_store::begin(millis());
+  Serial.printf("Indicator soil UART task=%s\n",local_soil::begin()?"ready-or-disabled":"failed");
   displayReady=indicator::begin();
   if(!displayReady){Serial.println("Indicator LCD init failed: check OPI PSRAM / original ST7701 panel.");return;}
   clientReady=planter::begin();

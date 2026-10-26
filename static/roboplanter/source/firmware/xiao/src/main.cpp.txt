@@ -16,6 +16,11 @@
 #include "controller.h"
 #include "ble_session.h"
 #include "robo_config.h"
+#include "remote_soil.h"
+#include "diagnostic_read_session.h"
+#if ROBO_WS2813_RMT
+#include "ws2813_rmt.h"
+#endif
 
 namespace {
 constexpr char ServiceUuid[] = "a2f39c10-7e4b-4d21-8a61-0f3bc9d15001";
@@ -53,7 +58,13 @@ QueueHandle_t printQueue;
 QueueHandle_t bleQueue;
 WebServer http(80);
 HardwareSerial printerSerial(1);
+#if ROBO_WS2813_RMT
+Ws2813Rmt<ROBO_LED_COUNT> pixels;
+#else
 Adafruit_NeoPixel pixels(ROBO_LED_COUNT, pins::Rgb, NEO_GRB + NEO_KHZ800);
+#endif
+robo::RemoteSoil remoteSoil;
+robo::DiagnosticReadSession diagnosticRead;
 robo::LightAnimation lightAnimation;
 BLECharacteristic* bleCharacteristic;
 BLE2902* bleNotifications;
@@ -177,6 +188,10 @@ void sensorTask(void*) {
 Sample copySample() {
   Lock guard(sensorMutex);
   Sample current = sample;
+  if (ROBO_ENABLE_REMOTE_SOIL) {
+    current.soil = remoteSoil.raw();
+    current.soilValid = remoteSoil.valid(millis());
+  }
   if (static_cast<uint32_t>(millis() - current.timestamp) > 3000) {
     current.soilValid = current.airValid = current.uvValid = false;
     current.environmentValid = false;
@@ -279,6 +294,12 @@ void stateJson(JsonDocument& document) {
   const bool calibrated = robo::calibrated(ROBO_SOIL_DRY_RAW, ROBO_SOIL_WET_RAW);
   soil["valid"] = current.soilValid;
   soil["calibrated"] = calibrated;
+  if(ROBO_ENABLE_REMOTE_SOIL) {
+    soil["source"]="indicator_rp2040_grove_adc";
+    Lock guard(sensorMutex);
+    if(remoteSoil.raw()>=0)soil["sample_age_ms"]=remoteSoil.age(now);
+    else soil["sample_age_ms"]=nullptr;
+  }
   if (current.soilValid && calibrated)
     soil["percent"] = robo::soilPercent(current.soil, ROBO_SOIL_DRY_RAW, ROBO_SOIL_WET_RAW);
   else soil["percent"] = nullptr;
@@ -345,6 +366,52 @@ bool jsonString(JsonVariantConst value, std::string& destination) {
   JsonString text = value.as<JsonString>();
   destination.assign(text.c_str(), text.size());
   return destination.find('\0') == std::string::npos;
+}
+
+void httpSoil() {
+  if (!httpAuthorized()) return;
+  if (!ROBO_ENABLE_REMOTE_SOIL) { sendError(409, "remote_soil_disabled"); return; }
+  if (http.header("Content-Type").indexOf("application/json") != 0) {
+    sendError(415, "content_type_required"); return;
+  }
+  const String body = http.arg("plain");
+  if (!body.length() || body.length() > MaxHttpBytes) {sendError(413,"body_size_invalid");return;}
+  StaticJsonDocument<512> input;
+  if (deserializeJson(input, body) || !input.is<JsonObject>() || input.size()!=5 ||
+      !input["source_boot"].is<const char*>() ||
+      input["seq"].is<bool>() || !input["seq"].is<uint32_t>() ||
+      input["raw"].is<bool>() || !input["raw"].is<int>() ||
+      input["age_ms"].is<bool>() || !input["age_ms"].is<uint32_t>() ||
+      !input["v"].is<int>() || input["v"].as<int>()!=1) {
+    sendError(400,"invalid_soil_sample");return;
+  }
+  bool accepted;
+  {Lock guard(sensorMutex); accepted=remoteSoil.accept(input["source_boot"],input["seq"],input["raw"],input["age_ms"],millis());}
+  StaticJsonDocument<128> output; output["accepted"]=accepted;
+  sendJson(accepted?200:409,output);
+}
+
+void httpDiagnosticSession() {
+  if(!httpAuthorized())return;
+  if(!ROBO_ENABLE_DIAGNOSTIC_READ){sendError(409,"diagnostic_read_disabled");return;}
+  if(http.header("Content-Type").indexOf("application/json")!=0){sendError(415,"content_type_required");return;}
+  const String body=http.arg("plain");
+  if(!body.length() || body.length()>MaxHttpBytes){sendError(413,"body_size_invalid");return;}
+  StaticJsonDocument<256> input;
+  if(deserializeJson(input,body) || !input.is<JsonObject>()){sendError(400,"invalid_json");return;}
+  if(input.size()==1 && input["disable"].is<bool>() && input["disable"].as<bool>()) {
+    {Lock guard(bleMutex);diagnosticRead.clear();}
+    StaticJsonDocument<128> out;out["disabled"]=true;sendJson(200,out);return;
+  }
+  if(input.size()!=2 || !input["token"].is<const char*>() || input["ttl_ms"].is<bool>() || !input["ttl_ms"].is<uint32_t>()) {
+    sendError(400,"invalid_diagnostic_session");return;
+  }
+  std::string readToken;
+  if(!jsonString(input["token"],readToken)){sendError(400,"invalid_diagnostic_session");return;}
+  bool ok;
+  {Lock guard(bleMutex);ok=diagnosticRead.start(readToken.c_str(),input["ttl_ms"],millis());}
+  StaticJsonDocument<128> out;out["created"]=ok;out["scope"]="one_soil_read";
+  sendJson(ok?200:400,out);
 }
 
 void httpCommand() {
@@ -496,6 +563,10 @@ std::string bleQuery(const std::string& field) {
 
 std::string handleBle(const std::string& text) {
   const auto fields = split(text);
+  if(fields.size()==2 && fields[0]=="Q") {
+    if(!ROBO_ENABLE_DIAGNOSTIC_READ || !diagnosticRead.take(fields[1].c_str(),millis()))return "E:AUTH";
+    return bleQuery("soil");
+  }
   if (fields.size() < 2 || !tokenMatches(fields[1])) return "E:AUTH";
   if (fields[0] == "S") {
     if (fields.size() == 2) return "Q:soil,pump,air,uv";
@@ -669,7 +740,11 @@ void setup() {
     Wire.setTimeOut(30);
   }
   if (ROBO_ENABLE_LIGHT) {
+#if ROBO_WS2813_RMT
+    if (!pixels.begin()) failClosed("Startup failed: WS2813 RMT unavailable");
+#else
     pixels.begin();
+#endif
     pixels.setBrightness(ROBO_LED_BRIGHTNESS);
     pixels.clear();
     pixels.show();
@@ -685,9 +760,14 @@ void setup() {
   char suffix[5];
   snprintf(suffix, sizeof(suffix), "%04X", static_cast<unsigned>(ESP.getEfuseMac() & 0xffff));
   deviceId = String("RoboPlanter-") + suffix;
-  WiFi.mode(WIFI_AP);
-  if (!WiFi.softAP(deviceId.c_str(), ROBO_AP_PASSWORD, 1, false, 2))
-    failClosed("Startup failed: Wi-Fi AP unavailable");
+  if (ROBO_WIFI_STA) {
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ROBO_STA_SSID,ROBO_STA_PASSWORD);
+  } else {
+    WiFi.mode(WIFI_AP);
+    if (!WiFi.softAP(deviceId.c_str(), ROBO_AP_PASSWORD, 1, false, 2))
+      failClosed("Startup failed: Wi-Fi AP unavailable");
+  }
   const char* headers[] = {"X-Device-Token", "Content-Type"};
   http.collectHeaders(headers, 2);
   http.on("/api/v1/state", HTTP_GET, []() {
@@ -697,6 +777,8 @@ void setup() {
     sendJson(200, output);
   });
   http.on("/api/v1/command", HTTP_POST, httpCommand);
+  http.on("/api/v1/sensors/soil", HTTP_POST, httpSoil);
+  http.on("/api/v1/diagnostic-session", HTTP_POST, httpDiagnosticSession);
   http.on("/api/v1/result", HTTP_GET, httpResult);
   http.onNotFound([]() { sendError(404, "not_found"); });
   http.begin();
@@ -720,11 +802,17 @@ void setup() {
   advertising->addServiceUUID(ServiceUuid);
   advertising->setScanResponse(true);
   advertising->start();
-  Serial.printf("%s ready; HTTP http://192.168.4.1; actions %s\n", deviceId.c_str(),
+  Serial.printf("%s ready; network=%s; actions %s\n", deviceId.c_str(),ROBO_WIFI_STA?"station":"access-point",
                 ROBO_ENABLE_ACTIONS && credentialsConfigured() ? "configured" : "disabled");
 }
 
 void loop() {
+  static uint32_t lastNetworkLog=0;
+  if (millis()-lastNetworkLog>=5000) {
+    lastNetworkLog=millis();
+    Serial.printf("RoboPlanter network connected=%d ip=%s\n",WiFi.status()==WL_CONNECTED,
+                  (ROBO_WIFI_STA?WiFi.localIP():WiFi.softAPIP()).toString().c_str());
+  }
   http.handleClient();
   delay(2);
 }
