@@ -1,10 +1,10 @@
 # 从自备硬件开始：接线、备份、烧录与首次联调
 
-适用代码：本仓库 `firmware/xiao` 和 `firmware/indicator`。核对日期：2026-10-25。本文是一份操作教程，不是这些操作已经在你的设备上通过的证明。命令中的端口、目录和设备名称必须按本机实际值填写。
+适用工程：`firmware/xiao` 和 `firmware/indicator`。命令中的端口、目录和设备名称按本机实际值填写。
 
 建议按 **空载只读 → 单个传感器 → 灯 → 打印 → 最后水泵 → 手机 BLE** 的顺序走完，每一步通过后再增加下一件外设。任何未知型号都先保持禁用。手机接入见 [BLE 教程](ble-integration.md)，异常见 [排障手册](troubleshooting.md)。
 
-先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。水位采集/低水位停泵、Indicator Grove 采集属于待实现方案，界面已逐项标注。完整分配见 [接线文档](../wiring.md)。
+先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。Indicator 土壤采集使用可选的 RP2040 程序；水位与低水位停泵仍在开发。完整分配见 [接线文档](../wiring.md)。
 
 ## 1. 先确认你拿到的是哪块板
 
@@ -27,18 +27,18 @@ XIAO 是实际测量与执行控制器；Indicator 是 Wi-Fi 显示和手动操�
 
 ![XIAO、手机、Indicator 与独立负载的连接逻辑](../../web/experience/assets/wiring-overview.svg)
 
-Indicator 内部的 ESP32-S3 与 RP2040 已有连接。本项目只刷 ESP32-S3，不刷 RP2040，不另占用它们的内部 UART。屏幕的动画、主题和番茄钟不能证明花盆已联网或传感器有效。
+Indicator 内部的 ESP32-S3 与 RP2040 已有连接。默认屏幕工程刷写 ESP32-S3；启用 Indicator 土壤采集时，还需安装 RP2040 采集程序并使用内部 UART。详见 [Indicator 固件](../../firmware/indicator/README.md)。
 
-### 与比赛附件旧例程的区别
+### 与原套件例程的区别
 
-附件 `Seeed XIAO Robot Kit x Honor Robot Phone Getting Started.zip` 的入门说明、旧车 Skill 和 V1.0 原理图是硬件参考。本次仅定向读取 Markdown 与原理图，没有执行附件中的固件、脚本或可执行文件。
+附件 `Seeed XIAO Robot Kit x Honor Robot Phone Getting Started.zip` 的入门说明、旧车 Skill 和 V1.0 原理图是硬件参考。
 
 - 原小车例程包含电机、舵机、加热等功能；本项目不运行这些功能。
 - 原教程和旧固件部分电机/加热引脚存在版本差异。本固件启动时拉低 GPIO2/3/39/11/12 以及泵 GPIO7；首次烧录时仍须物理断开原电机、舵机、加热器和泵。
 - 旧 Skill 的 `forward`、`stop`、舞蹈命令不能控制本固件；新协议的停泵是带鉴权的 `stop_water`。
 - 旧例程的 Arduino Core 和库选择不能覆盖本项目 `platformio.ini` 中的固定版本。
 
-原始附件仅作为项目方提供的硬件参考，不随公开复现包分发。不要把完整附件、原设备 Flash 备份、私密配置或真实令牌放进公开仓库。
+原设备 Flash 备份和本地凭据单独保存，不提交到仓库。
 
 ## 2. 器材和电源准备
 
@@ -57,7 +57,7 @@ Indicator 内部的 ESP32-S3 与 RP2040 已有连接。本项目只刷 ESP32-S3�
 
 ## 3. 在不接设备的情况下准备软件
 
-先下载 [RoboPlanter 源码复现包](https://peterpanstechland.github.io/roboplanter/downloads/roboplanter-starter.zip)，按 [发布清单](https://peterpanstechland.github.io/roboplanter/downloads/manifest.json) 核对 SHA-256，解压到一个空目录（例如 `C:\work\RoboPlanter` 或 `~/work/RoboPlanter`）。包内 `SOURCE-MANIFEST.json` 记录每个源码文件的哈希。完整开发仓库保持私有，复现不依赖访问该仓库；源码包不包含预编译固件或你的设备配置。
+先下载 [RoboPlanter 源码包](https://peterpanstechland.github.io/roboplanter/downloads/roboplanter-starter.zip)，按 [发布清单](https://peterpanstechland.github.io/roboplanter/downloads/manifest.json) 核对 SHA-256，解压到一个空目录（例如 `C:\work\RoboPlanter` 或 `~/work/RoboPlanter`）。包内 `SOURCE-MANIFEST.json` 记录每个源码文件的哈希。源码包提供可构建的源文件和示例配置，解压后填写本地参数。
 
 安装 Python 3.10 或更高版本及 Git，打开项目根目录。下面使用本地 `.tools` 虚拟环境，依赖不装进系统 Python。第一次安装/编译需要联网下载官方工具链；这些命令不会刷写设备。
 
@@ -184,7 +184,7 @@ wc -c "$rp_backup"
 sha256sum "$rp_backup"
 ```
 
-通过条件：XIAO 备份恰为 **16,777,216 字节**，Indicator 恰为 **8,388,608 字节**，`verify_flash` 成功。把型号、容量、日期、哈希和对应文件记在本地。完整 Flash 可能含密码、令牌、个人配置；`build/` 已忽略，备份不纳入作品公开附件。需要恢复时只使用这台板自己的完整备份，见 [排障：恢复](troubleshooting.md#恢复原来的-esp32-固件)。
+通过条件：XIAO 备份恰为 **16,777,216 字节**，Indicator 恰为 **8,388,608 字节**，`verify_flash` 成功。把型号、容量、日期、哈希和对应文件记在本地。完整 Flash 可能含密码、令牌、个人配置；`build/` 已忽略，备份不提交到仓库。需要恢复时只使用这台板自己的完整备份，见 [排障：恢复](troubleshooting.md#恢复原来的-esp32-固件)。
 
 ## 5. 明确选择目标，再手动上传
 
@@ -263,7 +263,7 @@ $rpPtr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($rpSecret)
 try { $env:ROBOPLANTER_TOKEN = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($rpPtr) }
 finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($rpPtr) }
 & $rpPython tools/device_cli.py state
-# 本轮结束后执行：Remove-Item Env:ROBOPLANTER_TOKEN
+# 使用后执行：Remove-Item Env:ROBOPLANTER_TOKEN
 ```
 
 ```bash
@@ -271,7 +271,7 @@ read -r -s -p '输入本机设备令牌（不回显）: ' ROBOPLANTER_TOKEN
 printf '\n'
 export ROBOPLANTER_TOKEN
 "$rp_python" tools/device_cli.py state
-# 本轮结束后执行：unset ROBOPLANTER_TOKEN
+# 使用后执行：unset ROBOPLANTER_TOKEN
 ```
 
 固件中的令牌仍存在 Flash，本地进程环境也不是硬件密钥保险箱；这是受控原型的鉴权方式。HTTP 没有 TLS，BLE 没有配对加密，不把 API 暴露到公网。
@@ -325,9 +325,9 @@ export ROBOPLANTER_TOKEN
 
 ### 8.5 UART 打印机
 
-先确认供电与 TTL 电平：12 V 是供电标称，不表示串口也是 12 V。打印机独立供电；**XIAO TX GPIO43 / J10 pin1 → 打印机 RX**；公共 GND → J10 pin4。若需要连打印机 TX → XIAO RX GPIO44 / J10 pin2，必须先确认不高于 3.3 V 或加合适电平转换。当前固件不读状态，不接该 TX 也可只发单向文本。**J10 pin3 的 3.3 V 不给打印机供电。**
+先确认供电与 TTL 电平。断电后将 **SERVO4/J14 pin1 / D8 / GPIO7 → 打印机 RX**；打印机 TX 确认是 3.3V 逻辑或加电平转换后 → 原 UART/J10 pin2 / GPIO44。公共 GND → J10 pin4，GPIO43 不接打印机。SERVO4 不能同时接泵或舵机，打印模式与水泵模式不能同时启用。**打印机独立供电，SERVO4 的 Motor5V 和 UART 的 3.3V 都不接打印机电源。** 详细接线与验收见 [UART 打印机](uart-printer.md)。
 
-设置实际 `ROBO_PRINTER_BAUD`，`ROBO_ENABLE_PRINTER 1`、`ROBO_PRINTER_HARDWARE_CONFIRMED 1`，并保持动作总开关及非默认令牌；泵继续关闭。先发送短 ASCII：
+设置实际 `ROBO_PRINTER_BAUD`，确认换线后设置 `ROBO_ENABLE_PRINTER 1`、`ROBO_PRINTER_HARDWARE_CONFIRMED 1`、`ROBO_PRINTER_D8_WIRING_CONFIRMED 1`，并保持动作总开关及非默认令牌；泵继续关闭。先发送短 ASCII：
 
 ```powershell
 & $rpPython tools/device_cli.py print 'Hello planter'
@@ -340,7 +340,7 @@ export ROBOPLANTER_TOKEN
 "$rp_python" tools/device_cli.py result '<刚才的ID>'
 ```
 
-等待 `accepted → completed`，同时人工确认纸上文本正确。`bytes_sent` / `completed` 只证明软件串口发送完成，不证明出纸。支持最多 160 字节可打印 ASCII 和 LF；不支持中文编码、ESC/POS 控制码、切刀或缺纸反馈。超时或乱码先排查，不能自动重印。
+等待 `accepted → completed`，同时人工确认纸上文本正确。`bytes_sent` / `completed` 只证明软件串口发送完成，不证明出纸。请求支持最多 160 字节可打印 ASCII 和 LF；固件添加固定 ESC/POS 初始化及末尾走纸，不接受调用方传入控制码。不支持中文编码、切刀或缺纸反馈。超时或乱码先排查，不能自动重印。
 
 ### 8.6 水泵最后接入
 
@@ -393,7 +393,7 @@ J14 pin2 是 NC，pin3 是 Motor_5V，pin4 是 GND。12 V 不接 J14 pin3，不�
 
 ## 9. 每一步如何记验收结果
 
-把记录存到本地或使用 [验收记录](acceptance.md)（若已提供），不要上传凭据。每项至少记录日期、板型、固件 Git 提交、构建配置摘要（不含密码）、测试操作、预期、实际软件结果、实物观察、通过/失败和问题编号。
+把记录存到本地或使用 [验收记录](acceptance.md)，不要上传凭据。每项至少记录日期、板型、固件 Git 提交、构建配置摘要（不含密码）、测试操作、预期、实际软件结果、实物观察、通过/失败和问题编号。
 
 完成层级应分开写：
 
@@ -401,14 +401,12 @@ J14 pin2 是 NC，pin3 是 Motor_5V，pin4 是 GND。12 V 不接 J14 pin3，不�
 2. **已刷写**：正确芯片、容量、端口，上传校验通过。
 3. **已启动**：串口和屏幕启动正常。
 4. **已联网只读**：实际设备状态可读，字段/过期处理正确。
-5. **已验证单件硬件**：真实读数/出纸/灯光/停泵有现场证据。
+5. **已验证单件硬件**：已检查实际读数、出纸、灯光和停泵情况。
 6. **已验证手机链路**：BLE 长写、鉴权、通知、结果关联及异常处理通过。
-
-本仓库以往某台 Indicator 的刷写和部分显示反馈不能替代你自备设备的验收；当前 XIAO 及手机硬件链路仍以真机记录为准。
 
 ## 10. 来源与进一步阅读
 
-- 引脚、电源网络：项目方提供的比赛附件 V1.0 原理图 PDF 第 5–6 页，已渲染复核。本文只提炼连接事实，不复制整套附件；复现者需核对自己实物的板型与丝印。
+- 引脚、电源网络：套件 V1.0 原理图第5–6页；接线前核对实物板型与丝印。
 - 实现真值：[XIAO 配置](../../firmware/xiao/include/robo_config.h)、[XIAO 主程序](../../firmware/xiao/src/main.cpp)、[控制核心](../../firmware/xiao/include/controller.h)、[Indicator 配置](../../firmware/indicator/include/config.h)、[两板协议](../device-protocol.md)、[已有接线说明](../wiring.md)。
 - [Seeed XIAO ESP32-S3 系列官方指南](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/)：型号、引脚与下载模式；本项目依赖以仓库固定版本为准。
 - [Seeed Indicator Arduino 官方指南](https://wiki.seeedstudio.com/SenseCAP_Indicator_ESP32_Arduino/)：双 MCU、CH340 ESP32 端口、屏幕/OPI PSRAM 背景。

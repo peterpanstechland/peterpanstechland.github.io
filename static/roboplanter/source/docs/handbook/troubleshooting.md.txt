@@ -1,6 +1,6 @@
 # RoboPlanter 排障：从供电到手机回包
 
-配合 [硬件教程](hardware-quickstart.md) 与 [BLE 教程](ble-integration.md) 使用。以下是诊断方法和预期结果，不是你的硬件已经通过的记录。例子中的端口和 ID 必须替换为当前真实值；不凭旧 COM 号选择设备。
+配合 [硬件教程](hardware-quickstart.md) 与 [BLE 教程](ble-integration.md) 使用。例子中的端口和 ID 必须替换为当前真实值；不凭旧 COM 号选择设备。
 
 ## 先止损，再定位
 
@@ -103,7 +103,7 @@ XIAO 如果现有程序没有 USB CDC 或陷入重启，普通串口名可能暂
 - `touch=ready` 也不能证明所有坐标都准确。检查四角/中心、抬手触发、滑动不误发动作，先禁用所有执行器。
 - 屏幕两帧缓冲依赖 PSRAM。不要把工程改成无 PSRAM 或 OPI 不匹配的配置。
 - 当前生产环境是 `sensecap_indicator`。`sensecap_indicator_lcdtest` 是明确的诊断构建，不作为默认比赛固件。
-- 界面文字清楚、Wi-Fi 能扫描或历史另一版本实机通过，都不能代替本次版本的长时间动画、联网与硬件验证。
+- 更换固件后检查动画、联网和触摸是否正常，持续闪烁时保存启动日志。
 
 详细板级依据见 [Indicator README](../../firmware/indicator/README.md)；该文档保留历史设置版本的摘要与适用边界。
 
@@ -258,7 +258,7 @@ printf '%s  %s\n' "$rp_expected_hash" "$rp_backup" | sha256sum --check - || exit
 保存以下最少信息：
 
 - 板型/版本、外设型号、接线草图和电源额定值；照片遮住设备唯一标识。
-- 仓库提交、PlatformIO 环境、实际包版本、本次改过的非敏感配置。
+- 仓库提交、PlatformIO 环境、实际包版本、相关非敏感配置。
 - 操作顺序、预期、实际结果；第一条异常日志；相关请求 ID（日志中的令牌全部遮蔽）。
 - `accepted/completed/unknown` 等软件结果和真实泵/灯/纸的观察分开记录。
 - 手机型号、系统/YOYO 版本、普通 GATT 客户端与官方工具结果是否一致。

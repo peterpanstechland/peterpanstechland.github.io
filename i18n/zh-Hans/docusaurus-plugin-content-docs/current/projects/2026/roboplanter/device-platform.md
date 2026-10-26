@@ -1,29 +1,29 @@
 ---
 title: "自带硬件与 Device Kit"
 description: "统一能力描述、离线登记和验证，以及未来在线平台的边界。"
-sidebar_position: 9
+sidebar_position: 10
 hide_title: true
 ---
 
 # 用户自带硬件的 RoboPlanter 设备平台
 
-## 产品目标与当前交付
+## Device Kit
 
 用户带来自己的硬件，选择或补充设备 profile，经适配和台架验证后从同一个 YOYO 入口使用。当前工位绿植是第一套设备实现；以后设施农业和灌溉需要新的设备能力、驱动与现场约束，不应把第一套 XIAO 引脚和水泵协议当成所有硬件的统一底层。
 
-本次加入的是一个**可运行的离线接入基础层**：[Device Kit](/roboplanter/source/integrations/device-kit/README.md.txt)。它提供 profile 校验、设备登记、样例遥测解释、清单退役和测试，不提供在线设备管理服务。现有 XIAO 固件、Indicator、本地 MCP、云查询和 YOYO Skill 的协议与权限保持原有行为。当前没有通用多设备 YOYO 调度、自动配对、用户账号绑定、远程灌溉或后台定时任务。
+[Device Kit](/roboplanter/source/integrations/device-kit/README.md.txt) 提供 profile 校验、设备登记、样例遥测解释和退役记录，采用本地文件运行。实际连接设备需要对应的运行时适配器。
 
-这里区分四件事：设备型号描述、用户自己的设备实例、适配器代码、实际运行权限。写一个 JSON 描述不会产生驱动；登记一个设备不会证明拥有它；模拟数据通过不会证明真机在线；YOYO 能读懂能力名称不会自动获得硬件调用权限。
+Profile 描述型号能力，设备实例标识具体硬件，适配器处理通信，鉴权决定访问权限。四者分别配置，便于复用和维护。
 
 ## 从小智借鉴什么
 
-2026-10-25 阅读了 `78/xiaozhi-esp32` 的官方仓库。它把板级初始化与引脚配置放在独立板型目录，用独立型号和构建变体维护不同硬件；文档特别指出复用错误的型号身份可能导致 OTA 覆盖错误固件。这适合作为本项目“型号身份、适配模块和升级兼容性分开管理”的参考。[小智自定义板型指南](https://github.com/78/xiaozhi-esp32/blob/main/docs/custom-board.md)
+`78/xiaozhi-esp32` 将板级初始化与引脚配置放在独立板型目录，用独立型号和构建变体维护不同硬件；文档特别指出复用错误的型号身份可能导致 OTA 覆盖错误固件。这适合作为本项目“型号身份、适配模块和升级兼容性分开管理”的参考。[小智自定义板型指南](https://github.com/78/xiaozhi-esp32/blob/main/docs/custom-board.md)
 
 小智的 OTA 代码另外处理设备标识、激活码或挑战，以及服务配置。这里借鉴“发现/登记、校验、绑定、启用、退役”的阶段分离，不复制其激活协议，也不把离线登记伪装成安全绑定。[小智 OTA/激活实现](https://github.com/78/xiaozhi-esp32/blob/main/main/ota.cc)
 
 小智 README 明确包含唤醒、音频、ASR/LLM/TTS、WebSocket/MQTT 等能力，固件默认连接其服务。RoboPlanter 的语音和智能体入口已经选定 YOYO，因此不搬这些语音或云服务链路，不要求用户部署一套小智后端。[小智官方 README](https://github.com/78/xiaozhi-esp32/blob/main/README.md)
 
-以上是架构参考，不代表两个项目协议兼容；本目录没有复制小智源码。
+RoboPlanter 与小智使用不同的设备协议。
 
 ## 分层结构
 
@@ -41,13 +41,13 @@ flowchart TD
     I -.-> F[现场控制器：联锁、流量/压力反馈、手动接管]
 ```
 
-图中的虚线代表尚未实现的路径或离线描述关系。Device Kit 不在真实命令通道中，图不能作为 YOYO 已打通多设备的证据。
+图中的虚线代表尚未实现的路径或离线描述关系。Device Kit 不在真实命令通道中，在线多设备调度仍在开发。
 
 ### 1. 入口与设备选择
 
 YOYO 继续负责对话。目标用户体验是先选定自己的设备，再查询或执行一次明确的动作。设备不明确时不能依赖“最近上线”或广播名称相似来选择泵。未来必须保存用户到设备的绑定关系，并让响应包含具体设备和请求编号；目前这些能力没有实现。
 
-现有独立 Skill 的硬件门禁仍关闭。安全注入令牌、实际广播身份、MTU/长写、WRITE 确认、NOTIFY 业务回包都完成验证后，才能在后续版本调整 Skill。`profile.assistant` 固定为 `entrypoint=yoyo`、`binding_status=not_verified`、`execution_enabled=false`，校验器不接受把它们改成已绑定或可执行。
+下载的0.2.1 Skill 包仅开放联通诊断。安全注入令牌、实际广播身份、MTU/长写、WRITE 确认、NOTIFY 业务回包都完成验证后，才能在后续版本调整 Skill。`profile.assistant` 固定为 `entrypoint=yoyo`、`binding_status=not_verified`、`execution_enabled=false`，校验器不接受把它们改成已绑定或可执行。
 
 ### 2. Profile：描述一种硬件
 
@@ -93,7 +93,7 @@ YOYO 继续负责对话。目标用户体验是先选定自己的设备，再查
 
 [profile](/roboplanter/source/integrations/device-kit/profiles/irrigation-zone-planned-v1.json.txt) 和 [fixture](/roboplanter/source/integrations/device-kit/fixtures/irrigation-state.json.txt) 描述土壤测量与一个有时间上限的分区动作，并列出干转、流量、压力、现场停止等将来的要求。Modbus 只是候选传输描述，没有寄存器定义、驱动或现场验收，不是可以直接接电磁阀运行的方案。
 
-设施农业扩展前还需要按真实装置确定分区拓扑、阀门默认状态、掉电/断网行为、泵阀顺序、传感器校准、异常停机和人工接管。先以单分区、明确时长、现场可停止的台架验证积累证据，再评估批量操作、排程与自动化。当前不实现这些控制。
+设施农业扩展前还需要按真实装置确定分区拓扑、阀门默认状态、掉电/断网行为、泵阀顺序、传感器校准、异常停机和人工接管。先以单分区、明确时长、现场可停止的台架验证检查行为，再评估批量操作、排程与自动化。当前不实现这些控制。
 
 ## 五分钟离线上手
 
@@ -155,11 +155,11 @@ python3 integrations/device-kit/device_kit.py mock-check \
 4. **运行校验与测试。** 新 profile 至少必须通过 schema 和跨字段校验；新增字节解码器要有厂商已知报文测试，错误格式不能变成“动作完成”。本工具不动态加载用户脚本，因此新增真正运行时适配器需要显式代码接入与审查。
 5. **台架验证单台硬件。** 在已授权的现场环境，先只读，再分别验证短动作、本地限时、停止、掉线、设备重启、重复请求和未知结果。把测试记录与硬件型号、固件版本、连接方式关联。这一步不属于 Device Kit 的模拟通过。
 6. **验证 YOYO 绑定与目标选择。** 核实官方工具的实际参数、身份与凭据注入，不猜测变量名。证明一个用户只控制其指定设备；多台设备选择与解除绑定需要独立实现。本阶段完成前现有 Skill 门禁继续关闭。
-7. **按实际证据提升支持状态。** 仅增加实现过、测试过的能力。传输变更和破坏性协议变更使用新版本；退役登记不等于撤销真实凭据，实物和平台凭据生命周期要分别处理。
+7. **更新支持状态。** 仅增加实现过、测试过的能力。传输变更和破坏性协议变更使用新版本；退役登记不等于撤销真实凭据，实物和平台凭据生命周期要分别处理。
 
-登记 → 离线检查是本次已经实现的生命周期；台架验收 → 安全绑定 → 有限启用 → 撤销/退役是后续交付阶段，当前没有自动化实现。
+当前工具支持登记与离线检查；在线绑定、启用和凭据撤销需要运行时服务实现。
 
-## 验证与已知限制
+## 测试与适用范围
 
 ```bash
 python3 -m unittest discover -s tests -p test_device_kit.py -v
@@ -167,7 +167,5 @@ python3 -m unittest discover -s tests -p test_mcp_result_validation.py -v
 ```
 
 测试覆盖三套 profile/fixture、封闭 schema、秘密字段拒绝、YOYO 门禁、传输引用、泵时间上限、空值/标定/新鲜度、登记去重、profile 哈希变化、逻辑/物理身份区分、CLI 登记到退役的完整路径。测试替换网络 socket 以保证离线样例不发起连接。
-
-本次顺带修复了本地 MCP 对畸形 `status` 的处理：原实现遇到数组/对象会在集合判断中抛出 `TypeError`；现在保留 `unknown`，并验证重复调用不会再次 POST。回归测试用替身 `_request`，不连接真实泵。
 
 标准库校验器只实现本 schema 用到的 JSON Schema 关键字，不是通用 JSON Schema 引擎；遇到不支持的关键字会拒绝。遥测检查当前只解释数值测量，不能验收设备停止、执行器反馈、布线、访问控制或平台绑定。profile 是开发输入，不是可信执行权限源。

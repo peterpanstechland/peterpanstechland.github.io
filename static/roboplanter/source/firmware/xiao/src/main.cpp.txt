@@ -14,6 +14,7 @@
 #include <vector>
 
 #include "controller.h"
+#include "printer_receipt.h"
 #include "ble_session.h"
 #include "robo_config.h"
 #include "remote_soil.h"
@@ -233,18 +234,18 @@ void printerTask(void*) {
   PrintJob job;
   for (;;) {
     if (xQueueReceive(printQueue, &job, portMAX_DELAY) != pdTRUE) continue;
-    bool success = ROBO_ENABLE_PRINTER;
     const uint32_t started = millis();
-    const size_t length = strlen(job.text);
     // Transmission is bounded and occurs in this low priority task. It never
     // holds the controller mutex or delays the independent pump deadline task.
-    for (size_t i = 0; success && i <= length; ++i) {
+    const auto writeByte = [&](uint8_t byte) {
+      if (millis() - started >= 5000) return false;
       while (printerSerial.availableForWrite() < 1) {
-        if (millis() - started >= 5000) { success = false; break; }
+        if (millis() - started >= 5000) return false;
         vTaskDelay(pdMS_TO_TICKS(1));
       }
-      if (success) success = printerSerial.write(i == length ? '\n' : job.text[i]) == 1;
-    }
+      return printerSerial.write(byte) == 1;
+    };
+    bool success = ROBO_ENABLE_PRINTER && robo::writeReceipt(job.text, writeByte);
     if (success)
       success = uart_wait_tx_done(UART_NUM_1, pdMS_TO_TICKS(5000)) == ESP_OK;
     {
@@ -707,7 +708,8 @@ void bleTask(void*) {
 }
 
 void failClosed(const char* reason) {
-  digitalWrite(pins::Pump, LOW);
+  // D8 belongs to UART while printing is enabled; do not force a UART break.
+  if (!ROBO_ENABLE_PRINTER) digitalWrite(pins::Pump, LOW);
   Serial.println(reason);
   for (;;) delay(1000);
 }
@@ -717,8 +719,12 @@ void setup() {
   // Disable both documented revisions' motor/heater nets. This firmware never
   // runs the robot drive controller. External pump driver MUST have a pulldown
   // so it remains off during reset, before these GPIOs become outputs.
-  const int safePins[] = {2, 3, 39, 11, 12, pins::Pump};
+  const int safePins[] = {2, 3, 39, 11, 12};
   for (int pin : safePins) { digitalWrite(pin, LOW); pinMode(pin, OUTPUT); }
+  // UART idles HIGH. Avoid the former pump initialization pulling printer TX
+  // LOW before UART1 starts. The config rejects simultaneous pump/printer use.
+  digitalWrite(pins::Pump, ROBO_ENABLE_PRINTER ? HIGH : LOW);
+  pinMode(pins::Pump, OUTPUT);
   Serial.begin(115200);
   coreMutex = xSemaphoreCreateMutex();
   sensorMutex = xSemaphoreCreateMutex();
@@ -749,8 +755,10 @@ void setup() {
     pixels.clear();
     pixels.show();
   }
-  if (ROBO_ENABLE_PRINTER)
+  if (ROBO_ENABLE_PRINTER) {
     printerSerial.begin(ROBO_PRINTER_BAUD, SERIAL_8N1, pins::PrinterRx, pins::PrinterTx);
+    if (!printerSerial) failClosed("Startup failed: printer UART unavailable");
+  }
   if (xTaskCreate(sensorTask, "sensors", 4096, nullptr, 1, nullptr) != pdPASS ||
       xTaskCreate(printerTask, "printer", 4096, nullptr, 1, nullptr) != pdPASS ||
       (ROBO_ENABLE_LIGHT && xTaskCreate(lightTask, "light-frames", 3072, nullptr, 1, nullptr) != pdPASS) ||
