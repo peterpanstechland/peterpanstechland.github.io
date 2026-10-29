@@ -31,6 +31,7 @@ Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/m
 | `environment.temperature_c`、`humidity_pct`、`valid` | 可选 DHT20 / SHT31 的温湿度和有效性 |
 | `pump.enabled`、`on`、`remaining_ms` | 泵功能是否启用、当前状态和剩余时间 |
 | `light.enabled`、`on`、`effect` | 灯带功能、目标开关及模式；关灯时模式为 `solid` |
+| `auto_light` | 自动开关配置、NVS可写状态、手动暂停与环境光过期标记，见下文 |
 | `printer.enabled`、`status` | 打印功能与软件发送状态：disabled / idle / queued / bytes_sent / recovery_required |
 | `printer.text_format`、`paper_width_dots`、`autocut`、`feedback` | 新固件为 utf8-raster、384、切刀配置布尔值、unavailable；旧固件可能缺省 |
 | `printer.layout` | `receipt32-v2` 表示 32 点阵字、44 点行高、居中首行布局；旧固件缺省，不能据此显示新布局的精确预览 |
@@ -55,6 +56,20 @@ Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/m
 成功写入NVS并读回后返回 `200 {"ok":true,"revision":新修订号}`。修订冲突返回409 `calibration_conflict`；运行中泵拒绝保存为409 `pump_busy`；存储失败503 `calibration_save_failed` 并将运行时参考值置为未标定，避免重启前后保护不一致。保存不启动任何执行器。保存期间新浇水返回 `calibration_busy`；原有停泵任务仍可运行。网络响应丢失不自动重发，客户端通过后续状态的修订号和相同参考值确认结果。
 
 记录以单条带版本/校验值的NVS blob保存，正常断电和应用分区更新保留。损坏记录保持未标定；明确清除后的记录不会回退到编译期值。具体操作见[屏幕校准教程](handbook/sensor-calibration.md)。
+
+### 环境光自动开关配置
+
+状态中的 `auto_light` 包含 `schema:1`、`available`、`writable`、`error`、`revision`、`enabled`、`on_below`、`off_above`、`paused`、`sensor_stale`。没有此对象的旧固件不能通过Indicator配置自动灯光。
+
+`POST /api/v1/auto-light` 使用相同设备鉴权和JSON类型，最多512字节，必须恰有以下四个字段：
+
+```json
+{"revision":0,"enabled":true,"on_below":1200,"off_above":1800}
+```
+
+先读取最新修订号。阈值必须为0–4095的整数，`off_above - on_below ≥ 64`；不接受额外字段或浮点数。成功保存单条带校验值的NVS记录并读回后返回 `200 {"ok":true,"revision":新修订号}`。过期版本返回409 `settings_conflict`，泵运行或其他设置写入期间返回409 `settings_busy`。存储失败返回503 `auto_light_save_failed`，自动模式关闭并关灯。未知结果不重发，通过后续状态的修订号和配置值核对。
+
+保存期间新浇水和手动灯光命令被 `light_settings_busy` 拒绝；停止浇水仍可用。自动模式每秒使用环境光采样，连续三份合格数据且至少两秒后切换；中间区间保持当前开关。无效或超过三秒未更新的自动采样使灯关闭。手动灯光命令暂停自动模式；保存设置或重启恢复已保存的自动模式。关闭自动模式只停止自动判断，不改变当时灯带状态。详见[灯光设置操作](handbook/ws2812-lighting.md)。
 
 ### 可选的 Indicator 土壤上传
 

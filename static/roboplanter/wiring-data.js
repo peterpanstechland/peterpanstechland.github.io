@@ -7,7 +7,7 @@ const doc='/docs/projects/2026/roboplanter/hardware-wiring';
 export const routes=[
   {
     id:'water',board:'xiao',port:'SERVO2',title:'超声波水箱距离',kind:'water',protocol:'单 SIG / 3.3 V',
-    status:'测距已验证 · 水箱待标定',line:'“先量距离，再谈还有多少水。”',
+    status:'测距与本机水箱参考已确认',line:'“先量距离，再谈还有多少水。”',
     address:'J5 pin1 · D9 / GPIO8 · Grove Ultrasonic Ranger v2.0',
     pins:[['power','独立 3.3 V','红线 VCC','3V3'],['ground','公共 GND','黑线 GND'],['signal','GPIO8 / J5 pin1','黄线 SIG'],['unused','白线 / Servo 5V','不接']],
     steps:[
@@ -15,7 +15,7 @@ export const routes=[
       ['一个 SIG 负责触发和回波','黄线SIG接D9/GPIO8。不是I²C模块，也不是HC-SR04的TRIG/ECHO两线；M2/J9不使用。'],
       ['先移动平面，再装水箱','距离随平面移动已通过。探头保持干燥；水箱完成后测满水、空箱和停泵三个距离。未标定不报余水百分比。'],
     ],
-    caution:'当前水箱未完成，探头不浸水；示意液面不是实际安装或水位测量。',doc,
+    caution:'本机水箱及实际参考点已确认；探头不浸水，示意液面不是实时水位。',doc,
   },
   {
     id:'climate',board:'xiao',port:'IIC1',title:'SEN54 环境感知',kind:'climate',protocol:'I²C 0x69 / 独立 5 V',
@@ -61,19 +61,19 @@ export const routes=[
     steps:[
       ['这里接光照，土壤在屏幕端','当前Light Sensor v1.2替代UV。红线另取3.3V，黑线共地，白线不接；Servo电源是5V，不能整根直插。'],
       ['黄线进 GPIO1','OUT接SERVO3/D0/GPIO1。该脚只接这一只模拟输出，不能再并接土壤或UV。'],
-      ['遮住，再照亮','Indicator环境光页面已确认随明暗变化。只报告原始ADC，不加lux或PAR单位。'],
+      ['遮住，再照亮','环境光已确认随明暗变化；设置→灯光设置可保存暗时开灯、亮时关灯的ADC阈值，不使用lux或PAR单位。'],
     ],
     caution:'土壤探头已移到Indicator的RP2040 GPIO27，不能按旧图接回SERVO3。',doc,
   },
   {
     id:'pump',board:'xiao',port:'SERVO1',title:'Grove Relay v1.2',kind:'pump',protocol:'GPIO42 / 高电平吸合',
-    status:'12V / 150mA泵已接 · 待水箱',line:'“水箱做好、校准完成，再测试浇水。”',
+    status:'12V / 150mA泵已启用 · 水位保护',line:'“先核对水位，再按一次浇水。”',
     address:'J1 pin1 · D15 / GPIO42 → Relay SIG',
     pins:[['power','已确认的3.3–5V','Relay VCC'],['ground','公共 GND','Relay GND'],['signal','GPIO42 / J1 pin1','Relay SIG'],['power','两颗常开负载端子','独立12V泵回路']],
     steps:[
       ['独立12V负载供电','用户确认泵已接、铭牌150mA。12V正极经继电器常开触点接泵正极，泵负极接12V负极，12V不接Grove电源脚。'],
       ['控制改到 SERVO1','SIG接D15/GPIO42，高电平吸合。SERVO4/GPIO7已经用于打印，M2/J9也不使用。'],
-      ['等待实体水箱与校准','空载吸合已验证，泵保持禁用。水箱做好后从Indicator设置采满水、缺水和空箱距离；另需检查启动电流、保护与进水条件，再进行负载测试。'],
+      ['保存真实水箱参考','用户已确认水箱、进出水和实际35/61/80mm参考，本机已启用。500ms命令完成并停泵；用户确认短出水后停止。其他水箱需自行标定，不能照抄数值。'],
     ],
     caution:'接线已确认不等于带水运行已通过；校准工具不会启动水泵，软件保护不能代替负载试验。',doc,
   },

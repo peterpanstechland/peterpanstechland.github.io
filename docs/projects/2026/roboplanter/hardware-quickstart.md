@@ -11,7 +11,7 @@ hide_title: true
 
 建议按 **空载只读 → 单个传感器 → 灯 → 打印 → 最后水泵 → 手机 BLE** 的顺序走完，每一步通过后再增加下一件外设。任何未知型号都先保持禁用。手机接入见 [BLE 教程](/docs/projects/2026/roboplanter/ble-integration)，异常见 [排障手册](/docs/projects/2026/roboplanter/troubleshooting)。
 
-先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。Indicator 土壤采集使用可选的 RP2040 程序；超声波测距与软件水位保护已实现，实体水箱与泵负载仍待联调。完整分配见 [接线文档](/docs/projects/2026/roboplanter/hardware-wiring)。
+先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。Indicator 土壤采集使用可选的 RP2040 程序；超声波测距与软件水位保护已实现，本机水箱、进出水和实际标定已获用户确认，泵已启用；短时出水与最终保护另行验收。完整分配见 [接线文档](/docs/projects/2026/roboplanter/hardware-wiring)。
 
 ## 1. 先确认你拿到的是哪块板
 

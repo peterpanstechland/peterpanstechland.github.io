@@ -37,6 +37,10 @@ if errorlevel 1 exit /b 1
 cl.exe /nologo /std:c++17 /EHsc /utf-8 /W4 /I"$rpRoot\firmware\xiao\.pio\libdeps\xiao_robot_board\ArduinoJson\src" "$rpRoot\tests\core\sensor_calibration_test.cpp" /Fe:sensor_calibration_test.exe
 if errorlevel 1 exit /b 1
 sensor_calibration_test.exe
+if errorlevel 1 exit /b 1
+cl.exe /nologo /std:c++17 /EHsc /utf-8 /W4 /I"$rpRoot\firmware\xiao\.pio\libdeps\xiao_robot_board\ArduinoJson\src" "$rpRoot\tests\core\auto_light_test.cpp" /Fe:auto_light_test.exe
+if errorlevel 1 exit /b 1
+auto_light_test.exe
 "@
 Set-Content -LiteralPath $rpBatch -Value $rpBatchContent -Encoding ascii
 & $env:ComSpec /d /c $rpBatch

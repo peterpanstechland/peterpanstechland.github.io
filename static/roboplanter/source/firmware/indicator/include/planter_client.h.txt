@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include "../../xiao/include/daily_ticket.h"
 #include "../../xiao/include/sensor_calibration.h"
+#include "../../xiao/include/auto_light.h"
 
 namespace planter {
 struct Reading { float value = 0; bool valid = false; };
@@ -45,6 +46,10 @@ struct State {
   bool remainingKnown = false;
   uint32_t remainingMs = 0;
   bool lightKnown = false, lightEnabled = false, lightOn = false;
+  bool autoLightKnown=false, autoLightAvailable=false, autoLightWritable=false, autoLightPaused=false, autoLightStale=true;
+  robo::AutoLightSettings autoLight;
+  CalibrationWrite autoLightWrite=CalibrationWrite::Idle;
+  char autoLightError[48]={};
   bool printerKnown = false, printerEnabled = false;
   bool printerRaster = false, printerAutocut = false;
   bool printerLayout32 = false;
@@ -62,4 +67,5 @@ bool fresh(const State &state, uint32_t now);
 bool submit(Action action, bool lightOn = false, const PrintReceipt *receipt = nullptr, uint16_t focusMinutes = 25);
 void acknowledgeUncertain();
 bool submitCalibration(const robo::CalibrationEdit& edit);
+bool submitAutoLight(const robo::AutoLightSettings& settings);
 }

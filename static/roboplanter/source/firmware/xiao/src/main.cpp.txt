@@ -18,6 +18,7 @@
 
 #include "controller.h"
 #include "calibration_json.h"
+#include "auto_light_json.h"
 #include "printer_receipt.h"
 #include "daily_receipt.h"
 #include "daily_json.h"
@@ -92,6 +93,9 @@ Preferences calibrationPrefs;
 robo::SensorCalibration sensorCalibration;
 bool calibrationStorage = false;
 const char* calibrationStorageError = "";
+Preferences autoLightPrefs;
+bool autoLightStorage=false;
+const char* autoLightStorageError="";
 bool companionStorage=false;
 uint32_t pairPin=0;
 uint32_t pairConnections=0,pairRequests=0,pairNotifications=0;
@@ -315,6 +319,7 @@ void sensorTask(void*) {
       writePump();
     }
     next.timestamp = millis();
+    { Lock guard(coreMutex); controller.updateAmbient(next.ambient, next.ambientValid, next.timestamp); }
     {
       Lock guard(sensorMutex);
       sample = next;
@@ -562,6 +567,18 @@ void stateJson(JsonDocument& document) {
   light["enabled"] = ROBO_ENABLE_LIGHT && ActionsReady;
   light["on"] = controller.lightOn();
   light["effect"] = controller.lightEffect();
+  JsonObject automatic = document.createNestedObject("auto_light");
+  const auto &autoSettings=controller.autoLight().settings();
+  automatic["schema"]=1;
+  automatic["available"]=bool(ROBO_ENABLE_LIGHT && ROBO_ENABLE_AMBIENT_LIGHT && ActionsReady);
+  automatic["writable"]=autoLightStorage;
+  automatic["error"]=autoLightStorageError;
+  automatic["revision"]=autoSettings.revision;
+  automatic["enabled"]=autoSettings.enabled;
+  automatic["on_below"]=autoSettings.onBelow;
+  automatic["off_above"]=autoSettings.offAbove;
+  automatic["paused"]=controller.autoLight().paused();
+  automatic["sensor_stale"]=controller.autoLight().stale(now);
   JsonObject printer = document.createNestedObject("printer");
   printer["enabled"] = ROBO_ENABLE_PRINTER && ActionsReady;
   printer["status"] = std::string(controller.printerStatus());
@@ -667,6 +684,45 @@ void httpCalibration() {
   StaticJsonDocument<128> output;
   output["ok"] = true; output["revision"] = next.revision;
   sendJson(200, output);
+}
+
+void loadAutoLight() {
+  autoLightStorage=autoLightPrefs.begin("rp-light",false);
+  robo::AutoLightSettings settings;
+  if(!autoLightStorage)autoLightStorageError="storage_unavailable";
+  else if(autoLightPrefs.isKey("values")) {
+    robo::AutoLightRecord record;
+    if(autoLightPrefs.getBytesLength("values")!=sizeof(record) || autoLightPrefs.getBytes("values",&record,sizeof(record))!=sizeof(record) ||
+       !robo::decodeAutoLight(record,settings))autoLightStorageError="auto_light_corrupt";
+  }
+  controller.finishLightSettings(settings);
+}
+void httpAutoLight() {
+  if(!httpAuthorized())return;
+  if(!(ROBO_ENABLE_LIGHT && ROBO_ENABLE_AMBIENT_LIGHT && ActionsReady)) { sendError(409,"auto_light_unavailable"); return; }
+  if(http.header("Content-Type").indexOf("application/json")!=0) { sendError(415,"content_type_required"); return; }
+  const String body=http.arg("plain");
+  if(!body.length() || body.length()>MaxHttpBytes) { sendError(413,"body_size_invalid"); return; }
+  StaticJsonDocument<384> input; robo::AutoLightSettings settings;
+  if(deserializeJson(input,body) || !robo::parseAutoLight(input.as<JsonVariantConst>(),settings)) { sendError(400,"invalid_auto_light"); return; }
+  const char* error="";
+  {
+    Lock guard(coreMutex);
+    if(!autoLightStorage)error="storage_unavailable";
+    else if(settings.revision!=controller.autoLight().settings().revision)error="settings_conflict";
+    else if(settings.revision==UINT32_MAX)error="revision_exhausted";
+    else if(!controller.beginLightSettings())error="settings_busy";
+  }
+  if(*error) { sendError(409,error); return; }
+  ++settings.revision;
+  const bool saved=robo::saveAutoLight(autoLightPrefs,settings);
+  {
+    Lock guard(coreMutex);
+    if(saved) { controller.finishLightSettings(settings); autoLightStorageError=""; }
+    else { autoLightStorage=false;autoLightStorageError="auto_light_save_failed";controller.finishLightSettings(robo::AutoLightSettings(),true); }
+  }
+  if(!saved) { sendError(503,"auto_light_save_failed"); return; }
+  StaticJsonDocument<128> output; output["ok"]=true;output["revision"]=settings.revision;sendJson(200,output);
 }
 
 void httpSoil() {
@@ -1155,6 +1211,7 @@ void setup() {
   if (!coreMutex || !sensorMutex || !lightMutex || !bleMutex || !printQueue || !bleQueue)
     failClosed("Startup failed: task resources unavailable");
   loadSensorCalibration();
+  loadAutoLight();
   if (xTaskCreate(pumpTask, "pump-deadline", 3072, nullptr, 10, nullptr) != pdPASS)
     failClosed("Startup failed: pump deadline task unavailable");
 
@@ -1210,6 +1267,7 @@ void setup() {
   });
   http.on("/api/v1/command", HTTP_POST, httpCommand);
   http.on("/api/v1/calibration", HTTP_POST, httpCalibration);
+  http.on("/api/v1/auto-light", HTTP_POST, httpAutoLight);
   http.on("/api/v1/sensors/soil", HTTP_POST, httpSoil);
   http.on("/api/v1/diagnostic-session", HTTP_POST, httpDiagnosticSession);
   http.on("/api/v1/result", HTTP_GET, httpResult);

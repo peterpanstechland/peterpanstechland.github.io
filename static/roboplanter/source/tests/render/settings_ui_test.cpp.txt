@@ -87,11 +87,14 @@ bool requestConnect(const char *ssid, const char *password) {
 namespace planter {
 State fixture;
 unsigned calibrationSaves = 0;
+unsigned lightSaves=0;
+robo::AutoLightSettings savedLight;
 robo::CalibrationEdit savedEdit;
 State snapshot() { return fixture; }
 bool fresh(const State &s, uint32_t) { return s.received && s.wifi; }
 bool submit(Action, bool, const PrintReceipt*, uint16_t) { throw std::runtime_error("Calibration UI must never actuate hardware"); }
 bool submitCalibration(const robo::CalibrationEdit& edit) { ++calibrationSaves; savedEdit = edit; fixture.calibrationWrite = CalibrationWrite::Queued; return true; }
+bool submitAutoLight(const robo::AutoLightSettings& settings) { ++lightSaves;savedLight=settings;fixture.autoLightWrite=CalibrationWrite::Queued;return true; }
 }
 int main(int argc, char **argv) {
   try {
@@ -187,12 +190,28 @@ int main(int argc, char **argv) {
     tap(200, 250); now += 1000; planter::fixture.receivedMs = now; render();
     planter::fixture.tankDistance.value = 160; now += 1000; planter::fixture.receivedMs = now; render();
     require(!settings_ui::calibrationCapture.active() && settings_ui::calibrationDraft.tank.fullMm == -1, "Unstable tank echo rejected");
+    settings_ui::open();tap(350,215);render();
+    require(std::string(settings_ui::title())=="自动灯光","Light settings entry");
+    tap(100,170);tap(200,430);require(planter::lightSaves==0,"Unavailable auto light cannot save");
+    planter::fixture.autoLightKnown=planter::fixture.autoLightAvailable=planter::fixture.autoLightWritable=true;
+    planter::fixture.ambientLightEnabled=true;planter::fixture.ambientLightRaw={2200,true};planter::fixture.receivedMs=now;
+    render();tap(100,170);tap(200,430);require(planter::lightSaves==1&&planter::savedLight.enabled,"Mode change saved explicitly");
+    tap(200,430);require(planter::lightSaves==1,"No double save while pending");
+    planter::fixture.autoLight=planter::savedLight;++planter::fixture.autoLight.revision;planter::fixture.autoLightWrite=planter::CalibrationWrite::Saved;render();
+    require(!settings_ui::lightDirty&&!settings_ui::lightWaiting,"Settings readback confirmed");
+    tap(200,260);require(settings_ui::lightDraft.onBelow==2200,"Capture current light ADC");
+    tap(200,430);require(planter::lightSaves==1,"Invalid threshold gap blocks save");
+    tap(430,350);require(settings_ui::lightDraft.offAbove==1900,"Increase off threshold");
+    settings_ui::back();tap(350,215);render();require(settings_ui::lightDraft.onBelow==1200,"Unsaved edits discarded");
+    planter::fixture.autoLightPaused=true;tap(200,430);require(planter::lightSaves==2,"Explicit save resumes manual override");
+    planter::fixture.autoLightWrite=planter::CalibrationWrite::Idle;
     if (argc > 1) {
       const std::filesystem::path output(argv[1]); std::filesystem::create_directories(output);
       for (unsigned lang = 0; lang < 2; ++lang) {
         language = lang ? device_settings::Language::English : device_settings::Language::Chinese;
         const std::string prefix = lang ? "en-" : "zh-";
         networks(); settings_ui::open(); frame(output, (prefix + "settings").c_str());
+        planter::fixture.receivedMs=now;tap(350,215);frame(output,(prefix+"auto-light").c_str());settings_ui::back();
         tap(100, 420); frame(output, (prefix + "planter").c_str());
         planter::fixture.receivedMs = now;
         tap(350, 355); frame(output, (prefix + "calibration").c_str());

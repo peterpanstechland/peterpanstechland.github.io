@@ -111,6 +111,7 @@ bool submit(Action action, bool, const PrintReceipt *receipt, uint16_t) {
 }
 void acknowledgeUncertain() { throw std::runtime_error("Rendering must not modify command state"); }
   bool submitCalibration(const robo::CalibrationEdit&) { throw std::runtime_error("Rendering must not save calibration"); }
+  bool submitAutoLight(const robo::AutoLightSettings&) { throw std::runtime_error("Rendering must not change auto light settings"); }
 }
 namespace {
 struct Capture {
