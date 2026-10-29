@@ -31,6 +31,12 @@ class PublicStarterTests(unittest.TestCase):
                             self.assertIn(candidate, files, f"Missing dependency of {path.relative_to(ROOT)}")
                         break
 
+    def test_core_runner_sources_are_included(self):
+        names = {p.relative_to(ROOT).as_posix() for p in starter.source_files()}
+        runner = (ROOT / "tools/test-core.ps1").read_text(encoding="utf-8")
+        for name in re.findall(r'tests\\core\\[A-Za-z0-9_]+\.cpp', runner):
+            self.assertIn(name.replace("\\", "/"), names)
+
     def test_archive_excludes_local_state_and_verifies_every_source_hash(self):
         with tempfile.TemporaryDirectory() as work:
             result = starter.package(Path(work) / "source.zip")
