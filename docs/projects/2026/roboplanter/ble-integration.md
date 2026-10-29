@@ -1,7 +1,7 @@
 ---
 title: "BLE 完整接入教程"
 description: "官方工具参数、设备协议、MTU、加密绑定、回包语义和逐步验收。"
-sidebar_position: 12
+sidebar_position: 13
 hide_title: true
 ---
 

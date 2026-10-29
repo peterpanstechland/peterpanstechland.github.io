@@ -1,7 +1,7 @@
 ---
 title: "植物生长与陪伴养成"
 description: "真实物候、预测与陪伴反馈分开，逐步替换加速演示周期。"
-sidebar_position: 7
+sidebar_position: 8
 hide_title: true
 ---
 

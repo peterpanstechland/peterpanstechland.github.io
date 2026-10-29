@@ -167,11 +167,19 @@ class Controller {
   }
 
   void updateTank(int distanceMm, uint32_t now) { tank_.update(distanceMm, now); tick(now); }
+  bool beginCalibration() {
+    if (pumpOn_ || calibrationBusy_) return false;
+    calibrationBusy_ = true; return true;
+  }
+  void finishCalibration(TankCalibration calibration) {
+    tank_.setCalibration(calibration); calibrationBusy_ = false;
+  }
   void failPreference(const std::string& id,bool previous) {autoPrint_=previous;finish(id,false,"settings_save_failed");}
   bool autoPrint() const {return autoPrint_;}
   void restoreAutoPrint(bool value) {autoPrint_=value;}
   const FocusSession& focus() const {return focus_;}
   const char* waterBlockReason(uint32_t now) const {
+    if (calibrationBusy_) return "calibration_busy";
     return config_.tankRequired ? tank_.error(now) : "";
   }
 
@@ -218,6 +226,7 @@ class Controller {
   std::array<Entry, CacheCapacity> entries_{};
   size_t used_ = 0;
   bool pumpOn_ = false;
+  bool calibrationBusy_ = false;
   bool lightOn_ = false;
   std::string lightEffect_ = "solid";
   bool printerBusy_ = false;

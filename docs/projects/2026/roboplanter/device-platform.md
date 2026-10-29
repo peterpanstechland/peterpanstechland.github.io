@@ -1,7 +1,7 @@
 ---
 title: "自带硬件与 Device Kit"
 description: "统一能力描述、离线登记和验证，以及未来在线平台的边界。"
-sidebar_position: 13
+sidebar_position: 14
 hide_title: true
 ---
 

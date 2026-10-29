@@ -27,7 +27,7 @@ device_settings_test.exe
 if errorlevel 1 exit /b 1
 cl.exe /nologo /std:c++17 /EHsc /utf-8 /W4 /D_CRT_SECURE_NO_WARNINGS /I"$rpStubs" /I"$rpInclude" /I"$rpJson" "$rpNetworkSource" "$rpSettingsSource" /Fe:planter_network_test.exe
 if errorlevel 1 exit /b 1
-for %%S in (settings-mutex settings-queue client-mutex commands-queue stops-queue task stop-switch print sensors companion) do (
+for %%S in (settings-mutex settings-queue client-mutex commands-queue stops-queue task stop-switch print sensors companion calibration) do (
   planter_network_test.exe %%S
   if errorlevel 1 exit /b 1
 )

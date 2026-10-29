@@ -15,8 +15,11 @@
 
 namespace {
 using namespace planter;
-struct Command { Action action; bool on; char id[33]; uint32_t networkRevision; PrintReceipt receipt; uint16_t focusMinutes; };
+struct Command { Action action; bool on; char id[33]; uint32_t networkRevision; PrintReceipt receipt; uint16_t focusMinutes;
+  bool calibrationWrite = false; robo::CalibrationEdit calibration; };
 State shared;
+robo::CalibrationEdit lastCalibrationEdit;
+uint32_t calibrationNetwork = 0;
 SemaphoreHandle_t lock = nullptr;
 QueueHandle_t commands = nullptr, stops = nullptr;
 uint32_t bootNonce = 0, sequence = 0;
@@ -28,6 +31,14 @@ bool terminal(const char *status) {
   return !strcmp(status, "completed") || !strcmp(status, "failed") ||
          !strcmp(status, "rejected") || !strcmp(status, "cancelled") ||
          !strcmp(status, "stopped");
+}
+bool calibrationBusy(CalibrationWrite state) {
+  return state == CalibrationWrite::Queued || state == CalibrationWrite::Saving;
+}
+void calibrationResult(CalibrationWrite state, const char* error = "") {
+  xSemaphoreTake(lock, portMAX_DELAY);
+  shared.calibrationWrite = state; copy(shared.calibrationError, error);
+  xSemaphoreGive(lock);
 }
 void networkError(const char *message, NetworkFailure failure = NetworkFailure::Http, int status = 0) {
   xSemaphoreTake(lock, portMAX_DELAY);
@@ -126,11 +137,29 @@ void pollState() {
   next.ageKnown = doc["sample_age_ms"].is<uint32_t>();
   if (next.ageKnown) next.sampleAgeMs = doc["sample_age_ms"].as<uint32_t>();
   next.soilRaw = reading(doc["soil"], "raw");
+  next.soilAgeKnown = doc["soil"]["sample_age_ms"].is<uint32_t>() && !doc["soil"]["sample_age_ms"].is<bool>();
+  if (next.soilAgeKnown) next.soilAgeMs = doc["soil"]["sample_age_ms"];
+  else if (doc["soil"]["source"].isNull()) { next.soilAgeKnown = next.ageKnown; next.soilAgeMs = next.sampleAgeMs; }
   next.soilCalibrationKnown = doc["soil"]["calibrated"].is<bool>();
   next.soilCalibrated = next.soilCalibrationKnown && doc["soil"]["calibrated"].as<bool>();
   next.soilPercent = reading(doc["soil"], "percent");
   next.soilPercent.valid = next.soilPercent.valid && next.soilCalibrated &&
                            next.soilPercent.value >= 0 && next.soilPercent.value <= 100;
+  auto cal = doc["calibration"];
+  next.calibrationKnown = cal["schema"].is<unsigned>() && cal["schema"].as<unsigned>() == 1 &&
+    cal["revision"].is<uint32_t>() && !cal["revision"].is<bool>() && cal["writable"].is<bool>();
+  const char* calKeys[] = {"dry", "wet", "full_mm", "empty_mm", "stop_mm"};
+  int* calValues[] = {&next.calibration.dry, &next.calibration.wet, &next.calibration.tank.fullMm,
+                     &next.calibration.tank.emptyMm, &next.calibration.tank.stopMm};
+  for (unsigned i = 0; i < 5; ++i) {
+    if (!cal[calKeys[i]].is<int>() || cal[calKeys[i]].is<bool>()) next.calibrationKnown = false;
+    else *calValues[i] = cal[calKeys[i]].as<int>();
+  }
+  robo::SensorCalibration verified;
+  next.calibrationKnown = next.calibrationKnown && robo::decodeCalibration(robo::encodeCalibration(next.calibration), verified);
+  if (next.calibrationKnown) {
+    next.calibration.revision = cal["revision"]; next.calibrationWritable = cal["writable"];
+  }
   next.airRaw = reading(doc["air"], "raw");
   next.yoyoEnabled=doc["yoyo"]["enabled"]==true;
   next.yoyoPaired=doc["yoyo"]["paired"]==true;
@@ -194,6 +223,17 @@ void pollState() {
 
   xSemaphoreTake(lock, portMAX_DELAY);
   copy(next.requestId, shared.requestId);
+  next.calibrationWrite = shared.calibrationWrite;
+  copy(next.calibrationError, shared.calibrationError);
+  if (next.calibrationWrite == CalibrationWrite::Unknown && next.calibrationKnown && requestNetwork == calibrationNetwork &&
+      next.calibration.revision == lastCalibrationEdit.revision + 1) {
+    const auto &edit = lastCalibrationEdit;
+    const auto &saved = next.calibration;
+    const bool matches = edit.kind == robo::CalibrationKind::Soil ?
+      saved.dry == (edit.reset ? -1 : edit.a) && saved.wet == (edit.reset ? -1 : edit.b) :
+      saved.tank.fullMm == (edit.reset ? -1 : edit.a) && saved.tank.emptyMm == (edit.reset ? -1 : edit.b) && saved.tank.stopMm == (edit.reset ? -1 : edit.c);
+    if (matches) { next.calibrationWrite = CalibrationWrite::Saved; next.calibrationError[0] = 0; }
+  }
   copy(next.commandStatus, shared.commandStatus);
   copy(next.commandError, shared.commandError);
   next.commandBlocked = shared.commandBlocked;
@@ -274,7 +314,46 @@ void pollCommandResult() {
   // overwrite a newer STOP request or a manual uncertainty acknowledgement.
 }
 
+void sendCalibration(const Command& command) {
+  const auto state = planter::snapshot();
+  if (!planter::fresh(state, millis()) || !state.calibrationWritable || !state.calibrationKnown ||
+      state.networkRevision != command.networkRevision || command.networkRevision != device_settings::networkRevision() ||
+      state.pumpOn || !state.pumpKnown) { calibrationResult(CalibrationWrite::Failed, "not_sent"); return; }
+  robo::SensorCalibration candidate;
+  const char* error = robo::applyCalibration(state.calibration, command.calibration, candidate);
+  if (*error) { calibrationResult(CalibrationWrite::Failed, error); return; }
+  const auto &edit = command.calibration;
+  StaticJsonDocument<256> input;
+  input["kind"] = edit.kind == robo::CalibrationKind::Soil ? "soil" : "tank";
+  input["revision"] = edit.revision; input["reset"] = edit.reset;
+  if (!edit.reset) {
+    if (edit.kind == robo::CalibrationKind::Soil) { input["dry"] = edit.a; input["wet"] = edit.b; }
+    else { input["full_mm"] = edit.a; input["empty_mm"] = edit.b; input["stop_mm"] = edit.c; }
+  }
+  WiFiClient client; HTTPClient http;
+  if (!configureHttp(http, client, "/api/v1/calibration")) { calibrationResult(CalibrationWrite::Failed, "not_sent"); return; }
+  http.addHeader("Content-Type", "application/json");
+  String body; serializeJson(input, body);
+  calibrationResult(CalibrationWrite::Saving);
+  const int code = http.POST(body);
+  if (code <= 0 || http.getSize() < 0 || http.getSize() > 1024) {
+    http.end(); calibrationResult(CalibrationWrite::Unknown, "response_lost"); return;
+  }
+  const String response = http.getString(); http.end();
+  StaticJsonDocument<512> result;
+  if (deserializeJson(result, response) || !result["ok"].is<bool>()) {
+    calibrationResult(CalibrationWrite::Unknown, "unverified_response"); return;
+  }
+  if (code == 200 && result["ok"].as<bool>() && result["revision"].is<uint32_t>() &&
+      !result["revision"].is<bool>() && result["revision"].as<uint32_t>() == candidate.revision) {
+    calibrationResult(CalibrationWrite::Saved);
+  } else if (code >= 400 && code < 600 && !result["ok"].as<bool>()) {
+    calibrationResult(CalibrationWrite::Failed, result["error"] | "save_failed");
+  } else calibrationResult(CalibrationWrite::Unknown, "unverified_response");
+}
+
 void sendCommand(const Command &command) {
+  if (command.calibrationWrite) { sendCalibration(command); return; }
   if (WiFi.status() != WL_CONNECTED || !device_settings::planterNetworkReady() ||
       command.networkRevision != device_settings::networkRevision()) {
     commandResult(command.id, "not_sent", "Planter network unavailable or changed; no retry", false); return;
@@ -351,6 +430,7 @@ void networkTask(void *) {
     // STOP has its own one-element queue and is serviced before other work.
     if (xQueueReceive(stops, &command, 0) == pdTRUE) {
       xQueueReset(commands);
+      if (planter::snapshot().calibrationWrite == CalibrationWrite::Queued) calibrationResult(CalibrationWrite::Failed, "cancelled");
       sendCommand(command);
       // Keep settings from invalidating this STOP between enqueue and POST.
       // Release on every result, including not_sent/unknown; never replay it.
@@ -465,14 +545,15 @@ bool submit(Action action, bool lightOn, const PrintReceipt *receipt, uint16_t f
                        action == Action::Light ? shared.lightEnabled : shared.printerEnabled;
   if (!enabled || !shared.wifi || shared.networkRevision != device_settings::networkRevision() ||
       (action == Action::Water && !shared.waterAllowed) ||
-      !device_settings::planterNetworkReady() || (!stop && (!fresh(shared, millis()) || shared.commandBlocked)) ||
+      !device_settings::planterNetworkReady() || (!stop && (!fresh(shared, millis()) || shared.commandBlocked || calibrationBusy(shared.calibrationWrite))) ||
       (action == Action::Print && (!strcmp(shared.printerStatus, "recovery_required") ||
        (receipt->requiresRaster && !shared.printerRaster) ||
        (receipt->layout32 && !shared.printerLayout32) ||
        (receipt->isDaily && (!shared.printerDaily || !robo::validDaily(receipt->daily)))))) {
     xSemaphoreGive(lock); return false;
   }
-  Command command{action, lightOn, {}, device_settings::networkRevision(), {}, focusMinutes};
+  Command command{};
+  command.action = action; command.on = lightOn; command.networkRevision = device_settings::networkRevision();
   command.focusMinutes=focusMinutes;
   if (action == Action::Print) command.receipt = *receipt;
   // Acquire under the settings lock after the checks above: a concurrent UI
@@ -496,6 +577,22 @@ bool submit(Action action, bool lightOn, const PrintReceipt *receipt, uint16_t f
   else if (stop) device_settings::releaseNetworkAfterStop();
   xSemaphoreGive(lock);
   return queued == pdTRUE;
+}
+bool submitCalibration(const robo::CalibrationEdit& edit) {
+  if (!lock || !commands) return false;
+  xSemaphoreTake(lock, portMAX_DELAY);
+  robo::SensorCalibration candidate;
+  const bool allowed = fresh(shared, millis()) && shared.calibrationKnown && shared.calibrationWritable &&
+    shared.pumpKnown && !shared.pumpOn && !shared.commandBlocked && !calibrationBusy(shared.calibrationWrite) &&
+    !*robo::applyCalibration(shared.calibration, edit, candidate);
+  Command command{};
+  command.calibrationWrite = true; command.calibration = edit; command.networkRevision = shared.networkRevision;
+  const bool queued = allowed && xQueueSend(commands, &command, 0) == pdTRUE;
+  if (queued) {
+    shared.calibrationWrite = CalibrationWrite::Queued; shared.calibrationError[0] = 0;
+    lastCalibrationEdit = edit; calibrationNetwork = shared.networkRevision;
+  }
+  xSemaphoreGive(lock); return queued;
 }
 void acknowledgeUncertain() {
   if (!lock) return;

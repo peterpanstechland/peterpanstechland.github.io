@@ -85,8 +85,13 @@ bool requestConnect(const char *ssid, const char *password) {
 }
 }
 namespace planter {
-State snapshot() { return State(); }
-bool fresh(const State &, uint32_t) { return false; }
+State fixture;
+unsigned calibrationSaves = 0;
+robo::CalibrationEdit savedEdit;
+State snapshot() { return fixture; }
+bool fresh(const State &s, uint32_t) { return s.received && s.wifi; }
+bool submit(Action, bool, const PrintReceipt*, uint16_t) { throw std::runtime_error("Calibration UI must never actuate hardware"); }
+bool submitCalibration(const robo::CalibrationEdit& edit) { ++calibrationSaves; savedEdit = edit; fixture.calibrationWrite = CalibrationWrite::Queued; return true; }
 }
 int main(int argc, char **argv) {
   try {
@@ -151,6 +156,37 @@ int main(int argc, char **argv) {
     require(std::string(settings_ui::title()) == "花盆连接", "Planter diagnostics must be reachable");
     render(); const auto beforeRestore = restores; tap(100, 437);
     require(restores == beforeRestore + 1 && std::string(settings_ui::title()) == "无线网络", "Diagnostics must restore only the paired network");
+    settings_ui::open(); tap(100, 420); tap(350, 355); render();
+    require(std::string(settings_ui::title()) == "传感器校准", "Calibration entry");
+    tap(200, 170); render(); tap(200, 250); render();
+    require(!settings_ui::calibrationCapture.active() && planter::calibrationSaves == 0, "Offline capture must not start");
+    planter::fixture.received = planter::fixture.wifi = planter::fixture.calibrationKnown = planter::fixture.calibrationWritable = planter::fixture.pumpKnown = true;
+    planter::fixture.ageKnown = planter::fixture.soilAgeKnown = true;
+    planter::fixture.soilRaw = {3000, true};
+    planter::fixture.soilAgeMs = 3100; tap(200, 250); render();
+    require(!settings_ui::calibrationCapture.active() && settings_ui::calibrationDraft.dry == -1, "Relayed soil age must reject stale capture");
+    planter::fixture.soilAgeMs = 0;
+    tap(200, 250);
+    for (unsigned i = 0; i < 5; ++i) { now += 1000; planter::fixture.receivedMs = now; render(); }
+    require(settings_ui::calibrationDraft.dry == 3000 && planter::calibrationSaves == 0, "Capturing does not save");
+    tap(100, 425); require(planter::calibrationSaves == 0, "Cannot save missing wet point");
+    planter::fixture.soilRaw.value = 1500; tap(200, 305);
+    for (unsigned i = 0; i < 5; ++i) { now += 1000; planter::fixture.receivedMs = now; render(); }
+    tap(100, 425); require(planter::calibrationSaves == 1 && planter::savedEdit.a == 3000 && planter::savedEdit.b == 1500, "Explicit save submits captured endpoints");
+    tap(100, 425); require(planter::calibrationSaves == 1, "Double tap cannot duplicate pending write");
+    planter::fixture.calibrationWrite = planter::CalibrationWrite::Saved;
+    planter::fixture.calibration.revision = 1; planter::fixture.calibration.dry = 3000; planter::fixture.calibration.wet = 1500;
+    render(); require(!settings_ui::calibrationDirty && !settings_ui::calibrationWaiting, "Readback confirms save");
+    tap(350, 425); require(std::string(settings_ui::title()) == "清除校准", "Reset confirmation");
+    require(planter::calibrationSaves == 1, "Reset must need confirmation");
+    tap(350, 425); require(planter::calibrationSaves == 1, "Cancel reset does not write");
+    tap(350, 425); tap(100, 425);
+    require(planter::calibrationSaves == 2 && planter::savedEdit.reset && planter::savedEdit.kind == robo::CalibrationKind::Soil, "Reset only selected group");
+    planter::fixture.calibrationWrite = planter::CalibrationWrite::Idle;
+    settings_ui::back(); tap(200, 300); planter::fixture.tankDistance = {145, true}; render();
+    tap(200, 250); now += 1000; planter::fixture.receivedMs = now; render();
+    planter::fixture.tankDistance.value = 160; now += 1000; planter::fixture.receivedMs = now; render();
+    require(!settings_ui::calibrationCapture.active() && settings_ui::calibrationDraft.tank.fullMm == -1, "Unstable tank echo rejected");
     if (argc > 1) {
       const std::filesystem::path output(argv[1]); std::filesystem::create_directories(output);
       for (unsigned lang = 0; lang < 2; ++lang) {
@@ -158,6 +194,12 @@ int main(int argc, char **argv) {
         const std::string prefix = lang ? "en-" : "zh-";
         networks(); settings_ui::open(); frame(output, (prefix + "settings").c_str());
         tap(100, 420); frame(output, (prefix + "planter").c_str());
+        planter::fixture.receivedMs = now;
+        tap(350, 355); frame(output, (prefix + "calibration").c_str());
+        tap(200, 170); frame(output, (prefix + "soil-calibration").c_str());
+        tap(350, 425); frame(output, (prefix + "reset-calibration").c_str());
+        settings_ui::back(); settings_ui::back(); tap(200, 300); frame(output, (prefix + "tank-calibration").c_str());
+        settings_ui::back(); settings_ui::back();
         settings_ui::back(); tap(350, 420); frame(output, (prefix + "about").c_str());
         settings_ui::back(); tap(200, 218); frame(output, (prefix + "wifi").c_str());
         tap(200, 184); for (unsigned i = 0; i < 8; ++i) key(i);

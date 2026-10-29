@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     else if (scenario == "commands-queue") settingsTestFailQueueOn = 2;
     else if (scenario == "stops-queue") settingsTestFailQueueOn = 3;
     else if (scenario == "task") settingsTestTaskFail = true;
-    if (scenario != "stop-switch" && scenario != "print" && scenario != "sensors" && scenario != "companion") {
+    if (scenario != "stop-switch" && scenario != "print" && scenario != "sensors" && scenario != "companion" && scenario != "calibration") {
       CHECK(!planter::begin()); CHECK(settingsTestTask == nullptr);
       CHECK(!device_settings::wifiState().ready); CHECK(!device_settings::planterNetworkReady());
       CHECK(!device_settings::requestScan()); CHECK(!device_settings::requestConnect("office", "test-password"));
@@ -40,6 +40,44 @@ int main(int argc, char **argv) {
       const bool settingsFailed = scenario == "settings-mutex" || scenario == "settings-queue";
       CHECK(settingsTestLiveMutexes == (settingsFailed ? 0U : 1U));
       CHECK(settingsTestLiveQueues == (settingsFailed ? 0U : 1U));
+    } else if (scenario == "calibration") {
+      CHECK(planter::begin());
+      auto fixture = [](unsigned revision, int dry, int wet, bool pump = false) {
+        return String("{\"schema_version\":1,\"device_id\":\"mock-planter\",\"sample_age_ms\":0,\"calibration\":{\"schema\":1,\"writable\":true,\"revision\":") + std::to_string(revision) +
+          ",\"dry\":" + std::to_string(dry) + ",\"wet\":" + std::to_string(wet) + ",\"full_mm\":-1,\"empty_mm\":-1,\"stop_mm\":-1},\"pump\":{\"enabled\":true,\"water_allowed\":true,\"on\":" + (pump ? "true" : "false") + "}}";
+      };
+      settingsTestStateBody = fixture(0, -1, -1); connectConfiguredNetwork();
+      CHECK(planter::snapshot().calibrationKnown && planter::snapshot().calibrationWritable);
+      robo::CalibrationEdit edit{robo::CalibrationKind::Soil, 0, false, 3000, 1500};
+      CHECK(planter::submitCalibration(edit)); CHECK(!planter::submitCalibration(edit));
+      CHECK(!planter::submit(planter::Action::Water)); // no concurrent ordinary action
+      settingsTestPostHook = [&](const String& body) {
+        StaticJsonDocument<512> doc; CHECK(!deserializeJson(doc, body));
+        CHECK(!strcmp(doc["kind"] | "", "soil") && doc["dry"] == 3000 && doc["wet"] == 1500);
+        CHECK(doc["revision"] == 0 && doc["reset"] == false);
+        settingsTestPostBody = "{\"ok\":true,\"revision\":1}"; settingsTestStateBody = fixture(1, 3000, 1500);
+      };
+      workerOnce(); CHECK(settingsTestPosts.size() == 1);
+      CHECK(settingsTestPosts.back().url.find("/api/v1/calibration") != String::npos);
+      CHECK(planter::snapshot().calibrationWrite == planter::CalibrationWrite::Saved);
+      CHECK(planter::snapshot().calibration.revision == 1);
+      CHECK(!planter::submitCalibration(edit)); // stale revision cannot clobber newer settings
+      edit.revision = 1; edit.reset = true;
+      settingsTestStateBody = fixture(1, 3000, 1500, true); pollState(); CHECK(!planter::submitCalibration(edit));
+      settingsTestStateBody = fixture(1, 3000, 1500); pollState(); CHECK(planter::submitCalibration(edit));
+      settingsTestPostHook = [&](const String&) { settingsTestPostCode = -1; };
+      workerOnce(); CHECK(planter::snapshot().calibrationWrite == planter::CalibrationWrite::Unknown);
+      const size_t sent = settingsTestPosts.size();
+      settingsTestNow += 2000; workerOnce(); CHECK(settingsTestPosts.size() == sent); // never auto-retry writes
+      settingsTestStateBody = fixture(2, -1, -1); pollState();
+      CHECK(planter::snapshot().calibrationWrite == planter::CalibrationWrite::Saved); // lost response recovered by readback
+      edit.revision = 2; CHECK(planter::submitCalibration(edit)); settingsTestNow += kStaleMs + 1;
+      workerOnce(); CHECK(settingsTestPosts.size() == sent);
+      CHECK(planter::snapshot().calibrationWrite == planter::CalibrationWrite::Failed);
+      settingsTestStateBody = fixture(2, 4096, 1500); pollState(); CHECK(!planter::snapshot().calibrationKnown);
+      settingsTestStateBody = fixture(2, -1, -1); pollState(); CHECK(planter::submitCalibration(edit));
+      CHECK(device_settings::requestConnect("untrusted", "test-password")); workerOnce();
+      CHECK(settingsTestPosts.size() == sent); // queued calibration cannot leak token onto another Wi-Fi
     } else if(scenario=="companion") {
       CHECK(planter::begin());
       const String valid=R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"uptime_ms":1000,"auto_print":true,"yoyo":{"enabled":true,"paired":false,"pairing":true,"pin":123456},"focus":{"enabled":true,"phase":1,"revision":8,"duration_ms":60000,"remaining_ms":58000}})";

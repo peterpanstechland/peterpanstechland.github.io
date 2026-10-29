@@ -1,10 +1,12 @@
 #pragma once
 #include <Arduino.h>
 #include "../../xiao/include/daily_ticket.h"
+#include "../../xiao/include/sensor_calibration.h"
 
 namespace planter {
 struct Reading { float value = 0; bool valid = false; };
 enum class NetworkFailure : uint8_t { None, Configuration, Http, Authentication, InvalidState };
+enum class CalibrationWrite : uint8_t { Idle, Queued, Saving, Saved, Failed, Unknown };
 struct PrintReceipt {
   char text[161] = {};
   bool requiresRaster = false;
@@ -33,6 +35,12 @@ struct State {
   char waterBlockReason[32] = {};
   bool ambientLightEnabled = false;
   bool soilCalibrationKnown = false, soilCalibrated = false;
+  bool soilAgeKnown = false;
+  uint32_t soilAgeMs = 0;
+  bool calibrationKnown = false, calibrationWritable = false;
+  robo::SensorCalibration calibration;
+  CalibrationWrite calibrationWrite = CalibrationWrite::Idle;
+  char calibrationError[48] = {};
   bool pumpKnown = false, pumpEnabled = false, pumpOn = false;
   bool remainingKnown = false;
   uint32_t remainingMs = 0;
@@ -53,4 +61,5 @@ State snapshot();
 bool fresh(const State &state, uint32_t now);
 bool submit(Action action, bool lightOn = false, const PrintReceipt *receipt = nullptr, uint16_t focusMinutes = 25);
 void acknowledgeUncertain();
+bool submitCalibration(const robo::CalibrationEdit& edit);
 }

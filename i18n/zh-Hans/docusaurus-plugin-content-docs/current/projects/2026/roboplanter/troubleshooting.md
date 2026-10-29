@@ -1,7 +1,7 @@
 ---
 title: "排障与恢复"
 description: "从电源、串口、构建、显示、HTTP 到 BLE 的故障诊断。"
-sidebar_position: 18
+sidebar_position: 19
 hide_title: true
 ---
 
@@ -160,7 +160,7 @@ Wi-Fi 关联与 HTTP 业务是两层。依次检查：
 ## 土壤一直 `null` / `0` / `4095` / 百分比反了
 
 - `null` 且 `valid:false`：当前先检查Indicator RP2040的GPIO27、内部UART、PLANTER_ENABLE_LOCAL_SOIL、XIAO的ROBO_ENABLE_REMOTE_SOIL和HTTP上传；缺值不等于“极干”。
-- 原始值有变化但 `percent:null`：尚未配置两个合法、不相等的干/湿标定点，这是预期。
+- 原始值有变化但 `percent:null`：尚未保存合法的干/湿参考点，这是预期。在“设置 → 花盆连接 → 传感器校准”采集两点（0–4095，差至少64）并保存。详见[校准教程](/docs/projects/2026/roboplanter/sensor-calibration)。
 - 长期为 0 或 4095：检查信号脚、共地、电源、输出范围、短路/饱和、探头是否断开。ADC 返回合法数不证明电气正常。
 - 值漂移：先固定插入深度、基质与电源，检查探头型号及负载。不要直接把噪声解释为浇水需求。
 - 百分比方向不符：按实际干参考填 `ROBO_SOIL_DRY_RAW`，湿参考填 `ROBO_SOIL_WET_RAW`；值大小不预设。不要把“dry 应该更大”写成所有传感器的规律。

@@ -23,6 +23,7 @@ inline float tankLevelPercent(int mm, const TankCalibration& c) {
 class TankGuard {
  public:
   explicit TankGuard(TankCalibration calibration) : calibration_(calibration) {}
+  void setCalibration(TankCalibration calibration) { calibration_ = calibration; }
   void update(int distanceMm, uint32_t now) {
     distance_ = distanceMm; sampled_ = true; timestamp_ = now;
   }
