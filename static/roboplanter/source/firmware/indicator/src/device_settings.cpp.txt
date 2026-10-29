@@ -17,6 +17,7 @@ constexpr uint32_t kConnectTimeoutMs = 20000, kRetryMs = 30000;
 struct Credentials { uint32_t version = 1; char ssid[33] = {}, password[65] = {}; };
 struct WifiRequest {
   bool present = false, save = false, forget = false;
+  bool retryKnownNetwork = false;
   uint32_t revision = 0;
   Credentials credentials;
 };
@@ -165,6 +166,7 @@ void serviceConnection() {
         if (active.revision == revision) state.saved = ok;
       }
       active.save = false;
+      active.retryKnownNetwork = true;
       return;
     }
     DisconnectEvent event;
@@ -172,7 +174,10 @@ void serviceConnection() {
         (!event.ssid[0] || !strcmp(event.ssid, active.credentials.ssid))) {
       if (event.reason == WIFI_REASON_AUTH_FAIL || event.reason == WIFI_REASON_4WAY_HANDSHAKE_TIMEOUT ||
           event.reason == WIFI_REASON_HANDSHAKE_TIMEOUT || event.reason == WIFI_REASON_802_1X_AUTH_FAILED) {
-        failConnection(WifiError::AuthFailed, false); return;
+        // Saved/provisioned boot credentials were previously known to work.
+        // Handshake/auth failures during router or device startup must not
+        // permanently strand them. A newly typed password still fails once.
+        failConnection(WifiError::AuthFailed, active.retryKnownNetwork); return;
       }
       if (event.reason == WIFI_REASON_NO_AP_FOUND) {
         failConnection(WifiError::NetworkNotFound, true); return;
@@ -182,7 +187,9 @@ void serviceConnection() {
       failConnection(WifiError::NetworkNotFound, true); return;
     }
     if (WiFi.status() == WL_CONNECT_FAILED && now - stageStarted > 500) {
-      failConnection(WifiError::ConnectionFailed, false); return;
+      // Generic association failure can be transient after a cold boot.
+      // Newly entered invalid credentials above remain non-retrying.
+      failConnection(WifiError::ConnectionFailed, true); return;
     }
     if (now - stageStarted >= kConnectTimeoutMs) {
       failConnection(WifiError::Timeout, true); return;
@@ -304,6 +311,10 @@ bool begin() {
     wipe(&stored, sizeof(stored));
   }
   pending.present = true; pending.revision = revision; pending.credentials = credentials;
+  // A successful first boot also persists the provisioned network. Subsequent
+  // boots load that committed blob without writing Flash again.
+  pending.save = !saved;
+  pending.retryKnownNetwork = true;
   state.ready = true; state.saved = saved; state.persistenceAvailable = preferencesReady;
   state.phase = WifiPhase::Connecting;
   copy(state.targetSsid, credentials.ssid);
@@ -328,6 +339,30 @@ bool saveBrightness(uint8_t percent) {
   return true;
 }
 WifiSnapshot wifiState() { if (!initialized) return WifiSnapshot(); Guard guard; return state; }
+PlanterEndpoint planterEndpoint() {
+  PlanterEndpoint result;
+  copy(result.ssid, PLANTER_WIFI_SSID);
+  // Show only the origin. Even a mistakenly configured URL containing userinfo
+  // or a query must not expose it on the display.
+  const char *url = PLANTER_BASE_URL;
+  const char *scheme = strstr(url, "://");
+  if (scheme && (!strncmp(url, "http://", 7) || !strncmp(url, "https://", 8))) {
+    const char *host = scheme + 3;
+    const char *end = host + strcspn(host, "/?#");
+    for (const char *p = host; p < end; ++p) if (*p == '@') host = p + 1;
+    const size_t prefix = static_cast<size_t>(scheme + 3 - url);
+    const size_t hostBytes = static_cast<size_t>(end - host);
+    if (prefix < 10 && prefix + hostBytes < sizeof(result.address) && hostBytes) {
+      memcpy(result.address, url, prefix);
+      memcpy(result.address + prefix, host, hostBytes);
+      result.address[prefix + hostBytes] = 0;
+    }
+  }
+  result.configured = result.address[0] && PLANTER_DEVICE_TOKEN[0] &&
+                      strcmp(PLANTER_DEVICE_TOKEN, "change-me-before-use") &&
+                      strcmp(PLANTER_WIFI_SSID, "RoboPlanter-XXXX");
+  return result;
+}
 bool requestScan() {
   if (!initialized) return false;
   Guard guard;
@@ -344,6 +379,7 @@ bool queueConnection(const char *ssid, const char *password, bool forget) {
   if (!validCredentials(ssid, password)) { state.error = WifiError::InvalidInput; return false; }
   if (stopNetworkReserved || pending.present) { state.error = WifiError::Busy; return false; }
   pending.present = true; pending.forget = forget; pending.save = !forget;
+  pending.retryKnownNetwork = forget;
   pending.revision = ++revision;
   // A connect request supersedes a scan not yet started by the worker. An
   // already-running scan finishes first, then the new connection is applied.

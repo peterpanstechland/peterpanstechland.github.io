@@ -57,7 +57,7 @@ MCP 地址是 `http://127.0.0.1:8765/mcp`。没有公网监听选项；此 HTTP 
 | `water` | `request_id`, `duration_ms` | 明确请求后执行一次定时浇水；单位毫秒，默认上限 3000 ms |
 | `stop_water` | `request_id` | 停泵；不依赖传感器新鲜度或有效性 |
 | `set_light` | `request_id`, `on`，可选 `effect` | `on` 为布尔值；开灯支持 solid/breath/chase/rainbow，省略为 solid；关灯不传 effect |
-| `print_note` | `request_id`, `text` | 一次打印；当前只接受可打印 ASCII 和换行，最多 160 字节，无 ESC 等控制码 |
+| `print_note` | `request_id`, `text` | 一次打印；最多 160 个 UTF-8 字节，ASCII/GB2312 字库字符和 LF，最多 8 个显式行，无 ESC 等控制码；设备还会检查自动换行上限 |
 | `get_action_result` | `request_id` | 只读查询原动作结果，不重新执行 |
 
 每个**新动作**都必须使用全新的 ID，跨会话、客户端也不复用；推荐随机 32 位十六进制字符串，例如本地生成 `[guid]::NewGuid().ToString('N')`。ID 限 1–32 个 ASCII 字母、数字、`_`、`-`。查询某个动作时使用它原来的 ID。不要在实际操作中循环使用 `water1` 或固定示例 ID。

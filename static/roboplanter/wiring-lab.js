@@ -58,13 +58,14 @@ function say(line, mood = 'idle') {
 function refreshPractice() {
   connected = false;
   $('wiring-practice-note').hidden = mode !== 'practice';
-  $('wiring-plug').hidden = mode !== 'practice' || !sceneAvailable;
+  $('wiring-plug').hidden = mode !== 'practice' || !sceneAvailable || current().reserved;
   $('wiring-connect').hidden = false; $('wiring-retry').hidden = true; $('wiring-next-device').hidden = true;
-  $('wiring-practice-hint').textContent = `把插头送到 ${current().port}，也可点插头再点接口`;
-  scene?.setPractice(mode === 'practice');
+  $('wiring-connect').textContent = current().reserved ? '确认留空' : '完成教学连接';
+  $('wiring-practice-hint').textContent = current().reserved ? `${current().port} 当前留空，无需插线` : `先核对分线与独立供电，再点 ${current().port} 确认`;
+  scene?.setPractice(mode === 'practice' && !current().reserved);
   root.classList.toggle('is-practicing', mode === 'practice');
   root.classList.remove('is-connected');
-  if (mode === 'practice') { say(`我准备好啦！这根线要去 ${current().port}。`); showStep(1); }
+  if (mode === 'practice') { say(current().reserved ? '这个接口留给以后，现在保持空着。' : `先读清分线说明，再确认 ${current().port} 的接法。`); showStep(1); }
   else say(current().id === 'water' ? '嗨，先帮我看看水箱还有多少水～' : `${current().title}已就位。转转板子，认识一下它的小窝。`);
 }
 function connectPlug() {
@@ -74,8 +75,8 @@ function connectPlug() {
   root.classList.add('is-connected');
   $('wiring-plug').hidden = true; $('wiring-connect').hidden = true; $('wiring-retry').hidden = false; $('wiring-next-device').hidden = false;
   root.querySelectorAll('.wiring-port-button').forEach(button => { button.dataset.completed = String(completed.has(button.dataset.wiringRoute)); });
-  $('wiring-practice-hint').textContent = `啪嗒，${current().port} 教学连接完成！`;
-  say(completed.size === routes.length ? '九种接法全部认识啦！你就是我的首席接线官。' : '啪嗒！收到收到。接下来，我们看看怎么验证～', 'happy');
+  $('wiring-practice-hint').textContent = current().reserved ? `${current().port} 已标记留空` : `${current().port} 教学步骤已确认，实物仍需逐线核对。`;
+  say(completed.size === routes.length ? '所有接口都认识啦，接下来按教程检查实物。' : '收到！接下来，我们看看怎么验证～', 'happy');
   scene?.connect(); showStep(2);
 }
 function onPortClick(id) {
@@ -126,7 +127,7 @@ async function startScene() {
     scene.setExploded(exploded); scene.setTop(topView);
     scene.setReducedMotion(motion.matches); scene.setActive(inView && !document.hidden);
     $('wiring-fallback').hidden = true;
-    scene.setPractice(mode === 'practice'); $('wiring-plug').hidden = mode !== 'practice' || connected;
+    scene.setPractice(mode === 'practice' && !current().reserved); $('wiring-plug').hidden = mode !== 'practice' || connected || current().reserved;
   } catch {
     scene?.dispose(); scene = null; reportFailure();
   }

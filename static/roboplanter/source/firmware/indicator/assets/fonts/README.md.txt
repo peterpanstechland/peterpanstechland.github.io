@@ -17,4 +17,4 @@ python tools/build_indicator_font.py --font .tools/fonts/NotoSansSC-Regular.otf 
 python tools/build_indicator_font.py --check
 ```
 
-The generator requires Pillow and includes ASCII plus printable BMP characters found in the Indicator source and headers. Unsupported characters render as `?`; supplementary-plane emoji are omitted from photo captions. This display font does not add Chinese text support to the TTL thermal printer.
+The generator requires Pillow and includes ASCII plus printable BMP characters found in the Indicator source and headers. Unsupported characters render as `?`; supplementary-plane emoji are omitted from photo captions. This is the display font. The separate `firmware/xiao/include/printer_font.h` receipt font is generated from the same licensed OTF by `tools/build_printer_font.py`: 32px, 7,540 printable ASCII/GB2312 glyphs, 44px line height. Printer output uses bitmaps rather than the printer-resident Chinese font. Keep this notice and `OFL.txt` with both generated fonts. Run `python -m unittest discover -s tests -p test_printer_font.py` to verify reproducibility with the original OTF installed.

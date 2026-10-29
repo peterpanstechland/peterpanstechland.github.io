@@ -27,6 +27,10 @@ struct WifiSnapshot {
   uint8_t networkCount = 0;
   Network networks[kMaxNetworks];
 };
+struct PlanterEndpoint {
+  char ssid[33] = {}, address[96] = {};
+  bool configured = false;
+};
 
 // Call once during setup, before starting the network task. Also safe to call
 // again after successful initialization. No Wi-Fi operations occur here.
@@ -36,6 +40,7 @@ bool setLanguage(Language value);
 uint8_t getBrightness();
 bool saveBrightness(uint8_t percent); // 5..100; PWM belongs to the board driver.
 WifiSnapshot wifiState();             // Never contains credentials.
+PlanterEndpoint planterEndpoint();    // Public pairing details only; no token/password.
 bool requestScan();                   // Asynchronous; strongest 10 unique SSIDs.
 // SSID 1..32 bytes; open network or 8..63 ASCII password / 64 hex PSK.
 // Returns request acceptance, not successful association. Save only after DHCP.

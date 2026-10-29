@@ -1,7 +1,7 @@
 ---
 title: "产品视觉与交互设计"
 description: "工位搭子的视觉语言、角色、状态、动效和可访问性规则。"
-sidebar_position: 11
+sidebar_position: 14
 hide_title: true
 ---
 

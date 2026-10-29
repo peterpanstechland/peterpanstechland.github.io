@@ -22,10 +22,10 @@ RoboPlanter 与小智使用不同的设备协议。
 
 ```mermaid
 flowchart TD
-    Y[YOYO：对话意图与明确的动作请求] --> B[设备选择与安全绑定：尚待平台/手机验证]
+    Y[YOYO：对话意图与明确的动作请求] --> B[单设备绑定读取已通过；多设备选择待实现]
     B --> C[能力契约：读取、结果语义、范围与风险]
     C --> A[设备适配器]
-    A --> X[XIAO HTTP/BLE v1：已有实现]
+    A --> X[XIAO HTTP及绑定BLE v2：已有实现]
     A -.-> G[用户自带 BLE：实验模板]
     A -.-> I[设施农业/灌溉：计划]
     K[Device Kit：离线 profile/登记/fixture 检查] -.-> C
@@ -38,9 +38,9 @@ flowchart TD
 
 ### 1. 入口与设备选择
 
-YOYO 继续负责对话。目标用户体验是先选定自己的设备，再查询或执行一次明确的动作。设备不明确时不能依赖“最近上线”或广播名称相似来选择泵。未来必须保存用户到设备的绑定关系，并让响应包含具体设备和请求编号；目前这些能力没有实现。
+YOYO 继续负责对话。目标用户体验是先选定自己的设备，再查询或执行一次明确的动作。设备不明确时不能依赖“最近上线”或广播名称相似来选择泵。未来必须保存用户到设备的绑定关系，并让响应包含具体设备和请求编号；当前单设备BLE绑定和查询已通过，多设备选择与生命周期仍未实现。
 
-下载的0.2.1 Skill 包仅开放联通诊断。安全注入令牌、实际广播身份、MTU/长写、WRITE 确认、NOTIFY 业务回包都完成验证后，才能在后续版本调整 Skill。`profile.assistant` 固定为 `entrypoint=yoyo`、`binding_status=not_verified`、`execution_enabled=false`，校验器不接受把它们改成已绑定或可执行。
+当前下载包为0.4.0，单设备加密绑定与实时查询已通过；手机动作和长中文仍待验收。这里的Device Kit profile/fixture是独立离线v1示例，不是当前实物接线或运行授权，不能靠改JSON开启设备。`profile.assistant` 固定为 `entrypoint=yoyo`、`binding_status=not_verified`、`execution_enabled=false`，校验器不接受把它们改成已绑定或可执行。
 
 ### 2. Profile：描述一种硬件
 

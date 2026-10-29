@@ -2,6 +2,12 @@
 
 This test executable exercises the same header used by the ESP32 firmware. It has no Arduino dependencies and does not access hardware or open network connections.
 
+`tools/test-core.ps1` also runs `sen54_tank_test.cpp`: the documented CRC vector,
+corrupted/truncated SEN54 frames, signed temperature, unavailable/warmup values,
+transport/readiness failures, ultrasonic range, tank calibration, low water,
+stale/missing echo, obstruction, timer rollover, and no pump restart on replay.
+These tests do not establish acoustic reliability inside a real water tank.
+
 With GCC or Clang, from the repository root:
 
 ```sh

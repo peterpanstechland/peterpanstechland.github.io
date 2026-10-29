@@ -1,216 +1,86 @@
 ---
 title: "BLE 完整接入教程"
-description: "官方工具参数、设备协议、MTU、凭证注入、回包语义和逐步验收。"
-sidebar_position: 9
+description: "官方工具参数、设备协议、MTU、加密绑定、回包语义和逐步验收。"
+sidebar_position: 12
 hide_title: true
 ---
 
-# XIAO BLE 与 YOYO Skill 对接：从只读链路到动作验收
+# BLE 与 YOYO Skill 接入 · v2
 
-本页介绍 XIAO 固件的 BLE 协议与荣耀 `ble_send_command` 参数。平台配置见 [Skill 教程](/docs/projects/2026/roboplanter/honor-platform)，接线和烧录见 [硬件入门](/docs/projects/2026/roboplanter/hardware-quickstart)。
+当前Skill 0.4.0使用**系统加密配对 + 公开V协议**。2026-10-29已确认首次绑定及手机“读取工位状态”返回土壤、温度和湿度。[最新接线](/docs/projects/2026/roboplanter/hardware-wiring) · [使用步骤](/docs/projects/2026/roboplanter/yoyo-companion)
 
-下载的0.2.1 Skill 包支持固定无效凭据的联通诊断。正式查询和动作需要设备鉴权，以及完整的请求与通知传输支持。
+## 连接与授权
 
-## 1. 先把三个层次分清
+手机通过官方`ble_send_command`直连XIAO；Indicator通过同一Wi-Fi的HTTP接XIAO，不是蓝牙中继，云MCP/MQTT也不是前置条件。
 
-1. **GATT 写确认**：手机把一段字节交给特征，底层返回写入结果。它不表示鉴权成功，也不表示泵已停。
-2. **固件业务回包**：`A:id` 表示受理，`D:id` 表示软件完成，`E:...` 表示错误。必须是本次请求/同一 ID 的回包。
-3. **物理结果**：水泵确实停止、灯确实变化、纸上确实打印。这要观察硬件；没有流量/纸张反馈时不能由业务回包推断。
+在Indicator“设置 → 花盆连接 → YOYO与场景小票”开启两分钟配对，手机蓝牙选择实际RoboPlanter名称，输入**Indicator显示的六位码**。主控要求Secure Connections、MITM和bonding，登记手机身份。PIN不进入Skill、聊天或公开录屏。这是项目的首次绑定设计，不是荣耀强制要求。
 
-YOYO → 手机官方蓝牙工具 → XIAO BLE 是主链路。Indicator → Wi-Fi HTTP → XIAO 是另一入口，两者共用控制器和幂等缓存。Indicator 不是手机蓝牙中继；荣耀云不能直接访问 XIAO 的 `192.168.4.1`。云 MCP/MQTT 是可选辅助，不能代替这条主链路的验收。
+固件默认`ROBO_ENABLE_BONDED_YOYO=0`，本机为1。V只是协议标记，没有授权作用。每次连接仍须加密认证；旧带token的BLE命令和一次性土壤凭据不是开启v2后的回退入口。HTTP保留本机令牌，不把它复制进Skill。
 
-## 2. 固定通道与长度
+## GATT与传输
 
-- 设备名：读取你这台 XIAO 的真实广播名称 `RoboPlanter-...`，保留完整大小写和后缀。不要用旧车名称，也不猜测 MAC。
-- Service UUID：`a2f39c10-7e4b-4d21-8a61-0f3bc9d15001`。
-- Characteristic UUID：`a2f39c11-7e4b-4d21-8a61-0f3bc9d15001`。
-- 特征能力：**Write With Response + Notify**。不提供 Read，不使用 Write Without Response。
-- 先订阅同一特征的通知，再写入。每个连接需要自己的订阅。
-- 请求是一个完整 ASCII 文本，最多 **240 字节**；每条请求带设备令牌；分隔符是 `|`。不加 `\0`、CR/LF 或 `$` 结尾。
-- BLE 动作 ID 为 **1–8 个 ASCII 字母、数字、`_`、`-`**。HTTP 可达 32 字符；HTTP 的 32 字符随机 ID 不能原封不动写入 BLE 动作字段。
-- 固件偏好 MTU=247，但最终 MTU 由手机/系统协商。回复始终是单条不超过 **20 字节**的通知，客户端不应拼接旧通知猜测结果。
-- 只允许一个 BLE 命令连接。测试应用占着连接时，YOYO 可能连不上；测试完主动断开，再测试下一客户端。
+| 参数 | 值 |
+| --- | --- |
+| Service | `a2f39c10-7e4b-4d21-8a61-0f3bc9d15001` |
+| Characteristic | `a2f39c11-7e4b-4d21-8a61-0f3bc9d15001` |
+| 能力 | Write With Response + Notify，不提供Read |
+| 请求 | UTF-8完整一条最多240字节，无换行/NUL |
+| 回复 | 单条通知不超过20字节 |
+| 动作ID | 1–8位字母数字、下划线或短横线；Skill使用8位 |
+| 并发 | 一个BLE命令连接，调试App不能同时占用 |
 
-请求长度是**编码后的字节数**，不是编辑器里的“字符数”。仅最短 16 字符令牌，`S|令牌|uv` 已 21 字节，`soil` 是 23 字节，含 8 字符 ID 的两秒浇水是 38 字节。因此默认 ATT MTU=23 的 20 字节载荷不足。
+先订阅Notify，再写。偏好MTU247，最终由手机协商；长中文场景需更大MTU或ATT prepare/execute长写，**不能拆成几个普通Write**。短查询成功不代表最长指令已通过。
 
-手机必须成功协商更大 MTU，或者经其蓝牙栈完成 ATT prepare/execute 长写。**不能把文本自行拆成几个普通 Write**，不能缩短/截断令牌，也不能把续段当第二条命令。固件已实现有界、连接归属校验的 ATT 长写处理；这不证明某一版本的荣耀工具支持它。
+## 第一条查询
 
-可在本机离线验证长度（合成令牌不对应任何设备，不联网）：
-
-```powershell
-# Windows：在硬件教程的环境变量 rpPython 已设置后执行
-@'
-token = "T" * 16
-frames = ["S|" + token + "|uv", "S|" + token + "|soil", "C|" + token + "|abcd1234|water|2000"]
-print([len(s.encode("ascii")) for s in frames])
-'@ | & $rpPython -
-```
-
-```bash
-"$rp_python" -c 'token="T"*16; frames=["S|"+token+"|uv","S|"+token+"|soil","C|"+token+"|abcd1234|water|2000"]; print([len(s.encode("ascii")) for s in frames])'
-```
-
-期望 `[21, 23, 38]`。最长合法令牌 64 字符及 160 字节打印文本还要核对总长≤240；不能只检查打印字段长度。
-
-## 3. 开始前的本地检查
-
-依次确认：
-
-1. 负载电源断开，泵/灯/打印未启用。XIAO 正在运行本仓库固件，不是附件原车例程。
-2. 通过 USB 串口和 HTTP 确认真实设备名称、`schema_version:1`、全部执行器 `enabled:false`。HTTP 只读先通过，减少把接线问题与手机传输问题混在一起的概率。
-3. 手机打开蓝牙并授予系统要求的蓝牙/附近设备权限。具体权限名称随系统版本变化；不要假设一个固定菜单。
-4. 用可信的本地 BLE/GATT 调试客户端扫描，只选择刚核实的设备，展开上述 Service 和 Characteristic；记录是否存在 Write 和 Notify。
-5. 订阅 Notify，选择**带响应的写入**及 ASCII/UTF-8 文本模式；先发送一次 `S|<本机令牌>|pump`。尖括号表示你本地替换的内容，不是协议字节，不是平台变量语法。
-6. 请求超过 20 字节时，记录调试客户端显示的协商 MTU或长写方式。没有证据就记为“未确认”，不能仅凭工具界面显示已发送来勾选通过。
-
-本地调试可以用默认禁用配置的公开默认令牌验证第一条只读请求；换成自己的非默认令牌后必须再次验证完整请求。真实令牌只在可信本地客户端中输入，不放到公开平台代码、聊天、录屏或报告。
-
-预期泵查询回复为 `P:0:0:0`；分别查询 `soil`、`env`、`light`、`printer`。全禁用状态常见回复为 `S:x:x:0:0`、`E:x:x:0`、`L:0:0`、`T:0:off`。这些是**协议示例**，不是本机实测值。全禁用时不需要水泵接线也能测试。
-
-成功判据：每次写入后收到一条符合该查询类型的完整通知；没有遗漏字段、截断或串入上一条通知。再断开/重连，重新订阅通知并复查。断连不会停止已经受理的泵动作，它仍由本地截止任务控制。
-
-### 本地只读异常测试
-
-在仍关闭执行器的条件下执行：
-
-- 错令牌：应收到 `E:AUTH`，不能返回传感器数据。
-- 未知查询字段：有效鉴权后应收到 `E:FIELD`。
-- 不订阅通知：不能把写成功当作得到业务结果；重新订阅后再测试。
-- 断连并重连：旧连接中排队/部分长写内容不能变成新连接动作。
-- 请求字节数超限：不应执行；记录实际 `E:SIZE` 或长写格式错误，及客户端是否在写入前已拒绝。
-
-不要在测试中用旧车的 `forward`/`stop`/`dance` 命令；它们不是盆栽协议。
-
-## 4. 当前查询和回包的完整契约
-
-下面 `token` 是说明中的字段名，不是有效凭据，也不是可用的 APIKey 注入变量。
-
-```text
-S|token|soil       -> S:raw:percent:valid:calibrated
-S|token|air        -> A:raw:valid
-S|token|uv         -> U:raw:valid
-S|token|env        -> E:temperature:humidity:valid
-S|token|pump       -> P:enabled:on:remaining_ms
-S|token|light      -> L:enabled:on
-S|token|printer    -> T:enabled:status
-S|token           -> Q:soil,pump,air,uv
-R|token|id        -> A:id / D:id / E:id:code
-```
-
-- `x` 表示不可用；不能补成 0。土壤 `valid=1` 且 `calibrated=1` 才报告百分比。
-- `air` / `uv` 是原始 ADC，不是气体浓度、空气质量结论、lux 或植物缺光判断。
-- 环境 `E:x:x:0` 是无效温湿度。其他 `E:` 开头可能是错误，解析必须结合**本次查询类型与完整格式**。
-- `E:STALE` 表示传感器采样已超过 3 秒，不把旧值说成“现在”。多次逐项查询不是原子快照。
-- `printer.status` 为 `off`、`idle`、`queued`、`sent`、`fail`。`sent` 仅软件 UART 发送完成。
-- 空气查询的 `A:raw:valid` 与动作受理的 `A:id` 不同；不能只看首字符 `A` 就说浇水成功。
-- `R` 仅查询缓存，不重新执行动作。`MISS` 表示本次启动缓存里没有该 ID，不证明动作没发生。
-
-## 5. 对接荣耀官方工具
-
-按 [荣耀 BLE 文档](https://developer.honor.com/cn/doc/guides/101781) 配置以下参数：
-
-- `device_name`：真实广播名称原文。`device_address` 可选；只填写实际验证过的地址，不凭印象生成。
-- `service_uuid` / `characteristic_uuid`：使用第 2 节的完整 UUID，不采用示例 `FFE0/FFE1`。
-- `encoding`：`utf-8`；当前业务协议限定 ASCII。
-- `ack_type`：`ack`。官方定义这是 Write With Response，与业务回包等待独立。
-- `expect_response`：`true`。必须取得设备业务响应。
-- `response_timeout_ms`：先用 `3000`；官方范围为 100–60000 ms。加长超时不能修复请求被截断或没有通知订阅。
-- `command_array`：每次只有一个 `{command, delay_ms:0}`；即使只有一条仍必须是对象数组。按回包串行调下一次，不批量排浇水/停泵。
-
-仅用于核对字段形状的模板如下，**不可直接执行**。本教程没有规定任何令牌变量展开语法；必须先解决下文的安全注入问题。
+替换为自己的真实广播名称，示例不含凭据：
 
 ```json
-{
-  "device_name": "<本机真实广播名称>",
-  "service_uuid": "a2f39c10-7e4b-4d21-8a61-0f3bc9d15001",
-  "characteristic_uuid": "a2f39c11-7e4b-4d21-8a61-0f3bc9d15001",
-  "encoding": "utf-8",
-  "ack_type": "ack",
-  "expect_response": true,
-  "response_timeout_ms": 3000,
-  "command_array": [
-    {"command": "<可信本地组件构造的完整查询帧>", "delay_ms": 0}
-  ]
-}
+{"device_name":"RoboPlanter-A994","service_uuid":"a2f39c10-7e4b-4d21-8a61-0f3bc9d15001","characteristic_uuid":"a2f39c11-7e4b-4d21-8a61-0f3bc9d15001","command_array":[{"command":"V|S|desk","delay_ms":0}],"encoding":"utf-8","ack_type":"ack","expect_response":true,"response_timeout_ms":3000}
 ```
 
-官方页当前有一处不一致：输出表/错误码表写 `0` 成功，JSON Schema 写 `200` 成功。记录真机实际返回及系统版本；**无论工具层代码是哪一个，都必须继续核对 `response` 中的业务回包**。不能把页面矛盾通过“所有非错误都当成功”抹平。
+响应`K:raw:temperature10:humidity`：温度除10才是°C，空气湿度为%，土壤仍是ADC，x为未知。
 
-官方常见工具错误为 1001 设备未找到、1002 连接失败、1003 已断开、1004 特征不存在、1005 不支持写入、1006 发送超时、1007 响应超时、1008 编码错误。它们是手机工具错误，不是下一节的固件业务错误。
+| 查询字段（V\|S\|字段） | 回包 | 说明 |
+| --- | --- | --- |
+| soil | S:raw:percent:valid:calibrated | 未标定不报告百分比或判断缺水 |
+| env | E:temperature:humidity:valid | 空气温湿度 |
+| ambient | B:raw:valid | 光照ADC，不是lux |
+| pm25 | M:value:valid | PM2.5，µg/m³ |
+| voc | V:value:valid | VOC指数，不是ppm |
+| tank | W:distance_mm:valid | 探头距离，尚未标定水位 |
+| focus | F:phase:remaining_seconds:duration_seconds | 0待机、1计时、2暂停、3完成 |
+| auto | AUTO:0/1 | 持久自动打印开关 |
+| light | L:enabled:on | 灯能力与开关 |
+| pump | P:enabled:on:remaining_ms | 当前泵禁用 |
+| printer | T:enabled:status | sent仅表示串口已发送 |
 
-### 必须完成的两项平台核实
+## 动作与结果
 
-1. **凭据安全注入**：确认官方支持何种方式让可信组件把设备令牌加入每条请求，且令牌不进入 Skill 正文、对话、公开日志和录屏。当前仓库没有经过验证的变量注入语法。配置 APIKey 不自动证明能在 `command` 字符串里安全替换。不能删除 XIAO 鉴权、改成公开固定真令牌或试着猜变量来绕过。
-2. **手机完整传输**：用当前手机、MagicOS、YOYO/工具版本实测带真实长度令牌的查询完整到达、正确订阅通知并返回。官方文档没有给出 MTU 自动协商、ATT 长写或跨调用保持连接的明确保证；桌面/其他手机 BLE 客户端成功不能代替荣耀工具成功。
+`V|C|id|action|参数`发动作，`V|R|id`查同一次结果。新动作新ID，超时查询保持原ID。下表的id、斜线为说明，不应原样发送。
 
-这两项未通过，就保持 `HARDWARE_READY=false`。先完成本地协议与硬件检查，再接入手机。
+| 意图 | 命令 |
+| --- | --- |
+| 开灯 / 关灯 | V\|C\|id\|light\|1 或0 |
+| 开始25分钟 | V\|C\|id\|focus_start\|1500000 |
+| 暂停 / 继续 / 结束 | action为focus_pause / focus_resume / focus_reset，无参数 |
+| 自动打印开 / 关 | V\|C\|id\|auto_print\|1 或0 |
+| 场景小票 | V\|C\|id\|print_scene\|meetings\|1\|会议结束，脑袋下班 |
+| 停泵 | V\|C\|id\|stop_water |
 
-## 6. 动作开启后的单步验收
+场景中1代表自动，0代表明确手动。短句最多42个UTF-8字节，不含竖线、换行或emoji。当前Skill不发送启动浇水命令。
 
-只能在硬件教程已经完成电平/供电/本地限时验证、且平台两项条件已实测通过后，修订 Skill 版本并开放相应能力。先灯，再 ASCII 打印，最后短时水泵；仅开放实物已接好并验收的能力。
+- A:id为受理，D:id为软件完成；GATT ACK不是业务完成，软件完成也不等于物理出纸。
+- E:PAIR：未通过加密/身份验证。检查绑定，不发送旧凭据。
+- E:id:OFF / LOCK / TANK：未启用、锁定、水箱条件不足。
+- STATE：计时状态不允许，不重开覆盖；MUTE / COOL：自动打印关闭或五分钟冷却。
+- BUSY / IO：忙或打印失败；ID / FULL / MISS：ID冲突、缓存满或记录不存在。
+- STALE / FORMAT / SIZE / ARG：数据过期或参数错误。
 
-完整动作格式：
+超时最多查三次，每次至少间隔一秒；仍未知就报告未知，不自动重发。64条请求缓存不跨断电，MISS不等于肯定未执行。物理出纸、刀具、水泵停转仍须现场观察。
 
-```text
-C|token|id|light|1       柔绿常亮
-C|token|id|light|1|breath 慢呼吸（也可 solid / chase / rainbow）
-C|token|id|light|0       关灯
-C|token|id|print|text    ASCII 打印
-C|token|id|water|500     单次 500 ms 泵脉冲
-C|token|id|stop_water    立即请求停泵
-```
+## 验收顺序
 
-灯效为开灯时可选的第六字段；关灯不能带该字段，省略模式默认 `solid`。灯查询仍只返回 `L:enabled:on`，不增加字段；模式读回使用 HTTP `light.effect`。省略与显式 `solid` 是同一幂等内容。详见 [WS2812 教程](/docs/projects/2026/roboplanter/ws2812-lighting)。
+已通过：Indicator状态链路、手机首次配对、主控认证、YOYO土壤/温湿度查询。接着分别测试断开/重启重连、开关灯、共享计时，再到一张有意触发的场景小票，以及长中文写入、超时只查结果、自动开关和冷却。水箱/泵负载仍不接入。
 
-每次**新的用户动作意图**分配新 ID。轮询结果使用原 ID；不能把新的 ID 当作处理超时的方法。同 ID 同内容返回保存结果而不再次执行；同 ID 不同内容返回 `ID`。水泵和打印机互斥，忙时也会记住拒绝结果，解决忙碌后若用户明确发起新意图才分配新 ID。
-
-1. **灯**：先 `S|token|light` 确认 enabled=1。用户明确开灯 → 一条 `C` → 匹配 `D:id` → 再查灯状态 → 实看灯。验证重复同 ID 不出现额外动作。
-2. **打印**：明确授权短 ASCII 文本 → 收到 `A:id` → 用 `R|token|id` 查询。`D:id` 后人工确认出纸。中文聊天不受限制，但当前硬件打印文本不支持中文或 ESC/POS 控制码。
-3. **水泵**：台架容器与物理断电就绪、短脉冲上限已配好 → 明确 500 ms 指令 → `A:id` → 原 ID 查询直到结果有界结束 → 实测自动停止。默认泵上限 3000 ms，实际以该次固件 `ROBO_MAX_WATER_MS` 为准，不能拆多次绕过上限。
-4. **停泵**：单独的新 ID 和 `stop_water`，最高优先发送，不等传感器/结果查询。固件允许已鉴权的停泵在动作禁用或缓存满时使用，但客户端仍须具备可用连接。停泵结果未知时立即提示现场物理断电/检查，不能说已停。
-
-不在一组 `command_array` 排“开泵 → 等几秒 → 停泵”作为限时保护。手机断连、工具崩溃或后台限制都会破坏这种设计；真正的截止控制在 XIAO 本地任务。
-
-## 7. 结果未知、错误与重启
-
-正常生命周期：
-
-```text
-明确用户意图 -> 新 ID -> 一次 C 请求
-                         ├─ A:id -> 查询同一 ID -> D:id / E:id:code
-                         ├─ D:id -> 软件完成
-                         └─ 超时/断线 -> 结果未知 -> 查原 ID / 现场检查
-```
-
-固件常用业务码：
-
-```text
-AUTH  鉴权失败             LOCK  动作总开关/非默认令牌条件未满足
-OFF   外设未启用           BUSY  泵或打印忙 / 队列无法立即接收
-ID    相同 ID 但内容不同    FULL  本次启动的幂等缓存已满
-TIME  时长不合法           IO    UART 发送失败
-ARG   参数/格式不合法      ACT   未知动作（以固件实际回包为准）
-MISS  结果记录不存在       SIZE  请求/回复超限
-FIELD 查询字段不存在      STALE 传感器采样过期
-```
-
-固件只有 **64 条 RAM 缓存**，本次启动不淘汰，满后普通新动作拒绝；重启后缓存丢失。重启前先停止并现场确认负载安全。重启后不能自动重放之前未知的浇水/打印；没有 `MISS` 就能“放心再来一次”的保证。BLE 没有独立的 uptime 查询，必要时结合本地 HTTP 的 `uptime_ms` 和串口确认是否重启；不能从重连成功推断设备没有重启。
-
-控制器的一条旧 `last_command` 可能被另一入口覆盖，因此应查 `R` / HTTP `/api/v1/result`。收到 `A:id` 时只说“已受理/处理中”，不无限轮询、不承诺后台持续操作；等待超时后报告未知。
-
-## 8. 连接边界与已知安全限制
-
-- 已接受的泵动作在断连后继续按本地截止时间完成；断连不是撤销。
-- 固件用连接 ID 加代际标识约束队列和长写，旧会话不能向新会话提交命令或收到旧回复。
-- 没有 BLE 配对/加密策略。令牌防止不知道令牌的普通调用，但不抵抗处于合适位置的无线观察者；用于受控现场，泄露后换令牌并重新刷写。
-- Arduino 2.0.17 底层在应用事件钩子之前积累 ATT prepared-write 缓冲，应用无法通过公开 API 清除/限长。当前代码防止残余数据成为业务命令，但不宣称能抵抗恶意反复 prepare write 的堆耗尽攻击。部署到不可信环境前需要库级修复或替换并重新进行安全检查。
-- NFC 仅用于进入入口/选择设备；触碰 NFC、传感器低读数或情绪表达不能自动授权浇水、打印或复合动作。
-- 当前 BLE 没有照片上传、主题切换、远程番茄钟、植物图像识别等命令。
-
-## 9. 调试记录
-
-对每台自备设备记录手机型号、MagicOS/YOYO/工具版本、XIAO 固件提交和配置能力、日期、客户端、请求**类型与字节数**、MTU/长写结果、工具层返回、业务回包、实物观察、结论。令牌、设备完整地址和个人账号标识应遮蔽；原始私密材料留在本地。
-
-至少覆盖：禁用状态、正确/错误鉴权、完整长请求、通知订阅、断连重连、结果关联、同 ID 重复/冲突、超时不重发、灯实物、打印实物、泵自动停止与主动停止、手机不可用时的现场处置。只通过对话、页面保存或安全检测不能替代这些项目。
-
-来源：[固件 BLE 说明](/roboplanter/source/firmware/xiao/README.md.txt)、[实际 BLE 处理代码](/roboplanter/source/firmware/xiao/src/main.cpp.txt)、[连接隔离代码](/roboplanter/source/firmware/xiao/include/ble_session.h.txt)、[设备协议](/roboplanter/source/docs/device-protocol.md.txt)、[Skill 契约](/roboplanter/source/integrations/yoyo/skill-draft/references/ble-contract.md.txt)、[荣耀官方蓝牙工具](https://developer.honor.com/cn/doc/guides/101781)。
+当前通过记录基于已部署固件，后续大码提示与连接阶段诊断仅编译未刷。[完整契约](/roboplanter/source/integrations/yoyo/skill-draft/references/ble-contract.md.txt) · [荣耀工具说明](https://developer.honor.com/en/doc/guides/101776)

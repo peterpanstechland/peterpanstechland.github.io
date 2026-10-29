@@ -14,8 +14,14 @@ int main() {
     CHECK(setLanguage(Language::English)); CHECK(!setLanguage(static_cast<Language>(9)));
     CHECK(Preferences::writes == 0); CHECK(WiFi.connectCalls == 0); // UI never writes NVS or operates radio.
     service(); CHECK(Preferences::writes == 2); CHECK(WiFi.connectCalls == 0);
+    advance(200); WiFi.failure(WIFI_REASON_AUTH_FAIL); service();
+    CHECK(wifiState().error == WifiError::AuthFailed);
+    const auto bootAttempts = WiFi.connectCalls;
+    advance(29999); CHECK(WiFi.connectCalls == bootAttempts);
+    advance(1); advance(200); CHECK(WiFi.connectCalls == bootAttempts + 1);
     finishConnect(); CHECK(wifiState().phase == WifiPhase::Connected); CHECK(planterNetworkReady());
-    CHECK(!Preferences::values.count("wifi")); CHECK(!WiFi.autoReconnect);
+    CHECK(Preferences::values.count("wifi")); CHECK(wifiState().saved); CHECK(!WiFi.autoReconnect);
+    const auto bootWrites = Preferences::writes; service(); CHECK(Preferences::writes == bootWrites);
     const auto priorRevision = networkRevision();
     CHECK(!reserveNetworkForStop(priorRevision + 1));
     CHECK(reserveNetworkForStop(priorRevision)); CHECK(!reserveNetworkForStop(priorRevision));
@@ -30,7 +36,7 @@ int main() {
     CHECK(networkRevision() != priorRevision); CHECK(!planterNetworkReady());
     CHECK(!requestConnect("second", "valid-password")); // Single pending request is not overwritten.
     CHECK(wifiState().error == WifiError::Busy);
-    CHECK(!Preferences::values.count("wifi"));
+    CHECK(Preferences::values.count("wifi"));
     service(); finishConnect();
     CHECK(wifiState().phase == WifiPhase::Connected); CHECK(!planterNetworkReady());
     CHECK(!strcmp(wifiState().connectedSsid, "office")); CHECK(wifiState().saved);
@@ -41,6 +47,13 @@ int main() {
     CHECK(wifiState().phase == WifiPhase::Failed); CHECK(wifiState().error == WifiError::AuthFailed);
     CHECK(Preferences::values["wifi"] == savedCredentials);
     const auto connects = WiFi.connectCalls; advance(60000); CHECK(WiFi.connectCalls == connects);
+    CHECK(requestConnect("temporary-association-failure", "valid-password")); service(); advance(200);
+    WiFi.link = WL_CONNECT_FAILED; advance(600);
+    CHECK(wifiState().error == WifiError::ConnectionFailed);
+    const auto transientConnects = WiFi.connectCalls;
+    advance(29999); CHECK(WiFi.connectCalls == transientConnects);
+    advance(1); advance(200); CHECK(WiFi.connectCalls == transientConnects + 1);
+    WiFi.connect(); service(); CHECK(wifiState().phase == WifiPhase::Connected);
     CHECK(requestScan()); CHECK(!requestScan());
     service(); CHECK(WiFi.scanCalls == 1); CHECK(WiFi.asyncScan); CHECK(wifiState().scanning);
     for (int i = 0; i < 14; ++i) WiFi.results.push_back({"AP" + std::to_string(i), -90 + i * 3, true});

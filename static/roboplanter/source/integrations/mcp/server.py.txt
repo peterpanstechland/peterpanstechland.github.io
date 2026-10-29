@@ -26,7 +26,7 @@ else:  # Preserve direct `python integrations/mcp/server.py` usage.
 RequestId = Annotated[str, Field(min_length=1, max_length=32, pattern=r"^[A-Za-z0-9_-]+$",
     description="Required unique action ID. Keep the same ID when querying; never invent a new ID to retry an unknown outcome.")]
 Duration = Annotated[StrictInt, Field(ge=1, le=30000, description="Pump duration in milliseconds, not millilitres. Bridge default maximum is 3000 ms.")]
-PrintText = Annotated[str, Field(min_length=1, max_length=160, description="Printable ASCII or newline only, at most 160 bytes; no printer control codes.")]
+PrintText = Annotated[str, Field(min_length=1, max_length=160, description="ASCII or GB2312 Chinese/punctuation plus newline; at most 160 UTF-8 bytes and 8 lines including device wrapping. No printer control codes or emoji. Byte/repertoire limits are checked by the bridge; final layout by the device.")]
 LightEffect = Literal["solid", "breath", "chase", "rainbow"]
 
 
@@ -80,7 +80,7 @@ def create_server(config: Config | None = None, *, port: int = 8765,
 
     @server.tool(annotations=action)
     async def print_note(request_id: RequestId, text: PrintText) -> dict[str, Any]:
-        """Print a user-requested note, ASCII/newline only, max 160 bytes. completed means UART bytes sent, not confirmed paper output. Unknown result must not be retried."""
+        """Print a user-requested Chinese/ASCII note, max 160 UTF-8 bytes and 8 wrapped lines. Chinese/punctuation must be in GB2312; emoji and control codes are unsupported. Requires raster-capable firmware; preserve device rejections without retrying. completed means UART bytes sent, not confirmed paper output or cutting. Unknown result must not be retried."""
         return await bridge.act(request_id, "print", text=text)
 
     @server.tool(annotations=readonly)

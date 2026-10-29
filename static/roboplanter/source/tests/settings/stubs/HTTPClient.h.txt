@@ -10,6 +10,7 @@ inline unsigned settingsTestHttpBegins = 0;
 inline std::vector<SettingsTestPost> settingsTestPosts;
 inline String settingsTestStateBody, settingsTestPostBody;
 inline int settingsTestPostCode = 200;
+inline int settingsTestGetCode = 200;
 inline std::function<void(const String &)> settingsTestPostHook;
 class HTTPClient {
   String url, response;
@@ -20,7 +21,7 @@ class HTTPClient {
   void setFollowRedirects(int) {}
   bool begin(WiFiClient &, const String &target) { ++settingsTestHttpBegins; url = target; return true; }
   void addHeader(const char *, const char *) {} // Never retain/log device tokens.
-  int GET() { response = settingsTestStateBody; return 200; }
+  int GET() { response = settingsTestStateBody; return settingsTestGetCode; }
   int POST(const String &body) {
     settingsTestPosts.push_back({url, body});
     if (settingsTestPostHook) settingsTestPostHook(body);

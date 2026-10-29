@@ -40,3 +40,5 @@ struct RenderEsp {
   uint32_t getPsramSize() const { return 8U * 1024 * 1024; }
 };
 inline RenderEsp ESP;
+
+inline uint32_t esp_random() { return 95U; } // Deterministic UI-only fixture.

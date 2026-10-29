@@ -5,8 +5,8 @@ import { routes } from './wiring-data.js';
 // live electrical simulation. Connector locations are simplified for teaching.
 const colors = { pcb: 0x21372b, cream: 0xeee9d9, metal: 0xadb9aa, dark: 0x101e16, green: 0xc4eb72, red: 0xdf8d6d, yellow: 0xf0df9f, ground: 0x9aa79b, water: 0x79bac5 };
 const placements = {
-  water: [0.04, .72], climate: [-2.24, .72], light: [-2.24, 1.48], printer: [.04, 1.48],
-  soil: [-2.24, -1.45], pump: [.04, -1.45], air: [.04, -.28],
+  water: [.04, -.28], climate: [-2.24, .72], light: [-2.24, 1.48], printer: [.04, -1.45],
+  soil: [-2.24, -1.45], pump: [-2.24, -.28], air: [.04, .72],
   'indicator-adc': [.15, .65], 'indicator-i2c': [.15, -.65],
 };
 
@@ -93,7 +93,6 @@ export function createWiringScene(host, overlay, callbacks) {
     box(.12,.055,.09,mats.cream,group,0,.22,.16);
     for (const side of [-1,1]) box(.045,.09,.24,mats.cream,group,side*.23,.15,0);
     if (!reserved) { shell.userData.route = id; hits.push(shell); }
-    if (reserved) label('SERVO1 / RESERVED', .85, .16, parent, x + .2, .035, z + .34);
     return shell;
   }
   function buildBoard() {
@@ -127,7 +126,8 @@ export function createWiringScene(host, overlay, callbacks) {
         cylinder(.18, .24, mats.dark, boardRoot, x, .17, z); cylinder(.17, .025, mats.metal, boardRoot, x, .30, z);box(.24,.005,.015,mats.dark,boardRoot,x,.316,z);box(.015,.005,.24,mats.dark,boardRoot,x,.316,z);
       }
       for (let i = 0; i < 18; i++) box(.10, .06, .15, i % 3 ? mats.dark : mats.metal, boardRoot, -1.88 + (i % 5) * .34, .08, -.02 + Math.floor(i / 5) * .32);
-      connector(boardRoot, -2.24, -.28, '', true);
+      connector(boardRoot, .04, 1.48, '', true);
+      label('UART RX / GPIO44', .92, .16, boardRoot, .08, .035, 1.82);
       for (const item of routes.filter(item => item.board === board)) {
         const [x, z] = placements[item.id]; connector(boardRoot, x, z, item.id);
       }
@@ -165,19 +165,21 @@ export function createWiringScene(host, overlay, callbacks) {
       rounded(1.45, .10, 1.45, mats.cream, deviceRoot, 0, -.03, 0,.12);
       rounded(1.3, .70, 1.3, waterMat, deviceRoot, 0, .37, 0,.10);
       const tank=rounded(1.45, 1.45, 1.45, glass, deviceRoot, 0, .72, 0,.10);tank.castShadow=false;
-      box(.22, 1.55, .055, mat(0x7f9e6c), deviceRoot, -.22, .88, .16);
-      for (let i = 0; i < 12; i++) box(.13, .055, .02, mats.yellow, deviceRoot, -.22, .21 + i * .085, .20);
-      rounded(.25,.17,.18,mats.cream,deviceRoot,-.22,1.62,.16,.025);
+      pcb(deviceRoot, 0, 1.75, 0, 1.1, .58);
+      for (const x of [-.29, .29]) {
+        cylinder(.22, .18, mats.metal, deviceRoot, x, 1.62, 0);
+        cylinder(.17, .018, mats.dark, deviceRoot, x, 1.52, 0);
+      }
       for(let i=0;i<6;i++)box(.11,.016,.012,mats.cream,deviceRoot,.53,.24+i*.19,.74);
       face(deviceRoot,0,.51,.736,.86);
-      label('WATER BUDDY', 1.4, .22, deviceRoot, 0, .04, 1.03,'#7f8d6a');
+      label('RANGER v2 / DISTANCE ONLY', 1.9, .22, deviceRoot, 0, .04, 1.03,'#536344');
     } else if (kind === 'light') {
       box(1.75, .05, .52, mats.cream, deviceRoot, .12, .06, 0);
-      for (let i = 0; i < 8; i++) {
-        box(.13, .045, .16, mats.dark, deviceRoot, -.62 + i * .21, .10, 0);
-        const bead = box(.085, .02, .10, mat(colors.green, { emissive: colors.green, emissiveIntensity: .5 }), deviceRoot, -.62 + i * .21, .13, 0); dynamicParts.push({ type: 'led', object: bead, index: i });
+      for (let i = 0; i < 10; i++) {
+        box(.13, .045, .16, mats.dark, deviceRoot, -.69 + i * .18, .10, 0);
+        const bead = box(.085, .02, .10, mat(colors.green, { emissive: colors.green, emissiveIntensity: .5 }), deviceRoot, -.69 + i * .18, .13, 0); dynamicParts.push({ type: 'led', object: bead, index: i });
       }
-      label('WS2812 / DIN →', 1.65, .25, deviceRoot, .12, .03, .61);
+      label('WS2813 / 10 LEDs / DIN →', 1.85, .25, deviceRoot, .12, .03, .61, '#536344');
     } else if (kind === 'printer') {
       rounded(1.35, .88, 1.15, mats.cream, deviceRoot, 0, .42, 0,.14);
       box(1.12, .08, .14, mats.dark, deviceRoot, 0, .87, .32);
@@ -194,24 +196,28 @@ export function createWiringScene(host, overlay, callbacks) {
       const leaf2=add(new THREE.SphereGeometry(1,20,12),mat(0x83b25b),deviceRoot,.16,1.48,-.05);leaf2.scale.set(.30,.09,.17);leaf2.rotation.z=-.35;
       face(deviceRoot,.14,.36,.65,.88);
     } else if (kind === 'pump') {
-      pcb(deviceRoot, -.60, .08, .08, .62, .68); box(.31, .15, .27, mats.metal, deviceRoot, -.60, .23, .05);
-      const pump = cylinder(.36, .73, mats.metal, deviceRoot, .47, .46, 0); pump.rotation.x = Math.PI / 2;
-      cylinder(.38, .12, mats.dark, deviceRoot, .47, .50, .37);
-      rounded(.58, .10, .83, mats.dark, deviceRoot, .47, .08, 0,.08);
-      const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(.47, .62, -.38), new THREE.Vector3(.47, 1.15, -.8), new THREE.Vector3(.05, 1.1, -.95)]);
-      add(new THREE.TubeGeometry(curve, 24, .065, 8, false), waterMat, deviceRoot);
-      label('DRIVER → 12V PUMP', 1.7, .23, deviceRoot, 0, .03, .96);
+      pcb(deviceRoot, 0, .08, 0, 1.05, 1.18);
+      rounded(.72, .45, .63, mat(0x4279a5), deviceRoot, 0, .34, -.18, .035);
+      box(.65, .24, .3, mat(0x468069), deviceRoot, 0, .23, .40);
+      for (const x of [-.17, .17]) { cylinder(.09, .02, mats.metal, deviceRoot, x, .36, .40); box(.13, .005, .018, mats.dark, deviceRoot, x, .375, .40); }
+      label('RELAY v1.2 / LOAD EMPTY', 1.9, .23, deviceRoot, 0, .03, .96, '#536344');
+    } else if (kind === 'climate') {
+      rounded(1.25, .68, 1.05, mats.metal, deviceRoot, 0, .39, 0, .06);
+      for (let i = 0; i < 7; i++) box(.84, .015, .045, mats.dark, deviceRoot, 0, .74, -.31 + i * .1);
+      label('SEN54 / EXTERNAL 5V', 1.9, .22, deviceRoot, 0, .03, .96, '#536344');
+    } else if (kind === 'reserved') {
+      label('RESERVED / LEAVE EMPTY', 1.9, .26, deviceRoot, 0, .03, 0, '#536344');
     } else {
       pcb(deviceRoot, 0, .07, 0);
       if (kind === 'climate') box(.31, .14, .38, mats.metal, deviceRoot, 0, .22, 0);
       if (kind === 'air') { cylinder(.28, .25, mat(0x917a54), deviceRoot, 0, .26, -.06); cylinder(.22, .015, mats.metal, deviceRoot, 0, .40, -.06); }
       if (kind === 'uv') cylinder(.16, .09, mat(0xa99cc6), deviceRoot, 0, .20, -.05);
       if (kind === 'lux') { box(.22, .03, .22, mats.cream, deviceRoot, 0, .16, -.06); cylinder(.06, .02, mats.dark, deviceRoot, 0, .19, -.06); }
-      label(kind === 'climate' ? 'SHT31 / I²C' : kind === 'air' ? 'ANALOG / AIR' : kind === 'uv' ? 'UV / PLANNED' : 'I²C / RESERVED', 1.45, .22, deviceRoot, 0, .03, .89);
+      label('LIGHT SENSOR v1.2', 1.65, .22, deviceRoot, 0, .03, .89, '#536344');
     }
-    if (['printer', 'pump'].includes(kind)) {
+    if (['printer', 'climate'].includes(kind)) {
       rounded(.85, .23, .48, mats.dark, deviceRoot, .05, .07, 1.72,.09);
-      label('EXTERNAL 12V', .8, .16, deviceRoot, .05, .20, 1.72);
+      label(kind === 'printer' ? 'EXTERNAL 12V' : 'EXTERNAL 5V', .8, .16, deviceRoot, .05, .20, 1.72);
     }
   }
   function path(points, color, power = false, water = false) {
@@ -225,25 +231,19 @@ export function createWiringScene(host, overlay, callbacks) {
     clearGroup(cableRoot); cables = [];
     if (!route) return;
     const [x, z] = placements[route.id];
-    const destinationX = route.kind === 'pump' ? 1.48 : 1.75;
-    const endY = route.kind === 'water' ? 1.54 : route.kind === 'soil' ? 1.45 : route.kind === 'printer' ? .27 : .14;
+    const destinationX = 1.75;
+    const endY = route.kind === 'water' ? 1.8 : route.kind === 'soil' ? 1.45 : ['printer', 'climate'].includes(route.kind) ? .27 : .14;
     const available = route.pins.filter(pin => !['unused', 'external'].includes(pin[0]));
-    available.forEach(([kind], i) => {
+    available.forEach(([kind, , , source], i) => {
       const offset = (i - (available.length - 1) / 2) * .065;
       const color = kind === 'power' ? colors.red : kind === 'ground' ? colors.ground : kind === 'signal2' ? colors.yellow : colors.green;
-      const start=practice&&!plugged&&plugPoint?[plugPoint.x+offset,plugPoint.y,plugPoint.z]:[x+offset,.36,z];
+      const origin = source === 'UART' ? [.04, 1.48] : source === '3V3' ? [-1.1, 1.15] : [x, z];
+      const start=practice&&!plugged&&plugPoint&&!source?[plugPoint.x+offset,plugPoint.y,plugPoint.z]:[origin[0]+offset,.36,origin[1]];
       path([start, [start[0]+.35, Math.max(start[1],.65)+explosion*.45, start[2]+.08+offset], [.78, .65 + explosion * .25, z * .45 + offset], [destinationX, endY + explosion * .14, .22 + offset]], color, kind === 'power' || kind === 'ground');
     });
-    if (['printer', 'pump'].includes(route.kind)) {
+    if (['printer', 'climate'].includes(route.kind)) {
       for (const [offset, color] of [[-.05, colors.red], [.05, colors.ground]]) {
-        if (route.kind === 'pump') {
-          // Show the external driver in the power path; do not draw a pair of
-          // supply leads that bypasses it and suggests an always-on pump.
-          path([[2.16 + offset, .24, 1.65], [1.10 + offset, .26, 1.16], [1.32 + offset, .18, .36], [1.48 + offset, .20, .22]], color, true);
-          path([[1.78, .20, .15 + offset], [2.02, .24, .48 + offset], [2.42, .20, .32 + offset]], color, true);
-        } else {
-          path([[2.16 + offset, .24, 1.65], [2.90 + offset, .30, 1.13], [2.72 + offset, .25, .50], [2.37, .21, .31 + offset]], color, true);
-        }
+        path([[2.16 + offset, .24, 1.65], [2.90 + offset, .30, 1.13], [2.72 + offset, .25, .50], [2.37, .21, .31 + offset]], color, true);
       }
     }
     needsRender = true;

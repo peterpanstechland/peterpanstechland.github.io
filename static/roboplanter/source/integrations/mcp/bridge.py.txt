@@ -17,6 +17,8 @@ DEFAULT_TOKEN = "change-me-before-use"
 ID_PATTERN = re.compile(r"[A-Za-z0-9_-]{1,32}\Z")
 FINAL_STATUSES = {"completed", "rejected", "failed", "cancelled", "stopped"}
 LIGHT_EFFECTS = ("solid", "breath", "chase", "rainbow")
+MAX_PRINT_BYTES = 160
+MAX_PRINT_LINES = 8
 
 
 @dataclass(frozen=True)
@@ -62,6 +64,35 @@ class Config:
 
 def valid_id(value: Any) -> bool:
     return isinstance(value, str) and ID_PATTERN.fullmatch(value) is not None
+
+
+def valid_print_text(text: Any) -> bool:
+    """Match the firmware's ASCII/GB2312 repertoire, without transcoding input.
+
+    This preflight checks UTF-8 size and explicit lines. The device also applies
+    its glyph-width wrapping limit before emitting any bytes to the printer.
+    """
+    if not isinstance(text, str) or not 1 <= len(text) <= MAX_PRINT_BYTES:
+        return False
+    try:
+        if len(text.encode("utf-8")) > MAX_PRINT_BYTES:
+            return False
+        # A terminal LF ends the final line, matching printerTextLayout().
+        line_count = text.count("\n") + (0 if text.endswith("\n") else 1)
+        if line_count > MAX_PRINT_LINES:
+            return False
+        for char in text:
+            if char == "\n" or 32 <= ord(char) <= 126:
+                continue
+            if not char.isprintable() and char != "\u3000":
+                return False
+            encoded = char.encode("gb2312")
+            if (len(encoded) != 2 or not 0xA1 <= encoded[0] <= 0xF7 or
+                    not 0xA1 <= encoded[1] <= 0xFE or encoded.decode("gb2312") != char):
+                return False
+    except UnicodeError:
+        return False
+    return True
 
 
 def outcome(request_id: str, status: str, error: str = "", **details: Any) -> dict[str, Any]:
@@ -145,9 +176,7 @@ class PlanterBridge:
                                        values["effect"] not in LIGHT_EFFECTS):
                 return "invalid_light_effect"
         elif action == "print":
-            text = values.get("text")
-            if (not isinstance(text, str) or not 1 <= len(text) <= 160 or
-                    any(c != "\n" and not 32 <= ord(c) <= 126 for c in text)):
+            if not valid_print_text(values.get("text")):
                 return "invalid_print_text"
         elif action != "stop_water":
             return "invalid_action"

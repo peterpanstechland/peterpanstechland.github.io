@@ -10,10 +10,15 @@ namespace {
 HardwareSerial rpUart(2);
 SemaphoreHandle_t soilLock=nullptr;
 local_soil::Sample current;
+bool chimePending=false;
 void worker(void*) {
   // Original Indicator internal wiring: ESP RX20/TX19 <-> RP TX16/RX17.
   rpUart.begin(115200,SERIAL_8N1,20,19);
   for(;;) {
+    xSemaphoreTake(soilLock,portMAX_DELAY);
+    const bool chime=chimePending;chimePending=false;
+    xSemaphoreGive(soilLock);
+    if(chime)rpUart.print("B|focus\n");
     while(rpUart.available())rpUart.read();
     const uint32_t nonce=esp_random();
     rpUart.printf("S|%08lx\n",static_cast<unsigned long>(nonce));
@@ -42,6 +47,10 @@ void worker(void*) {
 }
 }
 namespace local_soil {
+bool notifyFocusComplete() {
+  if(!soilLock)return false;
+  xSemaphoreTake(soilLock,portMAX_DELAY);chimePending=true;xSemaphoreGive(soilLock);return true;
+}
 bool begin() {
   if(!PLANTER_ENABLE_LOCAL_SOIL)return true;
   soilLock=xSemaphoreCreateMutex();

@@ -1,4 +1,5 @@
 #include "planter_client.h"
+#include "../../xiao/include/daily_json.h"
 #include "config.h"
 #include "device_settings.h"
 #include "local_soil.h"
@@ -14,7 +15,7 @@
 
 namespace {
 using namespace planter;
-struct Command { Action action; bool on; char id[33]; uint32_t networkRevision; };
+struct Command { Action action; bool on; char id[33]; uint32_t networkRevision; PrintReceipt receipt; uint16_t focusMinutes; };
 State shared;
 SemaphoreHandle_t lock = nullptr;
 QueueHandle_t commands = nullptr, stops = nullptr;
@@ -28,11 +29,15 @@ bool terminal(const char *status) {
          !strcmp(status, "rejected") || !strcmp(status, "cancelled") ||
          !strcmp(status, "stopped");
 }
-void networkError(const char *message) {
+void networkError(const char *message, NetworkFailure failure = NetworkFailure::Http, int status = 0) {
   xSemaphoreTake(lock, portMAX_DELAY);
+  const bool changed = strcmp(shared.networkError, message) || shared.httpStatus != status;
   copy(shared.networkError, message);
+  shared.networkFailure = failure;
+  shared.httpStatus = static_cast<int16_t>(status);
   shared.wifi = device_settings::planterNetworkReady();
   xSemaphoreGive(lock);
+  if (changed) Serial.printf("Indicator network: %s\n", message);
 }
 void commandResult(const char *id, const char *status, const char *error,
                    bool blocked, bool uncertain = false) {
@@ -90,30 +95,31 @@ void pollState() {
   WiFiClient client;
   HTTPClient http;
   if (!configureHttp(http, client, "/api/v1/state")) {
-    networkError("Invalid HTTP configuration"); return;
+    networkError("Invalid HTTP configuration", NetworkFailure::Configuration); return;
   }
   const int code = http.GET();
   if (code != 200) {
     char message[80];
     snprintf(message, sizeof(message), "State HTTP %d%s", code,
              code == 401 || code == 403 ? " - check token" : "");
-    networkError(message); http.end(); return;
+    networkError(message, code == 401 || code == 403 ? NetworkFailure::Authentication : NetworkFailure::Http, code); http.end(); return;
   }
   const int length = http.getSize();
   if (length < 0 || length > 4096) {
-    networkError("Unexpected state body length"); http.end(); return;
+    networkError("Unexpected state body length", NetworkFailure::InvalidState); http.end(); return;
   }
   const String body = http.getString();
   http.end();
   if (requestNetwork != device_settings::networkRevision()) return;
-  StaticJsonDocument<3072> doc;
+  StaticJsonDocument<4096> doc;
   const auto error = deserializeJson(doc, body);
   if (error || !doc["schema_version"].is<int>() || doc["schema_version"].as<int>() != 1 ||
       !doc["device_id"].is<const char *>()) {
-    networkError("Invalid or unsupported state schema"); return;
+    networkError("Invalid or unsupported state schema", NetworkFailure::InvalidState); return;
   }
   State next;
   next.received = next.wifi = true;
+  next.httpStatus = 200;
   next.receivedMs = millis();
   next.networkRevision = requestNetwork;
   copy(next.deviceId, doc["device_id"]);
@@ -126,13 +132,50 @@ void pollState() {
   next.soilPercent.valid = next.soilPercent.valid && next.soilCalibrated &&
                            next.soilPercent.value >= 0 && next.soilPercent.value <= 100;
   next.airRaw = reading(doc["air"], "raw");
+  next.yoyoEnabled=doc["yoyo"]["enabled"]==true;
+  next.yoyoPaired=doc["yoyo"]["paired"]==true;
+  next.yoyoConnected=doc["yoyo"]["connected"]==true;
+  next.yoyoPairing=doc["yoyo"]["pairing"]==true;
+  next.yoyoPin=doc["yoyo"]["pin"] | 0U;
+  next.autoPrintKnown=doc["auto_print"].is<bool>();next.autoPrint=doc["auto_print"] | true;
+  auto focus=doc["focus"];
+  next.uptimeMs=doc["uptime_ms"] | 0U;
+  next.focusKnown=focus["enabled"]==true && focus["phase"].is<unsigned>() && focus["phase"].as<unsigned>()<=3 &&
+    focus["duration_ms"].is<uint32_t>() && focus["remaining_ms"].is<uint32_t>() && focus["revision"].is<uint32_t>();
+  if(next.focusKnown) {
+    next.focusPhase=focus["phase"];next.focusDuration=focus["duration_ms"];next.focusRemaining=focus["remaining_ms"];next.focusRevision=focus["revision"];
+    next.focusKnown=next.focusDuration>=60000 && next.focusDuration<=7200000 && next.focusRemaining<=next.focusDuration;
+  }
+  next.sen54Enabled = doc["sen54"]["enabled"] == true;
+  if (next.sen54Enabled) {
+    next.pm25 = reading(doc["sen54"], "pm25_ug_m3");
+    next.vocIndex = reading(doc["sen54"], "voc_index");
+    next.pm25.valid = next.pm25.valid && next.pm25.value >= 0 && next.pm25.value <= 1000;
+    next.vocIndex.valid = next.vocIndex.valid && next.vocIndex.value >= 1 && next.vocIndex.value <= 500;
+  }
+  next.tankEnabled = doc["water_tank"]["enabled"] == true;
+  next.tankCalibrated = doc["water_tank"]["calibrated"] == true;
+  if (next.tankEnabled) {
+    next.tankDistance = reading(doc["water_tank"], "distance_mm");
+    next.tankDistance.valid = next.tankDistance.valid && next.tankDistance.value >= 20 && next.tankDistance.value <= 3500;
+    next.tankLevel = reading(doc["water_tank"], "level_pct");
+    next.tankLevel.valid = next.tankLevel.valid && next.tankCalibrated && next.tankDistance.valid && next.tankLevel.value >= 0 && next.tankLevel.value <= 100;
+  }
   next.uvRaw = reading(doc["uv"], "raw");
+  next.ambientLightEnabled = doc["ambient_light"]["enabled"].is<bool>() &&
+                            doc["ambient_light"]["enabled"].as<bool>();
+  if (next.ambientLightEnabled)
+    next.ambientLightRaw = reading(doc["ambient_light"], "raw");
+  next.ambientLightRaw.valid = next.ambientLightRaw.valid &&
+                              next.ambientLightRaw.value >= 0 && next.ambientLightRaw.value <= 4095;
   next.temperature = reading(doc["environment"], "temperature_c");
   next.humidity = reading(doc["environment"], "humidity_pct");
   next.humidity.valid = next.humidity.valid && next.humidity.value >= 0 && next.humidity.value <= 100;
   const auto pump = doc["pump"];
   next.pumpKnown = pump["enabled"].is<bool>() && pump["on"].is<bool>();
   next.pumpEnabled = next.pumpKnown && pump["enabled"].as<bool>();
+  next.waterAllowed = next.pumpEnabled && pump["water_allowed"] == true;
+  copy(next.waterBlockReason, pump["water_block_reason"] | "");
   next.pumpOn = next.pumpKnown && pump["on"].as<bool>();
   next.remainingKnown = pump["remaining_ms"].is<uint32_t>();
   if (next.remainingKnown) next.remainingMs = pump["remaining_ms"].as<uint32_t>();
@@ -144,6 +187,10 @@ void pollState() {
   next.printerKnown = printer["enabled"].is<bool>() && printer["status"].is<const char *>();
   next.printerEnabled = next.printerKnown && printer["enabled"].as<bool>();
   if (next.printerKnown) copy(next.printerStatus, printer["status"]);
+  next.printerRaster = next.printerKnown && !strcmp(printer["text_format"] | "", "utf8-raster");
+  next.printerDaily = next.printerRaster && !strcmp(printer["daily_layout"] | "", "garden-daily-v2");
+  next.printerLayout32 = next.printerRaster && !strcmp(printer["layout"] | "", "receipt32-v2");
+  next.printerAutocut = next.printerKnown && printer["autocut"].is<bool>() && printer["autocut"].as<bool>();
 
   xSemaphoreTake(lock, portMAX_DELAY);
   copy(next.requestId, shared.requestId);
@@ -236,14 +283,26 @@ void sendCommand(const Command &command) {
   const State state = planter::snapshot();
   if (strcmp(state.requestId, command.id)) return; // superseded by STOP
   const bool stop = command.action == Action::StopWater;
-  const bool enabled = (command.action == Action::Water || stop) ? state.pumpEnabled :
+  const bool enabled = command.action==Action::PairYoyo ? state.yoyoEnabled : command.action==Action::AutoPrint ? state.autoPrintKnown : isFocus(command.action) ? state.focusKnown : (command.action == Action::Water || stop) ? state.pumpEnabled :
                        command.action == Action::Light ? state.lightEnabled : state.printerEnabled;
-  if (!enabled || (!stop && !planter::fresh(state, millis()))) {
+  if (!enabled || (command.action == Action::Water && !state.waterAllowed) || (!stop && !planter::fresh(state, millis()))) {
     commandResult(command.id, "not_sent", "Unavailable or stale device state", false); return;
   }
-  StaticJsonDocument<512> doc;
+  if (command.action == Action::Print && (!strcmp(state.printerStatus, "recovery_required") ||
+      (command.receipt.requiresRaster && !state.printerRaster) ||
+      (command.receipt.layout32 && !state.printerLayout32) ||
+      (command.receipt.isDaily && !state.printerDaily))) {
+    commandResult(command.id, "not_sent", "Printer needs recovery or a new preview", false); return;
+  }
+  StaticJsonDocument<1024> doc;
   doc["request_id"] = command.id;
   switch (command.action) {
+    case Action::PairYoyo:doc["action"]="pair_yoyo";break;
+    case Action::AutoPrint:doc["action"]="auto_print";doc["on"]=command.on;break;
+    case Action::FocusStart:doc["action"]="focus_start";doc["duration_ms"]=uint32_t(command.focusMinutes)*60000;break;
+    case Action::FocusPause:doc["action"]="focus_pause";break;
+    case Action::FocusResume:doc["action"]="focus_resume";break;
+    case Action::FocusReset:doc["action"]="focus_reset";break;
     case Action::Water:
       doc["action"] = "water";
       doc["duration_ms"] = PLANTER_WATER_DURATION_MS;
@@ -251,8 +310,8 @@ void sendCommand(const Command &command) {
     case Action::StopWater: doc["action"] = "stop_water"; break;
     case Action::Light: doc["action"] = "light"; doc["on"] = command.on; break;
     case Action::Print:
-      doc["action"] = "print";
-      doc["text"] = "RoboPlanter\nManual garden check-in.\nObserve your plant before watering.\n";
+      if(command.receipt.isDaily){doc["action"]="print_daily";robo::writeDaily(doc.createNestedObject("daily"),command.receipt.daily);}
+      else {doc["action"] = "print";doc["text"] = command.receipt.text;}
       break;
   }
   String body;
@@ -301,6 +360,17 @@ void networkTask(void *) {
     // Settings service owns the Wi-Fi API. Scanning, switching and connection
     // timeout/retry handling never run in the display/touch task.
     device_settings::service();
+    // Transition-only diagnostics; never log SSID, password, IP or token.
+    const auto wifiStatus = device_settings::wifiState();
+    const unsigned statusBits = unsigned(wifiStatus.phase) | (unsigned(wifiStatus.error) << 4) |
+                                (unsigned(wifiStatus.saved) << 12) | (unsigned(wifiStatus.planterNetwork) << 13);
+    static unsigned lastStatusBits = ~0U;
+    if (statusBits != lastStatusBits) {
+      lastStatusBits = statusBits;
+      Serial.printf("Indicator Wi-Fi: phase=%u error=%u saved=%u storage=%u trusted=%u\n",
+                    unsigned(wifiStatus.phase), unsigned(wifiStatus.error), unsigned(wifiStatus.saved),
+                    unsigned(wifiStatus.persistenceAvailable), unsigned(wifiStatus.planterNetwork));
+    }
     const uint32_t currentNetwork = device_settings::networkRevision();
     const bool planterNetwork = device_settings::planterNetworkReady();
     {
@@ -332,7 +402,11 @@ void networkTask(void *) {
         uploadSoil();
         pollState();
         pollCommandResult();
-        nextPoll = millis() + kPollIntervalMs;
+        // Keep the period anchored to the start of this cycle. Adding another
+        // full second after three HTTP operations made relayed soil expire
+        // between otherwise successful uploads. Slow/failed transfers still
+        // expire normally; do not lengthen the sensor freshness limit.
+        nextPoll = now + kPollIntervalMs;
       }
     } else {
       const auto wifi = device_settings::wifiState();
@@ -377,21 +451,30 @@ State snapshot() {
   return out;
 }
 bool fresh(const State &state, uint32_t now) {
-  return state.received && state.wifi && state.ageKnown &&
+  return state.received && state.wifi && state.ageKnown && state.networkFailure == NetworkFailure::None &&
          state.networkRevision == device_settings::networkRevision() && device_settings::planterNetworkReady() &&
          static_cast<uint64_t>(now - state.receivedMs) + state.sampleAgeMs <= kStaleMs;
 }
-bool submit(Action action, bool lightOn) {
+bool submit(Action action, bool lightOn, const PrintReceipt *receipt, uint16_t focusMinutes) {
+  if(isFocus(action) && (focusMinutes<1 || focusMinutes>120))return false;
   if (!lock || !commands || !stops) return false;
+  if (action == Action::Print && (!receipt || (receipt->isDaily ? !robo::validDaily(receipt->daily) : (!receipt->text[0] || !memchr(receipt->text, 0, sizeof(receipt->text)))))) return false;
   xSemaphoreTake(lock, portMAX_DELAY);
   const bool stop = action == Action::StopWater;
-  const bool enabled = (action == Action::Water || stop) ? shared.pumpEnabled :
+  const bool enabled = action==Action::PairYoyo ? shared.yoyoEnabled : action==Action::AutoPrint ? shared.autoPrintKnown : isFocus(action) ? shared.focusKnown : (action == Action::Water || stop) ? shared.pumpEnabled :
                        action == Action::Light ? shared.lightEnabled : shared.printerEnabled;
   if (!enabled || !shared.wifi || shared.networkRevision != device_settings::networkRevision() ||
-      !device_settings::planterNetworkReady() || (!stop && (!fresh(shared, millis()) || shared.commandBlocked))) {
+      (action == Action::Water && !shared.waterAllowed) ||
+      !device_settings::planterNetworkReady() || (!stop && (!fresh(shared, millis()) || shared.commandBlocked)) ||
+      (action == Action::Print && (!strcmp(shared.printerStatus, "recovery_required") ||
+       (receipt->requiresRaster && !shared.printerRaster) ||
+       (receipt->layout32 && !shared.printerLayout32) ||
+       (receipt->isDaily && (!shared.printerDaily || !robo::validDaily(receipt->daily)))))) {
     xSemaphoreGive(lock); return false;
   }
-  Command command{action, lightOn, {}, device_settings::networkRevision()};
+  Command command{action, lightOn, {}, device_settings::networkRevision(), {}, focusMinutes};
+  command.focusMinutes=focusMinutes;
+  if (action == Action::Print) command.receipt = *receipt;
   // Acquire under the settings lock after the checks above: a concurrent UI
   // network change either wins first (STOP rejected) or waits for this STOP.
   // Client -> settings is the only nested lock order. Duplicate pending STOPs

@@ -1,21 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 710" role="img" aria-labelledby="title desc">
-<title id="title">RoboPlanter 硬件与通信总览</title><desc id="desc">YOYO手机通过蓝牙直接连接XIAO，Indicator通过Wi-Fi和HTTP连接同一XIAO。XIAO接传感器、灯和外置驱动；12伏水泵和打印机独立供电，不接入GPIO供电。</desc>
-<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8" fill="none" stroke="#71845a" stroke-width="1.3"/></marker></defs>
-<rect width="1160" height="710" rx="24" fill="#f6f5ef"/>
-<g font-family="system-ui,'Microsoft Yahei',sans-serif" fill="#253126">
-<text x="45" y="55" font-size="12" letter-spacing="3" fill="#7c876f">ROBOPLANTER / HARDWARE MAP</text>
-<text x="45" y="103" font-size="30" font-weight="700">两条入口，同一个本地控制器。</text>
-<text x="45" y="136" font-size="14" fill="#707965">接线前断电。图示为连接逻辑，实际接针、供电和驱动要求见下文。</text>
-<g fill="#e9eede" stroke="#cdd5c1"><rect x="45" y="200" width="230" height="128" rx="14"/><rect x="45" y="395" width="230" height="128" rx="14"/><rect x="465" y="265" width="248" height="210" rx="18" fill="#d5e9aa"/><rect x="900" y="195" width="215" height="80" rx="12"/><rect x="900" y="325" width="215" height="80" rx="12"/><rect x="900" y="455" width="215" height="80" rx="12"/></g>
-<text x="68" y="238" font-size="19" font-weight="650">荣耀手机 / YOYO</text><text x="68" y="269" font-size="13">独立 Skill · 官方蓝牙工具</text><text x="68" y="297" font-size="12" fill="#707965">链路待真机验收</text>
-<text x="68" y="434" font-size="19" font-weight="650">SenseCAP Indicator</text><text x="68" y="465" font-size="13">本地屏幕 · 设置 · 像素养成</text><text x="68" y="494" font-size="12" fill="#707965">独立 USB / 5 V 供电</text>
-<text x="489" y="306" font-size="20" font-weight="700">XIAO ESP32-S3 Plus</text><text x="489" y="335" font-size="15">+ Robot Board V1.0</text><text x="489" y="376" font-size="13">鉴权 · 请求编号 · 本地限时</text><text x="489" y="405" font-size="13">真实状态与动作结果</text><text x="489" y="443" font-size="12" fill="#637449">只用一个已确认的 USB 供电入口</text>
-<text x="922" y="226" font-size="16" font-weight="650">传感器 / 3.3 V 逻辑</text><text x="922" y="252" font-size="12">土壤 GPIO1 · I²C GPIO5/6</text>
-<text x="922" y="357" font-size="16" font-weight="650">外置水泵驱动</text><text x="922" y="382" font-size="12">GPIO7 仅为 IN · 公共 GND</text>
-<text x="922" y="487" font-size="16" font-weight="650">UART 打印机</text><text x="922" y="513" font-size="12">TX GPIO43 · TTL 电平需核对</text>
-<g fill="none" stroke="#71845a" stroke-width="2" marker-end="url(#arrow)"><path d="M275 265H370V307H465"/><path d="M275 456H372V424H465"/><path d="M713 310H813V234H900"/><path d="M713 366H900"/><path d="M713 424H813V496H900"/></g>
-<text x="311" y="240" font-size="12">BLE / WRITE + NOTIFY</text><text x="305" y="485" font-size="12">Wi-Fi / HTTP</text><text x="738" y="347" font-size="11" fill="#707965">全部外设默认关闭</text>
-<rect x="45" y="576" width="1070" height="91" rx="12" fill="#f1e4d6"/>
-<text x="65" y="610" font-size="15" font-weight="650" fill="#765135">12 V 负载单独供电；水泵不可直连 GPIO，不借用载板 5 V 电机口供电。</text>
-<text x="65" y="640" font-size="13" fill="#765135">泵驱动需要 3.3 V 可识别输入、掉电关闭、瞬态保护和物理停止；Indicator 与 XIAO 不互接 UART/I²C。</text>
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1020" role="img" aria-labelledby="title desc">
+<title id="title">RoboPlanter 当前硬件连接 · 2026-10-29</title><desc id="desc">手机加密BLE连接XIAO；Indicator通过同一局域网HTTP连接XIAO，土壤接Indicator。SEN54独立5V。继电器空载，水泵未接。</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 8 4 0 8" fill="#51795e"/></marker></defs>
+<style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#20372a}.h{font-size:25px;font-weight:700}.t{font-size:18px}.s{font-size:16px;fill:#4b6053}.wire{fill:none;stroke:#51795e;stroke-width:3;marker-end:url(#arrow)}.card{fill:#fffdf6;stroke:#b4c5b1;stroke-width:1.5}</style>
+<rect width="1280" height="1020" rx="28" fill="#f3f1e6"/>
+<text x="40" y="50" class="h">工位搭子 / 当前硬件连接</text><text x="40" y="80" class="s">2026-10-29 · 端口逻辑示意，按实物丝印识别 pin1 · 非工程比例图</text>
+
+<rect class="card" x="40" y="110" width="345" height="142" rx="16"/>
+<text class="h" x="60" y="144">Robot Phone / YOYO</text>
+<text class="t" x="60" y="176">Skill 0.4.0 → 官方 BLE 工具</text>
+<text class="t" x="60" y="203">SC + MITM 加密绑定</text>
+<text class="t" x="60" y="230">六位码在 Indicator 上查看</text>
+<rect class="card" x="535" y="110" width="705" height="142" rx="16"/>
+<text class="h" x="555" y="144">XIAO ESP32-S3 Plus · Robot Board V1.0</text>
+<text class="t" x="555" y="176">采集环境、灯光、打印、共享番茄钟</text>
+<text class="t" x="555" y="203">独立 USB / 5V 供电；HTTP 使用私有令牌</text>
+<text class="t" x="555" y="230">水箱未完成，泵禁用；GPIO43 与 M2/J9 不使用</text>
+<path class="wire" d="M385 176 H535"/><text class="s" x="401" y="160">加密 BLE</text>
+<rect class="card" x="40" y="302" width="345" height="207" rx="16"/>
+<text class="h" x="60" y="336">SenseCAP Indicator D1</text>
+<text class="t" x="60" y="368">独立 USB / 5V；触摸与显示</text>
+<text class="t" x="60" y="395">Grove ADC：RP2040 GPIO27</text>
+<text class="t" x="60" y="422">  → 电容土壤，3.3V / GND</text>
+<text class="t" x="60" y="449">内置蜂鸣器：RP2040 GPIO19</text>
+<text class="t" x="60" y="476">备用 I²C：SDA20 / SCL21 留空</text>
+<path class="wire" d="M385 355 H465 V230 H535"/><text class="s" x="402" y="285">同一 Wi-Fi</text><text class="s" x="404" y="309">鉴权 HTTP</text>
+<rect class="card" x="535" y="302" width="705" height="135" rx="16"/>
+<text class="h" x="555" y="336">IIC1 / J11 → SEN54（IIC2 同总线备用）</text>
+<text class="t" x="555" y="368">pin2 SDA = GPIO5 · pin1 SCL = GPIO6 · 地址 0x69</text>
+<text class="t" x="555" y="395">红线独立 5V；信号/上拉 3.3V；黑线共地</text>
+<text class="t" x="555" y="422">IIC pin3 的 3.3V 不接 SEN54 红线，不反灌 5V</text>
+<rect class="card" x="535" y="461" width="335" height="135" rx="16"/>
+<text class="h" x="555" y="495">SERVO1 / J1 → 继电器</text>
+<text class="t" x="555" y="527">pin1 D15 / GPIO42 → SIG</text>
+<text class="t" x="555" y="554">模块 3.3–5V / 共地；白线空</text>
+<text class="t" x="555" y="581">两颗负载端子保持空着</text>
+<rect class="card" x="895" y="461" width="345" height="135" rx="16"/>
+<text class="h" x="915" y="495">SERVO2 / J5 → 超声波</text>
+<text class="t" x="915" y="527">pin1 D9 / GPIO8 → 单 SIG</text>
+<text class="t" x="915" y="554">独立 3.3V / GND；白线空</text>
+<text class="t" x="915" y="581">v2.0 探头干燥，水箱待标定</text>
+<rect class="card" x="535" y="620" width="335" height="135" rx="16"/>
+<text class="h" x="555" y="654">SERVO3 / J13 → 环境光</text>
+<text class="t" x="555" y="686">pin1 D0 / GPIO1 → OUT</text>
+<text class="t" x="555" y="713">独立 3.3V / GND；白线空</text>
+<text class="t" x="555" y="740">Light v1.2；替换旧 UV</text>
+<rect class="card" x="895" y="620" width="345" height="135" rx="16"/>
+<text class="h" x="915" y="654">RGB / J7 → WS2813</text>
+<text class="t" x="915" y="686">pin1 D13 / GPIO40 → DIN</text>
+<text class="t" x="915" y="713">5V / GND · 板载信号缓冲</text>
+<text class="t" x="915" y="740">10 颗灯珠 · 亮度 24/255</text>
+<rect class="card" x="535" y="779" width="705" height="135" rx="16"/>
+<text class="h" x="555" y="813">SERVO4 / J14 + UART / J10 → EM5826H</text>
+<text class="t" x="555" y="845">J14 pin1 D8 / GPIO7 → 打印机 RX；SERVO4 不接泵/舵机</text>
+<text class="t" x="555" y="872">打印机 TX（3.3V）→ J10 pin2 D7 / GPIO44</text>
+<text class="t" x="555" y="899">打印机独立 12V / 共地；GPIO43 留空，避开上电日志</text>
+<path class="wire" d="M887 252 V302"/>
+<rect class="card" x="40" y="550" width="425" height="206" rx="16"/>
+<text class="h" x="60" y="584">当前版本的替换关系</text>
+<text class="t" x="60" y="616">SEN54 → 温湿度 / PM2.5 / VOC</text>
+<text class="t" x="60" y="643">DHT20 与旧 Air Quality 拆下备用</text>
+<text class="t" x="60" y="670">UV → Light v1.2；土壤在 Indicator</text>
+<text class="t" x="60" y="697">SEN54 不测 CO₂ 或 NOx</text>
+<text class="t" x="60" y="724">SERVO 插座供电非通用 3.3V</text>
+<rect class="card" x="40" y="786" width="425" height="128" rx="16"/>
+<text class="h" x="60" y="820">已验证与下一步</text>
+<text class="t" x="60" y="852">YOYO 实时土壤 / 温湿度已通过</text>
+<text class="t" x="60" y="879">日签比例、预览一致、切纸已通过</text>
+<text class="t" x="60" y="906">手机动作及真实泵负载继续验收</text>
+<text x="40" y="963" class="t">换线前断电 · 共地不等于共用电源 · 传感器红线按表分线，不能整根插入 Servo 口</text><text x="40" y="992" class="s">www: peterpanstechland.github.io/docs/projects/2026/roboplanter/hardware-wiring</text></svg>

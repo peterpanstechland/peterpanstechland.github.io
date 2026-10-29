@@ -1,5 +1,6 @@
 #include "settings_ui.h"
 #include "device_settings.h"
+#include "planter_presentation.h"
 #include "indicator_board.h"
 #include "ui_text.h"
 #include "ui_theme.h"
@@ -11,10 +12,12 @@ namespace {
 using device_settings::Language;
 using device_settings::WifiError;
 using device_settings::WifiPhase;
-enum class Page : uint8_t { Menu, Wifi, Password, About };
+enum class Page : uint8_t { Menu, Wifi, Password, About, Planter, Yoyo };
 struct Rect { int16_t x, y, w, h; };
 constexpr Rect kChinese{24, 117, 208, 48}, kEnglish{248, 117, 208, 48};
-constexpr Rect kWifi{16, 181, 448, 76}, kAbout{16, 394, 448, 54};
+constexpr Rect kWifi{16, 181, 448, 76}, kPlanter{16, 394, 216, 54}, kAbout{248, 394, 216, 54};
+constexpr Rect kCompanion{24,332,432,60}, kPairPhone{24,174,432,54}, kAutoPrint{24,316,432,54};
+constexpr Rect kPairedNetwork{24, 411, 208, 52}, kNetworkSettings{248, 411, 208, 52};
 constexpr Rect kMinus{24, 321, 56, 56}, kSlider{96, 321, 288, 56}, kPlus{400, 321, 56, 56};
 constexpr Rect kRefresh{16, 422, 100, 48}, kPrevious{124, 422, 64, 48};
 constexpr Rect kNext{196, 422, 64, 48}, kDefault{268, 422, 196, 48};
@@ -95,11 +98,11 @@ const char *errorText(WifiError error) {
     case WifiError::Busy: return tr("正在处理，请稍候", "Busy. Please wait");
     case WifiError::AuthFailed: return tr("密码错误或认证失败", "Authentication failed");
     case WifiError::NetworkNotFound: return tr("未找到网络", "Network not found");
-    case WifiError::Timeout: return tr("连接超时，请重试", "Connection timed out");
+    case WifiError::Timeout: return tr("连接超时，稍后自动重连", "Timed out; auto-retry soon");
     case WifiError::Disconnected: return tr("连接已断开", "Disconnected");
     case WifiError::ScanFailed: return tr("扫描失败，请刷新", "Scan failed. Refresh");
     case WifiError::StorageUnavailable: return tr("设置未能保存", "Settings could not be saved");
-    case WifiError::ConnectionFailed: return tr("连接失败，请重试", "Connection failed");
+    case WifiError::ConnectionFailed: return tr("连接失败，稍后自动重连", "Failed; auto-retry soon");
     default: return "";
   }
 }
@@ -128,7 +131,7 @@ void showWifi() {
   wipePassword(); page = Page::Wifi; listLoaded = false; networkPage = 0;
   const auto state = device_settings::wifiState();
   syncList(state);
-  if (state.ready && !state.scanning && !state.networkCount) beginScan();
+  if (state.ready && state.phase != WifiPhase::Connecting && !state.scanning && !state.networkCount) beginScan();
 }
 bool validPassword() {
   if (!secureNetwork) return passwordLength == 0;
@@ -166,9 +169,8 @@ void drawMenu(const ui_theme::Theme &t) {
   g.fillRoundRect(96, 344, 288, 10, 5, t.outline);
   g.fillRoundRect(96, 344, knob - 96 + 1, 10, 5, t.accent);
   g.fillCircle(knob, 349, 10, t.accent);
-  g.fillRoundRect(kAbout.x, kAbout.y, kAbout.w, kAbout.h, 12, t.surface);
-  text(32, 406, tr("关于设备", "About this device"), t.ink, 24, 372);
-  text(428, 406, ">", t.ink, 24, 24);
+  button(kPlanter, tr("花盆连接", "Planter connection"), t, false, true, 16);
+  button(kAbout, tr("关于设备", "About device"), t, false, true, 16);
   if (settingsRejected || state.error == WifiError::StorageUnavailable)
     text(24, 455, tr("设置未能保存", "Settings could not be saved"), t.muted, 16);
 }
@@ -179,7 +181,8 @@ void drawWifi(const ui_theme::Theme &t) {
   const char *ssid = state.phase == WifiPhase::Connected ? state.connectedSsid : state.targetSsid;
   text(24, 116, ssid[0] ? ssid : tr("仅支持 2.4 GHz 网络", "2.4 GHz networks only"), t.muted, 16);
   if (state.error != WifiError::None) text(24, 138, errorText(state.error), t.accent, 16);
-  else text(24, 138, tr("Wi-Fi 连通不代表花盆已连通", "Wi-Fi is separate from the planter link"), t.muted, 16);
+  else text(24, 138, state.saved ? tr("已保存，上电自动连接", "Saved. Reconnects on startup") :
+            tr("连接成功后自动保存", "Saves after a successful connection"), t.muted, 16);
   for (unsigned row = 0; row < 5; ++row) {
     const unsigned index = networkPage * 5 + row;
     if (index >= listCount || state.scanning) break;
@@ -236,9 +239,48 @@ void drawAbout(const ui_theme::Theme &t) {
   text(32, 180, "ESP32-S3 + RP2040", t.ink, 24, 416);
   text(32, 229, tr("无内置 CO2 / VOC 传感器", "No built-in CO2 / VOC sensors"), t.ink, 24, 416);
   text(32, 269, tr("温湿度需要外接传感器", "Temperature / humidity need an external sensor"), t.muted, 16, 416);
-  text(32, 312, tr("花盆数据请看今日状态", "Plant data is on the Today page"), t.ink, 24, 416);
+  text(32, 312, tr("内置无源蜂鸣器，支持提示音", "Built-in passive buzzer for alert tones"), t.ink, 24, 416);
   text(32, 355, tr("其他 Wi-Fi 不等于已连接花盆", "Joining Wi-Fi does not connect the planter"), t.muted, 16, 416);
   text(32, 389, tr("设置仅在本机生效", "Settings apply to this display"), t.muted, 16, 416);
+}
+void drawPlanter(const ui_theme::Theme &t, uint32_t now) {
+  const auto wifi = device_settings::wifiState();
+  const auto endpoint = device_settings::planterEndpoint();
+  const auto state = planter::snapshot();
+  const bool english = device_settings::getLanguage() == Language::English;
+  const auto status = endpoint.configured ? planter_presentation::link(state, wifi, now) : planter_presentation::Link::Configuration;
+  text(24, 82, planter_presentation::linkText(status, english), t.ink, 24);
+  text(24, 122, tr("配对网络", "Paired network"), t.muted, 16);
+  text(24, 145, endpoint.ssid[0] ? endpoint.ssid : "--", t.ink, 24);
+  text(24, 184, tr("当前网络", "Current network"), t.muted, 16);
+  text(24, 207, wifi.connectedSsid[0] ? wifi.connectedSsid : tr("未连接", "Not connected"), t.ink, 24);
+  text(24, 246, tr("花盆地址", "Planter address"), t.muted, 16);
+  text(24, 269, endpoint.address[0] ? endpoint.address : "--", t.ink, 16);
+  char detail[64];
+  snprintf(detail, sizeof(detail), "HTTP %d", static_cast<int>(state.httpStatus));
+  text(24, 302, state.httpStatus ? detail : tr("尚未收到有效响应", "No verified response yet"), t.muted, 16);
+  button(kCompanion, tr("YOYO 与场景小票", "YOYO and scene receipts"), t, false, true, 24);
+  button(kPairedNetwork, tr("连接配对网络", "Use paired Wi-Fi"), t, false, wifi.ready, 16);
+  button(kNetworkSettings, tr("无线网络设置", "Wi-Fi settings"), t, false, true, 16);
+}
+void drawYoyo(const ui_theme::Theme &t,uint32_t now) {
+  const auto state=planter::snapshot();
+  const bool ready=planter::fresh(state,now) && !state.commandBlocked;
+  text(24,90,state.yoyoConnected?tr("手机已安全连接","Phone securely connected"):
+    state.yoyoPaired?tr("已配对，等待手机连接","Paired. Waiting for phone"):
+    tr("首次连接需要手机配对","Pair your phone on first use"),t.ink,24);
+  text(24,130,state.yoyoPaired?tr("回到 YOYO 即可读取工位状态","Return to YOYO to read desk status"):
+    state.yoyoPairing?tr("在手机输入下方六位码","Enter the six digits below on your phone"):
+    tr("先点下方按钮，再连接手机蓝牙","Tap below, then connect in phone Bluetooth"),t.muted,16);
+  button(kPairPhone,state.yoyoPairing?tr("配对窗口已开启","Pairing window open"):state.yoyoPaired?tr("手机已配对","Phone paired"):tr("显示六位配对码","Show pairing code"),t,false,
+    ready && state.yoyoEnabled && !state.yoyoPaired && !state.yoyoPairing,24);
+  if(state.yoyoPairing && state.yoyoPin>=100000 && state.yoyoPin<=999999) {
+    char pin[24];snprintf(pin,sizeof(pin),"PIN  %06lu",static_cast<unsigned long>(state.yoyoPin));text(80,240,pin,t.accent,48);
+  } else text(24,253,state.yoyoPaired?tr("下次连接无需重新输入配对码","No new code needed for later connections"):
+    tr("六位码在此显示，两分钟有效","Six digits appear here, valid for two minutes"),t.muted,16);
+  button(kAutoPrint,state.autoPrint?tr("场景自动打印：开","Scene auto-print: ON"):tr("场景自动打印：关","Scene auto-print: OFF"),t,state.autoPrint,ready&&state.autoPrintKnown,24);
+  text(24,392,tr("同一场景五分钟内仅打印一次","Same scene: at most once per five minutes"),t.muted,16);
+  text(24,423,tr("关闭后仍可主动要求打印","Explicit print requests still work when off"),t.muted,16);
 }
 void brightness(uint8_t value) {
   indicator::setBrightness(value);
@@ -252,6 +294,7 @@ void close() { wipePassword(); selectedSsid[0] = 0; opened = false; page = Page:
 void back() {
   wipePassword();
   if (page == Page::Menu) close();
+  else if(page==Page::Yoyo)page=Page::Planter;
   else if (page == Page::Password) { selectedSsid[0] = 0; page = Page::Wifi; }
   else page = Page::Menu;
 }
@@ -260,10 +303,12 @@ const char *title() {
     case Page::Wifi: return tr("无线网络", "Wi-Fi");
     case Page::Password: return tr("连接网络", "Join network");
     case Page::About: return tr("关于设备", "About device");
+    case Page::Yoyo: return tr("YOYO 伙伴", "YOYO companion");
+    case Page::Planter: return tr("花盆连接", "Planter connection");
     default: return tr("设备设置", "Settings");
   }
 }
-void draw(uint32_t /*now*/, uint8_t themeId) {
+void draw(uint32_t now, uint8_t themeId) {
   if (!opened) return;
   const auto &t = ui_theme::get(themeId);
   indicator::display().fillRect(0, 76, 480, 400, t.background);
@@ -272,9 +317,11 @@ void draw(uint32_t /*now*/, uint8_t themeId) {
     case Page::Wifi: drawWifi(t); break;
     case Page::Password: drawPassword(t); break;
     case Page::About: drawAbout(t); break;
+    case Page::Planter: drawPlanter(t, now); break;
+    case Page::Yoyo: drawYoyo(t,now);break;
   }
 }
-bool handle(ui::Gesture gesture, const ui::TouchGate &touch, uint32_t /*now*/) {
+bool handle(ui::Gesture gesture, const ui::TouchGate &touch, uint32_t now) {
   if (!opened) return false;
   if (gesture != ui::Gesture::Tap) return true;
   if (page == Page::Menu) {
@@ -282,9 +329,22 @@ bool handle(ui::Gesture gesture, const ui::TouchGate &touch, uint32_t /*now*/) {
     else if (tapped(kEnglish, touch)) settingsRejected = !device_settings::setLanguage(Language::English);
     else if (tapped(kWifi, touch)) showWifi();
     else if (tapped(kAbout, touch)) page = Page::About;
+    else if (tapped(kPlanter, touch)) page = Page::Planter;
     else if (tapped(kMinus, touch)) brightness(indicator::brightness() > 10 ? indicator::brightness() - 5 : 5);
     else if (tapped(kPlus, touch)) brightness(indicator::brightness() < 95 ? indicator::brightness() + 5 : 100);
     else if (tapped(kSlider, touch)) brightness(static_cast<uint8_t>(5 + (touch.lastX() - 96) * 95 / 287));
+  } else if(page==Page::Yoyo) {
+    const auto state=planter::snapshot();
+    if(planter::fresh(state,now) && !state.commandBlocked) {
+      if(tapped(kPairPhone,touch) && state.yoyoEnabled && !state.yoyoPaired && !state.yoyoPairing)planter::submit(planter::Action::PairYoyo);
+      else if(tapped(kAutoPrint,touch) && state.autoPrintKnown)planter::submit(planter::Action::AutoPrint,!state.autoPrint);
+    }
+  } else if (page == Page::Planter) {
+    if(tapped(kCompanion,touch))page=Page::Yoyo;
+    else if (tapped(kNetworkSettings, touch)) showWifi();
+    else if (tapped(kPairedNetwork, touch) && device_settings::wifiState().ready) {
+      if (device_settings::restoreDefaultWifi()) showWifi();
+    }
   } else if (page == Page::Wifi) {
     const auto state = device_settings::wifiState();
     if (tapped(kRefresh, touch) && state.ready && !state.scanning) beginScan();

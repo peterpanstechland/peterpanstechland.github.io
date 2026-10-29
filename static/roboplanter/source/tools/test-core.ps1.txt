@@ -14,9 +14,25 @@ $rpBatchContent = @"
 call "$rpDeveloperCmd" -no_logo -arch=x64
 if errorlevel 1 exit /b 1
 cd /d "$rpBuild"
-cl.exe /nologo /std:c++17 /EHsc /W4 "$rpTestSource" /Fe:controller_test.exe
+cl.exe /nologo /std:c++17 /EHsc /utf-8 /W4 "$rpTestSource" /Fe:controller_test.exe
 if errorlevel 1 exit /b 1
 controller_test.exe
+if errorlevel 1 exit /b 1
+cl.exe /nologo /std:c++17 /EHsc /utf-8 /O2 "$rpRoot\tests\core\daily_ticket_test.cpp" /Fe:daily_ticket_test.exe
+if errorlevel 1 exit /b 1
+daily_ticket_test.exe
+if errorlevel 1 exit /b 1
+cl.exe /nologo /std:c++17 /EHsc /utf-8 /W4 "$rpRoot\tests\core\dht20_test.cpp" /Fe:dht20_test.exe
+if errorlevel 1 exit /b 1
+dht20_test.exe
+if errorlevel 1 exit /b 1
+cl.exe /nologo /std:c++17 /EHsc /utf-8 /W4 "$rpRoot\tests\core\sen54_tank_test.cpp" /Fe:sen54_tank_test.exe
+if errorlevel 1 exit /b 1
+sen54_tank_test.exe
+if errorlevel 1 exit /b 1
+cl.exe /nologo /std:c++17 /EHsc /utf-8 /W4 "$rpRoot\tests\core\companion_test.cpp" /Fe:companion_test.exe
+if errorlevel 1 exit /b 1
+companion_test.exe
 "@
 Set-Content -LiteralPath $rpBatch -Value $rpBatchContent -Encoding ascii
 & $env:ComSpec /d /c $rpBatch

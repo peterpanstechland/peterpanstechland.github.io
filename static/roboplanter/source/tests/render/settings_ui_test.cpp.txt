@@ -67,6 +67,10 @@ uint8_t brightness() { return light; }
 void setBrightness(uint8_t value) { light = value < 5 ? 5 : value > 100 ? 100 : value; ++brightnessWrites; }
 }
 namespace device_settings {
+PlanterEndpoint planterEndpoint() {
+  PlanterEndpoint result; result.configured = true;
+  strcpy(result.ssid, "example"); strcpy(result.address, "http://192.0.2.1"); return result;
+}
 Language getLanguage() { return language; }
 bool setLanguage(Language value) { language = value; return true; }
 uint8_t getBrightness() { return light; }
@@ -79,6 +83,10 @@ bool requestConnect(const char *ssid, const char *password) {
   if (rejectJoin) { wifi.error = WifiError::Busy; return false; }
   wifi.phase = WifiPhase::Connecting; return true;
 }
+}
+namespace planter {
+State snapshot() { return State(); }
+bool fresh(const State &, uint32_t) { return false; }
 }
 int main(int argc, char **argv) {
   try {
@@ -139,13 +147,18 @@ int main(int argc, char **argv) {
     rejectJoin = false; tap(405, 446);
     require(requestedPassword == "abcdefgh" && std::string(settings_ui::title()) == "无线网络",
             "Retry after Busy must retain input until the request is accepted");
+    settings_ui::open(); tap(100, 420);
+    require(std::string(settings_ui::title()) == "花盆连接", "Planter diagnostics must be reachable");
+    render(); const auto beforeRestore = restores; tap(100, 437);
+    require(restores == beforeRestore + 1 && std::string(settings_ui::title()) == "无线网络", "Diagnostics must restore only the paired network");
     if (argc > 1) {
       const std::filesystem::path output(argv[1]); std::filesystem::create_directories(output);
       for (unsigned lang = 0; lang < 2; ++lang) {
         language = lang ? device_settings::Language::English : device_settings::Language::Chinese;
         const std::string prefix = lang ? "en-" : "zh-";
         networks(); settings_ui::open(); frame(output, (prefix + "settings").c_str());
-        tap(200, 420); frame(output, (prefix + "about").c_str());
+        tap(100, 420); frame(output, (prefix + "planter").c_str());
+        settings_ui::back(); tap(350, 420); frame(output, (prefix + "about").c_str());
         settings_ui::back(); tap(200, 218); frame(output, (prefix + "wifi").c_str());
         tap(200, 184); for (unsigned i = 0; i < 8; ++i) key(i);
         frame(output, (prefix + "password").c_str());

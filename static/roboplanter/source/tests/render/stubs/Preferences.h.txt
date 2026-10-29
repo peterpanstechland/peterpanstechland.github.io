@@ -5,4 +5,6 @@ class Preferences {
   bool begin(const char *, bool = false) { return true; }
   uint8_t getUChar(const char *, uint8_t fallback = 0) const { return fallback; }
   size_t putUChar(const char *, uint8_t) { return 1; }
+  bool getBool(const char *, bool fallback=false) const {return fallback;}
+  size_t putBool(const char *, bool) {return 1;}
 };

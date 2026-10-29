@@ -4,8 +4,9 @@
 #include <stdexcept>
 #include <Preferences.h>
 #include "../../firmware/indicator/src/planter_client.cpp"
+#include "planter_presentation.h"
 // This network harness does not run the RP2040 sampler or invent soil data.
-namespace local_soil { Sample snapshot() { return Sample(); } }
+namespace local_soil { Sample snapshot() { return Sample(); } bool notifyFocusComplete(){return true;} }
 unsigned checks = 0;
 #define CHECK(condition) do { ++checks; if (!(condition)) throw std::runtime_error("check failed at line " + std::to_string(__LINE__)); } while (0)
 void workerOnce() {
@@ -28,7 +29,7 @@ int main(int argc, char **argv) {
     else if (scenario == "commands-queue") settingsTestFailQueueOn = 2;
     else if (scenario == "stops-queue") settingsTestFailQueueOn = 3;
     else if (scenario == "task") settingsTestTaskFail = true;
-    if (scenario != "stop-switch") {
+    if (scenario != "stop-switch" && scenario != "print" && scenario != "sensors" && scenario != "companion") {
       CHECK(!planter::begin()); CHECK(settingsTestTask == nullptr);
       CHECK(!device_settings::wifiState().ready); CHECK(!device_settings::planterNetworkReady());
       CHECK(!device_settings::requestScan()); CHECK(!device_settings::requestConnect("office", "test-password"));
@@ -39,9 +40,139 @@ int main(int argc, char **argv) {
       const bool settingsFailed = scenario == "settings-mutex" || scenario == "settings-queue";
       CHECK(settingsTestLiveMutexes == (settingsFailed ? 0U : 1U));
       CHECK(settingsTestLiveQueues == (settingsFailed ? 0U : 1U));
+    } else if(scenario=="companion") {
+      CHECK(planter::begin());
+      const String valid=R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"uptime_ms":1000,"auto_print":true,"yoyo":{"enabled":true,"paired":false,"pairing":true,"pin":123456},"focus":{"enabled":true,"phase":1,"revision":8,"duration_ms":60000,"remaining_ms":58000}})";
+      settingsTestStateBody=valid;connectConfiguredNetwork();
+      auto state=planter::snapshot();CHECK(state.focusKnown && state.focusRemaining==58000 && state.focusRevision==8);
+      CHECK(state.yoyoEnabled && state.yoyoPairing && state.yoyoPin==123456 && state.autoPrint);
+      CHECK(!planter::submit(planter::Action::FocusStart,false,nullptr,0));
+      CHECK(!planter::submit(planter::Action::FocusStart,false,nullptr,121));
+      settingsTestPostHook=[&](const String& body) {
+        StaticJsonDocument<512> doc;CHECK(!deserializeJson(doc,body));
+        CHECK(!strcmp(doc["action"]|"","focus_start"));CHECK(doc["duration_ms"].as<int>()==60000);
+        settingsTestPostBody="{\"ok\":true,\"request_id\":\""+String(doc["request_id"]|"")+"\",\"status\":\"completed\"}";
+      };
+      CHECK(planter::submit(planter::Action::FocusStart,false,nullptr,1));workerOnce();CHECK(settingsTestPosts.size()==1);
+      settingsTestStateBody=R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"focus":{"enabled":true,"phase":1,"revision":8,"duration_ms":60000,"remaining_ms":60001}})";
+      pollState();CHECK(!planter::snapshot().focusKnown);CHECK(!planter::submit(planter::Action::FocusPause));
+      settingsTestStateBody=valid;pollState();CHECK(planter::submit(planter::Action::FocusPause));
+      settingsTestNow+=kStaleMs+1;workerOnce();CHECK(settingsTestPosts.size()==1);
+      CHECK(!strcmp(planter::snapshot().commandStatus,"not_sent"));
+      robo::DailyTicket ticket;StaticJsonDocument<512> json;
+      CHECK(!deserializeJson(json,R"({"card":0,"reversed":0,"english":0,"species":0,"soil":-9999,"raw":-9999,"temperature":-9999,"humidity":-9999,"scene":1,"note":"a\u0000b"})"));
+      CHECK(!robo::readDaily(json.as<JsonVariantConst>(),ticket));
+    } else if (scenario == "sensors") {
+      CHECK(planter::begin());
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"ambient_light":{"enabled":true,"raw":0,"valid":true},"uv":{"raw":987,"valid":true}})";
+      connectConfiguredNetwork();
+      CHECK(planter::snapshot().ambientLightEnabled);
+      CHECK(planter::snapshot().ambientLightRaw.valid);
+      CHECK(planter::snapshot().ambientLightRaw.value == 0);
+      CHECK(planter::snapshot().uvRaw.value == 987);
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"ambient_light":{"enabled":true,"raw":1200,"valid":false}})";
+      pollState(); CHECK(!planter::snapshot().ambientLightRaw.valid);
+      for (const char* raw : {"null", "-1", "4096", "\"1200\""}) {
+        settingsTestStateBody = String("{\"schema_version\":1,\"device_id\":\"mock-planter\",\"sample_age_ms\":0,\"ambient_light\":{\"enabled\":true,\"valid\":true,\"raw\":") + raw + "}}";
+        pollState(); CHECK(!planter::snapshot().ambientLightRaw.valid);
+      }
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"uv":{"raw":321,"valid":true}})";
+      pollState(); CHECK(!planter::snapshot().ambientLightEnabled);
+      CHECK(!planter::snapshot().ambientLightRaw.valid);
+      CHECK(planter::snapshot().uvRaw.value == 321);
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"ambient_light":{"enabled":false,"raw":1200,"valid":true}})";
+      pollState(); CHECK(!planter::snapshot().ambientLightRaw.valid);
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"sen54":{"enabled":true,"valid":true,"pm25_ug_m3":12.3,"voc_index":105},"water_tank":{"enabled":true,"valid":true,"calibrated":false,"distance_mm":150,"level_pct":50},"pump":{"enabled":true,"on":false,"water_allowed":false,"water_block_reason":"tank_uncalibrated"}})";
+      pollState(); auto sensors = planter::snapshot();
+      CHECK(sensors.pm25.valid && sensors.vocIndex.valid && sensors.tankDistance.valid);
+      CHECK(!sensors.tankLevel.valid && !sensors.waterAllowed);
+      CHECK(!planter::submit(planter::Action::Water));
+      CHECK(!strcmp(sensors.waterBlockReason,"tank_uncalibrated"));
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"sen54":{"enabled":true,"valid":true,"pm25_ug_m3":null,"voc_index":0},"water_tank":{"enabled":true,"valid":false,"calibrated":true,"distance_mm":150,"level_pct":50},"pump":{"enabled":true,"on":false}})";
+      pollState(); sensors = planter::snapshot();
+      CHECK(!sensors.pm25.valid && !sensors.vocIndex.valid && !sensors.tankDistance.valid && !sensors.tankLevel.valid);
+      CHECK(!planter::submit(planter::Action::Water)); // Missing explicit permission fails closed.
+    } else if (scenario == "print") {
+      CHECK(planter::begin());
+      const String modern = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"printer":{"enabled":true,"status":"idle","text_format":"utf8-raster","layout":"receipt32-v2","autocut":true}})";
+      const String oldRaster = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"printer":{"enabled":true,"status":"idle","text_format":"utf8-raster"}})";
+      const String legacy = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"printer":{"enabled":true,"status":"idle"}})";
+      settingsTestStateBody = modern; connectConfiguredNetwork();
+      CHECK(planter::snapshot().printerRaster && planter::snapshot().printerAutocut);
+      auto zh = planter_presentation::receipt(planter::snapshot(), false);
+      auto en = planter_presentation::receipt(planter::snapshot(), true);
+      CHECK(zh.requiresRaster && !en.requiresRaster);
+      CHECK(zh.layout32 && en.layout32);
+      CHECK(strlen(zh.text) <= 160 && strlen(en.text) <= 160);
+      const String approved = zh.text;
+      CHECK(!planter::submit(planter::Action::Print));
+      CHECK(planter::submit(planter::Action::Print, false, &zh));
+      strcpy(zh.text, "Modified after approval"); // The RTOS queue must own its copy.
+      CHECK(device_settings::setLanguage(device_settings::Language::English));
+      settingsTestPostHook = [&](const String &body) {
+        StaticJsonDocument<512> doc; CHECK(!deserializeJson(doc, body));
+        CHECK(!strcmp(doc["action"] | "", "print"));
+        CHECK(approved == (doc["text"] | ""));
+        settingsTestPostBody = "{\"ok\":true,\"request_id\":\"" + String(doc["request_id"] | "") + "\",\"status\":\"completed\"}";
+      };
+      workerOnce(); CHECK(settingsTestPosts.size() == 1);
+      settingsTestStateBody = legacy; pollState();
+      auto fallback = planter_presentation::receipt(planter::snapshot(), false);
+      CHECK(!fallback.requiresRaster && !strcmp(fallback.text, en.text));
+      for (const unsigned char *p = reinterpret_cast<const unsigned char *>(fallback.text); *p; ++p) CHECK(*p < 128);
+      auto modernState = planter::snapshot(); modernState.printerRaster = modernState.printerLayout32 = true;
+      zh = planter_presentation::receipt(modernState, false);
+      CHECK(!planter::submit(planter::Action::Print, false, &zh));
+      settingsTestStateBody = modern; pollState();
+      CHECK(planter::submit(planter::Action::Print, false, &zh));
+      settingsTestStateBody = oldRaster; pollState(); workerOnce();
+      CHECK(settingsTestPosts.size() == 1);
+      CHECK(!strcmp(planter::snapshot().commandStatus, "not_sent"));
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"printer":{"enabled":true,"status":"recovery_required","text_format":"utf8-raster"}})";
+      pollState(); CHECK(!planter::submit(planter::Action::Print, false, &zh));
+      settingsTestStateBody = modern; pollState();
+      const String dailyState = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"printer":{"enabled":true,"status":"idle","text_format":"utf8-raster","daily_layout":"garden-daily-v2"}})";
+      settingsTestStateBody=dailyState;pollState();CHECK(planter::snapshot().printerDaily);
+      auto preview=planter_presentation::dailyReceipt(planter::snapshot(),false,2,[]{return 155U;});
+      CHECK(preview.daily.card==77 && preview.daily.reversed==1 && preview.daily.soil==-9999);
+      CHECK(planter::submit(planter::Action::Print,false,&preview));
+      preview.daily.card=0; // The queue owns the approved 78th card, not this mutation.
+      settingsTestPostHook = [&](const String& body){
+        StaticJsonDocument<1024> doc;CHECK(!deserializeJson(doc,body));
+        CHECK(!strcmp(doc["action"]|"","print_daily"));CHECK(!doc.containsKey("text"));
+        robo::DailyTicket decoded;CHECK(robo::readDaily(doc["daily"],decoded));
+        CHECK(decoded.card==77 && decoded.reversed==1 && decoded.species==2);
+        doc["daily"]["card"]=78;CHECK(!robo::readDaily(doc["daily"],decoded));
+        doc["daily"]["card"]=0;doc["daily"]["extra"]=1;CHECK(!robo::readDaily(doc["daily"],decoded));
+        settingsTestPostBody="{\"ok\":true,\"request_id\":\""+String(doc["request_id"]|"")+"\",\"status\":\"completed\"}";
+      };
+      workerOnce();CHECK(settingsTestPosts.size()==2);
+      CHECK(planter::submit(planter::Action::Print,false,&preview));
+      settingsTestStateBody=modern;pollState();workerOnce();CHECK(settingsTestPosts.size()==2);
+      CHECK(!strcmp(planter::snapshot().commandStatus,"not_sent"));
+      CHECK(!planter::submit(planter::Action::Print,false,&preview));
+      settingsTestGetCode = 401; pollState();
+      auto state = planter::snapshot();
+      CHECK(state.networkFailure == planter::NetworkFailure::Authentication && state.httpStatus == 401);
+      CHECK(!planter::fresh(state, millis()));
+      CHECK(!planter::submit(planter::Action::Print, false, &zh));
+      using planter_presentation::Link;
+      auto wifi = device_settings::wifiState();
+      CHECK(planter_presentation::link(state, wifi, millis()) == Link::Authentication);
+      wifi.planterNetwork = false; CHECK(planter_presentation::link(state, wifi, millis()) == Link::WrongNetwork);
+      wifi.phase = device_settings::WifiPhase::Idle; CHECK(planter_presentation::link(state, wifi, millis()) == Link::Offline);
+      settingsTestGetCode = 400; pollState();
+      state = planter::snapshot();
+      CHECK(state.httpStatus == 400 && state.networkFailure == planter::NetworkFailure::Http);
+      CHECK(planter_presentation::link(state, device_settings::wifiState(), millis()) == Link::NoResponse);
+      CHECK(!planter::submit(planter::Action::Print, false, &zh));
+      settingsTestGetCode = 200; pollState();
+      CHECK(planter::fresh(planter::snapshot(), millis()));
+      settingsTestNow += kStaleMs + 1;
+      CHECK(planter_presentation::link(planter::snapshot(), device_settings::wifiState(), millis()) == Link::Stale);
     } else {
       CHECK(planter::begin());
-      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"pump":{"enabled":true,"on":true},"light":{"enabled":true,"on":false},"printer":{"enabled":true,"status":"idle"}})";
+      settingsTestStateBody = R"({"schema_version":1,"device_id":"mock-planter","sample_age_ms":0,"pump":{"enabled":true,"on":true,"water_allowed":true},"light":{"enabled":true,"on":false},"printer":{"enabled":true,"status":"idle"}})";
       connectConfiguredNetwork();
       const auto initialNetwork = device_settings::networkRevision();
       CHECK(planter::submit(planter::Action::StopWater));

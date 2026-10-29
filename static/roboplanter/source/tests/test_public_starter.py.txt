@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+import re
 from pathlib import Path
 import tempfile
 import unittest
@@ -16,6 +17,26 @@ spec.loader.exec_module(starter)
 
 
 class PublicStarterTests(unittest.TestCase):
+    def test_firmware_local_header_dependencies_are_included(self):
+        files = set(starter.source_files())
+        optional = {"config.local.h", "local_config.h", "photos.local.h"}
+        for path in files:
+            if not path.is_relative_to(ROOT / "firmware") or path.suffix not in {".cpp", ".h"}:
+                continue
+            for include in re.findall(r'^\s*#include\s+"([^"]+)"', path.read_text(encoding="utf-8"), re.M):
+                for candidate in [path.parent / include, path.parent.parent / "include" / include]:
+                    candidate = candidate.resolve()
+                    if candidate.is_file():
+                        if candidate.name not in optional:
+                            self.assertIn(candidate, files, f"Missing dependency of {path.relative_to(ROOT)}")
+                        break
+
+    def test_core_runner_sources_are_included(self):
+        names = {p.relative_to(ROOT).as_posix() for p in starter.source_files()}
+        runner = (ROOT / "tools/test-core.ps1").read_text(encoding="utf-8")
+        for name in re.findall(r'tests\\core\\[A-Za-z0-9_]+\.cpp', runner):
+            self.assertIn(name.replace("\\", "/"), names)
+
     def test_archive_excludes_local_state_and_verifies_every_source_hash(self):
         with tempfile.TemporaryDirectory() as work:
             result = starter.package(Path(work) / "source.zip")
@@ -92,10 +113,15 @@ class PublicStarterTests(unittest.TestCase):
             sync(site, "main")
             self.assertFalse(old.exists())
             self.assertTrue((site / "static/roboplanter/source/firmware/xiao/src/main.cpp.txt").exists())
+            for prefix in ["docs", "i18n/zh-Hans/docusaurus-plugin-content-docs/current"]:
+                for slug in ["hardware-wiring", "yoyo-companion", "daily-ticket"]:
+                    self.assertTrue((site / prefix / "projects/2026/roboplanter" / (slug + ".md")).is_file())
             download = site / "static/roboplanter/downloads/roboplanter-honor-skill.zip"
             with zipfile.ZipFile(download) as skill:
                 self.assertEqual(skill.namelist(), ["SKILL.md", "references/ble-contract.md", "references/acceptance.md"])
-                self.assertIn(b"S|probe|soil", skill.read("SKILL.md"))
+                self.assertIn(b"V|S|desk", skill.read("SKILL.md"))
+                self.assertIn(b"requires_local_pairing", skill.read("SKILL.md"))
+                self.assertNotIn(b"S|probe|soil", skill.read("SKILL.md"))
                 self.assertNotIn(b"Q|", skill.read("SKILL.md"))
             published = json.loads((download.parent / "manifest.json").read_text())
             self.assertEqual(published["honor_skill"]["sha256"], hashlib.sha256(download.read_bytes()).hexdigest())
