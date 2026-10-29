@@ -10,7 +10,7 @@
 
 ## YOYO 调用入口
 
-主交互路径为 **YOYO 独立 Skill → 官方 `ble_send_command` → XIAO BLE**；公开0.2.1草稿位于 [integrations/yoyo/skill-draft](../integrations/yoyo/skill-draft/README.md)，只允许固定无效凭据联通诊断，正式查询与控制未开放。另有用户授权的私有0.2.2单次土壤读取台架包，见下文。正式设备令牌的安全注入方式及手机工具的长写能力未验证，不能将正式令牌写入 Skill 正文或假定平台会替换未经文档确认的变量。
+主交互路径为 **YOYO 独立 Skill → 官方 `ble_send_command` → XIAO BLE**；当前0.4.0使用SC+MITM加密绑定和V协议，Skill正文不含HTTP令牌。手机实时土壤、温度和湿度查询已验证。旧0.2.x单次读取接口仅保留作历史说明；当前能力与真机边界见[YOYO日常交互](handbook/yoyo-companion.md)。
 
 Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/mcp/README.md) 和 [云 MCP/MQTT 网关](../integrations/cloud/README.md) 保留为辅助接入，均不是独立 Skill 主线的前置条件；A2A 不需要。MCP 的六个工具将请求映射到同一 HTTP 接口，服务端从环境读取固定地址与令牌。2026-10-26 已经通过电脑上的只读网关，实测公网 MCP → MQTT → XIAO → Indicator 土壤查询；电脑或网关停止时链路不可用，尚非持续遥测入库。云端所有写操作（包括停泵）仍禁用。详情见 [YOYO 接入说明](../integrations/yoyo/README.md)。
 
@@ -37,6 +37,24 @@ Indicator 独立使用下述 HTTP 协议。已有 [MCP 桥接](../integrations/m
 | `last_command.request_id`、`status`、`error` | 最近命令的关联标识、结果及错误 |
 
 未启用的数值返回 `null`，不能用零值替代。采样失效时可保留原始 ADC 供诊断，但客户端必须依据 `valid` 和采样年龄判断；未标定的湿度百分比为 `null`。打印机串口发送完成只代表字节交给串口，不代表纸张实际打印完成；实际纸尽、过热和完成反馈需按打印机型号增加。发送中断时本次结果为 `printer_write_failed`，状态进入 `recovery_required` 并拒绝新打印（`printer_recovery_required`）。检查后重启打印机与主控清除残留，不自动重放旧任务。详见 [打印教程](handbook/uart-printer.md)。
+
+### 传感器校准
+
+`GET /api/v1/state` 额外返回 `calibration`：`schema:1`、`revision`、`writable`、`error`，以及 `dry`、`wet`、`full_mm`、`empty_mm`、`stop_mm`。未设参考值为 `-1`。它与 `soil.calibrated` / `water_tank.calibrated` 一同供客户端显示；不能仅因收到数值便认定已经标定。
+
+`POST /api/v1/calibration` 使用相同 `X-Device-Token` 鉴权和JSON类型，请求体不超过512字节。以下仅为格式示例，勿将示例数字写入实际设备：
+
+```json
+{"kind":"soil","revision":0,"reset":false,"dry":3000,"wet":1500}
+{"kind":"tank","revision":1,"reset":false,"full_mm":40,"empty_mm":300,"stop_mm":260}
+{"kind":"tank","revision":2,"reset":true}
+```
+
+每次读取最新修订号再提交；一次请求只修改一组，清除请求不能携带参考值。禁止多余字段、错误类型、负修订号。土壤值须0–4095、差至少64；水箱须20–3500mm，满水 < 停泵 < 空箱且各差至少10mm。界面先采五份稳定新数据，接口负责范围/顺序、版本和持久化校验，不能由数字校验证明用户实际放置正确。
+
+成功写入NVS并读回后返回 `200 {"ok":true,"revision":新修订号}`。修订冲突返回409 `calibration_conflict`；运行中泵拒绝保存为409 `pump_busy`；存储失败503 `calibration_save_failed` 并将运行时参考值置为未标定，避免重启前后保护不一致。保存不启动任何执行器。保存期间新浇水返回 `calibration_busy`；原有停泵任务仍可运行。网络响应丢失不自动重发，客户端通过后续状态的修订号和相同参考值确认结果。
+
+记录以单条带版本/校验值的NVS blob保存，正常断电和应用分区更新保留。损坏记录保持未标定；明确清除后的记录不会回退到编译期值。具体操作见[屏幕校准教程](handbook/sensor-calibration.md)。
 
 ### 可选的 Indicator 土壤上传
 

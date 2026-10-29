@@ -12,11 +12,11 @@ namespace {
 using device_settings::Language;
 using device_settings::WifiError;
 using device_settings::WifiPhase;
-enum class Page : uint8_t { Menu, Wifi, Password, About, Planter, Yoyo };
+enum class Page : uint8_t { Menu, Wifi, Password, About, Planter, Yoyo, Calibration, Soil, Tank, ResetCalibration };
 struct Rect { int16_t x, y, w, h; };
 constexpr Rect kChinese{24, 117, 208, 48}, kEnglish{248, 117, 208, 48};
 constexpr Rect kWifi{16, 181, 448, 76}, kPlanter{16, 394, 216, 54}, kAbout{248, 394, 216, 54};
-constexpr Rect kCompanion{24,332,432,60}, kPairPhone{24,174,432,54}, kAutoPrint{24,316,432,54};
+constexpr Rect kCompanion{24,332,208,60}, kCalibration{248,332,208,60}, kPairPhone{24,174,432,54}, kAutoPrint{24,316,432,54};
 constexpr Rect kPairedNetwork{24, 411, 208, 52}, kNetworkSettings{248, 411, 208, 52};
 constexpr Rect kMinus{24, 321, 56, 56}, kSlider{96, 321, 288, 56}, kPlus{400, 321, 56, 56};
 constexpr Rect kRefresh{16, 422, 100, 48}, kPrevious{124, 422, 64, 48};
@@ -241,7 +241,7 @@ void drawAbout(const ui_theme::Theme &t) {
   text(32, 269, tr("温湿度需要外接传感器", "Temperature / humidity need an external sensor"), t.muted, 16, 416);
   text(32, 312, tr("内置无源蜂鸣器，支持提示音", "Built-in passive buzzer for alert tones"), t.ink, 24, 416);
   text(32, 355, tr("其他 Wi-Fi 不等于已连接花盆", "Joining Wi-Fi does not connect the planter"), t.muted, 16, 416);
-  text(32, 389, tr("设置仅在本机生效", "Settings apply to this display"), t.muted, 16, 416);
+  text(32, 389, tr("校准数据另存于花盆主控", "Sensor calibration is saved on the planter"), t.muted, 16, 416);
 }
 void drawPlanter(const ui_theme::Theme &t, uint32_t now) {
   const auto wifi = device_settings::wifiState();
@@ -259,7 +259,8 @@ void drawPlanter(const ui_theme::Theme &t, uint32_t now) {
   char detail[64];
   snprintf(detail, sizeof(detail), "HTTP %d", static_cast<int>(state.httpStatus));
   text(24, 302, state.httpStatus ? detail : tr("尚未收到有效响应", "No verified response yet"), t.muted, 16);
-  button(kCompanion, tr("YOYO 与场景小票", "YOYO and scene receipts"), t, false, true, 24);
+  button(kCompanion, tr("YOYO 与场景小票", "YOYO / receipts"), t, false, true, 16);
+  button(kCalibration, tr("传感器校准", "Sensor calibration"), t, false, true, 16);
   button(kPairedNetwork, tr("连接配对网络", "Use paired Wi-Fi"), t, false, wifi.ready, 16);
   button(kNetworkSettings, tr("无线网络设置", "Wi-Fi settings"), t, false, true, 16);
 }
@@ -282,6 +283,8 @@ void drawYoyo(const ui_theme::Theme &t,uint32_t now) {
   text(24,392,tr("同一场景五分钟内仅打印一次","Same scene: at most once per five minutes"),t.muted,16);
   text(24,423,tr("关闭后仍可主动要求打印","Explicit print requests still work when off"),t.muted,16);
 }
+#include "calibration_ui.h"
+
 void brightness(uint8_t value) {
   indicator::setBrightness(value);
   settingsRejected = !device_settings::saveBrightness(indicator::brightness());
@@ -290,10 +293,14 @@ void brightness(uint8_t value) {
 
 bool isOpen() { return opened; }
 void open() { wipePassword(); opened = true; page = Page::Menu; settingsRejected = false; }
-void close() { wipePassword(); selectedSsid[0] = 0; opened = false; page = Page::Menu; }
+void close() { wipePassword(); calibrationCapture.cancel(); selectedSsid[0] = 0; opened = false; page = Page::Menu; }
 void back() {
   wipePassword();
+  calibrationCapture.cancel();
   if (page == Page::Menu) close();
+  else if (page == Page::ResetCalibration) page = calibrationSoil ? Page::Soil : Page::Tank;
+  else if (page == Page::Soil || page == Page::Tank) page = Page::Calibration;
+  else if (page == Page::Calibration) page = Page::Planter;
   else if(page==Page::Yoyo)page=Page::Planter;
   else if (page == Page::Password) { selectedSsid[0] = 0; page = Page::Wifi; }
   else page = Page::Menu;
@@ -305,6 +312,10 @@ const char *title() {
     case Page::About: return tr("关于设备", "About device");
     case Page::Yoyo: return tr("YOYO 伙伴", "YOYO companion");
     case Page::Planter: return tr("花盆连接", "Planter connection");
+    case Page::Calibration: return tr("传感器校准", "Sensor calibration");
+    case Page::Soil: return tr("土壤干湿校准", "Soil calibration");
+    case Page::Tank: return tr("水箱水位校准", "Tank calibration");
+    case Page::ResetCalibration: return tr("清除校准", "Reset calibration");
     default: return tr("设备设置", "Settings");
   }
 }
@@ -319,11 +330,15 @@ void draw(uint32_t now, uint8_t themeId) {
     case Page::About: drawAbout(t); break;
     case Page::Planter: drawPlanter(t, now); break;
     case Page::Yoyo: drawYoyo(t,now);break;
+    case Page::Calibration: drawCalibrationMenu(t, now); break;
+    case Page::Soil: case Page::Tank: drawCalibrationEditor(t, now); break;
+    case Page::ResetCalibration: drawCalibrationReset(t); break;
   }
 }
 bool handle(ui::Gesture gesture, const ui::TouchGate &touch, uint32_t now) {
   if (!opened) return false;
   if (gesture != ui::Gesture::Tap) return true;
+  if (handleCalibration(touch, now)) return true;
   if (page == Page::Menu) {
     if (tapped(kChinese, touch)) settingsRejected = !device_settings::setLanguage(Language::Chinese);
     else if (tapped(kEnglish, touch)) settingsRejected = !device_settings::setLanguage(Language::English);
@@ -341,6 +356,7 @@ bool handle(ui::Gesture gesture, const ui::TouchGate &touch, uint32_t now) {
     }
   } else if (page == Page::Planter) {
     if(tapped(kCompanion,touch))page=Page::Yoyo;
+    else if(tapped(kCalibration,touch))page=Page::Calibration;
     else if (tapped(kNetworkSettings, touch)) showWifi();
     else if (tapped(kPairedNetwork, touch) && device_settings::wifiState().ready) {
       if (device_settings::restoreDefaultWifi()) showWifi();

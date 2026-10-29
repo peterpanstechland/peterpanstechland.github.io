@@ -1,7 +1,7 @@
 ---
 title: "从零搭建荣耀 YOYO Skill"
 description: "图文讲解技能文件、导入配置、安全检测、手机安装和 BLE 逐层验收。"
-sidebar_position: 11
+sidebar_position: 12
 hide_title: true
 ---
 

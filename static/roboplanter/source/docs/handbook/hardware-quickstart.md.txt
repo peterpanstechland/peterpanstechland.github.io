@@ -286,7 +286,7 @@ export ROBOPLANTER_TOKEN
 
 土壤探头按3.3V供电，黄线接Indicator左侧Grove GPIO27；RP2040运行仓库的soil_uart.py，屏幕开启PLANTER_ENABLE_LOCAL_SOIL，XIAO开启ROBO_ENABLE_REMOTE_SOIL，并关闭ROBO_ENABLE_SOIL。内部UART和HTTP会把原始值汇总给XIAO。数据断线必须失效。
 
-在实际探头、基质和插入深度下采集干/湿参考，填入ROBO_SOIL_DRY_RAW与ROBO_SOIL_WET_RAW；两值必须在0–4095内且不相等。未标定时percent为空是正确结果。百分比只是相对干湿，不是体积含水率；本机尚未完成标定。
+在实际探头、基质和插入深度下，通过 **设置 → 花盆连接 → 传感器校准 → 土壤** 采集干/湿参考并保存到主控。两值必须在0–4095内，差至少64；具体步骤见[校准教程](sensor-calibration.md)。编译期的ROBO_SOIL_DRY_RAW/ROBO_SOIL_WET_RAW仅作为没有保存记录时的初始值。未标定时percent为空是正确结果。百分比只是相对干湿，不是体积含水率；本机尚未完成实际基质标定。
 
 ### 8.2 SEN54统一温湿度和空气感知
 

@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "controller.h"
+#include "calibration_json.h"
 #include "printer_receipt.h"
 #include "daily_receipt.h"
 #include "daily_json.h"
@@ -87,6 +88,10 @@ robo::BleSession bleSession;
 robo::BondedAccess bondAccess;
 BLESecurity bondSecurity;
 Preferences companionPrefs;
+Preferences calibrationPrefs;
+robo::SensorCalibration sensorCalibration;
+bool calibrationStorage = false;
+const char* calibrationStorageError = "";
 bool companionStorage=false;
 uint32_t pairPin=0;
 uint32_t pairConnections=0,pairRequests=0,pairNotifications=0;
@@ -428,7 +433,8 @@ robo::Result processCommand(const robo::Command& command) {
       const auto state=copySample();
       if(state.soilValid) {
         job.daily.raw=state.soil;
-        if(robo::calibrated(ROBO_SOIL_DRY_RAW,ROBO_SOIL_WET_RAW))job.daily.soil=lround(robo::soilPercent(state.soil,ROBO_SOIL_DRY_RAW,ROBO_SOIL_WET_RAW));
+        Lock guard(coreMutex);
+        if(sensorCalibration.soilValid())job.daily.soil=lround(robo::soilPercent(state.soil,sensorCalibration.dry,sensorCalibration.wet));
       }
       if(state.environmentValid){job.daily.temperature=lround(state.temperature*10);job.daily.humidity=lround(state.humidity);}
     }
@@ -450,6 +456,10 @@ void resultJson(JsonDocument& document, const robo::Result& result) {
 
 void stateJson(JsonDocument& document) {
   const Sample current = copySample();
+  robo::SensorCalibration saved;
+  bool writable;
+  const char* storageError;
+  { Lock guard(coreMutex); saved = sensorCalibration; writable = calibrationStorage; storageError = calibrationStorageError; }
   const uint32_t now = millis();
   document["schema_version"] = 1;
   document["device_id"] = deviceId;
@@ -457,7 +467,7 @@ void stateJson(JsonDocument& document) {
   document["sample_age_ms"] = static_cast<uint32_t>(now - current.timestamp);
   JsonObject soil = document.createNestedObject("soil");
   if (current.soil >= 0) soil["raw"] = current.soil; else soil["raw"] = nullptr;
-  const bool calibrated = robo::calibrated(ROBO_SOIL_DRY_RAW, ROBO_SOIL_WET_RAW);
+  const bool calibrated = saved.soilValid();
   soil["valid"] = current.soilValid;
   soil["calibrated"] = calibrated;
   if(ROBO_ENABLE_REMOTE_SOIL) {
@@ -467,7 +477,7 @@ void stateJson(JsonDocument& document) {
     else soil["sample_age_ms"]=nullptr;
   }
   if (current.soilValid && calibrated)
-    soil["percent"] = robo::soilPercent(current.soil, ROBO_SOIL_DRY_RAW, ROBO_SOIL_WET_RAW);
+    soil["percent"] = robo::soilPercent(current.soil, saved.dry, saved.wet);
   else soil["percent"] = nullptr;
   JsonObject air = document.createNestedObject("air");
   if (current.air >= 0) air["raw"] = current.air; else air["raw"] = nullptr;
@@ -483,7 +493,12 @@ void stateJson(JsonDocument& document) {
     if (current.sen54Valid && std::isfinite(values[i])) sen[keys[i]] = values[i];
     else sen[keys[i]] = nullptr;
   }
-  const auto calibration = controlConfig().tankCalibration;
+  JsonObject settings = document.createNestedObject("calibration");
+  settings["schema"] = 1; settings["revision"] = saved.revision;
+  settings["writable"] = writable; settings["error"] = storageError;
+  settings["dry"] = saved.dry; settings["wet"] = saved.wet;
+  settings["full_mm"] = saved.tank.fullMm; settings["empty_mm"] = saved.tank.emptyMm; settings["stop_mm"] = saved.tank.stopMm;
+  const auto calibration = saved.tank;
   JsonObject tank = document.createNestedObject("water_tank");
   tank["enabled"] = bool(ROBO_ENABLE_ULTRASONIC);
   tank["valid"] = current.tankMm >= 20;
@@ -594,6 +609,64 @@ bool jsonString(JsonVariantConst value, std::string& destination) {
   JsonString text = value.as<JsonString>();
   destination.assign(text.c_str(), text.size());
   return destination.find('\0') == std::string::npos;
+}
+
+void loadSensorCalibration() {
+  calibrationStorage = calibrationPrefs.begin("rp-calibration", false);
+  if (!calibrationStorage) calibrationStorageError = "storage_unavailable";
+  else if (calibrationPrefs.isKey("values")) {
+    robo::CalibrationRecord record;
+    if (calibrationPrefs.getBytesLength("values") != sizeof(record) ||
+        calibrationPrefs.getBytes("values", &record, sizeof(record)) != sizeof(record) ||
+        !robo::decodeCalibration(record, sensorCalibration)) calibrationStorageError = "calibration_corrupt";
+  } else {
+    // Migrate valid build-time endpoints only on the first boot. A saved reset
+    // is a real all-unset record and must not resurrect build-time values.
+    sensorCalibration.dry = ROBO_SOIL_DRY_RAW; sensorCalibration.wet = ROBO_SOIL_WET_RAW;
+    sensorCalibration.tank = controlConfig().tankCalibration;
+    if (!sensorCalibration.soilValid()) sensorCalibration.dry = sensorCalibration.wet = -1;
+    if (!sensorCalibration.tankValid()) sensorCalibration.tank = robo::TankCalibration();
+  }
+  controller.finishCalibration(sensorCalibration.tank);
+}
+
+void httpCalibration() {
+  if (!httpAuthorized()) return;
+  if (http.header("Content-Type").indexOf("application/json") != 0) { sendError(415, "content_type_required"); return; }
+  const String body = http.arg("plain");
+  if (!body.length() || body.length() > MaxHttpBytes) { sendError(413, "body_size_invalid"); return; }
+  StaticJsonDocument<512> input;
+  robo::CalibrationEdit edit;
+  if (deserializeJson(input, body) || !robo::parseCalibrationEdit(input.as<JsonVariantConst>(), edit)) {
+    sendError(400, "invalid_calibration_payload"); return;
+  }
+  robo::SensorCalibration next;
+  const char* error = "";
+  {
+    Lock guard(coreMutex);
+    if (!calibrationStorage) error = "storage_unavailable";
+    else error = robo::applyCalibration(sensorCalibration, edit, next);
+    if (!*error && !controller.beginCalibration()) error = "pump_busy";
+  }
+  if (*error) { sendError(409, error); return; }
+  // Flash writes run outside the control lock. Water requests are blocked
+  // during this transaction; the independent deadline task stays responsive.
+  const bool saved = robo::saveCalibration(calibrationPrefs, next);
+  {
+    Lock guard(coreMutex);
+    if (saved) { sensorCalibration = next; calibrationStorageError = ""; }
+    else {
+      // An unverifiable NVS write must not leave water protection using values
+      // that disagree with the next boot. Fail closed until storage recovers.
+      sensorCalibration = robo::SensorCalibration();
+      calibrationStorage = false; calibrationStorageError = "calibration_save_failed";
+    }
+    controller.finishCalibration(sensorCalibration.tank);
+  }
+  if (!saved) { sendError(503, "calibration_save_failed"); return; }
+  StaticJsonDocument<128> output;
+  output["ok"] = true; output["revision"] = next.revision;
+  sendJson(200, output);
 }
 
 void httpSoil() {
@@ -787,10 +860,12 @@ std::string bleQuery(const std::string& field) {
     return "K:"+raw+":"+temp+":"+hum;
   }
   if (field == "soil") {
-    const bool calibrated = robo::calibrated(ROBO_SOIL_DRY_RAW, ROBO_SOIL_WET_RAW);
+    robo::SensorCalibration saved;
+    { Lock guard(coreMutex); saved = sensorCalibration; }
+    const bool calibrated = saved.soilValid();
     const std::string raw = current.soil >= 0 ? std::to_string(current.soil) : "x";
     const std::string percent = current.soilValid && calibrated ?
-      std::to_string(static_cast<int>(lround(robo::soilPercent(current.soil, ROBO_SOIL_DRY_RAW, ROBO_SOIL_WET_RAW)))) : "x";
+      std::to_string(static_cast<int>(lround(robo::soilPercent(current.soil, saved.dry, saved.wet)))) : "x";
     return "S:" + raw + ":" + percent + ":" + (current.soilValid ? "1" : "0") + ":" + (calibrated ? "1" : "0");
   }
   if (field == "air" || field == "uv" || field == "ambient") {
@@ -1079,6 +1154,7 @@ void setup() {
   bleQueue = xQueueCreate(4, sizeof(BleJob));
   if (!coreMutex || !sensorMutex || !lightMutex || !bleMutex || !printQueue || !bleQueue)
     failClosed("Startup failed: task resources unavailable");
+  loadSensorCalibration();
   if (xTaskCreate(pumpTask, "pump-deadline", 3072, nullptr, 10, nullptr) != pdPASS)
     failClosed("Startup failed: pump deadline task unavailable");
 
@@ -1133,6 +1209,7 @@ void setup() {
     sendJson(200, output);
   });
   http.on("/api/v1/command", HTTP_POST, httpCommand);
+  http.on("/api/v1/calibration", HTTP_POST, httpCalibration);
   http.on("/api/v1/sensors/soil", HTTP_POST, httpSoil);
   http.on("/api/v1/diagnostic-session", HTTP_POST, httpDiagnosticSession);
   http.on("/api/v1/result", HTTP_GET, httpResult);

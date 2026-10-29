@@ -67,15 +67,15 @@ export const routes=[
   },
   {
     id:'pump',board:'xiao',port:'SERVO1',title:'Grove Relay v1.2',kind:'pump',protocol:'GPIO42 / 高电平吸合',
-    status:'空载已通过 · 泵未接',line:'“先让继电器点头，水箱做好再浇。”',
+    status:'12V / 150mA泵已接 · 待水箱',line:'“水箱做好、校准完成，再测试浇水。”',
     address:'J1 pin1 · D15 / GPIO42 → Relay SIG',
-    pins:[['power','已确认的3.3–5V','Relay VCC'],['ground','公共 GND','Relay GND'],['signal','GPIO42 / J1 pin1','Relay SIG'],['unused','两颗负载端子','当前保持空着']],
+    pins:[['power','已确认的3.3–5V','Relay VCC'],['ground','公共 GND','Relay GND'],['signal','GPIO42 / J1 pin1','Relay SIG'],['power','两颗常开负载端子','独立12V泵回路']],
     steps:[
-      ['负载端保持空着','模块电源按v1.2规格接3.3–5V并共地。当前继电器的两颗螺丝端子不接12V泵。'],
+      ['独立12V负载供电','用户确认泵已接、铭牌150mA。12V正极经继电器常开触点接泵正极，泵负极接12V负极，12V不接Grove电源脚。'],
       ['控制改到 SERVO1','SIG接D15/GPIO42，高电平吸合。SERVO4/GPIO7已经用于打印，M2/J9也不使用。'],
-      ['空载通过，等待实体水箱','已听到300ms吸合后释放。泵保持禁用，待水箱、泵电流、触点/电源能力和保护确认，再做距离标定与短脉冲测试。'],
+      ['等待实体水箱与校准','空载吸合已验证，泵保持禁用。水箱做好后从Indicator设置采满水、缺水和空箱距离；另需检查启动电流、保护与进水条件，再进行负载测试。'],
     ],
-    caution:'图中仅画继电器与空端子，不表示泵已接入。软件水位保护不能代替负载试验。',doc,
+    caution:'接线已确认不等于带水运行已通过；校准工具不会启动水泵，软件保护不能代替负载试验。',doc,
   },
   {
     id:'air',board:'xiao',port:'IIC2',title:'共用 I²C 预留口',kind:'reserved',reserved:true,protocol:'同 GPIO5 / GPIO6',

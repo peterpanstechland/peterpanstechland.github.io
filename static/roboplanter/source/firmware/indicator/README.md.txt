@@ -14,6 +14,8 @@ For shared-LAN testing, configure both boards for the same actual 2.4GHz network
 
 ## Build and configuration
 
+The settings menu now includes **Planter connection → Sensor calibration**: capture five stable soil dry/wet or tank full/low-stop/empty readings, review and explicitly save/reset. Values live on the XIAO in a versioned NVS record, survive power cycles and drive HTTP/BLE/receipt values and the tank interlock together. The screen never actuates the pump during calibration. See the [calibration guide](../../docs/handbook/sensor-calibration.md). An assembled tank and actual medium calibration remain pending on this bench.
+
 1. Copy `include/local_config.example.h` to `include/local_config.h` (ignored by Git).
 2. Set the actual shared-router SSID (or optional XIAO SoftAP), password, XIAO origin and matching device token. Defaults are `RoboPlanter-XXXX`, `planter-demo`, `http://192.168.4.1`, `change-me-before-use`. The placeholder SSID is intentionally not automatically discovered. The default token is for setup only; change both boards together.
 3. Build from this directory with `pio run -e sensecap_indicator`. Building does not upload firmware.

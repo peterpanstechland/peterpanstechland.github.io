@@ -1,7 +1,7 @@
 ---
 title: "UART 小票打印机"
 description: "D8 接线、中英文点阵、可选切纸、屏幕配对与冷启动检查。"
-sidebar_position: 10
+sidebar_position: 11
 hide_title: true
 ---
 

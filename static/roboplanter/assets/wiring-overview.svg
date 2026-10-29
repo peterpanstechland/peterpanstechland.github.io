@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1020" role="img" aria-labelledby="title desc">
-<title id="title">RoboPlanter 当前硬件连接 · 2026-10-29</title><desc id="desc">手机加密BLE连接XIAO；Indicator通过同一局域网HTTP连接XIAO，土壤接Indicator。SEN54独立5V。继电器空载，水泵未接。</desc>
+<title id="title">RoboPlanter 当前硬件连接 · 2026-10-29</title><desc id="desc">手机加密BLE连接XIAO；Indicator通过同一局域网HTTP连接XIAO，土壤接Indicator。SEN54独立5V。用户确认12V/150mA泵已接，水箱未完成，泵禁用。</desc>
 <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0 8 4 0 8" fill="#51795e"/></marker></defs>
 <style>text{font-family:'Microsoft YaHei','Noto Sans CJK SC',sans-serif;fill:#20372a}.h{font-size:25px;font-weight:700}.t{font-size:18px}.s{font-size:16px;fill:#4b6053}.wire{fill:none;stroke:#51795e;stroke-width:3;marker-end:url(#arrow)}.card{fill:#fffdf6;stroke:#b4c5b1;stroke-width:1.5}</style>
 <rect width="1280" height="1020" rx="28" fill="#f3f1e6"/>
@@ -33,7 +33,7 @@
 <text class="h" x="555" y="495">SERVO1 / J1 → 继电器</text>
 <text class="t" x="555" y="527">pin1 D15 / GPIO42 → SIG</text>
 <text class="t" x="555" y="554">模块 3.3–5V / 共地；白线空</text>
-<text class="t" x="555" y="581">两颗负载端子保持空着</text>
+<text class="t" x="555" y="581">12V / 150mA 泵已接 · 待水箱</text>
 <rect class="card" x="895" y="461" width="345" height="135" rx="16"/>
 <text class="h" x="915" y="495">SERVO2 / J5 → 超声波</text>
 <text class="t" x="915" y="527">pin1 D9 / GPIO8 → 单 SIG</text>
