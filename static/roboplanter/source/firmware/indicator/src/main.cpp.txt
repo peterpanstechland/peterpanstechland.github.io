@@ -11,6 +11,8 @@
 #include "indicator_board.h"
 #include "lcd_diagnostics.h"
 #include "planter_client.h"
+#include "planter_presentation.h"
+#include "receipt_preview.h"
 #include "ui_model.h"
 #include "ui_photos.h"
 #include "ui_text.h"
@@ -21,7 +23,10 @@ using planter::State;
 using ui_theme::Icon;
 bool displayReady=false, clientReady=false, controlsOpen=false, prefsReady=false;
 bool confirmOpen=false;
+bool focusSound=false;
 planter::Action confirmAction=planter::Action::Water;
+planter::PrintReceipt confirmReceipt;
+uint8_t dailyPreviewPage=0;
 ui::Model model;
 ui::TouchGate touch;
 Preferences preferences;
@@ -35,6 +40,7 @@ constexpr planter::Action kActions[]={planter::Action::Water,planter::Action::St
 constexpr Rect kConfirmCancel{24,374,142,52}, kConfirmGo{178,374,278,52};
 constexpr Rect kTimerPresets[]={{24,314,136,44},{172,314,136,44},{320,314,136,44}};
 constexpr Rect kTimerToggle{24,374,278,52}, kTimerReset{316,374,140,52};
+constexpr Rect kFocusSound{328,78,128,30};
 constexpr Rect kPhotoPrevious{24,391,64,44}, kPhotoNext{392,391,64,44};
 const char *tr(const char *zh,const char *en) { return device_settings::getLanguage()==device_settings::Language::English?en:zh; }
 const ui_theme::Theme &theme() { return ui_theme::get(model.theme()); }
@@ -161,20 +167,27 @@ void infoRow(int y,Icon symbol,const char *name,const char *value) {
 }
 void infoPage(const State &s,uint32_t now) {
   title(tr("工位信息","Desk notes"),tr("工位情报 · 来自花盆的消息","A note from your planter."));
-  auto &g=indicator::display();g.fillRoundRect(24,145,432,191,12,theme().card);
+  auto &g=indicator::display();g.fillRoundRect(24,145,432,255,12,theme().card);
   const bool fresh=planter::fresh(s,now);char buffer[80];
   infoRow(161,Icon::Wifi,tr("连接","Connection"),connection(s,now));
   g.drawFastHLine(40,190,400,0xD6B9);
   if(s.received&&s.ageKnown)snprintf(buffer,sizeof(buffer),"%lus",static_cast<unsigned long>((static_cast<uint64_t>(now-s.receivedMs)+s.sampleAgeMs)/1000));else strlcpy(buffer,tr("未知","Unknown"),sizeof(buffer));
   infoRow(202,Icon::Clock,tr("采样距今","Sample age"),buffer);
-  if(s.airRaw.valid)snprintf(buffer,sizeof(buffer),tr("%.0f 原始值%s","%.0f raw%s"),s.airRaw.value,fresh?"":tr(" / 旧值"," / old"));else strlcpy(buffer,tr("暂无有效值","No reading"),sizeof(buffer));
-  infoRow(244,Icon::Leaf,tr("空气原始值","Air raw"),buffer);
-  if(s.uvRaw.valid)snprintf(buffer,sizeof(buffer),tr("%.0f 原始值%s","%.0f raw%s"),s.uvRaw.value,fresh?"":tr(" / 旧值"," / old"));else strlcpy(buffer,tr("暂无有效值","No reading"),sizeof(buffer));
-  infoRow(286,Icon::Light,tr("紫外原始值","UV raw"),buffer);
-  g.fillRoundRect(24,348,432,78,12,theme().surface);
-  icon(Icon::Yoyo,40,365,34,theme().second);
-  label(88,359,tr("YOYO 在手机上陪你","Use YOYO on your phone"),theme().ink);
-  label(88,386,tr("原始数值不等于空气质量或光照","Raw values are not air or light ratings."),theme().muted);
+  if(s.sen54Enabled) {
+    if(s.pm25.valid)snprintf(buffer,sizeof(buffer),"%.1f ug/m3%s",s.pm25.value,fresh?"":tr(" / 旧值"," / old"));else strlcpy(buffer,tr("等待传感器","No sensor data"),sizeof(buffer));
+  } else if(s.airRaw.valid)snprintf(buffer,sizeof(buffer),tr("%.0f 原始值%s","%.0f raw%s"),s.airRaw.value,fresh?"":tr(" / 旧值"," / old"));else strlcpy(buffer,tr("暂无有效值","No reading"),sizeof(buffer));
+  infoRow(240,Icon::Leaf,s.sen54Enabled?"PM2.5":tr("空气原始值","Air raw"),buffer);
+  const auto &lightReading=s.ambientLightEnabled?s.ambientLightRaw:s.uvRaw;
+  if(lightReading.valid)snprintf(buffer,sizeof(buffer),tr("%.0f 原始值%s","%.0f raw%s"),lightReading.value,fresh?"":tr(" / 旧值"," / old"));else strlcpy(buffer,tr("暂无有效值","No reading"),sizeof(buffer));
+  infoRow(278,Icon::Light,s.ambientLightEnabled?tr("环境光","Ambient"):tr("紫外原始值","UV raw"),buffer);
+  if(s.vocIndex.valid)snprintf(buffer,sizeof(buffer),"%.0f%s",s.vocIndex.value,fresh?"":tr(" / 旧值"," / old"));else strlcpy(buffer,tr("暂无有效值","No reading"),sizeof(buffer));
+  infoRow(316,Icon::Leaf,tr("VOC 指数","VOC index"),buffer);
+  if(s.tankDistance.valid) {
+    if(s.tankLevel.valid)snprintf(buffer,sizeof(buffer),"%.0f%% / %.0f mm%s",s.tankLevel.value,s.tankDistance.value,fresh?"":tr(" / 旧值"," / old"));
+    else snprintf(buffer,sizeof(buffer),tr("%.0f mm / 待校准","%.0f mm / calibrate"),s.tankDistance.value);
+  } else strlcpy(buffer,tr("暂无有效值","No reading"),sizeof(buffer));
+  infoRow(354,Icon::Water,tr("水箱液位","Tank level"),buffer);
+  label(40,412,tr("YOYO 在手机上陪你","Use YOYO on your phone"),theme().muted);
   statusStrip(s,now);
 }
 void photosPage(const State &s,uint32_t now) {
@@ -199,8 +212,10 @@ void photosPage(const State &s,uint32_t now) {
   statusStrip(s,now);
 }
 void focusPage(const State &s,uint32_t now) {
+  // Sound is opt-in and persists locally; the phone remains the speech output.
   auto &timer=model.timer();auto &g=indicator::display();
   title(tr("专注时光","Time to focus"),timer.done()?tr("这一段结束啦，伸个懒腰吧","All done. Time for a stretch."):timer.running()?tr("正在专注 · 换时长请先重置","Focusing / reset to change duration"):timer.phase()==ui::TimerPhase::Paused?tr("暂停一下 · 换时长请先重置","Paused / reset to change duration"):tr("专注与休息，都值得认真对待","Make room for both focus and rest."));
+  pill(kFocusSound,focusSound?tr("提示音 开","Sound on"):tr("提示音 关","Sound off"),theme().surface,theme().ink);
   g.fillRoundRect(24,145,432,153,12,theme().card);
   icon(Icon::Clock,43,164,22,theme().cardMuted);
   label(76,166,timer.running()?tr("正在专注","FOCUS IN PROGRESS"):timer.done()?tr("做得很好","WELL DONE"):timer.phase()==ui::TimerPhase::Paused?tr("慢慢来","TAKE YOUR TIME"):tr("一次只做一件事","ONE THING AT A TIME"),theme().cardMuted);
@@ -215,7 +230,8 @@ void focusPage(const State &s,uint32_t now) {
   const char *presets[]={tr("专注 25 分","Focus 25m"),tr("短歇 5 分","Break 5m"),tr("长歇 15 分","Rest 15m")};
   const bool canChange=timer.phase()==ui::TimerPhase::Ready || timer.done();
   for(uint8_t i=0;i<3;++i) {
-    const bool selected=static_cast<uint8_t>(timer.preset())==i;
+    const uint32_t durations[]={1500000U,300000U,900000U};
+    const bool selected=timer.durationMs()==durations[i];
     pill(kTimerPresets[i],presets[i],selected?theme().second:theme().surface,selected?contrastInk(theme().second):canChange?theme().ink:theme().muted);
   }
   pill(kTimerToggle,timer.running()?tr("暂停一下","Pause"):timer.phase()==ui::TimerPhase::Paused?tr("继续计时","Resume"):timer.done()?tr("再来一段","Start again"):tr("开始计时","Start focus"),theme().accent,contrastInk(theme().accent));
@@ -225,11 +241,29 @@ void focusPage(const State &s,uint32_t now) {
 bool enabled(planter::Action action,const State &s,uint32_t now) {
   const bool available=planter::fresh(s,now) && !s.commandBlocked && clientReady;
   switch(action) {
-    case planter::Action::Water:return available && s.pumpEnabled && !s.pumpOn;
+    case planter::Action::Water:return available && s.pumpEnabled && s.waterAllowed && !s.pumpOn;
     case planter::Action::StopWater:return clientReady && s.wifi && s.pumpEnabled;
     case planter::Action::Light:return available && s.lightEnabled;
-    case planter::Action::Print:return available && s.printerEnabled;
+    case planter::Action::Print:return available && s.printerEnabled && strcmp(s.printerStatus,"recovery_required");
+    default:return available && s.focusKnown;
   }return false;
+}
+const char *disabledReason(planter::Action action,const State &s,uint32_t now) {
+  const auto link=planter_presentation::link(s,device_settings::wifiState(),now,clientReady);
+  if(link!=planter_presentation::Link::Ready)
+    return planter_presentation::linkText(link,device_settings::getLanguage()==device_settings::Language::English);
+  if(action==planter::Action::Print && !strcmp(s.printerStatus,"recovery_required"))
+    return tr("请重启打印机和主控","Restart printer + board");
+  if(s.uncertain)return tr("请先检查上次操作","Check previous action");
+  if(s.commandBlocked)return tr("正在执行上次操作","Previous action busy");
+  if(action==planter::Action::Print)return tr("打印机尚未启用","Printer disabled");
+  if(action==planter::Action::Light)return tr("灯带尚未启用","Light disabled");
+  if(action==planter::Action::Water && s.pumpEnabled && !s.waterAllowed) {
+    if(!strcmp(s.waterBlockReason,"tank_uncalibrated"))return tr("请先校准水位","Calibrate tank first");
+    if(!strcmp(s.waterBlockReason,"tank_low"))return tr("水位低，请加水","Tank low / refill");
+    return tr("请检查水位传感器","Check tank sensor");
+  }
+  return s.pumpOn?tr("水泵正在运行","Pump is running"):tr("水泵尚未启用","Pump disabled");
 }
 const char *commandLabel(const State &s) {
   if(s.uncertain)return tr("结果未知 · 请先检查花盆","Unknown / check planter first");
@@ -241,7 +275,10 @@ const char *commandLabel(const State &s) {
 }
 void confirmPage(const State &s,uint32_t now) {
   auto &g=indicator::display();const bool water=confirmAction==planter::Action::Water;
-  title(water?tr("确认浇水","Water plant?"):tr("打印便签","Print a note"),water?tr("浇水前，先看看土壤和接水盘","Check the soil and tray first."):tr("当前小票使用英文打印","Preview of the English receipt."));
+  title(water?tr("确认浇水","Water plant?"):tr("打印便签","Print a note"),water?tr("浇水前，先看看土壤和接水盘","Check the soil and tray first."):
+    confirmReceipt.isDaily?"":
+    confirmReceipt.requiresRaster?tr("预览与实际发送文字一致","This text will be sent to the printer."):
+    tr("英文便签 · 兼容旧版打印固件","This text will be sent to the printer."));
   if(water) {
     ui_theme::face(g,model.theme(),132,229,76,(now%5300)<160,now);
     g.fillRoundRect(244,145,212,156,12,theme().card);
@@ -250,19 +287,34 @@ void confirmPage(const State &s,uint32_t now) {
     label(264,210,duration,theme().cardInk,3);
     label(260,270,tr("按时长控制，不估算水量","Timed pulse, not volume"),theme().cardMuted);
     centered(326,tr("确认后发送一次浇水指令","One watering request on confirmation."),theme().ink);
+  } else if (confirmReceipt.isDaily) {
+    receipt_preview::drawDaily(g,confirmReceipt.daily,dailyPreviewPage,48,110,theme().card,theme().cardInk);
+    char page[64];snprintf(page,sizeof(page),tr("滑动 %u/%u","Swipe %u/%u"),dailyPreviewPage+1,receipt_preview::DailyPreviewPages);
+    label(318,88,page,theme().muted);
+  } else if (confirmReceipt.layout32) {
+    receipt_preview::draw(g,confirmReceipt.text,54,142,372,204,theme().card,theme().cardInk);
+    centered(352,s.printerAutocut?tr("已启用自动切纸 · 请留意出纸口","Auto-cut enabled. Keep the outlet clear."):
+      tr("打印后请沿撕纸口取下","Tear off the receipt after printing."),theme().muted);
   } else {
     g.fillRect(54,148,372,192,theme().card);
     for(int x=54;x<426;x+=12) {g.fillTriangle(x,148,x+6,142,x+11,148,theme().card);g.fillTriangle(x,340,x+6,346,x+11,340,theme().card);}
-    icon(Icon::Print,76,168,26,theme().cardInk);label(119,174,"RoboPlanter",theme().cardInk,2);
-    for(int x=75;x<406;x+=12)g.drawFastHLine(x,212,6,theme().cardMuted);
-    label(76,232,"Manual garden check-in.",theme().cardInk);
-    label(76,265,"Observe your plant",theme().cardInk);
-    label(76,288,"before watering.",theme().cardInk);
-    centered(352,tr("小纸条，留给忙碌的自己","A little note for a busy day."),theme().muted);
+    char visible[sizeof(confirmReceipt.text)];memcpy(visible,confirmReceipt.text,sizeof(visible));
+    char *line=visible;unsigned row=0;
+    while(*line && row<6) {
+      char *next=strchr(line,'\n');if(next)*next=0;
+      ui_text::drawSized(g,76,row?202+(row-1)*25:167,line,theme().cardInk,row?16:24);
+      ++row;if(!next)break;line=next+1;
+    }
+    for(int x=75;x<406;x+=12)g.drawFastHLine(x,199,6,theme().cardMuted);
+    centered(352,s.printerAutocut?tr("已启用自动切纸 · 请留意出纸口","Auto-cut enabled. Keep the outlet clear."):
+      tr("打印后请沿撕纸口取下","Tear off the receipt after printing."),theme().muted);
   }
   pill(kConfirmCancel,tr("取消","Cancel"),theme().card,theme().cardInk);
-  const bool active=enabled(confirmAction,s,now);
-  pill(kConfirmGo,active?(water?tr("确认浇水","Water now"):tr("打印这张便签","Print note")):tr("当前不可操作","Unavailable"),active?theme().second:theme().surface,active?contrastInk(theme().second):theme().muted);
+  const bool changed=!water&&((confirmReceipt.requiresRaster&&!s.printerRaster)||
+    (confirmReceipt.layout32&&!s.printerLayout32)||(confirmReceipt.isDaily&&!s.printerDaily));
+  const bool active=enabled(confirmAction,s,now)&&!changed;
+  pill(kConfirmGo,active?(water?tr("确认浇水","Water now"):tr("打印这张便签","Print note")):
+    changed?tr("请重新打开预览","Reopen preview"):disabledReason(confirmAction,s,now),active?theme().second:theme().surface,active?contrastInk(theme().second):theme().muted);
   statusStrip(s,now);
 }
 void controlsPage(const State &s,uint32_t now) {
@@ -279,16 +331,16 @@ void controlsPage(const State &s,uint32_t now) {
     const uint16_t ink=active?contrastInk(fill):theme().cardMuted;
     g.fillRoundRect(r.x,r.y,r.w,r.h,12,fill);
     icon(symbols[i],r.x+14,r.y+15,24,ink);label(r.x+50,r.y+19,labels[i],ink);
-    const char *hint=active?(i==1?tr("网络停泵，非物理急停","Network stop only"):i==0||i==3?tr("点击查看确认页","Tap to review first"):tr("抬手后发送一次","One request on release")):tr("当前不可操作","Unavailable");
-    if(i==0&&s.pumpOn)hint=planter::fresh(s,now)&&s.pumpKnown?tr("泵正在运行","Pump is running"):tr("上次状态：泵运行","Last state: running");
-    if(i==3&&s.printerKnown&&!s.printerEnabled)hint=tr("打印机尚未启用","Printer disabled");
-    label(r.x+14,r.y+55,hint,ink);
+    const char *hint=active?(i==1?tr("网络停泵，非物理急停","Network stop only"):i==0||i==3?tr("点击查看确认页","Tap to review first"):tr("抬手后发送一次","One request on release")):disabledReason(kActions[i],s,now);
+    clipped(r.x+14,r.y+55,hint,r.w-28,ink);
   }
   g.fillRoundRect(24,340,432,86,12,theme().surface);
   label(38,352,commandLabel(s),s.uncertain?kWarning:theme().ink);
   if(s.uncertain)pill({24,379,432,44},tr("已现场检查 · 解除操作锁定","Checked on site / unlock actions"),theme().card,theme().cardInk,true);
   else {
-    clipped(38,383,s.commandError[0]?tr("操作未完成，请检查设备连接",s.commandError):tr("软件完成不等于已出水或已出纸","Software result, not physical proof."),402,theme().muted);
+    const bool connected=planter_presentation::link(s,device_settings::wifiState(),now,clientReady)==planter_presentation::Link::Ready;
+    clipped(38,383,!connected?tr("打开设置中的花盆连接查看原因","Open Settings > Planter connection"):
+      s.commandError[0]?tr("操作未完成，请检查设备连接",s.commandError):tr("软件完成不等于已出水或已出纸","Software result, not physical proof."),402,theme().muted);
     if(s.pumpKnown&&s.pumpOn&&planter::fresh(s,now)) {
       // Decorative motion only; no guessed amount, delivery or completion rate.
       for(int i=0;i<7;++i)g.fillRect(40+i*56,412,30,4,((now/120+i)%7)<3?kAqua:theme().muted);
@@ -337,7 +389,10 @@ void tickCompanion(uint32_t now) {
   const bool running=model.timer().running();
   const auto preset=model.timer().preset();
   model.timer().tick(now);
-  if(running && model.timer().done() && preset==ui::Preset::Focus25)garden_ui::focusCompleted(now);
+  if(running && model.timer().done()) {
+    if(preset==ui::Preset::Focus25)garden_ui::focusCompleted(now);
+    if(focusSound)local_soil::notifyFocusComplete();
+  }
 }
 void handle(ui::Gesture gesture,const State &s,uint32_t now) {
   tickCompanion(now);
@@ -361,7 +416,13 @@ void handle(ui::Gesture gesture,const State &s,uint32_t now) {
   }
   if(gesture!=ui::Gesture::Tap) {
     if(model.themesOpen())return;
-    if(confirmOpen){confirmOpen=false;return;}
+    if(confirmOpen){
+      if(confirmReceipt.isDaily&&confirmAction==planter::Action::Print){
+        if(gesture==ui::Gesture::SwipeLeft&&dailyPreviewPage+1<receipt_preview::DailyPreviewPages)++dailyPreviewPage;
+        if(gesture==ui::Gesture::SwipeRight&&dailyPreviewPage>0)--dailyPreviewPage;
+      }else confirmOpen=false;
+      return;
+    }
     if(controlsOpen){controlsOpen=false;return;}
     model.handleGesture(gesture);return;
   }
@@ -378,14 +439,22 @@ void handle(ui::Gesture gesture,const State &s,uint32_t now) {
     if(confirmOpen) {
       if(tapped(kConfirmCancel))confirmOpen=false;
       else if(tapped(kConfirmGo)&&enabled(confirmAction,s,now)) {
-        if(planter::submit(confirmAction))confirmOpen=false;
+        if(planter::submit(confirmAction,false,confirmAction==planter::Action::Print?&confirmReceipt:nullptr))confirmOpen=false;
       }
       return;
     }
     if(tapped(kDismiss)){controlsOpen=false;return;}
     if(s.uncertain&&tapped({24,379,432,44})){planter::acknowledgeUncertain();return;}
     for(uint8_t i=0;i<4;++i)if(tapped(kHardware[i])&&enabled(kActions[i],s,now)) {
-      if(kActions[i]==planter::Action::Water||kActions[i]==planter::Action::Print){confirmAction=kActions[i];confirmOpen=true;}
+      if(kActions[i]==planter::Action::Water||kActions[i]==planter::Action::Print){
+        confirmAction=kActions[i];
+        if(confirmAction==planter::Action::Print){
+          bool english=device_settings::getLanguage()==device_settings::Language::English;
+          confirmReceipt=s.printerDaily?planter_presentation::dailyReceipt(s,english,static_cast<int>(garden_store::model().selected()),[]{return esp_random();}):planter_presentation::receipt(s,english);
+          dailyPreviewPage=0;
+        }
+        confirmOpen=true;
+      }
       else planter::submit(kActions[i],!s.lightOn);
       return;
     }
@@ -403,7 +472,15 @@ void handle(ui::Gesture gesture,const State &s,uint32_t now) {
         else if(tapped(kPhotoNext))photoIndex=(photoIndex+1)%ui_photos::count();
       }break;
     case ui::Page::Focus:
+      if(tapped(kFocusSound)) {focusSound=!focusSound;if(prefsReady)preferences.putBool("focus-sound",focusSound);return;}
       for(uint8_t i=0;i<3;++i)if(tapped(kTimerPresets[i])) {model.timer().selectPreset(static_cast<ui::Preset>(i));return;}
+      if(s.focusKnown) {
+        if(tapped(kTimerToggle))planter::submit(model.timer().running()?planter::Action::FocusPause:
+          model.timer().phase()==ui::TimerPhase::Paused?planter::Action::FocusResume:planter::Action::FocusStart,
+          false,nullptr,model.timer().durationMs()/60000);
+        else if(tapped(kTimerReset))planter::submit(planter::Action::FocusReset);
+        break;
+      }
       if(tapped(kTimerToggle))model.timer().toggle(now);else if(tapped(kTimerReset))model.timer().reset();break;
   }
 }
@@ -415,6 +492,7 @@ void setup() {
   indicator::setBrightness(device_settings::getBrightness());
   prefsReady=preferences.begin("rp-ui",false);
   if(prefsReady)model.selectTheme(preferences.getUChar("theme",0)%ui_theme::kCount);
+  if(prefsReady)focusSound=preferences.getBool("focus-sound",false);
   const bool gardenReady=garden_store::begin(millis());
   Serial.printf("Indicator soil UART task=%s\n",local_soil::begin()?"ready-or-disabled":"failed");
   displayReady=indicator::begin();
@@ -440,6 +518,19 @@ void loop() {
   const ui::TouchInput mapped=input==indicator::TouchStatus::Down?ui::TouchInput::Down:input==indicator::TouchStatus::Up?ui::TouchInput::Up:ui::TouchInput::Invalid;
   const ui::Gesture gesture=touch.update(mapped,x,y,now);
   static uint32_t lastDraw=0;static bool first=true;const State state=planter::snapshot();
+  static bool focusSynced=false;static uint32_t focusRevision=0,focusUptime=0;
+  if(state.focusKnown && planter::fresh(state,now)) {
+    if(!focusSynced || state.focusRevision!=focusRevision || state.uptimeMs<focusUptime) {
+      uint32_t remaining=state.focusRemaining;
+      if(state.focusPhase==1){uint32_t elapsed=now-state.receivedMs;remaining=elapsed>=remaining?0:remaining-elapsed;}
+      const bool justFinished=model.timer().running() && state.focusPhase==3;
+      if(state.focusPhase==1 && !settings_ui::isOpen() && !controlsOpen && !garden_ui::isOpen())model.showFocus();
+      model.timer().synchronize(state.focusDuration,remaining,state.focusPhase,now);
+      if(justFinished && focusSound)local_soil::notifyFocusComplete();
+      focusSynced=true;focusRevision=state.focusRevision;
+    }
+    focusUptime=state.uptimeMs;
+  }
   if(gesture!=ui::Gesture::None)handle(gesture,state,now);
   const bool animated=!model.themesOpen() && !settings_ui::isOpen() &&
       (garden_ui::isOpen() || (!controlsOpen && (model.page()==ui::Page::Face || model.page()==ui::Page::Focus)) ||

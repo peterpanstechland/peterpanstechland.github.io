@@ -25,7 +25,7 @@ import httpx
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
-from bridge import Config, PlanterBridge
+from bridge import Config, PlanterBridge, valid_print_text
 from server import create_server
 
 TOKEN = "mock-only-token-12345678"
@@ -68,6 +68,9 @@ class BridgeTests(unittest.IsolatedAsyncioTestCase):
                 return httpx.Response(200, json={"ok": True, "request_id": "wrong", "status": "completed", "error": ""})
             if self.mode == "invalid_409":
                 return httpx.Response(409, json={"ok": True, "request_id": payload["request_id"], "status": "completed", "error": ""})
+            if self.mode == "legacy_print":
+                return httpx.Response(409, json={"ok": False, "request_id": payload["request_id"],
+                                               "status": "rejected", "error": "invalid_print_text"})
             rejected = self.mode == "reject"
             status = "rejected" if rejected else "accepted" if payload["action"] == "water" else "completed"
             return httpx.Response(409 if rejected else 202 if status == "accepted" else 200,
@@ -212,12 +215,66 @@ class BridgeTests(unittest.IsolatedAsyncioTestCase):
         for identity, action, args in [
             ("bad&url", "stop_water", {}), ("a", "water", {"duration_ms": True}),
             ("b", "water", {"duration_ms": 3001}), ("c", "light", {"on": "true"}),
-            ("d", "print", {"text": "\x1b@"}), ("e", "print", {"text": "中文"}),
+            ("d", "print", {"text": "\x1b@"}), ("e", "print", {"text": "中文🌱"}),
             ("f", "print", {"text": "x" * 161}), ("g", "stop_water", {"url": "http://other"}),
         ]:
             with self.subTest(action=action, args=args):
                 self.assertEqual((await self.bridge.act(identity, action, **args))["status"], "rejected")
         self.assertEqual(self.calls, [])
+
+    async def test_chinese_note_is_preserved_and_posted_once(self):
+        text = "工位花园 RoboPlanter\n薄荷：今天也要喝水。"
+        result = await self.bridge.act("chinese", "print", text=text)
+        self.assertEqual(result["status"], "completed")
+        self.assertEqual(json.loads(self.posts()[0].content),
+                         {"request_id": "chinese", "action": "print", "text": text})
+        self.assertEqual((await self.bridge.act("chinese", "print", text=text))["bridge_cached"], True)
+        self.assertEqual((await self.bridge.act("chinese", "print", text=text + "！"))["error"], "request_id_conflict")
+        self.assertEqual(len(self.posts()), 1)
+
+    async def test_print_utf8_byte_limits_and_controls_fail_before_network(self):
+        self.assertTrue(valid_print_text("中" * 53 + "!"))  # Exactly 160 UTF-8 bytes.
+        self.assertTrue(valid_print_text("x" * 160))
+        self.assertTrue(valid_print_text("1\n2\n3\n4\n5\n6\n7\n8\n"))
+        invalid = [None, b"text", "", "中" * 54, "中" * 53 + "!!", "x" * 161,
+                   "x\x00y", "\x1b@", "\x1dV\x00", "\t", "\r", "\x7f", "\x85",
+                   "\ud800", "\udfff", "🌱", "☃", "\ufeff", "\u200b", "\uffff",
+                   "1\n2\n3\n4\n5\n6\n7\n8\n9", "\n" * 9]
+        for index, text in enumerate(invalid):
+            with self.subTest(text=repr(text)):
+                result = await self.bridge.act(f"invalid-{index}", "print", text=text)
+                self.assertEqual(result["error"], "invalid_print_text")
+                self.assertFalse(result["sent"])
+        self.assertEqual(self.calls, [])
+
+    def test_bridge_repertoire_matches_every_shipped_font_entry(self):
+        # No font-rendering dependency: compare to the actual shipped firmware
+        # table, catching Unicode aliases or an accidental GBK superset.
+        import re
+        header = (ROOT / "firmware/xiao/include/printer_font.h").read_text(encoding="utf-8")
+        font_codes = {int(code, 16) for code in re.findall(r"\{0x([0-9A-F]{4}),", header)}
+        self.assertEqual(len(font_codes), 7540)
+        for code in range(0x10000):
+            self.assertEqual(valid_print_text(chr(code)), code == 10 or code in font_codes,
+                             f"U+{code:04X}")
+
+    async def test_old_firmware_print_rejection_is_preserved_without_retry(self):
+        self.mode = "legacy_print"
+        result = await self.bridge.act("legacy", "print", text="中文小票")
+        self.assertEqual((result["status"], result["source"], result["error"]),
+                         ("rejected", "device", "invalid_print_text"))
+        repeated = await self.bridge.act("legacy", "print", text="中文小票")
+        self.assertTrue(repeated["bridge_cached"])
+        self.assertEqual(repeated["error"], "invalid_print_text")
+        self.assertEqual(len(self.posts()), 1)
+
+    async def test_chinese_print_unknown_is_not_reposted(self):
+        self.mode = "timeout"
+        result = await self.bridge.act("lost-print", "print", text="中文小票")
+        repeated = await self.bridge.act("lost-print", "print", text="中文小票")
+        self.assertEqual(result["status"], "unknown")
+        self.assertEqual(repeated["status"], "unknown")
+        self.assertEqual(len(self.posts()), 1)
 
     def test_fixed_origin_configuration_and_hidden_token(self):
         for url in ["file:///tmp/device", "http://user:pass@host", "http://host/path", "http://host/?url=x"]:
@@ -282,7 +339,7 @@ class OfficialSdkStdioTests(unittest.IsolatedAsyncioTestCase):
                             ("get_planter_state", {}), ("water", {"request_id": "sdk-water", "duration_ms": 1000}),
                             ("stop_water", {"request_id": "sdk-stop"}), ("set_light", {"request_id": "sdk-light", "on": True}),
                             ("set_light", {"request_id": "sdk-effect", "on": True, "effect": "breath"}),
-                            ("print_note", {"request_id": "sdk-print", "text": "Hello planter\n"}),
+                            ("print_note", {"request_id": "sdk-print", "text": "工位花园 Hello planter\n"}),
                             ("get_action_result", {"request_id": "sdk-water"}),
                         ]
                         for name, arguments in samples:
@@ -298,9 +355,13 @@ class OfficialSdkStdioTests(unittest.IsolatedAsyncioTestCase):
                         self.assertTrue(null_effect.isError)
                         invalid_off = await session.call_tool("set_light", {"request_id": "off-effect", "on": False, "effect": "solid"})
                         self.assertEqual(invalid_off.structuredContent["status"], "rejected")
+                        invalid_note = await session.call_tool("print_note", {"request_id": "invalid-note", "text": "中" * 54})
+                        self.assertEqual(invalid_note.structuredContent["error"], "invalid_print_text")
             self.assertEqual(sum(method == "POST" for method, *_ in calls), 5)
             effect_payload = next(payload for method, _, _, payload in calls if method == "POST" and payload["request_id"] == "sdk-effect")
             self.assertEqual(effect_payload, {"request_id": "sdk-effect", "action": "light", "on": True, "effect": "breath"})
+            note_payload = next(payload for method, _, _, payload in calls if method == "POST" and payload["request_id"] == "sdk-print")
+            self.assertEqual(note_payload["text"], "工位花园 Hello planter\n")
             self.assertTrue(all(token == TOKEN for _, _, token, _ in calls))
         finally:
             mock.shutdown()

@@ -1,7 +1,7 @@
 ---
 title: "拍摄与分享"
 description: "项目图片、短视频、角色文案和接入经验的分享方法。"
-sidebar_position: 12
+sidebar_position: 15
 hide_title: true
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "从零搭建荣耀 YOYO Skill"
 description: "图文讲解技能文件、导入配置、安全检测、手机安装和 BLE 逐层验收。"
-sidebar_position: 8
+sidebar_position: 11
 hide_title: true
 ---
 
@@ -14,6 +14,8 @@ hide_title: true
 下文提供最小 Skill 示例、平台配置截图和手机测试步骤。
 
 ![独立 Skill 从文件到手机的搭建流程](/roboplanter/assets/honor-guide/skill-workflow.svg)
+
+当前主线为0.4.0。下方“最小版”用于学习从空白技能起步，不代表RoboPlanter当前能力；要使用现成硬件流程，导入当前三文件包并按[首次配对](/docs/projects/2026/roboplanter/yoyo-companion)完成绑定。
 
 ## 1. 选对创建入口
 
@@ -49,7 +51,7 @@ metadata: {"hardware_ready":false}
 本版本没有连接传感器、灯带、水泵或打印机。
 被问实时读数时，说明尚未接入，不能编造数值。
 用户要求浇水、开灯或打印时，说明本版未发送硬件指令。
-用户明确退出或换到无关话题时，调用 skill_exit，无参数。
+用户明确退出或要求转交系统任务时，调用 skill_exit，无参数；普通换话题不退出。
 ```
 
 这个版本只声明退出工具。正文出现“打印机”不等于取得打印权限。`hardware_ready` 是项目定义的说明字段，**不是平台强制隔离硬件的权限开关**；固件和服务端仍要独立鉴权。
@@ -79,7 +81,7 @@ references/ble-contract.md
 references/acceptance.md
 ```
 
-下载包为 **0.2.1**，仅增加固定无效凭据的 BLE 联通诊断，不含设备凭据，正式硬件控制保持关闭。可先阅读 [包内文件说明](/roboplanter/source/integrations/yoyo/skill-draft/README.md.txt)。
+当前源码构建包为 **0.4.0**：公开V协议配合设备端加密蓝牙绑定，不含设备令牌。已完成手机“读取工位状态”；灯光、计时与场景自动小票已有协议，逐项手机验收仍待完成。首次六位码位置和话术见[YOYO日常交互](/docs/projects/2026/roboplanter/yoyo-companion)。网站下载以发布manifest为准。[包内说明](/roboplanter/source/integrations/yoyo/skill-draft/README.md.txt)。
 
 ## 4. 导入 ZIP
 
@@ -137,20 +139,20 @@ references/acceptance.md
 
 *图 3：在编辑页打开真机测试，依次配置测试名单和发布测试服务。*
 
-第一轮说“今天有点累，陪我聊两句”，检查回复是否自然简短。再问“现在土壤湿度多少”，最小版应说明未连接，不能报随机数字。最后说“退出盆栽伙伴”，确认交回 YOYO。
+第一轮说“今天有点累，陪我聊两句”，检查回复是否自然简短。再问“现在土壤湿度多少”，仅聊天的最小版应说明未连接；当前0.4.0绑定后应调用真实查询，不能报随机数字。最后说“退出盆栽伙伴”，确认交回 YOYO。
 
 ## 8. 接入官方 BLE 工具
 
 准备好实物和协议后，才加入 `ble_send_command`，并提供已知的设备名、服务 UUID、特征 UUID、命令和响应解释。先完成 [硬件首次接入](/docs/projects/2026/roboplanter/hardware-quickstart)。
 
-下列为0.2.1包 的无效凭据诊断。`RoboPlanter-XXXX` 是占位名称，必须改成现场确认的广播名，不能照抄别人的设备标识：
+当前0.4.0使用系统蓝牙绑定。先在Indicator显示六位码并到手机系统蓝牙完成配对，然后发一次状态查询。`RoboPlanter-XXXX` 是占位名称，必须改成现场确认的广播名，不能照抄别人的设备标识：
 
 ```json
 {
   "device_name": "RoboPlanter-XXXX",
   "service_uuid": "a2f39c10-7e4b-4d21-8a61-0f3bc9d15001",
   "characteristic_uuid": "a2f39c11-7e4b-4d21-8a61-0f3bc9d15001",
-  "command_array": [{"command":"S|probe|soil","delay_ms":0}],
+  "command_array": [{"command":"V|S|desk","delay_ms":0}],
   "encoding": "utf-8",
   "ack_type": "ack",
   "expect_response": true,
@@ -158,7 +160,7 @@ references/acceptance.md
 }
 ```
 
-`probe` 是故意无效的公开字符串，预期设备返回 **`E:AUTH`**。它只证明消息到达并收到鉴权拒绝，不能读取正式土壤值或控制执行器。
+`V`只是公开协议标记，身份授权由绑定加密链路提供。成功时收到`K:土壤原始值:温度十分之一°C:空气湿度%`，未知用x；未绑定时拒绝。当前台架已取得真实回包。
 
 `ack_type: ack` 等待 GATT 写确认；`expect_response: true` 另行等待业务响应。只有“发送成功”不能报告读取成功。一次短查询成功也不能证明长指令、打印、水泵或灯光控制都可用。
 
@@ -173,7 +175,7 @@ references/acceptance.md
 | ZIP 结构检查通过 | 文件可解压，根文件正确 | 手机可运行 |
 | 保存后版本仍在 | 平台保留配置 | 手机已更新 |
 | 手机进入该 Skill | 名单、分发和入口可用 | BLE 接通 |
-| 收到 `E:AUTH` | 固件返回鉴权拒绝 | 取得读数 |
+| 收到 `E:PAIR` | 固件拒绝未授权蓝牙访问 | 完成正确配对再读取 |
 | 收到有效的实时土壤回包 | 这次读取闭环完成 | 已校准或应该浇水 |
 | 关联到请求的灯亮、出水或出纸 | 对应实物动作被观察到 | 长期稳定、其他外设也通过 |
 

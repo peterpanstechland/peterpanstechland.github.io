@@ -12,7 +12,7 @@ slug: /projects
 
 [互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)
 
-**进度：** 已完成一次私有手机土壤读取和独立云端只读查询；公开 Skill 包仍仅开放联通诊断。打印与灌溉未完成实物验收，网页交互为模拟。
+**进度：** 2026-10-29：手机加密配对及YOYO实时读取已通过；中文日签、预览一致性与自动切纸已验收。SEN54、环境光和超声波已接入，继电器空载通过；水箱与泵负载待完成。手机动作仍待逐项验收，网页交互为模拟。
 <!-- ROBOPLANTER:END -->
 
 # 项目

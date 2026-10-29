@@ -13,6 +13,11 @@ OUTPUT = ROOT / "build" / "honor" / "roboplanter-companion-draft.zip"
 
 def package(destination: Path = OUTPUT) -> dict:
     contents = {name: (SOURCE / name).read_bytes() for name in FILES}
+    # The retired private diagnostic command carried a real 16-hex key.
+    # Check every packaged file before writing anything; never echo the key.
+    for name, data in contents.items():
+        if re.search(rb"Q\|[0-9a-fA-F]{16}(?![0-9a-fA-F])", data):
+            raise ValueError(f"Embedded one-read credential in {name}")
     skill = contents["SKILL.md"].decode("utf-8").replace("\r\n", "\n")
     if not skill.startswith("---\n") or "\n---\n" not in skill[4:]:
         raise ValueError("SKILL.md must start with YAML front matter")

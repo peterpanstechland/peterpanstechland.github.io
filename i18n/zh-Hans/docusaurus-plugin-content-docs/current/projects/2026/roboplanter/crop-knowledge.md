@@ -1,7 +1,7 @@
 ---
 title: "作物知识库与地区化方案"
 description: "官方农业资源、学术依据、开源工具及带适用条件的离线原型。"
-sidebar_position: 5
+sidebar_position: 8
 hide_title: true
 ---
 

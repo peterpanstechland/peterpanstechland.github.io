@@ -93,6 +93,7 @@ class FocusTimer {
     if (value != Preset::Focus25 && value != Preset::ShortBreak5 && value != Preset::LongBreak15)
       return false;
     preset_ = value;
+    customDuration_ = 0;
     reset();
     return true;
   }
@@ -154,6 +155,7 @@ class FocusTimer {
   }
 
   uint32_t durationMs() const {
+    if(customDuration_)return customDuration_;
     return preset_ == Preset::ShortBreak5 ? 300000U :
            preset_ == Preset::LongBreak15 ? 900000U : 1500000U;
   }
@@ -161,11 +163,18 @@ class FocusTimer {
   TimerPhase phase() const { return phase_; }
   bool running() const { return phase_ == TimerPhase::Running; }
   bool done() const { return phase_ == TimerPhase::Completed; }
+  bool synchronize(uint32_t duration,uint32_t remaining,uint8_t phase,uint32_t now) {
+    if(duration<60000 || duration>7200000 || remaining>duration || phase>3)return false;
+    customDuration_=duration;remaining_=remaining;startedMs_=now;phase_=static_cast<TimerPhase>(phase);
+    preset_=duration==300000?Preset::ShortBreak5:duration==900000?Preset::LongBreak15:Preset::Focus25;
+    return true;
+  }
 
  private:
   Preset preset_ = Preset::Focus25;
   TimerPhase phase_ = TimerPhase::Ready;
   uint32_t remaining_ = 1500000U;
+  uint32_t customDuration_ = 0;
   uint32_t startedMs_ = 0;
 };
 
@@ -192,6 +201,7 @@ class Model {
     page_ = Page::Today;
     return true;
   }
+  void showFocus() {page_=Page::Focus;themesOpen_=false;}
   void home() { page_ = Page::Face; themesOpen_ = false; }
   void openThemes() { themesOpen_ = true; }
   void closeThemes() { themesOpen_ = false; }

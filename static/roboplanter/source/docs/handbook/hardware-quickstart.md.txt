@@ -4,7 +4,7 @@
 
 建议按 **空载只读 → 单个传感器 → 灯 → 打印 → 最后水泵 → 手机 BLE** 的顺序走完，每一步通过后再增加下一件外设。任何未知型号都先保持禁用。手机接入见 [BLE 教程](ble-integration.md)，异常见 [排障手册](troubleshooting.md)。
 
-先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。Indicator 土壤采集使用可选的 RP2040 程序；水位与低水位停泵仍在开发。完整分配见 [接线文档](../wiring.md)。
+先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。Indicator 土壤采集使用可选的 RP2040 程序；超声波测距与软件水位保护已实现，实体水箱与泵负载仍待联调。完整分配见 [接线文档](../wiring.md)。
 
 ## 1. 先确认你拿到的是哪块板
 
@@ -19,7 +19,7 @@
 XIAO 是实际测量与执行控制器；Indicator 是 Wi-Fi 显示和手动操作端。**两板不接 UART、I²C 或 USB 数据线**，分别供电即可：
 
 ```text
-电脑/Indicator -- 2.4 GHz Wi-Fi --> XIAO 热点 + HTTP API
+电脑/Indicator -- 同一 2.4 GHz Wi-Fi --> XIAO HTTP API
 荣耀手机      -- BLE -----------> 同一台 XIAO
                                       |
                              传感器 / 灯 / 外置泵驱动 / UART 打印机
@@ -34,7 +34,7 @@ Indicator 内部的 ESP32-S3 与 RP2040 已有连接。默认屏幕工程刷写 
 附件 `Seeed XIAO Robot Kit x Honor Robot Phone Getting Started.zip` 的入门说明、旧车 Skill 和 V1.0 原理图是硬件参考。
 
 - 原小车例程包含电机、舵机、加热等功能；本项目不运行这些功能。
-- 原教程和旧固件部分电机/加热引脚存在版本差异。本固件启动时拉低 GPIO2/3/39/11/12 以及泵 GPIO7；首次烧录时仍须物理断开原电机、舵机、加热器和泵。
+- 原教程和旧固件部分电机/加热引脚存在版本差异。本固件启动时拉低 GPIO2/3/39/11/12 以及已确认继电器的 GPIO42；首次烧录时仍须物理断开原电机、舵机、加热器和泵。
 - 旧 Skill 的 `forward`、`stop`、舞蹈命令不能控制本固件；新协议的停泵是带鉴权的 `stop_water`。
 - 旧例程的 Arduino Core 和库选择不能覆盖本项目 `platformio.ini` 中的固定版本。
 
@@ -46,7 +46,7 @@ Indicator 内部的 ESP32-S3 与 RP2040 已有连接。默认屏幕工程刷写 
 
 - 万用表；合适的 Grove 转接线；可识别 pin1 的标记。
 - 已知型号、工作电压和模拟输出范围的土壤探头。输出不得超过 ESP32 的 3.3 V 输入范围。
-- 可选 SHT31（不是名称近似的 DHT/AHT）；可选、经过电压确认的空气/UV 模块。
+- 当前为 SEN54（独立5V、I²C信号3.3V）、Grove Light Sensor v1.2、Ultrasonic Ranger v2.0、Relay v1.2；DHT20、Air Quality和UV已替换。
 - 可选 GRB、800 kHz 单线灯带；明确灯数、电流及供电规格。
 - 水泵：独立额定电源、适合启动电流的外置驱动、3.3 V 可识别且高电平开启的逻辑输入、输入下拉、适合负载的续流/瞬态保护、可立即切断泵支路的物理开关。
 - 打印机：明确型号、额定供电、UART 波特率、TTL 电平和 ASCII/LF 协议；必要的电平转换。
@@ -274,34 +274,31 @@ export ROBOPLANTER_TOKEN
 # 使用后执行：unset ROBOPLANTER_TOKEN
 ```
 
-固件中的令牌仍存在 Flash，本地进程环境也不是硬件密钥保险箱；这是受控原型的鉴权方式。HTTP 没有 TLS，BLE 没有配对加密，不把 API 暴露到公网。
+固件中的令牌仍存在 Flash，本地进程环境也不是硬件密钥保险箱；这是受控原型的鉴权方式。HTTP没有TLS，应只用于受控局域网。当前YOYO使用可选的SC+MITM绑定BLE，HTTP令牌不进入Skill；见[BLE v2教程](ble-integration.md)。
 
 ## 8. 逐件接线和启用
 
 **每次换线先断开电源。** 编号来自 V1.0 原理图，不是从插座左往右数的位置。先按丝印找到 pin1，断电用万用表确认 GND/连通性，再上电空载量供电电压；探针避免跨接相邻针脚。未知连接器、电平或极性时保持该外设关闭。
 
-### 8.1 土壤探头：先原始值，后标定
+### 8.1 先按最新总表接线
 
-1. 确认探头允许 3.3 V 供电，或采用它要求的独立供电和已验证的电平调理。先测模拟输出范围，任何状态不超过 3.3 V。
-2. 模拟 OUT → **J13 Servo3 pin1 / D0 / GPIO1**，GND → 公共地。J13 pin3 是 **Motor_5V**，不是 3.3 V；J13 pin2 是 NC，不接。传感器电源另取已确认的 3.3 V。
-3. 仅设置 `ROBO_ENABLE_SOIL 1`，其他外设继续 `0`。烧录后查询 `state`，观察 `soil.raw` 随干/湿参考条件变化。
-4. 在可重复的干、湿参考条件下分别记录稳定 ADC 值；记录传感器型号、基质和插入深度。测量前不要把不能浸水的电子元件浸入水中。
-5. 将测得的两个 **0–4095 且不相等** 的值填入 `ROBO_SOIL_DRY_RAW` / `ROBO_SOIL_WET_RAW`。重新烧录，干参考应接近 0%，湿参考接近 100%，中间值连续变化。
+[2026-10-29硬件接线总表](../wiring.md)是当前接线依据。Robot Board的分配为：SERVO1/GPIO42继电器、SERVO2/GPIO8超声波、SERVO3/GPIO1环境光、SERVO4/GPIO7打印TX；土壤在Indicator RP2040 GPIO27。M2/J9不用。
 
-两个值大小顺序取决于探头，公式可处理相反方向。百分比是相对湿度指标，不是体积含水率。`valid:true` 只说明读到了近期且在范围内的 ADC；常数 0、4095 或漂浮读数仍需排查断线、饱和和接触。未标定时 `percent:null` 是正确结果。
+土壤探头按3.3V供电，黄线接Indicator左侧Grove GPIO27；RP2040运行仓库的soil_uart.py，屏幕开启PLANTER_ENABLE_LOCAL_SOIL，XIAO开启ROBO_ENABLE_REMOTE_SOIL，并关闭ROBO_ENABLE_SOIL。内部UART和HTTP会把原始值汇总给XIAO。数据断线必须失效。
 
-### 8.2 SHT31 温湿度
+在实际探头、基质和插入深度下采集干/湿参考，填入ROBO_SOIL_DRY_RAW与ROBO_SOIL_WET_RAW；两值必须在0–4095内且不相等。未标定时percent为空是正确结果。百分比只是相对干湿，不是体积含水率；本机尚未完成标定。
 
-确认芯片确为 SHT31，电源/总线可用 3.3 V：SCL → **J11/J12 pin1 / GPIO6**，SDA → **pin2 / GPIO5**，3.3 V → pin3，GND → pin4。默认 `ROBO_SHT31_ADDRESS 0x44`，实际地址为 `0x45` 时对应修改。板载 IMU 使用 `0x6A`，不能接同地址设备。
+### 8.2 SEN54统一温湿度和空气感知
 
-仅设置 `ROBO_ENABLE_SHT31 1`。通过条件是环境 `valid:true`、温湿度落在现场合理范围，改变环境后有合理响应；驱动检查 CRC。DHT11/DHT22/AHT 类模块需要自己的驱动，不改个名字就能运行。
+SEN54的SCL→IIC pin1/GPIO6，SDA→pin2/GPIO5，地址0x69。**VCC独立5V，信号和上拉3.3V，共地**；IIC pin3的3.3V不能供SEN54使用，也不能被5V反灌。当前此接法已确认。
 
-### 8.3 空气和 UV 原始值（可选）
+启用ROBO_ENABLE_SEN54和ROBO_SEN54_WIRING_CONFIRMED；关闭DHT20、SHT31及模拟AIR。SEN54已有温湿度，旧Grove Temperature & Humidity v2.0可以拆下备用，不必重复接。观察CRC、有效标记、温湿度、PM2.5和VOC；它不测CO₂，SEN54不提供NOx。
 
-- 空气模拟 OUT → **J5 Servo2 pin1 / D9 / GPIO8**。先断开该口的原舵机，电源另按传感器规格接，输出电压合格后才可设 `ROBO_ENABLE_AIR 1` 和 `ROBO_AUX_PINS_CONFIRMED 1`。
-- UV 预留 OUT → **J9 M2 ENC pin4 / D10 / GPIO9**。必须断开编码器；V1.0 该路存在 22 Ω 串阻及 **4.7 kΩ 上拉到 3.3 V**，会加载模拟传感器。它不是已经验证的 UV 接口，默认不要装。若传感器不能在该负载下正确工作，需要重新设计接口/外部 ADC 并修改代码，不能靠勾选确认标志修复。
+### 8.3 环境光与超声波
 
-名称如 Grove Air Quality v1.3 / UV v1.1 不能代替实际型号、电源及输出检查。现有固件只报告 ADC，不能显示 CO₂、PM2.5、UV Index、lux 或光合有效辐射。设置确认标志只是记录你已经完成硬件核对，不会改变电路。
+- Light Sensor v1.2黄线OUT→SERVO3/J13 pin1，D0/GPIO1；红线另取3.3V、黑共地、白不接。启用ROBO_ENABLE_AMBIENT_LIGHT及ROBO_AUX_PINS_CONFIRMED；UV/本地土壤保持0。遮挡响应已通过，ADC不是lux。
+- Ultrasonic Ranger v2.0黄线SIG→SERVO2/J5 pin1，D9/GPIO8；红线另取3.3V、黑共地、白不接。启用ROBO_ENABLE_ULTRASONIC及ROBO_ULTRASONIC_WIRING_CONFIRMED；AIR保持0。单SIG双向测距，不能插IIC口。
+- 先对准10–30cm平整物体验证变化。当前只验收距离，水箱未建好，不能报告余水百分比。后续满/空/停泵距离标定见[接线总表](../wiring.md)。
 
 ### 8.4 灯带
 
@@ -325,7 +322,7 @@ export ROBOPLANTER_TOKEN
 
 ### 8.5 UART 打印机
 
-先确认供电与 TTL 电平。断电后将 **SERVO4/J14 pin1 / D8 / GPIO7 → 打印机 RX**；打印机 TX 确认是 3.3V 逻辑或加电平转换后 → 原 UART/J10 pin2 / GPIO44。公共 GND → J10 pin4，GPIO43 不接打印机。SERVO4 不能同时接泵或舵机，打印模式与水泵模式不能同时启用。**打印机独立供电，SERVO4 的 Motor5V 和 UART 的 3.3V 都不接打印机电源。** 详细接线与验收见 [UART 打印机](uart-printer.md)。
+先确认供电与 TTL 电平。断电后将 **SERVO4/J14 pin1 / D8 / GPIO7 → 打印机 RX**；打印机 TX 确认是 3.3V 逻辑或加电平转换后 → 原 UART/J10 pin2 / GPIO44。公共 GND → J10 pin4，GPIO43 不接打印机。SERVO4 不能同时接泵或舵机，打印与泵使用不同GPIO；控制器限制两者不能同时运行。**打印机独立供电，SERVO4 的 Motor5V 和 UART 的 3.3V 都不接打印机电源。** 详细接线与验收见 [UART 打印机](uart-printer.md)。
 
 设置实际 `ROBO_PRINTER_BAUD`，确认换线后设置 `ROBO_ENABLE_PRINTER 1`、`ROBO_PRINTER_HARDWARE_CONFIRMED 1`、`ROBO_PRINTER_D8_WIRING_CONFIRMED 1`，并保持动作总开关及非默认令牌；泵继续关闭。先发送短 ASCII：
 
@@ -340,56 +337,16 @@ export ROBOPLANTER_TOKEN
 "$rp_python" tools/device_cli.py result '<刚才的ID>'
 ```
 
-等待 `accepted → completed`，同时人工确认纸上文本正确。`bytes_sent` / `completed` 只证明软件串口发送完成，不证明出纸。请求支持最多 160 字节可打印 ASCII 和 LF；固件添加固定 ESC/POS 初始化及末尾走纸，不接受调用方传入控制码。不支持中文编码、切刀或缺纸反馈。超时或乱码先排查，不能自动重印。
+等待 `accepted → completed`，同时人工确认纸上文本正确。`bytes_sent` / `completed` 只证明软件串口发送完成，不证明出纸。请求支持最多 160 字节 UTF-8（ASCII、GB2312 映射字符及 LF），自动换行最多 8 行；固件转换为 384 点光栅，添加固定初始化、走纸和可选切刀指令，不接受调用方传入控制码。切刀须显式设置 `ROBO_PRINTER_CUTTER_CONFIRMED 1`；缺纸或机械完成反馈尚未实现。超时或乱码先排查，不能自动重印。
 
-### 8.6 水泵最后接入
+### 8.6 Grove Relay与水泵：当前只到空载
 
-水泵只能由外置合适驱动控制。**GPIO7 是逻辑信号，不能直接接泵，也不使用板载 M1/M2 的 5 V 电机输出驱动 12 V 泵。**
+Relay v1.2的SIG→SERVO1/J1 pin1，D15/GPIO42，模块电源按已确认的3.3–5V供电，共地。GPIO7属于打印机，不能接泵；M2/J9不使用。继电器已完成300ms吸合/释放验证，负载两端子保持空着，ROBO_ENABLE_PUMP保持0。
 
-常见外置低侧驱动的连接逻辑如下，具体端子仍以实际模块说明为准：
+等水箱完成并确认泵电流、触点/电源能力和负载保护后，再设置满水、空箱、停泵三个距离阈值。软件已经检查未标定、过期/无效回波、低水位及异常距离；未完成实物测试前不能把这些检查当作真实泵保护已验收。
 
-```text
-独立 +12V -------- 泵正极
-泵负极 ---------- 驱动的负载开关端
-电源 GND -------- 驱动 GND -------- XIAO GND
-GPIO7 / J14 pin1 - 驱动 IN（3.3V 可识别，高电平开启）
-驱动 IN ---------- 合适的下拉到 GND（复位/断连时保持关闭）
-```
+未来12V支路接继电器常开触点后再接泵，不经过GPIO或Grove电源脚。逐项验证短脉冲、到时停止、主动停泵、复位、断网和水位异常，再测流量；当前教程不要求提前接负载或开放浇水。
 
-J14 pin2 是 NC，pin3 是 Motor_5V，pin4 是 GND。12 V 不接 J14 pin3，不接 XIAO/载板电池口。续流二极管/瞬态保护按电机及驱动要求安装，不能只依赖固件或 GPIO 的低电平。
-
-先断开泵和打印机的负载电源，用万用表/示波器确认 IN 在开机、复位和掉电过程保持关闭。只启用泵，设置：
-
-```cpp
-#define ROBO_ENABLE_ACTIONS 1
-#define ROBO_ENABLE_PUMP 1
-#define ROBO_PUMP_HARDWARE_CONFIRMED 1
-#define ROBO_MAX_WATER_MS 1000  // 首次台架上限；不是流量或毫升
-```
-
-非默认令牌必须已经配置。程序允许上限 1–30000 ms，仓库默认 3000 ms；首次台架建议更短，测完流量后再决定实际值。Indicator 的 `PLANTER_WATER_DURATION_MS` 默认 2000 ms，首次把它同步调到 **不大于泵上限**，例如 500 ms，重新编译；否则屏幕请求会被拒绝。
-
-空载电平通过后，将泵放入有接水容器的独立台架，准备好物理断电开关。不要让不允许空转的泵干转。一次只发一个明确测试脉冲：
-
-```powershell
-& $rpPython tools/device_cli.py water 500
-& $rpPython tools/device_cli.py result '<刚才的ID>'
-& $rpPython tools/device_cli.py state
-# 下一次有意测试提前停止时，使用单独的终端/屏幕发：
-& $rpPython tools/device_cli.py stop_water
-```
-
-```bash
-"$rp_python" tools/device_cli.py water 500
-"$rp_python" tools/device_cli.py result '<刚才的ID>'
-"$rp_python" tools/device_cli.py state
-# 提前停止是另一项独立台架测试：
-"$rp_python" tools/device_cli.py stop_water
-```
-
-通过条件必须同时包含：匹配 ID 的软件完成、`pump.on:false`、**真实泵停转/无持续出水**。测定 500 ms 脉冲也要给操作者足够准备时间，不能等串行执行的几条命令来代替紧急停止。正式停泵测试可在受控的稍长脉冲中用第二个终端/Indicator 提前停止；超时不受网络阻塞影响的测试应由熟悉台架的人员进行。
-
-之后分别记录自动到时、主动停止、手机/屏幕断连、复位、同 ID 重试、冲突 ID、泵/打印互斥。重试同一已完成 ID 不应再转泵；**只在受控台架才测试重试，日常流程不自动重发**。任一次失控立即切断泵支路，保持禁用直到原因查清。冻结的 MCU、损坏 MOSFET 或粘连继电器不能由软件保证断电。
 
 ## 9. 每一步如何记验收结果
 

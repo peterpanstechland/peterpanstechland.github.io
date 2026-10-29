@@ -136,3 +136,7 @@ Sources: [Seeed Grove ADC and port diagram](https://wiki.seeedstudio.com/SenseCA
 [capacitive probe](https://wiki.seeedstudio.com/Grove-Capacitive_Moisture_Sensor-Corrosion-Resistant/),
 [MicroPython Pico](https://micropython.org/download/RPI_PICO/),
 [official picotool](https://github.com/raspberrypi/picotool).
+
+## Optional focus chime (2026-10-29)
+
+The soil responder also accepts `B|focus\n` from the internal UART. It drives the built-in passive buzzer on GPIO19 at 2400 Hz for 180 ms, non-blocking, at most once per two seconds. The Indicator UI keeps this off by default and persists its sound toggle. PWM is disabled on interruption/exit. This is a tone, not a speech speaker. See [the integration record](../../docs/deployment/yoyo-companion-v2.md) for validation limits.

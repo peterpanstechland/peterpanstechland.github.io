@@ -1,7 +1,7 @@
 ---
 title: "排障与恢复"
 description: "从电源、串口、构建、显示、HTTP 到 BLE 的故障诊断。"
-sidebar_position: 15
+sidebar_position: 18
 hide_title: true
 ---
 
@@ -159,19 +159,21 @@ Wi-Fi 关联与 HTTP 业务是两层。依次检查：
 
 ## 土壤一直 `null` / `0` / `4095` / 百分比反了
 
-- `null` 且 `valid:false`：先检查是否开启 `ROBO_ENABLE_SOIL` 并上传了这次构建；缺值不等于“极干”。
+- `null` 且 `valid:false`：当前先检查Indicator RP2040的GPIO27、内部UART、PLANTER_ENABLE_LOCAL_SOIL、XIAO的ROBO_ENABLE_REMOTE_SOIL和HTTP上传；缺值不等于“极干”。
 - 原始值有变化但 `percent:null`：尚未配置两个合法、不相等的干/湿标定点，这是预期。
 - 长期为 0 或 4095：检查信号脚、共地、电源、输出范围、短路/饱和、探头是否断开。ADC 返回合法数不证明电气正常。
 - 值漂移：先固定插入深度、基质与电源，检查探头型号及负载。不要直接把噪声解释为浇水需求。
 - 百分比方向不符：按实际干参考填 `ROBO_SOIL_DRY_RAW`，湿参考填 `ROBO_SOIL_WET_RAW`；值大小不预设。不要把“dry 应该更大”写成所有传感器的规律。
 
-示波器/万用表确认模拟信号不超过 3.3 V；Servo3 的 pin3 为 5 V，不能当成 3.3 V 传感器供电。空气/UV 同样只能先认原始值；UV 复用编码器脚带 4.7 kΩ 上拉，可能根本不适合该模拟模块。
+模拟输入不得超过3.3V。当前土壤在Indicator GPIO27，环境光在Robot SERVO3 GPIO1，超声波在SERVO2 GPIO8。不要按旧图把土壤/Air/UV接回已被占用的接口。
 
-## SHT31 无效 / 温湿度不合理
+## SEN54 无效 / 温湿度不合理
 
-核对实际器件是 SHT31、地址是 `0x44` 或 `0x45`，以及 SDA=GPIO5、SCL=GPIO6。Grove I²C pin1 是 SCL、pin2 是 SDA，别按线色猜。确保没有地址冲突、线太长、供电电压不合或连接反向。驱动 CRC 不通过时会标无效，不应改成强行显示上次温度。
+先确认独立5V VCC、共地、3.3V信号上拉，SDA=GPIO5/SCL=GPIO6，地址0x69。IIC口直接给3.3V不能满足SEN54供电。保持DHT20/SHT31/AIR关闭，检查CRC与预热状态；无效不能强行显示上次值。D1不自带CO₂/VOC传感器，当前环境读数来自XIAO上的SEN54。
 
-Indicator D1 上的界面不是另一个自动启用的温湿度来源。当前花盆读数来自 XIAO，不因为屏幕能显示温度标签就证明读到了本地传感器。
+## 超声波无回波 / 浇水不可用
+
+核对SERVO2 GPIO8单SIG和独立3.3V；保持探头干燥并对准平面，避开过近目标和箱壁。未建水箱、未标定或泵未启用时，按钮不可用是当前正确状态，不删除保护条件。
 
 ## 灯带没亮 / 颜色异常
 
@@ -183,7 +185,7 @@ Indicator D1 上的界面不是另一个自动启用的温湿度来源。当前�
 
 `completed` 或 `bytes_sent` 只代表 UART 发完。核对独立电源及峰值电流、上纸/盖板、实际波特率、8N1、TX→RX 和共地。TTL RX 是否识别 3.3 V、打印机 TX 是否会超过 ESP32 允许输入，必须按实际型号确认。
 
-首条只发 `Hello planter`。乱码时先排查波特率和协议，不连续重印；中文、ESC/POS、切刀或 USB-only 打印机不是当前实现。`printer_write_failed` 表示软件发送失败，保留原 ID 查结果，排查后由用户决定是否创建新的打印动作。
+可先发一条短小票。乱码时先排查波特率和协议，不连续重印；新版支持中英文点阵与显式启用的切刀，USB-only 驱动和机械反馈尚未实现。`printer_write_failed` 表示发送中断，随后 `recovery_required` 会锁住打印。先保留原 ID 查结果、检查纸面及连接，再重启打印机和主控清除残留；不能自动重放未知任务。屏幕按钮不可用时进入“设置 → 花盆连接”查看网络、地址和鉴权原因，按 [打印教程](/docs/projects/2026/roboplanter/uart-printer) 配对。
 
 ## BLE 找不到设备 / 连得上但收不到业务回包
 
@@ -191,20 +193,24 @@ Indicator D1 上的界面不是另一个自动启用的温湿度来源。当前�
 2. 关闭其他 BLE 调试应用连接；本固件仅允许一个命令连接。
 3. 使用 `ack_type=ack`，不能沿用旧车的 `no_ack`。
 4. 写入前订阅 Notify；`expect_response=true`。没有 Read 特征，不要尝试读取“上次回包”。
-5. 请求含令牌后通常超过 20 字节，核对协商 MTU/ATT 长写。不要把一条命令拆成普通 Write，也不要把 MTU 偏好 247 当成已协商成功。
+5. 当前v2使用V协议，不在请求中携带HTTP令牌；长中文仍需核对MTU/ATT长写。不要把一条命令拆成普通 Write，也不要把 MTU 偏好 247 当成已协商成功。
 6. 断开重连后重新订阅，按“一次完整请求 → 一次完整回包”串行测试。
 
 普通 BLE 客户端成功但荣耀失败，记录两者的实际请求字节长度、MTU/长写能力和回包，定位在手机工具层；不要把固件鉴权删掉迁就不支持的客户端。
 
-业务 `E:AUTH` 查令牌；`E:FORMAT` 查完整帧/长写/字段；`E:SIZE` 查字节数；`E:FIELD` 查查询名；`E:STALE` 查采样任务；`E:id:TIME/LOCK/OFF/BUSY/ID/FULL` 按 [BLE 契约](/docs/projects/2026/roboplanter/ble-integration) 处理。空气回复的 `A:raw:valid` 不等于动作的 `A:id`。
+v2业务 `E:PAIR` 查系统绑定与本次加密状态；`E:FORMAT` 查完整帧/长写/字段；`E:SIZE` 查字节数；`E:FIELD` 查查询名；`E:STALE` 查采样任务；`E:id:TIME/LOCK/OFF/BUSY/ID/FULL` 按 [BLE 契约](/docs/projects/2026/roboplanter/ble-integration) 处理。空气回复的 `A:raw:valid` 不等于动作的 `A:id`。
+
+## 手机要配对码，但不知道在哪里看
+
+六位码在 **Indicator → 设置 → 花盆连接 → YOYO与场景小票**，点击“开启两分钟配对”才会显示。不是锁屏密码，不在Skill代码中。新提示版按钮改为“显示六位配对码”，当前实机仍为旧文字。窗口过期要重新开启并输入新码，不重复猜测。
+
+本机曾因用户找不到码而配对应答超时；正确输入后主控认证成功，YOYO读取通过。判断成功同时看系统配对和主控paired/connected状态；不能仅凭手机列表里出现名称。
 
 ## YOYO 说无法控制 / 工具成功但没有动作
 
-当前 Skill 0.2.0 的 `HARDWARE_READY=false` 会拒绝所有 BLE 调用，这是设计中的未接通状态。先完成 [平台教程](/docs/projects/2026/roboplanter/honor-platform) 的安装/对话测试及 [BLE 教程](/docs/projects/2026/roboplanter/ble-integration) 中安全令牌注入、完整长写/通知的两项核实；不是在对话里说“已经接好了”就解锁。
+0.4.0已通过手机实时土壤/温湿度查询。先核对安装的版本、真实广播名、绑定和业务回包；旧0.2/0.3对话或诊断包不具备相同能力。“读取技能文件异常”先查Skill文件/安装入口，蓝牙重试不能代替技能加载。
 
-手机工具的发送成功也不是业务完成。核对 `response` 是否有本次有效回包，ID 是否匹配；`A:id` 只代表受理，`D:id` 才是软件完成。官方页面目前同时出现成功码 0 和 200，要记录实测版本，不仅看一个数字就宣布成功。
-
-若安全注入方式尚不明确，保持草稿门禁，向平台核实具体能力；不向 Skill 正文、公共变量示例、聊天或截图填真实令牌。NFC 入口、插件上架、智能体创建也不能证明 BLE 绑定完成。
+水泵仍未启用；灯/打印/计时需各自测试，不能把一次查询通过算作所有动作通过。A表示受理，D表示软件完成；纸张、刀具和灯光需要观察。打印超时只查原ID，不自动重复出纸。
 
 ## 请求丢了、重复了，或者只看见另一条 `last_command`
 
@@ -272,4 +278,4 @@ printf '%s  %s\n' "$rp_expected_hash" "$rp_backup" | sha256sum --check - || exit
 
 不要附完整 Flash 备份、`config.local.h` / `local_config.h`、`.env`、原始账号截图或带令牌的完整 BLE/HTTP 抓包到公开 issue。可以保留字段名和请求字节长度，敏感值替换为 `[redacted]`。未验证的判断写成“怀疑/待测”，不要写成硬件故障定论。
 
-来源：[固件说明](/roboplanter/source/firmware/xiao/README.md.txt)、[设备协议](/roboplanter/source/docs/device-protocol.md.txt)、[接线依据](/roboplanter/source/docs/wiring.md.txt)、[Indicator 板级说明](/roboplanter/source/firmware/indicator/README.md.txt)、[Seeed XIAO 官方指南](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/)、[Seeed Indicator 官方指南](https://wiki.seeedstudio.com/SenseCAP_Indicator_ESP32_Arduino/)、[Espressif esptool v4 命令](https://docs.espressif.com/projects/esptool/en/release-v4/esp32s3/esptool/basic-commands.html)、[荣耀 BLE 官方文档](https://developer.honor.com/cn/doc/guides/101781)。
+来源：[固件说明](/roboplanter/source/firmware/xiao/README.md.txt)、[设备协议](/roboplanter/source/docs/device-protocol.md.txt)、[接线依据](/docs/projects/2026/roboplanter/hardware-wiring)、[Indicator 板级说明](/roboplanter/source/firmware/indicator/README.md.txt)、[Seeed XIAO 官方指南](https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/)、[Seeed Indicator 官方指南](https://wiki.seeedstudio.com/SenseCAP_Indicator_ESP32_Arduino/)、[Espressif esptool v4 命令](https://docs.espressif.com/projects/esptool/en/release-v4/esp32s3/esptool/basic-commands.html)、[荣耀 BLE 官方文档](https://developer.honor.com/cn/doc/guides/101781)。

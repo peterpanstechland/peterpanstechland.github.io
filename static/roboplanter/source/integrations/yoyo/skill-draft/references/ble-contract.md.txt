@@ -1,54 +1,46 @@
-# RoboPlanter BLE v1 接入契约
+# RoboPlanter BLE v2 契约
 
-供开发和验收；0.2.1 的正式读数与动作门禁仍关闭，不得照下表试发。根文件唯一例外是用户明确请求的固定 `S|probe|soil` 联通诊断，预期 `E:AUTH`，不获取读数或开放权限。下文token/id是协议字段名，不是平台变量或可执行占位符。未验证安全鉴权注入前不能构造带凭据的工具调用。
+本契约用于 0.4.0 联调。V 是公开协议标记，设备必须启用 ROBO_ENABLE_BONDED_YOYO；链路需要 Secure Connections + MITM + bonding，并且只有本机两分钟配对窗口内登记的那一部手机可以操作。端侧检查每次连接，不依赖提示词保密。旧令牌、旧单次读权限、无效 probe 均不是 v2 的回退方案。
 
-## 通道
+固定 GATT 服务 a2f39c10-7e4b-4d21-8a61-0f3bc9d15001，特征 a2f39c11-7e4b-4d21-8a61-0f3bc9d15001，WRITE + NOTIFY，设备 RoboPlanter-A994。先订阅通知，等待写响应和本次业务通知；不把 ACK 或系统配对成功当动作完成。每命令最多240字节；由官方工具/系统处理 ATT 长写，技能不可自行拆串。最长中文场景命令需真机验证。
 
-官方工具为 `ble_send_command`。设备名使用实际广播完整原文，本固件前缀为 `RoboPlanter-`；不使用旧车名称、猜测后缀或MAC。
+## 查询（V|S|字段）
 
-| 参数 | 设备要求 |
-| --- | --- |
-| service_uuid | `a2f39c10-7e4b-4d21-8a61-0f3bc9d15001` |
-| characteristic_uuid | `a2f39c11-7e4b-4d21-8a61-0f3bc9d15001` |
-| encoding | `utf-8`，当前协议仅ASCII |
-| ack_type | `ack`（固件WRITE，不支持WRITE_NR） |
-| expect_response | `true`（需要NOTIFY业务回包） |
-| response_timeout_ms | 3000；超时不等于未执行 |
-| command_array | 单个对象含完整command及delay_ms=0；逐条等待回包，不并发 |
+- desk → K:raw:temperature10:humidity。温度除10，湿度为%，raw只表示土壤ADC；x为未知，三项分别解释。
+- soil → S:raw:percent:valid:calibrated。valid=0时raw不能当新读数；calibrated=0时不判断干湿。
+- env → E:temperature:humidity:valid，温度°C，空气湿度%。
+- ambient → B:raw:valid，只是环境光ADC，不是lux。
+- pm25 → M:value:valid，µg/m³。
+- voc → V:value:valid，VOC指数，不是ppb、CO₂或CO浓度。
+- tank → W:distance_mm:valid，未完成水箱标定，只报告探头距离，不报余水百分比。
+- focus → F:phase:remaining_seconds:duration_seconds；phase 0待机、1计时、2暂停、3完成。
+- light → L:enabled:on；pump → P:enabled:on:remaining_ms。
+- printer → T:enabled:status；sent仅串口已发，fail需现场恢复，不能继续塞入打印任务。
+- auto → AUTO:0/1，跨重启保留的自动打印开关。
 
-每请求≤240字节，单条回复≤20字节。16字符令牌的土壤查询23字节，8字符ID的两秒浇水38字节，超过默认ATT载荷20字节。须实测手机MTU协商或ATT长写；不能截断令牌、拆独立命令或假设工具自动分帧。每个连接需订阅通知，只允许一个BLE命令连接。
+未知、过期、未标定不能补零。主控按传感器有效性限制，土壤来自Indicator的独立有效期。每次用户明确读取才按需查询，避免闲聊时反复轮询。
 
-官方文档说明表与Schema分别写成功码0和200，真机需记录实际版本；无论哪个码，都必须核对业务响应，不能把“发送成功”当作动作完成。
+## 动作和结果
 
-## 查询映射
+`V|C|id|action|参数`，id为1–8位安全字母数字或短横线（技能统一生成8位），命令参数见根SKILL。`V|R|id` 查询原请求。
 
-| 请求 | 回包 | 解释 |
-| --- | --- | --- |
-| `S\|token\|soil` | `S:raw:percent:valid:calibrated` | valid和calibrated都为1才报告相对湿度；x为未知 |
-| `S\|token\|env` | `E:temperature:humidity:valid` | valid=1才报告温度/空气湿度 |
-| `S\|token\|air` | `A:raw:valid` | ADC，不是CO₂或PM2.5 |
-| `S\|token\|uv` | `U:raw:valid` | ADC，不是lux或光合强度 |
-| `S\|token\|pump` | `P:enabled:on:remaining_ms` | 能力、控制状态和剩余时长 |
-| `S\|token\|light` | `L:enabled:on` | 灯能力及控制状态 |
-| `S\|token\|printer` | `T:enabled:status` | off/idle/queued/sent/fail |
-| `R\|token\|id` | `A:id` / `D:id` / `E:id:code` | 查询原动作，不重新执行 |
+- A:id：已受理；D:id：软件完成。
+- E:id:OFF：对应外设未启用；LOCK：动作锁定；TANK：水箱条件不足。
+- E:id:STATE：计时状态不允许；不要重开覆盖正在运行的番茄钟。
+- E:id:MUTE：自动打印已关闭；COOL：同场景五分钟限流；正常接着聊。
+- E:id:BUSY：设备正忙；不能自动排队重试或换id。
+- E:id:IO：打印失败／恢复锁；检查打印机与纸张，不宣称已出纸。
+- E:id:ID：相同id不同参数；FULL：当前启动周期的64条去重记录已满。
+- E:id:MISS：找不到记录；可能主控重启，不能推断“没有执行”。
+- E:PAIR：未通过系统配对和加密连接；到Indicator开启配对。不索取聊天密钥。
+- E:STALE／无效读数：当前没有新数据；E:FORMAT／SIZE／ARG：参数不被支持。
 
-按当前请求解析，不能把空气查询的A:raw:valid当动作受理。E:x:x:0是无效环境数据；其他E:按错误处理。缺字段、格式错、x、valid=0都不补零。E:STALE说明采样超过3秒；不使用旧值回答现在。逐项查询并非同一瞬间快照。
+动作一旦发送，超时只查询同一个id，最多三次（每次间隔至少一秒）；依然未知就如实告知用户，停止自动重试。打印耗时可以超过工具的3秒回包窗口；A仅代表受理，后续R才读结果。只有用户重新明确要求并知晓上一次可能已执行，才新建id再执行。
 
-## 动作映射（未来启用）
+请求缓存不跨断电。打印队列和水泵互斥，未校准水箱/无效距离/低水位均不能启动泵。禁止拆短浇水来绕过上限。当前版本完全不发启动泵命令。
 
-每新动作使用新的1–8字符ASCII字母数字/下划线/连字符ID，查询保留原ID。设备本次启动仅有64条去重记录，重启丢失；ID冲突不自动换ID重发。
+## 屏幕与设备
 
-| 意图 | 请求 | 结果 |
-| --- | --- | --- |
-| 明确浇两秒 | `C\|token\|id\|water\|2000` | 先A:id，再查询原ID；本地计时停泵 |
-| 停泵 | `C\|token\|id\|stop_water` | 最高优先，不等状态查询；D:id或错误 |
-| 指定灯效 | `C\|token\|id\|light\|1\|breath` | 可选第六字段：solid/breath/chase/rainbow；仅开灯可带，查询仍为 L:enabled:on；Skill 当前门禁仍关闭 |
-| 开/关灯 | `C\|token\|id\|light\|1` / `...\|0` | D:id是软件结果，可查询灯状态 |
-| ASCII打印 | `C\|token\|id\|print\|text` | 文本≤160字节，整包≤240；D仅串口发送完 |
+Indicator每秒左右从同一XIAO状态接口刷新，网络耗时会增加显示延迟。远端开始番茄钟时，在不打断设置、确认和养成页的前提下跳到计时页；其他情况下用户稍后进入即可看到共享计时。手机断开不取消计时；主控断电会清零。RP2040 GPIO19仅是无源蜂鸣器，180ms提示音，默认静音，用户可在计时页开启。不是可播放YOYO语音的扬声器。
 
-浇水1–3000ms，服从固件更小上限。不从心情、低读数或NFC碰触推断动作授权，不扩展为组合动作。打印不含|、ESC或其他控制字节。
-
-结果未知不重发，不安排“稍后再停”，本地任务负责限时。结果仍A时只说处理中，不无限轮询或承诺后台继续。MISS不证明没执行。LOCK/OFF/BUSY/FULL/ID/TIME/IO/ARG/AUTH/SIZE等错误按实际解释，不说成功，不用默认凭据重试。
-
-Indicator独立通过Wi-Fi HTTP读取同一控制器；不转发YOYO对话，BLE没有主题、照片、番茄钟命令。云MCP是辅助，本Skill没有自建MCP调用能力。
+场景小票采用384点宽、128行带状位图；logo/状态/待办/78牌及正逆位沿用已验收排版。scene: checkin/lunch/meetings/rest/lowbattery；automatic标志1表示自动、0表示用户明确手动。每次有效命令仅生成一次牌面，重复id不重复出纸。标题与短句变体不等于屏幕已经预览了该牌。

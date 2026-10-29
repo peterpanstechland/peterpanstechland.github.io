@@ -1,5 +1,7 @@
 # RoboPlanter XIAO firmware
 
+Current bench and pin allocation: [hardware wiring](../../docs/wiring.md). Bonded BLE pairing and YOYO soil/temperature/humidity reads passed on2026-10-29. Phone actions remain pending; pump load is disconnected. New pairing-code UI/diagnostic source changes are compiled but not reflashed.
+
 Standalone firmware for the supplied **XIAO ESP32-S3 Plus + XIAO Robot Board V1.0**. It does not run or reuse the original car control loop. It provides authenticated HTTP and Bluetooth commands, actual optional sensor measurements, an independently timed external pump output, WS2812 control, and optional UART text transmission.
 
 The supplied configuration disables **all sensors and actuators**. Disabled measurements are `null` with `valid:false`; the firmware does not invent readings. Actions also remain disabled until both `ROBO_ENABLE_ACTIONS=1` and a nondefault 16–64 character device token are configured. A compiled binary is not evidence that the connected hardware has been tested.
@@ -8,13 +10,13 @@ The supplied configuration disables **all sensors and actuators**. Disabled meas
 
 Optional bench configuration: `ROBO_WIFI_STA=1` connects to the private `ROBO_STA_SSID` / `ROBO_STA_PASSWORD` instead of creating the standalone hotspot. Both boards must use the same 2.4GHz LAN; observe the actual DHCP address in the XIAO serial log and set Indicator's private base URL accordingly. The serial log never prints the password or device token. This mode itself does not implement MQTT.
 
-`ROBO_ENABLE_DIAGNOSTIC_READ=1` enables a separate one-use soil-read session for private phone acceptance. It is disabled by default and inactive after boot. An authenticated administrator may provision a distinct 16-hex-character key for at most ten minutes via `/api/v1/diagnostic-session`; BLE `Q|<key>` consumes it once. It grants no HTTP or actuator access. See [the protocol](../../docs/device-protocol.md#可选的单次土壤读取会话). Do not include a live key in public source or distribution packages.
+`ROBO_ENABLE_DIAGNOSTIC_READ=1` enables a legacy one-use soil-read session for earlier private phone acceptance (not the current bonded-v2 route). It is disabled by default and inactive after boot. An authenticated administrator may provision a distinct 16-hex-character key for at most ten minutes via `/api/v1/diagnostic-session`; BLE `Q|<key>` consumes it once. It grants no HTTP or actuator access. See [the protocol](../../docs/device-protocol.md#可选的单次土壤读取会话). Do not include a live key in public source or distribution packages.
 
 `ROBO_WS2813_RMT=1` selects GPIO40/D13 and the direct RMT timing used in the successful four-wire strip diagnostic. It is disabled by default. Sensor and actuator flags remain independent; for a light-only bench configuration keep pump and printer flags at zero. A successful command is software confirmation; visible motion requires observation.
 
 `ROBO_ENABLE_REMOTE_SOIL=1` accepts the original Indicator's authenticated soil relay; it is mutually exclusive with local XIAO soil ADC. The relay checks source boot ID, increasing sequence, ADC range and sample age. Duplicate/stale uploads cannot renew the stored sample. No calibration percentage is supplied by a wet-tissue test, and no irrigation is triggered by this route. See [the wire protocol](../../docs/device-protocol.md).
 
-Dependencies are pinned in `platformio.ini`: Espressif32 6.12.0 (Arduino ESP32 2.0.17), ArduinoJson 6.21.5, Adafruit NeoPixel 1.12.3. Wi-Fi, WebServer, BLE, Wire, HardwareSerial and FreeRTOS come from the Arduino core. SHT31 reads use Wire and verify the sensor's CRC directly.
+Dependencies are pinned in `platformio.ini`: Espressif32 6.12.0 (Arduino ESP32 2.0.17), ArduinoJson 6.21.5, Adafruit NeoPixel 1.12.3. Wi-Fi, WebServer, BLE, Wire, HardwareSerial and FreeRTOS come from the Arduino core. The current bench uses the SEN54 driver; legacy sensor drivers remain optional and disabled for this wiring.
 
 ```sh
 cd firmware/xiao
@@ -25,19 +27,19 @@ The generic ESP32-S3 DevKitC target is overridden for the XIAO Plus **16 MB flas
 
 Copy `include/config.local.example.h` to `include/config.local.h`, then set only options corresponding to verified hardware. Keep that local file private. Do not commit real tokens. Runtime configuration is compiled in, so changes require a rebuild and deliberate upload.
 
-## Wiring assumptions and supported peripherals
+## Current wiring · 2026-10-29
 
 These assignments follow the supplied `XIAO Robot Board_V1.0.pdf`, especially pages 5–6. Connector pin numbers are schematic numbers, **not a promise of left-to-right order when looking at the board**. Check silkscreen, orientation and continuity. Use the signal net and a shared ground; do not infer a sensor supply from a neighbouring connector pin.
 
 | Function | GPIO / board net | Actual implementation and constraints |
 | --- | --- | --- |
-| Soil moisture | GPIO1 / D0 / Servo3 J13 signal | 12-bit ADC, eight-read average. Enable only after confirming an analog-output sensor and 0–3.3 V signal. Configure dry/wet raw values to obtain a relative percentage. |
-| External pump driver | GPIO7 / D8 / Servo4 J14 signal | Active-high logic output to a separate 12 V-rated MOSFET driver. Requires `ROBO_ENABLE_PUMP` and `ROBO_PUMP_HARDWARE_CONFIRMED`. |
-| Air sensor | GPIO8 / D9 / Servo2 J5 signal | Optional raw ADC only, with the servo disconnected and voltage conditioning if required. Requires `ROBO_AUX_PINS_CONFIRMED`. No AQI or pollutant concentration is calculated. |
-| UV sensor (experimental spare) | GPIO9 / D10 / M2 encoder B | Encoder must be disconnected. Board has a **4.7 kΩ pull-up to 3.3 V**, which loads an analog sensor and changes its transfer curve. Disabled by default; not a validated UV measurement or recommended final wiring. |
-| SHT31 | SDA GPIO5 / D4, SCL GPIO6 / D5 | Optional SHT31 at address 0x44 (configurable). Genuine temperature/humidity and CRC checks; this is not an autodriver for unspecified Grove DHT/AHT sensors. |
-| WS2812 strip | GPIO40 / D13 / Grove RGB | Optional GRB 800 kHz strip, configurable count and limited brightness; solid green, four-second breathing, green chase and twelve-second rainbow modes. Not a photosynthetically calibrated grow light. |
-| Thermal printer | TX: GPIO7 / D8 / SERVO4 J14 pin 1; RX: GPIO44 / D7 / UART J10 pin 2 | Hardware UART 8N1. Requires `ROBO_ENABLE_PRINTER`, `ROBO_PRINTER_HARDWARE_CONFIRMED` and `ROBO_PRINTER_D8_WIRING_CONFIRMED`. No pump/servo on SERVO4; pump and printer cannot both be enabled. At most 160 ASCII/LF bytes with fixed ESC/POS initialization/feed. Model-specific status queries are not implemented. |
+| Soil moisture | Indicator RP2040 GPIO27 → authenticated HTTP relay | Current bench uses remote raw ADC with freshness checks; no calibrated percentage yet. XIAO GPIO1 is now occupied by ambient light. |
+| Grove Relay v1.2 | GPIO42 / D15 / SERVO1 J1 pin1 | High-active; 300ms empty-load click/release verified. Load screws empty, pump disabled pending tank/current/commissioning. |
+| Ultrasonic Ranger v2.0 | GPIO8 / D9 / SERVO2 J5 pin1 | Single SIG; separate3.3V supply; distance verified, tank calibration pending. |
+| Light Sensor v1.2 | GPIO1 / D0 / SERVO3 J13 pin1 | Separate3.3V; raw ADC follows shade/light. Replaces UV. |
+| SEN54 | SDA GPIO5 / D4, SCL GPIO6 / D5; 0x69 | IIC1/J11 or IIC2/J12; separate5V, I2C pullups/signals3.3V, common ground. Temperature/RH/PM/VOC replace DHT20 and analogAir; no CO2/NOx. |
+| WS2813 strip | GPIO40 / D13 / RGB J7 | Current bench:10 LEDs,24/255 brightness, RMT; local effects verified, phone control pending. |
+| EM5826H printer | TX GPIO7 / D8 / SERVO4 J14 pin1; RX GPIO44 / D7 / UART J10 pin2 | Independent12V; return logic confirmed3.3V; GPIO43 disconnected.384-dot raster in128-row bands; Chinese,78-card daily ticket, screen preview parity and cutting verified. |
 
 On the supplied V1.0 schematic, J13/J14/J5 pin 1 is the signal, pin 2 is NC, pin 3 is Motor5V, and pin 4 is GND. The firmware does not use Motor5V as a sensor supply. I²C J11/J12 pin 1 is SCL GPIO6, pin 2 SDA GPIO5, pin 3 3.3 V, pin 4 GND. UART J10 pin 1 is TX43, pin 2 RX44, pin 3 3.3 V, pin 4 GND. Verify the exact board revision before using these references.
 
@@ -55,13 +57,13 @@ the current carrier wiring. See [wiring notes](../../docs/wiring.md).
 
 ### 12 V pump and printer
 
-Use properly sized external 12 V power distribution. **Do not attach a 12 V pump to the Robot Board's 5 V motor outputs, and do not feed 12 V into XIAO/Robot Board 3.3 V, 5 V or battery pins.** The pump needs an external driver rated for its startup current, an appropriate flyback diode/protection for the motor, a common logic ground, and a gate/input pull-down that keeps the driver OFF during boot and reset. GPIO7 is only a logic signal. The firmware assumes active-high polarity; do not enable an active-low driver without adapting and checking the implementation. A physical power cutoff remains necessary for bench testing.
+Use properly sized external 12 V power distribution. **Do not attach a 12 V pump to the Robot Board's 5 V motor outputs, and do not feed 12 V into XIAO/Robot Board 3.3 V, 5 V or battery pins.** The pump needs an external driver rated for its startup current, an appropriate flyback diode/protection for the motor, a common logic ground, and a gate/input pull-down that keeps the driver OFF during boot and reset. Current relay control is GPIO42 (SERVO1); GPIO7 belongs to the printer. The relay load remains empty pending actual pump commissioning. The firmware assumes active-high polarity; do not enable an active-low driver without adapting and checking the implementation. A physical power cutoff remains necessary for bench testing.
 
 A printer's **12 V supply rating does not specify its TTL voltage**. Confirm baud, UART protocol, logic levels and current from its actual label/manual. Protect the ESP32's RX from any output above 3.3 V and verify the printer recognises a 3.3 V TX, or use appropriate level shifting. Do not power it from the UART connector's 3.3 V rail. USB-only printer operation is not implemented. `bytes_sent` means the UART peripheral finished transmitting; there is no paper or print-success feedback.
 
-**Printer TX uses SERVO4:** power off, connect printer RX to J14 pin 1 / D8 / GPIO7, and disconnect any pump or servo from SERVO4. Printer TX may connect to J10 pin 2 / GPIO44 only after confirming 3.3V logic or adding level shifting. Connect common GND; do not use either connector power pin. GPIO43 remains disconnected from the printer to avoid ROM boot messages. D8 starts HIGH in printer builds, and pump/printer simultaneous enable is rejected at compile time. UART reception is configured, but printer status querying/decoding is not implemented yet. The earlier GPIO44 transmit-only proposal is superseded. See the [printer guide](../../docs/handbook/uart-printer.md).
+**Printer TX uses SERVO4:** power off, connect printer RX to J14 pin 1 / D8 / GPIO7, and disconnect any pump or servo from SERVO4. Printer TX may connect to J10 pin 2 / GPIO44 only after confirming 3.3V logic or adding level shifting. Connect common GND; do not use either connector power pin. GPIO43 remains disconnected from the printer to avoid ROM boot messages. D8 starts HIGH in printer builds, and sharing the same pump/printer pin is rejected at compile time; runtime actions remain mutually exclusive. UART reception is configured, but printer status querying/decoding is not implemented yet. The earlier GPIO44 transmit-only proposal is superseded. See the [printer guide](../../docs/handbook/uart-printer.md).
 
-Only an explicit confirmed print command writes printer bytes. Each receipt uses ESC/POS reset, normal font, left alignment and default line spacing, followed by validated ASCII/LF text and three feed lines (plus a line terminator if missing). Callers cannot inject control commands. Write failure stops the job; it is never automatically retried.
+Manual confirmed print requests and enabled YOYO scene requests can write printer bytes. Each receipt uses ESC/POS reset, 384-dot GS v 0 raster bands, and ESC d 6 feed. Set `ROBO_PRINTER_CUTTER_CONFIRMED=1` only for compatible verified autocutter hardware to append GS V 0. The 32px bitmap font covers 7,540 ASCII/GB2312 characters; full input validation rejects unsupported glyphs, invalid UTF-8, controls, more than 160 bytes, or more than eight wrapped lines before output. Callers cannot inject printer commands. The nonblocking UART deadline covers raster transmission and drain at the configured baud rate. Any write/drain failure sets `recovery_required` and rejects new print jobs until restart; inspect the result and restart both printer and controller to clear partial raster state. Never automatically replay an uncertain job.
 
 The current D8 wiring permits either pump or printer, never both enabled. The controller also retains an action interlock for a future separately wired pump. This does not replace a correctly sized supply. The local pump cap defaults to 3,000 ms and may be set to 1–30,000 ms only after measuring flow. A priority-10 FreeRTOS task checks the pump deadline every 10 ms; HTTP processing, sensor delays and printing do not hold that task's mutex. This is software timing with scheduler/GPIO jitter, not a certified hardware cutoff. A frozen MCU, failed driver or stuck relay requires separate hardware protection.
 
@@ -87,7 +89,7 @@ At boot the board creates `RoboPlanter-XXXX` (MAC-derived suffix), default Wi-Fi
   "environment": {"temperature_c": null, "humidity_pct": null, "valid": false},
   "pump": {"enabled": false, "on": false, "remaining_ms": 0},
   "light": {"enabled": false, "on": false, "effect": "solid"},
-  "printer": {"enabled": false, "status": "disabled"},
+  "printer": {"enabled": false, "status": "disabled", "text_format": "utf8-raster", "paper_width_dots": 384, "autocut": false, "feedback": "unavailable"},
   "last_command": {"request_id": "", "status": "none", "error": ""}
 }
 ```
@@ -108,7 +110,7 @@ Values above show schema/defaults, not a captured device reading. Sensors are sa
 
 A priority-1 task renders every 40 ms without holding the controller mutex during NeoPixel output. OFF clears the strip synchronously before the command returns; it does not wait for an animation cycle. All modes keep the configured brightness cap. A one-LED chase falls back to breathing. Lights start OFF after reboot, are not persisted, and retain their mode on a network disconnection. Timing and power must still be checked on real hardware. See the [lighting tutorial](../../docs/handbook/ws2812-lighting.md).
 
-Responses are `{ "ok": true|false, "request_id": "...", "status": "accepted"|"completed"|"rejected", "error": "..." }`. Water and queued print return 202/accepted. Stop/light return 200/completed. Invalid or rejected commands return a 4xx response. Printing accepts printable ASCII and LF; raw control codes and unverified multibyte encodings are rejected.
+Responses are `{ "ok": true|false, "request_id": "...", "status": "accepted"|"completed"|"rejected", "error": "..." }`. Water and queued print return 202/accepted. Stop/light return 200/completed. Invalid or rejected commands return a 4xx response. Printing accepts strictly validated UTF-8 from the included ASCII/GB2312 bitmap font and LF; raw control codes, unmapped glyphs and malformed encodings are rejected before output.
 
 `GET /api/v1/result?request_id=dose001` uses the same token header and looks up that request without executing it again. A found record returns HTTP 200 with the same result structure, whether accepted, completed or rejected. An unknown ID returns 404 with `error:"request_not_found"` and the requested ID; an invalid ID returns 400. Poll this endpoint for a specific pending command, because another client's command may replace `state.last_command`. Retrying the **same** POST also retrieves its saved result, but must not be used to replay an uncertain action across a device restart.
 
@@ -145,9 +147,9 @@ The plain HTTP service is local and has no TLS. The network/token model is inten
 | `C\|token\|id\|stop_water` | `D:id` or error | Authenticated stop; available even with actions disabled. |
 | `C\|token\|id\|light\|1` | `D:id` or error | Use `1` for on, `0` for off. |
 | `C\|token\|id\|light\|1\|breath` | `D:id` or error | Optional sixth field: `solid`, `breath`, `chase`, `rainbow`; only with `1`. |
-| `C\|token\|id\|print\|Hello plant` | `A:id` or error | ASCII only; at most 160 text bytes and 240 total request bytes. |
+| `C\|token\|id\|print\|Hello plant` | `A:id` or error | UTF-8 from the included font; at most 160 text bytes and 240 total request bytes; no pipe delimiter inside text. |
 
-`A` means accepted/pending, `D` means completed. Command errors are `E:id:code`; malformed or unauthenticated messages can return `E:FORMAT`, `E:AUTH`, `E:SIZE`, `E:FIELD`, or `E:BUSY` without an ID. `E:STALE` means the sensor sampling cycle is older than 3 seconds; do not interpret that response as a current measurement. Business codes: `LOCK` actions/token not configured; `OFF` peripheral disabled; `BUSY` pump/printer busy; `ID` reused ID with conflicting payload; `FULL` dedupe cache full; `TIME` invalid duration; `IO` UART transmit failed; `ACT` unknown action; `ARG` invalid fields; `MISS` lookup not found. The characteristic is not readable, so a different client cannot read a previous notification from an unauthenticated read operation.
+`A` means accepted/pending, `D` means completed. Command errors are `E:id:code`; malformed or unauthenticated messages can return `E:FORMAT`, `E:AUTH`, `E:SIZE`, `E:FIELD`, or `E:BUSY` without an ID. `E:STALE` means the sensor sampling cycle is older than 3 seconds; do not interpret that response as a current measurement. Business codes: `LOCK` actions/token not configured; `OFF` peripheral disabled; `BUSY` pump/printer busy; `ID` reused ID with conflicting payload; `FULL` dedupe cache full; `TIME` invalid duration; `IO` UART transmit failed or printer recovery required; `ACT` unknown action; `ARG` invalid fields; `MISS` lookup not found. The characteristic is not readable, so a different client cannot read a previous notification from an unauthenticated read operation.
 
 ## Bring-up and verification
 

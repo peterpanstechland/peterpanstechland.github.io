@@ -2,22 +2,27 @@
 
 > 你先下班，我负责发芽。
 
-RoboPlanter 是一个以工位绿植为起点的开源硬件项目，将 YOYO 对话、XIAO 设备控制和 Indicator 像素养成连接起来。你可以使用现有套件复现，也可以为自己的硬件编写适配器。
+RoboPlanter 是一个以工位绿植为起点的硬件项目，将 YOYO 对话、XIAO 设备控制和 Indicator 像素养成连接起来。你可以使用现有套件复现，也可以为自己的硬件编写适配器。
 
 [互动体验](https://peterpanstechland.github.io/roboplanter/) · [下载源码包](https://peterpanstechland.github.io/roboplanter/downloads/roboplanter-starter.zip) · [下载 Device Kit](https://peterpanstechland.github.io/roboplanter/downloads/roboplanter-device-kit.zip) · [功能进度](roadmap-evidence.md)
 
 源码包包含固件、示例配置、教程和测试。下载后可通过 [文件清单与 SHA-256](https://peterpanstechland.github.io/roboplanter/downloads/manifest.json) 核对完整性，再按教程填写自己的配置并构建固件。
+
+更新：2026-10-29。**手机加密绑定与YOYO实时土壤/温湿度读取已通过；SEN54、超声波、环境光和打印链路已接入。** 水箱和泵负载仍待完成。
 
 ## 从这里开始
 
 | 内容 | 文档 |
 | --- | --- |
 | 了解工位搭子与产品设计 | [项目介绍](product-story.md) |
+| 当前接线总表、供电和替代模块 | [最新硬件接线](../wiring.md) |
+| 首次配对、场景小票、番茄钟与提示音 | [YOYO日常交互](yoyo-companion.md) |
 | 认板、接线、备份和烧录 | [硬件入门](hardware-quickstart.md) |
 | 了解植物精灵与真实生长周期 | [植物生长与陪伴](plant-companion.md) |
 | 查询地区、作物和生长阶段相关资料 | [作物知识库](crop-knowledge.md) |
 | 配置常亮、呼吸、流动和彩虹灯效 | [灯带教程](ws2812-lighting.md) |
 | 连接串口打印机 | [小票打印教程](uart-printer.md) |
+| 打印 Logo、植物状态、待办和塔罗 | [工位日签](daily-ticket.md) |
 | 编写、导入和测试 YOYO Skill | [荣耀 Skill 图文教程](honor-platform.md) |
 | 了解 BLE 参数、鉴权和回包 | [BLE 接入教程](ble-integration.md) |
 | 为其他控制板添加能力描述 | [Device Kit](device-platform.md) |
@@ -36,6 +41,6 @@ RoboPlanter 是一个以工位绿植为起点的开源硬件项目，将 YOYO �
 
 ## 设备与界面
 
-**真实设备**负责采集和执行，状态页显示有效性与校准状态。**屏幕养成**提供植物精灵和本地专注计时，游戏浇水不会开启水泵。**网页体验**展示交互与外观概念，使用浏览器内的模拟状态。
+**真实设备**负责采集和执行，状态页显示有效性与校准状态。**屏幕养成**提供植物精灵和主控共享专注计时（无共享能力时回退本地），游戏浇水不会开启水泵。**网页体验**展示交互与外观概念，使用浏览器内的模拟状态。
 
 当前功能和开发方向统一列在 [功能进度与开发计划](roadmap-evidence.md)。

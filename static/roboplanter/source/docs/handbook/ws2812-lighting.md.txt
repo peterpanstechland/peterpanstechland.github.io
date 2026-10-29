@@ -4,6 +4,8 @@
 
 灯光是桌面氛围，不是植物健康读数，也不是经过光合标定的生长灯。网页灯珠环和粒子是可交互预览，不连接真实灯带；网页展示的灯珠数量不能当作实际配置。
 
+当前台架实际使用Grove WS2813四线灯带，RGB GPIO40，10颗、亮度上限24/255；使用已验证的RMT驱动路径。本教程的WS2812名称指兼容单线协议家族，不代表所有Grove灯带可直接互换。手机开关灯验收仍待完成。
+
 ## 1. 四种模式怎么选
 
 | 模式 | 命令值 | 固件行为 | 适合的使用时刻 |
@@ -76,18 +78,18 @@ HTTP 继续使用 `/api/v1/command` 及 `X-Device-Token` 请求头。例如：
 
 `effect` 仅在 `on:true` 时可选，严格接受 `solid`、`breath`、`chase`、`rainbow`。省略等价于 `solid`；关灯不带此字段。没有组合动作或额外参数。省略与显式 `solid` 是相同幂等请求；相同 ID 换模式会冲突，不能用新 ID 自动补发一个结果未知的动作。
 
-BLE 保留旧五字段命令，并为开灯提供第六字段：
+当前绑定BLE v2使用公开V前缀（非令牌）；以下例子以新请求ID替换id：
 
 ```text
-C|token|id|light|1          柔绿常亮
-C|token|id|light|1|breath   慢呼吸
-C|token|id|light|1|chase    流动
-C|token|id|light|1|rainbow  彩虹
-C|token|id|light|0          关灯
-S|token|light              回包仍为 L:enabled:on
+V|C|id|light|1          柔绿常亮
+V|C|id|light|1|breath   慢呼吸
+V|C|id|light|1|chase    流动
+V|C|id|light|1|rainbow  彩虹
+V|C|id|light|0          关灯
+V|S|light              回包仍为 L:enabled:on
 ```
 
-`token` / `id` 是字段说明，不是真实凭据；BLE 的 ID 最多 8 字符，请求总长最多 240 字节。查询格式维持兼容，**BLE 查询不回报模式**；需要模式读回时使用 HTTP `light.effect`。荣耀的长写、通知和凭据注入条件见 [BLE 教程](ble-integration.md)。下载的 Skill 包仅开放联通诊断，手机灯效控制需要单独接入。
+`V`是公开版本标记，`id`是请求编号，不是真实凭据；BLE 的 ID 最多 8 字符，请求总长最多 240 字节。查询格式维持兼容，**BLE 查询不回报模式**；需要模式读回时使用 HTTP `light.effect`。荣耀的长写、通知和加密配对条件见 [BLE 教程](ble-integration.md)。当前0.4.0 Skill提供开关灯；手机验收仍待完成，四种效果的语音选择未在Skill中映射。
 
 本地 MCP 的六工具数量不变，`set_light(request_id, on, effect)` 增加可省略的枚举参数。云端 MCP 的所有写操作仍禁用，不能通过本地灯效参数绕过。
 
@@ -108,3 +110,5 @@ S|token|light              回包仍为 L:enabled:on
 人物说“今天电量只剩一点点”，镜头从屏幕小精灵移到桌沿慢呼吸，字幕接“那我们今天省电生长”。切一个流动模式近景，再回到人继续做自己的事。最后一句可以是：“它不催我上进，主要催自己发芽。”
 
 网页录屏标“灯效预览”，完成实体板验证后的实拍才标“WS2812 实机灯效”。保留环境光下的真实亮度，不用后期光圈冒充硬件，也不把彩虹变化叫作植物健康监测。
+
+当前YOYO 0.4.0使用加密绑定的 `V|C|id|light|1` / `0`；下方或旧版token格式不能直接放入当前Skill。四种灯效的固件能力不等于Skill已开放全部灯效话术。见[BLE v2](ble-integration.md)。
