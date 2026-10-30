@@ -16,7 +16,7 @@ RoboPlanter 是一个以工位绿植为起点的硬件项目，将 YOYO 对话�
 
 源码包包含固件、示例配置、教程和测试。下载后可通过 [文件清单与 SHA-256](https://peterpanstechland.github.io/roboplanter/downloads/manifest.json) 核对完整性，再按教程填写自己的配置并构建固件。
 
-更新：2026-10-29。**手机加密绑定与YOYO实时土壤/温湿度读取已通过；SEN54、超声波、环境光和打印链路已接入。** 新增屏幕土壤/水箱校准工具。用户确认12V/150mA泵已接，水箱尚未完成，泵仍禁用。
+更新：2026-10-29。**手机加密绑定与YOYO实时土壤/温湿度读取已通过；SEN54、超声波、环境光和打印链路已接入。** 屏幕已有土壤/水箱校准及自动灯光阈值设置。用户确认水箱、进出水与实际标定完成后，本机12V/150mA泵已启用；用户确认500ms短出水后停止，灯光设置页面与保存正常。
 
 ## 从这里开始
 
@@ -29,7 +29,7 @@ RoboPlanter 是一个以工位绿植为起点的硬件项目，将 YOYO 对话�
 | 认板、接线、备份和烧录 | [硬件入门](/docs/projects/2026/roboplanter/hardware-quickstart) |
 | 了解植物精灵与真实生长周期 | [植物生长与陪伴](/docs/projects/2026/roboplanter/plant-companion) |
 | 查询地区、作物和生长阶段相关资料 | [作物知识库](/docs/projects/2026/roboplanter/crop-knowledge) |
-| 配置常亮、呼吸、流动和彩虹灯效 | [灯带教程](/docs/projects/2026/roboplanter/ws2812-lighting) |
+| 设置自动开关阈值与四种灯效 | [灯带教程](/docs/projects/2026/roboplanter/ws2812-lighting) |
 | 连接串口打印机 | [小票打印教程](/docs/projects/2026/roboplanter/uart-printer) |
 | 打印 Logo、植物状态、待办和塔罗 | [工位日签](/docs/projects/2026/roboplanter/daily-ticket) |
 | 编写、导入和测试 YOYO Skill | [荣耀 Skill 图文教程](/docs/projects/2026/roboplanter/honor-platform) |

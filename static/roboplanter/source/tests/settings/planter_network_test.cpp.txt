@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     else if (scenario == "commands-queue") settingsTestFailQueueOn = 2;
     else if (scenario == "stops-queue") settingsTestFailQueueOn = 3;
     else if (scenario == "task") settingsTestTaskFail = true;
-    if (scenario != "stop-switch" && scenario != "print" && scenario != "sensors" && scenario != "companion" && scenario != "calibration") {
+    if (scenario != "stop-switch" && scenario != "print" && scenario != "sensors" && scenario != "companion" && scenario != "calibration" && scenario != "auto-light") {
       CHECK(!planter::begin()); CHECK(settingsTestTask == nullptr);
       CHECK(!device_settings::wifiState().ready); CHECK(!device_settings::planterNetworkReady());
       CHECK(!device_settings::requestScan()); CHECK(!device_settings::requestConnect("office", "test-password"));
@@ -40,6 +40,32 @@ int main(int argc, char **argv) {
       const bool settingsFailed = scenario == "settings-mutex" || scenario == "settings-queue";
       CHECK(settingsTestLiveMutexes == (settingsFailed ? 0U : 1U));
       CHECK(settingsTestLiveQueues == (settingsFailed ? 0U : 1U));
+    } else if(scenario=="auto-light") {
+      CHECK(planter::begin());
+      auto fixture=[](unsigned revision,bool enabled,bool pump=false) {
+        return String("{\"schema_version\":1,\"device_id\":\"mock-planter\",\"sample_age_ms\":0,\"auto_light\":{\"schema\":1,\"available\":true,\"writable\":true,\"paused\":false,\"sensor_stale\":false,\"revision\":")+std::to_string(revision)+",\"enabled\":"+(enabled?"true":"false")+",\"on_below\":1200,\"off_above\":1800},\"pump\":{\"enabled\":true,\"water_allowed\":true,\"on\":"+(pump?"true":"false")+"}}";
+      };
+      settingsTestStateBody=fixture(0,false);connectConfiguredNetwork();
+      auto state=planter::snapshot();CHECK(state.autoLightKnown&&state.autoLightAvailable&&state.autoLightWritable);
+      auto settings=state.autoLight;settings.enabled=true;
+      CHECK(planter::submitAutoLight(settings));CHECK(!planter::submitAutoLight(settings));CHECK(!planter::submit(planter::Action::Water));
+      settingsTestPostHook=[&](const String& body) {
+        StaticJsonDocument<256> doc;CHECK(!deserializeJson(doc,body));CHECK(doc["enabled"]==true&&doc["on_below"]==1200&&doc["off_above"]==1800&&doc["revision"]==0);
+        settingsTestPostBody="{\"ok\":true,\"revision\":1}";settingsTestStateBody=fixture(1,true);
+      };
+      workerOnce();CHECK(settingsTestPosts.size()==1);CHECK(settingsTestPosts.back().url.find("/api/v1/auto-light")!=String::npos);
+      CHECK(planter::snapshot().autoLightWrite==planter::CalibrationWrite::Saved);CHECK(!planter::submitAutoLight(settings));
+      settings.revision=1;settings.enabled=false;
+      settingsTestStateBody=fixture(1,true,true);pollState();CHECK(!planter::submitAutoLight(settings));
+      settingsTestStateBody=fixture(1,true);pollState();CHECK(planter::submitAutoLight(settings));
+      settingsTestPostHook=[&](const String&){settingsTestPostCode=-1;};workerOnce();
+      CHECK(planter::snapshot().autoLightWrite==planter::CalibrationWrite::Unknown);
+      auto sent=settingsTestPosts.size();settingsTestNow+=2000;workerOnce();CHECK(settingsTestPosts.size()==sent);
+      settingsTestStateBody=fixture(2,false);pollState();CHECK(planter::snapshot().autoLightWrite==planter::CalibrationWrite::Saved);
+      settings.revision=2;CHECK(planter::submitAutoLight(settings));settingsTestNow+=kStaleMs+1;workerOnce();
+      CHECK(settingsTestPosts.size()==sent&&planter::snapshot().autoLightWrite==planter::CalibrationWrite::Failed);
+      settingsTestStateBody=fixture(2,false);pollState();CHECK(planter::submitAutoLight(settings));
+      CHECK(device_settings::requestConnect("untrusted","test-password"));workerOnce();CHECK(settingsTestPosts.size()==sent);
     } else if (scenario == "calibration") {
       CHECK(planter::begin());
       auto fixture = [](unsigned revision, int dry, int wet, bool pump = false) {

@@ -1,5 +1,6 @@
 #include "planter_client.h"
 #include "../../xiao/include/daily_json.h"
+#include "../../xiao/include/auto_light_json.h"
 #include "config.h"
 #include "device_settings.h"
 #include "local_soil.h"
@@ -16,10 +17,13 @@
 namespace {
 using namespace planter;
 struct Command { Action action; bool on; char id[33]; uint32_t networkRevision; PrintReceipt receipt; uint16_t focusMinutes;
-  bool calibrationWrite = false; robo::CalibrationEdit calibration; };
+  bool calibrationWrite = false; robo::CalibrationEdit calibration;
+  bool lightSettingsWrite=false; robo::AutoLightSettings autoLight; };
 State shared;
 robo::CalibrationEdit lastCalibrationEdit;
 uint32_t calibrationNetwork = 0;
+robo::AutoLightSettings lastAutoLight;
+uint32_t autoLightNetwork=0;
 SemaphoreHandle_t lock = nullptr;
 QueueHandle_t commands = nullptr, stops = nullptr;
 uint32_t bootNonce = 0, sequence = 0;
@@ -38,6 +42,11 @@ bool calibrationBusy(CalibrationWrite state) {
 void calibrationResult(CalibrationWrite state, const char* error = "") {
   xSemaphoreTake(lock, portMAX_DELAY);
   shared.calibrationWrite = state; copy(shared.calibrationError, error);
+  xSemaphoreGive(lock);
+}
+void autoLightResult(CalibrationWrite state, const char* error="") {
+  xSemaphoreTake(lock,portMAX_DELAY);
+  shared.autoLightWrite=state; copy(shared.autoLightError,error);
   xSemaphoreGive(lock);
 }
 void networkError(const char *message, NetworkFailure failure = NetworkFailure::Http, int status = 0) {
@@ -212,6 +221,17 @@ void pollState() {
   next.lightKnown = light["enabled"].is<bool>() && light["on"].is<bool>();
   next.lightEnabled = next.lightKnown && light["enabled"].as<bool>();
   next.lightOn = next.lightKnown && light["on"].as<bool>();
+  const auto automatic=doc["auto_light"];
+  next.autoLightKnown=automatic["schema"].is<unsigned>() && automatic["schema"].as<unsigned>()==1 &&
+    automatic["available"].is<bool>() && automatic["writable"].is<bool>() && automatic["paused"].is<bool>() && automatic["sensor_stale"].is<bool>();
+  // Reuse the strict request parser on the four settings fields only.
+  StaticJsonDocument<256> lightSettings;
+  for(const char* key:{"enabled","revision","on_below","off_above"})lightSettings[key]=automatic[key];
+  next.autoLightKnown=next.autoLightKnown && robo::parseAutoLight(lightSettings.as<JsonVariantConst>(),next.autoLight);
+  if(next.autoLightKnown) {
+    next.autoLightAvailable=automatic["available"];next.autoLightWritable=automatic["writable"];
+    next.autoLightPaused=automatic["paused"];next.autoLightStale=automatic["sensor_stale"];
+  }
   const auto printer = doc["printer"];
   next.printerKnown = printer["enabled"].is<bool>() && printer["status"].is<const char *>();
   next.printerEnabled = next.printerKnown && printer["enabled"].as<bool>();
@@ -223,6 +243,9 @@ void pollState() {
 
   xSemaphoreTake(lock, portMAX_DELAY);
   copy(next.requestId, shared.requestId);
+  next.autoLightWrite=shared.autoLightWrite;copy(next.autoLightError,shared.autoLightError);
+  if(next.autoLightWrite==CalibrationWrite::Unknown && next.autoLightKnown && requestNetwork==autoLightNetwork &&
+     robo::sameAutoLight(next.autoLight,lastAutoLight)) { next.autoLightWrite=CalibrationWrite::Saved;next.autoLightError[0]=0; }
   next.calibrationWrite = shared.calibrationWrite;
   copy(next.calibrationError, shared.calibrationError);
   if (next.calibrationWrite == CalibrationWrite::Unknown && next.calibrationKnown && requestNetwork == calibrationNetwork &&
@@ -352,7 +375,34 @@ void sendCalibration(const Command& command) {
   } else calibrationResult(CalibrationWrite::Unknown, "unverified_response");
 }
 
+void sendAutoLight(const Command& command) {
+  const auto state=planter::snapshot();
+  if(!planter::fresh(state,millis()) || !state.autoLightKnown || !state.autoLightAvailable || !state.autoLightWritable ||
+    !state.pumpKnown || state.pumpOn || command.networkRevision!=state.networkRevision || command.networkRevision!=device_settings::networkRevision()) {
+    autoLightResult(CalibrationWrite::Failed,"not_sent"); return;
+  }
+  const auto &settings=command.autoLight;
+  if(settings.revision!=state.autoLight.revision || settings.revision==UINT32_MAX || !settings.valid()) {
+    autoLightResult(CalibrationWrite::Failed,"settings_conflict");return;
+  }
+  WiFiClient client;HTTPClient http;
+  if(!configureHttp(http,client,"/api/v1/auto-light")) { autoLightResult(CalibrationWrite::Failed,"not_sent");return; }
+  StaticJsonDocument<256> input;
+  input["enabled"]=settings.enabled;input["revision"]=settings.revision;
+  input["on_below"]=settings.onBelow;input["off_above"]=settings.offAbove;
+  String body;serializeJson(input,body);http.addHeader("Content-Type","application/json");
+  autoLightResult(CalibrationWrite::Saving);
+  const int code=http.POST(body);
+  if(code<=0 || http.getSize()<0 || http.getSize()>1024) { http.end();autoLightResult(CalibrationWrite::Unknown,"response_lost");return; }
+  const String response=http.getString();http.end();StaticJsonDocument<512> result;
+  if(deserializeJson(result,response) || !result["ok"].is<bool>()) { autoLightResult(CalibrationWrite::Unknown,"unverified_response");return; }
+  if(code==200 && result["ok"].as<bool>() && result["revision"].is<uint32_t>() && !result["revision"].is<bool>() && result["revision"].as<uint32_t>()==settings.revision+1)autoLightResult(CalibrationWrite::Saved);
+  else if(code>=400 && code<600 && !result["ok"].as<bool>())autoLightResult(CalibrationWrite::Failed,result["error"]|"save_failed");
+  else autoLightResult(CalibrationWrite::Unknown,"unverified_response");
+}
+
 void sendCommand(const Command &command) {
+  if(command.lightSettingsWrite) { sendAutoLight(command); return; }
   if (command.calibrationWrite) { sendCalibration(command); return; }
   if (WiFi.status() != WL_CONNECTED || !device_settings::planterNetworkReady() ||
       command.networkRevision != device_settings::networkRevision()) {
@@ -431,6 +481,7 @@ void networkTask(void *) {
     if (xQueueReceive(stops, &command, 0) == pdTRUE) {
       xQueueReset(commands);
       if (planter::snapshot().calibrationWrite == CalibrationWrite::Queued) calibrationResult(CalibrationWrite::Failed, "cancelled");
+      if(planter::snapshot().autoLightWrite==CalibrationWrite::Queued)autoLightResult(CalibrationWrite::Failed,"cancelled");
       sendCommand(command);
       // Keep settings from invalidating this STOP between enqueue and POST.
       // Release on every result, including not_sent/unknown; never replay it.
@@ -545,7 +596,7 @@ bool submit(Action action, bool lightOn, const PrintReceipt *receipt, uint16_t f
                        action == Action::Light ? shared.lightEnabled : shared.printerEnabled;
   if (!enabled || !shared.wifi || shared.networkRevision != device_settings::networkRevision() ||
       (action == Action::Water && !shared.waterAllowed) ||
-      !device_settings::planterNetworkReady() || (!stop && (!fresh(shared, millis()) || shared.commandBlocked || calibrationBusy(shared.calibrationWrite))) ||
+      !device_settings::planterNetworkReady() || (!stop && (!fresh(shared, millis()) || shared.commandBlocked || calibrationBusy(shared.calibrationWrite) || calibrationBusy(shared.autoLightWrite))) ||
       (action == Action::Print && (!strcmp(shared.printerStatus, "recovery_required") ||
        (receipt->requiresRaster && !shared.printerRaster) ||
        (receipt->layout32 && !shared.printerLayout32) ||
@@ -583,7 +634,7 @@ bool submitCalibration(const robo::CalibrationEdit& edit) {
   xSemaphoreTake(lock, portMAX_DELAY);
   robo::SensorCalibration candidate;
   const bool allowed = fresh(shared, millis()) && shared.calibrationKnown && shared.calibrationWritable &&
-    shared.pumpKnown && !shared.pumpOn && !shared.commandBlocked && !calibrationBusy(shared.calibrationWrite) &&
+    shared.pumpKnown && !shared.pumpOn && !shared.commandBlocked && !calibrationBusy(shared.calibrationWrite) && !calibrationBusy(shared.autoLightWrite) &&
     !*robo::applyCalibration(shared.calibration, edit, candidate);
   Command command{};
   command.calibrationWrite = true; command.calibration = edit; command.networkRevision = shared.networkRevision;
@@ -593,6 +644,20 @@ bool submitCalibration(const robo::CalibrationEdit& edit) {
     lastCalibrationEdit = edit; calibrationNetwork = shared.networkRevision;
   }
   xSemaphoreGive(lock); return queued;
+}
+bool submitAutoLight(const robo::AutoLightSettings& settings) {
+  if(!lock || !commands || !settings.valid() || settings.revision==UINT32_MAX)return false;
+  xSemaphoreTake(lock,portMAX_DELAY);
+  const bool allowed=fresh(shared,millis()) && shared.autoLightKnown && shared.autoLightAvailable && shared.autoLightWritable &&
+    shared.pumpKnown && !shared.pumpOn && !shared.commandBlocked && !calibrationBusy(shared.autoLightWrite) &&
+    !calibrationBusy(shared.calibrationWrite) && settings.revision==shared.autoLight.revision;
+  Command command{};command.lightSettingsWrite=true;command.autoLight=settings;command.networkRevision=shared.networkRevision;
+  const bool queued=allowed && xQueueSend(commands,&command,0)==pdTRUE;
+  if(queued) {
+    shared.autoLightWrite=CalibrationWrite::Queued;shared.autoLightError[0]=0;
+    lastAutoLight=settings;++lastAutoLight.revision;autoLightNetwork=shared.networkRevision;
+  }
+  xSemaphoreGive(lock);return queued;
 }
 void acknowledgeUncertain() {
   if (!lock) return;

@@ -12,10 +12,10 @@ namespace {
 using device_settings::Language;
 using device_settings::WifiError;
 using device_settings::WifiPhase;
-enum class Page : uint8_t { Menu, Wifi, Password, About, Planter, Yoyo, Calibration, Soil, Tank, ResetCalibration };
+enum class Page : uint8_t { Menu, Wifi, Password, About, Planter, Yoyo, Calibration, Soil, Tank, ResetCalibration, AutoLight };
 struct Rect { int16_t x, y, w, h; };
 constexpr Rect kChinese{24, 117, 208, 48}, kEnglish{248, 117, 208, 48};
-constexpr Rect kWifi{16, 181, 448, 76}, kPlanter{16, 394, 216, 54}, kAbout{248, 394, 216, 54};
+constexpr Rect kWifi{16, 181, 216, 76}, kLightSettings{248,181,216,76}, kPlanter{16, 394, 216, 54}, kAbout{248, 394, 216, 54};
 constexpr Rect kCompanion{24,332,208,60}, kCalibration{248,332,208,60}, kPairPhone{24,174,432,54}, kAutoPrint{24,316,432,54};
 constexpr Rect kPairedNetwork{24, 411, 208, 52}, kNetworkSettings{248, 411, 208, 52};
 constexpr Rect kMinus{24, 321, 56, 56}, kSlider{96, 321, 288, 56}, kPlus{400, 321, 56, 56};
@@ -159,7 +159,11 @@ void drawMenu(const ui_theme::Theme &t) {
   ui_theme::icon(g, ui_theme::Icon::Wifi, 31, 198, 32, t.accent);
   text(78, 193, "Wi-Fi", t.ink);
   const auto state = device_settings::wifiState();
-  text(78, 226, phaseText(state), t.muted, 16, 338); text(428, 202, ">", t.ink, 24, 24);
+  text(30, 226, phaseText(state), t.muted, 16, 188);
+  const auto planterState=planter::snapshot();
+  g.fillRoundRect(kLightSettings.x,kLightSettings.y,kLightSettings.w,kLightSettings.h,12,t.surface);
+  text(264,193,tr("灯光设置","Light settings"),t.ink,24,184);
+  text(264,226,planterState.autoLightKnown ? (planterState.autoLight.enabled ? (planterState.autoLightPaused ? tr("自动已暂停","Auto paused") : tr("自动模式开启","Auto enabled")) : tr("手动模式","Manual mode")) : tr("等待读取","Waiting for data"),t.muted,16,184);
   g.fillRoundRect(16, 273, 448, 110, 12, t.surface);
   text(32, 284, tr("屏幕亮度", "Brightness"), t.ink);
   char value[8]; snprintf(value, sizeof(value), "%u%%", indicator::brightness());
@@ -284,6 +288,7 @@ void drawYoyo(const ui_theme::Theme &t,uint32_t now) {
   text(24,423,tr("关闭后仍可主动要求打印","Explicit print requests still work when off"),t.muted,16);
 }
 #include "calibration_ui.h"
+#include "auto_light_ui.h"
 
 void brightness(uint8_t value) {
   indicator::setBrightness(value);
@@ -316,6 +321,7 @@ const char *title() {
     case Page::Soil: return tr("土壤干湿校准", "Soil calibration");
     case Page::Tank: return tr("水箱水位校准", "Tank calibration");
     case Page::ResetCalibration: return tr("清除校准", "Reset calibration");
+    case Page::AutoLight: return tr("自动灯光", "Automatic lighting");
     default: return tr("设备设置", "Settings");
   }
 }
@@ -333,16 +339,19 @@ void draw(uint32_t now, uint8_t themeId) {
     case Page::Calibration: drawCalibrationMenu(t, now); break;
     case Page::Soil: case Page::Tank: drawCalibrationEditor(t, now); break;
     case Page::ResetCalibration: drawCalibrationReset(t); break;
+    case Page::AutoLight: drawAutoLight(t,now); break;
   }
 }
 bool handle(ui::Gesture gesture, const ui::TouchGate &touch, uint32_t now) {
   if (!opened) return false;
   if (gesture != ui::Gesture::Tap) return true;
+  if(page==Page::AutoLight) { handleAutoLight(touch,now); return true; }
   if (handleCalibration(touch, now)) return true;
   if (page == Page::Menu) {
     if (tapped(kChinese, touch)) settingsRejected = !device_settings::setLanguage(Language::Chinese);
     else if (tapped(kEnglish, touch)) settingsRejected = !device_settings::setLanguage(Language::English);
     else if (tapped(kWifi, touch)) showWifi();
+    else if(tapped(kLightSettings,touch))openAutoLight();
     else if (tapped(kAbout, touch)) page = Page::About;
     else if (tapped(kPlanter, touch)) page = Page::Planter;
     else if (tapped(kMinus, touch)) brightness(indicator::brightness() > 10 ? indicator::brightness() - 5 : 5);

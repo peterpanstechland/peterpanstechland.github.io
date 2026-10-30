@@ -138,7 +138,7 @@ def sync(site: Path, source_ref: str) -> dict:
         copy.parent.mkdir(parents=True, exist_ok=True)
         copy.write_bytes(path.read_bytes())
     (downloads / "manifest.json").write_text(json.dumps({"device_kit": kit, "starter": starter, "honor_skill": honor_skill}, indent=2) + "\n", encoding="utf-8")
-    block = "\n<!-- ROBOPLANTER:START -->\n### [工位搭子 · RoboPlanter](/docs/projects/2026/roboplanter/)\n\n你先下班，我负责发芽。YOYO Skill、XIAO 设备控制、Indicator 像素养成，以及可供自带硬件使用的离线 Device Kit。\n\n[互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)\n\n**进度：** 2026-10-29：手机加密配对及YOYO实时读取已通过；中文日签、预览一致性与自动切纸已验收。SEN54、环境光和超声波已接入，继电器空载通过；12V/150mA泵负载已接但禁用，待水箱完成；屏幕校准工具已接入。手机动作仍待逐项验收，网页交互为模拟。\n<!-- ROBOPLANTER:END -->\n"
+    block = "\n<!-- ROBOPLANTER:START -->\n### [工位搭子 · RoboPlanter](/docs/projects/2026/roboplanter/)\n\n你先下班，我负责发芽。YOYO Skill、XIAO 设备控制、Indicator 像素养成，以及可供自带硬件使用的离线 Device Kit。\n\n[互动体验与原创工位海报](https://peterpanstechland.github.io/roboplanter/) · [硬件与荣耀平台教程](/docs/projects/2026/roboplanter/hardware-quickstart) · [设备接入方案](/docs/projects/2026/roboplanter/device-platform)\n\n**进度：** 2026-10-29：手机加密配对及YOYO实时读取已通过；中文日签、预览一致性与自动切纸已验收。SEN54、环境光和超声波已接入，继电器空载通过；水箱和实际标定获用户确认后，本机12V/150mA泵已启用；屏幕已有校准工具与自动灯光阈值设置。手机动作仍待逐项验收，网页交互为模拟。\n<!-- ROBOPLANTER:END -->\n"
     indexes = [site / "docs/projects/index.md", site / "i18n/zh-Hans/docusaurus-plugin-content-docs/current/projects/index.md"]
     for path in indexes:
         original = path.read_text(encoding="utf-8")

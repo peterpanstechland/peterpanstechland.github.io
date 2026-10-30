@@ -8,6 +8,7 @@
 #include "daily_ticket.h"
 #include "water_tank.h"
 #include "focus_session.h"
+#include "auto_light.h"
 
 namespace robo {
 
@@ -134,6 +135,7 @@ class Controller {
     } else if (command.action == "stop_water") {
       completePump();
     } else if (command.action == "light") {
+      autoLight_.pause();
       lightOn_ = command.on;
       lightEffect_ = command.on && command.hasEffect ? command.effect : "solid";
     } else if ((command.action == "print" || command.action == "print_scene" || command.action == "print_daily" || command.action == "print_calibration")) {
@@ -157,6 +159,7 @@ class Controller {
 
   void tick(uint32_t now) {
     focus_.tick(now);
+    if(autoLight_.shouldFailOff(now))lightOn_=false;
     if (pumpOn_ && *waterBlockReason(now)) {
       pumpOn_ = false;
       finish(pumpRequestId_, false, waterBlockReason(now));
@@ -167,8 +170,22 @@ class Controller {
   }
 
   void updateTank(int distanceMm, uint32_t now) { tank_.update(distanceMm, now); tick(now); }
+  void updateAmbient(int raw, bool valid, uint32_t now) {
+    if(!config_.lightEnabled || !config_.actionsEnabled || !config_.credentialsConfigured)return;
+    const int decision=autoLight_.sample(raw,valid,now,lightOn_);
+    if(decision>=0) { lightOn_=decision==1; lightEffect_="solid"; }
+  }
+  const AutoLight& autoLight() const { return autoLight_; }
+  bool beginLightSettings() {
+    if(pumpOn_ || calibrationBusy_ || lightSettingsBusy_)return false;
+    lightSettingsBusy_=true; return true;
+  }
+  void finishLightSettings(const AutoLightSettings& settings, bool failed=false) {
+    autoLight_.configure(settings); lightSettingsBusy_=false;
+    if(failed)lightOn_=false;
+  }
   bool beginCalibration() {
-    if (pumpOn_ || calibrationBusy_) return false;
+    if (pumpOn_ || calibrationBusy_ || lightSettingsBusy_) return false;
     calibrationBusy_ = true; return true;
   }
   void finishCalibration(TankCalibration calibration) {
@@ -179,6 +196,7 @@ class Controller {
   void restoreAutoPrint(bool value) {autoPrint_=value;}
   const FocusSession& focus() const {return focus_;}
   const char* waterBlockReason(uint32_t now) const {
+    if(lightSettingsBusy_)return "light_settings_busy";
     if (calibrationBusy_) return "calibration_busy";
     return config_.tankRequired ? tank_.error(now) : "";
   }
@@ -219,6 +237,8 @@ class Controller {
   struct Entry { Command command; Result result; };
   Config config_;
   TankGuard tank_;
+  AutoLight autoLight_;
+  bool lightSettingsBusy_=false;
   FocusSession focus_;
   bool autoPrint_=true;
   bool scenePrinted_[6]={};
@@ -270,6 +290,7 @@ class Controller {
           c.durationMs <= 0 || c.durationMs > config_.maxWaterMs)
         return "invalid_duration";
     } else if (c.action == "light") {
+      if(lightSettingsBusy_)return "light_settings_busy";
       if (!config_.lightEnabled) return "light_disabled";
       if (!c.hasOn || c.hasDuration || c.hasText) return "invalid_light_fields";
       if (c.hasEffect) {
