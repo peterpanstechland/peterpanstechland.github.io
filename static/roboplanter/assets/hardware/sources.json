@@ -1,0 +1,28 @@
+{
+  "retrieved_on": "2026-11-01",
+  "usage": "Official product photographs for hardware identification; trademarks and images belong to their respective owners.",
+  "processing": "Proportional resizing to at most 1000 px; web image compression; no generative edits.",
+  "assets": [
+    {
+      "file": "honor-robot-phone.webp",
+      "owner": "HONOR",
+      "product_page": "https://www.honor.com/cn/phones/honor-robot-phone/",
+      "source_image": "https://www-file.honor.com/content/dam/honor/common/product-list/product-series/honor-robot-phone/honor-robot-phone-silver-back.png",
+      "sha256": "436fa999091d1f0637930a670f0980785ea6460223e076df8b660d746a499356"
+    },
+    {
+      "file": "xiao-esp32s3-plus.jpg",
+      "owner": "Seeed Studio",
+      "product_page": "https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32S3-Plus-p-6361.html",
+      "source_image": "https://media-cdn.seeedstudio.com/media/catalog/product/cache/bb49d3ec4ee05b6f018e93f896b8a25d/1/-/1-102010671-seeedstudio-xiao-esp32s3-plus_1.jpg",
+      "sha256": "9b214a8eb8e84c2e9cb4849abecb1944fb36c340d57382b9753c43430c0cf9a9"
+    },
+    {
+      "file": "sensecap-indicator-d1.png",
+      "owner": "Seeed Studio",
+      "product_page": "https://www.seeedstudio.com/SenseCAP-Indicator-D1-p-5643.html",
+      "source_image": "https://media-cdn.seeedstudio.com/media/catalog/product/cache/bb49d3ec4ee05b6f018e93f896b8a25d/_/1/_1_5.png",
+      "sha256": "192123e04f7cc27ef3b51033b84ef1a86e5671fb44bdc81683e768ffe8a9c48f"
+    }
+  ]
+}

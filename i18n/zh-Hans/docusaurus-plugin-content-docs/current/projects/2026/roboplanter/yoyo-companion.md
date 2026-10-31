@@ -1,7 +1,7 @@
 ---
 title: "YOYO陪伴与设备控制"
 description: "Robot Phone入口、首次配对、场景日签、共享番茄钟与日常话术。"
-sidebar_position: 5
+sidebar_position: 6
 hide_title: true
 ---
 

@@ -8,6 +8,7 @@
     "docs/handbook/daily-ticket.md",
     "docs/handbook/design-system.md",
     "docs/handbook/device-platform.md",
+    "docs/handbook/hardware-catalog.md",
     "docs/handbook/hardware-quickstart.md",
     "docs/handbook/honor-platform.md",
     "docs/handbook/index.md",
