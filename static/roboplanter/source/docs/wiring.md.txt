@@ -2,6 +2,12 @@
 
 适用实物：**XIAO ESP32-S3 Plus + XIAO Robot Board V1.0、SenseCAP Indicator D1**，不是 XIAO Sense。本页替代早期 I²C 水位、GPIO43 打印和 SERVO4 水泵方案。[三维接线小工坊](https://peterpanstechland.github.io/roboplanter/#wiring-lab)使用同一版分配。
 
+## 硬件认图
+
+<a href="https://www.honor.com/cn/phones/honor-robot-phone/" target="_blank" rel="noopener noreferrer"><img src="/roboplanter/assets/hardware/honor-robot-phone.webp" alt="HONOR Robot Phone 官方产品图" width="100" /></a> <a href="https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32S3-Plus-p-6361.html" target="_blank" rel="noopener noreferrer"><img src="/roboplanter/assets/hardware/xiao-esp32s3-plus.jpg" alt="Seeed XIAO ESP32-S3 Plus 官方产品图" width="200" /></a> <a href="https://www.seeedstudio.com/SenseCAP-Indicator-D1-p-5643.html" target="_blank" rel="noopener noreferrer"><img src="/roboplanter/assets/hardware/sensecap-indicator-d1.png" alt="Seeed SenseCAP Indicator D1 官方产品图，原厂示例界面" width="200" /></a>
+
+从左到右为 **HONOR Robot Phone**（YOYO 对话）、**Seeed XIAO ESP32-S3 Plus**（配合 Robot Board 控制外设）、**Seeed SenseCAP Indicator D1**（显示与触摸）。点击图片可打开官方产品页，型号说明和全部链接见 [硬件图鉴](handbook/hardware-catalog.md)。产品图来自各厂商官方页面。
+
 ## 整机通信
 
 ```text

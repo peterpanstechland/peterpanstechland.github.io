@@ -22,6 +22,7 @@ PUBLIC_BASE = "/docs/projects/2026/roboplanter"
 PAGES = [
     ("index", "工位搭子 · RoboPlanter", "从工位绿植开始，了解产品、硬件、YOYO Skill 与开放设备接入。"),
     ("product-story", "项目介绍", "了解工位搭子的设备分工、日常使用与产品设计。"),
+    ("hardware-catalog", "硬件图鉴与产品链接", "HONOR Robot Phone、Seeed XIAO ESP32-S3 Plus 与 SenseCAP Indicator D1 的官方产品图、用途和链接。"),
     ("hardware-wiring", "当前硬件连接", "2026-10-29接线总表、SEN54分线供电、Indicator土壤与当前验收状态。"),
     ("sensor-calibration", "土壤与水箱校准", "Indicator设置中的干湿、满水、缺水和空箱参考点采集、保存与清除。"),
     ("yoyo-companion", "YOYO陪伴与设备控制", "Robot Phone入口、首次配对、场景日签、共享番茄钟与日常话术。"),

@@ -1,7 +1,7 @@
 ---
 title: "功能进度与开发计划"
 description: "查看模块支持情况和接下来的开发方向。"
-sidebar_position: 17
+sidebar_position: 18
 hide_title: true
 ---
 

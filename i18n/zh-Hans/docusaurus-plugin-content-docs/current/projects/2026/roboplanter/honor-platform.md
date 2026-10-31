@@ -1,7 +1,7 @@
 ---
 title: "从零搭建荣耀 YOYO Skill"
 description: "图文讲解技能文件、导入配置、安全检测、手机安装和 BLE 逐层验收。"
-sidebar_position: 12
+sidebar_position: 13
 hide_title: true
 ---
 
@@ -16,6 +16,8 @@ hide_title: true
 ![独立 Skill 从文件到手机的搭建流程](/roboplanter/assets/honor-guide/skill-workflow.svg)
 
 当前主线为0.4.0。下方“最小版”用于学习从空白技能起步，不代表RoboPlanter当前能力；要使用现成硬件流程，导入当前三文件包并按[首次配对](/docs/projects/2026/roboplanter/yoyo-companion)完成绑定。
+
+测试手机使用 [HONOR Robot Phone](https://www.honor.com/cn/phones/honor-robot-phone/)，控制端为 Seeed XIAO ESP32-S3 Plus + Robot Board。[查看产品实图与型号说明](/docs/projects/2026/roboplanter/hardware-catalog)。
 
 ## 1. 选对创建入口
 

@@ -1,7 +1,7 @@
 ---
 title: "土壤与水箱校准"
 description: "Indicator设置中的干湿、满水、缺水和空箱参考点采集、保存与清除。"
-sidebar_position: 4
+sidebar_position: 5
 hide_title: true
 ---
 

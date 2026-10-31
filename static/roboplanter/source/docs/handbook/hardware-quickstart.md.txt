@@ -6,6 +6,12 @@
 
 先在 [三维接线实验室](https://peterpanstechland.github.io/roboplanter/#wiring-lab) 认接口：切换 XIAO / Indicator，点选外设，查看供电、信号与验证三步。图示可旋转和拆层，布局及模块外形均已简化，不能代替实物丝印或工程图；移动光点也不是实时电流。Indicator 土壤采集使用可选的 RP2040 程序；超声波测距与软件水位保护已实现，本机水箱、进出水和实际标定已获用户确认，泵已启用；短时出水与最终保护另行验收。完整分配见 [接线文档](../wiring.md)。
 
+## 硬件认图
+
+<a href="https://www.honor.com/cn/phones/honor-robot-phone/" target="_blank" rel="noopener noreferrer"><img src="/roboplanter/assets/hardware/honor-robot-phone.webp" alt="HONOR Robot Phone 官方产品图" width="100" /></a> <a href="https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32S3-Plus-p-6361.html" target="_blank" rel="noopener noreferrer"><img src="/roboplanter/assets/hardware/xiao-esp32s3-plus.jpg" alt="Seeed XIAO ESP32-S3 Plus 官方产品图" width="200" /></a> <a href="https://www.seeedstudio.com/SenseCAP-Indicator-D1-p-5643.html" target="_blank" rel="noopener noreferrer"><img src="/roboplanter/assets/hardware/sensecap-indicator-d1.png" alt="Seeed SenseCAP Indicator D1 官方产品图，原厂示例界面" width="200" /></a>
+
+从左到右为 **HONOR Robot Phone**（YOYO 对话）、**Seeed XIAO ESP32-S3 Plus**（配合 Robot Board 控制外设）、**Seeed SenseCAP Indicator D1**（显示与触摸）。点击图片可打开官方产品页，型号说明和全部链接见 [硬件图鉴](hardware-catalog.md)。产品图来自各厂商官方页面。
+
 ## 1. 先确认你拿到的是哪块板
 
 本教程的直接支持对象是：

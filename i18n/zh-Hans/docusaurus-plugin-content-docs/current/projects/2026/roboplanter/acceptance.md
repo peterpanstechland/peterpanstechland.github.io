@@ -1,7 +1,7 @@
 ---
 title: "安装与功能检查"
 description: "软件、采样、外设与手机接入的检查表。"
-sidebar_position: 18
+sidebar_position: 19
 hide_title: true
 ---
 

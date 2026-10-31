@@ -10,6 +10,8 @@
 
 当前主线为0.4.0。下方“最小版”用于学习从空白技能起步，不代表RoboPlanter当前能力；要使用现成硬件流程，导入当前三文件包并按[首次配对](yoyo-companion.md)完成绑定。
 
+测试手机使用 [HONOR Robot Phone](https://www.honor.com/cn/phones/honor-robot-phone/)，控制端为 Seeed XIAO ESP32-S3 Plus + Robot Board。[查看产品实图与型号说明](hardware-catalog.md)。
+
 ## 1. 选对创建入口
 
 进入 **我的技能**，使用“导入技能”上传自己的 ZIP，或用“创建技能”从空白开始。不要误进左侧的“创建智能体”；这是另一种产品入口。

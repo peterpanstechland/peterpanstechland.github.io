@@ -18,11 +18,18 @@ RoboPlanter 是一个以工位绿植为起点的硬件项目，将 YOYO 对话�
 
 更新：2026-10-29。**手机加密绑定与YOYO实时土壤/温湿度读取已通过；SEN54、超声波、环境光和打印链路已接入。** 屏幕已有土壤/水箱校准及自动灯光阈值设置。用户确认水箱、进出水与实际标定完成后，本机12V/150mA泵已启用；用户确认500ms短出水后停止，灯光设置页面与保存正常。
 
+## 使用的硬件
+
+<a href="https://www.honor.com/cn/phones/honor-robot-phone/"><img src="/roboplanter/assets/hardware/honor-robot-phone.webp" alt="HONOR Robot Phone 官方产品图" width="100" /></a> <a href="https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32S3-Plus-p-6361.html"><img src="/roboplanter/assets/hardware/xiao-esp32s3-plus.jpg" alt="Seeed XIAO ESP32-S3 Plus 官方产品图" width="200" /></a> <a href="https://www.seeedstudio.com/SenseCAP-Indicator-D1-p-5643.html"><img src="/roboplanter/assets/hardware/sensecap-indicator-d1.png" alt="Seeed SenseCAP Indicator D1 官方产品图" width="200" /></a>
+
+**HONOR Robot Phone × Seeed Studio**：Robot Phone 提供 YOYO 入口，XIAO ESP32-S3 Plus 配合 Robot Board 连接外设，SenseCAP Indicator D1 显示状态与像素植物。[查看产品实图、型号与官方链接](/docs/projects/2026/roboplanter/hardware-catalog)。
+
 ## 从这里开始
 
 | 内容 | 文档 |
 | --- | --- |
 | 了解工位搭子与产品设计 | [项目介绍](/docs/projects/2026/roboplanter/product-story) |
+| 识别产品型号、查看实图与官方链接 | [硬件图鉴](/docs/projects/2026/roboplanter/hardware-catalog) |
 | 当前接线总表、供电和替代模块 | [最新硬件接线](/docs/projects/2026/roboplanter/hardware-wiring) |
 | 在屏幕采集并保存干湿、满水和缺水点 | [土壤与水箱校准](/docs/projects/2026/roboplanter/sensor-calibration) |
 | 首次配对、场景小票、番茄钟与提示音 | [YOYO日常交互](/docs/projects/2026/roboplanter/yoyo-companion) |

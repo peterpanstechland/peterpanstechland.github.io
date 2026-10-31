@@ -13,6 +13,12 @@ RoboPlanter 把真实绿植、像素植物和 YOYO 对话放在同一张工位�
 
 它从一盆工位绿植开始，也为自带传感器、控制板和外设的开发者提供接入方式。
 
+## Creeper 头里，住一盆绿
+
+当前花盆使用 Creeper 头造型，网页也采用方块场景和像素交互。方方正正的外壳负责好认，真实植物负责慢慢生长。
+
+硬件来自 **HONOR 与 Seeed Studio**：Robot Phone 上的 YOYO 负责对话，XIAO ESP32-S3 Plus 与 Robot Board 负责外设，SenseCAP Indicator D1 负责桌面显示。[产品实图与官方链接](/docs/projects/2026/roboplanter/hardware-catalog) 列出了具体型号和各自用途。
+
 ## 让照料轻一点
 
 工位上已经有很多需要处理的事。照顾一盆植物，应该是一次轻松的停顿：看一眼读数，观察有没有新叶，记下一次浇水，然后继续手头的工作。
@@ -24,7 +30,7 @@ RoboPlanter 把真实绿植、像素植物和 YOYO 对话放在同一张工位�
 - **YOYO**：自然语言入口，通过 Skill 解释状态、处理明确的设备请求。
 - **XIAO**：设备控制器，提供 BLE 和 HTTP 接口，负责采样、动作时限和结果查询。
 - **SenseCAP Indicator**：本地屏幕与触摸终端，提供植物养成、状态显示、照片、主题和番茄钟。
-- **项目网页**：介绍产品、展示可旋转的一体机概念模型，并提供互动预览和接入教程。
+- **项目网页**：介绍产品、展示 Creeper 头花盆的方块交互场景，并提供互动预览和接入教程。
 
 Indicator 经 Wi-Fi/HTTP 与 XIAO 通信，手机经 BLE 连接 XIAO。具体连接方式见 [硬件入门](/docs/projects/2026/roboplanter/hardware-quickstart) 和 [YOYO Skill 教程](/docs/projects/2026/roboplanter/honor-platform)。
 
